@@ -3,6 +3,7 @@ import { createGlobalStyle } from 'styled-components'
 import theme from 'styled-theming'
 import { darkTheme } from './dark'
 import { lightTheme } from './light'
+import { resetCss } from '../reset'
 
 const THEMES = {
   DARK: 'dark',
@@ -30,7 +31,7 @@ export const useSiteTheme = () => {
 
 export const GlobalStyle = createGlobalStyle`
   ${theme('siteTheme', {
-    light: lightTheme,
-    dark: darkTheme,
+    light: [...resetCss, ...lightTheme],
+    dark: [...resetCss, ...darkTheme],
   })}
 `
