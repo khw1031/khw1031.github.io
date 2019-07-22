@@ -1,6 +1,8 @@
+const config = require('./custom/siteMeta')
+
 module.exports = {
   siteMetadata: {
-    title: `Hyunwoo Kim`,
+    title: config.siteTitle,
     description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
     author: `@gatsbyjs`,
     meta: {
@@ -28,19 +30,53 @@ module.exports = {
     {
       resolve: 'gatsby-plugin-manifest',
       options: {
-        name: `gatsby-starter-default`,
+        name: config.siteTitle,
         short_name: `starter`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `static/logos/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `static/logos/terminal_dark.svg`, // This path is relative to the root of the site.
+      },
+    },
+    {
+      resolve: 'gatsby-transformer-remark',
+      options: {
+        plugins: [
+          {
+            resolve: 'gatsby-remark-external-links',
+          },
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 850,
+            },
+          },
+          {
+            resolve: `gatsby-remark-autolink-headers`,
+            options: {
+              offsetY: `100`,
+              maintainCase: false,
+              removeAccents: true,
+            },
+          },
+          'gatsby-remark-prismjs',
+          'gatsby-remark-copy-linked-files',
+        ],
       },
     },
     {
       resolve: `gatsby-plugin-styled-components`,
       options: {
         displayName: true,
+      },
+    },
+    {
+      resolve: 'gatsby-plugin-web-font-loader',
+      options: {
+        google: {
+          families: ['Noto Sans KR'],
+        },
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
