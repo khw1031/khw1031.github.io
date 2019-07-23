@@ -1,20 +1,17 @@
 import React from 'react'
-import Helmet from 'react-helmet'
-import PropTypes from 'prop-types'
+// import Helmet from 'react-helmet'
+// import PropTypes from 'prop-types'
 import { graphql } from 'gatsby'
 import { Layout } from '../components/layout'
-import config from '../../custom/siteMeta'
+// import siteMeta from '../../custom/siteMeta'
 import { PageContextTypes, PostDataTypes } from '../types'
 
-const ArticleTemplate = ({ pageContext, data: { markdownRemark } }) => {
-  const { slug } = pageContext
+const ArticleTemplate = ({ /* pageContext */ data: { markdownRemark } }) => {
+  // const { slug } = pageContext
 
   return (
     <Layout>
       <>
-        <Helmet>
-          {/* <title>{`${article.title} – ${config.siteTitle}`}</title> */}
-        </Helmet>
         <div dangerouslySetInnerHTML={{ __html: markdownRemark.html }} />
       </>
     </Layout>
@@ -22,7 +19,7 @@ const ArticleTemplate = ({ pageContext, data: { markdownRemark } }) => {
 }
 
 ArticleTemplate.propTypes = {
-  pageContext: PageContextTypes.isRequired,
+  // pageContext: PageContextTypes.isRequired,
   data: PostDataTypes.isRequired,
 }
 
