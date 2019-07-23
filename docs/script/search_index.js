@@ -114,12 +114,6 @@ window.esdocSearchIndex = [
     "function"
   ],
   [
-    "khw1031.github.io/src/styles/theme/index.js~usesitetheme",
-    "function/index.html#static-function-useSiteTheme",
-    "<span>useSiteTheme</span> <span class=\"search-result-import-path\">khw1031.github.io/src/styles/theme/index.js</span>",
-    "function"
-  ],
-  [
     "src/.external-ecmascript.js~array",
     "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
     "src/.external-ecmascript.js~Array",

@@ -41,7 +41,6 @@
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-BaseContainer">BaseContainer</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-resetCss">resetCss</a></span></span></li>
 <li data-ice="doc"><a data-ice="dirPath" class="nav-dir-path" href="identifiers.html#styles-theme">styles/theme</a><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-getTheme">getTheme</a></span></span></li>
-<li data-ice="doc"><span data-ice="kind" class="kind-function">F</span><span data-ice="name"><span><a href="function/index.html#static-function-useSiteTheme">useSiteTheme</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-bqBorder">bqBorder</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-buttonColors">buttonColors</a></span></span></li>
 <li data-ice="doc"><span data-ice="kind" class="kind-variable">V</span><span data-ice="name"><span><a href="variable/index.html#static-variable-commonColors">commonColors</a></span></span></li>
@@ -54,8 +53,7 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/styles/theme/index.js</h1>
-<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { useState } from &apos;react&apos;
-import { createGlobalStyle } from &apos;styled-components&apos;
+<pre class="source-code line-number raw-source-code"><code class="prettyprint linenums" data-ice="content">import { createGlobalStyle } from &apos;styled-components&apos;
 import theme from &apos;styled-theming&apos;
 import { darkTheme } from &apos;./dark&apos;
 import { lightTheme } from &apos;./light&apos;
@@ -68,22 +66,6 @@ const THEMES = {
 
 export const getTheme = currentTheme =&gt;
   currentTheme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT
-
-export const useSiteTheme = () =&gt; {
-  const [siteTheme, setTheme] = useState(
-    () =&gt; localStorage.getItem(&apos;theme&apos;) || THEMES.LIGHT
-  )
-
-  const setSiteTheme = () =&gt; {
-    setTheme(prevTheme =&gt; {
-      const nextTheme = getTheme(prevTheme)
-      localStorage.setItem(&apos;theme&apos;, nextTheme)
-      return nextTheme
-    })
-  }
-
-  return [siteTheme, setSiteTheme]
-}
 
 export const GlobalStyle = createGlobalStyle`
   ${theme(&apos;siteTheme&apos;, {

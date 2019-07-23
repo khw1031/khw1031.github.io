@@ -1279,7 +1279,7 @@
     "__docId__": 79,
     "kind": "file",
     "name": "src/styles/theme/dark.js",
-    "content": "import { darken, lighten } from 'polished'\nimport { css } from 'styled-components'\nimport { commonColors } from './common'\nimport { DarkThemeColors } from '../../../custom/styleScheme/colors'\n\n// Colors\nconst background = '#2d2d2d'\nconst foreground = '#b3b9c5'\nconst darkBorder = darken(0.03, background)\n\nexport const darkPalette = {\n  background,\n  foreground,\n  darkBorder,\n}\n\n// Css\nexport const darkTheme = css`\n  body {\n    background-color: ${DarkThemeColors.background};\n    color: ${foreground};\n    transition: background 0.3s ease;\n  }\n  h1 {\n    color: ${foreground};\n  }\n  a {\n    color: ${lighten(0.1, commonColors.primaryColor)};\n  }\n  a:hover,\n  a:active,\n  a:focus {\n    color: ${lighten(0.12, commonColors.primaryColor)};\n    background: transparent;\n  }\n\n  ::selection {\n    background: ${DarkThemeColors.link};\n    color: #ffffff;\n  }\n`\n",
+    "content": "import { darken, lighten } from 'polished'\nimport { css } from 'styled-components'\nimport { commonColors } from './common'\nimport { DarkThemeColors } from '../../../custom/styleScheme/colors'\n\n// Colors\nconst background = '#2d2d2d'\nconst foreground = '#b3b9c5'\nconst darkBorder = darken(0.03, background)\n\nexport const darkPalette = {\n  background,\n  foreground,\n  darkBorder,\n}\n\n// Css\nexport const darkTheme = css`\n  body {\n    background-color: ${DarkThemeColors.background};\n    color: ${foreground};\n    /* transition: background 0.3s ease; */\n  }\n  h1 {\n    color: ${foreground};\n  }\n  a {\n    color: ${lighten(0.1, commonColors.primaryColor)};\n  }\n  a:hover,\n  a:active,\n  a:focus {\n    color: ${lighten(0.12, commonColors.primaryColor)};\n    background: transparent;\n  }\n\n  ::selection {\n    background: ${DarkThemeColors.link};\n    color: #ffffff;\n  }\n`\n",
     "static": true,
     "longname": "/Users/kei/food/blog/src/styles/theme/dark.js",
     "access": "public",
@@ -1393,7 +1393,7 @@
     "__docId__": 85,
     "kind": "file",
     "name": "src/styles/theme/index.js",
-    "content": "import { useState } from 'react'\nimport { createGlobalStyle } from 'styled-components'\nimport theme from 'styled-theming'\nimport { darkTheme } from './dark'\nimport { lightTheme } from './light'\nimport { resetCss } from '../reset'\n\nconst THEMES = {\n  DARK: 'dark',\n  LIGHT: 'light',\n}\n\nexport const getTheme = currentTheme =>\n  currentTheme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT\n\nexport const useSiteTheme = () => {\n  const [siteTheme, setTheme] = useState(\n    () => localStorage.getItem('theme') || THEMES.LIGHT\n  )\n\n  const setSiteTheme = () => {\n    setTheme(prevTheme => {\n      const nextTheme = getTheme(prevTheme)\n      localStorage.setItem('theme', nextTheme)\n      return nextTheme\n    })\n  }\n\n  return [siteTheme, setSiteTheme]\n}\n\nexport const GlobalStyle = createGlobalStyle`\n  ${theme('siteTheme', {\n    light: [...resetCss, ...lightTheme],\n    dark: [...resetCss, ...darkTheme],\n  })}\n`\n",
+    "content": "import { createGlobalStyle } from 'styled-components'\nimport theme from 'styled-theming'\nimport { darkTheme } from './dark'\nimport { lightTheme } from './light'\nimport { resetCss } from '../reset'\n\nconst THEMES = {\n  DARK: 'dark',\n  LIGHT: 'light',\n}\n\nexport const getTheme = currentTheme =>\n  currentTheme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT\n\nexport const GlobalStyle = createGlobalStyle`\n  ${theme('siteTheme', {\n    light: [...resetCss, ...lightTheme],\n    dark: [...resetCss, ...darkTheme],\n  })}\n`\n",
     "static": true,
     "longname": "/Users/kei/food/blog/src/styles/theme/index.js",
     "access": "public",
@@ -1412,7 +1412,7 @@
     "importPath": "khw1031.github.io/src/styles/theme/index.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 8,
+    "lineNumber": 7,
     "undocument": true,
     "type": {
       "types": [
@@ -1435,7 +1435,7 @@
     "importPath": "khw1031.github.io/src/styles/theme/index.js",
     "importStyle": "{getTheme}",
     "description": null,
-    "lineNumber": 13,
+    "lineNumber": 12,
     "undocument": true,
     "params": [
       {
@@ -1449,29 +1449,6 @@
   },
   {
     "__docId__": 88,
-    "kind": "function",
-    "name": "useSiteTheme",
-    "memberof": "src/styles/theme/index.js",
-    "generator": false,
-    "async": false,
-    "static": true,
-    "longname": "src/styles/theme/index.js~useSiteTheme",
-    "access": "public",
-    "export": true,
-    "importPath": "khw1031.github.io/src/styles/theme/index.js",
-    "importStyle": "{useSiteTheme}",
-    "description": null,
-    "lineNumber": 16,
-    "undocument": true,
-    "params": [],
-    "return": {
-      "types": [
-        "undefined[]"
-      ]
-    }
-  },
-  {
-    "__docId__": 89,
     "kind": "variable",
     "name": "GlobalStyle",
     "memberof": "src/styles/theme/index.js",
@@ -1482,7 +1459,7 @@
     "importPath": "khw1031.github.io/src/styles/theme/index.js",
     "importStyle": "{GlobalStyle}",
     "description": null,
-    "lineNumber": 32,
+    "lineNumber": 15,
     "undocument": true,
     "type": {
       "types": [
@@ -1491,10 +1468,10 @@
     }
   },
   {
-    "__docId__": 90,
+    "__docId__": 89,
     "kind": "file",
     "name": "src/styles/theme/light.js",
-    "content": "// import { lighten } from 'polished'\nimport { css } from 'styled-components'\nimport { commonColors, buttonColors } from './common'\nimport { LightThemeColors } from '../../../custom/styleScheme/colors'\n\nexport const lightTheme = css`\n  body {\n    background: ${LightThemeColors.background};\n    color: ${LightThemeColors.body};\n    transition: background 0.3s ease;\n  }\n  h1 {\n    color: ${LightThemeColors.body};\n  }\n  a {\n    color: ${LightThemeColors.link};\n  }\n  a:hover {\n    color: ${commonColors.linkHoverColor};\n    background: ${buttonColors.primaryHover};\n  }\n  a:active,\n  a:focus {\n    color: ${commonColors.linkHoverColor};\n    background: ${buttonColors.primaryHover};\n  }\n\n  ::selection {\n    background: rgba(255, 245, 20, 0.8);\n    color: #111;\n  }\n`\n",
+    "content": "// import { lighten } from 'polished'\nimport { css } from 'styled-components'\nimport { commonColors, buttonColors } from './common'\nimport { LightThemeColors } from '../../../custom/styleScheme/colors'\n\nexport const lightTheme = css`\n  body {\n    background: ${LightThemeColors.background};\n    color: ${LightThemeColors.body};\n    /* transition: background 0.3s ease; */\n  }\n  h1 {\n    color: ${LightThemeColors.body};\n  }\n  a {\n    color: ${LightThemeColors.link};\n  }\n  a:hover {\n    color: ${commonColors.linkHoverColor};\n    background: ${buttonColors.primaryHover};\n  }\n  a:active,\n  a:focus {\n    color: ${commonColors.linkHoverColor};\n    background: ${buttonColors.primaryHover};\n  }\n\n  ::selection {\n    background: rgba(255, 245, 20, 0.8);\n    color: #111;\n  }\n`\n",
     "static": true,
     "longname": "/Users/kei/food/blog/src/styles/theme/light.js",
     "access": "public",
@@ -1502,7 +1479,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 91,
+    "__docId__": 90,
     "kind": "variable",
     "name": "lightTheme",
     "memberof": "src/styles/theme/light.js",
@@ -1522,7 +1499,7 @@
     }
   },
   {
-    "__docId__": 92,
+    "__docId__": 91,
     "kind": "file",
     "name": "src/types.js",
     "content": "import { PropTypes } from 'prop-types'\n\nexport const PageContextTypes = PropTypes.shape({\n  slug: PropTypes.string.isRequired,\n})\n\nexport const PostDataTypes = PropTypes.shape({\n  markdownRemark: PropTypes.shape({\n    html: PropTypes.string.isRequired,\n    timeToRead: PropTypes.number.isRequired,\n    excerpt: PropTypes.string.isRequired,\n    frontmatter: PropTypes.shape({\n      title: PropTypes.string.isRequired,\n      thumbnail: PropTypes.shape({\n        childImageSharp: PropTypes.shape({\n          fixed: PropTypes.shape({\n            base64: PropTypes.string.isRequired,\n            height: PropTypes.number.isRequired,\n            width: PropTypes.number.isRequired,\n            src: PropTypes.string.isRequired,\n            srcSet: PropTypes.string.isRequired,\n          }),\n        }),\n      }),\n      slug: PropTypes.string.isRequired,\n      date: PropTypes.string,\n      categories: PropTypes.array,\n      tags: PropTypes.array,\n      template: PropTypes.string.isRequired,\n    }).isRequired,\n    fields: PropTypes.shape({\n      slug: PropTypes.string.isRequired,\n      date: PropTypes.string.isRequired,\n    }).isRequired,\n  }).isRequired,\n})\n",
@@ -1533,7 +1510,7 @@
     "lineNumber": 1
   },
   {
-    "__docId__": 93,
+    "__docId__": 92,
     "kind": "variable",
     "name": "PageContextTypes",
     "memberof": "src/types.js",
@@ -1553,7 +1530,7 @@
     }
   },
   {
-    "__docId__": 94,
+    "__docId__": 93,
     "kind": "variable",
     "name": "PostDataTypes",
     "memberof": "src/types.js",

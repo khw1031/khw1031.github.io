@@ -1,6 +1,6 @@
 {
   "coverage": "0%",
-  "expectCount": 39,
+  "expectCount": 38,
   "actualCount": 0,
   "files": {
     "src/styles/container.js": {
@@ -66,13 +66,12 @@
       ]
     },
     "src/styles/theme/index.js": {
-      "expectCount": 4,
+      "expectCount": 3,
       "actualCount": 0,
       "undocumentLines": [
-        8,
-        13,
-        16,
-        32
+        7,
+        12,
+        15
       ]
     },
     "src/styles/theme/light.js": {
