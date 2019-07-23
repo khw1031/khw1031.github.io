@@ -1,0 +1,1591 @@
+[
+  {
+    "__docId__": 1,
+    "kind": "external",
+    "name": "Infinity",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Infinity",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 2,
+    "kind": "external",
+    "name": "NaN",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~NaN",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 3,
+    "kind": "external",
+    "name": "undefined",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~undefined",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 4,
+    "kind": "external",
+    "name": "null",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~null",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 5,
+    "kind": "external",
+    "name": "Object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 6,
+    "kind": "external",
+    "name": "object",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~object",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 7,
+    "kind": "external",
+    "name": "Function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 8,
+    "kind": "external",
+    "name": "function",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Function",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~function",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 9,
+    "kind": "external",
+    "name": "Boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 10,
+    "kind": "external",
+    "name": "boolean",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Boolean",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~boolean",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 11,
+    "kind": "external",
+    "name": "Symbol",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Symbol",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 12,
+    "kind": "external",
+    "name": "Error",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Error",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Error",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 13,
+    "kind": "external",
+    "name": "EvalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/EvalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~EvalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 14,
+    "kind": "external",
+    "name": "InternalError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/InternalError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~InternalError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 15,
+    "kind": "external",
+    "name": "RangeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RangeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RangeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 16,
+    "kind": "external",
+    "name": "ReferenceError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ReferenceError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ReferenceError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 17,
+    "kind": "external",
+    "name": "SyntaxError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/SyntaxError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~SyntaxError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 18,
+    "kind": "external",
+    "name": "TypeError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/TypeError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~TypeError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 19,
+    "kind": "external",
+    "name": "URIError",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/URIError",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~URIError",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 20,
+    "kind": "external",
+    "name": "Number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 21,
+    "kind": "external",
+    "name": "number",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~number",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 22,
+    "kind": "external",
+    "name": "Date",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Date",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 23,
+    "kind": "external",
+    "name": "String",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~String",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 24,
+    "kind": "external",
+    "name": "string",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~string",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 25,
+    "kind": "external",
+    "name": "RegExp",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/RegExp",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~RegExp",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 26,
+    "kind": "external",
+    "name": "Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 27,
+    "kind": "external",
+    "name": "Int8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 28,
+    "kind": "external",
+    "name": "Uint8Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 29,
+    "kind": "external",
+    "name": "Uint8ClampedArray",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint8ClampedArray",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint8ClampedArray",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 30,
+    "kind": "external",
+    "name": "Int16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 31,
+    "kind": "external",
+    "name": "Uint16Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint16Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint16Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 32,
+    "kind": "external",
+    "name": "Int32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Int32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Int32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 33,
+    "kind": "external",
+    "name": "Uint32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Uint32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Uint32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 34,
+    "kind": "external",
+    "name": "Float32Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float32Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float32Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 35,
+    "kind": "external",
+    "name": "Float64Array",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Float64Array",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Float64Array",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 36,
+    "kind": "external",
+    "name": "Map",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Map",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 37,
+    "kind": "external",
+    "name": "Set",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Set",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 38,
+    "kind": "external",
+    "name": "WeakMap",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakMap",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakMap",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 39,
+    "kind": "external",
+    "name": "WeakSet",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/WeakSet",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~WeakSet",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 40,
+    "kind": "external",
+    "name": "ArrayBuffer",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/ArrayBuffer",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~ArrayBuffer",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 41,
+    "kind": "external",
+    "name": "DataView",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/DataView",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~DataView",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 42,
+    "kind": "external",
+    "name": "JSON",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~JSON",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 43,
+    "kind": "external",
+    "name": "Promise",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Promise",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 44,
+    "kind": "external",
+    "name": "Generator",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Generator",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Generator",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 45,
+    "kind": "external",
+    "name": "GeneratorFunction",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/GeneratorFunction",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~GeneratorFunction",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 46,
+    "kind": "external",
+    "name": "Reflect",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Reflect",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Reflect",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 47,
+    "kind": "external",
+    "name": "Proxy",
+    "externalLink": "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Proxy",
+    "memberof": "src/.external-ecmascript.js",
+    "static": true,
+    "longname": "src/.external-ecmascript.js~Proxy",
+    "access": "public",
+    "description": "",
+    "builtinExternal": true
+  },
+  {
+    "__docId__": 48,
+    "kind": "file",
+    "name": "src/styles/container.js",
+    "content": "import styled, { css } from 'styled-components'\n\nexport const BaseContainer = styled.div.attrs(props => ({\n  props,\n}))`\n  ${props => css`\n    max-width: ${props.maxWidth};\n    margin: auto;\n    padding: 0 1.5rem;\n  `}\n`\n",
+    "static": true,
+    "longname": "/Users/kei/food/blog/src/styles/container.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 49,
+    "kind": "variable",
+    "name": "BaseContainer",
+    "memberof": "src/styles/container.js",
+    "static": true,
+    "longname": "src/styles/container.js~BaseContainer",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/container.js",
+    "importStyle": "{BaseContainer}",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 50,
+    "kind": "file",
+    "name": "src/styles/mediaQuery.js",
+    "content": "import { css } from 'styled-components'\nimport { BreakPoints } from '../../custom/styleScheme/breakpoints'\n\nconst reduceCssStr = (cssStrs, keys) => {\n  return cssStrs\n    .reduce((prevTags, cssAttr, i) => {\n      return keys[i] ? [...prevTags, cssAttr, keys[i]] : [...prevTags, cssAttr]\n    }, [])\n    .join('')\n}\n\nconst mediaQuery = breakpoint => (cssStrs, keys) => css`\n  @media (min-width: ${BreakPoints[breakpoint]}) {\n    ${reduceCssStr(cssStrs, keys)}\n  }\n`\n\nexport const mobileSAbove = (cssStrs, ...keys) =>\n  mediaQuery('mobileS')(cssStrs, keys)\nexport const mobileMAbove = (cssStrs, ...keys) =>\n  mediaQuery('mobileM')(cssStrs, keys)\nexport const mobileLAbove = (cssStrs, ...keys) =>\n  mediaQuery('mobileL')(cssStrs, keys)\nexport const tabletAbove = (cssStrs, ...keys) =>\n  mediaQuery('tablet')(cssStrs, keys)\nexport const laptopAbove = (cssStrs, ...keys) =>\n  mediaQuery('laptop')(cssStrs, keys)\nexport const laptopLAbove = (cssStrs, ...keys) =>\n  mediaQuery('laptopL')(cssStrs, keys)\nexport const fourKAbove = (cssStrs, ...keys) =>\n  mediaQuery('fourK')(cssStrs, keys)\n",
+    "static": true,
+    "longname": "/Users/kei/food/blog/src/styles/mediaQuery.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 51,
+    "kind": "function",
+    "name": "reduceCssStr",
+    "memberof": "src/styles/mediaQuery.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/styles/mediaQuery.js~reduceCssStr",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/mediaQuery.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "params": [
+      {
+        "name": "cssStrs",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "keys",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 52,
+    "kind": "function",
+    "name": "mediaQuery",
+    "memberof": "src/styles/mediaQuery.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/styles/mediaQuery.js~mediaQuery",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/mediaQuery.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "params": [
+      {
+        "name": "breakpoint",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null,
+    "ignore": true
+  },
+  {
+    "__docId__": 53,
+    "kind": "function",
+    "name": "mobileSAbove",
+    "memberof": "src/styles/mediaQuery.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/styles/mediaQuery.js~mobileSAbove",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/mediaQuery.js",
+    "importStyle": "{mobileSAbove}",
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "params": [
+      {
+        "name": "cssStrs",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "keys",
+        "types": [
+          "...*"
+        ],
+        "spread": true
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 54,
+    "kind": "function",
+    "name": "mobileMAbove",
+    "memberof": "src/styles/mediaQuery.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/styles/mediaQuery.js~mobileMAbove",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/mediaQuery.js",
+    "importStyle": "{mobileMAbove}",
+    "description": null,
+    "lineNumber": 20,
+    "undocument": true,
+    "params": [
+      {
+        "name": "cssStrs",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "keys",
+        "types": [
+          "...*"
+        ],
+        "spread": true
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 55,
+    "kind": "function",
+    "name": "mobileLAbove",
+    "memberof": "src/styles/mediaQuery.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/styles/mediaQuery.js~mobileLAbove",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/mediaQuery.js",
+    "importStyle": "{mobileLAbove}",
+    "description": null,
+    "lineNumber": 22,
+    "undocument": true,
+    "params": [
+      {
+        "name": "cssStrs",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "keys",
+        "types": [
+          "...*"
+        ],
+        "spread": true
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 56,
+    "kind": "function",
+    "name": "tabletAbove",
+    "memberof": "src/styles/mediaQuery.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/styles/mediaQuery.js~tabletAbove",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/mediaQuery.js",
+    "importStyle": "{tabletAbove}",
+    "description": null,
+    "lineNumber": 24,
+    "undocument": true,
+    "params": [
+      {
+        "name": "cssStrs",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "keys",
+        "types": [
+          "...*"
+        ],
+        "spread": true
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 57,
+    "kind": "function",
+    "name": "laptopAbove",
+    "memberof": "src/styles/mediaQuery.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/styles/mediaQuery.js~laptopAbove",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/mediaQuery.js",
+    "importStyle": "{laptopAbove}",
+    "description": null,
+    "lineNumber": 26,
+    "undocument": true,
+    "params": [
+      {
+        "name": "cssStrs",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "keys",
+        "types": [
+          "...*"
+        ],
+        "spread": true
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 58,
+    "kind": "function",
+    "name": "laptopLAbove",
+    "memberof": "src/styles/mediaQuery.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/styles/mediaQuery.js~laptopLAbove",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/mediaQuery.js",
+    "importStyle": "{laptopLAbove}",
+    "description": null,
+    "lineNumber": 28,
+    "undocument": true,
+    "params": [
+      {
+        "name": "cssStrs",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "keys",
+        "types": [
+          "...*"
+        ],
+        "spread": true
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 59,
+    "kind": "function",
+    "name": "fourKAbove",
+    "memberof": "src/styles/mediaQuery.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/styles/mediaQuery.js~fourKAbove",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/mediaQuery.js",
+    "importStyle": "{fourKAbove}",
+    "description": null,
+    "lineNumber": 30,
+    "undocument": true,
+    "params": [
+      {
+        "name": "cssStrs",
+        "types": [
+          "*"
+        ]
+      },
+      {
+        "name": "keys",
+        "types": [
+          "...*"
+        ],
+        "spread": true
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 60,
+    "kind": "file",
+    "name": "src/styles/reset.js",
+    "content": "import { css } from 'styled-components'\nimport { fontScheme } from '../../custom/styleScheme/fonts'\n\nexport const resetCss = css`\n  html {\n    -ms-text-size-adjust: 100%;\n    -webkit-text-size-adjust: 100%;\n    -moz-text-size-adjust: 100%;\n    font-size: ${fontScheme.baseFontSize};\n    font-variant: ${fontScheme.fontVariant};\n    font-family: ${fontScheme.fontFamily};\n    line-height: ${fontScheme.lineHeight};\n    font-weight: ${fontScheme.fontWeight};\n    box-sizing: border-box;\n  }\n\n  *,\n  *::before,\n  *::after {\n    box-sizing: border-box;\n    -webkit-font-smoothing: antialiased;\n    -moz-osx-font-smoothing: grayscale;\n  }\n\n  body {\n    margin: 0;\n  }\n  article,\n  aside,\n  details,\n  figcaption,\n  figure,\n  footer,\n  header,\n  main,\n  menu,\n  nav,\n  section,\n  summary {\n    display: block;\n    margin: 0;\n  }\n\n  audio,\n  canvas,\n  progress,\n  video {\n    display: inline-block;\n  }\n\n  audio:not([controls]) {\n    display: none;\n    height: 0;\n  }\n\n  progress {\n    vertical-align: baseline;\n  }\n  [hidden],\n  template {\n    display: none;\n  }\n  a {\n    background-color: transparent;\n    -webkit-text-decoration-skip: objects;\n  }\n  a:active,\n  a:hover {\n    outline-width: 0;\n  }\n\n  abbr[title] {\n    border-bottom: none;\n    text-decoration: underline;\n    text-decoration: underline dotted;\n  }\n  b,\n  strong {\n    font-weight: inherit;\n    font-weight: bolder;\n  }\n  dfn {\n    font-style: italic;\n  }\n  h1 {\n    font-size: 2em;\n  }\n  mark {\n    background-color: #ff0;\n    color: #000;\n  }\n  small {\n    font-size: 80%;\n  }\n  sub,\n  sup {\n    font-size: 75%;\n    line-height: 0;\n    position: relative;\n    vertical-align: baseline;\n  }\n  sub {\n    bottom: -0.25em;\n  }\n  sup {\n    top: -0.5em;\n  }\n  img {\n    border-style: none;\n  }\n  svg:not(:root) {\n    overflow: hidden;\n  }\n  code,\n  kbd,\n  pre,\n  samp {\n    font-family: monospace, monospace;\n    font-size: 1em;\n  }\n  figure {\n    margin: 1em 40px;\n  }\n  hr {\n    box-sizing: content-box;\n    height: 0;\n    overflow: visible;\n  }\n  button,\n  input,\n  optgroup,\n  select,\n  textarea {\n    font: inherit;\n    margin: 0;\n  }\n  optgroup {\n    font-weight: 700;\n  }\n  button,\n  input {\n    overflow: visible;\n  }\n  fieldset {\n    border: 1px solid silver;\n    margin: 0 2px;\n    padding: 0.35em 0.625em 0.75em;\n  }\n  legend {\n    box-sizing: border-box;\n    color: inherit;\n    display: table;\n    max-width: 100%;\n    padding: 0;\n    white-space: normal;\n  }\n  textarea {\n    overflow: auto;\n  }\n  [type='checkbox'],\n  [type='radio'] {\n    box-sizing: border-box;\n    padding: 0;\n  }\n  [type='number']::-webkit-inner-spin-button,\n  [type='number']::-webkit-outer-spin-button {\n    height: auto;\n  }\n  [type='search'] {\n    -webkit-appearance: textfield;\n    outline-offset: -2px;\n  }\n  [type='search']::-webkit-search-cancel-button,\n  [type='search']::-webkit-search-decoration {\n    -webkit-appearance: none;\n  }\n  ::-webkit-input-placeholder {\n    color: inherit;\n    opacity: 0.54;\n  }\n  ::-webkit-file-upload-button {\n    -webkit-appearance: button;\n    font: inherit;\n  }\n  * {\n    box-sizing: inherit;\n  }\n  *:before {\n    box-sizing: inherit;\n  }\n  *:after {\n    box-sizing: inherit;\n  }\n  body {\n    word-wrap: break-word;\n    font-kerning: normal;\n    -moz-font-feature-settings: 'kern', 'liga', 'clig', 'calt';\n    -ms-font-feature-settings: 'kern', 'liga', 'clig', 'calt';\n    -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';\n    font-feature-settings: 'kern', 'liga', 'clig', 'calt';\n  }\n  img {\n    max-width: 100%;\n    margin-left: 0;\n    margin-right: 0;\n    margin-top: 0;\n    padding-bottom: 0;\n    padding-left: 0;\n    padding-right: 0;\n    padding-top: 0;\n    margin-bottom: 1.45rem;\n  }\n  h1 {\n    margin: 0;\n    padding: 0;\n    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,\n      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;\n    font-weight: bold;\n    text-rendering: optimizeLegibility;\n    font-size: 2.25rem;\n    line-height: 1.1;\n  }\n  h2 {\n    margin: 0;\n    padding: 0;\n    color: inherit;\n    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,\n      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;\n    font-weight: bold;\n    text-rendering: optimizeLegibility;\n    font-size: 1.62671rem;\n    line-height: 1.1;\n  }\n  h3 {\n    margin: 0;\n    padding: 0;\n    color: inherit;\n    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,\n      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;\n    font-weight: bold;\n    text-rendering: optimizeLegibility;\n    font-size: 1.38316rem;\n    line-height: 1.1;\n  }\n  h4 {\n    margin: 0;\n    padding: 0;\n    color: inherit;\n    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,\n      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;\n    font-weight: bold;\n    text-rendering: optimizeLegibility;\n    font-size: 1rem;\n    line-height: 1.1;\n  }\n  h5 {\n    margin: 0;\n    padding: 0;\n    color: inherit;\n    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,\n      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;\n    font-weight: bold;\n    text-rendering: optimizeLegibility;\n    font-size: 0.85028rem;\n    line-height: 1.1;\n  }\n  h6 {\n    margin: 0;\n    padding: 0;\n    color: inherit;\n    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,\n      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;\n    font-weight: bold;\n    text-rendering: optimizeLegibility;\n    font-size: 0.78405rem;\n    line-height: 1.1;\n  }\n  hgroup {\n    margin-left: 0;\n    margin-right: 0;\n    margin-top: 0;\n    padding-bottom: 0;\n    padding-left: 0;\n    padding-right: 0;\n    padding-top: 0;\n    margin-bottom: 1.45rem;\n  }\n  ul {\n    margin-left: 1.45rem;\n    margin-right: 0;\n    margin-top: 0;\n    padding-bottom: 0;\n    padding-left: 0;\n    padding-right: 0;\n    padding-top: 0;\n    margin-bottom: 1.45rem;\n    list-style-position: outside;\n    list-style-image: none;\n  }\n  ol {\n    margin-left: 1.45rem;\n    margin-right: 0;\n    margin-top: 0;\n    padding-bottom: 0;\n    padding-left: 0;\n    padding-right: 0;\n    padding-top: 0;\n    margin-bottom: 1.45rem;\n    list-style-position: outside;\n    list-style-image: none;\n  }\n  dl {\n    margin-left: 0;\n    margin-right: 0;\n    margin-top: 0;\n    padding-bottom: 0;\n    padding-left: 0;\n    padding-right: 0;\n    padding-top: 0;\n    margin-bottom: 1.45rem;\n  }\n  dd {\n    margin-left: 0;\n    margin-right: 0;\n    margin-top: 0;\n    padding-bottom: 0;\n    padding-left: 0;\n    padding-right: 0;\n    padding-top: 0;\n    margin-bottom: 1.45rem;\n  }\n  p {\n    margin-left: 0;\n    margin-right: 0;\n    margin-top: 0;\n    padding-bottom: 0;\n    padding-left: 0;\n    padding-right: 0;\n    padding-top: 0;\n    margin-bottom: 1.45rem;\n  }\n  figure {\n    margin-left: 0;\n    margin-right: 0;\n    margin-top: 0;\n    padding-bottom: 0;\n    padding-left: 0;\n    padding-right: 0;\n    padding-top: 0;\n    margin-bottom: 1.45rem;\n  }\n  pre {\n    margin-left: 0;\n    margin-right: 0;\n    margin-top: 0;\n    margin-bottom: 1.45rem;\n    font-size: 0.85rem;\n    line-height: 1.42;\n    background: hsla(0, 0%, 0%, 0.04);\n    border-radius: 3px;\n    overflow: auto;\n    word-wrap: normal;\n    padding: 1.45rem;\n  }\n  table {\n    margin-left: 0;\n    margin-right: 0;\n    margin-top: 0;\n    padding-bottom: 0;\n    padding-left: 0;\n    padding-right: 0;\n    padding-top: 0;\n    margin-bottom: 1.45rem;\n    font-size: 1rem;\n    line-height: 1.45rem;\n    border-collapse: collapse;\n    width: 100%;\n  }\n  fieldset {\n    margin-left: 0;\n    margin-right: 0;\n    margin-top: 0;\n    padding-bottom: 0;\n    padding-left: 0;\n    padding-right: 0;\n    padding-top: 0;\n    margin-bottom: 1.45rem;\n  }\n  blockquote {\n    margin-left: 1.45rem;\n    margin-right: 1.45rem;\n    margin-top: 0;\n    padding-bottom: 0;\n    padding-left: 0;\n    padding-right: 0;\n    padding-top: 0;\n    margin-bottom: 1.45rem;\n  }\n  form {\n    margin-left: 0;\n    margin-right: 0;\n    margin-top: 0;\n    padding-bottom: 0;\n    padding-left: 0;\n    padding-right: 0;\n    padding-top: 0;\n    margin-bottom: 1.45rem;\n  }\n  noscript {\n    margin-left: 0;\n    margin-right: 0;\n    margin-top: 0;\n    padding-bottom: 0;\n    padding-left: 0;\n    padding-right: 0;\n    padding-top: 0;\n    margin-bottom: 1.45rem;\n  }\n  iframe {\n    margin-left: 0;\n    margin-right: 0;\n    margin-top: 0;\n    padding-bottom: 0;\n    padding-left: 0;\n    padding-right: 0;\n    padding-top: 0;\n    margin-bottom: 1.45rem;\n  }\n  hr {\n    margin-left: 0;\n    margin-right: 0;\n    margin-top: 0;\n    padding-bottom: 0;\n    padding-left: 0;\n    padding-right: 0;\n    padding-top: 0;\n    margin-bottom: calc(1.45rem - 1px);\n    background: hsla(0, 0%, 0%, 0.2);\n    border: none;\n    height: 1px;\n  }\n  address {\n    margin-left: 0;\n    margin-right: 0;\n    margin-top: 0;\n    padding-bottom: 0;\n    padding-left: 0;\n    padding-right: 0;\n    padding-top: 0;\n    margin-bottom: 1.45rem;\n  }\n  b {\n    font-weight: bold;\n  }\n  strong {\n    font-weight: bold;\n  }\n  dt {\n    font-weight: bold;\n  }\n  th {\n    font-weight: bold;\n  }\n  li {\n    margin-bottom: calc(1.45rem / 2);\n  }\n  ol li {\n    padding-left: 0;\n  }\n  ul li {\n    padding-left: 0;\n  }\n  li > ol {\n    margin-left: 1.45rem;\n    margin-bottom: calc(1.45rem / 2);\n    margin-top: calc(1.45rem / 2);\n  }\n  li > ul {\n    margin-left: 1.45rem;\n    margin-bottom: calc(1.45rem / 2);\n    margin-top: calc(1.45rem / 2);\n  }\n  blockquote *:last-child {\n    margin-bottom: 0;\n  }\n  li *:last-child {\n    margin-bottom: 0;\n  }\n  p *:last-child {\n    margin-bottom: 0;\n  }\n  li > p {\n    margin-bottom: calc(1.45rem / 2);\n  }\n  code {\n    font-size: 0.85rem;\n    line-height: 1.45rem;\n  }\n  kbd {\n    font-size: 0.85rem;\n    line-height: 1.45rem;\n  }\n  samp {\n    font-size: 0.85rem;\n    line-height: 1.45rem;\n  }\n  abbr {\n    border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);\n    cursor: help;\n  }\n  acronym {\n    border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);\n    cursor: help;\n  }\n  abbr[title] {\n    border-bottom: 1px dotted hsla(0, 0%, 0%, 0.5);\n    cursor: help;\n    text-decoration: none;\n  }\n  thead {\n    text-align: left;\n  }\n  td,\n  th {\n    text-align: left;\n    border-bottom: 1px solid hsla(0, 0%, 0%, 0.12);\n    font-feature-settings: 'tnum';\n    -moz-font-feature-settings: 'tnum';\n    -ms-font-feature-settings: 'tnum';\n    -webkit-font-feature-settings: 'tnum';\n    padding-left: 0.96667rem;\n    padding-right: 0.96667rem;\n    padding-top: 0.725rem;\n    padding-bottom: calc(0.725rem - 1px);\n  }\n  th:first-child,\n  td:first-child {\n    padding-left: 0;\n  }\n  th:last-child,\n  td:last-child {\n    padding-right: 0;\n  }\n  tt,\n  code {\n    background-color: hsla(0, 0%, 0%, 0.04);\n    border-radius: 3px;\n    font-family: 'SFMono-Regular', Consolas, 'Roboto Mono', 'Droid Sans Mono',\n      'Liberation Mono', Menlo, Courier, monospace;\n    padding: 0;\n    padding-top: 0.2em;\n    padding-bottom: 0.2em;\n  }\n  pre code {\n    background: none;\n    line-height: 1.42;\n  }\n  code:before,\n  code:after,\n  tt:before,\n  tt:after {\n    letter-spacing: -0.2em;\n    content: ' ';\n  }\n  pre code:before,\n  pre code:after,\n  pre tt:before,\n  pre tt:after {\n    content: '';\n  }\n`\n",
+    "static": true,
+    "longname": "/Users/kei/food/blog/src/styles/reset.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 61,
+    "kind": "variable",
+    "name": "resetCss",
+    "memberof": "src/styles/reset.js",
+    "static": true,
+    "longname": "src/styles/reset.js~resetCss",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/reset.js",
+    "importStyle": "{resetCss}",
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 62,
+    "kind": "file",
+    "name": "src/styles/theme/common.js",
+    "content": "import { darken, lighten } from 'polished'\n\nconst background = '#f0f0f0'\nconst foreground = '#404040'\nconst primaryColor = '#5183f5'\nconst secondaryColor = 'ff5a55'\nconst green = '#12c47c'\nconst yellow = '#fed356'\nconst accentColor = '#cdcdcd'\nconst alternateBackground = '#f0f0f0'\nconst alternateColor = '#404040'\nconst linkColor = primaryColor\nconst linkHoverColor = darken(0.1, linkColor)\nconst highlight = '#ffeea8'\nconst error = '#d33c40'\n\nexport const commonColors = {\n  background,\n  foreground,\n  primaryColor,\n  secondaryColor,\n  green,\n  yellow,\n  accentColor,\n  alternateBackground,\n  alternateColor,\n  linkColor,\n  linkHoverColor,\n  highlight,\n  error,\n}\n\n// Colors for Buttons, Links, Pressable Elements\nexport const buttonColors = {\n  primaryHover: lighten(0.33, primaryColor),\n}\n\nexport const bqBorder = `16px solid ${background}`\n",
+    "static": true,
+    "longname": "/Users/kei/food/blog/src/styles/theme/common.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 63,
+    "kind": "variable",
+    "name": "background",
+    "memberof": "src/styles/theme/common.js",
+    "static": true,
+    "longname": "src/styles/theme/common.js~background",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/theme/common.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 64,
+    "kind": "variable",
+    "name": "foreground",
+    "memberof": "src/styles/theme/common.js",
+    "static": true,
+    "longname": "src/styles/theme/common.js~foreground",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/theme/common.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 65,
+    "kind": "variable",
+    "name": "primaryColor",
+    "memberof": "src/styles/theme/common.js",
+    "static": true,
+    "longname": "src/styles/theme/common.js~primaryColor",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/theme/common.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 5,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 66,
+    "kind": "variable",
+    "name": "secondaryColor",
+    "memberof": "src/styles/theme/common.js",
+    "static": true,
+    "longname": "src/styles/theme/common.js~secondaryColor",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/theme/common.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 67,
+    "kind": "variable",
+    "name": "green",
+    "memberof": "src/styles/theme/common.js",
+    "static": true,
+    "longname": "src/styles/theme/common.js~green",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/theme/common.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 68,
+    "kind": "variable",
+    "name": "yellow",
+    "memberof": "src/styles/theme/common.js",
+    "static": true,
+    "longname": "src/styles/theme/common.js~yellow",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/theme/common.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 69,
+    "kind": "variable",
+    "name": "accentColor",
+    "memberof": "src/styles/theme/common.js",
+    "static": true,
+    "longname": "src/styles/theme/common.js~accentColor",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/theme/common.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 70,
+    "kind": "variable",
+    "name": "alternateBackground",
+    "memberof": "src/styles/theme/common.js",
+    "static": true,
+    "longname": "src/styles/theme/common.js~alternateBackground",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/theme/common.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 10,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 71,
+    "kind": "variable",
+    "name": "alternateColor",
+    "memberof": "src/styles/theme/common.js",
+    "static": true,
+    "longname": "src/styles/theme/common.js~alternateColor",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/theme/common.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 72,
+    "kind": "variable",
+    "name": "linkColor",
+    "memberof": "src/styles/theme/common.js",
+    "static": true,
+    "longname": "src/styles/theme/common.js~linkColor",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/theme/common.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 12,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 73,
+    "kind": "variable",
+    "name": "linkHoverColor",
+    "memberof": "src/styles/theme/common.js",
+    "static": true,
+    "longname": "src/styles/theme/common.js~linkHoverColor",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/theme/common.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 74,
+    "kind": "variable",
+    "name": "highlight",
+    "memberof": "src/styles/theme/common.js",
+    "static": true,
+    "longname": "src/styles/theme/common.js~highlight",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/theme/common.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 14,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 75,
+    "kind": "variable",
+    "name": "error",
+    "memberof": "src/styles/theme/common.js",
+    "static": true,
+    "longname": "src/styles/theme/common.js~error",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/theme/common.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 15,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 76,
+    "kind": "variable",
+    "name": "commonColors",
+    "memberof": "src/styles/theme/common.js",
+    "static": true,
+    "longname": "src/styles/theme/common.js~commonColors",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/theme/common.js",
+    "importStyle": "{commonColors}",
+    "description": null,
+    "lineNumber": 17,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"background\": *, \"foreground\": *, \"primaryColor\": *, \"secondaryColor\": *, \"green\": *, \"yellow\": *, \"accentColor\": *, \"alternateBackground\": *, \"alternateColor\": *, \"linkColor\": *, \"linkHoverColor\": *, \"highlight\": *, \"error\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 77,
+    "kind": "variable",
+    "name": "buttonColors",
+    "memberof": "src/styles/theme/common.js",
+    "static": true,
+    "longname": "src/styles/theme/common.js~buttonColors",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/theme/common.js",
+    "importStyle": "{buttonColors}",
+    "description": null,
+    "lineNumber": 34,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"primaryHover\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 78,
+    "kind": "variable",
+    "name": "bqBorder",
+    "memberof": "src/styles/theme/common.js",
+    "static": true,
+    "longname": "src/styles/theme/common.js~bqBorder",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/theme/common.js",
+    "importStyle": "{bqBorder}",
+    "description": null,
+    "lineNumber": 38,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    }
+  },
+  {
+    "__docId__": 79,
+    "kind": "file",
+    "name": "src/styles/theme/dark.js",
+    "content": "import { darken, lighten } from 'polished'\nimport { css } from 'styled-components'\nimport { commonColors } from './common'\nimport { DarkThemeColors } from '../../../custom/styleScheme/colors'\n\n// Colors\nconst background = '#2d2d2d'\nconst foreground = '#b3b9c5'\nconst darkBorder = darken(0.03, background)\n\nexport const darkPalette = {\n  background,\n  foreground,\n  darkBorder,\n}\n\n// Css\nexport const darkTheme = css`\n  body {\n    background-color: ${DarkThemeColors.background};\n    color: ${foreground};\n    transition: background 0.3s ease;\n  }\n  h1 {\n    color: ${foreground};\n  }\n  a {\n    color: ${lighten(0.1, commonColors.primaryColor)};\n  }\n  a:hover,\n  a:active,\n  a:focus {\n    color: ${lighten(0.12, commonColors.primaryColor)};\n    background: transparent;\n  }\n\n  ::selection {\n    background: ${DarkThemeColors.link};\n    color: #ffffff;\n  }\n`\n",
+    "static": true,
+    "longname": "/Users/kei/food/blog/src/styles/theme/dark.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 80,
+    "kind": "variable",
+    "name": "background",
+    "memberof": "src/styles/theme/dark.js",
+    "static": true,
+    "longname": "src/styles/theme/dark.js~background",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/theme/dark.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 81,
+    "kind": "variable",
+    "name": "foreground",
+    "memberof": "src/styles/theme/dark.js",
+    "static": true,
+    "longname": "src/styles/theme/dark.js~foreground",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/theme/dark.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "string"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 82,
+    "kind": "variable",
+    "name": "darkBorder",
+    "memberof": "src/styles/theme/dark.js",
+    "static": true,
+    "longname": "src/styles/theme/dark.js~darkBorder",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/theme/dark.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 9,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 83,
+    "kind": "variable",
+    "name": "darkPalette",
+    "memberof": "src/styles/theme/dark.js",
+    "static": true,
+    "longname": "src/styles/theme/dark.js~darkPalette",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/theme/dark.js",
+    "importStyle": "{darkPalette}",
+    "description": null,
+    "lineNumber": 11,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"background\": *, \"foreground\": *, \"darkBorder\": *}"
+      ]
+    }
+  },
+  {
+    "__docId__": 84,
+    "kind": "variable",
+    "name": "darkTheme",
+    "memberof": "src/styles/theme/dark.js",
+    "static": true,
+    "longname": "src/styles/theme/dark.js~darkTheme",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/theme/dark.js",
+    "importStyle": "{darkTheme}",
+    "description": null,
+    "lineNumber": 18,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 85,
+    "kind": "file",
+    "name": "src/styles/theme/index.js",
+    "content": "import { useState } from 'react'\nimport { createGlobalStyle } from 'styled-components'\nimport theme from 'styled-theming'\nimport { darkTheme } from './dark'\nimport { lightTheme } from './light'\nimport { resetCss } from '../reset'\n\nconst THEMES = {\n  DARK: 'dark',\n  LIGHT: 'light',\n}\n\nexport const getTheme = currentTheme =>\n  currentTheme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT\n\nexport const useSiteTheme = () => {\n  const [siteTheme, setTheme] = useState(\n    () => localStorage.getItem('theme') || THEMES.LIGHT\n  )\n\n  const setSiteTheme = () => {\n    setTheme(prevTheme => {\n      const nextTheme = getTheme(prevTheme)\n      localStorage.setItem('theme', nextTheme)\n      return nextTheme\n    })\n  }\n\n  return [siteTheme, setSiteTheme]\n}\n\nexport const GlobalStyle = createGlobalStyle`\n  ${theme('siteTheme', {\n    light: [...resetCss, ...lightTheme],\n    dark: [...resetCss, ...darkTheme],\n  })}\n`\n",
+    "static": true,
+    "longname": "/Users/kei/food/blog/src/styles/theme/index.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 86,
+    "kind": "variable",
+    "name": "THEMES",
+    "memberof": "src/styles/theme/index.js",
+    "static": true,
+    "longname": "src/styles/theme/index.js~THEMES",
+    "access": "public",
+    "export": false,
+    "importPath": "khw1031.github.io/src/styles/theme/index.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 8,
+    "undocument": true,
+    "type": {
+      "types": [
+        "{\"DARK\": string, \"LIGHT\": string}"
+      ]
+    },
+    "ignore": true
+  },
+  {
+    "__docId__": 87,
+    "kind": "function",
+    "name": "getTheme",
+    "memberof": "src/styles/theme/index.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/styles/theme/index.js~getTheme",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/theme/index.js",
+    "importStyle": "{getTheme}",
+    "description": null,
+    "lineNumber": 13,
+    "undocument": true,
+    "params": [
+      {
+        "name": "currentTheme",
+        "types": [
+          "*"
+        ]
+      }
+    ],
+    "return": null
+  },
+  {
+    "__docId__": 88,
+    "kind": "function",
+    "name": "useSiteTheme",
+    "memberof": "src/styles/theme/index.js",
+    "generator": false,
+    "async": false,
+    "static": true,
+    "longname": "src/styles/theme/index.js~useSiteTheme",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/theme/index.js",
+    "importStyle": "{useSiteTheme}",
+    "description": null,
+    "lineNumber": 16,
+    "undocument": true,
+    "params": [],
+    "return": {
+      "types": [
+        "undefined[]"
+      ]
+    }
+  },
+  {
+    "__docId__": 89,
+    "kind": "variable",
+    "name": "GlobalStyle",
+    "memberof": "src/styles/theme/index.js",
+    "static": true,
+    "longname": "src/styles/theme/index.js~GlobalStyle",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/theme/index.js",
+    "importStyle": "{GlobalStyle}",
+    "description": null,
+    "lineNumber": 32,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 90,
+    "kind": "file",
+    "name": "src/styles/theme/light.js",
+    "content": "// import { lighten } from 'polished'\nimport { css } from 'styled-components'\nimport { commonColors, buttonColors } from './common'\nimport { LightThemeColors } from '../../../custom/styleScheme/colors'\n\nexport const lightTheme = css`\n  body {\n    background: ${LightThemeColors.background};\n    color: ${LightThemeColors.body};\n    transition: background 0.3s ease;\n  }\n  h1 {\n    color: ${LightThemeColors.body};\n  }\n  a {\n    color: ${LightThemeColors.link};\n  }\n  a:hover {\n    color: ${commonColors.linkHoverColor};\n    background: ${buttonColors.primaryHover};\n  }\n  a:active,\n  a:focus {\n    color: ${commonColors.linkHoverColor};\n    background: ${buttonColors.primaryHover};\n  }\n\n  ::selection {\n    background: rgba(255, 245, 20, 0.8);\n    color: #111;\n  }\n`\n",
+    "static": true,
+    "longname": "/Users/kei/food/blog/src/styles/theme/light.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 91,
+    "kind": "variable",
+    "name": "lightTheme",
+    "memberof": "src/styles/theme/light.js",
+    "static": true,
+    "longname": "src/styles/theme/light.js~lightTheme",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/styles/theme/light.js",
+    "importStyle": "{lightTheme}",
+    "description": null,
+    "lineNumber": 6,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 92,
+    "kind": "file",
+    "name": "src/types.js",
+    "content": "import { PropTypes } from 'prop-types'\n\nexport const PageContextTypes = PropTypes.shape({\n  slug: PropTypes.string.isRequired,\n})\n\nexport const PostDataTypes = PropTypes.shape({\n  markdownRemark: PropTypes.shape({\n    html: PropTypes.string.isRequired,\n    timeToRead: PropTypes.number.isRequired,\n    excerpt: PropTypes.string.isRequired,\n    frontmatter: PropTypes.shape({\n      title: PropTypes.string.isRequired,\n      thumbnail: PropTypes.shape({\n        childImageSharp: PropTypes.shape({\n          fixed: PropTypes.shape({\n            base64: PropTypes.string.isRequired,\n            height: PropTypes.number.isRequired,\n            width: PropTypes.number.isRequired,\n            src: PropTypes.string.isRequired,\n            srcSet: PropTypes.string.isRequired,\n          }),\n        }),\n      }),\n      slug: PropTypes.string.isRequired,\n      date: PropTypes.string,\n      categories: PropTypes.array,\n      tags: PropTypes.array,\n      template: PropTypes.string.isRequired,\n    }).isRequired,\n    fields: PropTypes.shape({\n      slug: PropTypes.string.isRequired,\n      date: PropTypes.string.isRequired,\n    }).isRequired,\n  }).isRequired,\n})\n",
+    "static": true,
+    "longname": "/Users/kei/food/blog/src/types.js",
+    "access": "public",
+    "description": null,
+    "lineNumber": 1
+  },
+  {
+    "__docId__": 93,
+    "kind": "variable",
+    "name": "PageContextTypes",
+    "memberof": "src/types.js",
+    "static": true,
+    "longname": "src/types.js~PageContextTypes",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/types.js",
+    "importStyle": "{PageContextTypes}",
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "__docId__": 94,
+    "kind": "variable",
+    "name": "PostDataTypes",
+    "memberof": "src/types.js",
+    "static": true,
+    "longname": "src/types.js~PostDataTypes",
+    "access": "public",
+    "export": true,
+    "importPath": "khw1031.github.io/src/types.js",
+    "importStyle": "{PostDataTypes}",
+    "description": null,
+    "lineNumber": 7,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "index",
+    "content": "# Hyunwoo Kim\n\n```bash\nyarn dev\n```\n",
+    "longname": "/Users/kei/food/blog/README.md",
+    "name": "./README.md",
+    "static": true,
+    "access": "public"
+  },
+  {
+    "kind": "packageJSON",
+    "content": "{\n  \"name\": \"khw1031.github.io\",\n  \"private\": true,\n  \"description\": \"Hyunwoos tech blog\",\n  \"version\": \"1.0.0\",\n  \"author\": \"Hyunwoo Kim <khw1031e@gmail.com>\",\n  \"dependencies\": {\n    \"babel-plugin-styled-components\": \"^1.10.6\",\n    \"gatsby\": \"^2.13.21\",\n    \"gatsby-image\": \"^2.2.6\",\n    \"gatsby-plugin-manifest\": \"^2.2.3\",\n    \"gatsby-plugin-offline\": \"^2.2.4\",\n    \"gatsby-plugin-react-helmet\": \"^3.1.2\",\n    \"gatsby-plugin-sharp\": \"^2.2.7\",\n    \"gatsby-plugin-styled-components\": \"^3.1.2\",\n    \"gatsby-plugin-web-font-loader\": \"^1.0.4\",\n    \"gatsby-remark-autolink-headers\": \"^2.1.3\",\n    \"gatsby-remark-copy-linked-files\": \"^2.1.3\",\n    \"gatsby-remark-external-links\": \"^0.0.4\",\n    \"gatsby-remark-images\": \"^3.1.6\",\n    \"gatsby-remark-prismjs\": \"^3.3.3\",\n    \"gatsby-source-filesystem\": \"^2.1.5\",\n    \"gatsby-transformer-remark\": \"^2.6.8\",\n    \"gatsby-transformer-sharp\": \"^2.2.3\",\n    \"lodash.kebabcase\": \"^4.1.1\",\n    \"moment\": \"^2.24.0\",\n    \"polished\": \"^3.4.1\",\n    \"prismjs\": \"^1.16.0\",\n    \"prop-types\": \"^15.7.2\",\n    \"react\": \"^16.8.6\",\n    \"react-dom\": \"^16.8.6\",\n    \"react-helmet\": \"^5.2.1\",\n    \"styled-components\": \"^4.3.2\",\n    \"styled-theming\": \"^2.2.0\",\n    \"url-join\": \"^4.0.1\"\n  },\n  \"devDependencies\": {\n    \"esdoc\": \"^1.1.0\",\n    \"esdoc-standard-plugin\": \"^1.0.0\",\n    \"eslint\": \"^6.0.1\",\n    \"eslint-config-airbnb\": \"^17.1.1\",\n    \"eslint-config-prettier\": \"^6.0.0\",\n    \"eslint-plugin-import\": \"^2.18.0\",\n    \"eslint-plugin-jsx-a11y\": \"^6.2.3\",\n    \"eslint-plugin-react\": \"^7.14.2\",\n    \"eslint-plugin-react-hooks\": \"^1.6.1\",\n    \"gh-pages\": \"^2.0.1\",\n    \"husky\": \"^3.0.0\",\n    \"lint-staged\": \"^9.2.0\",\n    \"prettier\": \"^1.18.2\"\n  },\n  \"keywords\": [\n    \"기술 블로그\",\n    \"블로그\",\n    \"blog\",\n    \"tech\",\n    \"gh-pages\",\n    \"gatsby\"\n  ],\n  \"license\": \"MIT\",\n  \"scripts\": {\n    \"prebuild\": \"rm -rf .cache public\",\n    \"build\": \"gatsby build\",\n    \"dev\": \"gatsby develop\",\n    \"serve\": \"gatsby serve\",\n    \"test\": \"echo \\\"Write tests! -> https://gatsby.dev/unit-testing\\\"\"\n  },\n  \"husky\": {\n    \"hooks\": {\n      \"pre-commit\": \"lint-staged\"\n    }\n  },\n  \"lint-staged\": {\n    \"src/**/*.js\": [\n      \"prettier --write\",\n      \"eslint --fix\",\n      \"yarn test\",\n      \"esdoc\",\n      \"git add\"\n    ]\n  },\n  \"repository\": {\n    \"type\": \"git\",\n    \"url\": \"https://github.com/khw1031/blog.git\"\n  },\n  \"bugs\": {\n    \"url\": \"https://github.com/khw1031/blog/issues\"\n  }\n}\n",
+    "longname": "/Users/kei/food/blog/package.json",
+    "name": "package.json",
+    "static": true,
+    "access": "public"
+  }
+]

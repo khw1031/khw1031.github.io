@@ -1,22 +1,23 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import styled, { ThemeProvider } from 'styled-components'
-import { useSiteTheme, GlobalStyle } from '../styles/theme'
+import { GlobalStyle } from '../styles/theme'
 import { Header } from './header'
 import { BaseContainer } from '../styles/container'
 import { tabletAbove } from '../styles/mediaQuery'
+import ThemeContext from '../themeContext'
 
 export const Layout = ({ children }) => {
-  const [siteTheme, setSiteTheme] = useSiteTheme()
+  const { dark, toggleDark } = useContext(ThemeContext)
   return (
-    <ThemeProvider theme={{ siteTheme }}>
+    <ThemeProvider theme={{ siteTheme: dark ? 'dark' : 'light' }}>
       <>
         <GlobalStyle />
         <Helmet>
           <meta name='description' content='test' />
         </Helmet>
-        <Header theme={siteTheme} setSiteTheme={setSiteTheme} />
+        <Header theme={dark ? 'dark' : 'light'} setSiteTheme={toggleDark} />
         <Main>
           <Div maxWidth='800px'>{children}</Div>
         </Main>

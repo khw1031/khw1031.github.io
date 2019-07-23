@@ -7,7 +7,7 @@ export const lightTheme = css`
   body {
     background: ${LightThemeColors.background};
     color: ${LightThemeColors.body};
-    transition: background 0.3s ease;
+    /* transition: background 0.3s ease; */
   }
   h1 {
     color: ${LightThemeColors.body};

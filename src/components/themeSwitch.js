@@ -1,6 +1,5 @@
 import React from 'react'
 import styled, { css } from 'styled-components'
-import PropTypes from 'prop-types'
 import { size } from 'polished'
 import moon from '../../images/icons/moon.svg'
 import sun from '../../images/icons/sun.svg'
@@ -17,11 +16,6 @@ export const ThemeSwitch = ({ theme, setSiteTheme }) => {
       />
     </Div>
   )
-}
-
-ThemeSwitch.propTypes = {
-  theme: PropTypes.string.isRequired,
-  setSiteTheme: PropTypes.func.isRequired,
 }
 
 const Div = styled.div`

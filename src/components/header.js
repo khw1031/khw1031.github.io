@@ -1,6 +1,5 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useContext } from 'react'
 import { Link } from 'gatsby'
-import PropTypes from 'prop-types'
 import styled, { css } from 'styled-components'
 import terminal from '../../images/logo/terminal.svg'
 import terminalDark from '../../images/logo/terminal_dark.svg'
@@ -11,6 +10,7 @@ import {
   DarkThemeColors,
   LightThemeColors,
 } from '../../custom/styleScheme/colors'
+import ThemeContext from '../themeContext'
 
 const menuLinks = [
   { name: 'Me', to: '/me' },
@@ -18,13 +18,15 @@ const menuLinks = [
   { name: 'Contact', to: '/contact' },
 ]
 
-export const Header = ({ theme, setSiteTheme }) => {
-  const [isScrolled, setScrolled] = useState(window.scrollY > 20)
+export const Header = () => {
+  const [isScrolled, setScrolled] = useState(false)
   const handleScrollY = () => {
     if (isScrolled !== window.scrollY > 20) {
       setScrolled(() => window.scrollY > 20)
     }
   }
+
+  const { dark, toggleDark } = useContext(ThemeContext)
 
   useEffect(() => {
     window.addEventListener('scroll', handleScrollY)
@@ -47,15 +49,13 @@ export const Header = ({ theme, setSiteTheme }) => {
             </Menu>
           ))}
         </Links>
-        <ThemeSwitch theme={theme} setSiteTheme={setSiteTheme} />
+        <ThemeSwitch
+          theme={dark ? 'dark' : 'light'}
+          setSiteTheme={toggleDark}
+        />
       </Container>
     </Nav>
   )
-}
-
-Header.propTypes = {
-  theme: PropTypes.string.isRequired,
-  setSiteTheme: PropTypes.func.isRequired,
 }
 
 const getNavBgColor = (siteTheme, isScrolled) => {
@@ -75,7 +75,7 @@ const Nav = styled.nav.attrs(({ theme: { siteTheme }, isScrolled }) => ({
     top: 0;
     left: 0;
     z-index: 3;
-    transition: all 0.3s ease;
+    /* transition: all 0.3s ease; */
   `}
 `
 

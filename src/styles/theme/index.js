@@ -1,4 +1,3 @@
-import { useState, useEffect } from 'react'
 import { createGlobalStyle } from 'styled-components'
 import theme from 'styled-theming'
 import { darkTheme } from './dark'
@@ -12,24 +11,6 @@ const THEMES = {
 
 export const getTheme = currentTheme =>
   currentTheme === THEMES.LIGHT ? THEMES.DARK : THEMES.LIGHT
-
-export const useSiteTheme = () => {
-  const [siteTheme, setTheme] = useState(THEMES.LIGHT)
-
-  useEffect(() => {
-    setTheme(() => localStorage.getItem('theme'))
-  })
-
-  const setSiteTheme = () => {
-    setTheme(prevTheme => {
-      const nextTheme = getTheme(prevTheme)
-      localStorage.setItem('theme', nextTheme)
-      return nextTheme
-    })
-  }
-
-  return [siteTheme, setSiteTheme]
-}
 
 export const GlobalStyle = createGlobalStyle`
   ${theme('siteTheme', {

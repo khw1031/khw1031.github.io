@@ -19,7 +19,7 @@ export const darkTheme = css`
   body {
     background-color: ${DarkThemeColors.background};
     color: ${foreground};
-    transition: background 0.3s ease;
+    /* transition: background 0.3s ease; */
   }
   h1 {
     color: ${foreground};
