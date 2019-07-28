@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[7],{240:function(t,e,a){"use strict";a.r(e);var n=a(294),i=a(0),l=a.n(i),r=a(245),s=a.n(r),c=a(247);e.default=function(){var t=n.data;return l.a.createElement(c.a,null,l.a.createElement(l.a.Fragment,null,l.a.createElement(s.a,{title:t.site.siteMetadata.title}),l.a.createElement("div",null,t.site.siteMetadata.title)))}},294:function(t){t.exports={data:{site:{siteMetadata:{title:"김현우 | 웹 개발자"}}}}}}]);
-//# sourceMappingURL=component---src-pages-index-js-a71f703066c2d432f203.js.map
