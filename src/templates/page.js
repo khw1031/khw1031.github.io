@@ -2,7 +2,6 @@ import React from 'react'
 import styled, { css } from 'styled-components'
 import { graphql } from 'gatsby'
 import Helmet from 'react-helmet'
-import PropTypes from 'prop-types'
 import { Layout } from '../components/layout'
 import siteMeta from '../../custom/siteMeta'
 import {
@@ -54,19 +53,6 @@ export const pageQuery = graphql`
     }
   }
 `
-
-PageTemplate.propTypes = {
-  pageContext: PropTypes.shape({
-    slug: PropTypes.string.isRequired,
-  }).isRequired,
-  data: PropTypes.shape({
-    markdownRemark: PropTypes.shape({
-      frontmatter: PropTypes.shape({
-        title: PropTypes.string.isRequired,
-      }).isRequired,
-    }).isRequired,
-  }).isRequired,
-}
 
 const H1 = styled.h1`
   ${props => css`

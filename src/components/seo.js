@@ -1,5 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import urljoin from 'url-join/lib/url-join'
 import siteMeta from '../../custom/siteMeta'
@@ -89,27 +88,4 @@ export const SEO = ({ postNode, postPath, postSEO }) => {
       <meta name='twitter:image' content={imageUrl} />
     </Helmet>
   )
-}
-
-SEO.defaultProps = {
-  postSEO: false,
-}
-
-SEO.propTypes = {
-  postNode: PropTypes.shape({
-    excerpt: PropTypes.string,
-    frontmatter: PropTypes.shape({
-      title: PropTypes.string.isRequired,
-      description: PropTypes.string,
-      thumbnail: PropTypes.shape({
-        childImageSharp: PropTypes.shape({
-          fixed: PropTypes.shape({
-            src: PropTypes.string,
-          }),
-        }),
-      }),
-    }).isRequired,
-  }).isRequired,
-  postPath: PropTypes.string.isRequired,
-  postSEO: PropTypes.bool,
 }

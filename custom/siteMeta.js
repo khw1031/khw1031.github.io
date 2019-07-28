@@ -4,6 +4,7 @@ const siteMeta = {
   siteTitleAlt: 'Hyunwoo Kim',
   siteLogo: '/logos/terminal_dark.svg',
   dateFromFormat: 'YYYY-MM-DD',
+  dateFormat: 'MMMM Do, YYYY',
   siteUrl: 'https://khw1031.github.io',
   repo: 'https://github.com/khw1031/khw1031.github.io',
   pathPrefix: '',

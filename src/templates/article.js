@@ -1,26 +1,57 @@
 import React from 'react'
-// import Helmet from 'react-helmet'
-// import PropTypes from 'prop-types'
+import Helmet from 'react-helmet'
 import { graphql } from 'gatsby'
+import Img from 'gatsby-image'
 import { Layout } from '../components/layout'
-// import siteMeta from '../../custom/siteMeta'
-import { PageContextTypes, PostDataTypes } from '../types'
+import { formatDate, editOnGithub } from '../utils/global'
+import siteMeta from '../../custom/siteMeta'
+import { SEO } from '../components/seo'
+import { PostTags } from '../components/postTags'
+import { UserInfo } from '../components/userInfo'
 
-const ArticleTemplate = ({ /* pageContext */ data: { markdownRemark } }) => {
-  // const { slug } = pageContext
+const ArticleTemplate = ({ pageContext, data: { markdownRemark } }) => {
+  const { slug } = pageContext
+  const postNode = markdownRemark
+  const post = markdownRemark.frontmatter
+  let thumbnail
+
+  if (post.thumbnail) {
+    thumbnail = post.thumbnail.childImageSharp.fixed
+  }
+
+  const date = formatDate(post.date)
+  const githubLink = editOnGithub(post)
 
   return (
     <Layout>
       <>
-        <div dangerouslySetInnerHTML={{ __html: markdownRemark.html }} />
+        <Helmet>
+          <title>{`${post.title} - ${siteMeta.siteTitle}`}</title>
+        </Helmet>
+        <SEO postPath={slug} postNode={postNode} postSEO />
+        <article>
+          <header>
+            {thumbnail && <Img fixed={thumbnail} />}
+            <div>
+              <h1>{post.title}</h1>
+              <div>
+                <time>{date}</time>
+                <a href={githubLink} rel='noopener noreferrer' target='_blank'>
+                  Edit on Github{' '}
+                  <span role='img' aria-labelledby='pencil icon'>
+                    ✏️
+                  </span>
+                </a>
+              </div>
+              <PostTags tags={post.tags} />
+            </div>
+          </header>
+          <div dangerouslySetInnerHTML={{ __html: markdownRemark.html }} />
+        </article>
+        <UserInfo />
       </>
     </Layout>
   )
-}
-
-ArticleTemplate.propTypes = {
-  // pageContext: PageContextTypes.isRequired,
-  data: PostDataTypes.isRequired,
 }
 
 export const pageQuery = graphql`
