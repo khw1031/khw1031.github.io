@@ -21,6 +21,7 @@ export const LightThemeColors = {
   linkHoverBg: '#f0f4fe',
   headerColor: '#111111',
   headerBorderBottom: '#ebebeb',
+  footerColor: '#a6a6a6',
 }
 
 /** Dark Theme Colors */
@@ -37,4 +38,5 @@ export const DarkThemeColors = {
   linkHover: '#5183f5',
   headerColor: '#cecece',
   headerBorderBottom: '#252525',
+  footerColor: '#81a5f8',
 }

@@ -6,6 +6,7 @@ import { Header } from './header'
 import { BaseContainer } from '../styles/container'
 import { tabletAbove } from '../styles/mediaQuery'
 import ThemeContext from '../themeContext'
+import { Footer } from './footer'
 
 export const Layout = ({ children }) => {
   const { dark, toggleDark } = useContext(ThemeContext)
@@ -20,6 +21,7 @@ export const Layout = ({ children }) => {
         <Main>
           <BaseContainer maxWidth='800px'>{children}</BaseContainer>
         </Main>
+        <Footer />
       </>
     </ThemeProvider>
   )
@@ -27,9 +29,10 @@ export const Layout = ({ children }) => {
 const Main = styled.main`
   margin-top: 55px;
   padding: 40px 0 0;
-  min-height: calc(100vh - 162px);
+  min-height: calc(100vh - 135px);
   ${tabletAbove`
     margin-top: 92px;
     padding: 60px 0 0;
+    min-height: calc(100vh - 219px);
   `}
 `
