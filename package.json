@@ -59,13 +59,14 @@
   "scripts": {
     "prebuild": "rm -rf .cache public",
     "build": "gatsby build",
-    "dev": "gatsby develop",
-    "serve": "gatsby serve",
+    "dev": "yarn prebuild && gatsby develop",
+    "deploy": "yarn dev && gh-pages -d pulbic -b master",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
   },
   "husky": {
     "hooks": {
-      "pre-commit": "lint-staged"
+      "pre-commit": "lint-staged",
+      "pre-push": "yarn deploy"
     }
   },
   "lint-staged": {

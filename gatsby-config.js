@@ -1,13 +1,11 @@
 const config = require('./custom/siteMeta')
 
 module.exports = {
+  pathPrefix: config.pathPrefix === '' ? '/' : config.pathPrefix,
   siteMetadata: {
     title: config.siteTitle,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
-    meta: {
-      a: 'b',
-    },
+    description: `hyunwookim's blog`,
+    author: `hyunwoo kim`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
