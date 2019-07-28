@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[11],{237:function(n,e,a){"use strict";a.r(e);var t=a(0),r=a.n(t),u=a(249);e.default=function(){return r.a.createElement(u.a,null,r.a.createElement(r.a.Fragment,null,"Tag"))}}}]);
+//# sourceMappingURL=component---src-templates-tag-js-fc55e2e80c1f8dc449ad.js.map
