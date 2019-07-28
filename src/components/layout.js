@@ -1,5 +1,4 @@
 import React, { useContext } from 'react'
-import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import styled, { ThemeProvider } from 'styled-components'
 import { GlobalStyle } from '../styles/theme'
@@ -19,7 +18,7 @@ export const Layout = ({ children }) => {
         </Helmet>
         <Header theme={dark ? 'dark' : 'light'} setSiteTheme={toggleDark} />
         <Main>
-          <Div maxWidth='800px'>{children}</Div>
+          <BaseContainer maxWidth='800px'>{children}</BaseContainer>
         </Main>
       </>
     </ThemeProvider>
@@ -34,9 +33,3 @@ const Main = styled.main`
     padding: 60px 0 0;
   `}
 `
-
-const Div = styled(BaseContainer)``
-
-Layout.propTypes = {
-  children: PropTypes.element.isRequired,
-}

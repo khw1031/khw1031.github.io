@@ -1,7 +1,7 @@
 {
   "name": "khw1031.github.io",
   "private": true,
-  "description": "Hyunwoos tech blog",
+  "description": "Hyunwoo's tech blog",
   "version": "1.0.0",
   "author": "Hyunwoo Kim <khw1031e@gmail.com>",
   "dependencies": {
@@ -35,8 +35,6 @@
     "url-join": "^4.0.1"
   },
   "devDependencies": {
-    "esdoc": "^1.1.0",
-    "esdoc-standard-plugin": "^1.0.0",
     "eslint": "^6.0.1",
     "eslint-config-airbnb": "^17.1.1",
     "eslint-config-prettier": "^6.0.0",
@@ -75,15 +73,14 @@
       "prettier --write",
       "eslint --fix",
       "yarn test",
-      "esdoc",
       "git add"
     ]
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/khw1031/blog.git"
+    "url": "https://github.com/khw1031/khw1031.github.io.git"
   },
   "bugs": {
-    "url": "https://github.com/khw1031/blog/issues"
+    "url": "https://github.com/khw1031/khw1031.github.io/issues"
   }
 }
