@@ -3,7 +3,7 @@
   "private": true,
   "description": "Hyunwoo's tech blog",
   "version": "1.0.0",
-  "author": "Hyunwoo Kim <khw1031e@gmail.com>",
+  "author": "Hyunwoo Kim <khw1031@gmail.com>",
   "dependencies": {
     "babel-plugin-styled-components": "^1.10.6",
     "gatsby": "^2.13.21",
