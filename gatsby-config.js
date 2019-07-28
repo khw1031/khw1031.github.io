@@ -1,7 +1,6 @@
 const config = require('./custom/siteMeta')
 
 module.exports = {
-  pathPrefix: config.pathPrefix === '' ? '/' : config.pathPrefix,
   siteMetadata: {
     title: config.siteTitle,
     description: `hyunwookim's blog`,

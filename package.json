@@ -60,7 +60,7 @@
     "prebuild": "rm -rf .cache public",
     "build": "gatsby build",
     "dev": "yarn prebuild && gatsby develop",
-    "deploy": "yarn dev && gh-pages -d pulbic -b master",
+    "deploy": "yarn build && gh-pages -d public -b master",
     "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\""
   },
   "husky": {
