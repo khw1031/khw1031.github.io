@@ -37,7 +37,7 @@ export const Header = () => {
 
   return (
     <Nav isScrolled={isScrolled}>
-      <Container maxWidth='800px' isScrolled={isScrolled}>
+      <Container isScrolled={isScrolled}>
         <TextLink to='/'>
           <Logo />
           <h1>Hyunwoo Kim</h1>

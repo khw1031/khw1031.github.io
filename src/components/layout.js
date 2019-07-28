@@ -19,7 +19,7 @@ export const Layout = ({ children }) => {
         </Helmet>
         <Header theme={dark ? 'dark' : 'light'} setSiteTheme={toggleDark} />
         <Main>
-          <BaseContainer maxWidth='800px'>{children}</BaseContainer>
+          <BaseContainer>{children}</BaseContainer>
         </Main>
         <Footer />
       </>

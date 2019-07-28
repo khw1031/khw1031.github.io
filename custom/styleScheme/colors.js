@@ -22,6 +22,7 @@ export const LightThemeColors = {
   headerColor: '#111111',
   headerBorderBottom: '#ebebeb',
   footerColor: '#a6a6a6',
+  filterButtonBg: '#ebf1fe',
 }
 
 /** Dark Theme Colors */
@@ -39,4 +40,5 @@ export const DarkThemeColors = {
   headerColor: '#cecece',
   headerBorderBottom: '#252525',
   footerColor: '#81a5f8',
+  filterButtonBg: '#222222',
 }

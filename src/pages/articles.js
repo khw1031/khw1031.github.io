@@ -1,10 +1,18 @@
 import React, { useState } from 'react'
+import styled, { css } from 'styled-components'
+import theme from 'styled-theming'
 import Helmet from 'react-helmet'
 import { graphql } from 'gatsby'
 import { Layout } from '../components/layout'
 import siteMeta from '../../custom/siteMeta'
 import { SEO } from '../components/seo'
 import { ArticleList } from '../components/articleList'
+import {
+  LightThemeColors,
+  DarkThemeColors,
+} from '../../custom/styleScheme/colors'
+import { tabletAbove } from '../styles/mediaQuery'
+import { CategoryFilter } from '../components/categoryFilter'
 
 export default ({ data }) => {
   const articles = data.articles.edges
@@ -59,24 +67,12 @@ export default ({ data }) => {
         <Helmet title={`Articles - ${siteMeta.siteTitle}`} />
         <SEO />
         <div>
-          <h1>Articles</h1>
-          <ul>
-            {categories.map(category => {
-              const active = currentCategories
-                .includes(category.fieldValue)
-                .toString()
-              return (
-                <li key={category.fieldValue} active={active}>
-                  <button
-                    type='button'
-                    onClick={() => updateCategories(category.fieldValue)}
-                  >
-                    {category.fieldValue}
-                  </button>
-                </li>
-              )
-            })}
-          </ul>
+          <H1>Articles</H1>
+          <CategoryFilter
+            categories={categories}
+            currentCategories={currentCategories}
+            handleCategoryFilter={updateCategories}
+          />
           <div>
             <input
               type='text'
@@ -92,6 +88,24 @@ export default ({ data }) => {
     </Layout>
   )
 }
+
+const H1 = styled.h1`
+  ${theme('siteTheme', {
+    light: css`
+      color: ${LightThemeColors.headerColor};
+    `,
+    dark: css`
+      color: ${DarkThemeColors.headerColor};
+    `,
+  })}
+  font-size: 1.5rem;
+  margin: 0 0 1rem;
+  font-weight: 800;
+  ${tabletAbove`
+    font-size: 2.25rem;
+    margin: 0 0 2rem;
+  `}
+`
 
 export const pageQuery = graphql`
   query ArticlesQuery {

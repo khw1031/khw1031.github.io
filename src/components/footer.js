@@ -11,7 +11,7 @@ import {
 export const Footer = () => {
   return (
     <StyledFooter>
-      <Container maxWidth='800px'>
+      <Container>
         <Menus>
           <Menu>
             <a href='https://www.github.com/khw1031'>GitHub</a>
