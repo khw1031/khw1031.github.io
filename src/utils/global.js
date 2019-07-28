@@ -8,7 +8,7 @@ export const editOnGithub = post => {
   const date = moment.utc(post.date).format(siteMeta.dateFromFormat)
   return urljoin(
     siteMeta.repo,
-    '/blob/master/content/posts',
+    '/blob/dev/content/posts',
     `${date}-${post.slug}.md`
   )
 }
