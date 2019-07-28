@@ -29,7 +29,7 @@ export const Layout = ({ children }) => {
 const Main = styled.main`
   margin-top: 55px;
   padding: 40px 0 0;
-  min-height: calc(100vh - 135px);
+  min-height: calc(100vh - 142px);
   ${tabletAbove`
     margin-top: 92px;
     padding: 60px 0 0;

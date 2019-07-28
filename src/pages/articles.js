@@ -19,13 +19,20 @@ export default ({ data }) => {
   const articles = data.articles.edges
   const [searchStr, setSearchStr] = useState('')
   const [currentCategories, setCurrentCategories] = useState([])
-  const [filteredArticles, setFilteredArticles] = useState(data.articles.edges)
+  const [filteredArticles, setFilteredArticles] = useState(() => {
+    return data.articles.edges.filter(
+      edge => edge.node.frontmatter.template === 'article'
+    )
+  })
 
   const filterArticles = (value, categories) => {
     let matchedArticles = articles.filter(article => {
-      return article.node.frontmatter.title
-        .toLowerCase()
-        .includes(value.toLowerCase())
+      return (
+        article.node.frontmatter.template === 'article' &&
+        article.node.frontmatter.title
+          .toLowerCase()
+          .includes(value.toLowerCase())
+      )
     })
     if (categories.length > 0) {
       matchedArticles = matchedArticles.filter(article => {
@@ -67,20 +74,18 @@ export default ({ data }) => {
       <>
         <Helmet title={`Articles - ${siteMeta.siteTitle}`} />
         <SEO />
-        <div>
-          <H1>Articles</H1>
-          <CategoryFilter
-            categories={categories}
-            currentCategories={currentCategories}
-            handleCategoryFilter={updateCategories}
-          />
-          <SearchBox
-            searchStr={searchStr}
-            handleSearch={handleSearch}
-            filterCount={filterCount}
-          />
-          <ArticleList articleEdges={filteredArticles} />
-        </div>
+        <H1>Articles</H1>
+        <CategoryFilter
+          categories={categories}
+          currentCategories={currentCategories}
+          handleCategoryFilter={updateCategories}
+        />
+        <SearchBox
+          searchStr={searchStr}
+          handleSearch={handleSearch}
+          filterCount={filterCount}
+        />
+        <ArticleList articleEdges={filteredArticles} />
       </>
     </Layout>
   )

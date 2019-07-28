@@ -8,6 +8,7 @@ import siteMeta from '../../custom/siteMeta'
 import { SEO } from '../components/seo'
 import { PostTags } from '../components/postTags'
 import { UserInfo } from '../components/userInfo'
+import { MarkdownContainer } from '../styles/container'
 
 const ArticleTemplate = ({ pageContext, data: { markdownRemark } }) => {
   const { slug } = pageContext
@@ -46,7 +47,9 @@ const ArticleTemplate = ({ pageContext, data: { markdownRemark } }) => {
               <PostTags tags={post.tags} />
             </div>
           </header>
-          <div dangerouslySetInnerHTML={{ __html: markdownRemark.html }} />
+          <MarkdownContainer
+            dangerouslySetInnerHTML={{ __html: markdownRemark.html }}
+          />
         </article>
         <UserInfo />
       </>
