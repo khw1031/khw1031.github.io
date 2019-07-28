@@ -7,6 +7,7 @@ import { BaseContainer } from '../styles/container'
 import { tabletAbove } from '../styles/mediaQuery'
 import ThemeContext from '../themeContext'
 import { Footer } from './footer'
+import siteMeta from '../../custom/siteMeta'
 
 export const Layout = ({ children }) => {
   const { dark, toggleDark } = useContext(ThemeContext)
@@ -15,7 +16,7 @@ export const Layout = ({ children }) => {
       <>
         <GlobalStyle />
         <Helmet>
-          <meta name='description' content='test' />
+          <meta name='description' content={siteMeta.siteDescription} />
         </Helmet>
         <Header theme={dark ? 'dark' : 'light'} setSiteTheme={toggleDark} />
         <Main>
