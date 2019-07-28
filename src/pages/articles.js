@@ -13,6 +13,7 @@ import {
 } from '../../custom/styleScheme/colors'
 import { tabletAbove } from '../styles/mediaQuery'
 import { CategoryFilter } from '../components/categoryFilter'
+import { SearchBox } from '../components/searchBox'
 
 export default ({ data }) => {
   const articles = data.articles.edges
@@ -73,15 +74,11 @@ export default ({ data }) => {
             currentCategories={currentCategories}
             handleCategoryFilter={updateCategories}
           />
-          <div>
-            <input
-              type='text'
-              value={searchStr}
-              placeholder='제목으로 검색'
-              onChange={handleSearch}
-            />
-            <div>{filterCount}</div>
-          </div>
+          <SearchBox
+            searchStr={searchStr}
+            handleSearch={handleSearch}
+            filterCount={filterCount}
+          />
           <ArticleList articleEdges={filteredArticles} />
         </div>
       </>
