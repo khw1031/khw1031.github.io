@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Helmet from 'react-helmet'
 import { graphql, navigate } from 'gatsby'
 import Img from 'gatsby-image'
@@ -20,13 +20,15 @@ const ArticleTemplate = ({ pageContext, data: { markdownRemark } }) => {
     thumbnail = post.thumbnail.childImageSharp.fixed
   }
 
+  useEffect(() => {
+    if (post.status === 'draft') {
+      navigate('/404')
+    }
+  }, [])
+
   const date = formatDate(post.date)
   const githubLink = editOnGithub(post)
 
-  // hit status === draft -> show NOT FOUND
-  if (post.status === 'draft') {
-    navigate('/404')
-  }
   return (
     <Layout>
       <>
