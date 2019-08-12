@@ -20,15 +20,16 @@ export default ({ data }) => {
   const [searchStr, setSearchStr] = useState('')
   const [currentCategories, setCurrentCategories] = useState([])
   const [filteredArticles, setFilteredArticles] = useState(() => {
-    return data.articles.edges.filter(
-      edge => edge.node.frontmatter.template === 'article'
-    )
+    return data.articles.edges
+      .filter(edge => edge.node.frontmatter.template === 'article')
+      .filter(edge => edge.node.frontmatter.status !== 'draft')
   })
 
   const filterArticles = (value, categories) => {
     let matchedArticles = articles.filter(article => {
       return (
         article.node.frontmatter.template === 'article' &&
+        article.node.frontmatter.status !== 'draft' &&
         article.node.frontmatter.title
           .toLowerCase()
           .includes(value.toLowerCase())
@@ -125,6 +126,7 @@ export const pageQuery = graphql`
           timeToRead
           frontmatter {
             title
+            status
             tags
             categories
             thumbnail {

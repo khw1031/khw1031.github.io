@@ -1,6 +1,6 @@
 import React from 'react'
 import Helmet from 'react-helmet'
-import { graphql } from 'gatsby'
+import { graphql, navigate } from 'gatsby'
 import Img from 'gatsby-image'
 import { Layout } from '../components/layout'
 import { formatDate, editOnGithub } from '../utils/global'
@@ -23,13 +23,22 @@ const ArticleTemplate = ({ pageContext, data: { markdownRemark } }) => {
   const date = formatDate(post.date)
   const githubLink = editOnGithub(post)
 
+  // hit status === draft -> show NOT FOUND
+  if (post.status === 'draft') {
+    navigate('/404')
+  }
   return (
     <Layout>
       <>
         <Helmet>
           <title>{`${post.title} - ${siteMeta.siteTitle}`}</title>
         </Helmet>
-        <SEO postPath={slug} postNode={postNode} postSEO />
+        <SEO
+          postPath={slug}
+          postNode={postNode}
+          postSEO
+          robot={post.status === 'draft' ? 'none' : 'all'}
+        />
         <article>
           <header>
             {thumbnail && <Img fixed={thumbnail} />}
@@ -65,6 +74,7 @@ export const pageQuery = graphql`
       excerpt
       frontmatter {
         title
+        status
         thumbnail {
           childImageSharp {
             fixed(width: 150, height: 150) {

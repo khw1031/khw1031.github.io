@@ -5,6 +5,7 @@ import { ArticleItem } from './articleItem'
 export const ArticleList = ({ articleEdges }) => {
   const articleList = articleEdges
     .filter(edge => edge.node.frontmatter.template === 'article')
+    .filter(edge => edge.node.frontmatter.status !== 'draft') // filter draft
     .map(edge => ({
       path: edge.node.fields.slug,
       tags: edge.node.frontmatter.tags,

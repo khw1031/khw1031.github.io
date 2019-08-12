@@ -3,7 +3,7 @@ import Helmet from 'react-helmet'
 import urljoin from 'url-join/lib/url-join'
 import siteMeta from '../../custom/siteMeta'
 
-export const SEO = ({ postNode, postPath, postSEO }) => {
+export const SEO = ({ postNode, postPath, postSEO, robot }) => {
   let title
   let description
   let postUrl
@@ -86,6 +86,7 @@ export const SEO = ({ postNode, postPath, postSEO }) => {
       <meta name='twitter:title' content={title} />
       <meta name='twitter:description' content={description} />
       <meta name='twitter:image' content={imageUrl} />
+      <meta name='robots' content={robot} />
     </Helmet>
   )
 }
