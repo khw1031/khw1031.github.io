@@ -30,13 +30,11 @@ export default function HTML({
           dangerouslySetInnerHTML={{ __html: body }}
         />
         {postBodyComponents}
+        <script src='https://ads-partners.coupang.com/g.js' />
         <script
           dangerouslySetInnerHTML={{
             __html: `
-            <script src="https://ads-partners.coupang.com/g.js"></script>
-            <script>
               new PartnersCoupang.G({ id:23738 });
-            </script>
             `,
           }}
         />
