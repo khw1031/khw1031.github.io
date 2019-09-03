@@ -33,6 +33,16 @@ export default function HTML({
         <script
           dangerouslySetInnerHTML={{
             __html: `
+            <script src="https://ads-partners.coupang.com/g.js"></script>
+            <script>
+              new PartnersCoupang.G({ id:23738 });
+            </script>
+            `,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
               var vglnk = {key: 'ee216a5565c6278385bf52d9b5f1ceef'};
               (function(d, t) {
                 var s = d.createElement(t);
