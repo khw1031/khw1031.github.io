@@ -15,7 +15,6 @@ import ThemeContext from '../themeContext'
 const menuLinks = [
   { name: 'Me', to: '/me' },
   { name: 'Articles', to: '/articles' },
-  { name: 'Contact', to: '/contact' },
 ]
 
 export const Header = () => {
