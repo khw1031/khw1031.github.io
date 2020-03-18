@@ -8,7 +8,7 @@ const siteMeta = {
   siteUrl: 'https://khw1031.github.io',
   repo: 'https://github.com/khw1031/khw1031.github.io',
   pathPrefix: '',
-  siteDescription: '김현우 풀스택 자바스크립트 개발자',
+  siteDescription: '김현우 프론트엔드 개발자',
   siteRss: '/rss.xml',
 }
 

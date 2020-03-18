@@ -1,14 +1,8 @@
-import { css } from 'styled-components'
-import { fontScheme } from '../../custom/styleScheme/fonts'
+import { css } from "styled-components";
+import { fontScheme } from "../../custom/styleScheme/fonts";
 
 export const resetCss = css`
   html {
-    -ms-text-size-adjust: 100%;
-    -webkit-text-size-adjust: 100%;
-    -moz-text-size-adjust: 100%;
-    font-size: ${fontScheme.baseFontSize};
-    font-variant: ${fontScheme.fontVariant};
-    font-family: ${fontScheme.fontFamily};
     line-height: ${fontScheme.lineHeight};
     font-weight: ${fontScheme.fontWeight};
     box-sizing: border-box;
@@ -157,21 +151,21 @@ export const resetCss = css`
   textarea {
     overflow: auto;
   }
-  [type='checkbox'],
-  [type='radio'] {
+  [type="checkbox"],
+  [type="radio"] {
     box-sizing: border-box;
     padding: 0;
   }
-  [type='number']::-webkit-inner-spin-button,
-  [type='number']::-webkit-outer-spin-button {
+  [type="number"]::-webkit-inner-spin-button,
+  [type="number"]::-webkit-outer-spin-button {
     height: auto;
   }
-  [type='search'] {
+  [type="search"] {
     -webkit-appearance: textfield;
     outline-offset: -2px;
   }
-  [type='search']::-webkit-search-cancel-button,
-  [type='search']::-webkit-search-decoration {
+  [type="search"]::-webkit-search-cancel-button,
+  [type="search"]::-webkit-search-decoration {
     -webkit-appearance: none;
   }
   ::-webkit-input-placeholder {
@@ -194,10 +188,10 @@ export const resetCss = css`
   body {
     word-wrap: break-word;
     font-kerning: normal;
-    -moz-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-    -ms-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-    -webkit-font-feature-settings: 'kern', 'liga', 'clig', 'calt';
-    font-feature-settings: 'kern', 'liga', 'clig', 'calt';
+    -moz-font-feature-settings: "kern", "liga", "clig", "calt";
+    -ms-font-feature-settings: "kern", "liga", "clig", "calt";
+    -webkit-font-feature-settings: "kern", "liga", "clig", "calt";
+    font-feature-settings: "kern", "liga", "clig", "calt";
   }
   img {
     max-width: 100%;
@@ -213,8 +207,6 @@ export const resetCss = css`
   h1 {
     margin: 0;
     padding: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     font-weight: bold;
     text-rendering: optimizeLegibility;
     font-size: 2.25rem;
@@ -224,8 +216,6 @@ export const resetCss = css`
     margin: 0;
     padding: 0;
     color: inherit;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     font-weight: bold;
     text-rendering: optimizeLegibility;
     font-size: 1.62671rem;
@@ -235,8 +225,6 @@ export const resetCss = css`
     margin: 0;
     padding: 0;
     color: inherit;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     font-weight: bold;
     text-rendering: optimizeLegibility;
     font-size: 1.38316rem;
@@ -246,8 +234,6 @@ export const resetCss = css`
     margin: 0;
     padding: 0;
     color: inherit;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     font-weight: bold;
     text-rendering: optimizeLegibility;
     font-size: 1rem;
@@ -257,8 +243,6 @@ export const resetCss = css`
     margin: 0;
     padding: 0;
     color: inherit;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     font-weight: bold;
     text-rendering: optimizeLegibility;
     font-size: 0.85028rem;
@@ -268,8 +252,6 @@ export const resetCss = css`
     margin: 0;
     padding: 0;
     color: inherit;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
     font-weight: bold;
     text-rendering: optimizeLegibility;
     font-size: 0.78405rem;
@@ -524,10 +506,10 @@ export const resetCss = css`
   th {
     text-align: left;
     border-bottom: 1px solid hsla(0, 0%, 0%, 0.12);
-    font-feature-settings: 'tnum';
-    -moz-font-feature-settings: 'tnum';
-    -ms-font-feature-settings: 'tnum';
-    -webkit-font-feature-settings: 'tnum';
+    font-feature-settings: "tnum";
+    -moz-font-feature-settings: "tnum";
+    -ms-font-feature-settings: "tnum";
+    -webkit-font-feature-settings: "tnum";
     padding-left: 0.96667rem;
     padding-right: 0.96667rem;
     padding-top: 0.725rem;
@@ -545,8 +527,8 @@ export const resetCss = css`
   code {
     background-color: hsla(0, 0%, 0%, 0.04);
     border-radius: 3px;
-    font-family: 'SFMono-Regular', Consolas, 'Roboto Mono', 'Droid Sans Mono',
-      'Liberation Mono', Menlo, Courier, monospace;
+    font-family: "SFMono-Regular", Consolas, "Roboto Mono", "Droid Sans Mono",
+      "Liberation Mono", Menlo, Courier, monospace;
     padding: 0;
     padding-top: 0.2em;
     padding-bottom: 0.2em;
@@ -560,12 +542,12 @@ export const resetCss = css`
   tt:before,
   tt:after {
     letter-spacing: -0.2em;
-    content: ' ';
+    content: " ";
   }
   pre code:before,
   pre code:after,
   pre tt:before,
   pre tt:after {
-    content: '';
+    content: "";
   }
-`
+`;
