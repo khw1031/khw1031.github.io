@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[10],{198:function(n,t,a){"use strict";a.r(t);var e=a(0),u=a.n(e),c=a(210),b=a(5);t.default=function(){return Object(b.b)(c.a,null,Object(b.b)(u.a.Fragment,null,"Tag"))}}}]);
+//# sourceMappingURL=component---src-templates-tag-js-468b343c9a54ba5e8a5d.js.map
