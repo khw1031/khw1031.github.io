@@ -1,33 +1,32 @@
-import React, { useEffect } from 'react'
-import Helmet from 'react-helmet'
-import { graphql, navigate } from 'gatsby'
-import Img from 'gatsby-image'
-import { Layout } from '../components/layout'
-import { formatDate, editOnGithub } from '../utils/global'
-import siteMeta from '../../custom/siteMeta'
-import { SEO } from '../components/seo'
-import { PostTags } from '../components/postTags'
-import { UserInfo } from '../components/userInfo'
-import { MarkdownContainer } from '../styles/container'
+import React, { useEffect } from "react";
+import Helmet from "react-helmet";
+import { graphql, navigate } from "gatsby";
+import Img from "gatsby-image";
+import { Layout } from "../components/layout";
+import { formatDate, editOnGithub } from "../utils/global";
+import siteMeta from "../../custom/siteMeta";
+import { SEO } from "../components/seo";
+import { PostTags } from "../components/postTags";
+import { MarkdownContainer } from "../styles/container";
 
 const ArticleTemplate = ({ pageContext, data: { markdownRemark } }) => {
-  const { slug } = pageContext
-  const postNode = markdownRemark
-  const post = markdownRemark.frontmatter
-  let thumbnail
+  const { slug } = pageContext;
+  const postNode = markdownRemark;
+  const post = markdownRemark.frontmatter;
+  let thumbnail;
 
   if (post.thumbnail) {
-    thumbnail = post.thumbnail.childImageSharp.fixed
+    thumbnail = post.thumbnail.childImageSharp.fixed;
   }
 
   useEffect(() => {
-    if (post.status === 'draft') {
-      navigate('/404')
+    if (post.status === "draft") {
+      navigate("/404");
     }
-  }, [])
+  }, []);
 
-  const date = formatDate(post.date)
-  const githubLink = editOnGithub(post)
+  const date = formatDate(post.date);
+  const githubLink = editOnGithub(post);
 
   return (
     <Layout>
@@ -39,7 +38,7 @@ const ArticleTemplate = ({ pageContext, data: { markdownRemark } }) => {
           postPath={slug}
           postNode={postNode}
           postSEO
-          robot={post.status === 'draft' ? 'none' : 'all'}
+          robot={post.status === "draft" ? "none" : "all"}
         />
         <article>
           <header>
@@ -49,7 +48,7 @@ const ArticleTemplate = ({ pageContext, data: { markdownRemark } }) => {
               <div>
                 <time>{date}</time>
                 <a href={githubLink} rel='noopener noreferrer' target='_blank'>
-                  Edit on Github{' '}
+                  Edit on Github{" "}
                   <span role='img' aria-labelledby='pencil icon'>
                     ✏️
                   </span>
@@ -62,11 +61,10 @@ const ArticleTemplate = ({ pageContext, data: { markdownRemark } }) => {
             dangerouslySetInnerHTML={{ __html: markdownRemark.html }}
           />
         </article>
-        <UserInfo />
       </>
     </Layout>
-  )
-}
+  );
+};
 
 export const pageQuery = graphql`
   query BlogPostBySlug($slug: String!) {
@@ -96,6 +94,6 @@ export const pageQuery = graphql`
       }
     }
   }
-`
+`;
 
-export default ArticleTemplate
+export default ArticleTemplate;
