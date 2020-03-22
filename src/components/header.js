@@ -12,7 +12,7 @@ import {
 } from "../../custom/styleScheme/colors";
 import ThemeContext from "../themeContext";
 
-const menuLinks = [{ name: "Me", to: "/me" }, { name: "Blog", to: "/" }];
+const menuLinks = [{ name: "Me", to: "/me" }];
 
 export const Header = () => {
   const [isScrolled, setScrolled] = useState(false);
