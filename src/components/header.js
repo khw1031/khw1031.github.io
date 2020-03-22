@@ -1,38 +1,35 @@
-import React, { useState, useEffect, useContext } from 'react'
-import { Link } from 'gatsby'
-import styled, { css } from 'styled-components'
-import terminal from '../../images/logo/terminal.svg'
-import terminalDark from '../../images/logo/terminal_dark.svg'
-import { mobileLAbove, tabletAbove } from '../styles/mediaQuery'
-import { ThemeSwitch } from './themeSwitch'
-import { BaseContainer } from '../styles/container'
+import React, { useState, useEffect, useContext } from "react";
+import { Link } from "gatsby";
+import styled, { css } from "styled-components";
+import terminal from "../../images/logo/terminal.svg";
+import terminalDark from "../../images/logo/terminal_dark.svg";
+import { mobileLAbove, tabletAbove } from "../styles/mediaQuery";
+import { ThemeSwitch } from "./themeSwitch";
+import { BaseContainer } from "../styles/container";
 import {
   DarkThemeColors,
   LightThemeColors,
-} from '../../custom/styleScheme/colors'
-import ThemeContext from '../themeContext'
+} from "../../custom/styleScheme/colors";
+import ThemeContext from "../themeContext";
 
-const menuLinks = [
-  { name: 'Me', to: '/me' },
-  { name: 'Articles', to: '/articles' },
-]
+const menuLinks = [{ name: "Me", to: "/me" }, { name: "Blog", to: "/" }];
 
 export const Header = () => {
-  const [isScrolled, setScrolled] = useState(false)
+  const [isScrolled, setScrolled] = useState(false);
   const handleScrollY = () => {
     if (isScrolled !== window.scrollY > 20) {
-      setScrolled(() => window.scrollY > 20)
+      setScrolled(() => window.scrollY > 20);
     }
-  }
+  };
 
-  const { dark, toggleDark } = useContext(ThemeContext)
+  const { dark, toggleDark } = useContext(ThemeContext);
 
   useEffect(() => {
-    window.addEventListener('scroll', handleScrollY)
+    window.addEventListener("scroll", handleScrollY);
     return () => {
-      window.removeEventListener('scroll', handleScrollY)
-    }
-  }, [isScrolled])
+      window.removeEventListener("scroll", handleScrollY);
+    };
+  }, [isScrolled]);
 
   return (
     <Nav isScrolled={isScrolled}>
@@ -49,21 +46,21 @@ export const Header = () => {
           ))}
         </Links>
         <ThemeSwitch
-          theme={dark ? 'dark' : 'light'}
+          theme={dark ? "dark" : "light"}
           setSiteTheme={toggleDark}
         />
       </Container>
     </Nav>
-  )
-}
+  );
+};
 
 const getNavBgColor = (siteTheme, isScrolled) => {
-  if (siteTheme === 'light') return LightThemeColors.background
-  return isScrolled ? DarkThemeColors.onScrollNav : DarkThemeColors.background
-}
+  if (siteTheme === "light") return LightThemeColors.background;
+  return isScrolled ? DarkThemeColors.onScrollNav : DarkThemeColors.background;
+};
 
 const Nav = styled.nav.attrs(({ theme: { siteTheme }, isScrolled }) => ({
-  boxShadow: isScrolled ? '1px 2px 18px rgba(0, 0, 0, 0.1)' : '',
+  boxShadow: isScrolled ? "1px 2px 18px rgba(0, 0, 0, 0.1)" : "",
   background: getNavBgColor(siteTheme, isScrolled),
 }))`
   ${({ boxShadow, background }) => css`
@@ -76,7 +73,7 @@ const Nav = styled.nav.attrs(({ theme: { siteTheme }, isScrolled }) => ({
     z-index: 3;
     /* transition: all 0.3s ease; */
   `}
-`
+`;
 
 const Container = styled(BaseContainer)`
   ${props => css`
@@ -86,16 +83,16 @@ const Container = styled(BaseContainer)`
   justify-content: space-between;
   transition: height 0.3s ease;
   ${mobileLAbove`
-    height: ${props.isScrolled ? '60px' : '90px'};
+    height: ${props.isScrolled ? "60px" : "90px"};
   `}
 }`}
-`
+`;
 
 const TextLink = styled(Link)`
   ${props => css`
     display: flex;
     align-items: center;
-    color: ${props.theme.siteTheme === 'light'
+    color: ${props.theme.siteTheme === "light"
       ? LightThemeColors.brandFont
       : DarkThemeColors.brandFont};
     text-decoration: none;
@@ -109,7 +106,7 @@ const TextLink = styled(Link)`
         display: inline-block;
       `}
       font-size: 1rem;
-      color: ${props.theme.siteTheme === 'light'
+      color: ${props.theme.siteTheme === "light"
         ? LightThemeColors.brandFont
         : DarkThemeColors.brandFont};
     }
@@ -117,16 +114,16 @@ const TextLink = styled(Link)`
     &:focus {
       background: none;
       h1 {
-        color: ${props.theme.siteTheme === 'light'
+        color: ${props.theme.siteTheme === "light"
           ? LightThemeColors.brandFontHover
           : DarkThemeColors.brandFontHover};
       }
     }
   `}
-`
+`;
 
 const Logo = styled.div.attrs(props => ({
-  url: props.theme.siteTheme === 'dark' ? terminalDark : terminal,
+  url: props.theme.siteTheme === "dark" ? terminalDark : terminal,
 }))`
   ${({ url }) => css`
     height: 18px;
@@ -137,14 +134,14 @@ const Logo = styled.div.attrs(props => ({
     background-position: left center;
     background-size: contain;
   `}
-`
+`;
 
 const Links = styled.div`
   display: flex;
   justify-content: flex-end;
   flex: 1;
   margin: 0;
-`
+`;
 
 const Menu = styled(Link)`
   ${props => css`
@@ -158,13 +155,13 @@ const Menu = styled(Link)`
     color: rgba(0, 0, 0, 0.45);
     line-height: 1.2;
     text-align: center;
-    color: ${props.theme.siteTheme === 'dark'
+    color: ${props.theme.siteTheme === "dark"
       ? DarkThemeColors.menu
       : LightThemeColors.menu};
     &:hover,
     &:focus,
     &:active {
-      color: ${props.theme.siteTheme === 'dark'
+      color: ${props.theme.siteTheme === "dark"
         ? DarkThemeColors.menuHover
         : LightThemeColors.menuHover};
       background: none;
@@ -175,4 +172,4 @@ const Menu = styled(Link)`
       padding: 1rem .5rem;
     `}
   `}
-`
+`;

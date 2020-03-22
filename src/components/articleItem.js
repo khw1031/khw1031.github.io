@@ -1,26 +1,26 @@
-import React from 'react'
-import Img from 'gatsby-image'
-import styled, { css } from 'styled-components'
-import theme from 'styled-theming'
-import { Link } from 'gatsby'
-import moment from 'moment'
-import { formatDate } from '../utils/global'
-import { tabletAbove } from '../styles/mediaQuery'
+import React from "react";
+import Img from "gatsby-image";
+import styled, { css } from "styled-components";
+import theme from "styled-theming";
+import { Link } from "gatsby";
+import moment from "moment";
+import { formatDate } from "../utils/global";
+import { tabletAbove } from "../styles/mediaQuery";
 
 export const ArticleItem = article => {
-  let thumbnail
+  let thumbnail;
   if (article.thumbnail) {
-    thumbnail = article.thumbnail.childImageSharp.fixed
+    thumbnail = article.thumbnail.childImageSharp.fixed;
   }
 
-  const popular = article.categories.includes('Popular')
-  const date = formatDate(article.date)
-  const newest = moment(article.date) > moment().subtract(1, 'months')
+  const popular = article.categories.includes("Popular");
+  const date = formatDate(article.date);
+  const newest = moment(article.date) > moment().subtract(1, "months");
 
   return (
     <Link
-      style={{ textDecorationLine: 'none' }}
-      to={`/articles${article.path}`}
+      style={{ textDecorationLine: "none" }}
+      to={`/blogs${article.path}`}
       aria-labelledby={article.title}
     >
       <Item>
@@ -33,10 +33,10 @@ export const ArticleItem = article => {
         {popular && <HighLight type='popular'>Popular</HighLight>}
       </Item>
     </Link>
-  )
-}
+  );
+};
 
-const ItemCss = theme('siteTheme', {
+const ItemCss = theme("siteTheme", {
   light: css`
     border-bottom-color: #f2f2f2;
     :hover,
@@ -55,7 +55,7 @@ const ItemCss = theme('siteTheme', {
       border-radius: 4px;
     }
   `,
-})
+});
 
 const Item = styled.li`
   display: grid;
@@ -71,18 +71,18 @@ const Item = styled.li`
     padding: 1rem 2rem;
     margin: 0 -2rem;
   `}
-`
+`;
 
-const HighLightCss = theme('siteTheme', {
+const HighLightCss = theme("siteTheme", {
   light: css`
-    color: ${({ type }) => (type === 'new' ? '#f7b801' : '#12c47c')};
-    background: ${({ type }) => (type === 'new' ? '#fff5da' : '#d9fcee')};
+    color: ${({ type }) => (type === "new" ? "#f7b801" : "#12c47c")};
+    background: ${({ type }) => (type === "new" ? "#fff5da" : "#d9fcee")};
   `,
   dark: css`
-    color: ${({ type }) => (type === 'new' ? '#f7b801' : '#12c47c')};
+    color: ${({ type }) => (type === "new" ? "#f7b801" : "#12c47c")};
     background: rgba(0, 0, 0, 0.2);
   `,
-})
+});
 
 const HighLight = styled.div`
   display: none;
@@ -96,7 +96,7 @@ const HighLight = styled.div`
   ${tabletAbove`
       display: block;
   `}
-`
+`;
 
 const Image = styled(Img)`
   margin-right: 25px;
@@ -108,16 +108,16 @@ const Image = styled(Img)`
     width: 50px !important;
     height: 50px !important;
   `}
-`
+`;
 
-const TitleCss = theme('siteTheme', {
+const TitleCss = theme("siteTheme", {
   light: css`
     color: #111;
   `,
   dark: css`
     color: #ccc;
   `,
-})
+});
 
 const Title = styled.h2`
   ${TitleCss}
@@ -126,16 +126,16 @@ const Title = styled.h2`
     font-size: 1.2rem;
     margin-bottom: 0.4rem;
   `}
-`
+`;
 
-const DateCss = theme('siteTheme', {
+const DateCss = theme("siteTheme", {
   light: css`
     color: rgba(0, 0, 0, 0.4);
   `,
   dark: css`
     color: #777c85;
   `,
-})
+});
 
 const Date = styled.time`
   display: none;
@@ -145,4 +145,4 @@ const Date = styled.time`
   ${tabletAbove`
     display: block;
   `}
-`
+`;

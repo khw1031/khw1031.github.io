@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 
 export default function HTML({
   htmlAttributes,
@@ -9,7 +9,7 @@ export default function HTML({
   postBodyComponents,
 }) {
   return (
-    <html lang='ko' {...htmlAttributes}>
+    <html lang='ko-KR' {...htmlAttributes}>
       <head>
         <meta charSet='utf-8' />
         <meta httpEquiv='x-ua-compatible' content='ie=edge' />
@@ -32,5 +32,5 @@ export default function HTML({
         {postBodyComponents}
       </body>
     </html>
-  )
+  );
 }
