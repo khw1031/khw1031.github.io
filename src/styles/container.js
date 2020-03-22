@@ -1,17 +1,17 @@
-import styled, { css } from 'styled-components'
+import styled, { css } from "styled-components";
 import {
   LightThemeColors,
   DarkThemeColors,
-} from '../../custom/styleScheme/colors'
-import { tabletAbove } from './mediaQuery'
+} from "../../custom/styleScheme/colors";
+import { tabletAbove } from "./mediaQuery";
 
 export const BaseContainer = styled.div`
   ${props => css`
-    max-width: ${props.maxWidth || '800px'};
+    max-width: ${props.maxWidth || "800px"};
     margin: auto;
     padding: 0 1.5rem;
   `}
-`
+`;
 
 export const MarkdownContainer = styled.div.attrs(props => ({
   theme: props.theme.siteTheme,
@@ -19,7 +19,7 @@ export const MarkdownContainer = styled.div.attrs(props => ({
   ${({ theme }) => css`
     h2,
     h3 {
-      color: ${theme === 'light'
+      color: ${theme === "light"
         ? LightThemeColors.headerColor
         : DarkThemeColors.headerColor};
       font-weight: 700;
@@ -34,7 +34,7 @@ export const MarkdownContainer = styled.div.attrs(props => ({
       font-size: 1.3rem;
       line-height: 1.3;
       border-bottom: 2px solid
-        ${theme === 'light'
+        ${theme === "light"
           ? LightThemeColors.headerBorderBottom
           : DarkThemeColors.headerBorderBottom};
       ${tabletAbove`
@@ -83,10 +83,10 @@ export const MarkdownContainer = styled.div.attrs(props => ({
     }
 
     a {
-      color: ${theme === 'light'
+      color: ${theme === "light"
         ? LightThemeColors.link
         : DarkThemeColors.link};
-      ${theme === 'light'
+      ${theme === "light"
         ? css`
             border-bottom: 2px solid ${LightThemeColors.linkBorder};
           `
@@ -98,31 +98,31 @@ export const MarkdownContainer = styled.div.attrs(props => ({
       &:hover,
       &:focus,
       &:active {
-        color: ${theme === 'light'
+        color: ${theme === "light"
           ? LightThemeColors.linkHover
           : DarkThemeColors.linkHover};
-        background: ${theme === 'light' ? LightThemeColors.linkHoverBg : ''};
+        background: ${theme === "light" ? LightThemeColors.linkHoverBg : ""};
         border-bottom: 2px solid
-          ${theme === 'light'
+          ${theme === "light"
             ? LightThemeColors.linkHover
             : DarkThemeColors.linkBorder};
       }
       &:active {
         border-bottom: 2px dashed
-          ${theme === 'light'
+          ${theme === "light"
             ? LightThemeColors.linkHover
             : DarkThemeColors.linkBorder};
       }
     }
 
     p {
-      line-height: 1.8;
-      font-size: 0.85rem;
+      line-height: 1.5;
+      font-size: 1rem;
       word-break: keep-all;
       word-wrap: break-word;
       ${tabletAbove`
-      font-size: 1rem;
-      line-height: 1.8;
+      font-size: 1.125rem;
+      line-height: 1.5;
     `}
     }
 
@@ -130,7 +130,7 @@ export const MarkdownContainer = styled.div.attrs(props => ({
     ol {
       margin: 0 0 2rem;
       li:before {
-        content: '\\2022';
+        content: "\\2022";
         position: absolute;
         left: 0;
         color: #8d8d8d;
@@ -169,4 +169,4 @@ export const MarkdownContainer = styled.div.attrs(props => ({
       }
     }
   `}
-`
+`;

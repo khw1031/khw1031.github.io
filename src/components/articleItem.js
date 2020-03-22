@@ -99,7 +99,6 @@ const HighLight = styled.div`
 `;
 
 const Image = styled(Img)`
-  margin-right: 25px;
   min-width: 40px;
   width: 40px !important;
   height: 40px !important;

@@ -18,7 +18,7 @@ export const Footer = () => {
           </Menu>
           <Menu>
             <a href='https://github.com/khw1031/khw1031.github.io'>
-              View source
+              View Source
             </a>
           </Menu>
         </Menus>
