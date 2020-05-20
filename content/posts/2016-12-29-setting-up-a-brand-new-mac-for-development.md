@@ -4,6 +4,7 @@ title: 'Setting up a Brand New Mac for Development'
 template: article
 thumbnail: '../thumbnails/apple.png'
 slug: setting-up-a-brand-new-mac-for-development
+status: draft
 categories:
   - Tools
   - Popular

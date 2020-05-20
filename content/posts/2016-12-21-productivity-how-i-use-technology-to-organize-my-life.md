@@ -4,6 +4,7 @@ title: 'Productivity: How I Use Technology to Organize My Life'
 template: article
 thumbnail: '../thumbnails/floppy.png'
 slug: productivity-how-i-use-technology-to-organize-my-life
+status: draft
 categories:
   - Tools
 tags:

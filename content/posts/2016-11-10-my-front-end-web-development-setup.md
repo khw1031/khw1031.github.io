@@ -4,6 +4,7 @@ title: 'My Complete Front End Web Development Setup'
 template: article
 thumbnail: '../thumbnails/terminal.png'
 slug: my-front-end-web-development-setup
+status: draft
 categories:
   - Tools
 tags:
