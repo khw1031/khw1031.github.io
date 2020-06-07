@@ -17,6 +17,10 @@ export default function HTML({
           name='viewport'
           content='width=device-width, initial-scale=1, shrink-to-fit=no, maximum-scale=1, user-scalable=0'
         />
+        <meta
+          name='naver-site-verification'
+          content='38089d39cdd5fe303b16c74bc4b5cf3bfb66277d'
+        />
         {headComponents}
       </head>
       <body {...bodyAttributes}>
