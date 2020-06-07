@@ -3,7 +3,9 @@
  *
  * See: https://www.gatsbyjs.org/docs/browser-apis/
  */
-import React from 'react'
-import { ThemeProvider } from './src/themeContext'
+import React from "react";
+import { ThemeProvider } from "./src/themeContext";
 
-export const wrapRootElement = ({ element }) => <ThemeProvider>{element}</ThemeProvider>
+export const wrapRootElement = ({ element }) => (
+  <ThemeProvider>{element}</ThemeProvider>
+);
