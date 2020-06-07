@@ -1,6 +1,6 @@
-import { css } from "@emotion/core";
+import { createGlobalStyle } from "styled-components";
 
-export const resetCss = css`
+export const ResetCss = createGlobalStyle`
   *,
   *::before,
   *::after {

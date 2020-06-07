@@ -1,6 +1,5 @@
 import React, { useContext } from "react";
 import Helmet from "react-helmet";
-import { Global } from "@emotion/core";
 import styled, { ThemeProvider } from "styled-components";
 import { GlobalStyle } from "../styles/theme";
 import { Header } from "./header";
@@ -9,7 +8,7 @@ import { tabletAbove } from "../styles/mediaQuery";
 import ThemeContext from "../themeContext";
 import { Footer } from "./footer";
 import siteMeta from "../../custom/siteMeta";
-import { resetCss } from "../styles/reset-css";
+import { ResetCss } from "../styles/resetCss";
 
 export const Layout = ({ children }) => {
   const { dark, toggleDark } = useContext(ThemeContext);
@@ -17,7 +16,7 @@ export const Layout = ({ children }) => {
     <ThemeProvider theme={{ siteTheme: dark ? "dark" : "light" }}>
       <>
         <GlobalStyle />
-        <Global styles={[resetCss]} />
+        <ResetCss />
         <Helmet>
           <meta name='description' content={siteMeta.siteDescription} />
         </Helmet>

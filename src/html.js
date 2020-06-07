@@ -30,6 +30,13 @@ export default function HTML({
           dangerouslySetInnerHTML={{ __html: body }}
         />
         {postBodyComponents}
+        <script type='text/javascript' src='//wcs.naver.net/wcslog.js' />
+        <script
+          type='text/javascript'
+          dangerouslySetInnerHTML={{
+            __html: `if(!wcs_add) var wcs_add = {};wcs_add["wa"] = "6819f77e71c10c";if(window.wcs) {wcs_do();}`,
+          }}
+        />
       </body>
     </html>
   );
