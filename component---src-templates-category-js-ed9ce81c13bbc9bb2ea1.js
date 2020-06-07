@@ -1,2 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[5],{Mdw5:function(n,t,c){"use strict";c.r(t);c("q1tI");var e=c("Bl7J"),o=c("qKvR");t.default=function(){return Object(o.b)(e.a,null,"category")}}}]);
-//# sourceMappingURL=component---src-templates-category-js-ed9ce81c13bbc9bb2ea1.js.map
