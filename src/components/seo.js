@@ -1,92 +1,99 @@
-import React from 'react'
-import Helmet from 'react-helmet'
-import urljoin from 'url-join/lib/url-join'
-import siteMeta from '../../custom/siteMeta'
+import React from "react";
+import { Helmet } from "react-helmet";
+import config from "../utils/config";
 
-export const SEO = ({ postNode, postPath, postSEO, robot }) => {
-  let title
-  let description
-  let postUrl
-  let imageUrl = ''
+export default function SEO({
+  postNode,
+  postPath,
+  postSEO,
+  customTitle,
+  customDescription,
+}) {
+  let title;
+  let description;
+  let image = config.siteLogo;
+  let postURL;
 
   if (postSEO) {
-    const postMeta = postNode.frontmatter
-    title = postMeta.title
-    description = postMeta.description ? postMeta.description : postNode.excerpt
+    const postMeta = postNode.frontmatter;
+    title = customTitle || postMeta.title;
+    description = customDescription || postNode.excerpt;
+
     if (postMeta.thumbnail) {
-      imageUrl = postMeta.thumbnail.childImageSharp.fixed.src
+      image = postMeta.thumbnail.childImageSharp.fixed.src;
     }
-    postUrl = urljoin(siteMeta.siteUrl, postPath)
+
+    postURL = `${config.siteUrl}${postPath}`;
   } else {
-    title = siteMeta.siteTitle
-    description = siteMeta.siteDescription
-    imageUrl = siteMeta.siteLogo
+    title = customTitle
+      ? `${customTitle} | ${config.siteTitle}`
+      : config.siteTitle;
+    description = customDescription || config.description;
   }
 
-  imageUrl = urljoin(siteMeta.siteUrl, imageUrl)
-  const blogUrl = urljoin(siteMeta.siteUrl, siteMeta.pathPrefix)
+  image = `${config.siteUrl}${image}`;
   const schemaOrgJSONLD = [
     {
-      '@context': 'http://schema.org',
-      '@type': 'WebSite',
-      url: blogUrl,
+      "@context": "http://schema.org",
+      "@type": "WebSite",
+      url: config.siteUrl,
       name: title,
-      alternateName: siteMeta.siteTitleAlt ? siteMeta.siteTitleAlt : '',
+      alternateName: title,
     },
-  ]
+  ];
 
   if (postSEO) {
     schemaOrgJSONLD.push(
       {
-        '@context': 'http://schema.org',
-        '@type': 'BreadcrumbList',
+        "@context": "http://schema.org",
+        "@type": "BreadcrumbList",
         itemListElement: [
           {
-            '@type': 'ListItem',
+            "@type": "ListItem",
             position: 1,
             item: {
-              '@id': postUrl,
+              "@id": postURL,
               name: title,
-              imageUrl,
+              image,
             },
           },
         ],
       },
       {
-        '@context': 'http://schema.org',
-        '@type': 'BlogPosting',
-        url: blogUrl,
+        "@context": "http://schema.org",
+        "@type": "BlogPosting",
+        url: config.siteUrl,
         name: title,
-        alternateName: siteMeta.siteTitleAlt ? siteMeta.siteTitleAlt : '',
+        alternateName: title,
         headline: title,
         image: {
-          '@type': 'ImageObject',
-          url: imageUrl,
+          "@type": "ImageObject",
+          url: image,
         },
         description,
       }
-    )
+    );
   }
-
   return (
-    <Helmet htmlAttributes={{ lang: 'ko' }}>
-      <meta name='description' content={description} />
-      <meta name='image' content={imageUrl} />
-      <script type='application/ld+json'>
+    <Helmet>
+      <title>{title}</title>
+      <meta name="description" content={description} />
+      <meta name="image" content={image} />
+
+      <script type="application/ld+json">
         {JSON.stringify(schemaOrgJSONLD)}
       </script>
 
-      <meta property='og:url' content={postSEO ? postUrl : blogUrl} />
-      {postSEO ? <meta property='og:type' content='article' /> : null}
-      <meta property='og:title' content={title} />
-      <meta property='og:description' content={description} />
-      <meta property='og:image' content={imageUrl} />
+      <meta property="og:url" content={postSEO ? postURL : config.siteUrl} />
+      {postSEO && <meta property="og:type" content="article" />}
+      <meta property="og:title" content={title} />
+      <meta property="og:description" content={description} />
+      <meta property="og:image" content={image} />
 
-      <meta name='twitter:card' content='summary_large_image' />
-      <meta name='twitter:title' content={title} />
-      <meta name='twitter:description' content={description} />
-      <meta name='twitter:image' content={imageUrl} />
-      <meta name='robots' content={robot} />
+      <meta name="twitter:card" content="summary" />
+      <meta name="twitter:title" content={title} />
+      <meta name="twitter:description" content={description} />
+      <meta name="twitter:image" content={image} />
     </Helmet>
-  )
+  );
 }

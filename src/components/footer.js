@@ -1,85 +1,36 @@
 import React from "react";
-import styled, { css } from "styled-components";
-import theme from "styled-theming";
-import { BaseContainer } from "../styles/container";
+import styled from "styled-components";
 import { tabletAbove } from "../styles/mediaQuery";
-import {
-  LightThemeColors,
-  DarkThemeColors,
-} from "../../custom/styleScheme/colors";
 
-export const Footer = () => {
+export default function Footer() {
   return (
-    <StyledFooter>
-      <Container>
-        <Menus>
-          <Menu>
-            <a href='https://www.github.com/khw1031'>GitHub</a>
-          </Menu>
-          <Menu>
-            <a href='https://github.com/khw1031/khw1031.github.io'>
-              View Source
-            </a>
-          </Menu>
-        </Menus>
-      </Container>
-    </StyledFooter>
+    <Container>
+      <Inner>
+        <Rights>
+          copyright ⓒ {new Date().getFullYear()} Hyunwoo Kim all rights reserved
+        </Rights>
+        <Rights>✉️ &nbsp;khw1031@gmail.com</Rights>
+      </Inner>
+    </Container>
   );
-};
+}
 
-const StyledFooter = styled.footer`
-  height: 55px;
+const Container = styled.footer`
+  max-width: var(--container-max-width);
+  margin: var(--container-margin);
+  margin-top: 4rem;
+  padding: var(--container-pad);
+`;
+
+const Inner = styled.div`
+  padding: 2rem 0;
+`;
+
+const Rights = styled.p`
+  text-align: center;
+  color: #ccc;
+  font-size: 0.85rem;
   ${tabletAbove`
-    height: 100px;
+    text-align: end;
   `}
-`;
-
-const Container = styled(BaseContainer)`
-  height: 100%;
-`;
-
-const Menus = styled.ul`
-  display: flex;
-  height: 100%;
-  align-items: center;
-  margin: 0;
-`;
-
-const Menu = styled.li`
-  list-style-type: none;
-  font-weight: 400;
-  margin: 0;
-  & + & {
-    margin-left: 14px;
-    ${tabletAbove`
-      margin-left: 18px;
-    `}
-  }
-  a {
-    cursor: pointer;
-    text-decoration: none;
-    font-size: 14px;
-    ${tabletAbove`
-      font-size: 1rem;
-    `}
-    :hover {
-      background: transparent;
-      ${theme("siteTheme", {
-        light: css`
-          color: ${DarkThemeColors.footerColor};
-        `,
-        dark: css`
-          color: ${LightThemeColors.footerColor};
-        `,
-      })}
-    }
-    ${theme("siteTheme", {
-      light: css`
-        color: ${LightThemeColors.footerColor};
-      `,
-      dark: css`
-        color: ${DarkThemeColors.footerColor};
-      `,
-    })}
-  }
 `;

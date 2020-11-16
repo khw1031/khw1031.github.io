@@ -1,5 +1,5 @@
 import { css } from "styled-components";
-import { BreakPoints } from "../../custom/styleScheme/breakpoints";
+import { BREAK_POINTS } from "./scheme";
 
 const reduceCssStr = (cssStrs, keys) => {
   return cssStrs
@@ -12,7 +12,7 @@ const reduceCssStr = (cssStrs, keys) => {
 };
 
 const mediaQuery = breakpoint => (cssStrs, keys) => css`
-  @media (min-width: ${BreakPoints[breakpoint]}) {
+  @media (min-width: ${BREAK_POINTS[breakpoint]}) {
     ${reduceCssStr(cssStrs, keys)}
   }
 `;

@@ -1,8 +1,9 @@
-import React from 'react'
-import { Layout } from '../components/layout'
+import React from "react";
+import Layout from "../components/layout";
 
-const CategoryTemplate = () => {
-  return <Layout>category</Layout>
+function CategoryTemplate({ pageContext }) {
+  const category = pageContext.category;
+  return <Layout>{category}</Layout>;
 }
 
-export default CategoryTemplate
+export default CategoryTemplate;

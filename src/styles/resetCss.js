@@ -1,22 +1,59 @@
-import { createGlobalStyle } from "styled-components";
+import { css } from "styled-components";
 
-export const ResetCss = createGlobalStyle`
+export default css`
+  :root {
+    --hello: 1px;
+  }
   *,
   *::before,
   *::after {
     box-sizing: border-box;
-    font-variant: normal;
+  }
+
+  *:focus {
+    outline-color: var(--color-secondary);
+    outline-width: 1px;
   }
 
   html {
-    /* default: 16px */
     font-size: 100%;
-    font-family: -apple-system, "system-ui", BlinkMacSystemFont, "Segoe UI",
-      Roboto, "Helvetica Neue", Arial, sans-serif;
+    font-family: var(--font-family);
   }
+
   body {
     margin: 0;
+    padding: 0;
+    background: var(--color-background);
+    color: var(--color-font);
+    transition: color 350ms ease 0s, background 350ms ease 0s;
   }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-weight: var(--font-weight-bold);
+    color: var(--color-heading);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    margin: 0 0 1.5rem;
+  }
+
+  h1 {
+    line-height: 1.1;
+  }
+
+  p {
+    margin: 0;
+  }
+
+  a {
+    color: var(--color-font);
+    text-decoration: none;
+  }
+
   article,
   aside,
   details,
@@ -32,31 +69,30 @@ export const ResetCss = createGlobalStyle`
     display: block;
     margin: 0;
   }
+
   audio,
   canvas,
   progress,
   video {
     display: inline-block;
   }
+
   small {
     font-size: 80%;
   }
+
   ul,
   ol {
     margin: 0;
     padding: 0;
     list-style: none;
   }
+
   img {
     display: block;
   }
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p {
-    margin: 0;
+
+  input[type="search"] {
+    -webkit-appearance: none;
   }
 `;

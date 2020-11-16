@@ -1,41 +1,28 @@
-import React, { useContext } from "react";
-import Helmet from "react-helmet";
-import styled, { ThemeProvider } from "styled-components";
-import { GlobalStyle } from "../styles/theme";
-import { Header } from "./header";
-import { BaseContainer } from "../styles/container";
-import { tabletAbove } from "../styles/mediaQuery";
-import ThemeContext from "../themeContext";
-import { Footer } from "./footer";
-import siteMeta from "../../custom/siteMeta";
-import { ResetCss } from "../styles/resetCss";
+import React from "react";
 
-export const Layout = ({ children }) => {
-  const { dark, toggleDark } = useContext(ThemeContext);
+import Navigation from "./nav";
+import Footer from "./footer";
+import { Helmet } from "react-helmet";
+import styled from "styled-components";
+
+const Layout = ({ children }) => {
   return (
-    <ThemeProvider theme={{ siteTheme: dark ? "dark" : "light" }}>
-      <>
-        <GlobalStyle />
-        <ResetCss />
-        <Helmet>
-          <meta name='description' content={siteMeta.siteDescription} />
-        </Helmet>
-        <Header theme={dark ? "dark" : "light"} setSiteTheme={toggleDark} />
-        <Main>
-          <BaseContainer>{children}</BaseContainer>
-        </Main>
-        <Footer />
-      </>
-    </ThemeProvider>
+    <React.Fragment>
+      <Helmet>
+        <html lang="ko" />
+      </Helmet>
+      <Navigation />
+      <Main>{children}</Main>
+      <Footer />
+    </React.Fragment>
   );
 };
+
 const Main = styled.main`
-  margin-top: 55px;
-  padding: 4rem 0 0;
-  min-height: calc(100vh - 142px);
-  ${tabletAbove`
-    margin-top: 92px;
-    padding: 1.5rem 0 0;
-    min-height: calc(100vh - 219px);
-  `}
+  max-width: var(--container-max-width);
+  margin: var(--container-margin);
+  margin-top: var(--stack-main);
+  padding: var(--container-pad);
 `;
+
+export default Layout;

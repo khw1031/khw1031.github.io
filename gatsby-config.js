@@ -1,66 +1,136 @@
-const config = require("./custom/siteMeta");
-
 const isProd = process.env.NODE_ENV === "production";
 
 module.exports = {
   siteMetadata: {
-    title: config.siteTitle,
-    description: `김현우의 개발 블로그 | 리액트 프론트엔드`,
-    author: `김현우`,
+    title: `Hyunwoo Kim`,
+    description: `블로그`,
+    author: {
+      name: "Hyunwoo Kim",
+    },
+    pathPrefix: "/",
+    siteUrl: "https://khw1031.github.io",
+    feedUrl: "https://khw1031.github.io/rss.xml",
+    logo: "https://khw1031.github.io/images/logo.png",
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-netlify`,
     {
-      resolve: `gatsby-source-filesystem`,
+      resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `assets`,
-        path: `${__dirname}/static/`,
+        name: `HyunwooKim dev blog`,
+        short_name: `Hyunwoo Kim`,
+        start_url: "/",
+        description: "개발기록",
+        background_color: "white",
+        theme_color: "#5183f5",
+        display: `minial-ui`,
+        icon: `static/images/logo.png`,
       },
     },
+    {
+      resolve: `gatsby-plugin-feed`,
+      options: {
+        query: `
+          {
+            site {
+              siteMetadata {
+                title
+                description
+                siteUrl
+                site_url: siteUrl
+              }
+            }
+          }
+        `,
+        feeds: [
+          {
+            serialize: ({ query: { site, allMarkdownRemark } }) => {
+              return allMarkdownRemark.edges.map(edge => {
+                return Object.assign({}, edge.node.frontmatter, {
+                  description: edge.node.excerpt,
+                  date: edge.node.frontmatter.date,
+                  url: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  guid: site.siteMetadata.siteUrl + edge.node.fields.slug,
+                  custom_elements: [
+                    { "content:encoded": edge.node.html },
+                    { author: "contact@eliga.kr" },
+                  ],
+                });
+              });
+            },
+            query: `
+              {
+                allMarkdownRemark(
+                  limit: 30,
+                  sort: { order: DESC, fields: [frontmatter___date] },
+                  filter: { frontmatter: { template: { eq: "post" } } }
+                ) {
+                  edges {
+                    node {
+                      excerpt
+                      html
+                      fields { 
+                        slug 
+                      }
+                      frontmatter {
+                        title
+                        date
+                        template
+                      }
+                    }
+                  }
+                }
+              }
+            `,
+            output: "/rss.xml",
+            title: "Hyunwoo Kim | RSS Feed",
+          },
+        ],
+      },
+    },
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `posts`,
-        path: `${__dirname}/content/`,
+        path: `${__dirname}/articles/`,
       },
     },
-    `gatsby-transformer-sharp`,
-    `gatsby-plugin-sharp`,
     {
-      resolve: "gatsby-plugin-manifest",
+      resolve: "gatsby-source-filesystem",
       options: {
-        name: config.siteTitle,
-        short_name: `starter`,
-        start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
-        display: `minimal-ui`,
-        icon: `static/logos/terminal_dark.svg`, // This path is relative to the root of the site.
+        name: "assets",
+        path: `${__dirname}/static/`,
       },
     },
     {
       resolve: "gatsby-transformer-remark",
       options: {
         plugins: [
-          {
-            resolve: "gatsby-remark-external-links",
-          },
+          "gatsby-remark-autolink-headers",
           {
             resolve: `gatsby-remark-images`,
             options: {
-              maxWidth: 850,
+              maxWidth: 650,
             },
           },
           {
-            resolve: `gatsby-remark-autolink-headers`,
+            resolve: "gatsby-remark-prismjs",
             options: {
-              offsetY: `100`,
-              maintainCase: false,
-              removeAccents: true,
+              classPrefix: "language-",
+              inlineCodeMarker: null,
+              aliases: {},
+              showLineNumbers: false,
+              noInlineHighlight: false,
+              prompt: {
+                user: "root",
+                host: "localhost",
+                global: true,
+              },
             },
           },
-          "gatsby-remark-prismjs",
-          "gatsby-remark-copy-linked-files",
         ],
       },
     },
@@ -68,10 +138,8 @@ module.exports = {
       resolve: `gatsby-plugin-styled-components`,
       options: {
         displayName: !isProd,
+        ssr: true,
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
 };

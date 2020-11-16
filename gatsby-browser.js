@@ -1,11 +1,6 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.org/docs/browser-apis/
- */
 import React from "react";
-import { ThemeProvider } from "./src/themeContext";
+import App from "./src/components/app";
 
-export const wrapRootElement = ({ element }) => (
-  <ThemeProvider>{element}</ThemeProvider>
-);
+export const wrapPageElement = ({ element, props }) => {
+  return <App {...props}>{element}</App>;
+};
