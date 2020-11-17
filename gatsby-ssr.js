@@ -51,7 +51,20 @@ const FallbackStyles = () => {
 
   const wrappedInSelector = `html { ${cssVariableString} }`;
 
-  return <style>{wrappedInSelector}</style>;
+  return (
+    <>
+      <link rel="preconnect" href="https://fonts.gstatic.com" />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&display=swap"
+        rel="stylesheet"
+      />
+      <link
+        href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&display=swap"
+        rel="stylesheet"
+      />
+      <style>{wrappedInSelector}</style>
+    </>
+  );
 };
 
 export const onRenderBody = ({ setPreBodyComponents, setHeadComponents }) => {

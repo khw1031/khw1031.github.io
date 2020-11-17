@@ -7,9 +7,18 @@ export default function Footer() {
     <Container>
       <Inner>
         <Rights>
-          copyright ⓒ {new Date().getFullYear()} Hyunwoo Kim all rights reserved
+          copyright ⓒ {new Date().getFullYear()} Hyunwoo Kim. all rights
+          reserved
         </Rights>
-        <Rights>✉️ &nbsp;khw1031@gmail.com</Rights>
+        <Rights>
+          <a
+            target="_blank"
+            rel="noopener noreferrer"
+            href="mailto:khw1031@gmail.com"
+          >
+            ✉️ &nbsp;khw1031@gmail.com
+          </a>
+        </Rights>
       </Inner>
     </Container>
   );
@@ -27,10 +36,13 @@ const Inner = styled.div`
 `;
 
 const Rights = styled.p`
-  text-align: center;
-  color: #ccc;
-  font-size: 0.85rem;
-  ${tabletAbove`
+  &,
+  a {
+    text-align: center;
+    color: #ccc;
+    font-size: 0.85rem;
+    ${tabletAbove`
     text-align: end;
   `}
+  }
 `;

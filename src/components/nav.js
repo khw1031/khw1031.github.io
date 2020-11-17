@@ -10,8 +10,11 @@ export default function Navigation() {
       <NavBar>
         <BrandLink to="/">Hyunwoo Kim</BrandLink>
         <Menus>
-          <MenuLink activeClassName="active" partiallyActive to="/posts">
+          <MenuLink activeClassName="active" to="/">
             articles
+          </MenuLink>
+          <MenuLink activeClassName="active" to="/about">
+            about
           </MenuLink>
           <ThemeToggle />
         </Menus>

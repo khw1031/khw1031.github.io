@@ -20,6 +20,7 @@ const createPages = async ({ graphql, actions }) => {
   const postTemplate = path.resolve(`src/templates/post.js`);
   const tagTemplate = path.resolve(`src/templates/tag.js`);
   const categoryTemplate = path.resolve(`src/templates/category.js`);
+  const aboutTemplate = path.resolve(`src/templates/about.js`);
 
   const result = await graphql(`
     {
@@ -48,6 +49,7 @@ const createPages = async ({ graphql, actions }) => {
 
   const all = result.data.allMarkdownRemark.edges;
   const posts = all.filter(post => post.node.frontmatter.template === "posts");
+  const aboutPage = all.filter(post => post.node.frontmatter.template === "about");
   const tagSet = new Set();
   const categorySet = new Set();
 
@@ -77,7 +79,10 @@ const createPages = async ({ graphql, actions }) => {
   });
 
   /** Pages */
-  // Todo
+  createPage({
+    path: `/about/`,
+    component: aboutTemplate
+  });
 
   /** Tags */
   [...tagSet].forEach(tag => {
