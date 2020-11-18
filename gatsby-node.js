@@ -33,6 +33,7 @@ const createPages = async ({ graphql, actions }) => {
               tags
               categories
               template
+              status
             }
             fields {
               slug
@@ -48,8 +49,12 @@ const createPages = async ({ graphql, actions }) => {
   }
 
   const all = result.data.allMarkdownRemark.edges;
-  const posts = all.filter(post => post.node.frontmatter.template === "posts");
-  const aboutPage = all.filter(post => post.node.frontmatter.template === "about");
+  const posts = all.filter(
+    post =>
+      post.node.frontmatter.template === "posts" &&
+      post.node.frontmatter.status === "published"
+  );
+
   const tagSet = new Set();
   const categorySet = new Set();
 
@@ -81,7 +86,7 @@ const createPages = async ({ graphql, actions }) => {
   /** Pages */
   createPage({
     path: `/about/`,
-    component: aboutTemplate
+    component: aboutTemplate,
   });
 
   /** Tags */

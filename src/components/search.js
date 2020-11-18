@@ -20,7 +20,7 @@ export default function Search({ posts, location, navigate }) {
 
   const onQueryChange = e => {
     const value = e.target.value;
-    navigate(value ? `/posts/?search=${value}` : ``);
+    navigate(value ? `/?search=${value}` : ``);
     setQuery(value);
   };
 

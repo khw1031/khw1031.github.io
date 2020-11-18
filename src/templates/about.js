@@ -110,7 +110,6 @@ export const aboutQuery = graphql`
       frontmatter {
         title
         status
-        slug
         metaTitle
         description
         date(formatString: "YYYY-MM-DD")

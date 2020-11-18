@@ -47,7 +47,9 @@ export const pageQuery = graphql`
   query PostsByTag($tag: String!) {
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { tags: { in: [$tag] } } }
+      filter: {
+        frontmatter: { tags: { in: [$tag] }, status: { eq: "published" } }
+      }
     ) {
       totalCount
       edges {
@@ -59,6 +61,7 @@ export const pageQuery = graphql`
           frontmatter {
             date(formatString: "YYYY-MM-DD")
             title
+            status
             description
             thumbnail {
               childImageSharp {

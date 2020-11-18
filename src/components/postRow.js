@@ -71,10 +71,11 @@ const Time = styled.time`
   color: #adb5bd;
   font-weight: var(--font-weight-light);
   font-size: 0.75rem;
-  padding: 0 0.8rem 0.6rem 0;
+  margin: 0 0.8rem 0.6rem 0;
+  min-width: 40px;
   ${mobileLAbove`
     font-size: 1rem;
-    padding: 0 2rem 0.6rem 0;
+    margin: 0 2rem 0.6rem 0;
   `}
 `;
 

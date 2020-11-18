@@ -38,7 +38,9 @@ export const postsQuery = graphql`
   query PostsQuery {
     allMarkdownRemark(
       sort: { fields: [frontmatter___date], order: DESC }
-      filter: { frontmatter: { template: { eq: "posts" } } }
+      filter: {
+        frontmatter: { template: { eq: "posts" }, status: { eq: "published" } }
+      }
     ) {
       edges {
         node {
