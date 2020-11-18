@@ -40,7 +40,7 @@ export default function PostTemplate({ data, pageContext }) {
             {prevLink && <Prev to={prevLink}>{prevTitle}</Prev>}
           </LinkCover>
           <LinkCover>
-            <Next to={nextLink}>{nextTitle}</Next>
+            {nextLink && <Next to={nextLink}>{nextTitle}</Next>}
           </LinkCover>
         </Cover>
       </Section>
