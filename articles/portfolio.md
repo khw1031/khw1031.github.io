@@ -8,7 +8,7 @@ status: published
 
 ## 중앙대학교 실내환경디자인학과 졸업전시회 웹 애플리케이션
 
-<a target="_blank" rel="noopener noreferrer" href="https://20chicgrad.netlify.app/">
+<a class="block__anchor" target="_blank" rel="noopener noreferrer" href="https://20chicgrad.netlify.app/">
 
 ![20chic](./portfolio-images/20chic.png)
 
@@ -20,7 +20,7 @@ status: published
 
 ## 코딩 교육 플랫폼 인프런 프론트엔드 개발
 
-<a target="_blank" rel="noopener noreferrer" href="https://inflearn.com/">
+<a class="block__anchor" target="_blank" rel="noopener noreferrer" href="https://inflearn.com/">
 
 ![inflearn](./portfolio-images/inflearn.png)
 
@@ -39,7 +39,7 @@ status: published
 
 ## 크라우드펀딩 플랫폼 텀블벅 프론트엔드 개발 및 유지 보수
 
-<a target="_blank" rel="noopener noreferrer" href="https://tumblbug.com/">
+<a class="block__anchor" target="_blank" rel="noopener noreferrer" href="https://tumblbug.com/">
 
 ![tumblbug](./portfolio-images/tumblbug.png)
 

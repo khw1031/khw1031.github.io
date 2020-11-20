@@ -94,6 +94,8 @@ const Article = styled.article`
       fill: var(--color-gray700);
     }
     display: block;
+  }
+  .block__anchor {
     margin: 2rem 0;
   }
 `;
