@@ -4,7 +4,7 @@ import { ThemeContext } from "../context/themeContext";
 
 import moon from "../../static/images/moon.svg";
 import sun from "../../static/images/sun.svg";
-import { tabletAbove } from "../styles/mediaQuery";
+import { mobileLAbove, tabletAbove } from "../styles/mediaQuery";
 
 const ThemeToggle = () => {
   const { colorMode, setColorMode } = useContext(ThemeContext);
@@ -31,8 +31,7 @@ const HiddenInput = styled.input`
 `;
 
 const Icon = styled.div`
-  background: ${props =>
-    props.isDarkMode ? `url(${moon})` : `url(${sun})`};
+  background: ${props => (props.isDarkMode ? `url(${moon})` : `url(${sun})`)};
   background-repeat: no-repeat;
   background-position: right center;
   background-size: contain;
@@ -43,6 +42,14 @@ const Icon = styled.div`
   ${tabletAbove`
     width: 1.25rem;
     height: 1.25rem;
+  `}
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  ${mobileLAbove`
+    position: relative;
+    top: 0;
+    right: 0;
   `}
 `;
 

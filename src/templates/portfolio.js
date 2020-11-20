@@ -13,8 +13,8 @@ export default ({ data }) => {
 
   return (
     <Layout>
-      <SEO customTitle={`about`} customDescription="개발자 김현우 간단 이력" />
-      <Header>about</Header>
+      <SEO customTitle={`portfolio`} customDescription="포트폴리오" />
+      <Header>portfolio</Header>
       <Section>
         <Time dateTime={dateTime}>
           <span>last updated: </span>
@@ -32,14 +32,14 @@ const Article = styled.article`
     margin-top: 6rem;
   `};
   h2 {
-    font-size: 0.65rem;
+    font-size: 0.8rem;
     color: var(--color-subHeading);
     letter-spacing: 1.2px;
     &:not(:first-of-type) {
-      margin-top: 3rem;
+      margin-top: 6rem;
     }
     ${mobileLAbove`
-      font-size: 0.8rem;
+      font-size: 1.2rem;
     `};
   }
 
@@ -93,6 +93,8 @@ const Article = styled.article`
     svg path {
       fill: var(--color-gray700);
     }
+    display: block;
+    margin: 2rem 0;
   }
 `;
 
@@ -104,9 +106,9 @@ const Time = styled.time`
   color: var(--color-secondary);
 `;
 
-export const aboutQuery = graphql`
-  query AboutQuery {
-    markdownRemark(frontmatter: { template: { eq: "about" } }) {
+export const portFolioQuery = graphql`
+  query PortFolioQuery {
+    markdownRemark(frontmatter: { template: { eq: "portfolio" } }) {
       html
       frontmatter {
         title

@@ -21,6 +21,7 @@ const createPages = async ({ graphql, actions }) => {
   const tagTemplate = path.resolve(`src/templates/tag.js`);
   const categoryTemplate = path.resolve(`src/templates/category.js`);
   const aboutTemplate = path.resolve(`src/templates/about.js`);
+  const portfolioTemplate = path.resolve(`src/templates/portfolio.js`);
 
   const result = await graphql(`
     {
@@ -87,6 +88,10 @@ const createPages = async ({ graphql, actions }) => {
   createPage({
     path: `/about/`,
     component: aboutTemplate,
+  });
+  createPage({
+    path: `/portfolio/`,
+    component: portfolioTemplate,
   });
 
   /** Tags */

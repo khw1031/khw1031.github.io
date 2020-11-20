@@ -2,7 +2,7 @@ import React from "react";
 import ThemeToggle from "./themeToggle";
 import styled from "styled-components";
 import { Link } from "gatsby";
-import { tabletAbove } from "../styles/mediaQuery";
+import { mobileLAbove, tabletAbove } from "../styles/mediaQuery";
 
 export default function Navigation() {
   return (
@@ -15,6 +15,9 @@ export default function Navigation() {
           </MenuLink>
           <MenuLink activeClassName="active" to="/about">
             about
+          </MenuLink>
+          <MenuLink activeClassName="active" to="/portfolio">
+            portfolio
           </MenuLink>
           <ThemeToggle />
         </Menus>
@@ -40,9 +43,12 @@ const BrandLink = styled(Link)`
   font-size: var(--font-size-brand);
   color: var(--color-heading);
   font-weight: var(--font-weight-bold);
-  margin-left: calc(var(--squish-s) * -1);
+  margin-left: auto;
   margin-right: auto;
   font-style: italic;
+  ${mobileLAbove`
+    margin-left: calc(var(--squish-s) * -1);
+  `}
 `;
 
 const NavBar = styled.nav`
@@ -51,6 +57,10 @@ const NavBar = styled.nav`
   max-width: var(--container-max-width);
   padding: var(--container-pad);
   margin: var(--container-margin);
+  flex-direction: column;
+  ${mobileLAbove`
+    flex-direction: row;
+  `}
 `;
 
 const Menus = styled.div`

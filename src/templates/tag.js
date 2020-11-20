@@ -28,7 +28,7 @@ export default function TagTemplate({ data, pageContext }) {
       <Header>#{capitalize(tag)}</Header>
       <Counter>총 {totalCount}개의 글</Counter>
       <Section>
-        <PostList data={simplifiedPosts} />
+        <PostList data={simplifiedPosts} showYears />
       </Section>
     </Layout>
   );
