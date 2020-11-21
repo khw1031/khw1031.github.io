@@ -91,6 +91,7 @@ export default css`
 
   ul {
     margin-top: 1.5rem;
+    font-size: 0.95rem;
     ${mobileLAbove`
       margin-top: 2rem;
     `}
@@ -110,6 +111,12 @@ export default css`
 
   ol li ol {
     margin-bottom: 0;
+  }
+
+  ol {
+    list-style-type: decimal;
+    margin-left: 1.1rem;
+    font-size: 0.95rem;
   }
 
   li + li {
