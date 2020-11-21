@@ -11,6 +11,21 @@ export default function HTML(props) {
           content="width=device-width, initial-scale=1, shrink-to-fit=no"
         />
         {props.headComponents}
+        <script
+          async
+          src="https://www.googletagmanager.com/gtag/js?id=UA-106556857-1"
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-106556857-1');
+  `,
+          }}
+        />
       </head>
       <body {...props.bodyAttributes}>
         {props.preBodyComponents}
@@ -20,17 +35,15 @@ export default function HTML(props) {
           dangerouslySetInnerHTML={{ __html: props.body }}
         />
         {props.postBodyComponents}
+        <script type="text/javascript" src="//wcs.naver.net/wcslog.js" />
         <script
           dangerouslySetInnerHTML={{
-            __html: `
-            <script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script>
-            <script type="text/javascript">
+            __html: `            
             if(!wcs_add) var wcs_add = {};
             wcs_add["wa"] = "6819f77e71c10c";
             if(window.wcs) {
               wcs_do();
             }
-            </script>
           `,
           }}
         />
