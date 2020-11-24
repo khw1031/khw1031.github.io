@@ -1,0 +1,248 @@
+<!DOCTYPE html><html lang="ko"><head><meta charSet="utf-8"/><meta http-equiv="x-ua-compatible" content="ie=edge"/><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no"/><meta name="generator" content="Gatsby 2.26.1"/><title data-react-helmet="true">자바스크립트 클로저</title><meta data-react-helmet="true" name="description" content="자바스크립트의 클로저에 대해서 공부해보자"/><meta data-react-helmet="true" name="image" content="https://khw1031.github.io/images/logo.png"/><meta data-react-helmet="true" property="og:url" content="https://khw1031.github.io/posts/자바스크립트-클로저/"/><meta data-react-helmet="true" property="og:type" content="article"/><meta data-react-helmet="true" property="og:title" content="자바스크립트 클로저"/><meta data-react-helmet="true" property="og:description" content="자바스크립트의 클로저에 대해서 공부해보자"/><meta data-react-helmet="true" property="og:image" content="https://khw1031.github.io/images/logo.png"/><meta data-react-helmet="true" name="twitter:card" content="summary"/><meta data-react-helmet="true" name="twitter:title" content="자바스크립트 클로저"/><meta data-react-helmet="true" name="twitter:description" content="자바스크립트의 클로저에 대해서 공부해보자"/><meta data-react-helmet="true" name="twitter:image" content="https://khw1031.github.io/images/logo.png"/><script data-react-helmet="true" type="application/ld+json">[{"@context":"http://schema.org","@type":"WebSite","url":"https://khw1031.github.io","name":"자바스크립트 클로저","alternateName":"자바스크립트 클로저"},{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"https://khw1031.github.io/posts/자바스크립트-클로저/","name":"자바스크립트 클로저","image":"https://khw1031.github.io/images/logo.png"}}]},{"@context":"http://schema.org","@type":"BlogPosting","url":"https://khw1031.github.io","name":"자바스크립트 클로저","alternateName":"자바스크립트 클로저","headline":"자바스크립트 클로저","image":{"@type":"ImageObject","url":"https://khw1031.github.io/images/logo.png"},"description":"자바스크립트의 클로저에 대해서 공부해보자"}]</script><link rel="icon" href="/favicon-32x32.png?v=744222839adbeb703746f58e8794b588" type="image/png"/><link rel="manifest" href="/manifest.webmanifest" crossorigin="anonymous"/><meta name="theme-color" content="#5183f5"/><link rel="apple-touch-icon" sizes="48x48" href="/icons/icon-48x48.png?v=744222839adbeb703746f58e8794b588"/><link rel="apple-touch-icon" sizes="72x72" href="/icons/icon-72x72.png?v=744222839adbeb703746f58e8794b588"/><link rel="apple-touch-icon" sizes="96x96" href="/icons/icon-96x96.png?v=744222839adbeb703746f58e8794b588"/><link rel="apple-touch-icon" sizes="144x144" href="/icons/icon-144x144.png?v=744222839adbeb703746f58e8794b588"/><link rel="apple-touch-icon" sizes="192x192" href="/icons/icon-192x192.png?v=744222839adbeb703746f58e8794b588"/><link rel="apple-touch-icon" sizes="256x256" href="/icons/icon-256x256.png?v=744222839adbeb703746f58e8794b588"/><link rel="apple-touch-icon" sizes="384x384" href="/icons/icon-384x384.png?v=744222839adbeb703746f58e8794b588"/><link rel="apple-touch-icon" sizes="512x512" href="/icons/icon-512x512.png?v=744222839adbeb703746f58e8794b588"/><link rel="alternate" type="application/rss+xml" title="Hyunwoo Kim | RSS Feed" href="/rss.xml"/><style type="text/css">
+    .anchor.before {
+      position: absolute;
+      top: 0;
+      left: 0;
+      transform: translateX(-100%);
+      padding-right: 4px;
+    }
+    .anchor.after {
+      display: inline-block;
+      padding-left: 4px;
+    }
+    h1 .anchor svg,
+    h2 .anchor svg,
+    h3 .anchor svg,
+    h4 .anchor svg,
+    h5 .anchor svg,
+    h6 .anchor svg {
+      visibility: hidden;
+    }
+    h1:hover .anchor svg,
+    h2:hover .anchor svg,
+    h3:hover .anchor svg,
+    h4:hover .anchor svg,
+    h5:hover .anchor svg,
+    h6:hover .anchor svg,
+    h1 .anchor:focus svg,
+    h2 .anchor:focus svg,
+    h3 .anchor:focus svg,
+    h4 .anchor:focus svg,
+    h5 .anchor:focus svg,
+    h6 .anchor:focus svg {
+      visibility: visible;
+    }
+  </style><script>
+    document.addEventListener("DOMContentLoaded", function(event) {
+      var hash = window.decodeURI(location.hash.replace('#', ''))
+      if (hash !== '') {
+        var element = document.getElementById(hash)
+        if (element) {
+          var scrollTop = window.pageYOffset || document.documentElement.scrollTop || document.body.scrollTop
+          var clientTop = document.documentElement.clientTop || document.body.clientTop || 0
+          var offset = element.getBoundingClientRect().top + scrollTop - clientTop
+          // Wait for the browser to finish rendering before scrolling.
+          setTimeout((function() {
+            window.scrollTo(0, offset - 0)
+          }), 0)
+        }
+      }
+    })
+  </script><style data-styled="" data-styled-version="5.2.1">:root{--font-weight-bold:700;--font-weight-medium:400;--font-weight-light:300;--font-family:-apple-system,"system-ui",BlinkMacSystemFont,"Segoe UI", Roboto,"Helvetica Neue","Noto Sans KR",Arial,sans-serif;--font-family-serif:"Noto Serif KR",serif;--font-size-brand:0.875rem;--font-size-section-headone:2rem;--font-size-section-subtitle:1.3rem;--font-size-section-subtwo:1rem;--container-pad:0 1rem;--container-max-width:780px;--container-margin:0 auto;--header-pad:1rem 0;--inset-header:0.5rem 0;--inline-xs:0.8rem;--inline-s:1rem;--squish-s:0.5rem;--stack-main:3.5rem;--stack-section-title:1.5rem;--navbar-z-index:2;--border:#d6d9de;--yellow:#ffd43b;--z-link:32;}/*!sc*/
+@media (min-width:425px){:root{--inset-header:0.5rem 0;--font-size-brand:1.125rem;--squish-s:1rem;--stack-main:4.5rem;--stack-section-title:2rem;}}/*!sc*/
+@media (min-width:768px){:root{--container-pad:0 2rem;--font-size-section-headone:3rem;--font-size-section-subtitle:1.5rem;--font-size-section-subtwo:1.2rem;}}/*!sc*/
+:root{--hello:1px;}/*!sc*/
+*,*::before,*::after{box-sizing:border-box;}/*!sc*/
+*:focus{outline-color:var(--color-secondary);outline-width:1px;}/*!sc*/
+html{font-size:100%;font-family:var(--font-family);}/*!sc*/
+body{margin:0;padding:0;background:var(--color-background);color:var(--color-font);-webkit-transition:color 350ms ease 0s,background 350ms ease 0s;transition:color 350ms ease 0s,background 350ms ease 0s;}/*!sc*/
+h1,h2,h3,h4,h5,h6{font-weight:var(--font-weight-bold);color:var(--color-heading);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;margin:0 0 1.5rem;}/*!sc*/
+h1{line-height:1.1;}/*!sc*/
+p{margin:0;}/*!sc*/
+a{color:var(--color-font);-webkit-text-decoration:none;text-decoration:none;}/*!sc*/
+article,aside,details,figcaption,figure,footer,header,main,menu,nav,section,summary{display:block;margin:0;}/*!sc*/
+audio,canvas,progress,video{display:inline-block;}/*!sc*/
+small{font-size:80%;}/*!sc*/
+ul,ol{margin:0;padding:0;list-style:none;}/*!sc*/
+img{display:block;}/*!sc*/
+input[type="search"]{-webkit-appearance:none;}/*!sc*/
+:root{--code-font-family:"Fira Mono",Menlo,"Roboto Mono",Courier New,monospace;--code-font-color:#b3b9c5;--code-background-color:#353535;--string:#92d192;--variable:#f2777a;--property:#abb2bf;--number:#fca369;--operator:#ac8d58;--punctuation:#d5d8df;--comment:#848991;--function:#62cfcf;--keyword:#ffeead;--attribute:#ffd479;--class:#e1a6f2;--tag:#6ab0f3;--error:#f2777a;}/*!sc*/
+code[class*="language-"],pre[class*="language-"]{-webkit-font-smoothing:subpixel-antialiased;color:var(--code-font-color);font-family:var(--code-font-family);font-size:0.9rem;text-align:left;white-space:pre-wrap;word-spacing:normal;word-break:normal;word-wrap:normal;font-weight:400;line-height:1.7;-moz-tab-size:2;-o-tab-size:2;tab-size:2;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none;}/*!sc*/
+pre[class*="language-"]{padding:1.5rem;margin-top:0.6rem;margin-bottom:2rem;margin-left:-1.5rem;margin-right:-1.5rem;overflow:auto;box-shadow:0 0 1px rgba(0,0,0,0.1),0 0 1px rgba(0,0,0,0.06),0 2px 2px rgba(0,0,0,0.06),0 4px 4px rgba(0,0,0,0.06),0 8px 8px rgba(0,0,0,0.06),0 16px 16px rgba(0,0,0,0.06);}/*!sc*/
+@media screen and (min-width:768px){code[class*="language-"],pre[class*="language-"]{font-size:0.9rem;}pre[class*="language-"]{padding:1.5rem;margin-left:auto;margin-right:auto;border-radius:0.35rem;}}/*!sc*/
+:not(pre) > code[class*="language-"],pre[class*="language-"]{background-color:var(--code-background-color);}/*!sc*/
+:not(pre) > code[class*="language-"]{padding:0.1rem 0.3rem;border-radius:0.35rem;}/*!sc*/
+pre.language-text,code.language-text{background:var(--light-background) !important;color:var(--dark-font-color) !important;border:1px solid var(--border);box-shadow:none;}/*!sc*/
+pre.language-text code.language-text{border:none;}/*!sc*/
+code.language-shell::before{content:"$ ";color:var(--comment);}/*!sc*/
+pre.language-terminal{position:relative;background:white;color:#595c62;padding-top:3rem;margin:2rem 0;border-radius:0.35rem;border:1px solid #c7c9ca;box-shadow:0 0.5rem 1rem rgba(51,51,51,0.2),0 0.5rem 2rem rgba(51,51,51,0.2);}/*!sc*/
+code.language-terminal{color:#595c62;}/*!sc*/
+pre.language-terminal::before{content:"\2022 \2022 \2022";position:absolute;top:0;left:0;background:linear-gradient(to bottom,#eaeaea,#d2d2d2);color:#b9bcbd;width:100%;font-size:2.5rem;margin:0;line-height:0;padding:15px 0 12px;text-indent:6px;-webkit-letter-spacing:-18px;-moz-letter-spacing:-18px;-ms-letter-spacing:-18px;letter-spacing:-18px;border-bottom:1px solid #a6a9aa;}/*!sc*/
+pre.language-terminal::after{content:"Output";line-height:1;font-family:"Myriad Pro",sans-serif;text-shadow:0px 1px 0px rgba(255,255,255,0.5);font-size:0.9rem;position:absolute;top:6px;right:0.5rem;}/*!sc*/
+.gatsby-highlight-code-line{background-color:#191919;display:block;margin-right:-1rem;margin-left:-1rem;padding-right:1rem;padding-left:0.75rem;border-left:0.25rem solid #748ffc;}/*!sc*/
+.token.comment,.token.prolog,.token.doctype,.token.cdata,.token.important{color:var(--comment);}/*!sc*/
+.token.punctuation{color:var(--punctuation);}/*!sc*/
+.token.namespace{opacity:0.7;}/*!sc*/
+.token.property{color:var(--property);}/*!sc*/
+.token.tag,.token.constant,.token.symbol,.token.deleted{color:var(--tag);}/*!sc*/
+.token.number{color:var(--number);}/*!sc*/
+.token.char,.token.builtin,.token.url,.token.inserted{color:var(--code-font-color);}/*!sc*/
+.token.attr-name,.token.selector{color:var(--attribute);}/*!sc*/
+.token.attr-value,.token.string{color:var(--string);}/*!sc*/
+.token.operator{color:var(--operator);}/*!sc*/
+.token.atrule,.token.keyword{color:var(--keyword);}/*!sc*/
+.token.function{color:var(--function);}/*!sc*/
+.language-css,.token.boolean,.token.class-name{color:var(--class) !important;}/*!sc*/
+.token.regex{color:var(--keyword);}/*!sc*/
+.token.variable{color:var(--variable);}/*!sc*/
+.token.bold{font-weight:bold;}/*!sc*/
+.token.italic{font-style:italic;}/*!sc*/
+.token.entity{cursor:help;}/*!sc*/
+.filename{font-size:0.9rem;margin-bottom:-0.8rem;padding:0.3rem 1.5rem;line-height:1;font-family:"Myriad Pro",sans-serif;background:linear-gradient(to bottom,#eaeaea,#d2d2d2);border:1px solid #b9bcbd;color:#4d494d;z-index:2;margin-left:-1.5rem;margin-right:-1.5rem;text-shadow:0px 1px 0px rgba(255,255,255,0.5);box-shadow:0px 1px 0px rgba(255,255,255,0.5) inset,0px 1px 0px #515151;text-align:center;}/*!sc*/
+@media screen and (min-width:768px){.filename{padding:0.3rem 1rem 0.5rem;border-top-left-radius:0.3rem;border-top-right-radius:0.3rem;margin-left:auto;margin-right:auto;}}/*!sc*/
+pre::-moz-selection,pre::-moz-selection,code::-moz-selection,code::-moz-selection{text-shadow:none;color:inherit;background:rgba(150,150,150,0.3) !important;}/*!sc*/
+pre::selection,pre::selection,code::selection,code::selection{text-shadow:none;color:inherit;background:rgba(150,150,150,0.3) !important;}/*!sc*/
+pre[class*="language-"]::-moz-selection,pre[class*="language-"]::-moz-selection,code[class*="language-"]::-moz-selection,code[class*="language-"]::-moz-selection{text-shadow:none;color:inherit;background:rgba(150,150,150,0.3) !important;}/*!sc*/
+pre[class*="language-"]::selection,pre[class*="language-"]::selection,code[class*="language-"]::selection,code[class*="language-"]::selection{text-shadow:none;color:inherit;background:rgba(150,150,150,0.3) !important;}/*!sc*/
+data-styled.g1[id="sc-global-dDxqWr1"]{content:"sc-global-dDxqWr1,"}/*!sc*/
+.eVXAOt{padding:var(--inset-header);background-color:var(--color-navbar);position:fixed;top:0;left:0;width:100%;box-shadow:var(--color-navbarshadow);z-index:var(--navbar-z-index);-webkit-transition:background 350ms ease 0s;transition:background 350ms ease 0s;}/*!sc*/
+data-styled.g4[id="oxvqxu-0"]{content:"eVXAOt,"}/*!sc*/
+.fBVEBw{padding:var(--squish-s);font-size:var(--font-size-brand);color:var(--color-heading);font-weight:var(--font-weight-bold);margin-left:auto;margin-right:auto;font-style:italic;}/*!sc*/
+@media (min-width:425px){.fBVEBw{margin-left:calc(var(--squish-s) * -1);}}/*!sc*/
+data-styled.g5[id="oxvqxu-1"]{content:"fBVEBw,"}/*!sc*/
+.gnQspL{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;max-width:var(--container-max-width);padding:var(--container-pad);margin:var(--container-margin);-webkit-flex-direction:column;-ms-flex-direction:column;flex-direction:column;}/*!sc*/
+@media (min-width:425px){.gnQspL{-webkit-flex-direction:row;-ms-flex-direction:row;flex-direction:row;}}/*!sc*/
+data-styled.g6[id="oxvqxu-2"]{content:"gnQspL,"}/*!sc*/
+.gTOwcO{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;}/*!sc*/
+data-styled.g7[id="oxvqxu-3"]{content:"gTOwcO,"}/*!sc*/
+.iYNoSh{font-size:calc(var(--font-size-brand) * 0.9);margin-right:var(--inline-xs);padding:var(--squish-s);}/*!sc*/
+.iYNoSh.active,.iYNoSh:hover{background-color:var(--color-menuActive);border-radius:3px;}/*!sc*/
+@media (min-width:768px){.iYNoSh{margin-right:var(--inline-s);}}/*!sc*/
+data-styled.g8[id="oxvqxu-4"]{content:"iYNoSh,"}/*!sc*/
+.dGqCRn{max-width:var(--container-max-width);margin:var(--container-margin);margin-top:4rem;padding:var(--container-pad);}/*!sc*/
+data-styled.g9[id="sc-8kyw34-0"]{content:"dGqCRn,"}/*!sc*/
+.beJwAG{padding:2rem 0;}/*!sc*/
+data-styled.g10[id="sc-8kyw34-1"]{content:"beJwAG,"}/*!sc*/
+.gPNlEd,.gPNlEd a{text-align:center;color:#ccc;font-size:0.85rem;}/*!sc*/
+@media (min-width:768px){.gPNlEd,.gPNlEd a{text-align:end;}}/*!sc*/
+data-styled.g11[id="sc-8kyw34-2"]{content:"gPNlEd,"}/*!sc*/
+.ebmQTm{max-width:var(--container-max-width);margin:var(--container-margin);margin-top:var(--stack-main);padding:var(--container-pad);}/*!sc*/
+data-styled.g12[id="sc-1cc8wmp-0"]{content:"ebmQTm,"}/*!sc*/
+.liThIX{padding:var(--header-pad);}/*!sc*/
+data-styled.g29[id="sc-1117y1t-0"]{content:"liThIX,"}/*!sc*/
+.fcTUCy{text-align:center;}/*!sc*/
+data-styled.g30[id="sc-1117y1t-1"]{content:"fcTUCy,"}/*!sc*/
+.jhrAil{color:inherit;font-family:var(--font-family-serif);margin-top:var(--stack-section-title);font-size:calc(var(--font-size-section-headone) * 0.8);}/*!sc*/
+data-styled.g31[id="sc-1117y1t-2"]{content:"jhrAil,"}/*!sc*/
+.vQRjv{border-top:1px solid var(--color-inversedFont);display:grid;grid-template-columns:repeat(2,calc(50% - 10px));-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;gap:20px;}/*!sc*/
+data-styled.g36[id="sc-1o958u5-0"]{content:"vQRjv,"}/*!sc*/
+.bYMypS{margin-top:10px;}/*!sc*/
+data-styled.g37[id="sc-1o958u5-1"]{content:"bYMypS,"}/*!sc*/
+.kCOxRV{display:-webkit-box;display:-webkit-flex;display:-ms-flexbox;display:flex;-webkit-align-items:center;-webkit-box-align:center;-ms-flex-align:center;align-items:center;height:80px;width:100%;cursor:pointer;padding:0 10px;-webkit-transition:background 0.6s;transition:background 0.6s;font-size:0.85rem;}/*!sc*/
+.kCOxRV:hover{background:var(--color-inversedFont);}/*!sc*/
+data-styled.g38[id="sc-1o958u5-2"]{content:"kCOxRV,"}/*!sc*/
+.Qovzw::before{content:"<";padding-right:0.4rem;}/*!sc*/
+data-styled.g39[id="sc-1o958u5-3"]{content:"Qovzw,"}/*!sc*/
+.fVMkDz{-webkit-box-pack:end;-webkit-justify-content:flex-end;-ms-flex-pack:end;justify-content:flex-end;}/*!sc*/
+.fVMkDz::after{content:">";padding-left:0.4rem;}/*!sc*/
+data-styled.g40[id="sc-1o958u5-4"]{content:"fVMkDz,"}/*!sc*/
+.hyHRJW .section__title{font-family:var(--font-family-serif);color:var(--color-subHeading);font-size:1.2rem;margin-top:4rem;font-style:italic;}/*!sc*/
+@media (min-width:425px){.hyHRJW .section__title{font-size:1.4rem;margin-top:6rem;}}/*!sc*/
+data-styled.g41[id="sc-1o958u5-5"]{content:"hyHRJW,"}/*!sc*/
+.eNohNd{display:block;font-size:0.8rem;text-align:center;font-weight:var(--font-weight-light);}/*!sc*/
+data-styled.g42[id="sc-1o958u5-6"]{content:"eNohNd,"}/*!sc*/
+.gqjOTA{margin-top:6rem;}/*!sc*/
+@media (min-width:425px){.gqjOTA{margin-top:8rem;}}/*!sc*/
+.gqjOTA p{font-weight:var(--font-weight-light);line-height:1.6;font-size:0.95rem;}/*!sc*/
+.gqjOTA h1,.gqjOTA h2,.gqjOTA h3,.gqjOTA h4,.gqjOTA h5{margin:0 0 1.5rem 0;line-height:1.2;color:var(--color-heading);-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;}/*!sc*/
+.gqjOTA h1:not(:first-child),.gqjOTA h2:not(:first-child),.gqjOTA h3:not(:first-child),.gqjOTA h4:not(:first-child){margin-top:3rem;}/*!sc*/
+.gqjOTA h1{font-size:1.8rem;line-height:1.1;}/*!sc*/
+@media (min-width:425px){.gqjOTA h1{font-size:2rem;}}/*!sc*/
+.gqjOTA h2{font-size:1.4rem;padding-bottom:0.25rem;border-bottom:1px solid var(--border);display:inline-block;}/*!sc*/
+@media (min-width:425px){.gqjOTA h2{font-size:1.5rem;}}/*!sc*/
+.gqjOTA h2 code{font-size:1.6rem !important;}/*!sc*/
+.gqjOTA h3{font-size:1rem;color:var(--color-font);font-weight:700;margin-bottom:1rem;padding-bottom:0.25rem;border-bottom:1px solid var(--border);display:inline-block;}/*!sc*/
+@media (min-width:425px){.gqjOTA h3{font-size:1.2rem;}}/*!sc*/
+.gqjOTA h3 code{font-size:1.4rem !important;}/*!sc*/
+.gqjOTA h4{font-size:1rem;color:var(--color-font);margin-bottom:1rem;padding-bottom:0.25rem;}/*!sc*/
+@media (min-width:425px){.gqjOTA h4{font-size:1.1rem;}}/*!sc*/
+.gqjOTA ul{margin-top:1.5rem;font-size:0.95rem;}/*!sc*/
+@media (min-width:425px){.gqjOTA ul{margin-top:2rem;}}/*!sc*/
+.gqjOTA ul li p{margin:0;}/*!sc*/
+.gqjOTA ul li ul{padding-left:1rem;margin:0;}/*!sc*/
+.gqjOTA ul li ul li{margin:0;}/*!sc*/
+.gqjOTA ol li ol{margin-bottom:0;}/*!sc*/
+.gqjOTA ol{list-style-type:decimal;margin-left:1.1rem;font-size:0.95rem;}/*!sc*/
+.gqjOTA li + li{margin-top:0.85rem;}/*!sc*/
+@media (min-width:425px){.gqjOTA li + li{margin-top:0.9rem;}}/*!sc*/
+.gqjOTA table{display:table;border-collapse:separate;border-spacing:0;width:100%;max-width:100%;overflow-x:auto;border-radius:0.35rem;margin-top:1.5rem;border:1px solid var(--border);}/*!sc*/
+@media (min-width:425px){.gqjOTA table{margin-top:2rem;}}/*!sc*/
+.gqjOTA thead,.gqjOTA tbody{white-space:nowrap;width:100%;}/*!sc*/
+.gqjOTA th{border-bottom:2px solid var(--border);}/*!sc*/
+.gqjOTA tfoot th{border-top:1px solid var(--border);}/*!sc*/
+.gqjOTA td{border-bottom:1px solid var(--border);}/*!sc*/
+.gqjOTA th,.gqjOTA td{text-align:center;padding:0.75rem !important;-webkit-hyphens:auto;-moz-hyphens:auto;-ms-hyphens:auto;hyphens:auto;word-break:break-word;}/*!sc*/
+.gqjOTA tbody tr:nth-child(even){background-color:var(--light-background);}/*!sc*/
+.gqjOTA p{line-height:1.8;}/*!sc*/
+.gqjOTA p + p{margin-top:1rem;}/*!sc*/
+.gqjOTA .gatsby-highlight{margin-top:2rem;}/*!sc*/
+.gqjOTA .reference__md{margin:8rem 0 1rem 0;font-size:0.8rem;text-align:center;text-align:end;}/*!sc*/
+.gqjOTA a{color:var(--color-secondary);-webkit-text-decoration:underline;text-decoration:underline;}/*!sc*/
+.gqjOTA a svg{width:12px;height:12px;}/*!sc*/
+.gqjOTA a svg path{fill:var(--color-gray700);}/*!sc*/
+data-styled.g43[id="sc-1o958u5-7"]{content:"gqjOTA,"}/*!sc*/
+</style><link rel="preconnect" href="https://fonts.gstatic.com"/><link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;700&amp;display=swap" rel="stylesheet"/><link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR&amp;display=swap" rel="stylesheet"/><style>html { 
+--color-font: #495057;
+--color-heading: #212529;
+--color-background: #ffffff;
+--color-primary: #0ca678;
+--color-secondary: hsl(250deg, 100%, 50%);
+--color-gray300: hsl(0deg, 0%, 70%);
+--color-gray500: hsl(0deg, 0%, 50%);
+--color-gray700: hsl(0deg, 0%, 30%);
+--color-navbar: hsl(0deg, 0%, 100%);
+--color-navbarshadow: 0 3px 13px rgba(100,110,140,.1), 0 2px 4px rgba(100,110,140,.15);
+--color-menuActive: #e9ecef;
+--color-subHeading: #212529;
+--color-inversedFont: #e9ecef; }</style><link as="script" rel="preload" href="/webpack-runtime-2c7f7acba11a01777cd9.js"/><link as="script" rel="preload" href="/framework-305b3707783ccc9d7ca6.js"/><link as="script" rel="preload" href="/app-12ff9fb67910f8458608.js"/><link as="script" rel="preload" href="/commons-cf1e23e2ab0f7066a68b.js"/><link as="script" rel="preload" href="/component---src-templates-post-js-ff875039c9728fe36588.js"/><link as="fetch" rel="preload" href="/page-data/posts/자바스크립트-클로저/page-data.json" crossorigin="anonymous"/><link as="fetch" rel="preload" href="/page-data/app-data.json" crossorigin="anonymous"/><script async="" src="https://www.googletagmanager.com/gtag/js?id=UA-106556857-1"></script><script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'UA-106556857-1');
+  </script></head><body><script>!function(){const e=window.matchMedia("(prefers-color-scheme: dark)").matches,r=localStorage.getItem("color-mode"),t=document.documentElement;let d="light";d="string"==typeof r?r:e?"dark":"light",t.style.setProperty("--initial-color-mode",d),Object.entries({font:{light:"#495057",dark:"#e9ecef"},heading:{light:"#212529",dark:"#ffffff"},background:{light:"#ffffff",dark:"#2b2b2b"},primary:{light:"#0ca678",dark:"#ffe066"},secondary:{light:"hsl(250deg, 100%, 50%)",dark:"hsl(190deg, 100%, 40%)"},gray300:{light:"hsl(0deg, 0%, 70%)",dark:"hsl(0deg, 0%, 30%)"},gray500:{light:"hsl(0deg, 0%, 50%)",dark:"hsl(0deg, 0%, 50%)"},gray700:{light:"hsl(0deg, 0%, 30%)",dark:"hsl(0deg, 0%, 70%)"},navbar:{light:"hsl(0deg, 0%, 100%)",dark:"#1d1d1d"},navbarshadow:{light:"0 3px 13px rgba(100,110,140,.1), 0 2px 4px rgba(100,110,140,.15)",dark:"none"},menuActive:{light:"#e9ecef",dark:"rgba(0,0,0,0.2)"},subHeading:{light:"#212529",dark:"#ffd43b"},inversedFont:{light:"#e9ecef",dark:"#495057"}}).forEach(([e,r])=>{const a="--color-"+e;t.style.setProperty(a,r[d])})}();</script><div id="___gatsby"><div style="outline:none" tabindex="-1" id="gatsby-focus-wrapper"><div class="oxvqxu-0 eVXAOt"><nav class="oxvqxu-2 gnQspL"><a class="oxvqxu-1 fBVEBw" href="/">Hyunwoo Kim</a><div class="oxvqxu-3 gTOwcO"><a class="oxvqxu-4 iYNoSh" href="/">articles</a><a class="oxvqxu-4 iYNoSh" href="/about">about</a><a class="oxvqxu-4 iYNoSh" href="/portfolio">portfolio</a></div></nav></div><main class="sc-1cc8wmp-0 ebmQTm"><section class="sc-1svwc3r-0 ezQtNw"><header class="sc-1117y1t-0 liThIX sc-1o958u5-5 hyHRJW"><div class="sc-1117y1t-1 fcTUCy"><h1 class="sc-1117y1t-2 jhrAil section__title">자바스크립트 클로저</h1></div></header><time dateTime="Mon Oct 14 2019 00:00:00 GMT+0900 (GMT+09:00)" class="sc-1o958u5-6 eNohNd">October 14, 2019</time><article class="sc-1o958u5-7 gqjOTA"><h2 id="클로저란" style="position:relative;"><a href="#%ED%81%B4%EB%A1%9C%EC%A0%80%EB%9E%80" aria-label="클로저란 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>클로저란?</h2>
+<p>어떤 함수 A에서 선언한 변수 a를 참조하는 내부함수 B를 외부로 전달할 경우 A의 실행 컨텍스트가 종료된 이후에도 변수 a가 사라지지 않는 현상</p>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">const</span> <span class="token function-variable function">outer</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token function-variable function">inner</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">++</span>a<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> inner<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">const</span> out <span class="token operator">=</span> <span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">out</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 2</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">out</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// 3</span></code></pre></div>
+<p>inner 함수의 실행 시점에는 outer 함수는 이미 실행이 종료된 상태인데 outer 함수의 LexicalEnvironment에 접근하고 있다. 가비지 컬렉터는 어떤 값을 참조하는 변수가 하나라도 있다면 그 값은 수집 대상에 포함시키지 않는다.</p>
+<p>외부 함수인 outer의 실행이 종료되더라도 내부 함수인 inner 함수는 언젠가 out을 실행함으로써 호출될 가능성이 열린 것이다. 언젠가 inner 함수의 실행 컨텍스트가 활성화되면 outerEnvironmentReference가 outer 함수의 LexicalEnvironment를 필요로 할 것이므로 수집 대상에서 제외된다. 그 덕에 inner 함수가 이 변수에 접근할 수 있는 것이다.</p>
+<h2 id="클로저와-메모리-관리" style="position:relative;"><a href="#%ED%81%B4%EB%A1%9C%EC%A0%80%EC%99%80-%EB%A9%94%EB%AA%A8%EB%A6%AC-%EA%B4%80%EB%A6%AC" aria-label="클로저와 메모리 관리 permalink" class="anchor before"><svg aria-hidden="true" focusable="false" height="16" version="1.1" viewBox="0 0 16 16" width="16"><path fill-rule="evenodd" d="M4 9h1v1H4c-1.5 0-3-1.69-3-3.5S2.55 3 4 3h4c1.45 0 3 1.69 3 3.5 0 1.41-.91 2.72-2 3.25V8.59c.58-.45 1-1.27 1-2.09C10 5.22 8.98 4 8 4H4c-.98 0-2 1.22-2 2.5S3 9 4 9zm9-3h-1v1h1c1 0 2 1.22 2 2.5S13.98 12 13 12H9c-.98 0-2-1.22-2-2.5 0-.83.42-1.64 1-2.09V6.25c-1.09.53-2 1.84-2 3.25C6 11.31 7.55 13 9 13h4c1.45 0 3-1.69 3-3.5S14.5 6 13 6z"></path></svg></a>클로저와 메모리 관리</h2>
+<p>클로저는 어떤 필요에 의해 의도적으로 함수의 지역변수를 메모리를 소모하도록 함으로써 발생한다. 그 필요성이 사라진 시점에는 메모리를 소모하지 않게 해주면 된다. 참조 카운트를 0으로 만들면 되므로, null이나 undefined를 할당하면 된다.</p>
+<div class="gatsby-highlight" data-language="js"><pre class="language-js"><code class="language-js"><span class="token keyword">let</span> <span class="token function-variable function">outer</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+  <span class="token keyword">let</span> a <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+  <span class="token keyword">const</span> <span class="token function-variable function">inner</span> <span class="token operator">=</span> <span class="token keyword">function</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+    <span class="token keyword">return</span> <span class="token operator">++</span>a<span class="token punctuation">;</span>
+  <span class="token punctuation">}</span>
+  <span class="token keyword">return</span> inner<span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+<span class="token keyword">let</span> out <span class="token operator">=</span> <span class="token function">outer</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">out</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span><span class="token function">out</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+out <span class="token operator">=</span> <span class="token keyword">null</span><span class="token punctuation">;</span></code></pre></div>
+<div class="reference__md">
+[참고]<br/>코어 자바스크립트 115p - 145p, 정재남 저. 위키북스
+</div></article><div class="sc-1o958u5-0 vQRjv cover_below__md"><div class="sc-1o958u5-1 bYMypS"><a class="sc-1o958u5-2 sc-1o958u5-3 kCOxRV Qovzw" href="/posts/자바스크립트-this/">자바스크립트 this</a></div><div class="sc-1o958u5-1 bYMypS"><a class="sc-1o958u5-2 sc-1o958u5-4 kCOxRV fVMkDz" href="/posts/자바스크립트-프로토타입/">자바스크립트 프로토타입</a></div></div></section></main><footer class="sc-8kyw34-0 dGqCRn"><div class="sc-8kyw34-1 beJwAG"><p class="sc-8kyw34-2 gPNlEd">copyright ⓒ <!-- -->2020<!-- --> Hyunwoo Kim. all rights reserved</p><p class="sc-8kyw34-2 gPNlEd"><a target="_blank" rel="noopener noreferrer" href="mailto:khw1031@gmail.com">✉️  khw1031@gmail.com</a></p></div></footer></div><div id="gatsby-announcer" style="position:absolute;top:0;width:1px;height:1px;padding:0;overflow:hidden;clip:rect(0, 0, 0, 0);white-space:nowrap;border:0" aria-live="assertive" aria-atomic="true"></div></div><script id="gatsby-script-loader">/*<![CDATA[*/window.pagePath="/posts/자바스크립트-클로저/";/*]]>*/</script><script id="gatsby-chunk-mapping">/*<![CDATA[*/window.___chunkMapping={"polyfill":["/polyfill-3f99b51aa82fcaeb5543.js"],"app":["/app-12ff9fb67910f8458608.js"],"component---src-pages-404-js":["/component---src-pages-404-js-45d8172ab9ef16ada89d.js"],"component---src-pages-index-js":["/component---src-pages-index-js-88c08634f01ab33d6533.js"],"component---src-templates-about-js":["/component---src-templates-about-js-92917763fb7bcd48ba26.js"],"component---src-templates-category-js":["/component---src-templates-category-js-43401fe386fbfbf0d429.js"],"component---src-templates-portfolio-js":["/component---src-templates-portfolio-js-bd0ba9e529598ea37695.js"],"component---src-templates-post-js":["/component---src-templates-post-js-ff875039c9728fe36588.js"],"component---src-templates-tag-js":["/component---src-templates-tag-js-42594f9b60c379bbeefa.js"]};/*]]>*/</script><script src="/polyfill-3f99b51aa82fcaeb5543.js" nomodule=""></script><script src="/component---src-templates-post-js-ff875039c9728fe36588.js" async=""></script><script src="/commons-cf1e23e2ab0f7066a68b.js" async=""></script><script src="/app-12ff9fb67910f8458608.js" async=""></script><script src="/framework-305b3707783ccc9d7ca6.js" async=""></script><script src="/webpack-runtime-2c7f7acba11a01777cd9.js" async=""></script><script type="text/javascript" src="//wcs.naver.net/wcslog.js"></script><script>            
+            if(!wcs_add) var wcs_add = {};
+            wcs_add["wa"] = "6819f77e71c10c";
+            if(window.wcs) {
+              wcs_do();
+            }
+          </script></body></html>
