@@ -115,7 +115,6 @@ export const portFolioQuery = graphql`
       frontmatter {
         title
         status
-        metaTitle
         description
         date(formatString: "YYYY-MM-DD")
         categories

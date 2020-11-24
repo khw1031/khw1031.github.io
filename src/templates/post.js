@@ -27,7 +27,7 @@ export default function PostTemplate({ data, pageContext }) {
       <SEO
         postPath={post.fields.slug}
         postNode={post}
-        customTitle={post.frontmatter.metaTitle}
+        customTitle={post.frontmatter.title}
         customDescription={post.frontmatter.description}
         postSEO
       />
@@ -125,7 +125,6 @@ export const pageQuery = graphql`
       frontmatter {
         title
         status
-        metaTitle
         description
         date(formatString: "MMMM DD, YYYY")
         categories

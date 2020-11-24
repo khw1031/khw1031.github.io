@@ -77,13 +77,12 @@ export default css`
   }
 
   h4 {
-    font-size: 1.25rem;
+    font-size: 1rem;
     color: var(--color-font);
     margin-bottom: 1rem;
-    border-bottom: 1px solid var(--border);
     padding-bottom: 0.25rem;
     ${mobileLAbove`
-      font-size: 1.35rem;
+      font-size: 1.1rem;
     `}
   }
 
