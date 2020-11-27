@@ -88,8 +88,9 @@ export default css`
 
   /* List */
 
-  ul {
-    margin-top: 1.5rem;
+  ul,
+  ol {
+    margin: 1.5rem 0;
     font-size: 0.95rem;
     ${mobileLAbove`
       margin-top: 2rem;
