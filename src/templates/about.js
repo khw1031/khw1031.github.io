@@ -35,6 +35,9 @@ const Article = styled.article`
     font-size: 0.65rem;
     color: var(--color-subHeading);
     letter-spacing: 1.2px;
+    &:first-of-type {
+      font-size: 1.2rem;
+    }
     &:not(:first-of-type) {
       margin-top: 3rem;
     }
