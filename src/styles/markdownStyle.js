@@ -49,7 +49,7 @@ export default css`
     font-size: 1.4rem;
     padding-bottom: 0.25rem;
     border-bottom: 1px solid var(--border);
-    display: inline-block;
+    /* display: inline-block; */
     ${mobileLAbove`
       font-size: 1.5rem;
     `}
@@ -66,7 +66,7 @@ export default css`
     margin-bottom: 1rem;
     padding-bottom: 0.25rem;
     border-bottom: 1px solid var(--border);
-    display: inline-block;
+    /* display: inline-block; */
     ${mobileLAbove`
       font-size: 1.2rem;
     `}
