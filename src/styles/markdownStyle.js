@@ -200,4 +200,9 @@ export default css`
       fill: var(--color-gray700);
     }
   }
+
+  .gatsby-resp-image-background-image {
+    display: block;
+    margin: 2rem 0;
+  }
 `;
