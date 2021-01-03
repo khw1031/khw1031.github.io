@@ -24,7 +24,7 @@ const GlobalStyle = createGlobalStyle`
 
   --header-pad: 1rem 0;
 
-  --inset-header: 0.5rem 0;
+  --inset-header: 0 0;
 
   --inline-xs: 0.8rem;
   --inline-s: 1rem;
@@ -48,7 +48,7 @@ const GlobalStyle = createGlobalStyle`
 
 ${mobileLAbove`
   :root {
-    --inset-header: 0.5rem 0;
+    --inset-header: 0;
     --font-size-brand: 1.125rem;
     --squish-s: 1rem;
 

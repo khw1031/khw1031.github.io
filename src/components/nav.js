@@ -8,17 +8,17 @@ export default function Navigation() {
   return (
     <Nav>
       <NavBar>
-        <BrandLink to="/">Hyunwoo Kim</BrandLink>
+        <BrandLink to="/">Kim Hyunwoo</BrandLink>
         <Menus>
-          <MenuLink activeClassName="active" to="/">
-            articles
+          <MenuLink activeClassName="active" to="/posts">
+            posts
           </MenuLink>
-          <MenuLink activeClassName="active" to="/about">
+          {/* <MenuLink activeClassName="active" to="/about">
             about
           </MenuLink>
           <MenuLink activeClassName="active" to="/portfolio">
             portfolio
-          </MenuLink>
+          </MenuLink> */}
           <ThemeToggle />
         </Menus>
       </NavBar>

@@ -201,6 +201,10 @@ export default css`
     }
   }
 
+  tbody {
+    white-space: pre-wrap;
+  }
+
   .gatsby-resp-image-background-image {
     display: block;
     margin: 2rem 0;
