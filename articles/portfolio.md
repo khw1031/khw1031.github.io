@@ -8,9 +8,11 @@ status: published
 
 ## 한화생명보험 구독보험 모바일 웹 애플리케이션
 
-<a class="block__anchor" target="_blank" rel="noopener noreferrer" href="https://www.onsure.co.kr/m/contract/computeSubscriptions_emart.do"></a>
+<a class="block__anchor" target="_blank" rel="noopener noreferrer" href="https://www.onsure.co.kr/m/contract/computeSubscriptions_emart.do">
 
 ![emart](./portfolio-images/emart.png)
+
+</a>
 
 - 작업기간: 2021.06 - 2021.08
 - 기술스택: React, NextJS, Typescript, styled-components, Redux-Toolkit, Sentry
