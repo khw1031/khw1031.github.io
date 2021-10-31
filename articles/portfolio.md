@@ -1,14 +1,30 @@
 ---
-date: 2020-11-21
+date: 2021-10-31
 title: Portfolio
 description: ""
 template: portfolio
 status: published
 ---
 
+## 한화생명보험 구독보험 모바일 웹 애플리케이션
+
+<a class="block__anchor" target="_blank" rel="noopener noreferrer" href="https://www.onsure.co.kr/m/contract/computeSubscriptions_emart.do">
+
+![emart](./portfolio-images/emart.png)
+
+- 작업기간: 2021.06 - 2021.08
+- 기술스택: React, NextJS, Typescript, styled-components, Redux-Toolkit, Sentry
+- 참여율: 70%
+
+## 한화생명보험 구독보험 CMS 개발
+
+- 작업기간: 2021.04 - 현재
+- 기술스택: React, NextJS, Typescript, styled-components, Redux-Toolkit, Jest, Testing-library
+- 참여율: 100%
+
 ## 중앙대학교 실내환경디자인학과 졸업전시회 웹 애플리케이션
 
-<a class="block__anchor" target="_blank" rel="noopener noreferrer" href="https://20chicgrad.netlify.app/">
+<a class="block__anchor" target="_blank" rel="noopener noreferrer" href="https://nullll.netlify.app/">
 
 ![20chic](./portfolio-images/20chic.png)
 
