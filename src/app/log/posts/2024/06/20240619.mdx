@@ -1,0 +1,299 @@
+---
+title: "TS Utility Types, Promise"
+publishedAt: "2024-06-19"
+updatedAt: "2024-06-19"
+wip: false
+summary: ""
+---
+
+# 타입스크립트 유틸리티 타입
+
+`Awaited<Type>`: 프로미스를 재귀적으로 언래핑하는 방식의 모델링
+
+```ts
+type Awaited<P> = P extends undefined | null ? P extends object & {
+  then(outfilled: infer F, ...args: infer _): any
+} ? F extends (value: infer V, ...args: infer _) => any ? Awaited<V> : never : P;
+
+check<Awaited<Promise<number>>, number>(true);
+check<Awaited<Promise<Promise<number>>>, number>(true);
+```
+
+`Partial<Type>`: Type의 모든 프로퍼티가 옵셔널로 설정된 유형 생성
+
+```ts
+type Partial<T> = {
+  [P in keyof T]?: T[P];
+};
+
+check<Partial<{ a: number; b: string }>, { a?: number; b?: string }>(true);
+```
+
+`Required<Type>`: Type의 모든 프로퍼티가 필수로 설정된 유형 생성
+
+```ts
+type Required<T> = {
+  [P in keyof T]-?: T[P];
+};
+
+check<Required<{ a?: number; b?: string }>, { a: number; b: string }>(true);
+```
+
+`Readonly<Type>`: Type의 모든 프로퍼티가 읽기 전용으로 설정된 유형 생성
+
+```ts
+type Readonly<T> = {
+  readonly [P in keyof T]: T[P];
+};
+
+check<
+  Readonly<{ a: number; b: string }>,
+  { readonly a: number; readonly b: string }
+>(true);
+```
+
+`Record<Keys, Type>`: 키를 가지고 타입을 생성
+
+```ts
+// keyof any = string | number | symbol
+type Record<K extends keyof any, T> = {
+  [P in K]: T;
+};
+
+check<Record<"a" | "b" | "c", number>, { a: number; b: number; c: number }>(
+  true
+);
+```
+
+`Pick<Type, Keys>`: Type에서 지정된 프퍼티만 선택하여 새로운 유형 생성
+
+```ts
+type Pick<T, K extends keyof T> = {
+  [P in K]: T[P];
+};
+```
+
+`Omit<Type, Keys>`: Type에서 지정된 프퍼티를 제외하고 새로운 유형 생
+
+```ts
+type Omit<T, K extends keyof T> = {
+  [P in Exclude<keyof T, K>]: T[P];
+};
+```
+
+`Exclude<UnionType, ExcludedMembers>`: UnionType에서 ExcludedMembers를 제외한 유형 생성
+
+```ts
+type Exclude<T, U> = T extends U ? never : T;
+```
+
+`Extract<Type, Union>`: Type에서 Union에 포함된 유형만 추출하여 새로운 유형 생성
+
+```ts
+type Extract<T, U> = T extends U ? T : never;
+```
+
+`NonNullable<Type>`: Type에서 null과 undefined를 제외한 유형 생성
+
+```ts
+type NonNullable<T> = T & {}
+```
+
+`Parameters<Type>`: Type의 모든 파라미터를 추출하여 새로운 유형 생성
+
+```ts
+type Parameters<T extends (...args: any) => any> = T extends (...args: infer P) => any ? P : never;
+```
+
+
+# Promise
+
+```ts
+function delay<T>(time: number, value: T): Promise<T> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(value);
+    }, time);
+  });
+}
+```
+
+## Promise.race는 언제 사용하면 좋을까?
+
+```ts
+function getFile(name: string): Promise<FileType> {
+  return delay(5000, { name, body: "...", size: 100 });
+}
+
+// 최대로 기다리고 싶은 TimeOut를 설정하고 싶은 경우
+const result = await Promise.race([
+  getFile("file1.png"),
+  delay(4000, "TimeOut"),
+]);
+
+console.log(result);
+
+// 응답이 매우 빠르다면 스켈레톤이나 로딩바를 보여주지 않고 그냥 보여주는 것이 나은 사용자 경험일 수 있음. 이런 경우 race를 사용해서 특정 시간보다 느리게 응답이 오는 경우 우선 로딩바를 보여주고 요청을 계속할 수 있음
+```
+
+## 동시에 여러 요청을 처리할 때 부하를 줄이려면?
+
+```ts
+Promise.all([
+  // 여기서 이미 getFile이 실행되어 평가가 되어버림.
+  getFile("file1.png"),
+  getFile("file2.png"),
+  getFile("file3.png"),
+]);
+
+// 함수 형태로 전달하면, Promise.all에 전달하기 전에 함수가 실행되어 평가가 되지 않으므로, 원하는 결과를 얻을 수 있음
+concurrent(3, [
+  () => getFile("file1.png"),
+  () => getFile("file2.png"),
+  () => getFile("file3.png"),
+  () => getFile("file4.png"),
+  () => getFile("file5.png"),
+  () => getFile("file6.png"),
+]);
+
+// 명령형으로 구현한다면?
+const concurrent = async <T>(limit: number, fs: (() => Promise<T>)[]) => {
+  const result: T[][] = [];
+  for (let i = 0; i < fs.length / limit; i++) {
+    const tmp: Promise<T>[] = [];
+    for (let j = 0; j < limit; j++) {
+      const f = fs[i * limit + j];
+      if (f) {
+        tmp.push(f());
+      }
+    }
+    result.push(await Promise.all(tmp));
+  }
+  return result.flat();
+};
+
+// 개선1 - generator, iterator 이용
+const concurrent = async <T>(limit: number, fs: (() => Promise<T>)[]) => {
+  const result = map(
+    (ps) => Promise.all(ps),
+    map((fs) => fs.map((f) => f()), chunk(limit, fs))
+  );
+
+  // https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/fromAsync
+  return (await Array.fromAsync(result)).flat();
+};
+
+// 개선2
+class FxIterator<T> {
+  constructor(public iterable: Iterable<T>) {}
+
+  chunk(size: number) {
+    return new FxIterator(chunk(size, this.iterable));
+  }
+
+  map<U>(f: (a: T) => U): FxIterator<U> {
+    return new FxIterator(map(f, this.iterable));
+  }
+
+  to<U>(f: (iterable: Iterable<T>) => U): U {
+    return f(this.iterable);
+  }
+}
+
+function fx<T>(iterable: Iterable<T>): FxIterator<T> {
+  return new FxIterator(iterable);
+}
+
+const concurrent = async <T>(limit: number, fs: (() => Promise<T>)[]) => {
+  return fx(fs)
+    .chunk(limit)
+    .map((fs) => fs.map((f) => f()))
+    .map((ps) => Promise.all(ps))
+    .to(fromAsync)
+    .then((arr) => arr.flat());
+
+// 체이닝으로 변경해보기
+
+```
+
+제너레이터 함수를 실행하면 이터레이터가 반환됨. 함수의 실행 단계를 외부에서 제어할 수 있음.
+
+```ts
+function* gen() {
+  yield 1;
+  yield 2;
+  yield 3;
+}
+
+const iterator = gen();
+console.log(iterator.next()); // { value: 1, done: false }
+console.log(iterator.next()); // { value: 2, done: false }
+console.log(iterator.next()); // { value: 3, done: false }
+console.log(iterator.next()); // { value: undefined, done: true }
+
+// 전개 연산자를 통해서 평가할 수 있음 (이터러블)
+[...gen()]; // [1, 2, 3]
+
+// 이터러블은 `Symbol.iterator`를 실행하면 이터레이터를 반환함.
+const arr = [1,2,3,4,5];
+const iterator = arr[Symbol.iterator]();
+```
+
+take
+
+```ts
+function* take<T>(length: number, iterable: Iterable<T>) {
+  const iterator = iterable[Symbol.iterator]();
+  while (length-- > 0) {
+    const { value, done } = iterator.next();
+    if (done) break;
+    yield value;
+  }
+}
+
+const iterator = take(3, [1, 2, 3, 4, 5]);
+console.log([...iterator]); // [1, 2, 3]
+```
+
+chunk
+
+```ts
+function* chunk<T>(size: number, iterable: Iterable<T>) {
+  const iterator = iterable[Symbol.iterator]();
+  while (true) {
+    const arr = [...take(size, { [Symbol.iterator]: () => iterator })];
+    if (arr.length) yield arr;
+    if (arr.length < size) break;
+  }
+}
+
+const iterator = chunk(3, [1, 2, 3, 4, 5]);
+console.log([...iterator]); // [[1, 2, 3], [4, 5]]
+```
+
+map
+
+```ts
+function* map<T, P>(
+  fn: (a: T) => P,
+  iterable: Iterable<T>
+): IterableIterator<P> {
+  for (const value of iterable) {
+    yield fn(value);
+  }
+}
+```
+
+fromAsync
+
+```ts
+async function fromAsync<T>(
+  iterable: Iterable<Promise<T>>
+): Promise<Awaited<T>[]> {
+  const arr: Awaited<T>[] = [];
+  for await (const value of iterable) {
+    arr.push(value);
+  }
+  return arr;
+}
+```

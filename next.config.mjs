@@ -6,6 +6,7 @@ const withMdx = nextMdx({
   extension: /.mdx?$/,
 });
 const nextConfig = withMdx({
+  output: "export",
   pageExtensions: ["js", "jsx", "mdx", "ts", "tsx"],
 });
 
