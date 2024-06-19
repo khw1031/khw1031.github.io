@@ -1,5 +1,5 @@
 ---
-title: "TS Utility Types"
+title: "TS Utility Types, Promise"
 publishedAt: "2024-06-19"
 updatedAt: "2024-06-19"
 wip: false
@@ -62,3 +62,32 @@ check<Record<"a" | "b" | "c", number>, { a: number; b: number; c: number }>(
 );
 ```
 
+# Promise
+
+```ts
+function delay<T>(time: number, value: T): Promise<T> {
+  return new Promise((resolve) => {
+    setTimeout(() => {
+      resolve(value);
+    }, time);
+  });
+}
+```
+
+## Promise.race는 언제 사용하면 좋을까?
+
+```ts
+function getFile(name: string): Promise<FileType> {
+  return delay(5000, { name, body: "...", size: 100 });
+}
+
+// 최대로 기다리고 싶은 TimeOut를 설정하고 싶은 경우
+const result = await Promise.race([
+  getFile("file1.png"),
+  delay(4000, "TimeOut"),
+]);
+
+console.log(result);
+
+// 응답이 매우 빠르다면 스켈레톤이나 로딩바를 보여주지 않고 그냥 보여주는 것이 나은 사용자 경험일 수 있음. 이런 경우 race를 사용해서 특정 시간보다 느리게 응답이 오는 경우 우선 로딩바를 보여주고 요청을 계속할 수 있음 
+```
