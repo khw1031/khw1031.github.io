@@ -1,0 +1,64 @@
+---
+title: "TS Utility Types"
+publishedAt: "2024-06-19"
+updatedAt: "2024-06-19"
+wip: false
+summary: ""
+---
+
+# 타입스크립트 유틸리티 타입
+
+`Awaited<Type>`: 프로미스를 재귀적으로 언래핑하는 방식의 모델링
+
+```ts
+type Awaited<P> = P extends undefined | null ? P extends object & {
+  then(outfilled: infer F, ...args: infer _): any
+} ? F extends (value: infer V, ...args: infer _) => any ? Awaited<V> : never : P;
+
+check<Awaited<Promise<number>>, number>(true);
+check<Awaited<Promise<Promise<number>>>, number>(true);
+```
+
+`Partial<Type>`: Type의 모든 프로퍼티가 옵셔널로 설정된 유형 생성
+
+```ts
+type Partial<T> = {
+  [P in keyof T]?: T[P];
+};
+
+check<Partial<{ a: number; b: string }>, { a?: number; b?: string }>(true);
+```
+
+`Required<Type>`: Type의 모든 프로퍼티가 필수로 설정된 유형 생성
+
+```ts
+type Required<T> = {
+  [P in keyof T]-?: T[P];
+};
+
+check<Required<{ a?: number; b?: string }>, { a: number; b: string }>(true);
+```
+
+`Readonly<Type>`: Type의 모든 프로퍼티가 읽기 전용으로 설정된 유형 생성
+
+```ts
+type Readonly<T> = {
+  readonly [P in keyof T]: T[P];
+};
+
+check<Readonly<{ a: number; b: string }>, { readonly a: number; readonly b: string }>(true);
+```
+
+`Record<Keys, Type>`: 키를 가지고 타입을 생성
+
+```ts
+// keyof any = string | number | symbol
+type Record<K extends keyof any, T> = {
+  [P in K]: T;
+};
+
+check<Record<"a" | "b" | "c", number>, { a: number; b: number; c: number }>(
+  true
+);
+```
+
