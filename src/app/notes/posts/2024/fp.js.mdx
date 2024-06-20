@@ -1,0 +1,42 @@
+---
+title: "함수형 프로그래밍과 자바스크립트 응용편(인프런)"
+publishedAt: "2024-06-20"
+updatedAt: "2024-06-20"
+wip: false
+summary: ""
+---
+
+## 홀수 n개를 뽑아서 해당 홀수를 제곱한 값을 모두 더하기
+
+```ts
+// 명령형
+function f1(limit: number, list: Iterable<number>) {
+  let sum = 0;
+  for (const n of list) {
+    if (n % 2) {
+      sum += n * n;
+      if (--limit === 0) break;
+    }
+  }
+  return sum;
+}
+```
+
+- if를 filter로
+- 값 변화 후 변수 할당을 map으로
+- break를 take로
+- 축약 및 합산을 reduce로
+- while을 range로
+- 효과를 each로 구분
+
+```ts
+function f1(limit: number, list: Iterable<number>) {
+  return pipe(
+    list,
+    filter((n) => n % 2),
+    map((n) => n * n),
+    take(3),
+    reduce((acc, n) => acc + n, 0),
+  );
+}
+```
