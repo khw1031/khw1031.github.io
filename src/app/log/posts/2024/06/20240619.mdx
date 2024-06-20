@@ -65,6 +65,47 @@ check<Record<"a" | "b" | "c", number>, { a: number; b: number; c: number }>(
 );
 ```
 
+`Pick<Type, Keys>`: Type에서 지정된 프퍼티만 선택하여 새로운 유형 생성
+
+```ts
+type Pick<T, K extends keyof T> = {
+  [P in K]: T[P];
+};
+```
+
+`Omit<Type, Keys>`: Type에서 지정된 프퍼티를 제외하고 새로운 유형 생
+
+```ts
+type Omit<T, K extends keyof T> = {
+  [P in Exclude<keyof T, K>]: T[P];
+};
+```
+
+`Exclude<UnionType, ExcludedMembers>`: UnionType에서 ExcludedMembers를 제외한 유형 생성
+
+```ts
+type Exclude<T, U> = T extends U ? never : T;
+```
+
+`Extract<Type, Union>`: Type에서 Union에 포함된 유형만 추출하여 새로운 유형 생성
+
+```ts
+type Extract<T, U> = T extends U ? T : never;
+```
+
+`NonNullable<Type>`: Type에서 null과 undefined를 제외한 유형 생성
+
+```ts
+type NonNullable<T> = T & {}
+```
+
+`Parameters<Type>`: Type의 모든 파라미터를 추출하여 새로운 유형 생성
+
+```ts
+type Parameters<T extends (...args: any) => any> = T extends (...args: infer P) => any ? P : never;
+```
+
+
 # Promise
 
 ```ts
