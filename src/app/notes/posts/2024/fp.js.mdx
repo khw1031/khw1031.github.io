@@ -6,7 +6,7 @@ wip: false
 summary: ""
 ---
 
-## 홀수 n개를 뽑아서 해당 홀수를 제곱한 값을 모두 더하기
+## 명령형 습관 지우기
 
 ```ts
 // 명령형
@@ -35,8 +35,92 @@ function f1(limit: number, list: Iterable<number>) {
     list,
     filter((n) => n % 2),
     map((n) => n * n),
-    take(3),
-    reduce((acc, n) => acc + n, 0),
+    take(limit),
+    reduce((acc, n) => acc + n, 0)
   );
 }
 ```
+
+query
+
+```ts
+function query(obj: Record<string, any>) {
+  return pipe(
+    Object.entries(obj),
+    reject(([_, v]) => v === undefined),
+    map(([k, v]) => `${k}=${v}`),
+    reduce((acc, curr) => `${acc}&${curr}`)
+  );
+}
+```
+
+parse query
+
+```ts
+function parseQuery(query: string) {
+  return pipe(
+    query,
+    split("&"),
+    map((s) => s.split("=")),
+    toArray,
+    as<[string, string][]>,
+    fromEntries
+  );
+}
+
+function parseQuery(query: string) {
+  return pipe(
+    query,
+    split("&"),
+    map((s) => s.split("=")),
+    map(([k, v]) => ({ [k]: v })),
+    reduce(Object.assign)
+  );
+}
+```
+
+## 안전한 합성
+
+map으로 함수 합성하기
+
+```ts
+const f = (a: number) => a + 10;
+const g = (a: number) => a * 10;
+const fg = (a: number) => g(f(a));
+
+const notMonad = pipe(undefined, as<number>, fg, console.log); // NaN
+const monad = pipe([10], map(fg), each(console.log)); // 200
+const monad2 = pipe([], map(fg), each(console.log)); // map이 돌지 않음
+```
+
+find 대신 filter 써보기
+
+```ts
+const users = [
+  { id: 1, name: "John", age: 20 },
+  { id: 2, name: "Jane", age: 25 },
+  { id: 3, name: "Jim", age: 30 },
+];
+
+const user = users.find((user) => user.name === "Kim"); // undefined
+if (user) {
+  // some logic
+}
+
+pipe(
+  users,
+  filter((user) => user.name === "Kim"),
+  take(1),
+  each(console.log)
+); // nothing happens
+
+pipe(
+  users,
+  filter((user) => user.name === "John"),
+  take(1),
+  each(console.log)
+); // [{ id: 1, name: "John", age: 20 }]
+```
+
+## 객체를 이터러블 프로그래밍으로 다루기
+
