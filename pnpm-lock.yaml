@@ -15,8 +15,8 @@ dependencies:
     specifier: ^14.2.1
     version: 14.2.2(@mdx-js/loader@3.0.1)(@mdx-js/react@3.0.1)
   ffuunnccttiioonn:
-    specifier: ^0.0.8
-    version: 0.0.8
+    specifier: ^0.0.13
+    version: 0.0.13
   gray-matter:
     specifier: ^4.0.3
     version: 4.0.3
@@ -1843,8 +1843,8 @@ packages:
       reusify: 1.0.4
     dev: true
 
-  /ffuunnccttiioonn@0.0.8:
-    resolution: {integrity: sha512-xkVX8BEI3OBTH/GUcOPqPFfqzsdirs629x/N/rhb1mFUI99uRuR7Q6eDbOVw3ZR2kmszMN81SPoE7wGFtaMGEg==}
+  /ffuunnccttiioonn@0.0.13:
+    resolution: {integrity: sha512-FnE0fKSOIyr2WekLz8dl3z+WN1XArUpVl4ukJPvGA+rR5YGvYrGC8dpq9u+83yIYmgZi1M53+nwiXYq/Cm5/Ww==}
     dev: false
 
   /file-entry-cache@6.0.1:
