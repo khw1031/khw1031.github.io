@@ -28,7 +28,7 @@ function getMDXFiles(dir: string, mdxFiles: string[] = [], path = "") {
   return mdxFiles;
 }
 
-function readMDXFile(filePath: string) {
+export function readMDXFile(filePath: string) {
   return read(filePath);
 }
 

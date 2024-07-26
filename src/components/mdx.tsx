@@ -1,11 +1,7 @@
 import Link from "next/link";
 import { compileMDX, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { highlight } from "sugar-high";
-import React, {
-  AnchorHTMLAttributes,
-  HTMLAttributes,
-  ImgHTMLAttributes,
-} from "react";
+import React, { AnchorHTMLAttributes, ImgHTMLAttributes } from "react";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
 
