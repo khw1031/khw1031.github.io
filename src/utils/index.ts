@@ -37,6 +37,7 @@ function getMDXData(dir: string) {
 
   return mdxFiles.map((file) => {
     const { data, content } = readMDXFile(join(dir, file));
+
     const slug = slugify(basename(file, extname(file)));
 
     return {
