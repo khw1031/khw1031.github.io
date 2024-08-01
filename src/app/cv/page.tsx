@@ -2,7 +2,7 @@ import { CustomMDX } from "@/components/mdx";
 import { readMDXFile } from "@/utils";
 import { Metadata } from "next";
 import { join } from "path";
-import { Layout, Header, Section, Detail } from "./components";
+import { Layout, Header, Section, Detail, Keywords } from "./components";
 
 export const metadata: Metadata = {
   title: "이력서 - cv",
@@ -16,7 +16,7 @@ export default function Page() {
       <article className="cv">
         <CustomMDX
           source={cvFile.content}
-          components={{ Layout, Header, Section, Detail }}
+          components={{ Layout, Header, Section, Detail, Keywords }}
         />
       </article>
     </section>

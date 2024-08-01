@@ -1,24 +1,23 @@
 <Layout>
   <Header />
-  <Section title="경력사항">
+  <Section title="경력 사항">
     <Detail
       title="(주)한샘"
       period="2023.02 - 재직중"
       content={[
         {
-          title:
-            "ERP 시스템 프론트엔드 환경 구축 및 모노레포 도입, ERP 시스템 마이그레이션",
-          description: ["", "test2"],
+          title: "ERP 시스템 개발 및 마이그레이션",
+          description: [
+            "리모델링 실시간 관제 시스템, 홈퍼니싱 현장 모바일",
+            "Turborepo, NextJS, Typescript, React-Query, Jenkins, vite, vitest, testing-library, TDD",
+          ],
         },
         {
           title: "홈퍼니싱(가구 배송/시공 시스템) 개발 및 운영",
-          description: ["test1", "test2"],
-        },
-        {
-          title: "홈퍼니싱 모바일(모바일 가구 물류 관리시스템) 개발",
           description: [
-            "가구 배송 후 반환되는 매트리스 커버, 팔레트를 관리하기 위한 웹앱",
-            "test4",
+            "홈퍼니싱 모바일 애플리케이션 개발 (웹뷰)",
+            "홈퍼니싱 PC 애플리케이션 개발 (어드민)",
+            "React, Typescript, Jenkins",
           ],
         },
       ]}
@@ -132,8 +131,15 @@
     />
   </Section>
   <Section title="사이드 프로젝트"></Section>
-  <Section title="기술스택"></Section>
-  <Section title="교육사항">
+  <Section title="기술 스택 • 툴">
+    <Keywords
+      keywords={[
+        { name: "TypeScript", color: "bg-neutral-600" },
+        { name: "React", color: "bg-neutral-600" },
+      ]}
+    />
+  </Section>
+  <Section title="교육 사항">
     <Detail
       title="패스트캠퍼스"
       period="2017 (수료)"
