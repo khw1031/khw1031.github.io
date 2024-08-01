@@ -5,8 +5,8 @@ import { read } from "gray-matter";
 type Metadata = {
   title: string;
   publishedAt: string;
+  updatedAt: string;
   wip?: boolean;
-  updatedAt?: string;
   summary: string;
   image?: string;
 };

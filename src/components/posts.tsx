@@ -22,20 +22,16 @@ export function BlogPosts({ postPath, postDir }: Props) {
         .map((post) => (
           <Link
             key={post.slug}
-            className="flex flex-col space-y-1 mb-4"
+            className="flex items-center font-noto_serif mb-2 gap-2 relative"
             href={`/${postDir}/${post.slug}`}
           >
-            <div className="w-full flex md:flex-row flex-col space-x-0 md:space-x-2">
-              <p className="text-neutral-900 tracking-tight">
-                {!isProd && post.metadata.wip && (
-                  <span className="mr-1">🚧</span>
-                )}
-                {post.metadata.title}
-              </p>
-              <p className="text-neutral-600 font-thin w-[100px] tabular-nums text-xs md:self-end self-start pb-0.5">
-                {formatDate(post.metadata.publishedAt, "en-US", false)}
-              </p>
-            </div>
+            <p className="text-neutral-800 text-[16px] font-semibold ml-4">
+              {post.metadata.title}
+            </p>
+            <p className="text-neutral-800 font-thin w-[100px] tabular-nums text-[12px] italic">
+              {formatDate(post.metadata.publishedAt, "en-US")}
+            </p>
+            <span className="absolute left-0 top-0 bottom-0 my-auto w-1 h-1 bg-slate-800" />
           </Link>
         ))}
     </div>
