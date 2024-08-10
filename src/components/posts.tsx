@@ -1,13 +1,16 @@
-import { formatDate, getBlogPosts, isProd } from "@/utils";
 import Link from "next/link";
+
+import { formatDate, getBlogPosts, isProd } from "@/utils";
 
 type Props = {
   postPath: string;
   postDir: string;
+  isRoot?: boolean;
 };
 
-export function BlogPosts({ postPath, postDir }: Props) {
+export function BlogPosts({ postPath, postDir, isRoot }: Props) {
   const allBlogs = getBlogPosts(postPath);
+  const linkDir = isRoot ? "" : `/${postDir}`;
 
   return (
     <div>
@@ -23,9 +26,9 @@ export function BlogPosts({ postPath, postDir }: Props) {
           <Link
             key={post.slug}
             className="flex items-center font-noto_serif mb-2 gap-2 relative"
-            href={`/${postDir}/${post.slug}`}
+            href={`${linkDir}/${post.slug}`}
           >
-            <p className="text-neutral-800 text-[16px] font-semibold ml-4">
+            <p className="text-neutral-800 text-[16px] ml-4">
               {post.metadata.title}
             </p>
             <p className="text-neutral-800 font-thin w-[100px] tabular-nums text-[12px] italic">

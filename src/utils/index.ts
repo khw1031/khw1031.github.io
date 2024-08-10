@@ -2,7 +2,7 @@ import { readdirSync } from "node:fs";
 import { basename, extname, join } from "node:path";
 import { read } from "gray-matter";
 
-type Metadata = {
+export type Metadata = {
   title: string;
   publishedAt: string;
   updatedAt: string;

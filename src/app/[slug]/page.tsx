@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
 
-import { BlogPost } from "@/components";
 import { getBlogPosts } from "@/utils";
+import { BlogPost } from "@/components";
 
 export async function generateStaticParams() {
-  const posts = getBlogPosts("/src/app/notes/posts");
+  const posts = getBlogPosts("/src/app/posts");
 
   return posts.map((post) => ({
     slug: post.slug,
@@ -12,12 +12,13 @@ export async function generateStaticParams() {
 }
 
 export default async function Blog({ params }: { params: { slug: string } }) {
-  const post = getBlogPosts("/src/app/notes/posts").find(
+  const post = getBlogPosts("/src/app/posts").find(
     (post) => encodeURIComponent(post.slug) === params.slug
   );
 
   if (!post) {
     notFound();
   }
+
   return <BlogPost post={post} />;
 }

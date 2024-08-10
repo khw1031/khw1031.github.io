@@ -4,18 +4,18 @@ const navItems = {
   "/": {
     name: "HOME",
   },
-  // "/log": {
-  //   name: "log",
-  // },
-  // "/notes": {
-  //   name: "notes",
+  // "/playground": {
+  //   name: "PLAYGROUND",
   // },
   "/cv": {
     name: "CV",
   },
 };
 
-export function Navbar() {
+type Props = {
+  items?: Record<string, { name: string }>;
+};
+export function Navbar({ items = navItems }: Props) {
   return (
     <aside className="-ml-[8px] mb-4 tracking-tight pb-2 border-b border-neutral-200">
       <div className="lg:sticky lg:top-20">
@@ -24,7 +24,7 @@ export function Navbar() {
           id="nav"
         >
           <div className="flex flex-row space-x-0 pr-10">
-            {Object.entries(navItems).map(([path, { name }]) => {
+            {Object.entries(items).map(([path, { name }]) => {
               return (
                 <Link
                   key={path}

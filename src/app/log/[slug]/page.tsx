@@ -1,6 +1,7 @@
-import { CustomMDX } from "@/components/mdx";
-import { formatDate, getBlogPosts, isProd } from "@/utils";
 import { notFound } from "next/navigation";
+
+import { BlogPost } from "@/components";
+import { getBlogPosts } from "@/utils";
 
 export async function generateStaticParams() {
   const posts = getBlogPosts("/src/app/log/posts");
@@ -19,20 +20,5 @@ export default async function Blog({ params }: { params: { slug: string } }) {
     notFound();
   }
 
-  return (
-    <section>
-      <h1 className="title font-bold text-lg md:text-2xl tracking-tighter">
-        {!isProd && post.metadata.wip && <span className="mr-1">🚧</span>}
-        {post.metadata.title}
-      </h1>
-      <div className="flex justify-between items-center mt-2 mb-8 text-sm">
-        <p className="text-xs text-neutral-800">
-          {formatDate(post.metadata.publishedAt, "ko-KR", true)}
-        </p>
-      </div>
-      <article className="prose">
-        <CustomMDX source={post.content} />
-      </article>
-    </section>
-  );
+  return <BlogPost post={post} />;
 }
