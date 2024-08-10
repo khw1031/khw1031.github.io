@@ -28,7 +28,7 @@ export default function RootLayout({
 }>) {
   return (
     <html
-      lang="kr"
+      lang="ko"
       className={cx(
         "text-neutral-800 bg-neutral-50",
         notoSansKr.className,

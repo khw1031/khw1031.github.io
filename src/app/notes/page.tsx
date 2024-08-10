@@ -11,11 +11,11 @@ export default function Page() {
     (post) => !post.metadata.wip
   ).length;
   return (
-    <section>
+    <main>
       <h1 className="font-semibold text-2xl mb-8 tracking-tighter">
         Posts <span className="text-sm font-normal">(총 {postsLength}개)</span>
       </h1>
       <BlogPosts postDir="notes" postPath="/src/app/notes/posts" />
-    </section>
+    </main>
   );
 }
