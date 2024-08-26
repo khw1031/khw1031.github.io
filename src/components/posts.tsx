@@ -31,7 +31,7 @@ export function BlogPosts({ postPath, postDir, isRoot }: Props) {
             <p className="text-neutral-800 text-[16px] ml-4">
               {post.metadata.title}
             </p>
-            <p className="text-neutral-800 font-thin w-[100px] tabular-nums text-[12px] italic">
+            <p className="text-neutral-800 font-thin min-w-[140px] tabular-nums text-[12px] italic">
               {formatDate(post.metadata.publishedAt, "en-US")}
             </p>
             <span className="absolute left-0 top-0 bottom-0 my-auto w-1 h-1 bg-slate-800" />
