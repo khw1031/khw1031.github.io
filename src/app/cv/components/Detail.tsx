@@ -6,15 +6,29 @@ type Content = {
 type DetailProps = {
   title: string;
   period: string;
-  content: Content[];
+  content?: Content[];
+  url?: string;
   ect?: string;
 };
 
-export function Detail({ title, period, content, ect }: DetailProps) {
+export function Detail({ title, period, url, content = [], ect }: DetailProps) {
   return (
     <div className="font-noto_serif">
       <div className="flex items-center gap-1">
-        <h3 className="text-md font-bold text-neutral-800">{title}</h3>
+        <h3 className="text-md font-bold text-neutral-800">
+          {url ? (
+            <a
+              href={url}
+              className="underline text-blue-700 hover:text-blue-900"
+              target="_blank"
+              rel="noreferrer noopener"
+            >
+              {title}
+            </a>
+          ) : (
+            title
+          )}
+        </h3>
         <p className="text-[12px] font-semibold text-neutral-600">{period}</p>
         {ect && (
           <span className="text-[10px] ml-1 text-neutral-500">
