@@ -6,12 +6,20 @@ type Content = {
 type DetailProps = {
   title: string;
   period: string;
+  role?: string;
   content?: Content[];
   url?: string;
   ect?: string;
 };
 
-export function Detail({ title, period, url, content = [], ect }: DetailProps) {
+export function Detail({
+  title,
+  period,
+  role,
+  url,
+  content = [],
+  ect,
+}: DetailProps) {
   return (
     <div className="font-noto_serif">
       <div className="flex items-center gap-1">
@@ -29,6 +37,11 @@ export function Detail({ title, period, url, content = [], ect }: DetailProps) {
             title
           )}
         </h3>
+        {role && (
+          <p className="text-[10px] font-[800] font-sans text-neutral-600 bg-slate-300 px-2 rounded-md inline-flex items-center gap-1 role-badge">
+            {role}
+          </p>
+        )}
         <p className="text-[12px] font-semibold text-neutral-600">{period}</p>
         {ect && (
           <span className="text-[10px] ml-1 text-neutral-500">

@@ -3,42 +3,70 @@
   <Section title="경력 사항">
     <Detail
       title="(주)한샘"
+      role="파트 리드"
       period="2023.02 - 재직중"
       content={[
+        {
+          title: "Figma MCP Server 도입 및 AI 기반 프론트엔드 개발 효율화",
+          description: [
+            "Cursor와 Figma MCP Server를 연동하여 AI 기반 프론트엔드 개발 효율화에 기여",
+            "디자인 시스템과 코드 생성 간 일관성 확보로 개발 생산성 향상",
+            "혁신TF 검증을 통한 상용 수준의 코드 생성 워크플로우 확립",
+          ],
+        },
+        {
+          title: "Code Review 자동화 PoC",
+          description: [
+            "Bitbucket 기반의 코드 변경 사항 자동 분석 및 요약 시스템 개발",
+            "Amazon Bedrock(Nova Lite 모델) 기반 코드 리뷰 효율화로 개발자의 리뷰 시간 단축",
+            "비용 효율적인 시스템 설계 (월 190여 개 PR(프론트엔드 팀 기준) 추정 비용 235원/월 수준, 월 4200 개 PR(IT본부 기준) 추정 비용 5,200원/월 수준",
+          ],
+        },
+        {
+          title: "스토어웹 서비스 Memory Leak, OOM 이슈 분석 및 해결",
+          description: [
+            "한샘몰 웹 애플리케이션 주기적 OOM 장애 원인 분석 및 해결",
+            "메모리 누수 분석 및 개선 통한 성능 개선",
+          ],
+        },
+        {
+          title: "한샘몰 모바일 웹 성능 개선 리드",
+          description: [
+            "모바일 및 PC 웹 서비스 Core Web Vitals 성능 지표(LCP, TBT, CLS) 개선 계획 수립 및 실행",
+            "Google Page Speed Insights 모니터링 시스템 구축(자사 및 타사)",
+            "디자인 시스템 및 전시 컴포넌트 번들 사이즈 최적화 (40% 감소)",
+            "Unused bytes 최적화로 script 실행시간 감소 (22% 감소)",
+          ],
+        },
         {
           title: "리모델링 외주 시공 프로 출석 관리 시스템",
           description: [
             "리모델링 공사 현장에서 근무하는 시공 프로의 출석 관리 시스템 클라이언트 개발",
-            "Turborepo, React, Typescript, Tailwindcss, React-query, Jenkins, vite, vitest, testing-library, TDD",
           ],
         },
         {
           title: "ERP 시스템 개발 및 마이그레이션",
-          description: [
-            "리모델링 실시간 관제 시스템, 홈퍼니싱 현장 모바일",
-            "Turborepo, NextJS, Typescript, React-Query, Jenkins, vite, vitest, testing-library, TDD",
-          ],
+          description: ["리모델링 실시간 관제 시스템, 홈퍼니싱 현장 모바일"],
         },
         {
           title: "홈퍼니싱(가구 배송/시공 시스템) 개발 및 운영",
           description: [
             "홈퍼니싱 모바일 애플리케이션 개발 (웹뷰)",
             "홈퍼니싱 PC 애플리케이션 개발 (어드민)",
-            "React, Typescript, Jenkins",
           ],
         },
       ]}
     />
     <Detail
       title="슈퍼메이커즈"
+      role="리드"
       period="2021.12 - 2022.12"
-      ect="오프라인 사업 집중화로 인한 개발팀 해체"
+      ect="이직사유: 오프라인 사업 집중화로 인한 개발팀 해체"
       content={[
         {
           title: "온라인 반찬 커머스 애플리케이션 '슈퍼키친'(미운영) 개발",
           description: [
             "반찬을 온라인으로 주문하거나 구독할 수 있는 웹 애플리케이션 개발",
-            "NextJS, Typescript, React-Query, Turborepo, Emotion, Github Actions, Docker, CI/CD, jest, testing-library, TDD",
           ],
         },
         {
@@ -51,15 +79,16 @@
     />
     <Detail
       title="(주)한화생명"
+      role="팀원"
       period="2021.01 - 2021.12"
-      ect="파트장이 슈퍼메이커즈 CTO 이직 후 이직 제안"
+      ect="이직사유: 전 파트장(슈퍼메이커즈 CTO)의 이직 제안"
       content={[
         {
           title: "보험 상품 컨텐츠 관리 시스템 'HLI-CMS' 개발",
           description: [
             "구독형 보험, 다이렉트 보험의 생성 및 관리를 위한 CMS 툴을 개발",
-            "API mocking을 활용하여 정해진 Spec을 기반으로 백엔드-프론트 개발이 병렬적으로 진행될 수 있게함",
-            "NextJS, Typescript, antd, jest, testing-library, msw",
+            "API mocking 전략 도입으로 백엔드-프론트엔드 개발 병렬화 구현, 개발 리드타임 40% 단축 달성",
+            "신규 보험 상품 출시 프로세스 간소화"
           ],
         },
         {
@@ -67,63 +96,67 @@
             "다이렉트 보험 웹 애플리케이션 '온슈어'(https://direct.hanwhalife.com) 개발",
           description: [
             "CMS로 생성된 보험 상품을 고객에게 제공하기 위한 보험 플랫폼 개발",
-            "NextJS, Typescript, React-Query, Sentry, jest, testing-library, TDD",
           ],
         },
       ]}
     />
     <Detail
       title="인프랩"
+      role="파트 리드"
+      ect="이직사유: 갭 이어 / 창업 시도"
       period="2018.10 - 2020.05"
       content={[
         {
           title: "코딩 교육 플랫폼 '인프런'(https://inflearn.com) 개발",
           description: [
+            "git init to production",
             "워드프레스 기반 웹 애플리케이션을 NodeJS 기반의 애플리케이션으로 마이그레이션",
-            "코드 Linting, 유닛 테스트, 코드 리뷰 프로세스 도입, 스프린트 기반 개발 및 데일리 스크럼 도입",
-            "JavaScript와 함수형 기반의 라이브러리 FxJS를 활용한 프론트엔드 개발, Webpack, Babel, Scss",
+            "유닛 테스트, 코드 리뷰 프로세스 도입, 스프린트 기반 개발 및 데일리 스크럼 도입",
+            "Pure JavaScript와 함수형 기반의 라이브러리 FxJS를 활용한 프론트엔드 개발",
           ],
         },
         {
           title: "인프런 어드민 개발",
           description: [
             "인프런 강의 로드맵 기능 관리를 위한 웹 어드민 서비스(CMS) 개발",
-            "NextJS, React, Redux",
           ],
         },
       ]}
     />
     <Detail
       title="제플린엑스"
+      role="팀원"
+      ect="이직사유: 인프런 대표의 이직 제안"
       period="2018.07 - 2018.09"
       content={[
         {
           title: "인터렉티브 컴퓨팅 플랫폼 '제플'(https://zepl.com) 개발 ",
           description: [
             "Angular 기반의 클라이언트를 React로 마이그레이션",
-            "React, Redux, Redux-Saga, Webpack, Babel, Scss, jest, enzyme, TDD",
           ],
         },
       ]}
     />
     <Detail
       title="텀블벅"
+      role="팀원"
       period="2017.07 - 2018.08"
-      ect="개발팀 인원 감축(경영악화)"
+      ect="이직사유: 개발팀 인원 감축(경영악화)"
       content={[
         {
           title:
             "크라우드 펀딩 웹 애플리케이션 '텀블벅'(https://tumblbug.com) 개발 및 유지보수",
           description: [
-            "Ruby on Rails를 이용해 개발되어 서버 사이드에서 제공하던 클라이언트를 React로 마이그레이션",
+            "Ruby on Rails(SSR)에서 React(SSR+CSR)로 마이그레이션",
             "정적 코드 분석 툴 도입 및 커밋 단계에서 코드 분석 및 유닛 테스팅을 도입하여 협업 방식 개선",
-            "React, styled-components, ESLint, lint-staged, husky, jest, enzyme, TDD",
           ],
         },
       ]}
     />
     <Detail
       title="(주)한화L&C"
+      role="팀원"
+      ect="이직사유: 직무 전환"
       period="2014.06 - 2016.05"
       content={[
         {
@@ -136,9 +169,15 @@
         },
       ]}
     />
+
   </Section>
   <Section title="사이드 프로젝트">
-    <div className="flex flex-row gap-4 flex-wrap">
+    <div className="flex gap-1 flex-wrap">
+      <Detail
+        title="MCP-YouTube-TLDR"
+        url="https://github.com/khw1031/mcp-youtube-tldr"
+        period="YouTube 영상의 스크립트와 타임스탬프 정보를 제공하는 MCP Server"
+      />
       <Detail
         title="Prompts"
         url="https://github.com/khw1031/prompts"
@@ -152,19 +191,47 @@
     </div>
   </Section>
   <Section title="기술 스택 • 툴">
-    <Keywords
-      keywords={[
-        { name: "TypeScript", color: "bg-neutral-600" },
-        { name: "React", color: "bg-neutral-600" },
-        { name: "ReactNative", color: "bg-neutral-600" },
-        { name: "CSS", color: "bg-neutral-600" },
-        { name: "HTML", color: "bg-neutral-600" },
-        { name: "NextJS", color: "bg-neutral-600" },
-        { name: "Git", color: "bg-neutral-600" },
-        { name: "Jenkins", color: "bg-neutral-600" },
-        { name: "CI/CD", color: "bg-neutral-600" },
-      ].sort((a, b) => a.name.localeCompare(b.name))}
-    />
+    <div className="avoid-break">
+      <Keywords
+        keywords={[
+          { name: "NextJS", color: "bg-neutral-800" },
+          { name: "React", color: "bg-neutral-800" },
+          { name: "TypeScript", color: "bg-neutral-700" },
+          { name: "Reqct Query", color: "bg-neutral-700" },
+          { name: "CSS", color: "bg-neutral-800" },
+          { name: "HTML", color: "bg-neutral-800" },
+          { name: "Git", color: "bg-neutral-800" },
+          { name: "CI/CD", color: "bg-neutral-600" },
+          { name: "Turborepo", color: "bg-neutral-600" },
+          { name: "Jenkins", color: "bg-neutral-500" },
+          { name: "Github Actions", color: "bg-neutral-500" },
+          { name: "Rollup", color: "bg-neutral-800" },
+          { name: "Vite", color: "bg-neutral-800" },
+          { name: "Vitest", color: "bg-neutral-800" },
+          { name: "Jira", color: "bg-neutral-700" },
+          { name: "Confluence", color: "bg-neutral-700" },
+          { name: "Firebase", color: "bg-neutral-600" },
+          {
+            name: "React Native",
+            color: "bg-neutral-300",
+            fontColor: "text-neutral-900",
+          },
+          {
+            name: "Docker",
+            color: "bg-neutral-200",
+            fontColor: "text-neutral-900",
+          },
+          {
+            name: "AWS Bedrock",
+            color: "bg-neutral-200",
+            fontColor: "text-neutral-900",
+          },
+          { name: "MCP", color: "bg-neutral-300", fontColor: "text-neutral-900" },
+        ].sort((a, b) =>
+          `${b.color}${a.name}`.localeCompare(`${a.color}${b.name}`)
+        )}
+      />
+    </div>
   </Section>
   <Section title="교육 사항">
     <Detail

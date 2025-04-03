@@ -4,12 +4,12 @@ const navItems = {
   "/": {
     name: "HOME",
   },
-  "/read-and-write": {
-    name: "READ & WRITE",
-  },
-  "/playground": {
-    name: "PLAYGROUND",
-  },
+  // "/read-and-write": {
+  //   name: "READ & WRITE",
+  // },
+  // "/playground": {
+  //   name: "PLAYGROUND",
+  // },
   "/cv": {
     name: "CV",
   },
