@@ -1,6 +1,7 @@
 type Content = {
   title: string;
   description: string[];
+  url?: string;
 };
 
 type DetailProps = {
@@ -54,7 +55,18 @@ export function Detail({
         {content.map((item) => (
           <div key={item.title} className="ml-2">
             <h4 className="text-[14px] font-[500] text-neutral-800">
-              {item.title}
+              {item.url ? (
+                <a
+                  href={item.url}
+                  className="underline text-blue-700 hover:text-blue-900"
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  {item.title}
+                </a>
+              ) : (
+                item.title
+              )}
             </h4>
             <ul className="flex flex-col text-neutral-600 gap-0.5 mt-0.5">
               {item.description?.map((description) => (
