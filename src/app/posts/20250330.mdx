@@ -1,0 +1,86 @@
+---
+title: "한샘몰 웹 서비스 성능 최적화 프로젝트"
+publishedAt: "2025-03-30"
+updatedAt: "2025-03-30"
+description: "Core Web Vitals 지표 개선을 통한 한샘몰 웹 성능 최적화 프로젝트 사례"
+---
+
+# 프로젝트 개요
+
+한샘몰 모바일 웹 서비스의 성능 개선을 위한 프로젝트를 진행했습니다. Google의 Core Web Vitals 지표인 LCP(Largest Contentful Paint), TBT(Total Blocking Time), CLS(Cumulative Layout Shift)를 중심으로 성능을 개선 했습니다.
+
+Google Lighthouse의 점수 측정이 테스트 시점 및 테스트 환경에 따라서 일정하지가 안않기 때문에 Google Page Speed Insights API를 활용해 모니터링 시스템을 구축했습니다. 1시간에 한 번의 테스트를 자사 애플리케이션 및 경쟁사 애플리케이션에 대해 진행하여 일간, 주간 평균을 측정하여 개선 여부를 판단했습니다.
+
+# 성능 개선 계획
+
+## 우선순위 설정
+
+- 모바일 우선 개선 진행 (사용자 비율 대략 5~7:1)
+- LCP, TBT 지표 중심 개선
+- 성능 개선 작업과 관련된 코드 작업은 담당자가 진행하고, 관련 시스템(디자인 시스템, C사이드) 담당자와 협업
+
+# 성능 분석 및 문제점 파악
+
+## LCP(Largest Contentful Paint) 분석
+
+
+## TBT(Total Blocking Time) 분석
+
+메인 스레드 차단 시간이 총 1860ms로 파악되었습니다. 주요 원인은:
+
+1. 스크립트 평가 시간(Script Evaluation)이 약 7초로 메인 스레드 차단
+2. chunks/framework-78b882cd4596227d.js와 react-dom.production.min.js의 처리 시간 과다
+3. design-system-mobile.esm.js에서 약 74.3%가 Unused Bytes로 확인
+
+
+## 번들 최적화 개선 결과
+
+### 빌드 및 번들 도구 변경
+변경 전: yarn, yarn workspace, babel, rollup  
+변경 후: pnpm, turbo, vite(esbuild), rollup
+
+### 모바일 최적화 결과
+| 구분 | 변경 전 | 변경 후 | 개선율 |
+|------|--------|--------|-------|
+| 번들 출력 | ESM, CJS | ESM | - |
+| 빌드 시간 | 12s (각 6s) | 4s | 66.7% 감소 |
+| 번들 크기 | 399.85KB | 279.57KB | 30.1% 감소 |
+| Gzip 크기 | 97.01KB | 58.01KB | 40.2% 감소 |
+
+### PC 최적화 결과
+| 구분 | 변경 전 | 변경 후 | 개선율 |
+|------|--------|--------|-------|
+| 번들 출력 | ESM, CJS | ESM | - |
+| 빌드 시간 | 18s (각 9s) | 4s | 77.8% 감소 |
+| 번들 크기 | 510.39KB | 462.37KB | 9.4% 감소 |
+| Gzip 크기 | 123.35KB | 98.89KB | 19.8% 감소 |
+
+### 주요 개선 작업
+1. Lodash에서 Lodash-ES로 전환 및 사용하는 함수만 import
+2. @display-components/shared를 peerDependencies로 설정
+3. swiper, lodash, date-fns 모두 peerDependencies로 설정
+
+## 디자인 시스템 및 컴포넌트 최적화
+
+### Shared 컴포넌트
+- 최종 크기: 14.78KB (gzip: 3.03KB, 빌드 시간: 853ms)
+
+### 모바일 컴포넌트
+- 변경 전: 927.77KB (gzip: 212.56KB)
+- 변경 후: 279.57KB (gzip: 58.01KB)
+- 개선율: 69.9% 감소 (gzip 기준 72.7% 감소)
+
+### PC 컴포넌트
+- 변경 전: 1.16MB (gzip: 337.9KB)
+- 변경 후: 462.37KB (gzip: 98.89KB)
+- 개선율: 60.1% 감소 (gzip 기준 70.7% 감소)
+
+## 결론
+
+한샘몰 웹 서비스 성능 최적화 프로젝트를 통해:
+1. 디자인 시스템 및 전시 컴포넌트 번들 사이즈를 평균 40% 이상 감소시켰습니다
+2. 빌드 시간을 최대 77.8%까지 단축시켰습니다
+3. Core Web Vitals 지표(LCP, TBT, CLS)를 개선했습니다
+4. Google Page Speed Insights 모니터링 시스템을 구축했습니다
+
+이러한 최적화를 통해 사용자 경험 향상과 함께 개발 생산성도 크게 개선할 수 있었습니다. 
