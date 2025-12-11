@@ -7,6 +7,7 @@ import remarkMath from "remark-math";
 
 import { slugify } from "@/utils";
 import { MDXComponents } from "mdx/types";
+import { Quote } from "./quote";
 
 type TableProps = {
   data: {
@@ -102,6 +103,7 @@ const components = {
   a: CustomLink,
   code: Code,
   table: Table,
+  Quote,
 };
 
 export async function CustomMDX(props: MDXRemoteProps) {

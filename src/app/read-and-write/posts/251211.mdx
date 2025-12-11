@@ -1,0 +1,25 @@
+---
+title: "시뮬레이터로서의 LLM"
+publishedAt: "2025-12-11"
+updatedAt: "2025-12-11"
+summary: ""
+---
+
+<Quote url="https://x.com/karpathy/status/1997731268969304070">
+  {`Don't think of LLMs as entities but as simulators. For example, when exploring a topic, don't ask:
+
+"What do you think about xyz"?
+
+There is no "you". Next time try:
+
+"What would be a good group of people to explore xyz? What would they say?"
+
+The LLM can channel/simulate many perspectives but it hasn't "thought about" xyz for a while and over time and formed its own opinions in the way we're used to. If you force it via the use of "you", it will give you something by adopting a personality embedding vector implied by the statistics of its finetuning data and then simulate that. It's fine to do, but there is a lot less mystique to it than I find people naively attribute to "asking an AI".`}
+
+</Quote>
+
+LLM은 자아를 가진 '개체(Entity)'가 아니라, 다양한 관점을 모방할 수 있는 '시뮬레이터(Simulator)'로 인식해야 합니다. 만약 당신이 '너(You)'라는 단어를 사용하여 AI에게 억지로 자아를 강요한다면, AI는 자신의 파인튜닝(미세조정) 데이터 통계 속에 내재된 **'성격 임베딩 벡터(Personality embedding vector)'**를 채택하고, 그저 그것을 흉내(Simulate) 낼 것입니다.
+
+AI는 자아가 없는데, 사용자가 "너는 어떻게 생각해?"라고 묻는 순간, AI는 문맥상 답변을 하기 위해 **가상의 화자('나')**를 설정해야만 하는 상황에 놓입니다. AI는 자신의 데이터베이스에서 '가장 일반적인 AI 비서'에 해당하는 수학적 좌표(성격)를 찾아내어, 그 가면을 쓰고 답변을 생성합니다. 즉, 진짜 자기 생각이 아니라 **"학습된 AI 비서의 말투"**를 불러오는 것입니다.
+
+사용자들은 습관적으로 AI에게 인격을 부여하지만, 이는 도구의 잠재력을 제한합니다. AI를 '생각하는 파트너'가 아닌 '상황 재연 엔진'으로 바라볼 때, 우리는 더 객관적이고 다각적인 정보를 얻을 수 있습니다. 이러한 상황에서 [특정 전문가]라면 어떻게 분석할까?" $\rightarrow$ AI는 구체적인 지식 체계와 어조를 모방하여 훨씬 깊이 있는 통찰을 제공합니다.
