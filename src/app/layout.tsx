@@ -43,7 +43,7 @@ export default function RootLayout({
           crossOrigin="anonymous"
         />
       </head>
-      <body className="antialiased max-w-screen-lg mt-8 mx-auto">
+      <body className="antialiased max-w-[768px] mt-8 mx-auto">
         <main className="flex-auto min-w-0 mt-6 flex flex-col px-4 lg:px-0">
           <Navbar />
           {children}
