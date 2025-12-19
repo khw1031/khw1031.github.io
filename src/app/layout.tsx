@@ -1,20 +1,15 @@
+import "@fontsource/noto-sans-kr/300.css";
+import "@fontsource/noto-sans-kr/400.css";
+import "@fontsource/noto-sans-kr/500.css";
+import "@fontsource/noto-sans-kr/700.css";
+import "@fontsource/noto-serif-kr/300.css";
+import "@fontsource/noto-serif-kr/400.css";
+import "@fontsource/noto-serif-kr/500.css";
+import "@fontsource/noto-serif-kr/700.css";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Noto_Sans_KR, Noto_Serif_KR } from "next/font/google";
-import { cx } from "@/utils";
 import { Navbar } from "@/components/nav";
 import { Footer } from "@/components/footer";
-
-const notoSansKr = Noto_Sans_KR({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-});
-
-const notoSerifKr = Noto_Serif_KR({
-  weight: ["300", "400", "500", "700"],
-  subsets: ["latin"],
-  variable: "--noto_serif",
-});
 
 export const metadata: Metadata = {
   title: "-",
@@ -27,14 +22,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html
-      lang="ko"
-      className={cx(
-        "text-neutral-800 bg-neutral-50",
-        notoSansKr.className,
-        notoSerifKr.variable
-      )}
-    >
+    <html lang="ko" className="text-neutral-800 bg-neutral-50">
       <head>
         <link
           rel="stylesheet"
