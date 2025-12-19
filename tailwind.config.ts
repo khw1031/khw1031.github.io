@@ -9,7 +9,8 @@ const config: Config = {
   theme: {
     extend: {
       fontFamily: {
-        noto_serif: ["var(--noto_serif)"],
+        sans: ["Noto Sans KR", "sans-serif"],
+        noto_serif: ["Noto Serif KR", "serif"],
       },
     },
   },
