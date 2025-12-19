@@ -157,11 +157,22 @@ input[type="email"] {
   appearance: none;
 }
 
-table {
-  display: block;
-  max-width: fit-content;
-  overflow-x: auto;
-  white-space: nowrap;
+.prose table {
+  @apply w-full border-collapse my-6;
+  display: table;
+}
+
+.prose table th,
+.prose table td {
+  @apply border border-neutral-300 px-4 py-2 text-left;
+}
+
+.prose table th {
+  @apply bg-neutral-50 font-semibold;
+}
+
+.prose table tbody tr:hover {
+  @apply bg-neutral-50;
 }
 
 .title {

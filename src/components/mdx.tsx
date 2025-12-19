@@ -1,40 +1,17 @@
 import Link from "next/link";
 import { compileMDX, type MDXRemoteProps } from "next-mdx-remote/rsc";
 import { highlight } from "sugar-high";
-import React, { AnchorHTMLAttributes, ImgHTMLAttributes } from "react";
+import React, { AnchorHTMLAttributes, ImgHTMLAttributes, TableHTMLAttributes } from "react";
 import rehypeKatex from "rehype-katex";
 import remarkMath from "remark-math";
+import remarkGfm from "remark-gfm";
 
 import { slugify } from "@/utils";
 import { MDXComponents } from "mdx/types";
 import { Quote } from "./quote";
 
-type TableProps = {
-  data: {
-    headers: string[];
-    rows: string[][];
-  };
-};
-
-function Table({ data }: TableProps) {
-  const headers = data.headers.map((header, index) => (
-    <th key={index}>{header}</th>
-  ));
-  const rows = data.rows.map((row, index) => (
-    <tr key={index}>
-      {row.map((cell, cellIndex) => (
-        <td key={cellIndex}>{cell}</td>
-      ))}
-    </tr>
-  ));
-  return (
-    <table>
-      <thead>
-        <tr>{headers}</tr>
-      </thead>
-      <tbody>{rows}</tbody>
-    </table>
-  );
+function Table({ children, ...props }: TableHTMLAttributes<HTMLTableElement>) {
+  return <table {...props}>{children}</table>;
 }
 
 function CustomLink(props: AnchorHTMLAttributes<HTMLAnchorElement>) {
@@ -112,7 +89,7 @@ export async function CustomMDX(props: MDXRemoteProps) {
     options: {
       mdxOptions: {
         rehypePlugins: [[rehypeKatex as any, { trust: true }]],
-        remarkPlugins: [remarkMath],
+        remarkPlugins: [remarkMath, remarkGfm],
         format: "mdx",
       },
     },
