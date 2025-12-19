@@ -7,6 +7,14 @@
       period="2023.02 - 재직중"
       content={[
         {
+          title: "한샘 Swagger MCP Server 개발 및 도입",
+          url: "/20251218",
+          description: [
+            "Swagger MCP Server를 통해 표준화된 워크플로우 내에서 자동화된 Agentic Coding이 가능하게 함",
+            "Swagger 문서를 탐색하지 않고도 자동으로 코드를 생성할 수 있도록 함",
+          ],
+        },
+        {
           title: "팀 기반 Agentic Coding Workflow 구축 리드",
           url: "/20251210",
           description: [
@@ -175,7 +183,23 @@
 
   </Section>
   <Section title="사이드 프로젝트">
-    <div className="flex gap-1 flex-wrap">
+    <div className="flex gap-4 flex-wrap flex-col items-start">
+    <div className="flex gap-2 items-start">
+      <Detail
+        title="@hynu/swagger-mcp"
+        url="https://www.npmjs.com/package/@hynu/swagger-mcp"
+        period="Swagger MCP Server"
+        role="NPM Package"
+        content={[
+          {
+            description: [
+              "Swagger의 정보를 받아오는 MCP Server를 개발해서 오픈소스화",
+            ]
+          }
+        ]}
+      />
+      <img className="mt-1" src="https://img.shields.io/npm/v/@hynu/swagger-mcp" alt="npm version" />
+      </div>
       <Detail
         title="룰루루틴"
         url="https://www.luluroutine.com"
