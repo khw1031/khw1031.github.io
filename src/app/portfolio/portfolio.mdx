@@ -1,0 +1,30 @@
+<Layout>
+  <Header />
+  <Section title="프로젝트">
+    <Detail
+      title="프로젝트 제목"
+      period="2024.01 - 2024.12"
+      role="개발자"
+      content={[
+        {
+          title: "프로젝트 설명",
+          description: [
+            "프로젝트에 대한 설명을 작성하세요.",
+            "주요 성과나 기술 스택을 작성할 수 있습니다.",
+          ],
+        },
+      ]}
+    />
+  </Section>
+  <Section title="기술 스택">
+    <div className="avoid-break">
+      <Keywords
+        keywords={[
+          { name: "React", color: "bg-neutral-800" },
+          { name: "TypeScript", color: "bg-neutral-700" },
+          { name: "Next.js", color: "bg-neutral-800" },
+        ]}
+      />
+    </div>
+  </Section>
+</Layout>

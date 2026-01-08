@@ -5,17 +5,17 @@ import { join } from "path";
 import { Layout, Header, Section, Detail, Keywords } from "@/app/components/document";
 
 export const metadata: Metadata = {
-  title: "이력서 - cv",
+  title: "포트폴리오 - portfolio",
 };
 
 export default function Page() {
-  const cvFile = readMDXFile(join(process.cwd(), "/src/app/cv/cv.mdx"));
+  const portfolioFile = readMDXFile(join(process.cwd(), "/src/app/portfolio/portfolio.mdx"));
 
   return (
     <section>
       <article className="cv">
         <CustomMDX
-          source={cvFile.content}
+          source={portfolioFile.content}
           components={{ Layout, Header, Section, Detail, Keywords }}
         />
       </article>
