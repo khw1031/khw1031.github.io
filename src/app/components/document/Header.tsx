@@ -1,6 +1,10 @@
 import { useEffect } from "react";
 
-export function Header() {
+type HeaderProps = {
+  hideContact?: boolean;
+};
+
+export function Header({ hideContact = false }: HeaderProps) {
   return (
     <>
       <div className="flex font-noto_serif items-end justify-between pb-8">
@@ -10,19 +14,21 @@ export function Header() {
             Frontend Based Product Developer
           </span>
         </h1>
-        <div className="flex flex-col items-end">
-          <a href="mailto:khw1031@gmail.com" className="text-sm">
-            Email: khw1031@gmail.com
-          </a>
-          <a
-            target="_blank"
-            rel="noreferrer noopener"
-            href="https://github.com/khw1031"
-            className="text-sm"
-          >
-            Github: https://github.com/khw1031
-          </a>
-        </div>
+        {!hideContact && (
+          <div className="flex flex-col items-end">
+            <a href="mailto:khw1031@gmail.com" className="text-sm">
+              Email: khw1031@gmail.com
+            </a>
+            <a
+              target="_blank"
+              rel="noreferrer noopener"
+              href="https://github.com/khw1031"
+              className="text-sm"
+            >
+              Github: https://github.com/khw1031
+            </a>
+          </div>
+        )}
       </div>
     </>
   );

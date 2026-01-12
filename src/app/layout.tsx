@@ -8,8 +8,10 @@ import "@fontsource/noto-serif-kr/500.css";
 import "@fontsource/noto-serif-kr/700.css";
 import "./globals.css";
 import type { Metadata } from "next";
-import { Navbar } from "@/components/nav";
-import { Footer } from "@/components/footer";
+import {
+  ConditionalNavbar,
+  ConditionalFooter,
+} from "@/components/conditional-navbar";
 
 export const metadata: Metadata = {
   title: "-",
@@ -33,9 +35,9 @@ export default function RootLayout({
       </head>
       <body className="antialiased max-w-[768px] mt-8 mx-auto">
         <main className="flex-auto min-w-0 mt-6 flex flex-col px-4 lg:px-0">
-          <Navbar />
+          <ConditionalNavbar />
           {children}
-          <Footer />
+          <ConditionalFooter />
         </main>
       </body>
     </html>
