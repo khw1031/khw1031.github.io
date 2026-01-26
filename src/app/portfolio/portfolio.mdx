@@ -167,6 +167,38 @@
   </Section>
   <Section title="사이드 프로젝트">
     <div className="flex gap-4 flex-wrap flex-col items-start">
+      <Detail
+        title="ai-library"
+        url="https://github.com/khw1031/ai-library"
+        period="Claude Code 프롬프트 자산 라이브러리"
+        role="Open Source"
+        content={[
+          {
+            title: "프로젝트 개요",
+            description: [
+              "Claude Code 및 LLM 기반 도구를 위한 재사용 가능한 프롬프트 자산(Skills, Rules, Agents) 모음",
+              "Progressive Disclosure 원칙 기반 3단계 로드 모델로 LLM 컨텍스트 효율성 극대화",
+            ],
+          },
+          {
+            title: "주요 컴포넌트",
+            description: [
+              "Skills: feature-workflow, qa-workflow, plan-workflow 등 실무 검증된 워크플로우",
+              "Agents: task-master(병렬 태스크 오케스트레이터), code-reviewer(시니어 코드 리뷰어)",
+              "Rules: progressive-disclosure 등 코드베이스 전반 적용 가이드라인",
+            ],
+          },
+          {
+            title: "설계 원칙",
+            description: [
+              "3단계 Progressive Disclosure: 항상 로드(~100토큰) → 활성화 시(<5000토큰) → 요청 시(무제한)",
+              "컨텍스트 격리: 각 워크플로우 단계가 별도 대화 컨텍스트에서 실행",
+              "Human in the Loop: 다음 단계 진행 전 사용자 확인",
+              "Git 기반 히스토리: 각 단계 완료 시 커밋 체크포인트 생성",
+            ],
+          },
+        ]}
+      />
       <div className="flex gap-2 items-start">
         <Detail
           title="add-ai-tools"
