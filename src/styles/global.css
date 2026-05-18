@@ -9,6 +9,12 @@
 @import "@fontsource/geist-mono/600.css";
 @import "@kfonts/d2coding";
 
+/* Theme colors sourced from src/styles/themes/<name>.itermcolors,
+   compiled by `pnpm theme:gen` (also runs as prebuild). To switch
+   themes: replace the .itermcolors file under src/styles/themes/
+   and edit scripts/iterm-to-css.ts to point at it, then regenerate. */
+@import "./theme.generated.css";
+
 @plugin "@tailwindcss/typography";
 
 /* Exclude documentation and content markdown from utility scanning so
@@ -18,14 +24,17 @@
 @source not "../../docs/**/*.md";
 @source not "../content/**/*.md";
 
-@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
-
 @theme {
-  --color-background: #fafafa;
-  --color-foreground: #18181b;
-  --color-muted: #71717a;
-  --color-border: #e4e4e7;
-  --color-surface: #f4f4f5;
+  /* Color tokens are sourced from theme.generated.css imported above.
+     Values here are defensive fallbacks that match Darkmatrix's broad
+     palette; the imported :root block overrides them with the exact
+     values parsed from the .itermcolors file. Tailwind needs the names
+     declared here to generate utilities like bg-background. */
+  --color-background: #070c0e;
+  --color-foreground: #3e5715;
+  --color-muted: #333333;
+  --color-border: #006536;
+  --color-surface: #0f191c;
 
   --font-display:
     "Geist Mono", "D2Coding", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas,
@@ -37,16 +46,7 @@
 
 @layer base {
   :root {
-    color-scheme: light;
-  }
-
-  [data-theme="dark"] {
     color-scheme: dark;
-    --color-background: #0a0a0a;
-    --color-foreground: #fafafa;
-    --color-muted: #a1a1aa;
-    --color-border: #27272a;
-    --color-surface: #18181b;
   }
 
   html {

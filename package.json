@@ -19,7 +19,9 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "test:e2e": "playwright test",
-    "import:legacy": "tsx scripts/import-from-legacy.ts"
+    "import:legacy": "tsx scripts/import-from-legacy.ts",
+    "theme:gen": "tsx scripts/iterm-to-css.ts",
+    "prebuild": "tsx scripts/iterm-to-css.ts"
   },
   "dependencies": {
     "@fontsource/geist-mono": "^5.2.8",
