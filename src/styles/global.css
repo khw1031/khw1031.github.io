@@ -126,19 +126,19 @@
   text-decoration-thickness: 2px;
 }
 
-/* Code blocks blend with the surrounding text.
-   The entire site is already in a mono stack, so we drop borders,
-   rounding, and the iTerm Selection Color in favor of a very subtle
-   tint derived from the foreground. */
+/* Code blocks blend with the surrounding text. The whole site is in a
+   mono stack, so no border or rounding is needed — a faint gray tint
+   (derived from foreground so it works for any iterm2 theme) is enough
+   to mark code regions. */
 .prose :is(pre) {
-  background-color: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+  background-color: color-mix(in srgb, var(--color-foreground) 10%, transparent);
   color: var(--color-foreground);
   padding: 0.75em 1em;
   border-radius: 0;
   border: 0;
 }
 .prose :is(code) {
-  background-color: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+  background-color: color-mix(in srgb, var(--color-foreground) 10%, transparent);
   padding: 0 0.25em;
   border-radius: 0;
   border: 0;
