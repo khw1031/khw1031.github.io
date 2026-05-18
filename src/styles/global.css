@@ -30,11 +30,11 @@
      overrides them with the exact values parsed from the
      .itermcolors file. Tailwind needs the names declared here to
      generate utilities like bg-background. */
-  --color-background: #2c2b2b;
-  --color-foreground: #d5a200;
-  --color-muted: #686868;
-  --color-border: #c7c7c7;
-  --color-surface: #6b5b02;
+  --color-background: #feffff;
+  --color-foreground: #000000;
+  --color-muted: #464646;
+  --color-border: #98989d;
+  --color-surface: #b4d7ff;
 
   --font-display:
     "Geist Mono", "D2Coding", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas,
@@ -45,10 +45,6 @@
 }
 
 @layer base {
-  :root {
-    color-scheme: dark;
-  }
-
   html {
     font-family: var(--font-display);
     font-size: 13px;

@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const SOURCE = resolve('src/styles/themes/AppleClassic.itermcolors');
+const SOURCE = resolve('src/styles/themes/AppleSystemColorsLight.itermcolors');
 const OUT = resolve('src/styles/theme.generated.css');
 
 interface RgbColor {
@@ -40,6 +40,12 @@ function toHex(c: RgbColor): string {
   return `#${h(c.r)}${h(c.g)}${h(c.b)}`;
 }
 
+/** sRGB relative luminance → 'light' if bg is bright, else 'dark'. */
+function detectColorScheme(bg: RgbColor): 'light' | 'dark' {
+  const luminance = 0.2126 * bg.r + 0.7152 * bg.g + 0.0722 * bg.b;
+  return luminance > 0.5 ? 'light' : 'dark';
+}
+
 function slugify(name: string): string {
   return name
     .toLowerCase()
@@ -62,12 +68,16 @@ function main(): void {
   const colors = parseItermColors(xml);
 
   const sourceRel = SOURCE.replace(`${resolve('.')}/`, '');
+  const bg = colors['Background Color'];
+  const colorScheme = bg ? detectColorScheme(bg) : 'dark';
+
   const lines: string[] = [
     `/* Generated from ${sourceRel}.`,
     '   Do not edit by hand. Run `pnpm theme:gen` to regenerate after',
     '   swapping the source .itermcolors file. */',
     '',
     ':root {',
+    `  color-scheme: ${colorScheme};`,
   ];
 
   for (const [cssVar, itermKey] of TOKEN_MAP) {
