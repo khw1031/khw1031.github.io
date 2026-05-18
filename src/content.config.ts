@@ -9,6 +9,7 @@ import {
   noteSchema,
   portfolioSchema,
   postSchema,
+  readAndWriteSchema,
 } from './content/schemas';
 
 const md = (folder: string) => ({
@@ -26,6 +27,10 @@ export const collections = {
   'cover-letter': defineCollection({
     loader: glob(md('cover-letter')),
     schema: coverLetterSchema,
+  }),
+  'read-and-write': defineCollection({
+    loader: glob(md('read-and-write')),
+    schema: readAndWriteSchema,
   }),
 };
 

@@ -18,7 +18,8 @@
     "format:check": "biome format .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test"
+    "test:e2e": "playwright test",
+    "import:legacy": "tsx scripts/import-from-legacy.ts"
   },
   "dependencies": {
     "astro": "^6.3.3",
@@ -34,10 +35,12 @@
     "@biomejs/biome": "^2.4.15",
     "@playwright/test": "^1.60.0",
     "@types/node": "^25.8.0",
+    "gray-matter": "^4.0.3",
     "happy-dom": "^20.9.0",
     "rehype-stringify": "^10.0.1",
     "remark-parse": "^11.0.0",
     "remark-rehype": "^11.1.2",
+    "tsx": "^4.22.1",
     "typescript": "^6.0.3",
     "unified": "^11.0.5",
     "vitest": "^4.1.6"
