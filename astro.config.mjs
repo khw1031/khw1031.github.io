@@ -1,3 +1,4 @@
+import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
 import { rehypePlugins, remarkPlugins, shikiConfig } from './src/lib/markdown-plugins.ts';
 
@@ -9,5 +10,8 @@ export default defineConfig({
     remarkPlugins,
     rehypePlugins,
     shikiConfig,
+  },
+  vite: {
+    plugins: [tailwindcss()],
   },
 });

@@ -1,0 +1,37 @@
+---
+import { THEME_STORAGE_KEY } from '../lib/theme';
+
+const script = `
+(() => {
+  const root = document.documentElement;
+  const btn = document.querySelector('[data-theme-toggle]');
+  if (!btn) return;
+  const labelLight = btn.querySelector('[data-when="light"]');
+  const labelDark = btn.querySelector('[data-when="dark"]');
+  const sync = () => {
+    const theme = root.getAttribute('data-theme') === 'dark' ? 'dark' : 'light';
+    btn.setAttribute('aria-pressed', String(theme === 'dark'));
+    if (labelLight) labelLight.hidden = theme === 'dark';
+    if (labelDark) labelDark.hidden = theme === 'light';
+  };
+  btn.addEventListener('click', () => {
+    const next = root.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+    root.setAttribute('data-theme', next);
+    try { localStorage.setItem(${JSON.stringify(THEME_STORAGE_KEY)}, next); } catch (_) {}
+    sync();
+  });
+  sync();
+})();
+`.trim();
+---
+
+<button
+  type="button"
+  data-theme-toggle
+  aria-label="Toggle color theme"
+  class="text-muted hover:text-foreground transition-colors text-sm"
+>
+  <span data-when="light">Dark mode</span>
+  <span data-when="dark">Light mode</span>
+</button>
+<script is:inline set:html={script} />
