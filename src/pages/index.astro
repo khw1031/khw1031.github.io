@@ -1,0 +1,13 @@
+---
+import Base from '../layouts/Base.astro';
+
+const builtAt = new Date().toISOString();
+---
+
+<Base title="khw1031" description="개발 노트와 이력을 정리하는 공간. Astro 기반으로 재구성 중.">
+  <h1>khw1031</h1>
+  <p>Astro 기반 정적 사이트로 재구성 중입니다.</p>
+  <p>
+    <small>Build at <time datetime={builtAt}>{builtAt}</time></small>
+  </p>
+</Base>
