@@ -26,15 +26,15 @@
 
 @theme {
   /* Color tokens are sourced from theme.generated.css imported above.
-     Values here are defensive fallbacks that match Darkmatrix's broad
-     palette; the imported :root block overrides them with the exact
-     values parsed from the .itermcolors file. Tailwind needs the names
-     declared here to generate utilities like bg-background. */
-  --color-background: #070c0e;
-  --color-foreground: #3e5715;
-  --color-muted: #333333;
-  --color-border: #006536;
-  --color-surface: #0f191c;
+     Values here are defensive fallbacks; the imported :root block
+     overrides them with the exact values parsed from the
+     .itermcolors file. Tailwind needs the names declared here to
+     generate utilities like bg-background. */
+  --color-background: #2c2b2b;
+  --color-foreground: #d5a200;
+  --color-muted: #686868;
+  --color-border: #c7c7c7;
+  --color-surface: #6b5b02;
 
   --font-display:
     "Geist Mono", "D2Coding", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas,
