@@ -94,45 +94,50 @@
   --tw-prose-invert-captions: var(--color-muted);
 }
 
-/* Heading hierarchy is conveyed by a stepped background tint rather
-   than by large font-size jumps. The whole stack is mono+sans hybrid
-   and a HN-style site looks tidier when sizes stay close to body. */
+/* All headings: nearly body-size, weight does the differentiation;
+   markdown body headings additionally get a background tint via the
+   :has(> a) rules below. Bare h1s (page titles like PostLayout's
+   article title or the home brand) intentionally stay plain. */
 .prose :is(h1, h2, h3, h4) {
   font-weight: 600;
   line-height: 1.3;
+  font-size: 1rem;
+}
+.prose :is(h1) {
+  font-size: 1.05rem;
+  margin-top: 0;
+  margin-bottom: 0.5em;
+}
+.prose :is(h2) {
+  margin-top: 1.5em;
+  margin-bottom: 0.4em;
+}
+.prose :is(h3) {
+  margin-top: 1.25em;
+  margin-bottom: 0.3em;
 }
 
-/* rehype-autolink-headings wraps each markdown heading in <a href="#slug">.
-   Hide the underline so the heading reads as text; the anchor still
-   works for fragment links. */
+/* rehype-autolink-headings wraps each markdown heading in
+   <a href="#slug">. Strip the underline; keep the click target. */
 .prose :is(h1, h2, h3, h4) > a {
   color: inherit;
   text-decoration: none;
 }
 
-.prose :is(h1) {
-  font-size: 1.1rem;
-  background-color: color-mix(in srgb, var(--color-foreground) 20%, transparent);
+/* Markdown-body headings (wrapped by autolink) get a stepped tint.
+   Bare h1s (page titles) do NOT match :has(> a) and stay plain. */
+.prose :is(h1):has(> a) {
+  background-color: color-mix(in srgb, var(--color-foreground) 18%, transparent);
   padding: 0.2em 0.4em;
   margin-top: 1.5em;
-  margin-bottom: 0.5em;
 }
-.prose :is(h2) {
-  font-size: 1.05rem;
+.prose :is(h2):has(> a) {
   background-color: color-mix(in srgb, var(--color-foreground) 12%, transparent);
   padding: 0.2em 0.4em;
-  margin-top: 1.5em;
-  margin-bottom: 0.5em;
 }
-.prose :is(h3) {
-  font-size: 1rem;
+.prose :is(h3):has(> a) {
   background-color: color-mix(in srgb, var(--color-foreground) 6%, transparent);
   padding: 0.2em 0.4em;
-  margin-top: 1.25em;
-  margin-bottom: 0.4em;
-}
-.prose :is(h4) {
-  font-size: 1rem;
 }
 
 .prose :is(a) {
@@ -149,7 +154,10 @@
 /* Code blocks blend with the surrounding text. The whole site is in a
    mono stack, so no border or rounding is needed — a faint gray tint
    (derived from foreground so it works for any iterm2 theme) is enough
-   to mark code regions. */
+   to mark code regions. Shiki is configured with defaultColor: false
+   in src/lib/markdown-plugins.ts so it emits --shiki-* CSS variables
+   instead of an inline background-color; that lets this rule win
+   without !important. */
 .prose :is(pre) {
   background-color: color-mix(in srgb, var(--color-foreground) 10%, transparent);
   color: var(--color-foreground);
