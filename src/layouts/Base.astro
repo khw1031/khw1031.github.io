@@ -1,15 +1,17 @@
 ---
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
+import JsonLd from '../components/JsonLd.astro';
 import '../styles/global.css';
 
 interface Props {
   title: string;
   description?: string;
   ogImage?: string;
+  jsonLd?: Record<string, unknown> | Array<Record<string, unknown>>;
 }
 
-const { title, description, ogImage } = Astro.props;
+const { title, description, ogImage, jsonLd } = Astro.props;
 const siteName = 'thnkr';
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
 const fullOgImage = ogImage ? new URL(ogImage, Astro.site).toString() : null;
@@ -37,6 +39,10 @@ const fullOgImage = ogImage ? new URL(ogImage, Astro.site).toString() : null;
     <meta name="twitter:title" content={title} />
     {description && <meta name="twitter:description" content={description} />}
     {fullOgImage && <meta name="twitter:image" content={fullOgImage} />}
+
+    <link rel="alternate" type="application/rss+xml" title="thnkr" href="/rss.xml" />
+
+    {jsonLd && <JsonLd data={jsonLd} />}
   </head>
   <body class="min-h-screen flex flex-col">
     <Header />

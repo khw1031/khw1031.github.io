@@ -126,21 +126,26 @@
   text-decoration-thickness: 2px;
 }
 
+/* Code blocks blend with the surrounding text.
+   The entire site is already in a mono stack, so we drop borders,
+   rounding, and the iTerm Selection Color in favor of a very subtle
+   tint derived from the foreground. */
 .prose :is(pre) {
-  border: 1px solid var(--color-border);
-  background-color: var(--color-surface);
+  background-color: color-mix(in srgb, var(--color-foreground) 5%, transparent);
   color: var(--color-foreground);
+  padding: 0.75em 1em;
+  border-radius: 0;
+  border: 0;
 }
 .prose :is(code) {
-  border: 1px solid var(--color-border);
-  padding: 0.1em 0.3em;
-  border-radius: 0.2em;
-  background-color: var(--color-surface);
+  background-color: color-mix(in srgb, var(--color-foreground) 5%, transparent);
+  padding: 0 0.25em;
+  border-radius: 0;
+  border: 0;
   font-weight: inherit;
-  font-size: 0.95em;
+  font-size: inherit;
 }
 .prose :is(pre) :is(code) {
-  border: none;
   background-color: transparent;
   padding: 0;
   font-size: inherit;

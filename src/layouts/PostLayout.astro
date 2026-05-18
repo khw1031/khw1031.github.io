@@ -1,6 +1,7 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import { type ListableCollection, formatDate } from '../lib/collections';
+import { blogPostingJsonLd } from '../lib/jsonld';
 import Base from './Base.astro';
 
 interface Props {
@@ -11,9 +12,19 @@ interface Props {
 const { entry, readingMinutes } = Astro.props;
 const { data } = entry;
 const description = data.description ?? data.summary ?? '';
+const siteUrl = Astro.site?.toString() ?? 'https://khw1031.github.io/';
+const pageUrl = new URL(Astro.url.pathname, siteUrl).toString();
+const jsonLd = blogPostingJsonLd({
+  title: data.title,
+  description: description || undefined,
+  pubDate: data.pubDate,
+  updatedDate: data.updatedDate,
+  url: pageUrl,
+  siteUrl,
+});
 ---
 
-<Base title={`${data.title} — thnkr`} description={description}>
+<Base title={`${data.title} — thnkr`} description={description} jsonLd={jsonLd}>
   <article class="prose max-w-none">
     <h1>{data.title}</h1>
     <div class="not-prose text-sm text-muted mb-6">

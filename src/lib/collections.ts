@@ -35,7 +35,7 @@ function entryToItem(
   entry: CollectionEntry<ListableCollection>,
 ): PostListItem {
   return {
-    href: `/${collection}/${entry.id}`,
+    href: `/${collection}/${entry.id}/`,
     title: entry.data.title,
     pubDate: entry.data.pubDate,
     readingMinutes: readingTime(entryBody(entry)).minutes,
