@@ -4,6 +4,8 @@ import { COLLECTION_LABELS, COLLECTION_ORDER, type ListableCollection } from '..
 const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const isActive = (collection: ListableCollection): boolean =>
   pathname === `/${collection}` || pathname.startsWith(`/${collection}/`);
+
+const href = (collection: ListableCollection): string => `/${collection}/`;
 ---
 
 <header class="border-b border-border">
@@ -15,7 +17,7 @@ const isActive = (collection: ListableCollection): boolean =>
           <>
             {idx > 0 && <span aria-hidden="true">|</span>}
             <a
-              href={`/${c}`}
+              href={href(c)}
               class:list={[
                 'hover:text-foreground transition-colors',
                 isActive(c) && 'text-foreground',

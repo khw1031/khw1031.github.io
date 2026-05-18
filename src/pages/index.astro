@@ -2,11 +2,14 @@
 import PostList from '../components/PostList.astro';
 import Base from '../layouts/Base.astro';
 import { getRecentAcrossCollections } from '../lib/collections';
+import { personJsonLd, websiteJsonLd } from '../lib/jsonld';
 
 const recent = await getRecentAcrossCollections(10);
+const siteUrl = Astro.site?.toString() ?? 'https://khw1031.github.io/';
+const jsonLd = [websiteJsonLd({ siteUrl }), personJsonLd({ siteUrl })];
 ---
 
-<Base title="thnkr" description="개발 노트와 이력을 정리하는 공간.">
+<Base title="thnkr" description="개발 노트와 이력을 정리하는 공간." jsonLd={jsonLd}>
   <section class="prose max-w-none">
     <h1>thnkr</h1>
     <p>개발 노트, 메모, 이력을 정리하는 공간입니다.</p>

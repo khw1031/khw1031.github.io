@@ -24,6 +24,8 @@
     "prebuild": "tsx scripts/iterm-to-css.ts"
   },
   "dependencies": {
+    "@astrojs/rss": "^4.0.18",
+    "@astrojs/sitemap": "^3.7.2",
     "@fontsource/geist-mono": "^5.2.8",
     "@kfonts/d2coding": "^0.2.0",
     "astro": "^6.3.3",
