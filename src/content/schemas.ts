@@ -24,6 +24,7 @@ export const csSchema = baseFrontmatter;
 export const logSchema = baseFrontmatter;
 export const cvSchema = baseFrontmatter;
 export const coverLetterSchema = baseFrontmatter;
+export const readAndWriteSchema = baseFrontmatter;
 
 export const portfolioSchema = baseFrontmatter.extend({
   role: z.string().optional(),
