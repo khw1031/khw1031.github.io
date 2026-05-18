@@ -1,7 +1,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import { readingTime } from './reading-time';
 
-export type ListableCollection = 'posts' | 'notes' | 'cs' | 'log' | 'read-and-write';
+export type ListableCollection = 'posts' | 'read-and-write';
 
 export interface PostListItem {
   href: string;
@@ -12,19 +12,10 @@ export interface PostListItem {
 
 export const COLLECTION_LABELS: Record<ListableCollection, string> = {
   posts: 'Posts',
-  notes: 'Notes',
-  cs: 'CS',
-  log: 'Log',
   'read-and-write': 'Read & Write',
 };
 
-export const COLLECTION_ORDER: ListableCollection[] = [
-  'posts',
-  'notes',
-  'cs',
-  'log',
-  'read-and-write',
-];
+export const COLLECTION_ORDER: ListableCollection[] = ['posts', 'read-and-write'];
 
 function entryBody(entry: CollectionEntry<ListableCollection>): string {
   return 'body' in entry && typeof entry.body === 'string' ? entry.body : '';

@@ -17,27 +17,6 @@ const COLLECTIONS: CollectionSpec[] = [
     sampleTitleIncludes: '회고',
   },
   {
-    name: 'notes',
-    path: '/notes/',
-    expectedCount: 3,
-    sampleSlug: '/notes/2024-fp-js/',
-    sampleTitleIncludes: '함수형',
-  },
-  {
-    name: 'cs',
-    path: '/cs/',
-    expectedCount: 2,
-    sampleSlug: '/cs/hash/',
-    sampleTitleIncludes: 'Hash',
-  },
-  {
-    name: 'log',
-    path: '/log/',
-    expectedCount: 2,
-    sampleSlug: '/log/20240617/',
-    sampleTitleIncludes: '유튜브',
-  },
-  {
     name: 'read-and-write',
     path: '/read-and-write/',
     expectedCount: 5,

@@ -19,9 +19,6 @@ export const baseFrontmatter = z.object({
 });
 
 export const postSchema = baseFrontmatter;
-export const noteSchema = baseFrontmatter;
-export const csSchema = baseFrontmatter;
-export const logSchema = baseFrontmatter;
 export const cvSchema = baseFrontmatter;
 export const coverLetterSchema = baseFrontmatter;
 export const readAndWriteSchema = baseFrontmatter;
