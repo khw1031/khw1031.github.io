@@ -1,11 +1,29 @@
 ---
+import Footer from '../components/Footer.astro';
+import Header from '../components/Header.astro';
+import { THEME_STORAGE_KEY } from '../lib/theme';
+import '../styles/global.css';
+
 interface Props {
   title: string;
   description?: string;
+  ogImage?: string;
 }
 
-const { title, description } = Astro.props;
+const { title, description, ogImage } = Astro.props;
+const siteName = 'khw1031';
 const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+const fullOgImage = ogImage ? new URL(ogImage, Astro.site).toString() : null;
+
+const noFlashScript = `
+try {
+  const stored = localStorage.getItem(${JSON.stringify(THEME_STORAGE_KEY)});
+  const isTheme = (v) => v === 'light' || v === 'dark';
+  const system = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = isTheme(stored) ? stored : (system ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+} catch (_) {}
+`.trim();
 ---
 
 <!doctype html>
@@ -13,16 +31,31 @@ const canonical = new URL(Astro.url.pathname, Astro.site).toString();
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
     <title>{title}</title>
     {description && <meta name="description" content={description} />}
     <link rel="canonical" href={canonical} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={siteName} />
+    <meta property="og:title" content={title} />
+    {description && <meta property="og:description" content={description} />}
+    <meta property="og:url" content={canonical} />
+    {fullOgImage && <meta property="og:image" content={fullOgImage} />}
+
+    <meta name="twitter:card" content={fullOgImage ? 'summary_large_image' : 'summary'} />
+    <meta name="twitter:title" content={title} />
+    {description && <meta name="twitter:description" content={description} />}
+    {fullOgImage && <meta name="twitter:image" content={fullOgImage} />}
+
+    <script is:inline set:html={noFlashScript} />
   </head>
-  <body>
-    <main>
+  <body class="min-h-screen flex flex-col">
+    <Header />
+    <main class="flex-1 w-full max-w-3xl mx-auto px-4 py-12">
       <slot />
     </main>
-    <footer>
-      <small>© {new Date().getFullYear()} khw1031</small>
-    </footer>
+    <Footer />
   </body>
 </html>
