@@ -21,8 +21,8 @@
 
 | 항목 | HN | THNKR |
 | --- | --- | --- |
-| 헤더 색 | 오렌지 #ff6600 바 | iTerm2 `Darkmatrix` 팔레트 (현재 `#070c0e` near-black) |
-| 배경 | 크림 #f6f6ef | iTerm2 `Background Color` (현재 `#070c0e`) |
+| 헤더 색 | 오렌지 #ff6600 바 | iTerm2 `Apple Classic` 팔레트 (현재 `#2c2b2b` warm dark gray) |
+| 배경 | 크림 #f6f6ef | iTerm2 `Background Color` (현재 `#2c2b2b`) |
 | 폰트 | Verdana 10pt | **코딩(mono) 스택** — SF Mono / Menlo / D2Coding / Noto Sans Mono CJK KR |
 | 본문 폭 | 거의 풀폭 | `max-w-3xl` 단일 컬럼 |
 | 업보트 화살표 | `▲` 텍스트 | 없음 (개인 블로그라 투표가 없다) |
@@ -55,7 +55,7 @@ Agentation은 위 원칙을 자동화한다: 라이브 사이트에서 요소를
 1. **Density over comfort** — 가독성을 깨지 않는 선에서 한 화면에 더 많이.
 2. **Text-first** — 의미는 단어와 시맨틱 HTML로. 아이콘·이모지·일러스트 없음.
 3. **Minimal chrome** — 카드, 큰 라운드, 박스 그림자, 그라데이션, 블러 배경 금지.
-4. **Single iTerm2-sourced palette** — 컬러는 `src/styles/themes/<name>.itermcolors`를 단일 출처로 사용. 빌드 시 `pnpm theme:gen`이 CSS 변수로 변환. 라이트/다크 토글 없이 **단일 테마**. 현재 채택: `Darkmatrix`.
+4. **Single iTerm2-sourced palette** — 컬러는 `src/styles/themes/<name>.itermcolors`를 단일 출처로 사용. 빌드 시 `pnpm theme:gen`이 CSS 변수로 변환. 라이트/다크 토글 없이 **단일 테마**. 현재 채택: `Apple Classic` (amber-on-dark, 클래식 모니터 미학).
 5. **Mono-first typography** — 본문·헤딩·메타 모두 코딩 폰트. 라틴 = Geist Mono, 한글 = D2 Coding (둘 다 self-hosted). 의도된 "터미널/CLI" 미학.
 6. **No motion** — `transition`/`animation` 사용 금지. 단, 텍스트 색 전환(`transition-colors`)과 포커스 링은 허용.
 7. **Predictable single column** — 모든 페이지 본문 최대 폭 동일(`max-w-3xl` ≈ 48rem). 모바일/데스크톱 동일 레이아웃, 폰트 크기만 미세 조정.
@@ -67,17 +67,17 @@ Agentation은 위 원칙을 자동화한다: 라이브 사이트에서 요소를
 
 ### 컬러 — 단일 테마, iTerm2에서 생성
 
-소스: `src/styles/themes/Darkmatrix.itermcolors`. 빌드 직전 `scripts/iterm-to-css.ts`가 파싱해 `src/styles/theme.generated.css`로 변환. 그 결과 `:root`에 정의되어 모든 페이지에 적용.
+소스: `src/styles/themes/AppleClassic.itermcolors`. 빌드 직전 `scripts/iterm-to-css.ts`가 파싱해 `src/styles/theme.generated.css`로 변환. 그 결과 `:root`에 정의되어 모든 페이지에 적용.
 
 | Token | Source iTerm key | Current value | 용도 |
 | --- | --- | --- | --- |
-| `--color-background` | `Background Color` | `#070c0e` | 페이지 배경 |
-| `--color-foreground` | `Foreground Color` | `#3e5715` | 본문 텍스트 (낮은 contrast — Darkmatrix 의도) |
-| `--color-muted` | `Ansi 8 Color` | `#333333` | 메타·캡션·비활성 텍스트 |
-| `--color-border` | `Ansi 7 Color` | `#006536` | 보더, 구분선 |
-| `--color-surface` | `Selection Color` | `#0f191c` | 코드블록 / 인라인 코드 배경 |
-| `--color-accent` | `Cursor Color` | `#9fa86e` | (선택) 액센트 — 본 디자인에서는 사용 안 함 |
-| `--color-link` | `Link Color` | `#00cd6d` | (선택) 링크 색 — 본 디자인은 foreground+밑줄 사용 |
+| `--color-background` | `Background Color` | `#2c2b2b` | 페이지 배경 (warm dark gray) |
+| `--color-foreground` | `Foreground Color` | `#d5a200` | 본문 텍스트 (Apple ][ amber CRT 미학) |
+| `--color-muted` | `Ansi 8 Color` | `#686868` | 메타·캡션·비활성 텍스트 |
+| `--color-border` | `Ansi 7 Color` | `#c7c7c7` | 보더, 구분선 (대비가 강한 light gray — 매핑 조정 후보) |
+| `--color-surface` | `Selection Color` | `#6b5b02` | 코드블록 / 인라인 코드 배경 (dark amber) |
+| `--color-accent` | `Cursor Color` | `#c7c7c7` | (선택) 액센트 — 본 디자인에서는 사용 안 함 |
+| `--color-link` | `Link Color` | `#005cbb` | (선택) 링크 색 — 본 디자인은 foreground+밑줄 사용 |
 
 전체 iTerm 팔레트는 `--iterm-*` 변수로도 노출되어 추후 액센트가 필요해지면 즉시 참조 가능.
 

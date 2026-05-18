@@ -1,7 +1,7 @@
 import { readFileSync, writeFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-const SOURCE = resolve('src/styles/themes/Darkmatrix.itermcolors');
+const SOURCE = resolve('src/styles/themes/AppleClassic.itermcolors');
 const OUT = resolve('src/styles/theme.generated.css');
 
 interface RgbColor {
@@ -61,8 +61,9 @@ function main(): void {
   const xml = readFileSync(SOURCE, 'utf-8');
   const colors = parseItermColors(xml);
 
+  const sourceRel = SOURCE.replace(`${resolve('.')}/`, '');
   const lines: string[] = [
-    '/* Generated from src/styles/themes/Darkmatrix.itermcolors.',
+    `/* Generated from ${sourceRel}.`,
     '   Do not edit by hand. Run `pnpm theme:gen` to regenerate after',
     '   swapping the source .itermcolors file. */',
     '',

@@ -1,45 +1,44 @@
-/* Generated from src/styles/themes/Darkmatrix.itermcolors.
+/* Generated from src/styles/themes/AppleClassic.itermcolors.
    Do not edit by hand. Run `pnpm theme:gen` to regenerate after
    swapping the source .itermcolors file. */
 
 :root {
-  --color-background: #070c0e;
-  --color-foreground: #3e5715;
-  --color-muted: #333333;
-  --color-border: #006536;
-  --color-surface: #0f191c;
-  --color-accent: #9fa86e;
-  --color-link: #00cd6d;
+  --color-background: #2c2b2b;
+  --color-foreground: #d5a200;
+  --color-muted: #686868;
+  --color-border: #c7c7c7;
+  --color-surface: #6b5b02;
+  --color-accent: #c7c7c7;
+  --color-link: #005cbb;
 }
 
 /* Full iTerm2 palette dump (referenceable) */
 :root {
-  --iterm-ansi-0-color: #091013;
-  --iterm-ansi-1-color: #006536;
-  --iterm-ansi-10-color: #90d762;
-  --iterm-ansi-11-color: #e2e500;
-  --iterm-ansi-12-color: #46d8b8;
-  --iterm-ansi-13-color: #4a3059;
-  --iterm-ansi-14-color: #12545a;
-  --iterm-ansi-15-color: #006536;
-  --iterm-ansi-2-color: #6fa64c;
-  --iterm-ansi-3-color: #7e8000;
-  --iterm-ansi-4-color: #2c9a84;
-  --iterm-ansi-5-color: #452d53;
-  --iterm-ansi-6-color: #114d53;
-  --iterm-ansi-7-color: #006536;
-  --iterm-ansi-8-color: #333333;
-  --iterm-ansi-9-color: #00733d;
-  --iterm-background-color: #070c0e;
+  --iterm-ansi-0-color: #000000;
+  --iterm-ansi-1-color: #c91b00;
+  --iterm-ansi-10-color: #5ffa68;
+  --iterm-ansi-11-color: #fffc67;
+  --iterm-ansi-12-color: #6871ff;
+  --iterm-ansi-13-color: #ff77ff;
+  --iterm-ansi-14-color: #60fdff;
+  --iterm-ansi-15-color: #ffffff;
+  --iterm-ansi-2-color: #00c200;
+  --iterm-ansi-3-color: #c7c400;
+  --iterm-ansi-4-color: #0225c7;
+  --iterm-ansi-5-color: #ca30c7;
+  --iterm-ansi-6-color: #00c5c7;
+  --iterm-ansi-7-color: #c7c7c7;
+  --iterm-ansi-8-color: #686868;
+  --iterm-ansi-9-color: #ff6e67;
+  --iterm-background-color: #2c2b2b;
   --iterm-badge-color: #ff2600;
-  --iterm-bold-color: #00cd6d;
-  --iterm-cursor-color: #9fa86e;
-  --iterm-cursor-guide-color: #353b3d;
-  --iterm-cursor-text-color: #00ff87;
-  --iterm-foreground-color: #3e5715;
-  --iterm-link-color: #00cd6d;
-  --iterm-selected-text-color: #00ff87;
-  --iterm-selection-color: #0f191c;
-  --iterm-tab-color: #2a2727;
-  --iterm-underline-color: #302c2c;
+  --iterm-bold-color: #ffffff;
+  --iterm-cursor-color: #c7c7c7;
+  --iterm-cursor-guide-color: #b3ecff;
+  --iterm-cursor-text-color: #ffffff;
+  --iterm-foreground-color: #d5a200;
+  --iterm-link-color: #005cbb;
+  --iterm-selected-text-color: #67e000;
+  --iterm-selection-color: #6b5b02;
+  --iterm-tab-color: #0020ff;
 }
