@@ -106,9 +106,44 @@
 - [ ] 3.4 Header/Nav/Footer 컴포넌트
 - [ ] 3.5 `prose` 스타일
 
+### Phase 3.6 ⭐ DESIGN.md 초기화 (Hacker News 디자인 철학)
+
+**위치**: `DESIGN.md` (저장소 루트). 이 문서는 이후 모든 UI 결정의 단일 출처(SoT)이며, Phase 4 이후 작업은 이 문서를 참조한다.
+
+**참고**: https://news.ycombinator.com/ — 정보 밀도, 텍스트 우선, 시스템 폰트, 단일 액센트 컬러, 무애니메이션, 카드/그림자/그라데이션 없음, 아이콘 없음.
+
+- [ ] 3.6.1 **철학 / 원칙** 섹션
+  - Density over comfort — 한 화면에 최대한 많은 컨텐츠 (적정 가독성 유지하는 선에서)
+  - Text-first — 아이콘/이모지/장식 요소 없음. 의미는 단어와 시맨틱 HTML로 전달
+  - Minimal chrome — 카드, 박스 그림자, 그라데이션, 라운드 코너 큰 값 금지
+  - One accent color — 링크/액션에만 단일 액센트(현 `--color-accent`). 그 외는 회색 계조
+  - System / web-safe font stack — 한글: Pretendard 또는 시스템; 영문/숫자: 시스템 sans; 코드: 시스템 mono
+  - No motion — `transition`/`animation` 금지(접근성/포커스 상태는 예외)
+  - Predictable layout — 단일 컬럼, 좁은 본문 폭(현 `max-w-3xl` 그대로 유지 후보)
+- [ ] 3.6.2 **토큰 표** — 현 `src/styles/global.css`의 `@theme` 값과 매핑하고 조정 필요 사항 식별
+  - 컬러: background, foreground, muted, accent, border, surface (HN 풍으로 채도/대비 검토)
+  - 타이포: base font-size (모바일/데스크톱), 라인하이트, 헤딩 스케일 (큰 헤딩 지양)
+  - 스페이싱: 단단한 종축 리듬(작은 gap 위주), 큰 여백 지양
+- [ ] 3.6.3 **컴포넌트 가이드**
+  - Header: 얇은 한 줄(브랜드 + 토글), 보더 1px
+  - Nav: 텍스트 링크만, 현재 위치는 텍스트 색만 변경 (밑줄/박스 X)
+  - 글 목록 줄: `title · pubDate · reading-time` 형태의 한 줄, 카드 X
+  - 본문 prose: 헤딩 1.25× 정도 스케일, 코드블록 보더 1px, 인용은 좌측 보더 + 회색
+  - 링크: 액센트 컬러 + 호버 시 밑줄(또는 항상 밑줄)
+  - 메타: 회색 작은 텍스트
+- [ ] 3.6.4 **안티패턴 목록** — 명시적으로 금지: 박스 섀도우 lg/xl, blur 배경, 그라데이션, 큰 라운드(rounded-2xl+), 큰 헤더 히어로, 회전/스케일 트랜스폼, 페이드/슬라이드 인 애니메이션, 이모지 장식, 이미지 배경, hover 시 확대
+- [ ] 3.6.5 **현 Phase 3 결과물 검토** — DESIGN.md 확정 후 충돌 지점 식별 → 토큰/컴포넌트 조정 별도 커밋 (예: header padding 줄임, footer 단순화, prose 헤딩 스케일 축소)
+- [ ] 3.6.6 **테스트 가능한 항목** (선택)
+  - dist HTML 정적 분석으로 금지 클래스 미사용 보장 (`tests/design-guard.test.ts`: `class="*shadow-lg*"` 같은 패턴 0건)
+  - Lighthouse Accessibility ≥95 임계는 Phase 9에서 강제
+
+**완료 정의**: DESIGN.md 푸시 + 충돌 항목 정리 커밋이 라이브 반영된 상태. 이후 Phase 4부터 모든 UI PR은 본 문서를 인용한다.
+
 ---
 
 ## Phase 4. 페이지/라우트
+
+> **선결 조건**: Phase 3.6 `DESIGN.md` 머지 완료. 모든 페이지 구현은 본 문서의 원칙·토큰·컴포넌트 가이드를 따른다.
 
 각 페이지 작업 단위 = **(1) 라우트 E2E 작성 → (2) 구현 → (3) 리팩터**.
 

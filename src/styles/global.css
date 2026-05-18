@@ -1,15 +1,21 @@
 @import "tailwindcss";
 @plugin "@tailwindcss/typography";
 
+/* Exclude documentation and content markdown from utility scanning so
+   class names mentioned in anti-pattern lists (DESIGN.md) do not get
+   generated as actual utilities. */
+@source not "../../*.md";
+@source not "../../docs/**/*.md";
+@source not "../content/**/*.md";
+
 @custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
 
 @theme {
   --color-background: #fafafa;
   --color-foreground: #18181b;
   --color-muted: #71717a;
-  --color-accent: #2563eb;
   --color-border: #e4e4e7;
-  --color-surface: #ffffff;
+  --color-surface: #f4f4f5;
 
   --font-display:
     "Pretendard Variable", "Pretendard", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
@@ -27,7 +33,6 @@
     --color-background: #0a0a0a;
     --color-foreground: #fafafa;
     --color-muted: #a1a1aa;
-    --color-accent: #60a5fa;
     --color-border: #27272a;
     --color-surface: #18181b;
   }
@@ -40,5 +45,64 @@
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
+  }
+
+  .prose,
+  .prose-invert {
+    --tw-prose-body: var(--color-foreground);
+    --tw-prose-headings: var(--color-foreground);
+    --tw-prose-links: var(--color-foreground);
+    --tw-prose-bold: var(--color-foreground);
+    --tw-prose-code: var(--color-foreground);
+    --tw-prose-pre-bg: var(--color-surface);
+    --tw-prose-pre-code: var(--color-foreground);
+    --tw-prose-quotes: var(--color-muted);
+    --tw-prose-quote-borders: var(--color-border);
+    --tw-prose-borders: var(--color-border);
+    --tw-prose-hr: var(--color-border);
+    --tw-prose-bullets: var(--color-muted);
+    --tw-prose-counters: var(--color-muted);
+    --tw-prose-captions: var(--color-muted);
+  }
+
+  .prose :is(h1, h2, h3) {
+    font-weight: 600;
+  }
+  .prose :is(h1) {
+    font-size: 1.5rem;
+  }
+  .prose :is(h2) {
+    font-size: 1.25rem;
+  }
+  .prose :is(h3) {
+    font-size: 1.125rem;
+  }
+
+  .prose :is(a) {
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    text-decoration-thickness: 1px;
+  }
+  .prose :is(a):hover {
+    text-decoration-thickness: 2px;
+  }
+
+  .prose :is(pre) {
+    border: 1px solid var(--color-border);
+  }
+  .prose :is(code) {
+    border: 1px solid var(--color-border);
+    padding: 0.1em 0.3em;
+    border-radius: 0.2em;
+    background-color: var(--color-surface);
+  }
+  .prose :is(pre) :is(code) {
+    border: none;
+    background-color: transparent;
+    padding: 0;
+  }
+  .prose :is(code)::before,
+  .prose :is(code)::after {
+    content: "";
   }
 }
