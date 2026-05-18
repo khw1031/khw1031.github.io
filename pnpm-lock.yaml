@@ -11,6 +11,9 @@ importers:
       astro:
         specifier: ^6.3.3
         version: 6.3.3(@types/node@25.8.0)(rollup@4.60.4)(yaml@2.9.0)
+      zod:
+        specifier: ^4.4.3
+        version: 4.4.3
     devDependencies:
       '@astrojs/check':
         specifier: ^0.9.9
