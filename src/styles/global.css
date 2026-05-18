@@ -51,6 +51,10 @@
     font-family: var(--font-display);
     font-size: 13px;
     -webkit-font-smoothing: antialiased;
+    /* Korean syllables stay together; long Latin identifiers wrap as a
+       last resort instead of leaving a hole at the end of a line. */
+    word-break: keep-all;
+    overflow-wrap: anywhere;
   }
 
   body {
@@ -151,22 +155,39 @@
   text-decoration-thickness: 2px;
 }
 
+/* Tailwind typography defaults blockquote to italic + font-weight 500
+   which reads heavier than body especially with Korean (Pretendard).
+   Bring it down to body scale, drop italic, lighten the side rule. */
+.prose :is(blockquote) {
+  font-size: 0.95em;
+  font-style: normal;
+  font-weight: inherit;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding-inline-start: 0.75em;
+  border-inline-start-width: 2px;
+  color: var(--color-muted);
+}
+.prose :is(blockquote p):first-of-type::before,
+.prose :is(blockquote p):last-of-type::after {
+  content: "";
+}
+
 /* Code blocks blend with the surrounding text. The whole site is in a
-   mono stack, so no border or rounding is needed — a faint gray tint
+   mono stack, so no border or rounding is needed — a very faint tint
    (derived from foreground so it works for any iterm2 theme) is enough
-   to mark code regions. Shiki is configured with defaultColor: false
-   in src/lib/markdown-plugins.ts so it emits --shiki-* CSS variables
-   instead of an inline background-color; that lets this rule win
-   without !important. */
+   to mark code regions. Shiki uses a single theme and a transformer
+   in src/lib/markdown-plugins.ts strips only its inline background;
+   token colors stay inline so syntax highlighting still works. */
 .prose :is(pre) {
-  background-color: color-mix(in srgb, var(--color-foreground) 10%, transparent);
+  background-color: color-mix(in srgb, var(--color-foreground) 5%, transparent);
   color: var(--color-foreground);
   padding: 0.75em 1em;
   border-radius: 0;
   border: 0;
 }
 .prose :is(code) {
-  background-color: color-mix(in srgb, var(--color-foreground) 10%, transparent);
+  background-color: color-mix(in srgb, var(--color-foreground) 5%, transparent);
   padding: 0 0.25em;
   border-radius: 0;
   border: 0;

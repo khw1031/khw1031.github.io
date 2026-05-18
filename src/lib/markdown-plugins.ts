@@ -17,14 +17,22 @@ export const rehypePlugins: ReadonlyArray<Pluggable> = [
 ];
 
 export const shikiConfig = {
-  themes: {
-    light: 'github-light',
-    dark: 'github-dark',
-  },
-  /* Suppress Shiki's inline background-color so our prose code-block
-     bg (color-mix on --color-foreground) can show through. Without
-     this, Shiki writes style="background-color:#fff" on <pre>, which
-     no external CSS rule can override. */
-  defaultColor: false,
+  /* Single theme: Shiki inlines token colors so syntax highlighting
+     shows. The transformer below strips only the background-color
+     from the <pre> inline style so our prose pre rule can paint the
+     code-block bg. */
+  theme: 'github-light',
   wrap: true,
+  transformers: [
+    {
+      name: 'strip-pre-bg',
+      pre(node: { properties?: Record<string, unknown> }) {
+        const props = node.properties;
+        if (!props) return;
+        const style = props.style;
+        if (typeof style !== 'string') return;
+        props.style = style.replace(/background-color\s*:\s*[^;]+;?/g, '').trim();
+      },
+    },
+  ],
 } as const;
