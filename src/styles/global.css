@@ -1,13 +1,15 @@
 @import "tailwindcss";
 
-/* Self-hosted coding fonts.
-   - Geist Mono: Latin (covers ASCII + Latin Extended); used by default
-   - D2 Coding: Hangul; picked up automatically for code points Geist
-     Mono does not cover, via the font-family fallback order */
+/* Self-hosted fonts (Latin mono + Korean sans hybrid).
+   - Geist Mono: Latin glyphs (ASCII + Latin Extended); primary face
+   - Pretendard Variable: Hangul; picked up automatically via the
+     font-family fallback for code points Geist Mono does not cover.
+     The dynamic-subset CSS uses unicode-range so only the needed
+     Hangul shards download on first paint. */
 @import "@fontsource/geist-mono/400.css";
 @import "@fontsource/geist-mono/500.css";
 @import "@fontsource/geist-mono/600.css";
-@import "@kfonts/d2coding";
+@import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 
 /* Theme colors sourced from src/styles/themes/<name>.itermcolors,
    compiled by `pnpm theme:gen` (also runs as prebuild). To switch
@@ -37,11 +39,11 @@
   --color-surface: #b4d7ff;
 
   --font-display:
-    "Geist Mono", "D2Coding", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas,
-    monospace;
+    "Geist Mono", "Pretendard Variable", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco,
+    Consolas, monospace;
   --font-mono:
-    "Geist Mono", "D2Coding", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas,
-    monospace;
+    "Geist Mono", "Pretendard Variable", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco,
+    Consolas, monospace;
 }
 
 @layer base {
