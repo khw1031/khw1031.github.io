@@ -21,8 +21,8 @@
 
 | 항목 | HN | THNKR |
 | --- | --- | --- |
-| 헤더 색 | 오렌지 #ff6600 바 | 회색조, 컬러 액센트 없음 |
-| 배경 | 크림 #f6f6ef | 회색조 #fafafa (light) / #0a0a0a (dark) |
+| 헤더 색 | 오렌지 #ff6600 바 | iTerm2 `Darkmatrix` 팔레트 (현재 `#070c0e` near-black) |
+| 배경 | 크림 #f6f6ef | iTerm2 `Background Color` (현재 `#070c0e`) |
 | 폰트 | Verdana 10pt | **코딩(mono) 스택** — SF Mono / Menlo / D2Coding / Noto Sans Mono CJK KR |
 | 본문 폭 | 거의 풀폭 | `max-w-3xl` 단일 컬럼 |
 | 업보트 화살표 | `▲` 텍스트 | 없음 (개인 블로그라 투표가 없다) |
@@ -55,9 +55,9 @@ Agentation은 위 원칙을 자동화한다: 라이브 사이트에서 요소를
 1. **Density over comfort** — 가독성을 깨지 않는 선에서 한 화면에 더 많이.
 2. **Text-first** — 의미는 단어와 시맨틱 HTML로. 아이콘·이모지·일러스트 없음.
 3. **Minimal chrome** — 카드, 큰 라운드, 박스 그림자, 그라데이션, 블러 배경 금지.
-4. **Grayscale only — no chromatic accent** — 모든 색은 회색 계조 + 검정/흰색. 액센트 컬러 없음. 링크는 색이 아니라 **밑줄**로 구분한다.
-5. **Mono-first typography** — 본문·헤딩·메타 모두 코딩 폰트(`ui-monospace` 스택). 의도된 "터미널/CLI" 미학. 한글은 D2Coding / Noto Sans Mono CJK KR로 폴백.
-6. **No motion** — `transition`/`animation` 사용 금지. 단, 텍스트 색 전환(`transition-colors`, 회색↔회색)과 포커스 링은 허용.
+4. **Single iTerm2-sourced palette** — 컬러는 `src/styles/themes/<name>.itermcolors`를 단일 출처로 사용. 빌드 시 `pnpm theme:gen`이 CSS 변수로 변환. 라이트/다크 토글 없이 **단일 테마**. 현재 채택: `Darkmatrix`.
+5. **Mono-first typography** — 본문·헤딩·메타 모두 코딩 폰트. 라틴 = Geist Mono, 한글 = D2 Coding (둘 다 self-hosted). 의도된 "터미널/CLI" 미학.
+6. **No motion** — `transition`/`animation` 사용 금지. 단, 텍스트 색 전환(`transition-colors`)과 포커스 링은 허용.
 7. **Predictable single column** — 모든 페이지 본문 최대 폭 동일(`max-w-3xl` ≈ 48rem). 모바일/데스크톱 동일 레이아웃, 폰트 크기만 미세 조정.
 8. **Agent-readable** — 시맨틱 HTML + plain `.md` 본문 + JSON-LD + `llms.txt`. JS 없이도 컨텐츠 100% 노출.
 
@@ -65,27 +65,25 @@ Agentation은 위 원칙을 자동화한다: 라이브 사이트에서 요소를
 
 `src/styles/global.css`의 `@theme` 블록과 1:1 매핑된다.
 
-### 컬러 (Light) — 4-tone grayscale
+### 컬러 — 단일 테마, iTerm2에서 생성
 
-| Token | Value | 용도 |
-| --- | --- | --- |
-| `--color-background` | `#fafafa` | 페이지 배경 |
-| `--color-foreground` | `#18181b` | 본문 텍스트, 링크 (밑줄로 구분) |
-| `--color-muted` | `#71717a` | 메타·캡션·날짜·작은 보조 텍스트, 비활성 nav |
-| `--color-border` | `#e4e4e7` | 헤더/푸터 보더, 코드블록 보더, 구분선 |
-| `--color-surface` | `#f4f4f5` | 코드블록 / 인라인 코드 배경 |
+소스: `src/styles/themes/Darkmatrix.itermcolors`. 빌드 직전 `scripts/iterm-to-css.ts`가 파싱해 `src/styles/theme.generated.css`로 변환. 그 결과 `:root`에 정의되어 모든 페이지에 적용.
 
-### 컬러 (Dark; `[data-theme="dark"]` 오버라이드)
+| Token | Source iTerm key | Current value | 용도 |
+| --- | --- | --- | --- |
+| `--color-background` | `Background Color` | `#070c0e` | 페이지 배경 |
+| `--color-foreground` | `Foreground Color` | `#3e5715` | 본문 텍스트 (낮은 contrast — Darkmatrix 의도) |
+| `--color-muted` | `Ansi 8 Color` | `#333333` | 메타·캡션·비활성 텍스트 |
+| `--color-border` | `Ansi 7 Color` | `#006536` | 보더, 구분선 |
+| `--color-surface` | `Selection Color` | `#0f191c` | 코드블록 / 인라인 코드 배경 |
+| `--color-accent` | `Cursor Color` | `#9fa86e` | (선택) 액센트 — 본 디자인에서는 사용 안 함 |
+| `--color-link` | `Link Color` | `#00cd6d` | (선택) 링크 색 — 본 디자인은 foreground+밑줄 사용 |
 
-| Token | Value |
-| --- | --- |
-| `--color-background` | `#0a0a0a` |
-| `--color-foreground` | `#fafafa` |
-| `--color-muted` | `#a1a1aa` |
-| `--color-border` | `#27272a` |
-| `--color-surface` | `#18181b` |
+전체 iTerm 팔레트는 `--iterm-*` 변수로도 노출되어 추후 액센트가 필요해지면 즉시 참조 가능.
 
-> `--color-accent` 토큰은 본 디자인에서 **존재하지 않는다.** Tailwind의 `text-accent` / `bg-accent` 유틸리티는 사용 금지. Phase 3에서 이미 코드에 들어간 `hover:text-accent` 등은 Phase 3.7 조정 PR에서 제거한다.
+### 라이트/다크 토글 없음
+
+단일 테마. 페이지 전체가 항상 같은 컬러로 표시. 토글 인프라(`ThemeToggle.astro`, `theme.ts`, 관련 테스트, no-flash 스크립트)는 모두 제거.
 
 ### 타이포그래피 — Mono-first
 
@@ -226,6 +224,23 @@ HN의 `1. ▲ Title (domain)` + submeta 구조를 차용하되 화살표·번호
 2. 동일 PR 또는 후속 PR로 토큰/컴포넌트 적용을 푸시한다.
 3. 라이브에서 비주얼 회귀를 눈으로 확인한다.
 4. 충돌하는 코드가 발견되면 (예: 어딘가에 `shadow-lg`가 들어옴) DESIGN.md를 인용하며 거절한다.
+
+### 6.1 컬러 테마 교체 워크플로
+
+1. 새 `.itermcolors` 파일을 `src/styles/themes/` 아래에 배치 (iterm2colorschemes.com 등에서 다운로드)
+2. `scripts/iterm-to-css.ts`의 `SOURCE` 상수를 새 파일 경로로 변경
+3. `pnpm theme:gen` 실행 → `src/styles/theme.generated.css` 갱신
+4. (필요 시) `scripts/iterm-to-css.ts`의 `TOKEN_MAP` 매핑 조정. 기본 매핑:
+   - `Background Color` → `--color-background`
+   - `Foreground Color` → `--color-foreground`
+   - `Ansi 8 Color` → `--color-muted`
+   - `Ansi 7 Color` → `--color-border`
+   - `Selection Color` → `--color-surface`
+   - `Cursor Color` → `--color-accent` (참조용)
+   - `Link Color` → `--color-link` (참조용)
+5. `pnpm build`로 시각 확인, 커밋
+
+각 빌드 직전 `prebuild` 훅이 자동으로 `theme:gen`을 실행하므로 generated 파일이 항상 최신이다.
 
 ## 7. 가드 (선택, Phase 9에서 강화)
 
