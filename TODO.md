@@ -6,6 +6,88 @@
 
 ---
 
+## 📍 세션 핸드오프 (2026-05-18)
+
+**라이브**: https://khw1031.github.io/ — 정상 동작
+
+**완료된 단계**
+- ✅ Phase 1 전부 (브랜치 재배치, 스캐폴드, CI/Deploy)
+- ✅ Phase 2.1 zod 스키마, 2.3 마크다운 파이프라인, 2.4 reading-time
+- ⚠ Phase 2.2 마이그레이션 — **posts(8)**, **read-and-write(5)**만 유지. notes/cs/log는 사용자 결정으로 컬렉션 자체 제거. cv/cover-letter/portfolio는 Phase 4.4에서 TS 데이터 + .astro로 따로 처리 예정
+- ✅ Phase 3 디자인 시스템 + DESIGN.md
+  - 폰트: Latin = Geist Mono, 한글 = Pretendard Variable (둘 다 self-hosted)
+  - body 13px, root font-size 13px
+  - 헤딩 hierarchy = 배경 tint (h1 18% / h2 12% / h3 6% / h4 무) + size 1.05~1rem
+  - 컬러 테마: iTerm2 `.itermcolors` 파일 단일 출처 → `scripts/iterm-to-css.ts`가 빌드 시 CSS 변수 생성. 현재 **Apple System Colors Light** 적용. 라이트/다크 토글 없음
+- ✅ Phase 4.2–4.3 라우트 (`/posts/`, `/posts/[slug]/`, `/read-and-write/`, `/read-and-write/[slug]/`, 홈에 Recent 목록)
+- ✅ Phase 5 SEO — sitemap-index.xml + sitemap-0.xml + rss.xml + robots.txt + JSON-LD(Person/WebSite/BlogPosting)
+- ✅ trailingSlash: 'always' 정착 — 301 리다이렉트 0
+- ✅ Shiki 단일 theme(github-light) + transformer로 inline pre bg 제거 → 코드 색상 + 우리 회색 톤 공존
+- ✅ Korean word-break (keep-all + overflow-wrap: anywhere)
+
+**테스트 현황**: 45 unit + 8 e2e green (각 커밋마다 모두 통과)
+
+**아직 진행 안 한 작업 (우선순위 추천 순)**
+
+1. **Phase 4.4** — `/cv/`, `/cover-letter/`, `/portfolio/` 페이지 복원
+   - 현재 legacy/nextjs에 JSX 형태로 존재 (Layout/Header/Section/Detail 컴포넌트들)
+   - 계획: `src/data/cv.ts`, `src/data/cover-letter.ts`, `src/data/portfolio.ts`에 TS 타입드 데이터 + 각 `.astro` 페이지에서 렌더
+   - 참조: `docs/jsx-usages.md`에 컴포넌트 구조 인벤토리 있음
+
+2. **Phase 8** — GA4 + Consent Mode v2
+   - 이미 `.github/workflows/deploy.yml`에 `PUBLIC_GA_MEASUREMENT_ID` secret placeholder 있음
+   - 구현: `src/components/analytics/GoogleAnalytics.astro` + `<ConsentBanner>` + `src/lib/analytics.ts`
+   - 단위테스트: prod/dev 분기, consent default denied → granted
+
+3. **Phase 6** — GEO
+   - `/llms.txt` — 사이트 인덱스
+   - `/llms-full.txt` — 모든 글 본문 평문 결합
+   - FAQ schema (필요한 페이지 식별 후)
+
+4. **Phase 7** — Pagefind 검색
+   - postbuild 인덱싱 + 검색 UI 컴포넌트
+
+5. **Phase 9** — 품질 게이트
+   - Lighthouse CI (`@lhci/cli`) — Perf/A11y/SEO 임계치
+   - axe-core + Playwright a11y 위반 0
+
+6. **Phase 4.5 / 4.7** — `/tags/[tag]/` + 404 페이지
+
+**Polish 후보 (단독 가능)**
+- PostLayout의 article 타이틀 h1과 markdown 본문 `# ...` h1이 함께 있는 페이지 — 본문 h1을 h2로 자동 강등하는 rehype 플러그인 추가 검토
+- README 갱신 (새 스택/명령어/디자인 토큰/테마 swap 워크플로)
+- `--color-surface` (현재 `Selection Color`인 라이트 블루)는 이제 prose에서 직접 안 쓰임 — 토큰 의미 재정의 또는 제거 검토
+
+**아이데이션 필요 항목 (별도 PR 전, 디자인 논의 먼저)**
+
+- **PC 화면의 사이드 여백 활용** — 현재 본문은 `max-w-3xl` 단일 컬럼이라 데스크톱 와이드 화면에서 좌우 공백이 큼. 이 공간을 단순히 비워두지 말고 "실험 공간"으로 활용하는 방향
+  - 후보 아이디어 (DESIGN.md 원칙과 양립 가능한 선에서):
+    - 사이드 마진 메타데이터: 글 메타(pubDate, reading time, tags), 목차(ToC), 백링크, footnote 인라인 노출
+    - "현재 위치" 미니맵 / 스크롤 인디케이터
+    - 인용된 외부 링크 미리보기 (호버 시 사이드에 카드 펼침)
+    - 좌측 = 글 메타 / 우측 = 동적 ToC + 진행도 라인
+    - 글 옆에 손글씨 메모 / 코멘트 영역 (margin notes / Edward Tufte 스타일)
+    - 라이브 코드 결과 (Phase 7 검색 + Phase 8 분석과 연계 가능)
+    - 사이트 활동 로그 (최근 커밋, 어떤 글이 추가/수정됐는지)
+    - 키보드 단축키 안내, 명령 팔레트 (Cmd+K)
+    - 글의 ASCII 다이어그램이 본문 폭을 넘어갈 때 사이드로 확장
+    - "이 글이 처음 보는 사람을 위한 한 줄 요약" 또는 GEO 요약 (Phase 6과 연계)
+  - 제약:
+    - DESIGN.md 원칙 1(Density)과 3(Minimal chrome) 유지 — 카드/그림자/큰 라운드 금지
+    - 모바일에서는 단일 컬럼으로 깔끔히 정리 (사이드 콘텐츠는 PC 전용 또는 하단으로)
+    - JS-only로 만들지 말기 (원칙 8 Agent-readable)
+  - 결정 필요:
+    - 후보 1~2개 우선 채택 vs 점진 실험
+    - "실험 공간" 자체를 별도 라우트(`/lab/`)로 빼서 메인 사이트에 안 섞을지, 본문 옆 직접 통합할지
+
+**참고 문서**
+- `DESIGN.md` — UI 결정 단일 출처
+- `docs/agentation.md` — UI 피드백 워크플로
+- `docs/jsx-usages.md` — legacy JSX 컴포넌트 인벤토리 (Phase 4.4용)
+- `src/styles/themes/` — iTerm 테마 파일들 (Darkmatrix, AppleClassic, AppleSystemColorsLight)
+
+---
+
 ## Phase 1. 브랜치 재배치 + Astro 스캐폴드 + Pages 자동 배포 ⭐ FIRST
 
 **이 단계의 정의**: `legacy/nextjs`에 기존 코드 보존 → `main`은 Astro로 새 출발 → push 한 번이면 GitHub Pages에 자동 배포되는 상태까지 완료.
