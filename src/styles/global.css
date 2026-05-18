@@ -1,4 +1,14 @@
 @import "tailwindcss";
+
+/* Self-hosted coding fonts.
+   - Geist Mono: Latin (covers ASCII + Latin Extended); used by default
+   - D2 Coding: Hangul; picked up automatically for code points Geist
+     Mono does not cover, via the font-family fallback order */
+@import "@fontsource/geist-mono/400.css";
+@import "@fontsource/geist-mono/500.css";
+@import "@fontsource/geist-mono/600.css";
+@import "@kfonts/d2coding";
+
 @plugin "@tailwindcss/typography";
 
 /* Exclude documentation and content markdown from utility scanning so
@@ -18,11 +28,11 @@
   --color-surface: #f4f4f5;
 
   --font-display:
-    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "D2Coding",
-    "Noto Sans Mono CJK KR", "Liberation Mono", "Courier New", monospace;
+    "Geist Mono", "D2Coding", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas,
+    monospace;
   --font-mono:
-    ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "D2Coding",
-    "Noto Sans Mono CJK KR", "Liberation Mono", "Courier New", monospace;
+    "Geist Mono", "D2Coding", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas,
+    monospace;
 }
 
 @layer base {
