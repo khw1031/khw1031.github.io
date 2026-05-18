@@ -1,0 +1,13 @@
+---
+import PostList from '../../components/PostList.astro';
+import Base from '../../layouts/Base.astro';
+import { COLLECTION_LABELS, getListItems } from '../../lib/collections';
+
+const items = await getListItems('posts');
+const title = COLLECTION_LABELS.posts;
+---
+
+<Base title={`${title} — thnkr`} description={`${title} — 개발 노트와 이력`}>
+  <h1 class="text-lg font-medium mb-4">{title}</h1>
+  <PostList items={items} />
+</Base>

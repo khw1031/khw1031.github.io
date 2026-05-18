@@ -1,10 +1,18 @@
 ---
+import PostList from '../components/PostList.astro';
 import Base from '../layouts/Base.astro';
+import { getRecentAcrossCollections } from '../lib/collections';
+
+const recent = await getRecentAcrossCollections(10);
 ---
 
 <Base title="thnkr" description="개발 노트와 이력을 정리하는 공간.">
   <section class="prose max-w-none">
     <h1>thnkr</h1>
     <p>개발 노트, 메모, 이력을 정리하는 공간입니다.</p>
+  </section>
+  <section class="mt-6">
+    <h2 class="text-lg font-medium mb-3">Recent</h2>
+    <PostList items={recent} />
   </section>
 </Base>

@@ -1,8 +1,31 @@
 ---
+import { COLLECTION_LABELS, COLLECTION_ORDER, type ListableCollection } from '../lib/collections';
+
+const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
+const isActive = (collection: ListableCollection): boolean =>
+  pathname === `/${collection}` || pathname.startsWith(`/${collection}/`);
 ---
 
 <header class="border-b border-border">
-  <div class="mx-auto flex max-w-3xl items-center px-4 py-2">
+  <div class="mx-auto flex max-w-3xl items-center justify-between px-4 py-2 text-sm">
     <a href="/" class="font-medium">thnkr</a>
+    <nav class="flex items-center gap-2 text-muted">
+      {
+        COLLECTION_ORDER.map((c, idx) => (
+          <>
+            {idx > 0 && <span aria-hidden="true">|</span>}
+            <a
+              href={`/${c}`}
+              class:list={[
+                'hover:text-foreground transition-colors',
+                isActive(c) && 'text-foreground',
+              ]}
+            >
+              {COLLECTION_LABELS[c].toLowerCase()}
+            </a>
+          </>
+        ))
+      }
+    </nav>
   </div>
 </header>

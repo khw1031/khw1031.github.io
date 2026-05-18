@@ -1,0 +1,26 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import { type ListableCollection, formatDate } from '../lib/collections';
+import Base from './Base.astro';
+
+interface Props {
+  entry: CollectionEntry<ListableCollection>;
+  readingMinutes: number;
+}
+
+const { entry, readingMinutes } = Astro.props;
+const { data } = entry;
+const description = data.description ?? data.summary ?? '';
+---
+
+<Base title={`${data.title} — thnkr`} description={description}>
+  <article class="prose max-w-none">
+    <h1>{data.title}</h1>
+    <div class="not-prose text-sm text-muted mb-6">
+      <time datetime={data.pubDate.toISOString()}>{formatDate(data.pubDate)}</time>
+      <span> · </span>
+      <span>{readingMinutes} min</span>
+    </div>
+    <slot />
+  </article>
+</Base>
