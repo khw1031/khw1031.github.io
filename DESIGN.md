@@ -23,7 +23,7 @@
 | --- | --- | --- |
 | 헤더 색 | 오렌지 #ff6600 바 | iTerm2 `Apple System Colors Light` 팔레트 (현재 `#feffff` near-white) |
 | 배경 | 크림 #f6f6ef | iTerm2 `Background Color` (현재 `#feffff`) |
-| 폰트 | Verdana 10pt | **코딩(mono) 스택** — SF Mono / Menlo / D2Coding / Noto Sans Mono CJK KR |
+| 폰트 | Verdana 10pt | **Latin mono + Korean sans 하이브리드** — Geist Mono (Latin) + Pretendard Variable (한글) |
 | 본문 폭 | 거의 풀폭 | `max-w-3xl` 단일 컬럼 |
 | 업보트 화살표 | `▲` 텍스트 | 없음 (개인 블로그라 투표가 없다) |
 | 글 목록 패턴 | `1. ▲ Title (domain)` + submeta | `Title (domain)` + 메타 한 줄 (번호 매김은 선택) |
@@ -56,7 +56,7 @@ Agentation은 위 원칙을 자동화한다: 라이브 사이트에서 요소를
 2. **Text-first** — 의미는 단어와 시맨틱 HTML로. 아이콘·이모지·일러스트 없음.
 3. **Minimal chrome** — 카드, 큰 라운드, 박스 그림자, 그라데이션, 블러 배경 금지.
 4. **Single iTerm2-sourced palette** — 컬러는 `src/styles/themes/<name>.itermcolors`를 단일 출처로 사용. 빌드 시 `pnpm theme:gen`이 CSS 변수로 변환. 라이트/다크 토글 없이 **단일 테마**. 현재 채택: `Apple System Colors Light` (macOS 시스템 컬러 light variant). 스크립트가 배경 luminance를 보고 `color-scheme: light/dark`를 자동 결정.
-5. **Mono-first typography** — 본문·헤딩·메타 모두 코딩 폰트. 라틴 = Geist Mono, 한글 = D2 Coding (둘 다 self-hosted). 의도된 "터미널/CLI" 미학.
+5. **Latin mono + Korean sans hybrid** — 라틴 글리프는 Geist Mono(터미널/CLI 미학), 한글은 Pretendard Variable(가독성 우선). 둘 다 self-hosted. font-family 폴백 순서로 글리프별 자동 매핑.
 6. **No motion** — `transition`/`animation` 사용 금지. 단, 텍스트 색 전환(`transition-colors`)과 포커스 링은 허용.
 7. **Predictable single column** — 모든 페이지 본문 최대 폭 동일(`max-w-3xl` ≈ 48rem). 모바일/데스크톱 동일 레이아웃, 폰트 크기만 미세 조정.
 8. **Agent-readable** — 시맨틱 HTML + plain `.md` 본문 + JSON-LD + `llms.txt`. JS 없이도 컨텐츠 100% 노출.
@@ -87,16 +87,15 @@ Agentation은 위 원칙을 자동화한다: 라이브 사이트에서 요소를
 
 단일 테마. 페이지 전체가 항상 같은 컬러로 표시. 토글 인프라(`ThemeToggle.astro`, `theme.ts`, 관련 테스트, no-flash 스크립트)는 모두 제거.
 
-### 타이포그래피 — Mono-first
+### 타이포그래피 — Latin mono + Korean sans
 
-본문, 헤딩, 메타, UI 텍스트 **전부 모노스페이스**. 코드와 본문이 동일한 폰트 패밀리. 의도된 "에이전트/터미널" 미학.
+라틴은 mono로 "에이전트/터미널" 미학, 한글은 sans로 가독성을 챙기는 하이브리드. 같은 줄에 영문/한글이 섞여도 자연스럽게 보이도록 폴백 순서로 글리프별 매핑.
 
-- **스택**: `ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "D2Coding", "Noto Sans Mono CJK KR", "Liberation Mono", "Courier New", monospace`
-- **본문**: 15px (HN의 10pt보단 한글 가독성 우선, 단 일반 sans 16px보다 살짝 작게) / line-height 1.6
-- **메타**: 13px / muted color
-- **헤딩**: H1 1.4× / H2 1.2× / H3 1.1× — mono는 같은 크기에서도 더 도드라지므로 sans보다 스케일 작게 둠
-- **코드 (인라인)**: 동일 mono / `--color-border` 1px box / `--color-surface` 배경 / 0.95em
-- **코드 (블록)**: 동일 mono / 1px `--color-border` / `--color-surface` 배경 / 가로 스크롤 허용
+- **스택**: `"Geist Mono", "Pretendard Variable", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace`
+- **본문**: 13px / line-height 1.6
+- **메타**: `text-sm` (≈ 11.4px) / muted color
+- **헤딩**: H1 1.4× / H2 1.2× / H3 1.1× (root 13px 기준 18.2 / 15.6 / 14.3px)
+- **코드 (인라인 + 블록)**: 동일 스택 / `color-mix(fg 10%, transparent)` 배경 / 보더·라운드 없음
 
 ### 스페이싱
 
@@ -216,7 +215,7 @@ HN의 `1. ▲ Title (domain)` + submeta 구조를 차용하되 화살표·번호
 ### 신규 (이번 PR에서 적용)
 
 - **브랜드 `khw1031` → `THNKR`** — Header 브랜드 텍스트, 레이아웃 기본 title, og:site_name, Footer 저작권, 홈 페이지 h1 / title prop, e2e 기대 텍스트
-- **`--font-display`를 mono 스택으로 교체** — `ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, "D2Coding", "Noto Sans Mono CJK KR", "Liberation Mono", "Courier New", monospace`
+- **`--font-display` 하이브리드 스택** — `"Geist Mono", "Pretendard Variable", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco, Consolas, monospace`. Pretendard는 dynamic-subset CSS로 unicode-range 기반 분할 로딩
 - **본문 기본 폰트 사이즈 15px** — body에서 `font-size: 15px` 명시 (mono는 sans 16px보다 시각적으로 크다)
 - prose 헤딩 스케일 mono용으로 축소 (1.4× / 1.2× / 1.1×)
 
