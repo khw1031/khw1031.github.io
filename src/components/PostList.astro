@@ -1,0 +1,26 @@
+---
+import { type PostListItem, formatDate } from '../lib/collections';
+
+interface Props {
+  items: PostListItem[];
+}
+
+const { items } = Astro.props;
+---
+
+<ul class="not-prose list-none p-0 m-0 space-y-3">
+  {
+    items.map((item) => (
+      <li>
+        <a href={item.href} class="text-foreground hover:underline underline-offset-2">
+          {item.title}
+        </a>
+        <div class="text-sm text-muted">
+          <time datetime={item.pubDate.toISOString()}>{formatDate(item.pubDate)}</time>
+          <span> · </span>
+          <span>{item.readingMinutes} min</span>
+        </div>
+      </li>
+    ))
+  }
+</ul>
