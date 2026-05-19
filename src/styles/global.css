@@ -128,13 +128,9 @@
   text-decoration: none;
 }
 
-/* Markdown-body headings (wrapped by autolink) get a stepped tint.
-   Bare h1s (page titles) do NOT match :has(> a) and stay plain. */
-.prose :is(h1):has(> a) {
-  background-color: color-mix(in srgb, var(--color-foreground) 18%, transparent);
-  padding: 0.2em 0.4em;
-  margin-top: 1.5em;
-}
+/* Markdown-body h2/h3 (wrapped by autolink) get a stepped tint to
+   reinforce section hierarchy. h1 stays bare regardless of source:
+   it's the page title, not a section heading. */
 .prose :is(h2):has(> a) {
   background-color: color-mix(in srgb, var(--color-foreground) 12%, transparent);
   padding: 0.2em 0.4em;
@@ -144,15 +140,22 @@
   padding: 0.2em 0.4em;
 }
 
+/* Content links: foreground (black) text with a faded underline so
+   the link is clearly clickable without shouting. Hover keeps the
+   same color/weight but fades the whole link a touch. Navigation in
+   header/footer overrides color via Tailwind utilities. */
+main a,
 .prose :is(a) {
   color: var(--color-foreground);
   font-weight: inherit;
   text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--color-foreground) 35%, transparent);
   text-underline-offset: 2px;
   text-decoration-thickness: 1px;
 }
+main a:hover,
 .prose :is(a):hover {
-  text-decoration-thickness: 2px;
+  opacity: 0.6;
 }
 
 /* Tailwind typography defaults blockquote to italic + font-weight 500

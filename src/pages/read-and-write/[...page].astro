@@ -1,0 +1,27 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import Pagination from '../../components/Pagination.astro';
+import PostList from '../../components/PostList.astro';
+import { Content as Intro } from '../../copy/read-and-write.md';
+import Base from '../../layouts/Base.astro';
+import { COLLECTION_LABELS, type PostListItem, getListItems } from '../../lib/collections';
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const items = await getListItems('read-and-write');
+  return paginate(items, { pageSize: 10 });
+};
+
+const { page } = Astro.props as { page: Page<PostListItem> };
+const title = COLLECTION_LABELS['read-and-write'];
+---
+
+<Base title={`${title} — thnkr`} description={`${title} — 개발 노트와 이력`}>
+  <section class="prose max-w-none">
+    <Intro />
+  </section>
+  <section class="mt-6">
+    <h2 class="font-medium mb-3">{title}</h2>
+    <PostList items={page.data} />
+    <Pagination page={page} />
+  </section>
+</Base>
