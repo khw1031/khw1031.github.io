@@ -5,12 +5,52 @@ import remarkGfm from 'remark-gfm';
 import remarkSmartypants from 'remark-smartypants';
 import type { Pluggable, PluggableList } from 'unified';
 
+/**
+ * Shift markdown body headings down one level so the page title (h1
+ * rendered by PostLayout) stays the only h1. Markdown `# foo` then
+ * becomes a section <h2>, which matches both the visual hierarchy
+ * and a11y/SEO expectations.
+ *
+ * Also normalizes the heading text: strips leading `#` characters
+ * from the first text child. Markdown sources that accidentally
+ * write `## # foo` end up with `# foo` as the heading text, which
+ * would clash with our CSS `::before` pseudo-prefix.
+ */
+function rehypeShiftHeadings() {
+  return (tree: unknown) => {
+    const visit = (node: unknown): void => {
+      if (typeof node !== 'object' || node === null) return;
+      const n = node as { tagName?: unknown; children?: unknown };
+      if (typeof n.tagName === 'string') {
+        const m = n.tagName.match(/^h([1-5])$/);
+        if (m) {
+          n.tagName = `h${Number(m[1]) + 1}`;
+          stripLeadingHash(n);
+        }
+      }
+      if (Array.isArray(n.children)) {
+        for (const child of n.children) visit(child);
+      }
+    };
+    visit(tree);
+  };
+}
+
+function stripLeadingHash(heading: { children?: unknown }): void {
+  const children = heading.children;
+  if (!Array.isArray(children) || children.length === 0) return;
+  const first = children[0] as { type?: unknown; value?: unknown };
+  if (first.type !== 'text' || typeof first.value !== 'string') return;
+  first.value = first.value.replace(/^[#\s]+/, '');
+}
+
 export const remarkPlugins: PluggableList = [
   remarkGfm,
   [remarkSmartypants, { dashes: 'oldschool' }],
 ];
 
 export const rehypePlugins: ReadonlyArray<Pluggable> = [
+  rehypeShiftHeadings,
   rehypeSlug,
   [rehypeAutolinkHeadings, { behavior: 'wrap' }],
   [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],

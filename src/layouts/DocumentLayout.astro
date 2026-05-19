@@ -1,4 +1,5 @@
 ---
+import CopyMarkdown from '../components/CopyMarkdown.astro';
 import DocumentHeader from '../components/document/DocumentHeader.astro';
 import Keywords from '../components/document/Keywords.astro';
 import Section from '../components/document/Section.astro';
@@ -10,9 +11,11 @@ interface Props {
 }
 
 const { page } = Astro.props;
+const mdHref = `${Astro.url.pathname.replace(/\/$/, '')}.md`;
 ---
 
 <Base title={page.title} description={page.description}>
+  <CopyMarkdown href={mdHref} />
   <DocumentHeader hideContact={page.hideContact} />
   <slot name="before-sections" />
   {page.sections.map((s) => <Section section={s} />)}

@@ -53,3 +53,14 @@ test('header nav links to every collection', async ({ page }) => {
     await expect(page.locator(`header a[href="${c.path}"]`)).toHaveCount(1);
   }
 });
+
+test('post detail pages expose copy-markdown link + raw md endpoint', async ({ page, request }) => {
+  for (const c of COLLECTIONS) {
+    await page.goto(c.sampleSlug);
+    const expectedMd = `${c.sampleSlug.replace(/\/$/, '')}/raw.md`;
+    await expect(page.locator(`a[data-copy-md][href="${expectedMd}"]`)).toHaveCount(1);
+    const res = await request.get(expectedMd);
+    expect(res.status()).toBe(200);
+    expect(res.headers()['content-type']).toContain('text/markdown');
+  }
+});

@@ -98,27 +98,58 @@
   --tw-prose-invert-captions: var(--color-muted);
 }
 
-/* All headings: nearly body-size, weight does the differentiation;
-   markdown body headings additionally get a background tint via the
-   :has(> a) rules below. Bare h1s (page titles like PostLayout's
-   article title or the home brand) intentionally stay plain. */
-.prose :is(h1, h2, h3, h4) {
+/* Heading hierarchy via SIZE (since we dropped the background tint
+   and prefix). Bare h1s (page titles) stay the largest at the top.
+   Tailwind typography plugin uses `.prose :where(...):not(...)` so
+   we match its selector pattern exactly to win specificity. */
+.prose :is(h1, h2, h3, h4, h5) {
   font-weight: 600;
   line-height: 1.3;
-  font-size: 1rem;
 }
-.prose :is(h1) {
-  font-size: 1.05rem;
+.prose :where(h1):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  font-size: 1.1rem;
   margin-top: 0;
-  margin-bottom: 0.5em;
-}
-.prose :is(h2) {
-  margin-top: 1.5em;
   margin-bottom: 0.4em;
 }
-.prose :is(h3) {
+.prose :where(h2):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  font-size: 1.05rem;
+  margin-top: 2.25em;
+  margin-bottom: 0.25em;
+}
+.prose :where(h3):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  font-size: 1rem;
+  margin-top: 1.75em;
+  margin-bottom: 0.2em;
+}
+.prose :where(h4):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  font-size: 0.95rem;
+  margin-top: 1.5em;
+  margin-bottom: 0.2em;
+}
+.prose :where(h5):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  font-size: 0.9rem;
   margin-top: 1.25em;
+  margin-bottom: 0.15em;
+}
+.prose :where(p):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  margin-top: 0.3em;
   margin-bottom: 0.3em;
+}
+/* Tighten ordered/unordered list indent — Tailwind's 1.625em creates
+   a big gap between marker and text for Korean prose. Also reduce
+   inter-item vertical gap (default 0.5em is airy for short bullets). */
+.prose :where(ol, ul):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  padding-inline-start: 1.25em;
+  margin-top: 0.5em;
+  margin-bottom: 0.5em;
+}
+.prose :where(li):not(:where([class~="not-prose"], [class~="not-prose"] *)) {
+  padding-inline-start: 0.25em;
+  margin-top: 0.15em;
+  margin-bottom: 0.15em;
+}
+.prose :where(h1, h2, h3, h4):not(:where([class~="not-prose"], [class~="not-prose"] *)) + p {
+  margin-top: 0.85em;
 }
 
 /* rehype-autolink-headings wraps each markdown heading in
@@ -126,18 +157,6 @@
 .prose :is(h1, h2, h3, h4) > a {
   color: inherit;
   text-decoration: none;
-}
-
-/* Markdown-body h2/h3 (wrapped by autolink) get a stepped tint to
-   reinforce section hierarchy. h1 stays bare regardless of source:
-   it's the page title, not a section heading. */
-.prose :is(h2):has(> a) {
-  background-color: color-mix(in srgb, var(--color-foreground) 12%, transparent);
-  padding: 0.2em 0.4em;
-}
-.prose :is(h3):has(> a) {
-  background-color: color-mix(in srgb, var(--color-foreground) 6%, transparent);
-  padding: 0.2em 0.4em;
 }
 
 /* Content links: foreground (black) text with a faded underline so
