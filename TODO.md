@@ -6,52 +6,56 @@
 
 ---
 
-## 📍 세션 핸드오프 (2026-05-18)
+## 📍 세션 핸드오프 (2026-05-19)
 
 **라이브**: https://khw1031.github.io/ — 정상 동작
 
 **완료된 단계**
 - ✅ Phase 1 전부 (브랜치 재배치, 스캐폴드, CI/Deploy)
 - ✅ Phase 2.1 zod 스키마, 2.3 마크다운 파이프라인, 2.4 reading-time
-- ⚠ Phase 2.2 마이그레이션 — **posts(8)**, **read-and-write(5)**만 유지. notes/cs/log는 사용자 결정으로 컬렉션 자체 제거. cv/cover-letter/portfolio는 Phase 4.4에서 TS 데이터 + .astro로 따로 처리 예정
+- ⚠ Phase 2.2 마이그레이션 — **posts(8)**, **read-and-write(5)**만 유지. notes/cs/log는 사용자 결정으로 컬렉션 자체 제거. cv/cover-letter/portfolio는 Phase 4.4에서 TS 데이터 + .astro로 처리 (이번 세션 완료)
 - ✅ Phase 3 디자인 시스템 + DESIGN.md
   - 폰트: Latin = Geist Mono, 한글 = Pretendard Variable (둘 다 self-hosted)
   - body 13px, root font-size 13px
   - 헤딩 hierarchy = 배경 tint (h1 18% / h2 12% / h3 6% / h4 무) + size 1.05~1rem
   - 컬러 테마: iTerm2 `.itermcolors` 파일 단일 출처 → `scripts/iterm-to-css.ts`가 빌드 시 CSS 변수 생성. 현재 **Apple System Colors Light** 적용. 라이트/다크 토글 없음
 - ✅ Phase 4.2–4.3 라우트 (`/posts/`, `/posts/[slug]/`, `/read-and-write/`, `/read-and-write/[slug]/`, 홈에 Recent 목록)
+- ✅ Phase 4.4 — `/cv/`, `/cover-letter/`, `/portfolio/`
+  - `src/data/types.ts`에 `documentPageSchema` (zod) — Section/Detail/DetailContent 구조
+  - `src/data/{cv,cover-letter,portfolio}.ts`에 타입드 데이터, 빌드 타임 zod parse
+  - `src/components/document/{DocumentHeader,Section,Detail,Keywords}.astro` + `src/layouts/DocumentLayout.astro`
+  - `cv` / `cover-letter` / `portfolio` 컨텐츠 컬렉션 제거 (glob-loader warning 해소)
+  - Footer에 정적 페이지 nav 추가 (탐색 가능)
+  - 레거시 `/20251218` 슬러그 → `/posts/20251218/`로 매핑
 - ✅ Phase 5 SEO — sitemap-index.xml + sitemap-0.xml + rss.xml + robots.txt + JSON-LD(Person/WebSite/BlogPosting)
 - ✅ trailingSlash: 'always' 정착 — 301 리다이렉트 0
 - ✅ Shiki 단일 theme(github-light) + transformer로 inline pre bg 제거 → 코드 색상 + 우리 회색 톤 공존
 - ✅ Korean word-break (keep-all + overflow-wrap: anywhere)
 
-**테스트 현황**: 45 unit + 8 e2e green (각 커밋마다 모두 통과)
+**테스트 현황**: 57 unit + 18 e2e green
 
 **아직 진행 안 한 작업 (우선순위 추천 순)**
 
-1. **Phase 4.4** — `/cv/`, `/cover-letter/`, `/portfolio/` 페이지 복원
-   - 현재 legacy/nextjs에 JSX 형태로 존재 (Layout/Header/Section/Detail 컴포넌트들)
-   - 계획: `src/data/cv.ts`, `src/data/cover-letter.ts`, `src/data/portfolio.ts`에 TS 타입드 데이터 + 각 `.astro` 페이지에서 렌더
-   - 참조: `docs/jsx-usages.md`에 컴포넌트 구조 인벤토리 있음
-
-2. **Phase 8** — GA4 + Consent Mode v2
+1. **Phase 8** — GA4 + Consent Mode v2
    - 이미 `.github/workflows/deploy.yml`에 `PUBLIC_GA_MEASUREMENT_ID` secret placeholder 있음
    - 구현: `src/components/analytics/GoogleAnalytics.astro` + `<ConsentBanner>` + `src/lib/analytics.ts`
    - 단위테스트: prod/dev 분기, consent default denied → granted
+   - **주의**: 동의 배너 UI는 DESIGN.md 미니멀 원칙(카드/그림자 금지) 안에서 결정 필요
 
-3. **Phase 6** — GEO
-   - `/llms.txt` — 사이트 인덱스
-   - `/llms-full.txt` — 모든 글 본문 평문 결합
+2. **Phase 6** — GEO
+   - `/llms.txt` — 사이트 인덱스 (cv/cover-letter/portfolio도 포함)
+   - `/llms-full.txt` — 모든 글 본문 평문 결합 (TS data 페이지는 별도 직렬화 필요)
    - FAQ schema (필요한 페이지 식별 후)
 
-4. **Phase 7** — Pagefind 검색
+3. **Phase 7** — Pagefind 검색
    - postbuild 인덱싱 + 검색 UI 컴포넌트
+   - cv/cover-letter/portfolio도 정적 HTML이라 자동 인덱싱됨
 
-5. **Phase 9** — 품질 게이트
+4. **Phase 9** — 품질 게이트
    - Lighthouse CI (`@lhci/cli`) — Perf/A11y/SEO 임계치
    - axe-core + Playwright a11y 위반 0
 
-6. **Phase 4.5 / 4.7** — `/tags/[tag]/` + 404 페이지
+5. **Phase 4.5 / 4.7** — `/tags/[tag]/` + 404 페이지
 
 **Polish 후보 (단독 가능)**
 - PostLayout의 article 타이틀 h1과 markdown 본문 `# ...` h1이 함께 있는 페이지 — 본문 h1을 h2로 자동 강등하는 rehype 플러그인 추가 검토

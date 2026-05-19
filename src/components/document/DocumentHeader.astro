@@ -1,0 +1,24 @@
+---
+interface Props {
+  hideContact?: boolean;
+}
+
+const { hideContact = false } = Astro.props;
+---
+
+<header class="flex flex-wrap items-end justify-between gap-2 border-b border-border pb-3">
+  <h1 class="text-base font-semibold flex flex-col leading-tight">
+    <span>김현우</span>
+    <span class="text-xs text-muted font-normal">Frontend Based Product Developer</span>
+  </h1>
+  {
+    !hideContact && (
+      <address class="not-italic flex flex-col items-end text-xs">
+        <a href="mailto:khw1031@gmail.com">khw1031@gmail.com</a>
+        <a href="https://github.com/khw1031" target="_blank" rel="noopener noreferrer">
+          github.com/khw1031
+        </a>
+      </address>
+    )
+  }
+</header>

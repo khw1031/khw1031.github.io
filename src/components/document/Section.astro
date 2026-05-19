@@ -1,0 +1,19 @@
+---
+import type { Section } from '../../data/types';
+import Detail from './Detail.astro';
+
+interface Props {
+  section: Section;
+}
+
+const { section } = Astro.props;
+---
+
+<section class="mt-8">
+  <h2 class="text-base font-semibold border-b border-border pb-1">
+    {section.title}
+  </h2>
+  <div class="mt-2">
+    {section.details.map((d) => <Detail detail={d} />)}
+  </div>
+</section>
