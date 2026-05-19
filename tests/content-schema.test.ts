@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { baseFrontmatter, portfolioSchema, postSchema } from '../src/content/schemas';
+import { baseFrontmatter, postSchema } from '../src/content/schemas';
 
 describe('baseFrontmatter', () => {
   it('accepts minimal valid frontmatter and applies defaults', () => {
@@ -41,24 +41,5 @@ describe('postSchema', () => {
 
   it('rejects empty-string tags', () => {
     expect(() => postSchema.parse({ title: 'x', pubDate: '2026-05-18', tags: [''] })).toThrow();
-  });
-});
-
-describe('portfolioSchema', () => {
-  it('accepts an optional role and url', () => {
-    const parsed = portfolioSchema.parse({
-      title: 'project',
-      pubDate: '2026-05-18',
-      role: 'lead',
-      url: 'https://example.com',
-    });
-    expect(parsed.role).toBe('lead');
-    expect(parsed.url).toBe('https://example.com');
-  });
-
-  it('rejects a non-URL value for url', () => {
-    expect(() =>
-      portfolioSchema.parse({ title: 'x', pubDate: '2026-05-18', url: 'not-a-url' }),
-    ).toThrow();
   });
 });

@@ -1,0 +1,21 @@
+---
+import DocumentHeader from '../components/document/DocumentHeader.astro';
+import Keywords from '../components/document/Keywords.astro';
+import Section from '../components/document/Section.astro';
+import type { DocumentPage } from '../data/types';
+import Base from './Base.astro';
+
+interface Props {
+  page: DocumentPage;
+}
+
+const { page } = Astro.props;
+---
+
+<Base title={page.title} description={page.description}>
+  <DocumentHeader hideContact={page.hideContact} />
+  <slot name="before-sections" />
+  {page.sections.map((s) => <Section section={s} />)}
+  <Keywords items={page.keywords} />
+  <slot />
+</Base>

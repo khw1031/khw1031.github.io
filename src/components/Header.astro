@@ -2,32 +2,46 @@
 import { COLLECTION_LABELS, COLLECTION_ORDER, type ListableCollection } from '../lib/collections';
 
 const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
-const isActive = (collection: ListableCollection): boolean =>
+const isCollectionActive = (collection: ListableCollection): boolean =>
   pathname === `/${collection}` || pathname.startsWith(`/${collection}/`);
+const isCvActive = pathname === '/cv' || pathname.startsWith('/cv/');
 
-const href = (collection: ListableCollection): string => `/${collection}/`;
+const collectionHref = (collection: ListableCollection): string => `/${collection}/`;
 ---
 
 <header class="border-b border-border">
-  <div class="mx-auto flex max-w-3xl items-center justify-between px-4 py-2 text-sm">
-    <a href="/" class="font-medium">thnkr</a>
-    <nav class="flex items-center gap-2 text-muted">
-      {
-        COLLECTION_ORDER.map((c, idx) => (
-          <>
-            {idx > 0 && <span aria-hidden="true">|</span>}
-            <a
-              href={href(c)}
-              class:list={[
-                'hover:text-foreground transition-colors',
-                isActive(c) && 'text-foreground',
-              ]}
-            >
-              {COLLECTION_LABELS[c].toLowerCase()}
-            </a>
-          </>
-        ))
-      }
+  <div class="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-2 text-sm">
+    <div class="flex items-center gap-3">
+      <a href="/" class="font-medium">thnkr</a>
+      <nav class="flex items-center gap-2 text-muted">
+        {
+          COLLECTION_ORDER.map((c, idx) => (
+            <>
+              {idx > 0 && <span aria-hidden="true">|</span>}
+              <a
+                href={collectionHref(c)}
+                class:list={[
+                  'hover:text-foreground transition-colors',
+                  isCollectionActive(c) && 'text-foreground',
+                ]}
+              >
+                {COLLECTION_LABELS[c].toLowerCase()}
+              </a>
+            </>
+          ))
+        }
+      </nav>
+    </div>
+    <nav class="flex items-center text-muted">
+      <a
+        href="/cv/"
+        class:list={[
+          'hover:text-foreground transition-colors',
+          isCvActive && 'text-foreground',
+        ]}
+      >
+        cv
+      </a>
     </nav>
   </div>
 </header>

@@ -1,0 +1,79 @@
+---
+import type { Detail } from '../../data/types';
+
+interface Props {
+  detail: Detail;
+}
+
+const { detail } = Astro.props;
+const isExternal = (href?: string) => Boolean(href && /^https?:\/\//.test(href));
+
+const metaParts: string[] = [];
+if (detail.role) metaParts.push(detail.role);
+if (detail.period) metaParts.push(detail.period);
+---
+
+<article class="mt-4">
+  <header>
+    <h3 class="text-base font-semibold">
+      {
+        detail.url ? (
+          <a
+            href={detail.url}
+            {...(isExternal(detail.url)
+              ? { target: '_blank', rel: 'noopener noreferrer' }
+              : {})}
+          >
+            {detail.title}
+          </a>
+        ) : (
+          detail.title
+        )
+      }
+    </h3>
+    {detail.subtitle && <p class="text-sm text-muted">{detail.subtitle}</p>}
+    {
+      metaParts.length > 0 && (
+        <p class="text-xs text-muted">
+          {metaParts.map((part, idx) => (
+            <>
+              {idx > 0 && <span aria-hidden="true"> · </span>}
+              {part}
+            </>
+          ))}
+          {detail.ect && (
+            <>
+              <span aria-hidden="true"> · </span>
+              <span>※ {detail.ect}</span>
+            </>
+          )}
+        </p>
+      )
+    }
+  </header>
+  {
+    detail.content.length > 0 && (
+      <div class="mt-2 flex flex-col gap-3">
+        {detail.content.map((item) => (
+          <div>
+            {item.title && <h4 class="text-sm font-medium">{item.title}</h4>}
+            {item.description.length > 0 &&
+              (item.kind === 'prose' ? (
+                <div class="mt-0.5 text-sm text-muted space-y-1">
+                  {item.description.map((line) => (
+                    <p>{line}</p>
+                  ))}
+                </div>
+              ) : (
+                <ul class="ml-4 list-disc text-sm text-muted space-y-1">
+                  {item.description.map((line) => (
+                    <li>{line}</li>
+                  ))}
+                </ul>
+              ))}
+          </div>
+        ))}
+      </div>
+    )
+  }
+</article>
