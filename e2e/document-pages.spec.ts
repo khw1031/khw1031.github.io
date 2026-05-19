@@ -28,6 +28,25 @@ const DOCS: DocSpec[] = [
   },
 ];
 
+test('every document page exposes a copy-markdown link', async ({ page }) => {
+  for (const doc of DOCS) {
+    await page.goto(doc.path);
+    const expectedHref = `${doc.path.replace(/\/$/, '')}.md`;
+    await expect(page.locator(`a[data-copy-md][href="${expectedHref}"]`)).toHaveCount(1);
+  }
+});
+
+test('document raw markdown endpoints serve text/markdown', async ({ request }) => {
+  for (const doc of DOCS) {
+    const mdUrl = `${doc.path.replace(/\/$/, '')}.md`;
+    const res = await request.get(mdUrl);
+    expect(res.status()).toBe(200);
+    expect(res.headers()['content-type']).toContain('text/markdown');
+    const body = await res.text();
+    expect(body).toContain('김현우');
+  }
+});
+
 test('header exposes /cv/ as the umbrella entry', async ({ page }) => {
   await page.goto('/');
   await expect(page.locator('header a[href="/cv/"]')).toHaveCount(1);

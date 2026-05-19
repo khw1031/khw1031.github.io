@@ -1,0 +1,35 @@
+---
+interface Props {
+  href: string;
+}
+
+const { href } = Astro.props;
+---
+
+<div class="flex justify-end text-xs text-muted">
+  <a href={href} data-copy-md class="hover:text-foreground transition-colors">copy markdown</a>
+</div>
+
+<script>
+  const links = document.querySelectorAll<HTMLAnchorElement>('a[data-copy-md]');
+  for (const link of links) {
+    if (!navigator.clipboard) continue;
+    link.addEventListener('click', async (e) => {
+      const href = link.getAttribute('href');
+      if (!href) return;
+      e.preventDefault();
+      try {
+        const res = await fetch(href);
+        const text = await res.text();
+        await navigator.clipboard.writeText(text);
+        const original = link.textContent;
+        link.textContent = '✓ copied';
+        window.setTimeout(() => {
+          link.textContent = original;
+        }, 1500);
+      } catch {
+        window.location.href = href;
+      }
+    });
+  }
+</script>
