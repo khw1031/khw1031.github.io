@@ -63,6 +63,37 @@ const data: Detail[] = [
     ],
   },
   {
+    title: 'glowed',
+    url: 'https://github.com/khw1031/glowed',
+    role: 'Open Source / Go TUI',
+    subtitle: 'Ghostty 중심 터미널 Markdown 브라우저/에디터',
+    content: [
+      {
+        title: '프로젝트 개요',
+        description: [
+          'Go 기반 터미널 TUI로 Markdown 문서를 스캔·검색·미리보기·원본 편집할 수 있는 개인 지식 워크플로우 도구',
+          'Ghostty split과 외부 LLM CLI 세션 연동을 통해 현재 문서 context를 AI 도구로 전달하는 개발자 생산성 실험',
+        ],
+      },
+      {
+        title: '주요 기능',
+        description: [
+          'Bubble Tea, Lipgloss, Glamour 기반 Markdown preview/source/edit mode 구현',
+          'frontmatter/tag/path/body 검색, sidebar directory tree, app-managed selection, atomic save와 undo/redo 지원',
+          '.glowedignore 및 built-in ignore, polling refresh, JSON schema 설정, Homebrew tap/go install 배포 지원',
+        ],
+      },
+      {
+        title: '성과/특징',
+        description: [
+          'v0.1.0~v0.2.2 릴리즈와 CHANGELOG/릴리즈 자동화 스크립트 운영',
+          'Go test 기반 cmd/internal 패키지 테스트와 docs/search/watch/editor 영역 회귀 테스트 구성',
+          'AI agent coding harness를 실제 제품 개발 루프에 적용한 사례',
+        ],
+      },
+    ],
+  },
+  {
     title: '@hynu/swagger-mcp',
     url: 'https://www.npmjs.com/package/@hynu/swagger-mcp',
     role: 'NPM Package',
