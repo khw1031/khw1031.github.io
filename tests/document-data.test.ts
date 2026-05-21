@@ -49,10 +49,33 @@ describe('cv data', () => {
     expect(() => documentPageSchema.parse(cv)).not.toThrow();
   });
 
-  it('includes the 경력 사항 section as the first block', () => {
-    const first = cv.sections[0];
-    expect(first?.title).toBe('경력 사항');
-    expect(first?.details.length).toBeGreaterThan(0);
+  it('starts with a summary section before career details', () => {
+    expect(cv.sections[0]?.title).toBe('요약');
+    expect(cv.sections[1]?.title).toBe('경력 사항');
+  });
+
+  it('includes the 경력 사항 section after summary', () => {
+    const careers = cv.sections.find((s) => s.title === '경력 사항');
+    expect(careers).toBeDefined();
+    expect(careers?.details.length).toBeGreaterThan(0);
+  });
+
+  it('highlights recent AI workflow achievements in Hanssem career', () => {
+    const careers = cv.sections.find((s) => s.title === '경력 사항');
+    const hanssem = careers?.details.find((d) => d.title === '(주)한샘');
+    const titles = hanssem?.content.map((item) => item.title) ?? [];
+    expect(titles.slice(0, 3)).toEqual([
+      'Feature Workflow Skill 설계 및 사내 표준화',
+      'Hanssem AI Toolkit / Frontend AI Library 구축',
+      '인테리어 플래너 AI 활용 개발',
+    ]);
+  });
+
+  it('does not expose career move reasons in public cv data', () => {
+    const careers = cv.sections.find((s) => s.title === '경력 사항');
+    for (const d of careers?.details ?? []) {
+      expect(d.ect).toBeUndefined();
+    }
   });
 
   it('every detail in 경력 사항 has a period', () => {
@@ -89,7 +112,12 @@ describe('portfolio data', () => {
     expect(portfolio.hideContact).toBe(true);
   });
 
-  it('lists 주요 프로젝트 as the first section', () => {
-    expect(portfolio.sections[0]?.title).toBe('주요 프로젝트');
+  it('highlights AI workflow projects before legacy projects', () => {
+    const projects = portfolio.sections[0]?.details.map((d) => d.title) ?? [];
+    expect(projects.slice(0, 3)).toEqual([
+      '인테리어 플래너 AI 활용 개발',
+      'Feature Workflow Skill 설계 및 사내 표준화',
+      'Hanssem AI Toolkit / Frontend AI Library 구축',
+    ]);
   });
 });
