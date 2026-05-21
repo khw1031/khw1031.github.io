@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { coverLetter } from '../src/data/cover-letter';
 import { cv } from '../src/data/cv';
 import { portfolio } from '../src/data/portfolio';
+import { sideProjects } from '../src/data/side-projects';
 import { detailContentSchema, detailSchema, documentPageSchema } from '../src/data/types';
 
 describe('detailContentSchema', () => {
@@ -47,6 +48,11 @@ describe('detailSchema', () => {
 describe('cv data', () => {
   it('parses with the document page schema', () => {
     expect(() => documentPageSchema.parse(cv)).not.toThrow();
+  });
+
+  it('uses the Builder title in the page and summary heading', () => {
+    expect(cv.title).toBe('김현우 · AI Workflow & Developer Productivity Builder');
+    expect(cv.sections[0]?.details[0]?.title).toBe('AI Workflow & Developer Productivity Builder');
   });
 
   it('starts with a summary section before career details', () => {
@@ -100,6 +106,15 @@ describe('cover-letter data', () => {
     const titles = coverLetter.sections.map((s) => s.title);
     expect(titles).toContain('소개');
     expect(titles).toContain('핵심 역량');
+  });
+});
+
+describe('side project data', () => {
+  it('includes glowed as an open source developer tool project', () => {
+    const glowed = sideProjects.find((project) => project.title === 'glowed');
+
+    expect(glowed).toBeDefined();
+    expect(glowed?.role).toBe('Open Source / Go TUI');
   });
 });
 

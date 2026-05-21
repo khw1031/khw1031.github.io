@@ -17,7 +17,7 @@
 - **최근 방향성이 좋다:** 한샘 섹션의 상단에 Swagger MCP, Agentic Coding Workflow, Figma MCP, 성능 개선이 배치되어 있어 “AI 도구 + 프론트엔드 생산성” 방향은 잘 보인다.
 - **정량 성과 일부가 이미 있다:** 한샘몰 성능 개선의 번들 40% 감소, script 실행시간 22% 감소, 한화생명 CMS의 리드타임 40% 단축 등은 채용자가 빠르게 이해할 수 있는 강한 근거다.
 - **별도 상세 페이지 구조가 있다:** `/cv/` → `/portfolio/` → `/cover-letter/`로 이어지는 구조가 있어, 이력서는 압축하고 상세 근거는 포트폴리오로 넘기기 좋다.
-- **사이드 프로젝트가 포지셔닝을 보강한다:** `@hynu/swagger-mcp`, `add-ai-tools`, `ai-library`가 본업 성과와 연결되어 “업무에서 만든 도구를 제품화/오픈소스화하는 사람”이라는 인상을 줄 수 있다.
+- **사이드 프로젝트가 포지셔닝을 보강한다:** `@hynu/swagger-mcp`, `add-ai-tools`, `ai-library`, `glowed`가 본업 성과와 연결되어 “업무에서 만든 도구를 제품화/오픈소스화하는 사람”이라는 인상을 줄 수 있다. 특히 `glowed`는 Go TUI, Markdown knowledge workflow, 외부 LLM CLI 연동, Homebrew 배포까지 포함해 프론트엔드 밖의 제품형 도구 제작 역량을 보여준다.
 
 ### 약점
 
@@ -37,7 +37,7 @@
 
 추천 포지션:
 
-> **Frontend-based AI Workflow & Developer Productivity Lead**
+> **AI Workflow & Developer Productivity Builder**
 
 한국어 요약:
 
@@ -96,7 +96,7 @@ it('starts with a summary section before career details', () => {
   title: '요약',
   details: [
     {
-      title: 'Frontend-based AI Workflow & Developer Productivity Lead',
+      title: 'AI Workflow & Developer Productivity Builder',
       subtitle:
         '프론트엔드 제품 개발을 기반으로 AI 에이전트·MCP·사내 개발 워크플로우를 제품화해 팀의 구현 속도와 품질을 높이는 개발자',
       content: [
@@ -344,7 +344,79 @@ pnpm test tests/document-data.test.ts
 
 Expected: PASS.
 
-### Task 6: Markdown copy와 실제 페이지 수동 확인
+### Task 6: glowed를 사이드 프로젝트에 추가
+
+**Objective:** `glowed`를 “개인 취미 프로젝트”가 아니라 AI/Developer Productivity 포지셔닝을 보강하는 제품형 오픈소스 도구로 소개한다.
+
+**판단:** 추가 권장. 다만 `/cv/` 본문 경력 섹션에 길게 넣기보다는 `src/data/side-projects.ts`와 `/portfolio/` 후반부에 배치한다. 이유는 `glowed`가 Go TUI·Markdown workflow·외부 LLM CLI 연동·Homebrew 배포를 보여줘 차별점은 크지만, 메인 메시지는 여전히 한샘의 AI Workflow/Developer Productivity 성과여야 하기 때문이다.
+
+**Files:**
+- Modify: `src/data/side-projects.ts`
+- Optional Modify: `src/data/portfolio.ts`
+- Test: `tests/document-data.test.ts`, `e2e/document-pages.spec.ts`
+
+**Step 1: side project 데이터에 추가**
+
+`ai-library`, `add-ai-tools` 다음 또는 `@hynu/swagger-mcp` 앞에 아래 항목을 추가한다.
+
+```ts
+{
+  title: 'glowed',
+  url: 'https://github.com/khw1031/glowed',
+  role: 'Open Source / Go TUI',
+  subtitle: 'Ghostty 중심 터미널 Markdown 브라우저/에디터',
+  content: [
+    {
+      title: '프로젝트 개요',
+      description: [
+        'Go 기반 터미널 TUI로 Markdown 문서를 스캔·검색·미리보기·원본 편집할 수 있는 개인 지식 워크플로우 도구',
+        'Ghostty split과 외부 LLM CLI 세션 연동을 통해 현재 문서 context를 AI 도구로 전달하는 개발자 생산성 실험',
+      ],
+    },
+    {
+      title: '주요 기능',
+      description: [
+        'Bubble Tea, Lipgloss, Glamour 기반 Markdown preview/source/edit mode 구현',
+        'frontmatter/tag/path/body 검색, sidebar directory tree, app-managed selection, atomic save와 undo/redo 지원',
+        '.glowedignore 및 built-in ignore, polling refresh, JSON schema 설정, Homebrew tap/go install 배포 지원',
+      ],
+    },
+    {
+      title: '성과/특징',
+      description: [
+        'v0.1.0~v0.2.2 릴리즈와 CHANGELOG/릴리즈 자동화 스크립트 운영',
+        'Go test 기반 cmd/internal 패키지 테스트와 docs/search/watch/editor 영역 회귀 테스트 구성',
+        'AI agent coding harness를 실제 제품 개발 루프에 적용한 사례',
+      ],
+    },
+  ],
+},
+```
+
+**Step 2: portfolio에는 짧게만 연결**
+
+`/portfolio/`에는 별도 대형 프로젝트로 과도하게 전개하기보다 “Open Source / Developer Tools” 섹션 또는 사이드 프로젝트 영역이 있을 때 요약형으로 추가한다. 핵심 회사 성과보다 앞에 두지 않는다.
+
+**Step 3: 테스트 추가**
+
+```ts
+it('includes glowed as an open source developer tool project', () => {
+  expect(sideProjects.some((project) => project.title === 'glowed')).toBe(true);
+});
+```
+
+**Step 4: 검증**
+
+Run:
+
+```bash
+pnpm test tests/document-data.test.ts
+pnpm test:e2e e2e/document-pages.spec.ts
+```
+
+Expected: PASS.
+
+### Task 7: Markdown copy와 실제 페이지 수동 확인
 
 **Objective:** 채용자가 복사하거나 공유할 때도 문맥이 잘 전달되는지 확인한다.
 
@@ -391,8 +463,9 @@ Open:
 ## 5. 예상 변경 파일 요약
 
 - `src/data/cv.ts`: 핵심 변경. 요약 섹션 추가, 한샘 성과 재작성, 교육/이직사유 압축, keywords 재정렬.
-- `src/data/portfolio.ts`: 최신 AI 워크플로우 프로젝트 상세 보강 및 순서 재정렬.
-- `tests/document-data.test.ts`: CV/portfolio 구조 회귀 테스트 추가 및 기존 “경력 사항 첫 블록” 기대값 수정.
+- `src/data/portfolio.ts`: 최신 AI 워크플로우 프로젝트 상세 보강 및 순서 재정렬. `glowed`는 필요 시 Open Source / Developer Tools 성격의 보조 사례로 후반부에 짧게 추가.
+- `src/data/side-projects.ts`: `glowed`를 Open Source / Go TUI 사이드 프로젝트로 추가해 Developer Productivity 도구 제작 역량을 보강.
+- `tests/document-data.test.ts`: CV/portfolio/sideProjects 구조 회귀 테스트 추가 및 기존 “경력 사항 첫 블록” 기대값 수정.
 - `e2e/document-pages.spec.ts`: 필요 시 `/cv/` 섹션 기대값에 `요약` 추가.
 - `src/data/cover-letter.ts`: 선택 사항. 자기소개까지 포지셔닝을 맞추고 싶을 때 후속으로 수정.
 
@@ -402,10 +475,12 @@ Open:
 - **성과 과장:** 62% 일정 단축, 86.8% AI 협업 비율 등은 `pies/agents/company` 기록에 있는 수치만 사용한다.
 - **연도 불일치:** 현재 공개 페이지의 2025.12 항목과 회사 기록의 2026.01~03 항목이 섞여 있다. 구현 전 실제 공개 가능한 기간 표기를 사용자가 최종 확인해야 한다.
 - **너무 AI 일변도:** 프론트엔드 실행력도 함께 보여야 한다. `인테리어 플래너`, 성능 개선, OOM 해결, 인프런/텀블벅 마이그레이션을 남겨 균형을 맞춘다.
+- **사이드 프로젝트 과밀:** `glowed`까지 추가하면 사이드 프로젝트가 많아진다. `ai-library`/`add-ai-tools`/`glowed`는 Developer Productivity 축으로 묶고, 우선순위가 낮은 항목은 짧게 유지한다.
 
 ## 7. 완료 기준
 
 - `/cv/`에 요약 섹션이 추가되고, 한샘 최신 AI 워크플로우 성과 3개가 상단에 정량 수치와 함께 반영된다.
 - `/portfolio/`가 CV의 상세 근거 페이지로 동작하며, 최신 프로젝트가 상단에 정렬된다.
+- `glowed`가 사이드 프로젝트에 추가되어 Go TUI 기반 Developer Productivity 도구 제작 역량을 보강한다.
 - 공개 CV에서 이직사유와 낮은 우선순위 교육 세부정보가 제거/압축된다.
 - `pnpm check`, `pnpm lint`, `pnpm test`, `pnpm test:e2e`, `pnpm build`가 통과한다.
