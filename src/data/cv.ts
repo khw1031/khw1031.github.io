@@ -9,9 +9,29 @@ const sideProjectSkeleton = sideProjects.map((p) => ({
 }));
 
 const data: DocumentPage = documentPageSchema.parse({
-  title: '김현우 · Frontend Based Product Developer',
-  description: '김현우 프론트엔드 개발자 이력서.',
+  title: '김현우 · Frontend-based AI Workflow & Developer Productivity Lead',
+  description: '김현우 프론트엔드 기반 AI 워크플로우 및 개발 생산성 리드 이력서.',
   sections: [
+    {
+      title: '요약',
+      details: [
+        {
+          title: 'Frontend-based AI Workflow & Developer Productivity Lead',
+          subtitle:
+            '프론트엔드 제품 개발을 기반으로 AI 에이전트·MCP·사내 개발 워크플로우를 제품화해 팀의 구현 속도와 품질을 높이는 개발자',
+          content: [
+            {
+              title: '핵심 성과',
+              description: [
+                '인테리어 플래너 프로젝트에서 3인 팀·21일 개발로 기존 예상 대비 62% 일정 단축, AI 협업 비율 86.8%, 테스트:소스 비율 0.80 달성',
+                'Hanssem AI Toolkit / Frontend AI Library를 설계·구축해 37개 Skills/Rules/Agents 항목을 검색·설치 가능한 사내 도구 자산으로 전환',
+                'Requirements → Design → Task → Implementation → Review 5단계 Feature Workflow Skill을 설계해 Claude Code, Cursor, GitHub Copilot, Antigravity 4종 에이전트에서 동일 절차로 사용 가능하게 표준화',
+              ],
+            },
+          ],
+        },
+      ],
+    },
     {
       title: '경력 사항',
       details: [
@@ -21,19 +41,36 @@ const data: DocumentPage = documentPageSchema.parse({
           period: '2023.02 — 재직중',
           content: [
             {
-              title: '한샘 Swagger MCP Server 개발 및 도입',
-              url: '/posts/20251218/',
+              title: 'Feature Workflow Skill 설계 및 사내 표준화',
               description: [
-                'Swagger MCP Server를 통해 표준화된 워크플로우 내에서 자동화된 Agentic Coding이 가능하게 함',
-                'Swagger 문서를 탐색하지 않고도 자동으로 코드를 생성할 수 있도록 함',
+                '기능 구현을 Requirements → Design → Task → Implementation → Review 5단계로 표준화하는 AI 워크플로우 설계',
+                'Context Isolation, Human in the Loop, Document as Interface, Git as History 원칙을 적용해 긴 작업의 재개 가능성과 결과 재현성 확보',
+                'Claude Code, Cursor, GitHub Copilot, Antigravity 4종 에이전트에서 동일 절차로 사용 가능한 사내 공통 Skill(v1.1.0)로 등록',
               ],
             },
             {
-              title: '팀 기반 Agentic Coding Workflow 구축 리드',
-              url: '/posts/20251210/',
+              title: 'Hanssem AI Toolkit / Frontend AI Library 구축',
               description: [
-                '표준화된 워크플로우 구축 및 자동화로 일관된 퀄리티의 Agentic Coding이 가능하게 함',
-                '2주 스프린트 파일럿으로 워크플로우 검증 후 1월 신규 프로젝트에 도입 예정',
+                'Skills/Rules/Agents 라이브러리, install-ai CLI, 검색형 Web UI를 설계·구축해 사내 AI 도구를 제품화',
+                '37개 문서화된 라이브러리 항목을 검색·설치 가능하게 구성하고 v2.18.0까지 릴리즈 운영',
+                'Claude Code, Cursor, GitHub Copilot, Antigravity별 설치 경로를 지원해 팀 지식을 멀티 에이전트 환경에서 재사용 가능하게 전환',
+              ],
+            },
+            {
+              title: '인테리어 플래너 AI 활용 개발',
+              description: [
+                '3인 팀에서 Claude Code 기반 5단계 AI 워크플로우를 적용해 기존 예상 2~3개월 규모의 프론트엔드 개발을 21일에 완료',
+                '53개 태스크, 265+ 작업 산출물, 125 Jira 티켓, 약 410 커밋을 처리하며 62% 일정 단축과 AI 협업 비율 86.8% 달성',
+                'React, TypeScript, Tailwind CSS, Jest 기반 TDD로 소스 19,127줄·테스트 15,227줄, 테스트:소스 비율 0.80 확보',
+              ],
+            },
+            {
+              title: '한샘 Swagger MCP Server 개발 및 도입',
+              url: '/posts/20251218/',
+              description: [
+                'OpenAPI 3.0+ 기반 API 문서를 LLM이 자연어로 조회할 수 있는 MCP Server 개발',
+                'list_services, list_apis, get_api_detail, get_components 도구와 Swagger → Zod 스키마 변환으로 API 연동 자동화',
+                'Drill-down 조회 패턴으로 LLM 컨텍스트 토큰 오버플로우를 방지하고 Swagger 문서 탐색 없이 코드 생성 가능하게 개선',
               ],
             },
             {
@@ -86,7 +123,6 @@ const data: DocumentPage = documentPageSchema.parse({
           title: '슈퍼메이커즈',
           role: '리드',
           period: '2021.12 — 2022.12',
-          ect: '이직사유: 오프라인 사업 집중화로 인한 개발팀 해체',
           content: [
             {
               title: "온라인 반찬 커머스 애플리케이션 '슈퍼키친'(미운영) 개발",
@@ -104,7 +140,6 @@ const data: DocumentPage = documentPageSchema.parse({
           title: '(주)한화생명',
           role: '팀원',
           period: '2021.01 — 2021.12',
-          ect: '이직사유: 전 파트장(슈퍼메이커즈 CTO)의 이직 제안',
           content: [
             {
               title: "보험 상품 컨텐츠 관리 시스템 'HLI-CMS' 개발",
@@ -125,7 +160,6 @@ const data: DocumentPage = documentPageSchema.parse({
           title: '인프랩',
           role: '파트 리드',
           period: '2018.10 — 2020.05',
-          ect: '이직사유: 갭 이어 / 창업 시도',
           content: [
             {
               title: "코딩 교육 플랫폼 '인프런' 개발",
@@ -147,7 +181,6 @@ const data: DocumentPage = documentPageSchema.parse({
           title: '제플린엑스',
           role: '팀원',
           period: '2018.07 — 2018.09',
-          ect: '이직사유: 인프런 대표의 이직 제안',
           content: [
             {
               title: "인터렉티브 컴퓨팅 플랫폼 '제플' 개발",
@@ -160,7 +193,6 @@ const data: DocumentPage = documentPageSchema.parse({
           title: '텀블벅',
           role: '팀원',
           period: '2017.07 — 2018.06',
-          ect: '이직사유: 개발팀 인원 감축(경영악화)',
           content: [
             {
               title: "크라우드 펀딩 웹 애플리케이션 '텀블벅' 개발 및 유지보수",
@@ -176,7 +208,6 @@ const data: DocumentPage = documentPageSchema.parse({
           title: '(주)한화L&C',
           role: '팀원',
           period: '2014.06 — 2016.05',
-          ect: '이직사유: 직무 전환',
           content: [
             {
               title: '재무회계팀',
@@ -213,7 +244,6 @@ const data: DocumentPage = documentPageSchema.parse({
           content: [
             {
               title: '경영대학 경영학과',
-              description: ['학점: 3.21/4.5', '자퇴 후 재입학'],
             },
           ],
         },
@@ -223,7 +253,6 @@ const data: DocumentPage = documentPageSchema.parse({
           content: [
             {
               title: '미술대학 예술학과',
-              description: ['학점: 2.73/4.5', '제대 후 자퇴'],
             },
           ],
         },
@@ -231,25 +260,28 @@ const data: DocumentPage = documentPageSchema.parse({
     },
   ],
   keywords: [
-    'NextJS',
+    'AI Workflow',
+    'MCP',
+    'Claude Code',
+    'Cursor',
+    'GitHub Copilot',
+    'Developer Productivity',
+    'Frontend Platform',
     'React',
+    'NextJS',
     'TypeScript',
     'React Query',
-    'CSS',
-    'HTML',
-    'Git',
-    'CI/CD',
-    'Turborepo',
-    'Jenkins',
-    'Github Actions',
-    'Rollup',
+    'Tailwind CSS',
     'Vite',
     'Vitest',
-    'Confluence',
-    'Claude',
-    'Claude Code',
-    'Firebase',
-    'React Native',
+    'Jest',
+    'Turborepo',
+    'Rollup',
+    'CI/CD',
+    'GitHub Actions',
+    'Jenkins',
+    'Performance Optimization',
+    'Core Web Vitals',
   ],
 });
 

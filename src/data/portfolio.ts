@@ -10,55 +10,126 @@ const data: DocumentPage = documentPageSchema.parse({
       title: '주요 프로젝트',
       details: [
         {
-          title: '팀 단위 바이브 코딩 워크플로우 구축',
-          period: '2025.12',
-          role: '파트 리드 / (주)한샘',
+          title: '인테리어 플래너 AI 활용 개발',
+          period: '2026.02 — 2026.03',
+          role: '프론트엔드 개발 / AI 워크플로우 리드 / (주)한샘',
           content: [
             {
-              title: '프로젝트 개요',
+              title: '문제',
               description: [
-                '팀 기반 Agentic Coding Workflow 구축 및 파일럿 운영',
-                '표준화된 워크플로우로 일관된 품질의 AI 코딩 산출물 확보',
+                '기존 방식으로 2~3개월이 예상되는 인테리어 플래너 프론트엔드를 3인 팀으로 빠르게 완성해야 했고, Claude Code의 실무 적용 가능성도 검증해야 했다.',
               ],
             },
             {
-              title: '주요 성과',
+              title: '역할',
+              description: ['프론트엔드 개발과 AI 워크플로우 설계·적용을 리드했다.'],
+            },
+            {
+              title: '접근',
               description: [
-                '개발 시간 80~90% 단축 (API 연동 시간 1/3, 구현 사전 조사 시간 감소)',
-                '구현 유사도 80~95% 달성 (1-shot 기준)',
-                'Figma MCP로 디자인 재현율 90% 이상',
-                'Swagger MCP로 API 연동 시간 1/3로 단축',
+                '요구사항 분석 → 시스템 설계 → 태스크 분해 → 구현 → 리뷰 & QA의 5단계 품질 파이프라인을 적용했다.',
+                '33개 커스텀 Claude Skills, Figma MCP, AI Rules를 활용하고 53개 태스크·265+ 작업 산출물 기반으로 TDD 구현을 진행했다.',
               ],
             },
             {
-              title: '워크플로우 구성',
+              title: '성과',
               description: [
-                'Setup → Research → Plan → Implement → Review 단계별 체계화',
-                '공통 Rules + Templates + 명령어로 동일한 Input/Output 품질 확보',
-                'MCP 기반 상호운용 아키텍처 설계 (Global → Team → Project 계층 상속)',
+                '21일에 완료해 기존 예상 2~3개월 대비 62% 일정을 단축했다.',
+                '소스 19,127줄, 테스트 15,227줄, 125 Jira 티켓, 약 410 커밋을 처리했고 AI 협업 비율 86.8%와 테스트:소스 비율 0.80을 달성했다.',
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Feature Workflow Skill 설계 및 사내 표준화',
+          period: '2026.02 — 2026.03',
+          role: 'AI 워크플로우 설계 / 표준화 리드 / (주)한샘',
+          content: [
+            {
+              title: '문제',
+              description: [
+                'AI 에이전트 활용 기능 구현이 개인별 프롬프트와 즉흥 절차에 의존해 결과 품질·재현성·테스트 커버리지가 달라지는 문제가 있었다.',
+              ],
+            },
+            {
+              title: '역할',
+              description: [
+                '기능 구현을 표준화하는 Claude Skill을 설계하고 실제 프로젝트 검증 후 사내 공통 자산으로 등록했다.',
+              ],
+            },
+            {
+              title: '접근',
+              description: [
+                'Requirements → Design → Task → Implementation → Review 5단계와 Context Isolation, Human in the Loop, Document as Interface, Git as History 원칙을 정의했다.',
+                'Step 간 통신을 `.ai/tasks/<TASK_ID>/`의 문서로 고정하고, 테스트 시나리오가 설계·태스크·TDD 구현·리뷰까지 이어지도록 설계했다.',
+              ],
+            },
+            {
+              title: '성과',
+              description: [
+                '인테리어 플래너 프로젝트에서 53개 태스크·265+ 산출물·125 Jira 티켓을 처리하는 핵심 메커니즘으로 검증했다.',
+                'hanssem-ai-library의 `common/skills/feature-workflow` v1.1.0으로 등록해 Claude Code, Cursor, GitHub Copilot, Antigravity 4종 에이전트에서 동일 절차로 사용할 수 있게 표준화했다.',
+              ],
+            },
+          ],
+        },
+        {
+          title: 'Hanssem AI Toolkit / Frontend AI Library 구축',
+          period: '2026.01 — 현재',
+          role: 'AI 도구 생태계 설계/구축 리드 / (주)한샘',
+          content: [
+            {
+              title: '문제',
+              description: [
+                'Claude Code, Cursor, GitHub Copilot, Antigravity 등 AI 에이전트 사용이 늘면서 팀 지식과 프롬프트가 개인 로컬 환경에 흩어지고 있었다.',
+              ],
+            },
+            {
+              title: '역할',
+              description: [
+                '사내 AI 에이전트 리소스를 표준 구조로 관리·설치·문서화하는 도구 생태계를 설계하고 구축했다.',
+              ],
+            },
+            {
+              title: '접근',
+              description: [
+                'Skills/Rules/Agents 라이브러리와 META.md 기반 메타데이터 수집, Bitbucket SSH 기반 install-ai CLI, Vite + React 문서 Web UI를 설계했다.',
+                'Claude Code, Cursor, GitHub Copilot, Antigravity별 설치 경로를 매핑해 같은 도구를 여러 에이전트에서 재사용할 수 있게 했다.',
+              ],
+            },
+            {
+              title: '성과',
+              description: [
+                '37개 문서화된 라이브러리 항목을 웹 UI에서 검색·설치 가능하게 만들고 v2.18.0까지 릴리즈 운영했다.',
+                'AI 워크플로우 지식을 개인 프롬프트에서 팀 단위로 배포 가능한 도구 자산으로 전환했다.',
               ],
             },
           ],
         },
         {
           title: '한샘 Swagger MCP Server 개발',
-          period: '2025.12',
-          role: '파트 리드 / (주)한샘',
+          period: '2026.01 — 2026.03',
+          role: 'MCP 서버 개발 및 API 문서 표준화 / (주)한샘',
           url: '/posts/20251218/',
           content: [
             {
-              title: '프로젝트 개요',
+              title: '문제',
               description: [
-                'Swagger 문서를 AI가 직접 조회할 수 있는 MCP Server 개발 및 오픈소스화',
-                '자연어로 API 작성 → MCP 조회 → 스키마 조회 후 타이핑 및 API 연동까지 자동 완성',
+                '프론트엔드 API 연동 시 Swagger 문서 탐색과 타입 정의 작성이 반복적으로 발생했다.',
               ],
             },
             {
-              title: '주요 성과',
+              title: '접근',
               description: [
-                'Swagger 문서 탐색 없이 자동 코드 생성 가능',
-                'API 연동 작업 시간 1/3로 단축',
-                'NPM 패키지로 오픈소스 배포 (@hynu/swagger-mcp)',
+                'OpenAPI 3.0+ 기반 API 문서를 LLM이 자연어로 조회할 수 있는 MCP Server를 개발했다.',
+                '`list_services`, `list_apis`, `get_api_detail`, `get_components` 도구와 Swagger → Zod 스키마 변환을 제공했다.',
+              ],
+            },
+            {
+              title: '성과',
+              description: [
+                'Swagger 문서 탐색 없이 API 상세와 컴포넌트 스키마를 조회해 코드 생성을 자동화할 수 있게 했다.',
+                'Drill-down 조회 패턴으로 LLM 컨텍스트 토큰 오버플로우를 방지했다.',
               ],
             },
           ],
