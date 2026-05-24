@@ -1,11 +1,13 @@
 @import "tailwindcss";
 
-/* Self-hosted fonts (Latin mono + Korean sans hybrid).
-   - Geist Mono: Latin glyphs (ASCII + Latin Extended); primary face
-   - Pretendard Variable: Hangul; picked up automatically via the
-     font-family fallback for code points Geist Mono does not cover.
+/* Self-hosted fonts.
+   - Kiwi Maru: Latin glyphs for site text
+   - Pretendard Variable: Hangul; picked up automatically via fallback.
      The dynamic-subset CSS uses unicode-range so only the needed
-     Hangul shards download on first paint. */
+     Hangul shards download on first paint.
+   - Geist Mono: code blocks and inline code. */
+@import "@fontsource/kiwi-maru/latin-400.css";
+@import "@fontsource/kiwi-maru/latin-500.css";
 @import "@fontsource/geist-mono/400.css";
 @import "@fontsource/geist-mono/500.css";
 @import "@fontsource/geist-mono/600.css";
@@ -38,9 +40,7 @@
   --color-border: #98989d;
   --color-surface: #b4d7ff;
 
-  --font-display:
-    "Geist Mono", "Pretendard Variable", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco,
-    Consolas, monospace;
+  --font-display: "Kiwi Maru", "Pretendard Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono:
     "Geist Mono", "Pretendard Variable", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco,
     Consolas, monospace;
@@ -195,13 +195,14 @@ main a:hover,
   content: "";
 }
 
-/* Code blocks blend with the surrounding text. The whole site is in a
-   mono stack, so no border or rounding is needed — a very faint tint
+/* Code blocks blend with the surrounding text. They keep the mono
+   stack, so no border or rounding is needed — a very faint tint
    (derived from foreground so it works for any iterm2 theme) is enough
    to mark code regions. Shiki uses a single theme and a transformer
    in src/lib/markdown-plugins.ts strips only its inline background;
    token colors stay inline so syntax highlighting still works. */
 .prose :is(pre) {
+  font-family: var(--font-mono);
   background-color: color-mix(in srgb, var(--color-foreground) 5%, transparent);
   color: var(--color-foreground);
   padding: 0.75em 1em;
@@ -209,6 +210,7 @@ main a:hover,
   border: 0;
 }
 .prose :is(code) {
+  font-family: var(--font-mono);
   background-color: color-mix(in srgb, var(--color-foreground) 5%, transparent);
   padding: 0 0.25em;
   border-radius: 0;
