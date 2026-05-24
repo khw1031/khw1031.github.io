@@ -51,8 +51,8 @@ describe('cv data', () => {
   });
 
   it('uses the Builder title in the page and summary heading', () => {
-    expect(cv.title).toBe('김현우 · AI Workflow & Developer Productivity Builder');
-    expect(cv.sections[0]?.details[0]?.title).toBe('AI Workflow & Developer Productivity Builder');
+    expect(cv.title).toBe('김현우 · Builder');
+    expect(cv.sections[0]?.details[0]?.title).toBe('Builder');
   });
 
   it('starts with a summary section before career details', () => {
