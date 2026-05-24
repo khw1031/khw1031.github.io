@@ -9,16 +9,17 @@ const sideProjectSkeleton = sideProjects.map((p) => ({
 }));
 
 const data: DocumentPage = documentPageSchema.parse({
-  title: '김현우 · AI Workflow & Developer Productivity Builder',
-  description: '김현우 프론트엔드 기반 AI 워크플로우 및 개발 생산성 빌더 이력서.',
+  title: '김현우 · Builder',
+  description:
+    '프론트엔드 제품 개발 경험을 기반으로 AI Transformation과 생산성 향상을 구축하는 김현우 이력서.',
   sections: [
     {
       title: '요약',
       details: [
         {
-          title: 'AI Workflow & Developer Productivity Builder',
+          title: 'Builder',
           subtitle:
-            '프론트엔드 제품 개발을 기반으로 AI 에이전트·MCP·사내 개발 워크플로우를 제품화해 팀의 구현 속도와 품질을 높이는 개발자',
+            '프론트엔드 제품 개발 경험을 기반으로 개발·비개발 직무의 AI Transformation을 설계·구축해 조직 생산성을 높이는 개발자',
           content: [
             {
               title: '핵심 성과',
