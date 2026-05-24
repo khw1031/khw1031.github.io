@@ -15,10 +15,12 @@ const mdHref = `${Astro.url.pathname.replace(/\/$/, '')}.md`;
 ---
 
 <Base title={page.title} description={page.description}>
-  <CopyMarkdown href={mdHref} />
-  <DocumentHeader hideContact={page.hideContact} />
-  <slot name="before-sections" />
-  {page.sections.map((s) => <Section section={s} />)}
-  <Keywords items={page.keywords} />
-  <slot />
+  <div class="font-mono">
+    <CopyMarkdown href={mdHref} />
+    <DocumentHeader hideContact={page.hideContact} />
+    <slot name="before-sections" />
+    {page.sections.map((s) => <Section section={s} />)}
+    <Keywords items={page.keywords} />
+    <slot />
+  </div>
 </Base>
