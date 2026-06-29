@@ -2,3 +2,10 @@ allowBuilds:
   esbuild: true
   sharp: true
 verifyDepsBeforeRun: false
+
+# yaml-language-server pins yaml at exactly 2.7.1 (vulnerable, <2.8.3).
+# Force 2.9.0 (already used elsewhere in the tree; 2.x is API-stable).
+# esbuild 0.27.7 (LOW) is left alone — its 0.28 fix needs astro 7.x.
+overrides:
+  "yaml-language-server>yaml": 2.9.0
+  "gray-matter>js-yaml": 3.15.0
