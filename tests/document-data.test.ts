@@ -70,24 +70,28 @@ describe('cv data', () => {
     expect(careers?.details[0]?.title).toBe('(주)한샘');
   });
 
-  it('highlights recent AI workflow achievements in Hanssem career', () => {
+  it('keeps career histories as company, role, and period entries only', () => {
     const careers = cv.sections.find((s) => s.title === '경력 사항');
-    const hanssem = careers?.details.find((d) => d.title === '(주)한샘');
-    const themes = hanssem?.content.map((item) => item.title) ?? [];
-    expect(themes).toContain('프론트엔드 성능 엔지니어링');
-    expect(themes).toContain('AI 인프라·표준화');
+    for (const d of careers?.details ?? []) {
+      expect(d.title).toBeTruthy();
+      expect(d.role).toBeTruthy();
+      expect(d.period).toBeTruthy();
+      expect(d.content).toEqual([]);
+    }
   });
 
-  it('abbreviates earlier careers to only impactful roles (인프랩, 한화L&C)', () => {
+  it('includes the full career history from existing cv history', () => {
     const careers = cv.sections.find((s) => s.title === '경력 사항');
     const titles = careers?.details.map((d) => d.title) ?? [];
-    expect(titles).toContain('인프랩');
-    expect(titles).toContain('(주)한화L&C');
-    // dropped earlier employers
-    expect(titles).not.toContain('슈퍼메이커즈');
-    expect(titles).not.toContain('(주)한화생명');
-    expect(titles).not.toContain('제플린엑스');
-    expect(titles).not.toContain('텀블벅');
+    expect(titles).toEqual([
+      '(주)한샘',
+      '슈퍼메이커즈',
+      '(주)한화생명',
+      '인프랩',
+      '제플린엑스',
+      '텀블벅',
+      '(주)한화L&C',
+    ]);
   });
 
   it('does not expose career move reasons in public cv data', () => {
