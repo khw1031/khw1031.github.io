@@ -6,6 +6,16 @@
 
 대상 파일은 주로 `src/data/cv.ts`이며, CV 문구를 마크다운이나 다른 데이터 파일로 옮기더라도 동일한 원칙을 따른다.
 
+## Project Workspace
+
+- `docs/cv/projects/`를 `주요 프로젝트` 작성 전용 작업공간으로 사용한다.
+- 프로젝트 파일은 시작 월 기준 `YYYY-MM-slug.md` 형식으로 만든다.
+- 신규 프로젝트는 `docs/cv/projects/_new-project-template.md`를 기준으로 작성한다.
+- `docs/cv/projects/README.md`의 큐를 오래된 프로젝트부터 처리한다.
+- 프로젝트 파일의 `status`는 `draft`, `needs-input`, `ready`, `published` 중 하나로 관리한다.
+- `ready` 상태가 되기 전에는 `src/data/cv.ts`에 최종 반영하지 않는다.
+- 사용자와 상호작용할 때는 한 번에 하나의 프로젝트만 다루고, 질문은 최대 3개로 제한한다.
+
 ## Project Entry Structure
 
 - 각 프로젝트는 `What`, `Why`, `How`, `Impact`를 내부 점검축으로 삼는다.
