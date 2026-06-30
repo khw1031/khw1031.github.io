@@ -3,10 +3,12 @@ import type { Detail } from '../../data/types';
 
 interface Props {
   detail: Detail;
+  showDuration?: boolean;
 }
 
-const { detail } = Astro.props;
+const { detail, showDuration = false } = Astro.props;
 const isExternal = (href?: string) => Boolean(href && /^https?:\/\//.test(href));
+const shouldShowDuration = showDuration && Boolean(detail.period);
 
 const metaParts: string[] = [];
 if (detail.role) metaParts.push(detail.role);
@@ -14,7 +16,7 @@ if (detail.period) metaParts.push(detail.period);
 ---
 
 <article class="mt-3 bg-foreground/[0.025] px-4 py-3">
-  <header class="flex flex-wrap items-baseline gap-x-2">
+  <header class="flex flex-wrap items-baseline gap-x-2 gap-y-1">
     {detail.title && (
       <h3 class="text-base font-semibold">
         {
@@ -49,6 +51,15 @@ if (detail.period) metaParts.push(detail.period);
             </>
           )}
         </p>
+      )
+    }
+    {
+      shouldShowDuration && (
+        <span
+          class="ml-auto min-w-[4.75rem] shrink-0 text-right text-xs font-medium text-muted tabular-nums"
+          data-career-duration
+          data-career-period={detail.period}
+        />
       )
     }
   </header>
