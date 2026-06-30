@@ -20,10 +20,10 @@ private_materials: []
 
 ## Missing Information
 
-- [ ] v1.1.0에서 확정된 공개 가능한 기능 범위
+- [ ] v1.1.0에서 확정된 외부 게시 가능한 기능 범위
 - [ ] 사내 4종 에이전트 호환 구조의 공개 가능 설명
 - [ ] 인테리어 플래너 외 적용 사례
-- [ ] 공개 가능한 workflow diagram 또는 task folder 예시
+- [ ] 외부 게시 가능한 workflow diagram 또는 task folder 예시
 
 ## Deep-Dive Topics
 
@@ -33,7 +33,7 @@ private_materials: []
 
 ## References
 
-공개 가능한 링크만 추가한다.
+내부 근거와 외부 링크를 구분해 추가한다.
 
 - 
 
