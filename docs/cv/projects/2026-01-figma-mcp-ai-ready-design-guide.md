@@ -22,8 +22,8 @@ private_materials: []
 
 - [ ] 99% 디자인 충실도 측정 방식
 - [ ] 구현 시간 3배 단축 비교 기준
-- [ ] AI-Ready 디자인 가이드의 공개 가능한 샘플
-- [ ] 공개 가능한 Figma 캡처 또는 before/after 이미지
+- [ ] AI-Ready 디자인 가이드의 외부 게시 가능한 샘플
+- [ ] 외부 게시 가능한 Figma 캡처 또는 before/after 이미지
 
 ## Deep-Dive Topics
 
@@ -33,7 +33,7 @@ private_materials: []
 
 ## References
 
-공개 가능한 링크만 추가한다.
+내부 근거와 외부 링크를 구분해 추가한다.
 
 - 
 

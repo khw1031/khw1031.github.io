@@ -41,8 +41,8 @@ private_materials: []
 ## Missing Information
 
 - [ ] 기간과 참여 역할 확인
-- [ ] 공개 가능한 수치 확인
-- [ ] 공개 가능한 레퍼런스 확인
+- [ ] 외부 게시 가능한 수치 확인
+- [ ] 외부 게시 가능한 레퍼런스 확인
 - [ ] 이미지/다이어그램 공개 가능 여부 확인
 
 ## Deep-Dive Topics
@@ -51,7 +51,7 @@ private_materials: []
 
 ## References
 
-공개 가능한 링크만 추가한다.
+내부 근거와 외부 링크를 구분해 추가한다.
 
 - 
 

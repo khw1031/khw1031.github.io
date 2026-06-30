@@ -5,7 +5,11 @@ company: '(주)한샘'
 role: 'MCP 서버 개발 및 API 문서 표준화'
 status: draft
 source: 'src/data/cv.ts'
+post: 'src/content/posts/20251218.md'
+public_url: 'https://khw1031.github.io/posts/20251218/'
+evidence_dir: 'docs/cv/evidence/2026-01-hanssem-swagger-mcp-server/'
 cv_ready: false
+post_ready: false
 public_references:
   - '/posts/20251218/'
 private_materials: []
@@ -24,7 +28,7 @@ private_materials: []
 - [ ] 공개 npm/GitHub 링크를 CV에 직접 노출할지 여부
 - [ ] 내부용 Hanssem 서버와 오픈소스 패키지의 구분 방식
 - [ ] 실제 API 연동 시간 절감 사례
-- [ ] 공개 가능한 사용 예시 또는 시퀀스 다이어그램
+- [ ] 외부 게시 가능한 사용 예시 또는 시퀀스 다이어그램
 
 ## Deep-Dive Topics
 
@@ -34,9 +38,18 @@ private_materials: []
 
 ## References
 
-공개 가능한 링크만 추가한다.
+내부 근거와 외부 링크를 구분해 추가한다.
 
 - /posts/20251218/
+
+## Linked Documents
+
+- [Post](../../../src/content/posts/20251218.md)
+- [Metrics](../evidence/2026-01-hanssem-swagger-mcp-server/metrics.md)
+- [Interview Questions](../evidence/2026-01-hanssem-swagger-mcp-server/interview-questions.md)
+- [Concepts](../evidence/2026-01-hanssem-swagger-mcp-server/concepts.md)
+- [References](../evidence/2026-01-hanssem-swagger-mcp-server/references.md)
+- [Rewrite Notes](../evidence/2026-01-hanssem-swagger-mcp-server/rewrite-notes.md)
 
 ## Draft CV Paragraph
 

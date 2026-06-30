@@ -48,6 +48,7 @@
 - **Progressive Disclosure** — Put global rules in `AGENTS.md`, domain-specific workflows in skills/docs, and one-off instructions in the conversation.
 - **Do Not Overload Context** — Keep this file concise and avoid duplicating long documentation that already exists elsewhere.
 - **CLAUDE.md Symlink** — Whenever an `AGENTS.md` file is created or moved, keep a sibling `CLAUDE.md` symlink pointing to `AGENTS.md` unless the user explicitly requests otherwise. Use a relative symlink like `CLAUDE.md -> AGENTS.md`.
+- **Repository Visibility** — Do not treat this repository as public when creating internal working documents. Internal context, private links, and non-public implementation notes may be recorded in docs when useful. Publication review applies only when moving content into public-facing posts, CV text, or external artifacts.
 
 ## Posts
 
