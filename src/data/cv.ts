@@ -29,11 +29,6 @@ const data: DocumentPage = documentPageSchema.parse({
           period: '2018.10 — 2020.05',
         },
         {
-          title: '제플린엑스',
-          role: '팀원',
-          period: '2018.07 — 2018.09',
-        },
-        {
           title: '텀블벅',
           role: '팀원',
           period: '2017.07 — 2018.06',
