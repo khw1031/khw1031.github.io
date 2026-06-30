@@ -15,22 +15,24 @@ if (detail.period) metaParts.push(detail.period);
 
 <article class="mt-3 bg-foreground/[0.025] px-4 py-3">
   <header class="flex flex-wrap items-baseline gap-x-2">
-    <h3 class="text-base font-semibold">
-      {
-        detail.url ? (
-          <a
-            href={detail.url}
-            {...(isExternal(detail.url)
-              ? { target: '_blank', rel: 'noopener noreferrer' }
-              : {})}
-          >
-            {detail.title}
-          </a>
-        ) : (
-          detail.title
-        )
-      }
-    </h3>
+    {detail.title && (
+      <h3 class="text-base font-semibold">
+        {
+          detail.url ? (
+            <a
+              href={detail.url}
+              {...(isExternal(detail.url)
+                ? { target: '_blank', rel: 'noopener noreferrer' }
+                : {})}
+            >
+              {detail.title}
+            </a>
+          ) : (
+            detail.title
+          )
+        }
+      </h3>
+    )}
     {
       (metaParts.length > 0 || detail.ect) && (
         <p class="text-xs text-muted">
