@@ -80,16 +80,16 @@ describe('cv data', () => {
     }
   });
 
-  it('includes the current career history with insurance record periods', () => {
+  it('includes the current career history with roles and insurance record periods', () => {
     const careers = cv.sections.find((s) => s.title === '경력 사항');
-    const histories = careers?.details.map(({ title, period }) => ({ title, period })) ?? [];
+    const histories = careers?.details.map(({ title, role, period }) => ({ title, role, period })) ?? [];
     expect(histories).toEqual([
-      { title: '(주)한샘', period: '2023.02.01 — 재직중' },
-      { title: '슈퍼메이커즈', period: '2021.12.20 — 2022.12.31' },
-      { title: '(주)한화생명', period: '2021.01.18 — 2021.12.25' },
-      { title: '인프랩', period: '2018.10.01 — 2020.04.01' },
-      { title: '텀블벅', period: '2017.07.03 — 2018.04.07' },
-      { title: '현대엘앤씨', period: '2014.07.01 — 2016.05.31' },
+      { title: '(주)한샘', role: '프론트엔드 개발자', period: '2023.02.01 — 재직중' },
+      { title: '슈퍼메이커즈', role: '프론트엔드 개발자', period: '2021.12.20 — 2022.12.31' },
+      { title: '(주)한화생명', role: '프론트엔드 개발자', period: '2021.01.18 — 2021.12.25' },
+      { title: '인프랩', role: '프론트엔드 개발자', period: '2018.10.01 — 2020.04.01' },
+      { title: '텀블벅', role: '프론트엔드 개발자', period: '2017.07.03 — 2018.04.07' },
+      { title: '현대엘엔씨(구 - 한화L&C)', role: '재무팀', period: '2014.07.01 — 2016.05.31' },
     ]);
   });
 
