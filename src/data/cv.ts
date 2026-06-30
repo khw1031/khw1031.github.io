@@ -12,64 +12,36 @@ const data: DocumentPage = documentPageSchema.parse({
           title: '(주)한샘',
           role: '파트 리드',
           period: '2023.02 — 재직중',
-          content: [
-            {
-              title: '프론트엔드 성능 엔지니어링',
-              description: [
-                '전시 컴포넌트 번들 사이즈 70% 감소(Mobile 927→279KB, PC 1.16MB→462KB)·빌드 시간 75% 단축 — Yarn/Rollup을 pnpm/Turbo/Vite(esbuild)로 전환하고 Lodash-ES·peerDependencies·트리쉐이킹 최적화로 LCP·TBT·CLS 개선',
-                '한샘몰 서버 메모리 최적화로 PM2 제거 시 135KB 절감·Sentry 15% 오버헤드 정량 분석, CloudWatch Container Insights 기반 지속 모니터링과 autocannon/nGrinder 부하 테스트 방법론 확보',
-              ],
-            },
-            {
-              title: '디자인시스템·전시 플랫폼',
-              description: [
-                '한샘몰 디자인시스템을 Owner/Maintainer로 구축·운영 — Core·Mobile·PC 3패키지, Storybook 문서화, /release 커맨드 기반 자동 릴리즈, 50+ 정규 릴리즈 운영',
-                '한샘몰 전시 시스템 개편 및 HomeSOL 그랜드 오픈 수행 — 전시 컴포넌트 설계, 어드민/클라이언트 분리 아키텍처, Sentry 연동',
-                '기간계 모바일 디자인시스템 구현 — 15개 컴포넌트 중 14개(93%)를 Storybook·Jest 기반으로 문서화·테스트',
-              ],
-            },
-            {
-              title: 'ERP·기간계 아키텍처',
-              description: [
-                'ERP 프론트엔드 아키텍처를 팀 내 최초로 구축 — pnpm Workspaces+Turborepo 모노레포(apps 2·packages 9), PR 리뷰·Git 운영 규칙·MSW·Jenkins 선택적 빌드/배포 파이프라인 설계, CMS·WMSM 신규 서비스에 100% 적용',
-                'HFCM 홈퍼니싱 시공시스템 PC(250+ 화면) 전담 개발, HFCMS 모바일·PC·고객 웹뷰 3클라이언트 인수 운영',
-                '형상관리를 GitHub Enterprise→Bitbucket으로 전환하고 Nexus 기반 npm 레지스트리·내부 패키지 퍼블리싱 워크플로우 구축',
-              ],
-            },
-            {
-              title: 'AI 인프라·표준화',
-              description: [
-                '팀 레벨 AI 코딩 표준화 프레임워크(.ai/ 디렉토리·Grounding Rules·Research→Plan→Review→Implement→Verify 워크플로우)를 설계·문서화하고 Claude Code의 IT본부 도입을 추진해 팀 단위 AI 코딩 기반을 구축',
-                'PRD→UIUX→Figma→FE Code 4단계 AI 워크플로우와 Design System Dictionary 기반 Figma/DS/Tailwind 3-way 검증 프레임워크를 설계',
-                'Squad Platform PoC(Git-Native 기획 협업 플랫폼)와 Design System Dictionary PoC를 설계해 기획-디자인-개발 협업 모델을 실험',
-              ],
-            },
-          ],
+        },
+        {
+          title: '슈퍼메이커즈',
+          role: '리드',
+          period: '2021.12 — 2022.12',
+        },
+        {
+          title: '(주)한화생명',
+          role: '팀원',
+          period: '2021.01 — 2021.12',
         },
         {
           title: '인프랩',
           role: '파트 리드',
           period: '2018.10 — 2020.05',
-          url: 'https://inflearn.com',
-          content: [
-            {
-              description: [
-                '코딩 교육 플랫폼 인프런을 git init to production으로 구축 — 워드프레스 웹앱을 NodeJS 기반으로 마이그레이션하고 유닛 테스트·코드 리뷰·스프린트 기반 개발·데일리 스크럼을 도입, Pure JavaScript·FxJS 기반 함수형 프론트엔드로 개발',
-              ],
-            },
-          ],
+        },
+        {
+          title: '제플린엑스',
+          role: '팀원',
+          period: '2018.07 — 2018.09',
+        },
+        {
+          title: '텀블벅',
+          role: '팀원',
+          period: '2017.07 — 2018.06',
         },
         {
           title: '(주)한화L&C',
           role: '팀원',
           period: '2014.06 — 2016.05',
-          content: [
-            {
-              description: [
-                '재무회계팀에서 Oracle ERP(매출채권·매입채무)와 세무(부가세·원천세)를 담당 — 이후 개발자로 전향',
-              ],
-            },
-          ],
         },
       ],
     },
