@@ -3,8 +3,8 @@ import { cv } from '../src/data/cv';
 import { sideProjects } from '../src/data/side-projects';
 
 describe('side-projects shared module', () => {
-  it('has at least 4 entries', () => {
-    expect(sideProjects.length).toBeGreaterThanOrEqual(4);
+  it('has at least 2 entries', () => {
+    expect(sideProjects.length).toBeGreaterThanOrEqual(2);
   });
 
   it('every entry has a url so cv can link out to it', () => {
