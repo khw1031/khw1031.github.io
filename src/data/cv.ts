@@ -2,7 +2,7 @@ import { sideProjects } from './side-projects';
 import { type DocumentPage, documentPageSchema } from './types';
 
 const data: DocumentPage = documentPageSchema.parse({
-  title: '김현우 · Builder',
+  title: '김현우',
   description:
     '프론트엔드 제품 개발 경험을 기반으로 AI Transformation과 생산성 향상을 구축하는 김현우 이력서.',
   sections: [
@@ -10,7 +10,6 @@ const data: DocumentPage = documentPageSchema.parse({
       title: '프로필',
       details: [
         {
-          title: 'Builder',
           subtitle:
             '프론트엔드 제품 개발 경험을 기반으로 개발·비개발 직무의 AI Transformation을 설계·구축해 조직 생산성을 높이는 개발자',
           content: [

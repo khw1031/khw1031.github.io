@@ -23,8 +23,14 @@ describe('detailContentSchema', () => {
 });
 
 describe('detailSchema', () => {
-  it('requires a non-empty title', () => {
+  it('rejects an empty title when supplied', () => {
     expect(() => detailSchema.parse({ title: '', period: '2017' })).toThrow();
+  });
+
+  it('allows omitting title entirely (untitled detail use case)', () => {
+    const parsed = detailSchema.parse({ subtitle: '프로필 요약' });
+    expect(parsed.title).toBeUndefined();
+    expect(parsed.subtitle).toBe('프로필 요약');
   });
 
   it('rejects an empty period when supplied', () => {
@@ -48,10 +54,10 @@ describe('cv data', () => {
     expect(() => documentPageSchema.parse(cv)).not.toThrow();
   });
 
-  it('uses the Builder title in the page and profile heading', () => {
-    expect(cv.title).toBe('김현우 · Builder');
+  it('uses the name as the page title and leaves the profile detail untitled', () => {
+    expect(cv.title).toBe('김현우');
     expect(cv.sections[0]?.title).toBe('프로필');
-    expect(cv.sections[0]?.details[0]?.title).toBe('Builder');
+    expect(cv.sections[0]?.details[0]?.title).toBeUndefined();
   });
 
   it('starts with profile then key achievements before career details', () => {
@@ -110,7 +116,6 @@ describe('cv data', () => {
       expect(titles).toEqual(['What', 'How', 'Impact']);
     }
   });
-
 });
 
 describe('side project data', () => {

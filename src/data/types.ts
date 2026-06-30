@@ -12,7 +12,7 @@ export const detailContentSchema = z
   });
 
 export const detailSchema = z.object({
-  title: z.string().min(1),
+  title: z.string().min(1).optional(),
   subtitle: z.string().min(1).optional(),
   period: z.string().min(1).optional(),
   role: z.string().min(1).optional(),

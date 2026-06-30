@@ -9,8 +9,10 @@ export function documentPageToMarkdown(page: DocumentPage): string {
     out.push(`## ${section.title}`, '');
 
     for (const detail of section.details) {
-      const heading = detail.url ? `[${detail.title}](${detail.url})` : detail.title;
-      out.push(`### ${heading}`);
+      if (detail.title) {
+        const heading = detail.url ? `[${detail.title}](${detail.url})` : detail.title;
+        out.push(`### ${heading}`);
+      }
 
       if (detail.subtitle) out.push(`*${detail.subtitle}*`);
 
