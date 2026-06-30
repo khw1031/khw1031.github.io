@@ -239,22 +239,7 @@ const data: DocumentPage = documentPageSchema.parse({
         {
           title: '패스트캠퍼스',
           period: '2017 (수료)',
-          content: [{ title: '프론트엔드 부트캠프' }],
-        },
-        {
-          title: 'Udacity',
-          period: '2016 (수료)',
-          content: [{ title: 'Nano Degree, Intro to Programming' }],
-        },
-        {
-          title: '성균관대학교',
-          period: '2005.03 — 2014.08 (졸업)',
-          content: [{ title: '경영대학 경영학과' }],
-        },
-        {
-          title: '홍익대학교',
-          period: '2006.03 — 2010.02 (중퇴)',
-          content: [{ title: '미술대학 예술학과' }],
+          content: [{ title: '프론트엔드 풀타임 부트캠프' }],
         },
       ],
     },
