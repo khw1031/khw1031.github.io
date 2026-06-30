@@ -82,7 +82,8 @@ describe('cv data', () => {
 
   it('includes the current career history with roles and insurance record periods', () => {
     const careers = cv.sections.find((s) => s.title === '경력 사항');
-    const histories = careers?.details.map(({ title, role, period }) => ({ title, role, period })) ?? [];
+    const histories =
+      careers?.details.map(({ title, role, period }) => ({ title, role, period })) ?? [];
     expect(histories).toEqual([
       { title: '(주)한샘', role: '프론트엔드 개발자', period: '2023.02.01 — 재직중' },
       { title: '슈퍼메이커즈', role: '프론트엔드 개발자', period: '2021.12.20 — 2022.12.31' },
