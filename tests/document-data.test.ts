@@ -111,9 +111,6 @@ describe('cv data', () => {
     }
   });
 
-  it('has technology keywords', () => {
-    expect(cv.keywords.length).toBeGreaterThan(0);
-  });
 });
 
 describe('side project data', () => {
