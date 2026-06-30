@@ -54,16 +54,14 @@ describe('cv data', () => {
     expect(() => documentPageSchema.parse(cv)).not.toThrow();
   });
 
-  it('uses the name as the page title and leaves the profile detail untitled', () => {
+  it('uses the name as the page title without a profile section', () => {
     expect(cv.title).toBe('김현우');
-    expect(cv.sections[0]?.title).toBe('프로필');
-    expect(cv.sections[0]?.details[0]?.title).toBeUndefined();
+    expect(cv.sections.map((section) => section.title)).not.toContain('프로필');
   });
 
-  it('starts with profile then key achievements before career details', () => {
-    expect(cv.sections[0]?.title).toBe('프로필');
-    expect(cv.sections[1]?.title).toBe('핵심 성과');
-    expect(cv.sections[2]?.title).toBe('경력 사항');
+  it('starts with career details without a key achievements section', () => {
+    expect(cv.sections[0]?.title).toBe('경력 사항');
+    expect(cv.sections.map((section) => section.title)).not.toContain('핵심 성과');
   });
 
   it('includes the 경력 사항 section with Hanssem as the first career', () => {

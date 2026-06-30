@@ -3,45 +3,8 @@ import { type DocumentPage, documentPageSchema } from './types';
 
 const data: DocumentPage = documentPageSchema.parse({
   title: '김현우',
-  description:
-    '프론트엔드 제품 개발 경험을 기반으로 AI Transformation과 생산성 향상을 구축하는 김현우 이력서.',
+  description: '김현우 이력서.',
   sections: [
-    {
-      title: '프로필',
-      details: [
-        {
-          subtitle:
-            '프론트엔드 제품 개발 경험을 기반으로 개발·비개발 직무의 AI Transformation을 설계·구축해 조직 생산성을 높이는 개발자',
-          content: [
-            {
-              kind: 'prose',
-              description: [
-                '8년간 스타트업부터 대기업까지 웹 애플리케이션을 개발했고, 현재 한샘에서 파트 리드로 AI 도구를 활용한 개발 워크플로우 구축과 웹 성능 최적화를 리드하고 있다.',
-                'AI가 코드를 더 만들수록 리뷰 부담·맥락 유실·품질 편차라는 과제가 커지는 시대에, 실험과 검증의 균형을 잡으며 팀 단위로 재현 가능한 워크플로우를 만드는 일에 집중한다.',
-              ],
-            },
-          ],
-        },
-      ],
-    },
-    {
-      title: '핵심 성과',
-      details: [
-        {
-          title: '정량 하이라이트',
-          content: [
-            {
-              description: [
-                '인테리어 플래너: 3인 팀·21일 개발로 기존 예상 2~3개월 대비 62% 일정 단축, AI 협업 비율 86.8%, 테스트:소스 비율 0.80 달성',
-                'Hanssem AI Toolkit: 37개 Skills/Rules/Agents 항목을 검색·설치 가능한 사내 도구 자산으로 제품화, v2.18.0까지 릴리즈 운영',
-                'Feature Workflow Skill: Requirements→Design→Task→Implementation→Review 5단계를 4종 AI 에이전트에서 동일 절차로 사용 가능하게 표준화 (v1.1.0)',
-                '한샘몰 전시 컴포넌트: 번들 사이즈 70% 감소(Mobile 927KB→279KB), 빌드 시간 75% 단축 달성',
-              ],
-            },
-          ],
-        },
-      ],
-    },
     {
       title: '경력 사항',
       details: [
