@@ -8,14 +8,24 @@ interface Props {
 
 const { section } = Astro.props;
 const showCareerDuration = section.title === '경력 사항';
+const careerPeriods = section.details.map((detail) => detail.period).filter((period) => period);
 ---
 
 <section class="mt-10">
-  <h2 class="text-base font-semibold border-b border-border pb-2">
-    {section.title}
+  <h2 class="flex items-baseline justify-between gap-3 border-b border-border pb-2 text-base font-semibold">
+    <span>{section.title}</span>
+    {
+      showCareerDuration && (
+        <span
+          class="shrink-0 text-right text-xs font-medium text-muted tabular-nums"
+          data-career-total-duration
+          data-career-periods={JSON.stringify(careerPeriods)}
+        />
+      )
+    }
   </h2>
   <div class="mt-3">
-    {section.details.map((d) => <Detail detail={d} showDuration={showCareerDuration} />)}
+    {section.details.map((d) => <Detail detail={d} />)}
   </div>
   {
     showCareerDuration && (

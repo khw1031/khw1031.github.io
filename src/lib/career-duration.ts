@@ -42,7 +42,7 @@ export function formatCareerDuration(totalMonths: number): string {
   return `${years}yr ${months}mo`;
 }
 
-export function getCareerDurationLabel(period: string, today = new Date()): string | undefined {
+export function getCareerDurationMonths(period: string, today = new Date()): number | undefined {
   const matches = [...period.matchAll(periodDatePattern)];
   const startMatch = matches[0];
 
@@ -66,16 +66,60 @@ export function getCareerDurationLabel(period: string, today = new Date()): stri
     return undefined;
   }
 
-  return formatCareerDuration(calculateCompletedMonths(start, end));
+  return calculateCompletedMonths(start, end);
+}
+
+export function getCareerDurationLabel(period: string, today = new Date()): string | undefined {
+  const months = getCareerDurationMonths(period, today);
+  return months === undefined ? undefined : formatCareerDuration(months);
+}
+
+export function getTotalCareerDurationLabel(
+  periods: string[],
+  today = new Date(),
+): string | undefined {
+  let totalMonths = 0;
+  let validPeriodCount = 0;
+
+  for (const period of periods) {
+    const months = getCareerDurationMonths(period, today);
+
+    if (months === undefined) {
+      continue;
+    }
+
+    totalMonths += months;
+    validPeriodCount += 1;
+  }
+
+  return validPeriodCount > 0 ? formatCareerDuration(totalMonths) : undefined;
+}
+
+function parseCareerPeriods(rawPeriods: string | undefined): string[] {
+  if (!rawPeriods) {
+    return [];
+  }
+
+  try {
+    const periods: unknown = JSON.parse(rawPeriods);
+
+    if (!Array.isArray(periods)) {
+      return [];
+    }
+
+    return periods.filter((period): period is string => typeof period === 'string');
+  } catch {
+    return [];
+  }
 }
 
 export function updateCareerDurationElements(root: ParentNode = document): void {
   const today = new Date();
-  const elements = root.querySelectorAll<HTMLElement>('[data-career-duration]');
+  const elements = root.querySelectorAll<HTMLElement>('[data-career-total-duration]');
 
   for (const element of elements) {
-    const period = element.dataset.careerPeriod;
-    const duration = period ? getCareerDurationLabel(period, today) : undefined;
+    const periods = parseCareerPeriods(element.dataset.careerPeriods);
+    const duration = getTotalCareerDurationLabel(periods, today);
 
     if (!duration) {
       element.hidden = true;
@@ -84,6 +128,6 @@ export function updateCareerDurationElements(root: ParentNode = document): void 
 
     element.hidden = false;
     element.textContent = duration;
-    element.setAttribute('aria-label', `경력 기간 ${duration}`);
+    element.setAttribute('aria-label', `총 경력 기간 ${duration}`);
   }
 }
