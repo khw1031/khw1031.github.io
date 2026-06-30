@@ -1,7 +1,5 @@
 import { describe, expect, it } from 'vitest';
-import { coverLetter } from '../src/data/cover-letter';
 import { cv } from '../src/data/cv';
-import { portfolio } from '../src/data/portfolio';
 import { sideProjects } from '../src/data/side-projects';
 import { detailContentSchema, detailSchema, documentPageSchema } from '../src/data/types';
 
@@ -50,31 +48,42 @@ describe('cv data', () => {
     expect(() => documentPageSchema.parse(cv)).not.toThrow();
   });
 
-  it('uses the Builder title in the page and summary heading', () => {
+  it('uses the Builder title in the page and profile heading', () => {
     expect(cv.title).toBe('김현우 · Builder');
+    expect(cv.sections[0]?.title).toBe('프로필');
     expect(cv.sections[0]?.details[0]?.title).toBe('Builder');
   });
 
-  it('starts with a summary section before career details', () => {
-    expect(cv.sections[0]?.title).toBe('요약');
-    expect(cv.sections[1]?.title).toBe('경력 사항');
+  it('starts with profile then key achievements before career details', () => {
+    expect(cv.sections[0]?.title).toBe('프로필');
+    expect(cv.sections[1]?.title).toBe('핵심 성과');
+    expect(cv.sections[2]?.title).toBe('경력 사항');
   });
 
-  it('includes the 경력 사항 section after summary', () => {
+  it('includes the 경력 사항 section with Hanssem as the first career', () => {
     const careers = cv.sections.find((s) => s.title === '경력 사항');
     expect(careers).toBeDefined();
-    expect(careers?.details.length).toBeGreaterThan(0);
+    expect(careers?.details[0]?.title).toBe('(주)한샘');
   });
 
   it('highlights recent AI workflow achievements in Hanssem career', () => {
     const careers = cv.sections.find((s) => s.title === '경력 사항');
     const hanssem = careers?.details.find((d) => d.title === '(주)한샘');
-    const titles = hanssem?.content.map((item) => item.title) ?? [];
-    expect(titles.slice(0, 3)).toEqual([
-      'Feature Workflow Skill 설계 및 사내 표준화',
-      'Hanssem AI Toolkit / Frontend AI Library 구축',
-      '인테리어 플래너 AI 활용 개발',
-    ]);
+    const themes = hanssem?.content.map((item) => item.title) ?? [];
+    expect(themes).toContain('프론트엔드 성능 엔지니어링');
+    expect(themes).toContain('AI 인프라·표준화');
+  });
+
+  it('abbreviates earlier careers to only impactful roles (인프랩, 한화L&C)', () => {
+    const careers = cv.sections.find((s) => s.title === '경력 사항');
+    const titles = careers?.details.map((d) => d.title) ?? [];
+    expect(titles).toContain('인프랩');
+    expect(titles).toContain('(주)한화L&C');
+    // dropped earlier employers
+    expect(titles).not.toContain('슈퍼메이커즈');
+    expect(titles).not.toContain('(주)한화생명');
+    expect(titles).not.toContain('제플린엑스');
+    expect(titles).not.toContain('텀블벅');
   });
 
   it('does not expose career move reasons in public cv data', () => {
@@ -92,20 +101,18 @@ describe('cv data', () => {
     }
   });
 
+  it('has a 주요 프로젝트 section using the What/How/Impact structure', () => {
+    const projects = cv.sections.find((s) => s.title === '주요 프로젝트');
+    expect(projects).toBeDefined();
+    expect(projects?.details.length).toBeGreaterThan(0);
+    for (const d of projects?.details ?? []) {
+      const titles = d.content.map((c) => c.title);
+      expect(titles).toEqual(['What', 'How', 'Impact']);
+    }
+  });
+
   it('has technology keywords', () => {
     expect(cv.keywords.length).toBeGreaterThan(0);
-  });
-});
-
-describe('cover-letter data', () => {
-  it('parses with the document page schema', () => {
-    expect(() => documentPageSchema.parse(coverLetter)).not.toThrow();
-  });
-
-  it('has at least 소개 and 핵심 역량 sections', () => {
-    const titles = coverLetter.sections.map((s) => s.title);
-    expect(titles).toContain('소개');
-    expect(titles).toContain('핵심 역량');
   });
 });
 
@@ -115,24 +122,5 @@ describe('side project data', () => {
 
     expect(glowed).toBeDefined();
     expect(glowed?.role).toBe('Open Source / Go TUI');
-  });
-});
-
-describe('portfolio data', () => {
-  it('parses with the document page schema', () => {
-    expect(() => documentPageSchema.parse(portfolio)).not.toThrow();
-  });
-
-  it('hides contact info', () => {
-    expect(portfolio.hideContact).toBe(true);
-  });
-
-  it('highlights AI workflow projects before legacy projects', () => {
-    const projects = portfolio.sections[0]?.details.map((d) => d.title) ?? [];
-    expect(projects.slice(0, 3)).toEqual([
-      '인테리어 플래너 AI 활용 개발',
-      'Feature Workflow Skill 설계 및 사내 표준화',
-      'Hanssem AI Toolkit / Frontend AI Library 구축',
-    ]);
   });
 });

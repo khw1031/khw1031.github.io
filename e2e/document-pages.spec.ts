@@ -12,19 +12,7 @@ const DOCS: DocSpec[] = [
     path: '/cv/',
     h1Includes: '김현우',
     expectsContact: true,
-    sectionTitles: ['경력 사항', '사이드 프로젝트', '교육 사항'],
-  },
-  {
-    path: '/cover-letter/',
-    h1Includes: '김현우',
-    expectsContact: true,
-    sectionTitles: ['소개', '성장 과정', '핵심 역량'],
-  },
-  {
-    path: '/portfolio/',
-    h1Includes: '김현우',
-    expectsContact: false,
-    sectionTitles: ['주요 프로젝트', '사이드 프로젝트'],
+    sectionTitles: ['경력 사항', '주요 프로젝트', '사이드 프로젝트', '교육 사항'],
   },
 ];
 
@@ -36,7 +24,7 @@ test('every document page exposes a copy-markdown link', async ({ page }) => {
   }
 });
 
-test('document raw markdown endpoints serve text/markdown', async ({ request }) => {
+test('document raw markdown endpoint serves text/markdown', async ({ request }) => {
   for (const doc of DOCS) {
     const mdUrl = `${doc.path.replace(/\/$/, '')}.md`;
     const res = await request.get(mdUrl);
@@ -54,17 +42,19 @@ test('header exposes /cv/ as the umbrella entry', async ({ page }) => {
   await expect(page.locator('header a[href="/cover-letter/"]')).toHaveCount(0);
 });
 
-test('/cv/ cross-links out to /portfolio/ and /cover-letter/', async ({ page }) => {
-  await page.goto('/cv/');
-  await expect(page.locator('main aside a[href="/portfolio/"]')).toHaveCount(1);
-  await expect(page.locator('main aside a[href="/cover-letter/"]')).toHaveCount(1);
+test('removed /portfolio/ and /cover-letter/ pages 404', async ({ request }) => {
+  for (const path of ['/portfolio/', '/cover-letter/']) {
+    const res = await request.get(path);
+    expect(res.status()).toBe(404);
+  }
 });
 
-test('/cv/ side-project skeleton items link to /portfolio/', async ({ page }) => {
-  await page.goto('/cv/');
-  await expect(
-    page.locator('main section:has(h2:has-text("사이드 프로젝트")) a[href="/portfolio/"]'),
-  ).toHaveCount(4);
+test('cv projects use the What/How/Impact structure in markdown export', async ({ request }) => {
+  const res = await request.get('/cv.md');
+  const body = await res.text();
+  expect(body).toContain('#### What');
+  expect(body).toContain('#### How');
+  expect(body).toContain('#### Impact');
 });
 
 for (const doc of DOCS) {
