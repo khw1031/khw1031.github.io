@@ -1,6 +1,7 @@
 ---
 import OverthinkThreeHero from '../components/OverthinkThreeHero.astro';
 import PostList from '../components/PostList.astro';
+import SearchBox from '../components/SearchBox.astro';
 import { Content as HomeIntro } from '../copy/home.md';
 import Base from '../layouts/Base.astro';
 import { getRecentAcrossCollections } from '../lib/collections';
@@ -15,9 +16,17 @@ const jsonLd = [websiteJsonLd({ siteUrl }), personJsonLd({ siteUrl })];
   <section class="prose max-w-none">
     <OverthinkThreeHero />
     <HomeIntro />
+    <div class="not-prose mt-3 flex justify-end">
+      <SearchBox />
+    </div>
   </section>
   <section class="mt-6">
     <h2 class="font-medium mb-3">Recent</h2>
     <PostList items={recent} />
+    <p class="mt-4 text-sm">
+      <a href="/archive/" class="text-muted hover:text-foreground transition-colors">
+        See all →
+      </a>
+    </p>
   </section>
 </Base>

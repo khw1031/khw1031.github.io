@@ -1,0 +1,31 @@
+---
+import Base from '../layouts/Base.astro';
+---
+
+<Base title="Search — thnkr" description="사이트 내 글 검색.">
+  <section class="mt-2">
+    <h1 class="font-medium mb-3">Search</h1>
+    <div id="search"></div>
+  </section>
+
+  {/* Pagefind assets are generated into /pagefind at build time (`pnpm build`).
+      They do not exist under `astro dev`; verify search with `pnpm build && pnpm preview`. */}
+  <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
+  <script is:inline src="/pagefind/pagefind-ui.js"></script>
+  <script is:inline>
+    window.addEventListener('DOMContentLoaded', () => {
+      // Pagefind assets only exist in the built site (not under `astro dev`).
+      if (typeof PagefindUI === 'undefined') return;
+      new PagefindUI({ element: '#search', showImages: false, showSubResults: true });
+      // Prefill and run the query passed from the home search box (/search/?q=...).
+      const q = new URLSearchParams(window.location.search).get('q');
+      if (q) {
+        const input = document.querySelector('#search input');
+        if (input) {
+          input.value = q;
+          input.dispatchEvent(new Event('input', { bubbles: true }));
+        }
+      }
+    });
+  </script>
+</Base>

@@ -15,7 +15,8 @@ export default defineConfig({
     sitemap({
       filter: (page) => {
         const path = new URL(page).pathname;
-        return path !== '/notes' && !path.startsWith('/notes/');
+        const isPrivate = (base) => path === base || path.startsWith(`${base}/`);
+        return !isPrivate('/notes') && !isPrivate('/inbox');
       },
     }),
   ],

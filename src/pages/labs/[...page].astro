@@ -1,0 +1,41 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import PatternThreeHero from '../../components/PatternThreeHero.astro';
+import Pagination from '../../components/Pagination.astro';
+import Base from '../../layouts/Base.astro';
+import { type LabEntry, labs } from '../../lib/labs';
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const items = [...labs].sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+  return paginate(items, { pageSize: 10 });
+};
+
+const { page } = Astro.props as { page: Page<LabEntry> };
+const title = 'Labs';
+---
+
+<Base title={`${title} | thnkr`}>
+  <section class="space-y-4">
+    {page.currentPage === 1 && (
+      <PatternThreeHero slug="failed-trial-constellation" transparent scale={1.3} />
+    )}
+
+    <header class="space-y-1">
+      <h1 class="font-medium">{title}</h1>
+    </header>
+
+    <ul class="list-none p-0 m-0 space-y-3">
+      {
+        page.data.map((lab) => (
+          <li>
+            <a href={lab.href} class="text-foreground hover:underline underline-offset-2">
+              {lab.title}
+            </a>
+          </li>
+        ))
+      }
+    </ul>
+
+    <Pagination page={page} />
+  </section>
+</Base>

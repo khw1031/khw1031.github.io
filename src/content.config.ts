@@ -14,6 +14,7 @@ export const collections = {
     schema: readAndWriteSchema,
   }),
   notes: defineCollection({ loader: glob(md('notes')), schema: baseFrontmatter }),
+  inbox: defineCollection({ loader: glob(md('inbox')), schema: baseFrontmatter }),
 };
 
 export { baseFrontmatter };

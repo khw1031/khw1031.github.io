@@ -1,0 +1,37 @@
+---
+interface Props {
+  value: string;
+}
+
+const { value } = Astro.props;
+---
+
+<div class="flex justify-end text-xs text-muted">
+  <a
+    href="#"
+    data-copy-path
+    data-value={value}
+    class="hover:text-foreground transition-colors"
+  >copy path</a>
+</div>
+
+<script>
+  const links = document.querySelectorAll<HTMLAnchorElement>('a[data-copy-path]');
+  for (const link of links) {
+    link.addEventListener('click', async (e) => {
+      e.preventDefault();
+      const value = link.getAttribute('data-value');
+      if (!value || !navigator.clipboard) return;
+      try {
+        await navigator.clipboard.writeText(value);
+        const original = link.textContent;
+        link.textContent = '✓ copied';
+        window.setTimeout(() => {
+          link.textContent = original;
+        }, 1500);
+      } catch {
+        /* clipboard unavailable — no-op */
+      }
+    });
+  }
+</script>

@@ -1,0 +1,21 @@
+---
+import { getCollection, render } from 'astro:content';
+import PostLayout from '../../layouts/PostLayout.astro';
+import { readingTime } from '../../lib/reading-time';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('inbox');
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const minutes = readingTime((entry as { body?: string }).body ?? '').minutes;
+---
+
+<PostLayout entry={entry} readingMinutes={minutes}>
+  <Content />
+</PostLayout>

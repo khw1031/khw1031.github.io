@@ -1,19 +1,26 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
+import { getLabItems } from './labs';
 import { readingTime } from './reading-time';
 
-export type ListableCollection = 'posts' | 'read-and-write' | 'notes';
+export type ListableCollection = 'posts' | 'read-and-write' | 'notes' | 'inbox';
 
 export interface PostListItem {
   href: string;
   title: string;
   pubDate: Date;
-  readingMinutes: number;
+  /** Omitted for non-collection items such as labs. */
+  readingMinutes?: number;
+  /** Distinguishes labs from collection entries in shared list UI. */
+  kind?: 'post' | 'lab';
+  /** Optional source label shown in mixed lists (e.g. the archive). */
+  label?: string;
 }
 
 export const COLLECTION_LABELS: Record<ListableCollection, string> = {
   posts: 'Posts',
   'read-and-write': 'Read & Write',
   notes: 'Notes',
+  inbox: 'Inbox',
 };
 
 export const COLLECTION_ORDER: ListableCollection[] = ['posts', 'read-and-write'];
@@ -41,12 +48,29 @@ export async function getListItems(collection: ListableCollection): Promise<Post
     .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
 }
 
+// Public, listed content merged for the home "Recent" list and the archive:
+// the COLLECTION_ORDER collections plus labs. Notes and inbox are intentionally
+// excluded (they are unlisted — also absent from the sitemap and search index).
+async function getPublicItems(): Promise<PostListItem[]> {
+  const collections = await Promise.all(
+    COLLECTION_ORDER.map((c) =>
+      getListItems(c).then((items) =>
+        items.map((item) => ({ ...item, kind: 'post' as const, label: COLLECTION_LABELS[c] })),
+      ),
+    ),
+  );
+  return [...collections.flat(), ...getLabItems().map((item) => ({ ...item, label: 'Lab' }))].sort(
+    (a, b) => b.pubDate.valueOf() - a.pubDate.valueOf(),
+  );
+}
+
 export async function getRecentAcrossCollections(limit: number): Promise<PostListItem[]> {
-  const all = await Promise.all(COLLECTION_ORDER.map((c) => getListItems(c)));
-  return all
-    .flat()
-    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf())
-    .slice(0, limit);
+  // Recent keeps its compact look: no source label; labs are marked via `kind`.
+  return (await getPublicItems()).slice(0, limit).map(({ label: _label, ...item }) => item);
+}
+
+export async function getArchiveItems(): Promise<PostListItem[]> {
+  return getPublicItems();
 }
 
 export function formatDate(d: Date): string {

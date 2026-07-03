@@ -1,0 +1,23 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import Pagination from '../../components/Pagination.astro';
+import PostList from '../../components/PostList.astro';
+import Base from '../../layouts/Base.astro';
+import { type PostListItem, getArchiveItems } from '../../lib/collections';
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const items = await getArchiveItems();
+  return paginate(items, { pageSize: 20 });
+};
+
+const { page } = Astro.props as { page: Page<PostListItem> };
+const title = 'Archive';
+---
+
+<Base title={`${title} — thnkr`} description="모든 글과 labs를 시간순으로 모아본 아카이브.">
+  <section class="mt-2">
+    <h1 class="font-medium mb-3">{title}</h1>
+    <PostList items={page.data} />
+    <Pagination page={page} />
+  </section>
+</Base>

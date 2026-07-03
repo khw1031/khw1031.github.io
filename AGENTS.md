@@ -67,6 +67,11 @@
 - **Confidentiality** — Do not expose internal URLs, private repository names, customer data, credentials, or screenshots containing non-public information. Ask the user for sanitized/public references when evidence is missing.
 - **Language** — Write posts in Korean by default. Preserve English technical terms when they are standard terms or identifiers, and explain them in Korean when first introduced.
 
+## Site Listing & Search
+
+- **Public Routes Only in Search** — The search index must include only public, listed routes. `notes` and `inbox` are unlisted (already excluded from the sitemap) and must never enter the search index. Keep the searchable set tied to the public listed collections (`COLLECTION_ORDER`) so this rule cannot silently drift.
+- **Consistent Public Scope** — Cross-collection surfaces (home "Recent", the archive, search) share one public scope: the `COLLECTION_ORDER` collections plus labs. Do not add `notes`/`inbox` to these surfaces.
+
 ## Safety
 
 - **Reversibility First** — Confirm before performing irreversible operations such as destructive deletes, tag overwrites, force pushes, or release publication.

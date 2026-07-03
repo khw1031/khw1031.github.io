@@ -9,6 +9,7 @@ dist/
 public/posts/
 public/read-and-write/
 public/notes/
+public/inbox/
 
 # env
 .env

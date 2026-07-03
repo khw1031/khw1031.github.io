@@ -1,0 +1,29 @@
+---
+import { Search } from '@lucide/astro';
+
+// Compact black search box shown next to the home hero. It is a plain GET form,
+// so it always renders (no build-time dependency). Submitting navigates to the
+// /search page with `?q=`, where Pagefind runs the actual full-text search.
+---
+
+<form
+  action="/search/"
+  method="get"
+  role="search"
+  class="not-prose inline-flex items-stretch border border-black bg-white"
+>
+  <input
+    type="search"
+    name="q"
+    placeholder="Search"
+    aria-label="Search"
+    class="w-40 bg-white px-3 py-0.5 text-sm leading-4 text-black placeholder:text-xs placeholder:text-black/40 focus:outline-none"
+  />
+  <button
+    type="submit"
+    aria-label="Search"
+    class="flex items-center justify-center bg-white px-2.5 text-black hover:bg-black/5 transition-colors"
+  >
+    <Search size={13} aria-hidden="true" />
+  </button>
+</form>

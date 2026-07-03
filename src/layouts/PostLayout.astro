@@ -1,7 +1,8 @@
 ---
 import type { CollectionEntry } from 'astro:content';
 import CopyMarkdown from '../components/CopyMarkdown.astro';
-import { type ListableCollection, formatDate } from '../lib/collections';
+import CopyPath from '../components/CopyPath.astro';
+import { COLLECTION_ORDER, type ListableCollection, formatDate } from '../lib/collections';
 import { blogPostingJsonLd } from '../lib/jsonld';
 import Base from './Base.astro';
 
@@ -24,14 +25,26 @@ const jsonLd = blogPostingJsonLd({
   siteUrl,
 });
 const mdHref = `${Astro.url.pathname.replace(/\/$/, '')}/raw.md`;
+const showSourcePath = entry.collection === 'notes' || entry.collection === 'inbox';
+const sourcePath = `src/content/${entry.collection}/${entry.id}.md`;
+// Search principle: index only public, listed collections. Notes and inbox are
+// unlisted (excluded from sitemap too) and must never enter the search index.
+// Drafts are hidden from listings, so they must stay out of the index as well.
+const searchable =
+  (COLLECTION_ORDER as ListableCollection[]).includes(entry.collection) && !data.draft;
 ---
 
 <Base title={`${data.title} — thnkr`} description={description} jsonLd={jsonLd}>
-  <CopyMarkdown href={mdHref} />
-  <article class="prose max-w-none mt-2">
+  <div class="flex justify-end gap-4">
+    <CopyMarkdown href={mdHref} />
+    {showSourcePath && <CopyPath value={sourcePath} />}
+  </div>
+  <article class="prose max-w-none mt-2" data-pagefind-body={searchable ? true : undefined}>
     <h1>{data.title}</h1>
     <div class="not-prose text-sm text-muted mb-6">
-      <time datetime={data.pubDate.toISOString()}>{formatDate(data.pubDate)}</time>
+      <time datetime={data.pubDate.toISOString()} data-pagefind-meta="date">
+        {formatDate(data.pubDate)}
+      </time>
       <span> · </span>
       <span>{readingMinutes} min</span>
     </div>

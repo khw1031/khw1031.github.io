@@ -40,6 +40,15 @@ export type PlotPattern = {
   colors: PlotColors;
   view: PlotView;
   candidates: PlotCandidate[];
+  // Optional opt-in for line patterns: sweeps with index < colorSplit are drawn
+  // in the primary (→secondary) hue, sweeps >= colorSplit in the accent hue. This
+  // gives a hard two-tone split instead of the default continuous primary→accent
+  // gradient. Omitted on every other pattern, so their coloring is unchanged.
+  colorSplit?: number;
+  // Optional per-pattern line opacity (default 0.9). Lower it to make dense,
+  // overlapping strokes read as finer/thinner lines. Omitted elsewhere so those
+  // patterns keep the default opacity.
+  lineOpacity?: number;
 };
 
 // Human-readable rendering of the exact expressions that are evaluated. Shown in
@@ -262,6 +271,118 @@ export const plotPatternRegistry = {
             z: '0.9 * sin(3 * t)',
             domainT: [0, 18.85],
           },
+        },
+      },
+    ],
+  },
+  'resonant-weave': {
+    source: 'resonant-weave',
+    title: 'resonant weave',
+    sourcePhrase: 'vibe coding club',
+    ariaLabel:
+      'Damped harmonograph curve plotted from vibe coding club as coupled oscillators phase-locking into a shared groove',
+    topology: 'resonant harmonograph weave',
+    note: '공명하며 감기는 club의 vibe',
+    colors: { paper: '#0d0b1f', primary: '#4de1ff', secondary: '#a06bff', accent: '#ff5db1' },
+    view: {
+      rotation: { x: -0.38, y: 0.62, z: 0.12 },
+      zoom: 1,
+      motion: { yawAmplitude: 0.22, yawSpeed: 0.00022, rollAmplitude: 0.06, rollSpeed: 0.00017 },
+    },
+    candidates: [
+      {
+        id: 'harmonograph',
+        name: 'damped harmonograph (coupled oscillators)',
+        interpretation:
+          '감쇠 리사주: x = e^(−dt)(sin 2.005t + sin(3t+π/2)), y = e^(−dt)(sin(3.003t+π/4) + sin 2t), z = 0.9·e^(−dt)·sin(5t+π/3).',
+        role: '주파수 2·3·5의 세 성분이 근접-공명으로 beat를 만들고, 감쇠 포락선이 하나의 그루브로 감겨 정착한다.',
+        spec: {
+          mode: 'parametric',
+          samples: 3000,
+          parametric: {
+            x: 'exp(-0.005 * t) * sin(2.005 * t) + exp(-0.005 * t) * sin(3 * t + pi / 2)',
+            y: 'exp(-0.005 * t) * sin(3.003 * t + pi / 4) + exp(-0.005 * t) * sin(2 * t)',
+            z: '0.9 * exp(-0.004 * t) * sin(5 * t + pi / 3)',
+            domainT: [0, 150],
+          },
+        },
+      },
+    ],
+  },
+  'coupled-club-graph': {
+    source: 'coupled-club-graph',
+    title: 'coupled club graph',
+    sourcePhrase: 'vibe coding club',
+    ariaLabel:
+      'Modular multiplication chord graph plotted from vibe coding club as members wired by resonant coupling',
+    topology: 'modular chord network',
+    note: '엮여 공명하는 club',
+    colors: { paper: '#0b1020', primary: '#ff5db1', secondary: '#4de1ff', accent: '#b6ff5c' },
+    view: {
+      rotation: { x: -0.52, y: 0.28, z: -0.15 },
+      zoom: 1,
+      motion: {
+        yawAmplitude: 0,
+        yawSpeed: 0.0002,
+        rollAmplitude: 0.03,
+        rollSpeed: 0.00014,
+        spin: 0.00007,
+      },
+    },
+    candidates: [
+      {
+        id: 'modular-chord',
+        name: 'modular multiplication chord graph (N=48, ×2)',
+        interpretation:
+          '원 위 48개 노드 k를 엣지 규칙 j = (2·k) mod 48으로 잇는다: x = (1−t)cos(τk/48) + t·cos(τj/48), y = 동일한 sin, z = 0.55·sin(πt)·cos(τk/48).',
+        role: '노드는 각 꼭짓점, 현(chord)은 결합 규칙. 엣지들이 겹치며 만드는 카디오이드 포락선이 집단의 형상이다.',
+        spec: {
+          mode: 'parametric',
+          samples: 40,
+          parametric: {
+            x: '(1 - t) * cos(tau * k / 48) + t * cos(tau * ((2 * k) % 48) / 48)',
+            y: '(1 - t) * sin(tau * k / 48) + t * sin(tau * ((2 * k) % 48) / 48)',
+            z: '0.55 * sin(pi * t) * cos(tau * k / 48)',
+            domainT: [0, 1],
+          },
+          sweep: { param: 'k', from: 0, to: 47, steps: 48 },
+        },
+      },
+    ],
+  },
+  'vibe-coded-club': {
+    source: 'vibe-coded-club',
+    title: 'vibe coded club',
+    sourcePhrase: 'vibe coding club',
+    ariaLabel:
+      'Round-pipe lettermark extruded into depth, surrounded by crackling lightning and jazzy looping filaments',
+    topology: 'tubular lettermark in a diagonal filament band',
+    note: '둥근 파이프 글자 + 대각선 번개·재즈 밴드',
+    colors: { paper: '#0a0714', primary: '#ffcf3a', secondary: '#ffcf3a', accent: '#ffcf3a' },
+    colorSplit: 112,
+    lineOpacity: 0.5,
+    view: {
+      rotation: { x: -0.28, y: 0.45, z: 0.05 },
+      zoom: 1,
+      motion: { yawAmplitude: 0.4, yawSpeed: 0.00018, rollAmplitude: 0.04, rollSpeed: 0.00012 },
+    },
+    candidates: [
+      {
+        id: 'tube-decor',
+        name: 'round-pipe lettermark + electric-jazz band',
+        interpretation:
+          'k=0…111: 각 글자 획(floor(k/28))을 반경 0.34 원형 단면 튜브로 감싼다 — k%28을 단면 둘레각 φ로 써서 둥근 파이프(풍선) 표면을 28줄로 채운다. k=112…151: 필라멘트 40가닥의 중심을 대각선 (3.9u,1.7u)에 두고 수직으로 ±1.3 흩뿌려 두꺼운 밴드로 군집시키고, 2:3 리사주 루프(재즈 스윙)+삼각파 지터 asin(sin(26t))(잔 번개)를 얹는다.',
+        role: '둥근 파이프로 채운 입체 글자와, 좌하→우상 대각선으로 두껍게 군집한 필라멘트(즉흥적으로 감기는 재즈 곡선 + 지지직 튀는 잔 번개)를 모두 같은 노랑 얇은 선으로 그린다.',
+        spec: {
+          mode: 'parametric',
+          samples: 200,
+          parametric: {
+            x: '(1 - floor(k / 112)) * ((1 - floor(floor(k / 28) / 2)) * (-2.6 + 0.75 * (-(1 - (floor(k / 28) % 2)) * (1 - t) + (floor(k / 28) % 2) * t) + 0.34 * cos(tau * (k % 28) / 28) * (2 * (1 - 2 * (floor(k / 28) % 2)) / 2.136)) + floor(floor(k / 28) / 2) * (2.6 * (floor(k / 28) % 2) + (0.95 + 0.34 * cos(tau * (k % 28) / 28)) * cos(0.9 + t * (2 * pi - 1.8)))) + floor(k / 112) * (3.9 * (((k - 112) / 39) * 2 - 1) - 0.52 * sin(2.4 * (k - 112)) + (1.2 + 0.4 * sin(1.7 * (k - 112))) * sin(2 * t * tau + 0.5 * (k - 112)) + 0.14 * (2 / pi) * asin(sin(26 * t + 3 * (k - 112))))',
+            y: '(1 - floor(k / 112)) * ((1 - floor(floor(k / 28) / 2)) * ((1 - 2 * t) * (1 - 2 * (floor(k / 28) % 2)) + 0.34 * cos(tau * (k % 28) / 28) * (0.75 / 2.136)) + floor(floor(k / 28) / 2) * ((0.95 + 0.34 * cos(tau * (k % 28) / 28)) * sin(0.9 + t * (2 * pi - 1.8)))) + floor(k / 112) * (1.7 * (((k - 112) / 39) * 2 - 1) + 1.19 * sin(2.4 * (k - 112)) + (1.0 + 0.3 * cos(1.3 * (k - 112))) * sin(3 * t * tau + 0.9 * (k - 112)) + 0.14 * (2 / pi) * asin(sin(31 * t + 2 * (k - 112))))',
+            z: '(1 - floor(k / 112)) * (0.34 * sin(tau * (k % 28) / 28)) + floor(k / 112) * (1.2 * sin(t * tau * 1.5 + (k - 112)))',
+            domainT: [0, 1],
+          },
+          sweep: { param: 'k', from: 0, to: 151, steps: 152 },
         },
       },
     ],

@@ -1,5 +1,5 @@
 ---
-import { Copy, Download, RotateCcw, SquareCode } from '@lucide/astro';
+import { Copy, Download, RotateCcw, Square, SquareCode, Video } from '@lucide/astro';
 import Base from '../../../layouts/Base.astro';
 import { describeSpec, plotPatternRegistry, type PlotPatternEntry } from '../../../lib/plot/patterns';
 
@@ -31,7 +31,7 @@ const candidates = pattern.candidates.map((candidate) => ({
     </header>
 
     <figure class="space-y-2">
-      <div class="three-stage" style={`--pattern-paper: ${pattern.colors.paper}`}>
+      <div class="three-stage" data-background="transparent" style={`--pattern-paper: ${pattern.colors.paper}`}>
         <canvas id="three-scene" class="three-canvas" aria-label={pattern.ariaLabel}></canvas>
       </div>
     </figure>
@@ -51,7 +51,7 @@ const candidates = pattern.candidates.map((candidate) => ({
       <fieldset class="background-control">
         <legend>background</legend>
         <label>
-          <input type="radio" name="background" value="paper" data-effect="background" checked />
+          <input type="radio" name="background" value="paper" data-effect="background" />
           <span>paper</span>
         </label>
         <label>
@@ -59,7 +59,7 @@ const candidates = pattern.candidates.map((candidate) => ({
           <span>white</span>
         </label>
         <label>
-          <input type="radio" name="background" value="transparent" data-effect="background" />
+          <input type="radio" name="background" value="transparent" data-effect="background" checked />
           <span>transparent</span>
         </label>
       </fieldset>
@@ -101,6 +101,17 @@ const candidates = pattern.candidates.map((candidate) => ({
         <button type="button" id="download-png" class="icon-button" aria-label="download png" title="download png">
           <Download size={16} stroke-width={1.8} aria-hidden="true" />
         </button>
+        <button
+          type="button"
+          id="record-toggle"
+          class="icon-button record-button"
+          aria-label="record video"
+          title="record video"
+          aria-pressed="false"
+        >
+          <Video size={16} stroke-width={1.8} aria-hidden="true" class="rec-idle" />
+          <Square size={16} stroke-width={1.8} aria-hidden="true" class="rec-live" />
+        </button>
       </div>
       <p class="text-sm text-muted" id="copy-status" aria-live="polite"></p>
     </section>
@@ -138,7 +149,11 @@ const candidates = pattern.candidates.map((candidate) => ({
       id="color-config"
       type="application/json"
       is:inline
-      set:html={JSON.stringify(pattern.colors)}
+      set:html={JSON.stringify({
+        ...pattern.colors,
+        split: pattern.colorSplit,
+        opacity: pattern.lineOpacity,
+      })}
     />
     <script
       id="view-config"
@@ -160,7 +175,14 @@ const candidates = pattern.candidates.map((candidate) => ({
   import { buildPlot, type PlotSpec } from '../../../lib/plot/plotter';
 
   type Candidate = { id: string; name: string; spec: PlotSpec; expr: string; role: string };
-  type Colors = { paper: string; primary: string; secondary: string; accent: string };
+  type Colors = {
+    paper: string;
+    primary: string;
+    secondary: string;
+    accent: string;
+    split?: number;
+    opacity?: number;
+  };
   type Motion = {
     yawAmplitude: number;
     yawSpeed: number;
@@ -200,6 +222,7 @@ const candidates = pattern.candidates.map((candidate) => ({
   const copyPng = document.querySelector<HTMLButtonElement>('#copy-png');
   const copyCode = document.querySelector<HTMLButtonElement>('#copy-code');
   const downloadPng = document.querySelector<HTMLButtonElement>('#download-png');
+  const recordToggle = document.querySelector<HTMLButtonElement>('#record-toggle');
   const status = document.querySelector<HTMLElement>('#copy-status');
   if (!canvas || !stage) throw new Error('Missing plot canvas.');
 
@@ -225,7 +248,7 @@ const candidates = pattern.candidates.map((candidate) => ({
     saturation: 1,
     hue: 0,
     scale: 1,
-    background: 'paper',
+    background: 'transparent',
   };
 
   let effects = { ...defaults };
@@ -234,6 +257,12 @@ const candidates = pattern.candidates.map((candidate) => ({
   let lastPointer = { x: 0, y: 0 };
   let animTime = 0;
   let lastFrame = performance.now();
+  // Recording composites into this 2D canvas each frame (background fill + CSS
+  // filter + the WebGL frame) so the captured video matches what is on screen —
+  // captureStream on the raw WebGL canvas would miss the filter and background.
+  let recording = false;
+  const recordCanvas = document.createElement('canvas');
+  const recordCtx = recordCanvas.getContext('2d');
   const baseRotation = {
     x: view.rotation?.x ?? -0.1,
     y: view.rotation?.y ?? 0,
@@ -255,11 +284,13 @@ const candidates = pattern.candidates.map((candidate) => ({
     alpha: true,
     preserveDrawingBuffer: true,
   });
-  renderer.setClearColor(colors.paper, 1);
+  // Start transparent so the first painted frame matches the default background
+  // (transparent) with no opaque flash before updateBackground runs.
+  renderer.setClearColor(colors.paper, 0);
   renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(colors.paper);
+  scene.background = null;
   const camera = new THREE.OrthographicCamera(-360, 360, 270, -270, 0.1, 2000);
   camera.position.set(0, 0, 800);
   camera.lookAt(0, 0, 0);
@@ -332,11 +363,28 @@ const candidates = pattern.candidates.map((candidate) => ({
     } else {
       const sweeps = Math.max(1, ...result.curves.map((curve) => curve.sweep + 1));
       const ink = new THREE.Color(colors.primary);
+      const soft = new THREE.Color(colors.secondary);
       const hot = new THREE.Color(colors.accent);
+      const split = colors.split;
+      const baseOpacity = colors.opacity ?? 0.9;
       for (const curve of result.curves) {
-        const t = sweeps <= 1 ? 0 : curve.sweep / (sweeps - 1);
-        const color = ink.clone().lerp(hot, t).getStyle();
-        root.add(line(curve.points.map(tf), color, 0.9));
+        let color: string;
+        let opacity = baseOpacity;
+        if (typeof split === 'number') {
+          // Opt-in hard two-tone: sweeps below the split are the primary path
+          // (shaded toward secondary by depth), the rest are the accent hue.
+          if (curve.sweep < split) {
+            const t = split <= 1 ? 0 : curve.sweep / (split - 1);
+            color = ink.clone().lerp(soft, t * 0.5).getStyle();
+          } else {
+            color = hot.getStyle();
+            opacity = baseOpacity * 0.85;
+          }
+        } else {
+          const t = sweeps <= 1 ? 0 : curve.sweep / (sweeps - 1);
+          color = ink.clone().lerp(hot, t).getStyle();
+        }
+        root.add(line(curve.points.map(tf), color, opacity));
       }
     }
   };
@@ -426,6 +474,25 @@ const candidates = pattern.candidates.map((candidate) => ({
     root.rotateY(spin + Math.sin(animTime * motion.yawSpeed) * motion.yawAmplitude);
     root.rotateZ(Math.sin(animTime * motion.rollSpeed) * motion.rollAmplitude);
     render();
+    if (recording && recordCtx) {
+      if (recordCanvas.width !== canvas.width || recordCanvas.height !== canvas.height) {
+        recordCanvas.width = canvas.width;
+        recordCanvas.height = canvas.height;
+      }
+      // Fill an opaque background (video codecs carry no alpha). Transparent view
+      // shows the page behind, so match it by sampling the page background.
+      recordCtx.filter = 'none';
+      recordCtx.clearRect(0, 0, recordCanvas.width, recordCanvas.height);
+      let fill = backgroundColor();
+      if (effects.background === 'transparent') {
+        const pageBg = getComputedStyle(document.body).backgroundColor;
+        fill = pageBg && !pageBg.startsWith('rgba(0, 0, 0, 0') ? pageBg : colors.paper;
+      }
+      recordCtx.fillStyle = fill;
+      recordCtx.fillRect(0, 0, recordCanvas.width, recordCanvas.height);
+      recordCtx.filter = filterString();
+      recordCtx.drawImage(canvas, 0, 0, recordCanvas.width, recordCanvas.height);
+    }
     requestAnimationFrame(animate);
   };
 
@@ -518,6 +585,73 @@ const candidates = pattern.candidates.map((candidate) => ({
   downloadPng?.addEventListener('click', async () => {
     downloadBlob(await snapshotBlob(), 'png');
     setStatus('downloaded png');
+  });
+
+  // Live capture: record the composite canvas (background + CSS filter + WebGL
+  // frame, produced each frame in animate) so the video matches what is on
+  // screen. Prefer MP4/H.264 where supported, fall back to WebM.
+  type StreamCanvas = HTMLCanvasElement & { captureStream?: (fps?: number) => MediaStream };
+  let mediaRecorder: MediaRecorder | null = null;
+  let recordedChunks: Blob[] = [];
+  let recordExt = 'webm';
+
+  const pickRecordMime = () => {
+    if (typeof MediaRecorder === 'undefined' || !MediaRecorder.isTypeSupported) return '';
+    const candidates = [
+      'video/mp4;codecs=avc1.42E01E',
+      'video/mp4',
+      'video/webm;codecs=vp9',
+      'video/webm;codecs=vp8',
+      'video/webm',
+    ];
+    return candidates.find((type) => MediaRecorder.isTypeSupported(type)) ?? '';
+  };
+
+  const startRecording = () => {
+    const source = recordCanvas as StreamCanvas;
+    if (typeof MediaRecorder === 'undefined' || typeof source.captureStream !== 'function' || !recordCtx) {
+      setStatus('recording not supported in this browser');
+      return;
+    }
+    // Seed one composite frame before capturing so the stream starts non-empty.
+    recording = true;
+    recordCanvas.width = canvas.width;
+    recordCanvas.height = canvas.height;
+    const mimeType = pickRecordMime();
+    recordExt = mimeType.includes('mp4') ? 'mp4' : 'webm';
+    const stream = source.captureStream(60);
+    try {
+      mediaRecorder = mimeType
+        ? new MediaRecorder(stream, { mimeType, videoBitsPerSecond: 12_000_000 })
+        : new MediaRecorder(stream);
+    } catch {
+      mediaRecorder = new MediaRecorder(stream);
+      recordExt = 'webm';
+    }
+    recordedChunks = [];
+    mediaRecorder.ondataavailable = (event) => {
+      if (event.data && event.data.size > 0) recordedChunks.push(event.data);
+    };
+    mediaRecorder.onstop = () => {
+      const type = mediaRecorder?.mimeType || (recordExt === 'mp4' ? 'video/mp4' : 'video/webm');
+      downloadBlob(new Blob(recordedChunks, { type }), recordExt);
+      setStatus(`saved ${recordExt}`);
+    };
+    mediaRecorder.start();
+    recordToggle?.setAttribute('aria-pressed', 'true');
+    setStatus('recording… move or scale, then click again to stop');
+  };
+
+  const stopRecording = () => {
+    if (mediaRecorder && mediaRecorder.state !== 'inactive') mediaRecorder.stop();
+    mediaRecorder = null;
+    recording = false;
+    recordToggle?.setAttribute('aria-pressed', 'false');
+  };
+
+  recordToggle?.addEventListener('click', () => {
+    if (mediaRecorder && mediaRecorder.state === 'recording') stopRecording();
+    else startRecording();
   });
 
   canvas.addEventListener('pointerdown', (event) => {
@@ -667,6 +801,20 @@ const candidates = pattern.candidates.map((candidate) => ({
   .effect-tools button:hover {
     color: var(--color-foreground);
     border-color: var(--color-foreground);
+  }
+  .record-button .rec-live {
+    display: none;
+  }
+  .record-button[aria-pressed='true'] .rec-idle {
+    display: none;
+  }
+  .record-button[aria-pressed='true'] .rec-live {
+    display: block;
+  }
+  .record-button[aria-pressed='true'],
+  .record-button[aria-pressed='true']:hover {
+    color: #e5484d;
+    border-color: #e5484d;
   }
   .analysis-section {
     display: grid;

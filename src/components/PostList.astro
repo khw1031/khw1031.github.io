@@ -16,9 +16,24 @@ const { items } = Astro.props;
           {item.title}
         </a>
         <div class="text-sm text-muted">
+          {item.label && (
+            <>
+              <span>{item.label}</span>
+              <span> · </span>
+            </>
+          )}
           <time datetime={item.pubDate.toISOString()}>{formatDate(item.pubDate)}</time>
-          <span> · </span>
-          <span>{item.readingMinutes} min</span>
+          {item.readingMinutes != null ? (
+            <>
+              <span> · </span>
+              <span>{item.readingMinutes} min</span>
+            </>
+          ) : item.kind === 'lab' ? (
+            <>
+              <span> · </span>
+              <span>lab</span>
+            </>
+          ) : null}
         </div>
       </li>
     ))

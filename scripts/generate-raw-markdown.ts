@@ -2,7 +2,7 @@ import { existsSync, mkdirSync, readdirSync, readFileSync, writeFileSync } from 
 import { basename, join, resolve } from 'node:path';
 import matter from 'gray-matter';
 
-const COLLECTIONS = ['posts', 'read-and-write', 'notes'] as const;
+const COLLECTIONS = ['posts', 'read-and-write', 'notes', 'inbox'] as const;
 
 function sourceFiles(collection: (typeof COLLECTIONS)[number]): string[] {
   const dir = resolve('src/content', collection);
