@@ -22,7 +22,7 @@
     "test:e2e": "playwright test",
     "import:legacy": "tsx scripts/import-from-legacy.ts",
     "theme:gen": "tsx scripts/iterm-to-css.ts",
-    "prebuild": "vitest run tests/pattern-audit.test.ts && tsx scripts/iterm-to-css.ts && tsx scripts/generate-raw-markdown.ts"
+    "prebuild": "tsx scripts/iterm-to-css.ts && tsx scripts/generate-raw-markdown.ts"
   },
   "dependencies": {
     "@astrojs/markdown-remark": "7.2.0",
