@@ -36,21 +36,20 @@ export const aptRegistry = {
     reproUrl: 'https://gist.github.com/khw1031/3514223ceb224a99a4f6fd899d09ef7b',
     variant: {
       seed: 1207,
-      count: 5,
       horizonY: 0.9,
       vpLeftX: -1.2,
       vpRightX: 2.2,
       skyTop: '#3c7191',
       skyLow: '#82a4b6',
-      // Art-directed, back-to-front layout: an ivory tonal family (0 base, 10 warm,
-      // 11 cool, 12 light, 13 deep) with the tallest central tower as the lone amber
-      // accent (1). Order controls overlap, so a block's height never changes occlusion.
+      // Art-directed, back-to-front layout: an ivory tonal family (0 base, 2 warm,
+      // 3 cool, 4 light) with the tallest central tower as the lone amber accent (1).
+      // Order controls overlap, so a block's height never changes occlusion.
       blocks: [
-        { cx: 0.9297, yT: 0.696, lx: 0.7875, rx: 1.0611, palette: 11 }, // back — cool ivory
+        { cx: 0.9297, yT: 0.696, lx: 0.7875, rx: 1.0611, palette: 3 }, // back — cool ivory
         { cx: 0.7676, yT: 0.65, lx: 0.6507, rx: 0.9666, palette: 0 }, // beside center — base ivory
-        { cx: 0.0305, yT: 0.47, lx: -0.144, rx: 0.3, palette: 12 }, // left — light ivory
+        { cx: 0.0305, yT: 0.47, lx: -0.144, rx: 0.3, palette: 4 }, // left — light ivory
         { cx: 0.363, yT: 0.21, lx: 0.17, rx: 0.57, palette: 1 }, // tallest central tower — amber
-        { cx: 0.4634, yT: 0.43, lx: 0.2668, rx: 0.68, palette: 10 }, // center front — warm ivory
+        { cx: 0.4634, yT: 0.43, lx: 0.2668, rx: 0.68, palette: 2 }, // center front — warm ivory
       ],
     },
   },
