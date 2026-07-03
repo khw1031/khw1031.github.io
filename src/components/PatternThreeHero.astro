@@ -18,11 +18,16 @@ const {
   slug,
   className = '',
   canvasClassName = '',
+  transparent = false,
+  scale,
   effects = {},
 } = Astro.props as {
   slug: keyof typeof plotPatternRegistry;
   className?: string;
   canvasClassName?: string;
+  // Convenience shorthands folded into `effects`; the `effects` object overrides them.
+  transparent?: boolean;
+  scale?: number;
   effects?: Partial<Effects>;
 };
 
@@ -38,7 +43,12 @@ const defaultEffects: Effects = {
 
 const pattern = plotPatternRegistry[slug] as PlotPatternEntry;
 const spec = pattern.candidates[0].spec;
-const resolvedEffects: Effects = { ...defaultEffects, ...effects };
+const resolvedEffects: Effects = {
+  ...defaultEffects,
+  ...(transparent ? { background: 'transparent' as const } : {}),
+  ...(scale !== undefined ? { scale } : {}),
+  ...effects,
+};
 const config = { spec, colors: pattern.colors, view: pattern.view, effects: resolvedEffects };
 ---
 
@@ -127,7 +137,16 @@ const config = { spec, colors: pattern.colors, view: pattern.view, effects: reso
       y: view.rotation?.y ?? 0,
       z: view.rotation?.z ?? 0,
     };
-    root.rotation.set(baseRotation.x, baseRotation.y, baseRotation.z);
+    // Drag rotates about fixed world axes (quaternion) so the response stays
+    // proportional and correctly-signed at any orientation; ambient wobble is
+    // layered on top each frame from this base.
+    const dragAxisX = new THREE.Vector3(1, 0, 0);
+    const dragAxisY = new THREE.Vector3(0, 1, 0);
+    const homeQuat = new THREE.Quaternion().setFromEuler(
+      new THREE.Euler(baseRotation.x, baseRotation.y, baseRotation.z, 'XYZ'),
+    );
+    const userQuat = homeQuat.clone();
+    root.quaternion.copy(userQuat);
     scene.add(root);
 
     const result = buildPlot(spec);
@@ -215,10 +234,9 @@ const config = { spec, colors: pattern.colors, view: pattern.view, effects: reso
       if (!dragging && !reducedMotion) animTime += now - lastFrame;
       lastFrame = now;
       const spin = motion.spin ? animTime * motion.spin : 0;
-      root.rotation.x = baseRotation.x;
-      root.rotation.y =
-        baseRotation.y + spin + Math.sin(animTime * motion.yawSpeed) * motion.yawAmplitude;
-      root.rotation.z = baseRotation.z + Math.sin(animTime * motion.rollSpeed) * motion.rollAmplitude;
+      root.quaternion.copy(userQuat);
+      root.rotateY(spin + Math.sin(animTime * motion.yawSpeed) * motion.yawAmplitude);
+      root.rotateZ(Math.sin(animTime * motion.rollSpeed) * motion.rollAmplitude);
       render();
       frameId = requestAnimationFrame(animate);
     };
@@ -232,8 +250,10 @@ const config = { spec, colors: pattern.colors, view: pattern.view, effects: reso
     });
     canvas.addEventListener('pointermove', (event) => {
       if (!dragging) return;
-      baseRotation.z += (event.clientX - lastPointer.x) * 0.006;
-      baseRotation.x += (event.clientY - lastPointer.y) * 0.004;
+      const dx = event.clientX - lastPointer.x;
+      const dy = event.clientY - lastPointer.y;
+      userQuat.premultiply(new THREE.Quaternion().setFromAxisAngle(dragAxisY, dx * 0.006));
+      userQuat.premultiply(new THREE.Quaternion().setFromAxisAngle(dragAxisX, dy * 0.006));
       lastPointer = { x: event.clientX, y: event.clientY };
     });
     const stopDragging = (event: PointerEvent) => {

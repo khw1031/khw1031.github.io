@@ -239,6 +239,15 @@ const candidates = pattern.candidates.map((candidate) => ({
     y: view.rotation?.y ?? 0,
     z: view.rotation?.z ?? 0,
   };
+  // Drag rotates about fixed world axes (quaternion) so the motion stays
+  // proportional and correctly-signed at any orientation; ambient wobble is
+  // layered on top each frame from this base.
+  const dragAxisX = new THREE.Vector3(1, 0, 0);
+  const dragAxisY = new THREE.Vector3(0, 1, 0);
+  const homeQuat = new THREE.Quaternion().setFromEuler(
+    new THREE.Euler(baseRotation.x, baseRotation.y, baseRotation.z, 'XYZ'),
+  );
+  const userQuat = homeQuat.clone();
 
   const renderer = new THREE.WebGLRenderer({
     canvas,
@@ -256,7 +265,7 @@ const candidates = pattern.candidates.map((candidate) => ({
   camera.lookAt(0, 0, 0);
 
   const root = new THREE.Group();
-  root.rotation.set(baseRotation.x, baseRotation.y, baseRotation.z);
+  root.quaternion.copy(userQuat);
   scene.add(root);
 
   const line = (points: THREE.Vector3[], color: string, opacity: number) => {
@@ -413,9 +422,9 @@ const candidates = pattern.candidates.map((candidate) => ({
     if (!dragging) animTime += now - lastFrame;
     lastFrame = now;
     const spin = motion.spin ? animTime * motion.spin : 0;
-    root.rotation.x = baseRotation.x;
-    root.rotation.y = baseRotation.y + spin + Math.sin(animTime * motion.yawSpeed) * motion.yawAmplitude;
-    root.rotation.z = baseRotation.z + Math.sin(animTime * motion.rollSpeed) * motion.rollAmplitude;
+    root.quaternion.copy(userQuat);
+    root.rotateY(spin + Math.sin(animTime * motion.yawSpeed) * motion.yawAmplitude);
+    root.rotateZ(Math.sin(animTime * motion.rollSpeed) * motion.rollAmplitude);
     render();
     requestAnimationFrame(animate);
   };
@@ -519,8 +528,10 @@ const candidates = pattern.candidates.map((candidate) => ({
   });
   canvas.addEventListener('pointermove', (event) => {
     if (!dragging) return;
-    baseRotation.z += (event.clientX - lastPointer.x) * 0.006;
-    baseRotation.x += (event.clientY - lastPointer.y) * 0.004;
+    const dx = event.clientX - lastPointer.x;
+    const dy = event.clientY - lastPointer.y;
+    userQuat.premultiply(new THREE.Quaternion().setFromAxisAngle(dragAxisY, dx * 0.006));
+    userQuat.premultiply(new THREE.Quaternion().setFromAxisAngle(dragAxisX, dy * 0.006));
     lastPointer = { x: event.clientX, y: event.clientY };
   });
   const stopDragging = (event: PointerEvent) => {
