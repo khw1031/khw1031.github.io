@@ -16,7 +16,11 @@ interface Props {
 const { entry } = Astro.props;
 const sourceUrl = `${import.meta.env.BASE_URL}labs/apt/source.jpg`;
 
-const reproUrl = 'https://gist.github.com/khw1031/5e3f911eaf33707ac89687de6c3e8733';
+const isVariation = entry.scene === 'corner-variation';
+const pipeline = isVariation
+  ? 'synthetic-2point-perspective-corner'
+  : 'photo-structure-to-hopper-masses';
+const variantJson = isVariation ? JSON.stringify(entry.variant) : undefined;
 ---
 
 <Base title={`${entry.title} | Apt | Labs | thnkr`} description={entry.description}>
@@ -32,7 +36,9 @@ const reproUrl = 'https://gist.github.com/khw1031/5e3f911eaf33707ac89687de6c3e87
       data-source={entry.sourcePhrase}
       data-abstraction={entry.abstraction}
       data-style-reference={entry.styleReference.title}
-      data-pipeline="photo-structure-to-hopper-masses"
+      data-scene={entry.scene}
+      data-pipeline={pipeline}
+      data-variant={variantJson}
       data-source-image={sourceUrl}
     >
       <div class="apt-stage">
@@ -41,7 +47,7 @@ const reproUrl = 'https://gist.github.com/khw1031/5e3f911eaf33707ac89687de6c3e87
           class="apt-canvas"
           width="900"
           height="1350"
-          aria-label="A corner apartment reduced to two flat ivory masses — a sunlit face meeting a shadow face at a hard corner — under a wide empty sky, in the light of Edward Hopper's Rooms by the Sea"
+          aria-label={entry.description}
         >
         </canvas>
       </div>
@@ -49,13 +55,18 @@ const reproUrl = 'https://gist.github.com/khw1031/5e3f911eaf33707ac89687de6c3e87
 
     <section class="apt-method space-y-2">
       <p class="text-sm text-muted">
-        Claude Opus 4.8 (<code>claude-opus-4-8</code>). 기준 컨셉: Edward Hopper,
-        <em>Rooms by the Sea</em> (1951). 구조 소스 사진: Sarguninder Singh / Unsplash
-        (Unsplash License).
+        Claude Opus 4.8 (<code>claude-opus-4-8</code>). 기준 컨셉: {entry.styleReference.artist},
+        <em>{entry.styleReference.title}</em> ({entry.styleReference.year}). {entry.credit}
       </p>
-      <p class="text-sm text-muted">
-        <a href={reproUrl} target="_blank" rel="noopener noreferrer">gist</a>
-      </p>
+      {
+        entry.reproUrl && (
+          <p class="text-sm text-muted">
+            <a href={entry.reproUrl} target="_blank" rel="noopener noreferrer">
+              gist
+            </a>
+          </p>
+        )
+      }
     </section>
   </article>
 </Base>
@@ -77,6 +88,7 @@ const reproUrl = 'https://gist.github.com/khw1031/5e3f911eaf33707ac89687de6c3e87
   const W = canvas.width;
   const H = canvas.height;
   const sourceUrl = workbench.dataset.sourceImage ?? '';
+  const scene = workbench.dataset.scene ?? 'corner-mass';
 
   // The photo supplies only STRUCTURE — the corner silhouette and roofline. Everything
   // painted here is invented in the manner of Hopper's Rooms by the Sea: one raking
@@ -268,6 +280,319 @@ const reproUrl = 'https://gist.github.com/khw1031/5e3f911eaf33707ac89687de6c3e87
     grain();
   };
 
+  // A cluster of apartment blocks in apt.1's grammar — sunlit face meeting shadow face at
+  // a hard corner, matte brushwork, wide empty sky, NO ground shown (each block runs to
+  // the bottom edge). The whole cluster shares ONE horizon and TWO vanishing points, so
+  // every block is built in the same TRUE 2-point perspective and reads as one coherent
+  // block of buildings. Each apartment takes a different color; the light is consistent
+  // (left faces lit). Everything is synthetic; no photo is used.
+  interface FacePalette {
+    litTop: string;
+    litBase: string;
+    litBrushLight: string;
+    litBrushDark: string;
+    shadowBase: string;
+    shadowDeep: string;
+    shadowBrushLight: string;
+    shadowBrushDark: string;
+    eave: string;
+  }
+  interface ExplicitBlock {
+    cx: number; // near corner x (fraction of W)
+    yT: number; // roof height (fraction of H)
+    lx: number; // left (lit) face far edge (fraction of W)
+    rx: number; // right (shadow) face far edge (fraction of W)
+    palette: number; // index into APARTMENT_PALETTES
+  }
+  interface Variant {
+    seed: number; // deterministic layout seed
+    count: number; // number of apartment blocks
+    horizonY: number; // eye level / vanishing-point height (fraction of H)
+    vpLeftX: number; // left vanishing point x (fraction of W, off-canvas)
+    vpRightX: number; // right vanishing point x (fraction of W, off-canvas)
+    skyTop: string;
+    skyLow: string;
+    blocks?: ExplicitBlock[]; // art-directed layout; overrides procedural generation
+  }
+
+  const APARTMENT_PALETTES: FacePalette[] = [
+    {
+      litTop: '#f2ecd6', // ivory
+      litBase: '#e2d6b4',
+      litBrushLight: '#fbf6e6',
+      litBrushDark: '#cdbb8f',
+      shadowBase: '#ab9c7f',
+      shadowDeep: '#6f6349',
+      shadowBrushLight: '#c3b596',
+      shadowBrushDark: '#574d3b',
+      eave: '#5a5038',
+    },
+    {
+      litTop: '#f2cd9c', // amber
+      litBase: '#d79b5f',
+      litBrushLight: '#f9dcb4',
+      litBrushDark: '#b57f3e',
+      shadowBase: '#875f3b',
+      shadowDeep: '#48321f',
+      shadowBrushLight: '#a07a4e',
+      shadowBrushDark: '#3a2817',
+      eave: '#3f2c1a',
+    },
+    {
+      litTop: '#e8b9a3', // terracotta
+      litBase: '#cf9179',
+      litBrushLight: '#f2cdba',
+      litBrushDark: '#b0725c',
+      shadowBase: '#8a5a49',
+      shadowDeep: '#4c2f26',
+      shadowBrushLight: '#a2705d',
+      shadowBrushDark: '#3a231c',
+      eave: '#3c241d',
+    },
+    {
+      litTop: '#e6ebe4', // sage grey-green
+      litBase: '#c8d0c6',
+      litBrushLight: '#f1f4ee',
+      litBrushDark: '#aab3a6',
+      shadowBase: '#8b948c',
+      shadowDeep: '#4f564f',
+      shadowBrushLight: '#a7afa6',
+      shadowBrushDark: '#3c423c',
+      eave: '#454b45',
+    },
+    {
+      litTop: '#dce0ea', // slate blue
+      litBase: '#bcc2d4',
+      litBrushLight: '#ebedf4',
+      litBrushDark: '#a0a6bc',
+      shadowBase: '#727a94',
+      shadowDeep: '#3e4459',
+      shadowBrushLight: '#8a90a8',
+      shadowBrushDark: '#2f3444',
+      eave: '#363b4a',
+    },
+    {
+      litTop: '#ece5da', // warm taupe
+      litBase: '#d3c9ba',
+      litBrushLight: '#f4efe6',
+      litBrushDark: '#b3a793',
+      shadowBase: '#8f8272',
+      shadowDeep: '#524a3d',
+      shadowBrushLight: '#a89a86',
+      shadowBrushDark: '#3c352b',
+      eave: '#443c30',
+    },
+    // --- sage family (indices 6-9): subtle shifts of the base sage for a single-tone look
+    {
+      litTop: '#eaeade', // 6 sage — warm (toward olive)
+      litBase: '#cdd0bd',
+      litBrushLight: '#f3f3e7',
+      litBrushDark: '#b0b39c',
+      shadowBase: '#8f9080',
+      shadowDeep: '#524f42',
+      shadowBrushLight: '#abac97',
+      shadowBrushDark: '#3f3e30',
+      eave: '#48473a',
+    },
+    {
+      litTop: '#e2ebec', // 7 sage — cool (toward blue)
+      litBase: '#c2ced2',
+      litBrushLight: '#eef3f4',
+      litBrushDark: '#a4b1b4',
+      shadowBase: '#85929a',
+      shadowDeep: '#4a555c',
+      shadowBrushLight: '#a1aeb3',
+      shadowBrushDark: '#38424a',
+      eave: '#414b52',
+    },
+    {
+      litTop: '#eef2ec', // 8 sage — light
+      litBase: '#d6ddd4',
+      litBrushLight: '#f7f9f4',
+      litBrushDark: '#bcc4b8',
+      shadowBase: '#9aa39b',
+      shadowDeep: '#5c635a',
+      shadowBrushLight: '#b4bbb2',
+      shadowBrushDark: '#474e46',
+      eave: '#515850',
+    },
+    {
+      litTop: '#dde3da', // 9 sage — deep
+      litBase: '#bcc5b8',
+      litBrushLight: '#e9eee5',
+      litBrushDark: '#9ea798',
+      shadowBase: '#7e887d',
+      shadowDeep: '#434a41',
+      shadowBrushLight: '#99a294',
+      shadowBrushDark: '#333930',
+      eave: '#3c423a',
+    },
+    // --- ivory family (indices 10-13): subtle shifts of the base ivory (index 0)
+    {
+      litTop: '#f4ebcf', // 10 ivory — warm
+      litBase: '#e6d3ab',
+      litBrushLight: '#fcf4e0',
+      litBrushDark: '#d1bb87',
+      shadowBase: '#b09a79',
+      shadowDeep: '#726343',
+      shadowBrushLight: '#c7b48f',
+      shadowBrushDark: '#5a4c36',
+      eave: '#5d5033',
+    },
+    {
+      litTop: '#efecdc', // 11 ivory — cool
+      litBase: '#ddd6bb',
+      litBrushLight: '#f8f5e8',
+      litBrushDark: '#c6bd97',
+      shadowBase: '#a49b86',
+      shadowDeep: '#696351',
+      shadowBrushLight: '#bdb59e',
+      shadowBrushDark: '#524d40',
+      eave: '#565042',
+    },
+    {
+      litTop: '#f6f0de', // 12 ivory — light
+      litBase: '#e9dec0',
+      litBrushLight: '#fdf9ec',
+      litBrushDark: '#d5c69b',
+      shadowBase: '#b6a98d',
+      shadowDeep: '#7a6f59',
+      shadowBrushLight: '#ccc0a2',
+      shadowBrushDark: '#625848',
+      eave: '#665c48',
+    },
+    {
+      litTop: '#ece4c9', // 13 ivory — deep
+      litBase: '#d8caa4',
+      litBrushLight: '#f5eed9',
+      litBrushDark: '#c1ad80',
+      shadowBase: '#9d8e70',
+      shadowDeep: '#64583f',
+      shadowBrushLight: '#b6a781',
+      shadowBrushDark: '#4e4432',
+      eave: '#524731',
+    },
+  ];
+  // Procedural clusters (apt.3-5) use only the first six base colors; the sage-family
+  // extras above are for the art-directed single-tone preview.
+  const BASE_PALETTE_COUNT = 6;
+
+  interface Block {
+    cx: number;
+    yT: number;
+    lx: number;
+    rx: number;
+    palette: FacePalette;
+  }
+
+  const paintCornerCluster = (v: Variant) => {
+    const hY = H * v.horizonY;
+    const vlx = W * v.vpLeftX;
+    const vrx = W * v.vpRightX;
+
+    // Roof/base edge leaving a block's near corner (cx, yEdge) recedes toward the
+    // vanishing point (vpx, hY); at column x it sits at this y. Base is pinned to the
+    // frame bottom so no ground is ever shown.
+    const edgeY = (cx: number, x: number, yEdge: number, vpx: number) =>
+      yEdge + (hY - yEdge) * ((x - cx) / (vpx - cx));
+
+    // Deterministic layout: spread near-corners across the frame with jitter, vary
+    // heights and face widths, cycle palettes. Sort back-to-front by height (shorter
+    // blocks sit behind taller ones) so nearer blocks overlap farther ones.
+    const blocks: Block[] = [];
+    if (v.blocks && v.blocks.length > 0) {
+      // Art-directed layout: explicit blocks in fractional coordinates.
+      for (const b of v.blocks) {
+        blocks.push({
+          cx: W * b.cx,
+          yT: H * b.yT,
+          lx: W * b.lx,
+          rx: W * b.rx,
+          palette: APARTMENT_PALETTES[b.palette % APARTMENT_PALETTES.length] as FacePalette,
+        });
+      }
+    } else {
+      // Deterministic procedural layout.
+      const random = seeded(v.seed);
+      for (let i = 0; i < v.count; i += 1) {
+        // Position: spread near-corners across the frame with jitter.
+        const slot = (i + 0.5) / v.count;
+        const cxFrac = slot + (random() - 0.5) * (0.85 / v.count);
+        const cx = W * cxFrac;
+        // Height: a wide spread from short blocks to tall towers.
+        const yT = H * (0.28 + random() * 0.44);
+        // Size + face lengths: an overall footprint width, split by a corner ratio, so the
+        // two visible faces differ (a broad face and a narrow one, as if seen at an angle).
+        const totalW = W * (0.14 + random() * 0.32);
+        const ratio = 0.28 + random() * 0.44;
+        const lx = cx - totalW * ratio;
+        const rx = cx + totalW * (1 - ratio);
+        const palette = APARTMENT_PALETTES[i % BASE_PALETTE_COUNT] as FacePalette;
+        blocks.push({ cx, yT, lx, rx, palette });
+      }
+      // Procedural depth: shorter blocks sit behind taller ones.
+      blocks.sort((a, b) => b.yT - a.yT);
+    }
+    // Explicit blocks keep their given order (drawn back-to-front), so a block's height
+    // never changes what it overlaps — only the array order does.
+
+    gradFill(v.skyTop, v.skyLow);
+
+    for (const b of blocks) {
+      const { cx, yT, lx, rx, palette: p } = b;
+      // Left face is lit, right face falls into shadow (consistent light direction).
+      const litFace = () => {
+        context.beginPath();
+        context.moveTo(cx, yT);
+        context.lineTo(lx, edgeY(cx, lx, yT, vlx));
+        context.lineTo(lx, H);
+        context.lineTo(cx, H);
+        context.closePath();
+      };
+      const shadowFace = () => {
+        context.beginPath();
+        context.moveTo(cx, yT);
+        context.lineTo(rx, edgeY(cx, rx, yT, vrx));
+        context.lineTo(rx, H);
+        context.lineTo(cx, H);
+        context.closePath();
+      };
+
+      context.save();
+      litFace();
+      context.clip();
+      gradFill(p.litTop, p.litBase);
+      context.restore();
+      mottle(litFace, v.seed + Math.round(cx), p.litBrushLight, p.litBrushDark, 8, 0.14, 0.08);
+
+      context.save();
+      shadowFace();
+      context.clip();
+      gradFill(p.shadowBase, p.shadowDeep);
+      context.restore();
+      mottle(shadowFace, v.seed + Math.round(cx) + 97, p.shadowBrushLight, p.shadowBrushDark, 6, 0.12, 0.1);
+
+      // Thin eave shadow following the lit roof edge's slope.
+      const farY = edgeY(cx, lx, yT, vlx);
+      context.save();
+      litFace();
+      context.clip();
+      context.globalAlpha = 0.24;
+      context.fillStyle = p.eave;
+      context.beginPath();
+      context.moveTo(cx, yT);
+      context.lineTo(lx, farY);
+      context.lineTo(lx, farY + 16);
+      context.lineTo(cx, yT + 16);
+      context.closePath();
+      context.fill();
+      context.restore();
+    }
+
+    applyPaintTexture();
+    grain();
+  };
+
   const rooflineFromPhoto = (image: HTMLImageElement) => {
     const targetRatio = W / H;
     let sw = image.naturalWidth;
@@ -337,18 +662,24 @@ const reproUrl = 'https://gist.github.com/khw1031/5e3f911eaf33707ac89687de6c3e87
     return { roof, apex };
   };
 
-  const image = new Image();
-  image.onload = () => {
-    const { roof, apex } = rooflineFromPhoto(image);
-    paintScene(roof, apex);
+  if (scene === 'corner-variation') {
+    const variant = JSON.parse(workbench.dataset.variant ?? '{}') as Variant;
+    paintCornerCluster(variant);
     canvas.dataset.rendered = 'true';
-  };
-  image.onerror = () => {
-    const { roof, apex } = syntheticRoofline();
-    paintScene(roof, apex);
-    canvas.dataset.rendered = 'fallback';
-  };
-  image.src = sourceUrl;
+  } else {
+    const image = new Image();
+    image.onload = () => {
+      const { roof, apex } = rooflineFromPhoto(image);
+      paintScene(roof, apex);
+      canvas.dataset.rendered = 'true';
+    };
+    image.onerror = () => {
+      const { roof, apex } = syntheticRoofline();
+      paintScene(roof, apex);
+      canvas.dataset.rendered = 'fallback';
+    };
+    image.src = sourceUrl;
+  }
 </script>
 
 <style>

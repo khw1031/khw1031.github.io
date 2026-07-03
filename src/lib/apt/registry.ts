@@ -7,10 +7,132 @@ export const aptRegistry = {
     sourcePhrase:
       '사진에서 코너 아파트의 구조만 추출하고, Hopper Rooms by the Sea의 빛으로 상아색 평면 색면 재구성',
     abstraction: 'hopper mass reconstruction',
+    scene: 'corner-mass',
     styleReference: {
       artist: 'Edward Hopper',
       title: 'Rooms by the Sea',
+      year: 1951,
       source: 'light and palette of the 1951 painting',
+    },
+    credit: '구조 소스 사진: Sarguninder Singh / Unsplash (Unsplash License).',
+    reproUrl: 'https://gist.github.com/khw1031/5e3f911eaf33707ac89687de6c3e8733',
+  },
+  '2': {
+    title: 'apt.2',
+    href: '/labs/apt/2/',
+    description:
+      "A cluster of apartment blocks in a single ivory tonal family, gathered in true 2-point perspective under a wide empty sky, with the tallest central tower picked out in amber — in the light of Edward Hopper's Rooms by the Sea.",
+    sourcePhrase:
+      '아이보리 한 계열로 통일한 아파트 색면 매스들이 하나의 지평선·소실점을 공유하는 2점 투시로 모인 무리. 가장 높은 중앙 타워만 앰버. 바닥 없음, 넓은 하늘. 합성.',
+    abstraction: 'perspective apartment cluster — ivory with amber accent',
+    scene: 'corner-variation',
+    styleReference: {
+      artist: 'Edward Hopper',
+      title: 'Rooms by the Sea',
+      year: 1951,
+      source: 'light and palette of the 1951 painting',
+    },
+    credit: 'apt.1의 코너 매스 구도를 2점 투시 아파트 무리로 변주 (합성, 사진 미사용).',
+    reproUrl: 'https://gist.github.com/khw1031/3514223ceb224a99a4f6fd899d09ef7b',
+    variant: {
+      seed: 1207,
+      count: 5,
+      horizonY: 0.9,
+      vpLeftX: -1.2,
+      vpRightX: 2.2,
+      skyTop: '#3c7191',
+      skyLow: '#82a4b6',
+      // Art-directed, back-to-front layout: an ivory tonal family (0 base, 10 warm,
+      // 11 cool, 12 light, 13 deep) with the tallest central tower as the lone amber
+      // accent (1). Order controls overlap, so a block's height never changes occlusion.
+      blocks: [
+        { cx: 0.9297, yT: 0.696, lx: 0.7875, rx: 1.0611, palette: 11 }, // back — cool ivory
+        { cx: 0.7676, yT: 0.65, lx: 0.6507, rx: 0.9666, palette: 0 }, // beside center — base ivory
+        { cx: 0.0305, yT: 0.47, lx: -0.144, rx: 0.3, palette: 12 }, // left — light ivory
+        { cx: 0.363, yT: 0.21, lx: 0.17, rx: 0.57, palette: 1 }, // tallest central tower — amber
+        { cx: 0.4634, yT: 0.43, lx: 0.2668, rx: 0.68, palette: 10 }, // center front — warm ivory
+      ],
+    },
+  },
+  '3': {
+    title: 'apt.3',
+    href: '/labs/apt/3/',
+    description:
+      "A denser, taller cluster with the vanishing points pulled in closer for a steeper convergence — many-colored apartment corners crowding together under a cool sky, no ground shown.",
+    sourcePhrase:
+      '소실점을 가깝게 당겨 급격한 투시로 촘촘하고 높게 모인 여러 색상의 아파트 코너 무리. 차가운 하늘, 바닥 없음. 합성.',
+    abstraction: 'perspective apartment cluster — steep',
+    scene: 'corner-variation',
+    styleReference: {
+      artist: 'Edward Hopper',
+      title: 'Rooms by the Sea',
+      year: 1951,
+      source: 'light and palette of the 1951 painting',
+    },
+    credit: 'apt.1의 코너 매스 구도를 2점 투시 아파트 무리로 변주 (합성, 사진 미사용).',
+    reproUrl: null,
+    variant: {
+      seed: 743,
+      count: 6,
+      horizonY: 0.82,
+      vpLeftX: -0.4,
+      vpRightX: 1.5,
+      skyTop: '#436f80',
+      skyLow: '#9fb8bd',
+    },
+  },
+  '4': {
+    title: 'apt.4',
+    href: '/labs/apt/4/',
+    description:
+      "A sparse group of tall, narrow apartment towers at amber dusk — the vanishing points pushed far out for a gentle convergence, sunlit corners rising into a warm sky, no ground shown.",
+    sourcePhrase:
+      '앰버빛 해질녘, 소실점을 멀리 두어 완만한 투시로 드문드문 선 좁고 높은 아파트 타워 무리. 따뜻한 하늘, 바닥 없음. 합성.',
+    abstraction: 'perspective apartment cluster — amber dusk',
+    scene: 'corner-variation',
+    styleReference: {
+      artist: 'Edward Hopper',
+      title: 'Rooms by the Sea',
+      year: 1951,
+      source: 'light and palette of the 1951 painting',
+    },
+    credit: 'apt.1의 코너 매스 구도를 2점 투시 아파트 무리로 변주 (합성, 사진 미사용).',
+    reproUrl: null,
+    variant: {
+      seed: 358,
+      count: 4,
+      horizonY: 0.95,
+      vpLeftX: -2.0,
+      vpRightX: 3.0,
+      skyTop: '#3c6885',
+      skyLow: '#caa98f',
+    },
+  },
+  '5': {
+    title: 'apt.5',
+    href: '/labs/apt/5/',
+    description:
+      "A wide, crowded skyline of many-colored apartment blocks at twilight in cool blue — a shallow, calm convergence, corners packed edge to edge under a deep sky, no ground shown.",
+    sourcePhrase:
+      '해질 무렵 차가운 청색, 완만한 투시로 화면 가득 빼곡히 늘어선 여러 색상의 아파트 매스 스카이라인. 깊은 하늘, 바닥 없음. 합성.',
+    abstraction: 'perspective apartment cluster — twilight skyline',
+    scene: 'corner-variation',
+    styleReference: {
+      artist: 'Edward Hopper',
+      title: 'Rooms by the Sea',
+      year: 1951,
+      source: 'light and palette of the 1951 painting',
+    },
+    credit: 'apt.1의 코너 매스 구도를 2점 투시 아파트 무리로 변주 (합성, 사진 미사용).',
+    reproUrl: null,
+    variant: {
+      seed: 2110,
+      count: 7,
+      horizonY: 0.8,
+      vpLeftX: -0.8,
+      vpRightX: 1.8,
+      skyTop: '#2f4a68',
+      skyLow: '#7b7f9c',
     },
   },
 } as const;
