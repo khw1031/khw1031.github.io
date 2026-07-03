@@ -1,29 +1,51 @@
 ---
 import { plotPatternRegistry, type PlotPatternEntry } from '../lib/plot/patterns';
 
+// Post-render effects in the same shape the /labs/patterns studio exports via its
+// "copy code" button, so a tuned config can be dropped straight onto a hero.
+type BackgroundMode = 'paper' | 'white' | 'transparent';
+type Effects = {
+  invert: boolean;
+  grayscale: boolean;
+  contrast: number;
+  saturation: number;
+  hue: number;
+  scale: number;
+  background: BackgroundMode;
+};
+
 const {
   slug,
   className = '',
   canvasClassName = '',
-  transparent = false,
-  scale = 1,
+  effects = {},
 } = Astro.props as {
   slug: keyof typeof plotPatternRegistry;
   className?: string;
   canvasClassName?: string;
-  transparent?: boolean;
-  scale?: number;
+  effects?: Partial<Effects>;
+};
+
+const defaultEffects: Effects = {
+  invert: false,
+  grayscale: false,
+  contrast: 1,
+  saturation: 1,
+  hue: 0,
+  scale: 1,
+  background: 'paper',
 };
 
 const pattern = plotPatternRegistry[slug] as PlotPatternEntry;
 const spec = pattern.candidates[0].spec;
-const config = { spec, colors: pattern.colors, view: pattern.view, transparent, scale };
+const resolvedEffects: Effects = { ...defaultEffects, ...effects };
+const config = { spec, colors: pattern.colors, view: pattern.view, effects: resolvedEffects };
 ---
 
 <div
   class:list={['pattern-three-hero', className]}
   data-pattern-three
-  data-transparent={transparent ? 'true' : 'false'}
+  data-background={resolvedEffects.background}
   style={`--pattern-paper: ${pattern.colors.paper}`}
   aria-hidden="true"
 >
@@ -44,12 +66,21 @@ const config = { spec, colors: pattern.colors, view: pattern.view, transparent, 
     spin?: number;
   };
   type View = { rotation: { x: number; y: number; z: number }; zoom?: number; motion: Motion };
+  type BackgroundMode = 'paper' | 'white' | 'transparent';
+  type Effects = {
+    invert: boolean;
+    grayscale: boolean;
+    contrast: number;
+    saturation: number;
+    hue: number;
+    scale: number;
+    background: BackgroundMode;
+  };
   type Config = {
     spec: PlotSpec;
     colors: Colors;
     view: View;
-    transparent?: boolean;
-    scale?: number;
+    effects: Effects;
   };
 
   const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
@@ -62,19 +93,29 @@ const config = { spec, colors: pattern.colors, view: pattern.view, transparent, 
     const configNode = stage.querySelector<HTMLScriptElement>('[data-pattern-config]');
     if (!canvas || !configNode?.textContent) return;
 
-    const { spec, colors, view, transparent, scale: viewScale } = JSON.parse(
-      configNode.textContent,
-    ) as Config;
+    const { spec, colors, view, effects } = JSON.parse(configNode.textContent) as Config;
     const motion = view.motion;
-    const zoom = (view.zoom ?? 1) * (viewScale ?? 1);
+    const zoom = (view.zoom ?? 1) * effects.scale;
+
+    const isTransparent = effects.background === 'transparent';
+    const backgroundColor = effects.background === 'white' ? '#ffffff' : colors.paper;
 
     const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
-    renderer.setClearColor(colors.paper, transparent ? 0 : 1);
+    renderer.setClearColor(backgroundColor, isTransparent ? 0 : 1);
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
 
     const scene = new THREE.Scene();
-    scene.background = transparent ? null : new THREE.Color(colors.paper);
-    canvas.style.background = transparent ? 'transparent' : colors.paper;
+    scene.background = isTransparent ? null : new THREE.Color(backgroundColor);
+    canvas.style.background = isTransparent ? 'transparent' : backgroundColor;
+    canvas.style.filter = [
+      effects.invert ? 'invert(1)' : '',
+      effects.grayscale ? 'grayscale(1)' : '',
+      `contrast(${effects.contrast})`,
+      `saturate(${effects.saturation})`,
+      `hue-rotate(${effects.hue}deg)`,
+    ]
+      .filter(Boolean)
+      .join(' ');
 
     const camera = new THREE.OrthographicCamera(-360, 360, 270, -270, 0.1, 2000);
     camera.position.set(0, 0, 800);
@@ -239,8 +280,8 @@ const config = { spec, colors: pattern.colors, view: pattern.view, transparent, 
     background: var(--pattern-paper, #fbfaf7);
   }
 
-  .pattern-three-hero[data-transparent='true'],
-  .pattern-three-hero[data-transparent='true'] .pattern-three-canvas {
+  .pattern-three-hero[data-background='transparent'],
+  .pattern-three-hero[data-background='transparent'] .pattern-three-canvas {
     background: transparent;
   }
 

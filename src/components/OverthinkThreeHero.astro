@@ -1,9 +1,21 @@
 ---
 import PatternThreeHero from './PatternThreeHero.astro';
+
+// Effects tuned in the /labs/patterns/overthink studio (copy code export).
+const effects = {
+  invert: false,
+  grayscale: true,
+  contrast: 1,
+  saturation: 1,
+  hue: 101,
+  scale: 1.22,
+  background: 'transparent' as const,
+};
 ---
 
 <PatternThreeHero
   slug="overthink"
   className="overthink-three-hero"
   canvasClassName="overthink-three-canvas"
+  effects={effects}
 />
