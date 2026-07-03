@@ -1,0 +1,259 @@
+---
+import { plotPatternRegistry, type PlotPatternEntry } from '../lib/plot/patterns';
+
+const {
+  slug,
+  className = '',
+  canvasClassName = '',
+  transparent = false,
+  scale = 1,
+} = Astro.props as {
+  slug: keyof typeof plotPatternRegistry;
+  className?: string;
+  canvasClassName?: string;
+  transparent?: boolean;
+  scale?: number;
+};
+
+const pattern = plotPatternRegistry[slug] as PlotPatternEntry;
+const spec = pattern.candidates[0].spec;
+const config = { spec, colors: pattern.colors, view: pattern.view, transparent, scale };
+---
+
+<div
+  class:list={['pattern-three-hero', className]}
+  data-pattern-three
+  data-transparent={transparent ? 'true' : 'false'}
+  style={`--pattern-paper: ${pattern.colors.paper}`}
+  aria-hidden="true"
+>
+  <canvas class:list={['pattern-three-canvas', canvasClassName]}></canvas>
+  <script type="application/json" data-pattern-config is:inline set:html={JSON.stringify(config)} />
+</div>
+
+<script>
+  import * as THREE from 'three';
+  import { buildPlot, type PlotSpec } from '../lib/plot/plotter';
+
+  type Colors = { paper: string; primary: string; secondary: string; accent: string };
+  type Motion = {
+    yawAmplitude: number;
+    yawSpeed: number;
+    rollAmplitude: number;
+    rollSpeed: number;
+    spin?: number;
+  };
+  type View = { rotation: { x: number; y: number; z: number }; zoom?: number; motion: Motion };
+  type Config = {
+    spec: PlotSpec;
+    colors: Colors;
+    view: View;
+    transparent?: boolean;
+    scale?: number;
+  };
+
+  const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  const initScene = (stage: HTMLElement) => {
+    if (stage.dataset.patternInitialized) return;
+    stage.dataset.patternInitialized = 'true';
+
+    const canvas = stage.querySelector<HTMLCanvasElement>('canvas');
+    const configNode = stage.querySelector<HTMLScriptElement>('[data-pattern-config]');
+    if (!canvas || !configNode?.textContent) return;
+
+    const { spec, colors, view, transparent, scale: viewScale } = JSON.parse(
+      configNode.textContent,
+    ) as Config;
+    const motion = view.motion;
+    const zoom = (view.zoom ?? 1) * (viewScale ?? 1);
+
+    const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+    renderer.setClearColor(colors.paper, transparent ? 0 : 1);
+    renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+    const scene = new THREE.Scene();
+    scene.background = transparent ? null : new THREE.Color(colors.paper);
+    canvas.style.background = transparent ? 'transparent' : colors.paper;
+
+    const camera = new THREE.OrthographicCamera(-360, 360, 270, -270, 0.1, 2000);
+    camera.position.set(0, 0, 800);
+    camera.lookAt(0, 0, 0);
+
+    const root = new THREE.Group();
+    const baseRotation = {
+      x: view.rotation?.x ?? -0.4,
+      y: view.rotation?.y ?? 0,
+      z: view.rotation?.z ?? 0,
+    };
+    root.rotation.set(baseRotation.x, baseRotation.y, baseRotation.z);
+    scene.add(root);
+
+    const result = buildPlot(spec);
+    const { min, max } = result.bounds;
+    const center = { x: (min.x + max.x) / 2, y: (min.y + max.y) / 2, z: (min.z + max.z) / 2 };
+    let radius = 1e-6;
+    for (const curve of result.curves) {
+      for (const point of curve.points) {
+        const dx = point.x - center.x;
+        const dy = point.y - center.y;
+        const dz = point.z - center.z;
+        const r = Math.sqrt(dx * dx + dy * dy + dz * dz);
+        if (r > radius) radius = r;
+      }
+    }
+    const scale = 220 / radius;
+    const tf = (p: { x: number; y: number; z: number }) =>
+      new THREE.Vector3((p.x - center.x) * scale, (p.y - center.y) * scale, (p.z - center.z) * scale);
+
+    if (spec.mode === 'map') {
+      const positions: number[] = [];
+      for (const curve of result.curves) {
+        for (const point of curve.points) {
+          const v = tf(point);
+          positions.push(v.x, v.y, v.z);
+        }
+      }
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+      root.add(
+        new THREE.Points(
+          geometry,
+          new THREE.PointsMaterial({
+            color: colors.primary,
+            size: 1.5,
+            sizeAttenuation: false,
+            transparent: true,
+            opacity: 0.16,
+            depthWrite: false,
+          }),
+        ),
+      );
+    } else {
+      const sweeps = Math.max(1, ...result.curves.map((curve) => curve.sweep + 1));
+      const ink = new THREE.Color(colors.primary);
+      const hot = new THREE.Color(colors.accent);
+      for (const curve of result.curves) {
+        const t = sweeps <= 1 ? 0 : curve.sweep / (sweeps - 1);
+        const geometry = new THREE.BufferGeometry().setFromPoints(curve.points.map(tf));
+        const material = new THREE.LineBasicMaterial({
+          color: ink.clone().lerp(hot, t).getStyle(),
+          transparent: true,
+          opacity: 0.9,
+          depthWrite: false,
+        });
+        root.add(new THREE.Line(geometry, material));
+      }
+    }
+
+    let dragging = false;
+    let lastPointer = { x: 0, y: 0 };
+    let animTime = 0;
+    let lastFrame = performance.now();
+
+    const resize = () => {
+      const rect = stage.getBoundingClientRect();
+      const w = Math.max(1, Math.round(rect.width));
+      const h = Math.max(1, Math.round(rect.height));
+      renderer.setSize(w, h, false);
+      const aspect = w / h;
+      const viewHeight = 540 / zoom;
+      const viewWidth = viewHeight * aspect;
+      camera.left = -viewWidth / 2;
+      camera.right = viewWidth / 2;
+      camera.top = viewHeight / 2;
+      camera.bottom = -viewHeight / 2;
+      camera.updateProjectionMatrix();
+    };
+
+    const render = () => renderer.render(scene, camera);
+
+    let frameId = 0;
+    const animate = () => {
+      const now = performance.now();
+      if (!dragging && !reducedMotion) animTime += now - lastFrame;
+      lastFrame = now;
+      const spin = motion.spin ? animTime * motion.spin : 0;
+      root.rotation.x = baseRotation.x;
+      root.rotation.y =
+        baseRotation.y + spin + Math.sin(animTime * motion.yawSpeed) * motion.yawAmplitude;
+      root.rotation.z = baseRotation.z + Math.sin(animTime * motion.rollSpeed) * motion.rollAmplitude;
+      render();
+      frameId = requestAnimationFrame(animate);
+    };
+
+    canvas.addEventListener('pointerdown', (event) => {
+      if (!event.isPrimary || event.button !== 0) return;
+      dragging = true;
+      lastPointer = { x: event.clientX, y: event.clientY };
+      canvas.setPointerCapture(event.pointerId);
+      canvas.classList.add('is-dragging');
+    });
+    canvas.addEventListener('pointermove', (event) => {
+      if (!dragging) return;
+      baseRotation.z += (event.clientX - lastPointer.x) * 0.006;
+      baseRotation.x += (event.clientY - lastPointer.y) * 0.004;
+      lastPointer = { x: event.clientX, y: event.clientY };
+    });
+    const stopDragging = (event: PointerEvent) => {
+      if (!dragging) return;
+      dragging = false;
+      canvas.classList.remove('is-dragging');
+      if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+    };
+    canvas.addEventListener('pointerup', stopDragging);
+    canvas.addEventListener('pointercancel', stopDragging);
+
+    const observer = new ResizeObserver(() => {
+      resize();
+      render();
+    });
+    observer.observe(stage);
+
+    window.addEventListener(
+      'pagehide',
+      () => {
+        cancelAnimationFrame(frameId);
+        observer.disconnect();
+        renderer.dispose();
+      },
+      { once: true },
+    );
+
+    resize();
+    animate();
+  };
+
+  for (const stage of document.querySelectorAll<HTMLElement>('[data-pattern-three]')) {
+    initScene(stage);
+  }
+</script>
+
+<style>
+  .pattern-three-hero {
+    width: 100%;
+    max-width: 42rem;
+    aspect-ratio: 4 / 3;
+    margin: 0 auto 2rem;
+    overflow: hidden;
+    background: var(--pattern-paper, #fbfaf7);
+  }
+
+  .pattern-three-hero[data-transparent='true'],
+  .pattern-three-hero[data-transparent='true'] .pattern-three-canvas {
+    background: transparent;
+  }
+
+  .pattern-three-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    background: var(--pattern-paper, #fbfaf7);
+    cursor: grab;
+    touch-action: none;
+  }
+
+  .pattern-three-canvas.is-dragging {
+    cursor: grabbing;
+  }
+</style>

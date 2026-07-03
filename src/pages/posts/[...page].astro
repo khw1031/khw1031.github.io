@@ -2,6 +2,7 @@
 import type { GetStaticPaths, Page } from 'astro';
 import Pagination from '../../components/Pagination.astro';
 import PostList from '../../components/PostList.astro';
+import PostsJobWorkTimeThreeHero from '../../components/PostsJobWorkTimeThreeHero.astro';
 import { Content as Intro } from '../../copy/posts.md';
 import Base from '../../layouts/Base.astro';
 import { COLLECTION_LABELS, type PostListItem, getListItems } from '../../lib/collections';
@@ -17,6 +18,7 @@ const title = COLLECTION_LABELS.posts;
 
 <Base title={`${title} — thnkr`} description={`${title} — 개발 노트와 이력`}>
   <section class="prose max-w-none">
+    <PostsJobWorkTimeThreeHero />
     <Intro />
   </section>
   <section class="mt-6">

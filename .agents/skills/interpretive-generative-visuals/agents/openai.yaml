@@ -1,0 +1,4 @@
+interface:
+  display_name: "Interpretive Generative Visuals"
+  short_description: "Turn words into Three.js visual grammars"
+  default_prompt: "Use $interpretive-generative-visuals to propose and confirm an interpretation direction, then turn this word into formulas, color grammar, and a Three.js generative visual."

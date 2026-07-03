@@ -1,0 +1,34 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { plotPatternRegistry } from '../../../lib/plot/patterns';
+
+const title = 'Patterns';
+
+const patternPages = Object.entries(plotPatternRegistry).map(([slug, pattern]) => ({
+  title: pattern.title,
+  href: `/labs/patterns/${slug}/`,
+}));
+---
+
+<Base title={`${title} | thnkr`}>
+  <section class="space-y-4">
+    <header class="space-y-1">
+      <p class="text-sm text-muted">labs</p>
+      <h1 class="font-medium">{title}</h1>
+    </header>
+
+    {
+      patternPages.length > 0 && (
+        <ul class="list-none p-0 m-0 space-y-3">
+          {patternPages.map((page) => (
+            <li>
+              <a href={page.href} class="text-foreground hover:underline underline-offset-2">
+                {page.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</Base>

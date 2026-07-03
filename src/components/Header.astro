@@ -5,6 +5,7 @@ const pathname = Astro.url.pathname.replace(/\/+$/, '') || '/';
 const isCollectionActive = (collection: ListableCollection): boolean =>
   pathname === `/${collection}` || pathname.startsWith(`/${collection}/`);
 const isCvActive = pathname === '/cv' || pathname.startsWith('/cv/');
+const isLabsActive = pathname === '/labs' || pathname.startsWith('/labs/');
 
 const collectionHref = (collection: ListableCollection): string => `/${collection}/`;
 ---
@@ -30,6 +31,16 @@ const collectionHref = (collection: ListableCollection): string => `/${collectio
             </>
           ))
         }
+        <span aria-hidden="true">|</span>
+        <a
+          href="/labs/"
+          class:list={[
+            'hover:text-foreground transition-colors',
+            isLabsActive && 'text-foreground',
+          ]}
+        >
+          labs
+        </a>
       </nav>
     </div>
     <nav class="flex items-center text-muted">

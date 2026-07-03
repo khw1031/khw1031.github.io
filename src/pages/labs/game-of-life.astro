@@ -1,0 +1,598 @@
+---
+import { Pause, Play, RotateCcw, Shuffle, StepForward, Trash2 } from '@lucide/astro';
+import Base from '../../layouts/Base.astro';
+import { lifePatterns } from '../../lib/game-of-life';
+
+const title = 'Game of Life';
+const description = 'Conway Game of Life rendered with Three.js.';
+const patternOptions = Object.entries(lifePatterns).map(([value, pattern]) => ({
+  value,
+  title: pattern.title,
+}));
+---
+
+<Base title={`${title} | Labs | thnkr`} description={description}>
+  <article class="space-y-4">
+    <header class="space-y-1">
+      <p class="text-sm text-muted"><a href="/labs/">labs</a></p>
+      <h1 class="font-medium">{title}</h1>
+    </header>
+
+    <section class="life-workbench" data-running="false" aria-label="game of life simulator">
+      <div class="life-readout" aria-live="polite">
+        <output id="life-generation">generation 0</output>
+        <output id="life-population">population 0</output>
+        <output id="life-edge">edge dead</output>
+      </div>
+      <div class="life-stage" data-generation="0" data-population="0">
+        <canvas id="life-scene" class="life-canvas" aria-label="game of life grid"></canvas>
+      </div>
+
+      <form class="life-controls" aria-label="game of life controls">
+        <div class="life-actions">
+          <button type="button" id="life-toggle" aria-label="run simulation">
+            <Play class="life-icon life-run-icon" size={16} stroke-width={1.8} aria-hidden="true" />
+            <Pause class="life-icon life-pause-icon" size={16} stroke-width={1.8} aria-hidden="true" />
+            <span id="life-toggle-label">run</span>
+          </button>
+          <button type="button" id="life-step">
+            <StepForward size={16} stroke-width={1.8} aria-hidden="true" />
+            step
+          </button>
+          <button type="button" id="life-reset">
+            <RotateCcw size={16} stroke-width={1.8} aria-hidden="true" />
+            reset
+          </button>
+          <button type="button" id="life-random">
+            <Shuffle size={16} stroke-width={1.8} aria-hidden="true" />
+            random
+          </button>
+          <button type="button" id="life-clear">
+            <Trash2 size={16} stroke-width={1.8} aria-hidden="true" />
+            clear
+          </button>
+        </div>
+
+        <label class="life-control">
+          <span>pattern</span>
+          <select id="life-pattern">
+            {
+              patternOptions.map((pattern) => (
+                <option value={pattern.value} selected={pattern.value === 'glider-gun'}>
+                  {pattern.title}
+                </option>
+              ))
+            }
+          </select>
+        </label>
+
+        <label class="life-control">
+          <span>speed</span>
+          <input id="life-speed" type="range" min="60" max="600" step="20" value="160" />
+          <output id="life-speed-output" for="life-speed">160ms</output>
+        </label>
+
+        <label class="life-control">
+          <span>density</span>
+          <input id="life-density" type="range" min="10" max="55" step="5" value="30" />
+          <output id="life-density-output" for="life-density">30%</output>
+        </label>
+      </form>
+    </section>
+  </article>
+</Base>
+
+<script>
+  import * as THREE from 'three';
+  import {
+    countPopulation,
+    createEmptyGrid,
+    defaultLifeCols,
+    defaultLifeRows,
+    lifePatterns,
+    nextGeneration,
+    placePattern,
+    type LifeCell,
+    type LifeGrid,
+    type LifePatternKey,
+  } from '../../lib/game-of-life';
+
+  const rows = defaultLifeRows;
+  const cols = defaultLifeCols;
+  const cellSize = 1;
+  const maxInstances = rows * cols;
+
+  const workbench = document.querySelector<HTMLElement>('.life-workbench');
+  const stage = document.querySelector<HTMLElement>('.life-stage');
+  const canvas = document.querySelector<HTMLCanvasElement>('#life-scene');
+  const toggleButton = document.querySelector<HTMLButtonElement>('#life-toggle');
+  const toggleLabel = document.querySelector<HTMLElement>('#life-toggle-label');
+  const stepButton = document.querySelector<HTMLButtonElement>('#life-step');
+  const resetButton = document.querySelector<HTMLButtonElement>('#life-reset');
+  const randomButton = document.querySelector<HTMLButtonElement>('#life-random');
+  const clearButton = document.querySelector<HTMLButtonElement>('#life-clear');
+  const patternSelect = document.querySelector<HTMLSelectElement>('#life-pattern');
+  const speedInput = document.querySelector<HTMLInputElement>('#life-speed');
+  const speedOutput = document.querySelector<HTMLOutputElement>('#life-speed-output');
+  const densityInput = document.querySelector<HTMLInputElement>('#life-density');
+  const densityOutput = document.querySelector<HTMLOutputElement>('#life-density-output');
+  const generationOutput = document.querySelector<HTMLOutputElement>('#life-generation');
+  const populationOutput = document.querySelector<HTMLOutputElement>('#life-population');
+
+  if (
+    !workbench ||
+    !stage ||
+    !canvas ||
+    !toggleButton ||
+    !toggleLabel ||
+    !stepButton ||
+    !resetButton ||
+    !randomButton ||
+    !clearButton ||
+    !patternSelect ||
+    !speedInput ||
+    !speedOutput ||
+    !densityInput ||
+    !densityOutput ||
+    !generationOutput ||
+    !populationOutput
+  ) {
+    throw new Error('Missing Game of Life controls.');
+  }
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: false,
+    preserveDrawingBuffer: true,
+    powerPreference: 'high-performance',
+  });
+  renderer.setClearColor(0xf7f7f2, 1);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  const scene = new THREE.Scene();
+  const camera = new THREE.OrthographicCamera(-1, 1, 1, -1, 0.1, 200);
+  camera.position.set(0, 120, 0.001);
+  camera.up.set(0, 0, -1);
+  camera.lookAt(0, 0, 0);
+
+  const ambient = new THREE.HemisphereLight(0xffffff, 0x9a8f7a, 1.35);
+  const keyLight = new THREE.DirectionalLight(0xffffff, 1.8);
+  keyLight.position.set(-18, 34, 22);
+  scene.add(ambient, keyLight);
+
+  const ground = new THREE.Mesh(
+    new THREE.PlaneGeometry(cols, rows),
+    new THREE.MeshBasicMaterial({ color: 0xf7f7f2 }),
+  );
+  ground.rotation.x = -Math.PI / 2;
+  ground.position.y = -0.035;
+  scene.add(ground);
+
+  const hitPlane = new THREE.Mesh(
+    new THREE.PlaneGeometry(cols, rows),
+    new THREE.MeshBasicMaterial({
+      transparent: true,
+      opacity: 0,
+      depthWrite: false,
+    }),
+  );
+  hitPlane.rotation.x = -Math.PI / 2;
+  scene.add(hitPlane);
+
+  const makeGridLines = () => {
+    const vertices: number[] = [];
+    const left = -cols / 2;
+    const right = cols / 2;
+    const top = -rows / 2;
+    const bottom = rows / 2;
+
+    for (let col = 0; col <= cols; col += 1) {
+      const x = left + col * cellSize;
+      vertices.push(x, 0.012, top, x, 0.012, bottom);
+    }
+
+    for (let row = 0; row <= rows; row += 1) {
+      const z = top + row * cellSize;
+      vertices.push(left, 0.012, z, right, 0.012, z);
+    }
+
+    const geometry = new THREE.BufferGeometry();
+    geometry.setAttribute('position', new THREE.Float32BufferAttribute(vertices, 3));
+    return new THREE.LineSegments(
+      geometry,
+      new THREE.LineBasicMaterial({
+        color: 0x000000,
+        transparent: true,
+        opacity: 0.16,
+      }),
+    );
+  };
+
+  scene.add(makeGridLines());
+
+  const cellGeometry = new THREE.BoxGeometry(0.82, 1, 0.82);
+  const cellMaterial = new THREE.MeshStandardMaterial({
+    color: 0x000000,
+    roughness: 0.58,
+    metalness: 0.08,
+  });
+  const cells = new THREE.InstancedMesh(cellGeometry, cellMaterial, maxInstances);
+  cells.instanceMatrix.setUsage(THREE.DynamicDrawUsage);
+  scene.add(cells);
+
+  const hover = new THREE.Mesh(
+    new THREE.BoxGeometry(0.94, 0.05, 0.94),
+    new THREE.MeshBasicMaterial({
+      color: 0x000000,
+      transparent: true,
+      opacity: 0.24,
+      depthWrite: false,
+    }),
+  );
+  hover.visible = false;
+  scene.add(hover);
+
+  const raycaster = new THREE.Raycaster();
+  const pointer = new THREE.Vector2();
+  const matrix = new THREE.Matrix4();
+  const color = new THREE.Color();
+
+  let grid: LifeGrid = placePattern(rows, cols, lifePatterns['glider-gun']);
+  let generation = 0;
+  let population = countPopulation(grid);
+  let running = false;
+  let lastStepTime = 0;
+  let isPainting = false;
+  let paintValue: LifeCell = 1;
+
+  const updateOutputs = () => {
+    population = countPopulation(grid);
+    stage.dataset.generation = String(generation);
+    stage.dataset.population = String(population);
+    generationOutput.value = `generation ${generation}`;
+    generationOutput.textContent = `generation ${generation}`;
+    populationOutput.value = `population ${population}`;
+    populationOutput.textContent = `population ${population}`;
+    speedOutput.value = `${speedInput.value}ms`;
+    speedOutput.textContent = `${speedInput.value}ms`;
+    densityOutput.value = `${densityInput.value}%`;
+    densityOutput.textContent = `${densityInput.value}%`;
+  };
+
+  const setRunning = (nextRunning: boolean) => {
+    running = nextRunning;
+    workbench.dataset.running = String(running);
+    toggleButton.setAttribute('aria-label', running ? 'pause simulation' : 'run simulation');
+    toggleLabel.textContent = running ? 'pause' : 'run';
+    lastStepTime = performance.now();
+  };
+
+  const setCellInstance = (index: number, row: number, col: number) => {
+    const height = 0.36 + ((row + col) % 4) * 0.035;
+    const x = col - cols / 2 + 0.5;
+    const z = row - rows / 2 + 0.5;
+
+    matrix.compose(
+      new THREE.Vector3(x, height / 2, z),
+      new THREE.Quaternion(),
+      new THREE.Vector3(1, height, 1),
+    );
+    cells.setMatrixAt(index, matrix);
+
+    color.set(0x000000);
+    cells.setColorAt(index, color);
+  };
+
+  const renderGrid = () => {
+    let instanceIndex = 0;
+
+    for (let row = 0; row < rows; row += 1) {
+      for (let col = 0; col < cols; col += 1) {
+        if (grid[row][col] === 0) continue;
+        setCellInstance(instanceIndex, row, col);
+        instanceIndex += 1;
+      }
+    }
+
+    cells.count = instanceIndex;
+    cells.instanceMatrix.needsUpdate = true;
+    if (cells.instanceColor) cells.instanceColor.needsUpdate = true;
+    updateOutputs();
+  };
+
+  const stepSimulation = () => {
+    grid = nextGeneration(grid);
+    generation += 1;
+    renderGrid();
+  };
+
+  const resetPattern = () => {
+    const key = patternSelect.value as LifePatternKey;
+    grid = placePattern(rows, cols, lifePatterns[key]);
+    generation = 0;
+    setRunning(false);
+    renderGrid();
+  };
+
+  const randomize = () => {
+    const density = Number(densityInput.value) / 100;
+    grid = createEmptyGrid(rows, cols);
+
+    for (let row = 0; row < rows; row += 1) {
+      for (let col = 0; col < cols; col += 1) {
+        grid[row][col] = Math.random() < density ? 1 : 0;
+      }
+    }
+
+    generation = 0;
+    setRunning(false);
+    renderGrid();
+  };
+
+  const clearGrid = () => {
+    grid = createEmptyGrid(rows, cols);
+    generation = 0;
+    setRunning(false);
+    renderGrid();
+  };
+
+  const cellFromPointer = (event: PointerEvent) => {
+    const bounds = canvas.getBoundingClientRect();
+    pointer.x = ((event.clientX - bounds.left) / bounds.width) * 2 - 1;
+    pointer.y = -((event.clientY - bounds.top) / bounds.height) * 2 + 1;
+    raycaster.setFromCamera(pointer, camera);
+
+    const hit = raycaster.intersectObject(hitPlane, false)[0];
+    if (!hit) return null;
+
+    const col = Math.floor(hit.point.x + cols / 2);
+    const row = Math.floor(hit.point.z + rows / 2);
+    if (row < 0 || row >= rows || col < 0 || col >= cols) return null;
+
+    return { row, col };
+  };
+
+  const updateHover = (event: PointerEvent) => {
+    const cell = cellFromPointer(event);
+    if (!cell) {
+      hover.visible = false;
+      return;
+    }
+
+    hover.position.set(cell.col - cols / 2 + 0.5, 0.05, cell.row - rows / 2 + 0.5);
+    hover.visible = true;
+  };
+
+  const paintCell = (row: number, col: number, value: LifeCell) => {
+    if (grid[row][col] === value) return;
+    grid[row][col] = value;
+    renderGrid();
+  };
+
+  const resizeRenderer = () => {
+    const width = Math.max(1, Math.floor(stage.clientWidth));
+    const height = Math.max(1, Math.floor(stage.clientHeight));
+    const aspect = width / height;
+    const viewWidth = cols + 1.4;
+    const viewHeight = rows + 1.4;
+    const viewAspect = viewWidth / viewHeight;
+
+    renderer.setSize(width, height, false);
+
+    if (aspect >= viewAspect) {
+      camera.top = viewHeight / 2;
+      camera.bottom = -viewHeight / 2;
+      camera.left = (-viewHeight * aspect) / 2;
+      camera.right = (viewHeight * aspect) / 2;
+    } else {
+      camera.left = -viewWidth / 2;
+      camera.right = viewWidth / 2;
+      camera.top = viewWidth / aspect / 2;
+      camera.bottom = -viewWidth / aspect / 2;
+    }
+
+    camera.updateProjectionMatrix();
+  };
+
+  const animate = (time: number) => {
+    if (running && time - lastStepTime >= Number(speedInput.value)) {
+      stepSimulation();
+      lastStepTime = time;
+    }
+
+    renderer.render(scene, camera);
+    requestAnimationFrame(animate);
+  };
+
+  toggleButton.addEventListener('click', () => setRunning(!running));
+  stepButton.addEventListener('click', () => {
+    setRunning(false);
+    stepSimulation();
+  });
+  resetButton.addEventListener('click', resetPattern);
+  randomButton.addEventListener('click', randomize);
+  clearButton.addEventListener('click', clearGrid);
+  patternSelect.addEventListener('change', resetPattern);
+  speedInput.addEventListener('input', updateOutputs);
+  densityInput.addEventListener('input', updateOutputs);
+  window.addEventListener('resize', resizeRenderer);
+
+  canvas.addEventListener('pointerdown', (event) => {
+    if (event.button !== 0) return;
+    const cell = cellFromPointer(event);
+    if (!cell) return;
+
+    canvas.setPointerCapture(event.pointerId);
+    setRunning(false);
+    isPainting = true;
+    paintValue = grid[cell.row][cell.col] === 1 ? 0 : 1;
+    paintCell(cell.row, cell.col, paintValue);
+    updateHover(event);
+  });
+
+  canvas.addEventListener('pointermove', (event) => {
+    updateHover(event);
+    if (!isPainting) return;
+
+    const cell = cellFromPointer(event);
+    if (cell) paintCell(cell.row, cell.col, paintValue);
+  });
+
+  canvas.addEventListener('pointerup', (event) => {
+    isPainting = false;
+    if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+  });
+
+  canvas.addEventListener('pointerleave', () => {
+    isPainting = false;
+    hover.visible = false;
+  });
+
+  resizeRenderer();
+  renderGrid();
+  requestAnimationFrame(animate);
+</script>
+
+<style>
+  .life-workbench {
+    border: 1px solid color-mix(in srgb, var(--color-border) 75%, transparent);
+    border-radius: 8px;
+    overflow: hidden;
+    background: color-mix(in srgb, var(--color-background) 94%, var(--color-foreground) 6%);
+  }
+
+  .life-stage {
+    position: relative;
+    aspect-ratio: 16 / 10;
+    min-height: 280px;
+    background: #f7f7f2;
+  }
+
+  .life-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    cursor: crosshair;
+  }
+
+  .life-readout {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    gap: 0.5rem;
+    padding: 0.75rem 0.75rem 0.5rem;
+    background: color-mix(in srgb, var(--color-background) 96%, #000000 4%);
+  }
+
+  .life-readout output {
+    min-width: 0;
+    padding: 0.18rem 0.45rem;
+    border: 1px solid color-mix(in srgb, #000000 26%, transparent);
+    border-radius: 999px;
+    background: color-mix(in srgb, var(--color-background) 92%, transparent);
+    color: #000000;
+    font-size: 0.86rem;
+    line-height: 1.35;
+  }
+
+  .life-controls {
+    display: grid;
+    gap: 0.85rem;
+    padding: 0.85rem;
+    border-top: 1px solid color-mix(in srgb, var(--color-border) 65%, transparent);
+  }
+
+  .life-actions {
+    display: grid;
+    grid-template-columns: repeat(5, minmax(0, 1fr));
+    gap: 0.45rem;
+  }
+
+  .life-actions button,
+  .life-control select {
+    min-height: 2.3rem;
+    border: 1px solid color-mix(in srgb, var(--color-foreground) 22%, transparent);
+    border-radius: 6px;
+    background: var(--color-background);
+    color: var(--color-foreground);
+    font: inherit;
+  }
+
+  .life-actions button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    padding: 0.38rem 0.45rem;
+    white-space: nowrap;
+  }
+
+  .life-actions button:hover,
+  .life-control select:hover {
+    border-color: color-mix(in srgb, var(--color-foreground) 46%, transparent);
+  }
+
+  .life-workbench[data-running='false'] .life-pause-icon,
+  .life-workbench[data-running='true'] .life-run-icon {
+    display: none;
+  }
+
+  .life-control {
+    display: grid;
+    grid-template-columns: 4.8rem minmax(0, 1fr) 4.8rem;
+    align-items: center;
+    gap: 0.65rem;
+    color: var(--color-muted);
+  }
+
+  .life-control select,
+  .life-control input {
+    width: 100%;
+  }
+
+  .life-control select {
+    grid-column: span 2;
+    padding: 0.35rem 0.5rem;
+  }
+
+  .life-control output {
+    text-align: right;
+    color: var(--color-foreground);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .life-control input[type='range'] {
+    accent-color: #000000;
+  }
+
+  @media (max-width: 560px) {
+    .life-stage {
+      min-height: 260px;
+    }
+
+    .life-actions {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .life-actions button {
+      min-width: 0;
+      padding-inline: 0.35rem;
+      font-size: 0.92rem;
+    }
+
+    .life-control {
+      grid-template-columns: 1fr;
+      gap: 0.35rem;
+    }
+
+    .life-control select {
+      grid-column: auto;
+    }
+
+    .life-control output {
+      text-align: left;
+    }
+  }
+</style>

@@ -1,0 +1,411 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = 'expression plotter';
+---
+
+<Base title={`${title} | Labs | thnkr`}>
+  <article class="space-y-4">
+    <header class="space-y-1">
+      <p class="text-sm text-muted"><a href="/labs/">labs</a></p>
+      <h1 class="font-medium">{title}</h1>
+    </header>
+
+    <figure class="space-y-2">
+      <div class="plot-stage">
+        <canvas id="plot-canvas" class="plot-canvas" aria-label="Plot of the entered expression"></canvas>
+      </div>
+      <figcaption class="text-sm text-muted" id="plot-caption"></figcaption>
+    </figure>
+
+    <section class="preset-row" aria-label="presets">
+      <button type="button" class="chip" data-preset="line">y = 2x</button>
+      <button type="button" class="chip" data-preset="sweep">sin(a·x) sweep</button>
+      <button type="button" class="chip" data-preset="lissajous">lissajous</button>
+      <button type="button" class="chip" data-preset="dejong">De Jong map</button>
+      <button type="button" class="chip" id="reset-view">reset view</button>
+    </section>
+
+    <section class="controls">
+      <label class="row">
+        <span>mode</span>
+        <select id="mode">
+          <option value="function">function y = f(x)</option>
+          <option value="parametric">parametric (x(t), y(t), z(t))</option>
+          <option value="map">iterated map</option>
+        </select>
+      </label>
+
+      <div class="group" data-mode="function">
+        <label class="row"><span>y =</span><input id="fn-y" value="2*x" /></label>
+        <label class="row"><span>x from</span><input id="fn-x0" type="number" value="-10" step="0.5" /></label>
+        <label class="row"><span>x to</span><input id="fn-x1" type="number" value="10" step="0.5" /></label>
+        <label class="row inline"><input type="checkbox" id="sweep-on" /><span>sweep</span></label>
+        <label class="row"><span>param</span><input id="sweep-param" value="a" /></label>
+        <label class="row"><span>from</span><input id="sweep-from" type="number" value="1" step="0.5" /></label>
+        <label class="row"><span>to</span><input id="sweep-to" type="number" value="8" step="0.5" /></label>
+        <label class="row"><span>steps</span><input id="sweep-steps" type="number" value="8" step="1" /></label>
+      </div>
+
+      <div class="group" data-mode="parametric" hidden>
+        <label class="row"><span>x(t) =</span><input id="pm-x" value="sin(3*t)" /></label>
+        <label class="row"><span>y(t) =</span><input id="pm-y" value="sin(2*t)" /></label>
+        <label class="row"><span>z(t) =</span><input id="pm-z" value="0" /></label>
+        <label class="row"><span>t from</span><input id="pm-t0" type="number" value="0" step="0.1" /></label>
+        <label class="row"><span>t to</span><input id="pm-t1" type="number" value="6.283" step="0.1" /></label>
+      </div>
+
+      <div class="group" data-mode="map" hidden>
+        <label class="row"><span>x₀ =</span><input id="mp-x0" value="0.1" /></label>
+        <label class="row"><span>y₀ =</span><input id="mp-y0" value="0.1" /></label>
+        <label class="row"><span>next x =</span><input id="mp-nx" value="sin(1.4*y) - cos(1.3*x)" /></label>
+        <label class="row"><span>next y =</span><input id="mp-ny" value="sin(1.1*x) - cos(1.6*y)" /></label>
+        <label class="row"><span>iterations</span><input id="mp-iter" type="number" value="1600" step="100" /></label>
+        <label class="row"><span>seeds</span><input id="mp-seeds" type="number" value="4" step="1" /></label>
+      </div>
+
+      <label class="row"><span>samples</span><input id="samples" type="number" value="300" step="10" /></label>
+    </section>
+  </article>
+</Base>
+
+<script>
+  import * as THREE from 'three';
+  import { buildPlot, type PlotSpec } from '../../lib/plot/plotter';
+
+  const canvas = document.querySelector<HTMLCanvasElement>('#plot-canvas');
+  const stage = document.querySelector<HTMLElement>('.plot-stage');
+  const caption = document.querySelector<HTMLElement>('#plot-caption');
+  if (!canvas || !stage) throw new Error('Missing plot canvas.');
+
+  const paper = '#fbfaf7';
+  const ink = '#1b2430';
+  const accent = '#c4495d';
+  const axisColor = '#c3bcae';
+
+  const num = (id: string, fallback: number) => {
+    const value = Number((document.querySelector<HTMLInputElement>(`#${id}`)?.value ?? '').trim());
+    return Number.isFinite(value) ? value : fallback;
+  };
+  const str = (id: string) => (document.querySelector<HTMLInputElement>(`#${id}`)?.value ?? '').trim();
+  const mode = () =>
+    (document.querySelector<HTMLSelectElement>('#mode')?.value ?? 'function') as PlotSpec['mode'];
+
+  const renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.setClearColor(paper, 1);
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(paper);
+  const camera = new THREE.OrthographicCamera(-360, 360, 270, -270, 0.1, 2000);
+  camera.position.set(0, 0, 800);
+  camera.lookAt(0, 0, 0);
+
+  const root = new THREE.Group();
+  scene.add(root);
+
+  // Start slightly tilted so depth (z) is visible without dragging first.
+  const baseRotation = { x: -0.5, y: 0.5, z: 0 };
+  let dragging = false;
+  let lastPointer = { x: 0, y: 0 };
+
+  const disposeGroup = () => {
+    while (root.children.length) {
+      const child = root.children[0] as THREE.Line;
+      root.remove(child);
+      child.geometry?.dispose();
+      (child.material as THREE.Material)?.dispose();
+    }
+  };
+
+  const line = (pts: THREE.Vector3[], color: string, opacity: number) => {
+    const geometry = new THREE.BufferGeometry().setFromPoints(pts);
+    const material = new THREE.LineBasicMaterial({ color, transparent: true, opacity });
+    return new THREE.Line(geometry, material);
+  };
+
+  const buildSpec = (): PlotSpec => {
+    const samples = num('samples', 300);
+    if (mode() === 'parametric') {
+      return {
+        mode: 'parametric',
+        samples,
+        parametric: {
+          x: str('pm-x') || '0',
+          y: str('pm-y') || '0',
+          z: str('pm-z') || '0',
+          domainT: [num('pm-t0', 0), num('pm-t1', 6.283)],
+        },
+      };
+    }
+    if (mode() === 'map') {
+      return {
+        mode: 'map',
+        map: {
+          x0: str('mp-x0') || '0',
+          y0: str('mp-y0') || '0',
+          nextX: str('mp-nx') || 'x',
+          nextY: str('mp-ny') || 'y',
+          iterations: num('mp-iter', 1600),
+          seeds: num('mp-seeds', 4),
+        },
+      };
+    }
+    const sweepOn = document.querySelector<HTMLInputElement>('#sweep-on')?.checked;
+    return {
+      mode: 'function',
+      samples,
+      fn: { y: str('fn-y') || '0', domainX: [num('fn-x0', -10), num('fn-x1', 10)] },
+      sweep: sweepOn
+        ? {
+            param: str('sweep-param') || 'a',
+            from: num('sweep-from', 1),
+            to: num('sweep-to', 8),
+            steps: num('sweep-steps', 8),
+          }
+        : undefined,
+    };
+  };
+
+  const describe = (spec: PlotSpec) => {
+    if (spec.mode === 'parametric' && spec.parametric)
+      return `x(t)=${spec.parametric.x},  y(t)=${spec.parametric.y},  z(t)=${spec.parametric.z}`;
+    if (spec.mode === 'map' && spec.map)
+      return `xₙ₊₁=${spec.map.nextX},  yₙ₊₁=${spec.map.nextY}`;
+    if (spec.fn) return `y=${spec.fn.y}${spec.sweep ? `  (${spec.sweep.param}=${spec.sweep.from}…${spec.sweep.to})` : ''}`;
+    return '';
+  };
+
+  const plot = () => {
+    const spec = buildSpec();
+    const result = buildPlot(spec);
+    disposeGroup();
+
+    const { min, max } = result.bounds;
+    const center = {
+      x: (min.x + max.x) / 2,
+      y: (min.y + max.y) / 2,
+      z: (min.z + max.z) / 2,
+    };
+    const half = Math.max((max.x - min.x) / 2, (max.y - min.y) / 2, (max.z - min.z) / 2, 1e-6);
+    const scale = 220 / half;
+    const tf = (p: { x: number; y: number; z: number }) =>
+      new THREE.Vector3((p.x - center.x) * scale, (p.y - center.y) * scale, (p.z - center.z) * scale);
+
+    // axes through the math origin
+    const axis = (a: number[], b: number[]) =>
+      root.add(line([tf({ x: a[0], y: a[1], z: a[2] }), tf({ x: b[0], y: b[1], z: b[2] })], axisColor, 0.7));
+    axis([min.x, 0, 0], [max.x, 0, 0]);
+    axis([0, min.y, 0], [0, max.y, 0]);
+
+    const sweeps = Math.max(1, ...result.curves.map((c) => c.sweep + 1));
+    const c0 = new THREE.Color(ink);
+    const c1 = new THREE.Color(accent);
+    for (const curve of result.curves) {
+      const t = sweeps <= 1 ? 0 : curve.sweep / (sweeps - 1);
+      const color = c0.clone().lerp(c1, t).getStyle();
+      root.add(line(curve.points.map(tf), color, 0.9));
+    }
+
+    if (caption) {
+      const warn = result.pointCount === 0 ? '  — nothing to draw' : result.dropped ? `  (${result.dropped} non-finite dropped)` : '';
+      caption.textContent = `${describe(spec)}   ·   ${result.curves.length} curve(s), ${result.pointCount} pts${warn}`;
+    }
+  };
+
+  const presets: Record<string, () => void> = {
+    line: () => {
+      set('mode', 'function');
+      set('fn-y', '2*x');
+      set('fn-x0', '-10');
+      set('fn-x1', '10');
+      check('sweep-on', false);
+    },
+    sweep: () => {
+      set('mode', 'function');
+      set('fn-y', 'sin(a*x)');
+      set('fn-x0', '-6.283');
+      set('fn-x1', '6.283');
+      check('sweep-on', true);
+      set('sweep-param', 'a');
+      set('sweep-from', '1');
+      set('sweep-to', '8');
+      set('sweep-steps', '8');
+    },
+    lissajous: () => {
+      set('mode', 'parametric');
+      set('pm-x', 'sin(3*t)');
+      set('pm-y', 'sin(2*t)');
+      set('pm-z', 'sin(5*t) * 0.4');
+      set('pm-t0', '0');
+      set('pm-t1', '6.283');
+    },
+    dejong: () => {
+      set('mode', 'map');
+      set('mp-x0', '0.1');
+      set('mp-y0', '0.1');
+      set('mp-nx', 'sin(1.4*y) - cos(1.3*x)');
+      set('mp-ny', 'sin(1.1*x) - cos(1.6*y)');
+      set('mp-iter', '1800');
+      set('mp-seeds', '5');
+    },
+  };
+
+  const set = (id: string, value: string) => {
+    const element = document.querySelector<HTMLInputElement | HTMLSelectElement>(`#${id}`);
+    if (element) element.value = value;
+    if (id === 'mode') syncMode();
+  };
+  const check = (id: string, value: boolean) => {
+    const element = document.querySelector<HTMLInputElement>(`#${id}`);
+    if (element) element.checked = value;
+  };
+
+  const syncMode = () => {
+    const current = mode();
+    for (const group of document.querySelectorAll<HTMLElement>('.group[data-mode]')) {
+      group.hidden = group.dataset.mode !== current;
+    }
+  };
+
+  const resize = () => {
+    const rect = stage.getBoundingClientRect();
+    const w = Math.max(1, Math.round(rect.width));
+    const h = Math.max(1, Math.round(rect.height));
+    renderer.setSize(w, h, false);
+    const aspect = w / h;
+    const viewH = 540;
+    const viewW = viewH * aspect;
+    camera.left = -viewW / 2;
+    camera.right = viewW / 2;
+    camera.top = viewH / 2;
+    camera.bottom = -viewH / 2;
+    camera.updateProjectionMatrix();
+  };
+
+  const renderLoop = () => {
+    root.rotation.set(baseRotation.x, baseRotation.y, baseRotation.z);
+    renderer.render(scene, camera);
+    requestAnimationFrame(renderLoop);
+  };
+
+  for (const button of document.querySelectorAll<HTMLButtonElement>('[data-preset]')) {
+    button.addEventListener('click', () => {
+      presets[button.dataset.preset ?? '']?.();
+      plot();
+    });
+  }
+  document.querySelector('#reset-view')?.addEventListener('click', () => {
+    baseRotation.x = -0.5;
+    baseRotation.y = 0.5;
+    baseRotation.z = 0;
+  });
+  document.querySelector('#mode')?.addEventListener('change', () => {
+    syncMode();
+    plot();
+  });
+  for (const input of document.querySelectorAll<HTMLInputElement>('.controls input')) {
+    input.addEventListener('input', plot);
+  }
+
+  canvas.addEventListener('pointerdown', (event) => {
+    dragging = true;
+    lastPointer = { x: event.clientX, y: event.clientY };
+    canvas.setPointerCapture(event.pointerId);
+  });
+  canvas.addEventListener('pointermove', (event) => {
+    if (!dragging) return;
+    baseRotation.z += (event.clientX - lastPointer.x) * 0.006;
+    baseRotation.x += (event.clientY - lastPointer.y) * 0.006;
+    lastPointer = { x: event.clientX, y: event.clientY };
+  });
+  const stop = (event: PointerEvent) => {
+    dragging = false;
+    if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+  };
+  canvas.addEventListener('pointerup', stop);
+  canvas.addEventListener('pointercancel', stop);
+  window.addEventListener('resize', resize);
+
+  syncMode();
+  resize();
+  plot();
+  renderLoop();
+</script>
+
+<style>
+  .plot-stage {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: #fbfaf7;
+    border: 1px solid var(--color-border);
+  }
+  .plot-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    cursor: grab;
+  }
+  .plot-canvas:active {
+    cursor: grabbing;
+  }
+  #plot-caption {
+    font-family: ui-monospace, monospace;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .preset-row {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .chip {
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-muted);
+    cursor: pointer;
+    font: inherit;
+    padding: 0.3rem 0.6rem;
+  }
+  .chip:hover {
+    color: var(--color-foreground);
+    border-color: var(--color-foreground);
+  }
+  .controls {
+    display: grid;
+    gap: 0.5rem;
+    max-width: 40rem;
+  }
+  .group {
+    display: grid;
+    gap: 0.5rem;
+    padding: 0.6rem;
+    border: 1px solid var(--color-border);
+  }
+  .row {
+    display: grid;
+    grid-template-columns: 6rem 1fr;
+    align-items: center;
+    gap: 0.6rem;
+  }
+  .row.inline {
+    grid-template-columns: max-content max-content;
+  }
+  .row span {
+    color: var(--color-muted);
+  }
+  .row input,
+  .row select {
+    font: inherit;
+    padding: 0.25rem 0.4rem;
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-foreground);
+    min-width: 0;
+  }
+  .row input[type='checkbox'] {
+    width: 0.9rem;
+    height: 0.9rem;
+  }
+</style>

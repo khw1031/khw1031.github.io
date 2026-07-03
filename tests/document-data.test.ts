@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import { cv } from '../src/data/cv';
 import { sideProjects } from '../src/data/side-projects';
 import { detailContentSchema, detailSchema, documentPageSchema } from '../src/data/types';
+import { documentPageToMarkdown } from '../src/lib/serialize';
 
 describe('detailContentSchema', () => {
   it('accepts a title-only entry', () => {
@@ -117,6 +118,44 @@ describe('cv data', () => {
       const titles = d.content.map((c) => c.title);
       expect(titles).toEqual(['What', 'How', 'Impact']);
     }
+  });
+
+  it('keeps education entries as short title, period, and content rows', () => {
+    const education = cv.sections.find((s) => s.title === '교육 사항');
+    expect(
+      education?.details.map(({ title, period, content }) => ({
+        title,
+        period,
+        content: content.map((item) => item.title),
+      })),
+    ).toEqual([
+      {
+        title: '패스트캠퍼스',
+        period: '2017',
+        content: ['프론트엔드 풀타임 부트캠프(수료)'],
+      },
+      {
+        title: 'Udacity',
+        period: '2016',
+        content: ['Nano Degree, Intro to Programming(수료)'],
+      },
+      {
+        title: '홍익대학교',
+        period: '2006.03 - 2010.02',
+        content: ['예술학과(중퇴)'],
+      },
+      {
+        title: '성균관대학교',
+        period: '2005.03 - 2014.07',
+        content: ['경영학과(졸업)'],
+      },
+    ]);
+  });
+
+  it('serializes title-only education content inline instead of as nested headings', () => {
+    const markdown = documentPageToMarkdown(cv);
+    expect(markdown).toContain('2017 · 프론트엔드 풀타임 부트캠프(수료)');
+    expect(markdown).not.toContain('#### 프론트엔드 풀타임 부트캠프');
   });
 });
 

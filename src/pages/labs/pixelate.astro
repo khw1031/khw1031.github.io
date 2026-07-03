@@ -1,0 +1,1261 @@
+---
+import { Download, Redo2, RotateCcw, Undo2, Upload } from '@lucide/astro';
+import Base from '../../layouts/Base.astro';
+
+const title = 'Pixelate';
+const description = 'Upload an image and pixelate it in the browser.';
+---
+
+<Base title={`${title} | Labs | thnkr`} description={description}>
+  <article class="space-y-4">
+    <header class="space-y-1">
+      <p class="text-sm text-muted"><a href="/labs/">labs</a></p>
+      <h1 class="font-medium">{title}</h1>
+    </header>
+
+    <section class="pixelate-workbench" aria-label="image pixelator">
+      <div class="pixelate-stage" data-ready="false">
+        <canvas
+          id="pixel-canvas"
+          class="pixelate-canvas"
+          aria-label="pixelated image preview"
+        >
+        </canvas>
+        <p id="empty-state" class="empty-state">upload image</p>
+      </div>
+
+      <form class="pixelate-controls" aria-label="pixelate controls">
+        <div class="top-controls">
+          <div class="upload-control">
+            <span class="control-label">image</span>
+            <label class="file-control">
+              <input id="file-input" type="file" accept="image/*" />
+              <span>
+                <Upload size={16} stroke-width={1.8} aria-hidden="true" />
+                upload
+              </span>
+            </label>
+          </div>
+        </div>
+
+        <label class="range-control">
+          <span>block</span>
+          <input id="block-size" type="range" min="1" max="96" step="1" value="1" />
+          <output id="block-size-output" for="block-size">1px</output>
+        </label>
+
+        <label class="range-control">
+          <span>colors</span>
+          <input id="palette-colors" type="range" min="4" max="32" step="1" value="16" />
+          <output id="palette-colors-output" for="palette-colors">16 colors</output>
+        </label>
+
+        <fieldset class="palette-control" aria-label="palette method">
+          <legend>palette</legend>
+          <div class="palette-options">
+            <label>
+              <input type="radio" name="palette-mode" value="median" checked />
+              <span>median</span>
+            </label>
+            <label>
+              <input type="radio" name="palette-mode" value="octree" />
+              <span>octree</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <fieldset class="dither-control" aria-label="dither mode">
+          <legend>dither</legend>
+          <div class="dither-options">
+            <label>
+              <input type="radio" name="dither" value="none" />
+              <span>none</span>
+            </label>
+            <label>
+              <input type="radio" name="dither" value="bayer" checked />
+              <span>bayer</span>
+            </label>
+            <label>
+              <input type="radio" name="dither" value="blue-noise" />
+              <span>blue noise</span>
+            </label>
+            <label>
+              <input type="radio" name="dither" value="atkinson" />
+              <span>atkinson</span>
+            </label>
+            <label>
+              <input type="radio" name="dither" value="floyd" />
+              <span>floyd</span>
+            </label>
+            <label>
+              <input type="radio" name="dither" value="random" />
+              <span>random</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <label class="color-control">
+          <span>color</span>
+          <input id="paint-color" type="color" value="#ff3355" />
+        </label>
+
+        <label class="range-control">
+          <span>brightness</span>
+          <input id="brightness" type="range" min="0.4" max="1.8" step="0.05" value="1" />
+          <output id="brightness-output" for="brightness">1.00</output>
+        </label>
+
+        <label class="range-control">
+          <span>contrast</span>
+          <input id="contrast" type="range" min="0.4" max="2" step="0.05" value="1" />
+          <output id="contrast-output" for="contrast">1.00</output>
+        </label>
+
+        <label class="range-control">
+          <span>saturation</span>
+          <input id="saturation" type="range" min="0" max="2" step="0.05" value="1" />
+          <output id="saturation-output" for="saturation">1.00</output>
+        </label>
+
+        <label class="range-control">
+          <span>hue</span>
+          <input id="hue" type="range" min="-180" max="180" step="1" value="0" />
+          <output id="hue-output" for="hue">0deg</output>
+        </label>
+
+        <div class="pixelate-actions">
+          <button type="button" id="undo-stroke" aria-label="undo stroke" title="undo stroke" disabled>
+            <Undo2 size={16} stroke-width={1.8} aria-hidden="true" />
+          </button>
+          <button type="button" id="redo-stroke" aria-label="redo stroke" title="redo stroke" disabled>
+            <Redo2 size={16} stroke-width={1.8} aria-hidden="true" />
+          </button>
+          <button type="button" id="reset-image" aria-label="reset image" title="reset image">
+            <RotateCcw size={16} stroke-width={1.8} aria-hidden="true" />
+          </button>
+          <button type="button" id="download-image" disabled>
+            <Download size={16} stroke-width={1.8} aria-hidden="true" />
+            download
+          </button>
+        </div>
+
+        <p id="pixelate-status" class="text-sm text-muted" aria-live="polite"></p>
+      </form>
+    </section>
+  </article>
+</Base>
+
+<script>
+  const fileInput = document.querySelector<HTMLInputElement>('#file-input');
+  const blockInput = document.querySelector<HTMLInputElement>('#block-size');
+  const blockOutput = document.querySelector<HTMLOutputElement>('#block-size-output');
+  const paletteInput = document.querySelector<HTMLInputElement>('#palette-colors');
+  const paletteOutput = document.querySelector<HTMLOutputElement>('#palette-colors-output');
+  const paletteModeInputs = [
+    ...document.querySelectorAll<HTMLInputElement>('input[name="palette-mode"]'),
+  ];
+  const ditherInputs = [...document.querySelectorAll<HTMLInputElement>('input[name="dither"]')];
+  const paintColorInput = document.querySelector<HTMLInputElement>('#paint-color');
+  const brightnessInput = document.querySelector<HTMLInputElement>('#brightness');
+  const brightnessOutput = document.querySelector<HTMLOutputElement>('#brightness-output');
+  const contrastInput = document.querySelector<HTMLInputElement>('#contrast');
+  const contrastOutput = document.querySelector<HTMLOutputElement>('#contrast-output');
+  const saturationInput = document.querySelector<HTMLInputElement>('#saturation');
+  const saturationOutput = document.querySelector<HTMLOutputElement>('#saturation-output');
+  const hueInput = document.querySelector<HTMLInputElement>('#hue');
+  const hueOutput = document.querySelector<HTMLOutputElement>('#hue-output');
+  const canvas = document.querySelector<HTMLCanvasElement>('#pixel-canvas');
+  const stage = document.querySelector<HTMLElement>('.pixelate-stage');
+  const resetButton = document.querySelector<HTMLButtonElement>('#reset-image');
+  const undoButton = document.querySelector<HTMLButtonElement>('#undo-stroke');
+  const redoButton = document.querySelector<HTMLButtonElement>('#redo-stroke');
+  const downloadButton = document.querySelector<HTMLButtonElement>('#download-image');
+  const status = document.querySelector<HTMLElement>('#pixelate-status');
+
+  const maxOutputEdge = 4096;
+  const workingCanvas = document.createElement('canvas');
+  const baseCanvas = document.createElement('canvas');
+
+  type SourceImage = ImageBitmap | HTMLImageElement;
+  type DitherMode = 'none' | 'bayer' | 'blue-noise' | 'atkinson' | 'floyd' | 'random';
+  type PaletteMode = 'median' | 'octree';
+  type Point = { x: number; y: number };
+  type Rgba = { red: number; green: number; blue: number; alpha: number };
+  type Stroke = {
+    points: Point[];
+    color: string;
+    size: number;
+  };
+
+  let sourceImage: SourceImage | null = null;
+  let sourceWidth = 0;
+  let sourceHeight = 0;
+  let fileStem = 'pixelated-image';
+  let loadVersion = 0;
+  let resizedOutput = false;
+  let strokes: Stroke[] = [];
+  let redoStrokes: Stroke[] = [];
+  let activeStroke: Stroke | null = null;
+  let dragging = false;
+
+  if (
+    !fileInput ||
+    !blockInput ||
+    !blockOutput ||
+    !paletteInput ||
+    !paletteOutput ||
+    paletteModeInputs.length === 0 ||
+    ditherInputs.length === 0 ||
+    !paintColorInput ||
+    !brightnessInput ||
+    !brightnessOutput ||
+    !contrastInput ||
+    !contrastOutput ||
+    !saturationInput ||
+    !saturationOutput ||
+    !hueInput ||
+    !hueOutput ||
+    !canvas ||
+    !stage ||
+    !undoButton ||
+    !redoButton ||
+    !downloadButton
+  ) {
+    throw new Error('Missing pixelate controls.');
+  }
+
+  const context = canvas.getContext('2d');
+  const workingContext = workingCanvas.getContext('2d');
+  const baseContext = baseCanvas.getContext('2d');
+
+  if (!context || !workingContext || !baseContext) {
+    throw new Error('Missing canvas context.');
+  }
+
+  const isImageBitmap = (image: SourceImage | null): image is ImageBitmap =>
+    typeof ImageBitmap !== 'undefined' && image instanceof ImageBitmap;
+
+  const setStatus = (message: string) => {
+    if (status) status.textContent = message;
+  };
+
+  const setCanvasSize = (target: HTMLCanvasElement, width: number, height: number) => {
+    if (target.width !== width) target.width = width;
+    if (target.height !== height) target.height = height;
+  };
+
+  const updateRangeOutputs = () => {
+    blockOutput.value = `${blockInput.value}px`;
+    blockOutput.textContent = `${blockInput.value}px`;
+    paletteOutput.value = `${paletteInput.value} colors`;
+    paletteOutput.textContent = `${paletteInput.value} colors`;
+    brightnessOutput.value = Number(brightnessInput.value).toFixed(2);
+    brightnessOutput.textContent = Number(brightnessInput.value).toFixed(2);
+    contrastOutput.value = Number(contrastInput.value).toFixed(2);
+    contrastOutput.textContent = Number(contrastInput.value).toFixed(2);
+    saturationOutput.value = Number(saturationInput.value).toFixed(2);
+    saturationOutput.textContent = Number(saturationInput.value).toFixed(2);
+    hueOutput.value = `${hueInput.value}deg`;
+    hueOutput.textContent = `${hueInput.value}deg`;
+  };
+
+  const currentBlockSize = () => Math.max(1, Number(blockInput.value));
+  const currentBrushSize = () => currentBlockSize();
+  const currentPaletteSize = () => Math.max(4, Number(paletteInput.value));
+  const currentPaletteMode = (): PaletteMode => {
+    const selected = paletteModeInputs.find((input) => input.checked)?.value;
+    if (selected === 'median' || selected === 'octree') return selected;
+    return 'median';
+  };
+  const currentDitherMode = (): DitherMode => {
+    const selected = ditherInputs.find((input) => input.checked)?.value;
+    if (
+      selected === 'none' ||
+      selected === 'bayer' ||
+      selected === 'blue-noise' ||
+      selected === 'atkinson' ||
+      selected === 'floyd' ||
+      selected === 'random'
+    ) {
+      return selected;
+    }
+    return 'bayer';
+  };
+
+  const filterString = () =>
+    [
+      `brightness(${Number(brightnessInput.value)})`,
+      `contrast(${Number(contrastInput.value)})`,
+      `saturate(${Number(saturationInput.value)})`,
+      `hue-rotate(${Number(hueInput.value)}deg)`,
+    ].join(' ');
+
+  const imageSize = (image: SourceImage) => {
+    if (image instanceof HTMLImageElement) {
+      return {
+        width: image.naturalWidth,
+        height: image.naturalHeight,
+      };
+    }
+
+    return {
+      width: image.width,
+      height: image.height,
+    };
+  };
+
+  const closeSourceImage = () => {
+    if (isImageBitmap(sourceImage)) {
+      sourceImage.close();
+    }
+    sourceImage = null;
+  };
+
+  const fileNameStem = (name: string) => {
+    const withoutExtension = name.replace(/\.[^.]+$/, '');
+    return withoutExtension.replace(/[^a-z0-9_-]+/gi, '-').replace(/^-+|-+$/g, '') || 'image';
+  };
+
+  const loadWithImageElement = (file: File) =>
+    new Promise<HTMLImageElement>((resolve, reject) => {
+      const image = new Image();
+      const url = URL.createObjectURL(file);
+
+      image.onload = () => {
+        URL.revokeObjectURL(url);
+        resolve(image);
+      };
+      image.onerror = () => {
+        URL.revokeObjectURL(url);
+        reject(new Error('Could not load image.'));
+      };
+      image.src = url;
+    });
+
+  const loadSourceImage = async (file: File): Promise<SourceImage> => {
+    if ('createImageBitmap' in window) {
+      try {
+        return await createImageBitmap(file, { imageOrientation: 'from-image' });
+      } catch {
+        return await loadWithImageElement(file);
+      }
+    }
+
+    return await loadWithImageElement(file);
+  };
+
+  const outputSize = () => {
+    const scale = Math.min(1, maxOutputEdge / Math.max(sourceWidth, sourceHeight));
+
+    return {
+      width: Math.max(1, Math.round(sourceWidth * scale)),
+      height: Math.max(1, Math.round(sourceHeight * scale)),
+      resized: scale < 1,
+    };
+  };
+
+  const clamp = (value: number) => Math.min(255, Math.max(0, value));
+  const clampChannel = (value: number) => Math.round(clamp(value));
+
+  const coordinateNoise = (x: number, y: number, salt = 0) => {
+    let value = Math.imul(x + 1, 374761393) ^ Math.imul(y + 1, 668265263);
+    value ^= Math.imul(salt + 1, 1442695041);
+    value = Math.imul(value ^ (value >>> 13), 1274126177);
+    return ((value ^ (value >>> 16)) >>> 0) / 4294967295;
+  };
+
+  const createBlueNoiseMatrix = (side: number) => {
+    const matrix = Array.from({ length: side }, () => Array.from({ length: side }, () => 0));
+    const remaining = Array.from({ length: side * side }, (_, index) => ({
+      x: index % side,
+      y: Math.floor(index / side),
+    }));
+    const selected: Point[] = [];
+
+    const wrappedDistance = (a: Point, b: Point) => {
+      const dx = Math.abs(a.x - b.x);
+      const dy = Math.abs(a.y - b.y);
+      return Math.hypot(Math.min(dx, side - dx), Math.min(dy, side - dy));
+    };
+
+    for (let rank = 0; rank < side * side; rank += 1) {
+      let chosenIndex = 0;
+      let chosenScore = Number.NEGATIVE_INFINITY;
+
+      for (let index = 0; index < remaining.length; index += 1) {
+        const candidate = remaining[index];
+        if (!candidate) continue;
+
+        const nearestDistance =
+          selected.length === 0
+            ? 0
+            : Math.min(...selected.map((point) => wrappedDistance(candidate, point)));
+        const score = nearestDistance + coordinateNoise(candidate.x, candidate.y, rank) * 0.01;
+
+        if (score > chosenScore) {
+          chosenScore = score;
+          chosenIndex = index;
+        }
+      }
+
+      const [chosen] = remaining.splice(chosenIndex, 1);
+      if (!chosen) continue;
+
+      matrix[chosen.y][chosen.x] = rank;
+      selected.push(chosen);
+    }
+
+    return matrix;
+  };
+
+  const blueNoise8 = createBlueNoiseMatrix(8);
+
+  const pixelateCanvas = (
+    source: HTMLCanvasElement,
+    target: HTMLCanvasElement,
+    blockSize: number,
+  ) => {
+    const targetContext = target.getContext('2d');
+    if (!targetContext) return;
+
+    setCanvasSize(target, source.width, source.height);
+
+    const size = Math.max(1, Math.round(blockSize));
+    const lowCanvas = document.createElement('canvas');
+    const lowContext = lowCanvas.getContext('2d');
+    if (!lowContext) return;
+
+    const lowWidth = Math.max(1, Math.ceil(source.width / size));
+    const lowHeight = Math.max(1, Math.ceil(source.height / size));
+    lowCanvas.width = lowWidth;
+    lowCanvas.height = lowHeight;
+
+    lowContext.imageSmoothingEnabled = true;
+    lowContext.imageSmoothingQuality = 'high';
+    lowContext.clearRect(0, 0, lowWidth, lowHeight);
+    lowContext.drawImage(source, 0, 0, lowWidth, lowHeight);
+
+    const sourceData = lowContext.getImageData(0, 0, lowWidth, lowHeight);
+    const paletteSource: Rgba[] = [];
+
+    for (let offset = 0; offset < sourceData.data.length; offset += 4) {
+      paletteSource.push({
+        red: sourceData.data[offset] ?? 0,
+        green: sourceData.data[offset + 1] ?? 0,
+        blue: sourceData.data[offset + 2] ?? 0,
+        alpha: sourceData.data[offset + 3] ?? 255,
+      });
+    }
+
+    const averagePaletteColor = (pixels: Rgba[]): Rgba => {
+      let red = 0;
+      let green = 0;
+      let blue = 0;
+      let alpha = 0;
+
+      for (const pixel of pixels) {
+        red += pixel.red;
+        green += pixel.green;
+        blue += pixel.blue;
+        alpha += pixel.alpha;
+      }
+
+      return {
+        red: Math.round(red / pixels.length),
+        green: Math.round(green / pixels.length),
+        blue: Math.round(blue / pixels.length),
+        alpha: Math.round(alpha / pixels.length),
+      };
+    };
+
+    const colorRange = (pixels: Rgba[], key: 'red' | 'green' | 'blue') => {
+      let min = 255;
+      let max = 0;
+
+      for (const pixel of pixels) {
+        min = Math.min(min, pixel[key]);
+        max = Math.max(max, pixel[key]);
+      }
+
+      return max - min;
+    };
+
+    const medianCutPalette = (pixels: Rgba[], targetSize: number) => {
+      const boxes = [pixels];
+
+      while (boxes.length < targetSize) {
+        boxes.sort((a, b) => {
+          const rangeA = Math.max(colorRange(a, 'red'), colorRange(a, 'green'), colorRange(a, 'blue'));
+          const rangeB = Math.max(colorRange(b, 'red'), colorRange(b, 'green'), colorRange(b, 'blue'));
+          return rangeB * b.length - rangeA * a.length;
+        });
+
+        const box = boxes.shift();
+        if (!box || box.length <= 1) {
+          if (box) boxes.push(box);
+          break;
+        }
+
+        const ranges = {
+          red: colorRange(box, 'red'),
+          green: colorRange(box, 'green'),
+          blue: colorRange(box, 'blue'),
+        };
+        const channel = Object.entries(ranges).sort((a, b) => b[1] - a[1])[0]?.[0] as
+          | 'red'
+          | 'green'
+          | 'blue';
+        const sorted = [...box].sort((a, b) => a[channel] - b[channel]);
+        const middle = Math.max(1, Math.floor(sorted.length / 2));
+
+        boxes.push(sorted.slice(0, middle), sorted.slice(middle));
+      }
+
+      return boxes.filter((box) => box.length > 0).map(averagePaletteColor);
+    };
+
+    type PaletteBucket = {
+      red: number;
+      green: number;
+      blue: number;
+      alpha: number;
+      count: number;
+    };
+
+    const bucketColor = (bucket: PaletteBucket): Rgba => ({
+      red: Math.round(bucket.red / bucket.count),
+      green: Math.round(bucket.green / bucket.count),
+      blue: Math.round(bucket.blue / bucket.count),
+      alpha: Math.round(bucket.alpha / bucket.count),
+    });
+
+    const octreePalette = (pixels: Rgba[], targetSize: number) => {
+      let selectedBuckets: PaletteBucket[] = [];
+
+      for (let depth = 8; depth >= 1; depth -= 1) {
+        const shift = 8 - depth;
+        const buckets = new Map<string, PaletteBucket>();
+
+        for (const pixel of pixels) {
+          const key = `${pixel.red >> shift}:${pixel.green >> shift}:${pixel.blue >> shift}`;
+          let bucket = buckets.get(key);
+
+          if (!bucket) {
+            bucket = { red: 0, green: 0, blue: 0, alpha: 0, count: 0 };
+            buckets.set(key, bucket);
+          }
+
+          bucket.red += pixel.red;
+          bucket.green += pixel.green;
+          bucket.blue += pixel.blue;
+          bucket.alpha += pixel.alpha;
+          bucket.count += 1;
+        }
+
+        selectedBuckets = [...buckets.values()];
+        if (selectedBuckets.length <= targetSize || depth === 1) break;
+      }
+
+      return selectedBuckets
+        .sort((a, b) => b.count - a.count)
+        .slice(0, targetSize)
+        .map(bucketColor);
+    };
+
+    const palette =
+      currentPaletteMode() === 'octree'
+        ? octreePalette(paletteSource, currentPaletteSize())
+        : medianCutPalette(paletteSource, currentPaletteSize());
+
+    const nearestPaletteColor = (pixel: Rgba): Rgba => {
+      let nearest = palette[0] ?? pixel;
+      let nearestDistance = Number.POSITIVE_INFINITY;
+
+      for (const color of palette) {
+        const red = pixel.red - color.red;
+        const green = pixel.green - color.green;
+        const blue = pixel.blue - color.blue;
+        const distance = red * red + green * green + blue * blue;
+
+        if (distance < nearestDistance) {
+          nearest = color;
+          nearestDistance = distance;
+        }
+      }
+
+      return nearest;
+    };
+
+    const writePixel = (data: ImageData, offset: number, color: Rgba) => {
+      data.data[offset] = color.red;
+      data.data[offset + 1] = color.green;
+      data.data[offset + 2] = color.blue;
+      data.data[offset + 3] = color.alpha;
+    };
+
+    const ditherMode = currentDitherMode();
+    const outputData = lowContext.createImageData(lowWidth, lowHeight);
+    const bayer4 = [
+      [0, 8, 2, 10],
+      [12, 4, 14, 6],
+      [3, 11, 1, 9],
+      [15, 7, 13, 5],
+    ];
+
+    const orderedOffset = (x: number, y: number) => {
+      if (ditherMode === 'bayer') {
+        return (((bayer4[y % 4]?.[x % 4] ?? 0) + 0.5) / 16 - 0.5) * 64;
+      }
+
+      if (ditherMode === 'blue-noise') {
+        return (((blueNoise8[y % 8]?.[x % 8] ?? 0) + 0.5) / 64 - 0.5) * 64;
+      }
+
+      if (ditherMode === 'random') {
+        return (coordinateNoise(x, y, lowWidth + lowHeight) - 0.5) * 72;
+      }
+
+      return 0;
+    };
+
+    const errorDiffusion =
+      ditherMode === 'atkinson'
+        ? {
+            divisor: 8,
+            weights: [
+              { x: 1, y: 0, weight: 1 },
+              { x: 2, y: 0, weight: 1 },
+              { x: -1, y: 1, weight: 1 },
+              { x: 0, y: 1, weight: 1 },
+              { x: 1, y: 1, weight: 1 },
+              { x: 0, y: 2, weight: 1 },
+            ],
+          }
+        : ditherMode === 'floyd'
+          ? {
+              divisor: 16,
+              weights: [
+                { x: 1, y: 0, weight: 7 },
+                { x: -1, y: 1, weight: 3 },
+                { x: 0, y: 1, weight: 5 },
+                { x: 1, y: 1, weight: 1 },
+              ],
+            }
+          : null;
+
+    if (errorDiffusion) {
+      const working = new Float32Array(sourceData.data.length);
+      for (let index = 0; index < sourceData.data.length; index += 1) {
+        working[index] = sourceData.data[index] ?? 0;
+      }
+
+      const spreadError = (
+        x: number,
+        y: number,
+        red: number,
+        green: number,
+        blue: number,
+        weight: number,
+      ) => {
+        if (x < 0 || x >= lowWidth || y < 0 || y >= lowHeight) return;
+        const offset = (y * lowWidth + x) * 4;
+        working[offset] = clamp((working[offset] ?? 0) + (red * weight) / errorDiffusion.divisor);
+        working[offset + 1] = clamp(
+          (working[offset + 1] ?? 0) + (green * weight) / errorDiffusion.divisor,
+        );
+        working[offset + 2] = clamp(
+          (working[offset + 2] ?? 0) + (blue * weight) / errorDiffusion.divisor,
+        );
+      };
+
+      for (let y = 0; y < lowHeight; y += 1) {
+        for (let x = 0; x < lowWidth; x += 1) {
+          const offset = (y * lowWidth + x) * 4;
+          const original = {
+            red: clampChannel(working[offset] ?? 0),
+            green: clampChannel(working[offset + 1] ?? 0),
+            blue: clampChannel(working[offset + 2] ?? 0),
+            alpha: sourceData.data[offset + 3] ?? 255,
+          };
+          const quantized = nearestPaletteColor(original);
+
+          writePixel(outputData, offset, { ...quantized, alpha: original.alpha });
+
+          const redError = original.red - quantized.red;
+          const greenError = original.green - quantized.green;
+          const blueError = original.blue - quantized.blue;
+
+          for (const diffusion of errorDiffusion.weights) {
+            spreadError(
+              x + diffusion.x,
+              y + diffusion.y,
+              redError,
+              greenError,
+              blueError,
+              diffusion.weight,
+            );
+          }
+        }
+      }
+    } else {
+      for (let y = 0; y < lowHeight; y += 1) {
+        for (let x = 0; x < lowWidth; x += 1) {
+          const offset = (y * lowWidth + x) * 4;
+          const offsetValue = orderedOffset(x, y);
+          const original = {
+            red: clampChannel((sourceData.data[offset] ?? 0) + offsetValue),
+            green: clampChannel((sourceData.data[offset + 1] ?? 0) + offsetValue),
+            blue: clampChannel((sourceData.data[offset + 2] ?? 0) + offsetValue),
+            alpha: sourceData.data[offset + 3] ?? 255,
+          };
+          const quantized = nearestPaletteColor(original);
+          writePixel(outputData, offset, { ...quantized, alpha: original.alpha });
+        }
+      }
+    }
+
+    lowContext.putImageData(outputData, 0, 0);
+    targetContext.imageSmoothingEnabled = false;
+    targetContext.clearRect(0, 0, target.width, target.height);
+    targetContext.drawImage(lowCanvas, 0, 0, lowWidth, lowHeight, 0, 0, target.width, target.height);
+  };
+
+  const cellForPoint = (point: Point, size: number) => ({
+    x: Math.floor(point.x / size) * size,
+    y: Math.floor(point.y / size) * size,
+  });
+
+  const strokeCells = (stroke: Stroke, size = stroke.size) => {
+    const cells = new Map<string, Point>();
+    const addCell = (point: Point) => {
+      const cell = cellForPoint(point, size);
+      cells.set(`${cell.x}:${cell.y}`, cell);
+    };
+
+    for (let index = 0; index < stroke.points.length; index += 1) {
+      const point = stroke.points[index];
+      if (!point) continue;
+
+      addCell(point);
+
+      const next = stroke.points[index + 1];
+      if (!next) continue;
+
+      const distance = Math.hypot(next.x - point.x, next.y - point.y);
+      const steps = Math.max(1, Math.ceil(distance / size));
+
+      for (let step = 1; step <= steps; step += 1) {
+        addCell({
+          x: point.x + ((next.x - point.x) * step) / steps,
+          y: point.y + ((next.y - point.y) * step) / steps,
+        });
+      }
+    }
+
+    return [...cells.values()];
+  };
+
+  const drawStrokeShape = (
+    targetContext: CanvasRenderingContext2D,
+    stroke: Stroke,
+    offset: Point = { x: 0, y: 0 },
+  ) => {
+    const size = stroke.size;
+
+    for (const cell of strokeCells(stroke, size)) {
+      targetContext.fillRect(cell.x - offset.x, cell.y - offset.y, size, size);
+    }
+  };
+
+  const drawPaintStroke = (targetContext: CanvasRenderingContext2D, stroke: Stroke) => {
+    targetContext.save();
+    targetContext.strokeStyle = stroke.color;
+    targetContext.fillStyle = stroke.color;
+    targetContext.globalCompositeOperation = 'source-over';
+    drawStrokeShape(targetContext, stroke);
+    targetContext.restore();
+  };
+
+  const renderOutput = (previewStroke: Stroke | null = null) => {
+    if (!sourceImage) return;
+
+    const { width, height, resized } = outputSize();
+    const renderStrokes = previewStroke ? [...strokes, previewStroke] : strokes;
+
+    resizedOutput = resized;
+    setCanvasSize(workingCanvas, width, height);
+    setCanvasSize(baseCanvas, width, height);
+    setCanvasSize(canvas, width, height);
+    canvas.style.setProperty('--pixelate-aspect', String(width / height));
+
+    workingContext.save();
+    workingContext.clearRect(0, 0, width, height);
+    workingContext.filter = filterString();
+    workingContext.drawImage(sourceImage, 0, 0, width, height);
+    workingContext.restore();
+    workingContext.filter = 'none';
+
+    for (const stroke of renderStrokes) {
+      drawPaintStroke(workingContext, stroke);
+    }
+
+    if (currentBlockSize() <= 1) {
+      baseContext.imageSmoothingEnabled = false;
+      baseContext.clearRect(0, 0, width, height);
+      baseContext.drawImage(workingCanvas, 0, 0);
+    } else {
+      pixelateCanvas(workingCanvas, baseCanvas, currentBlockSize());
+    }
+
+    context.imageSmoothingEnabled = false;
+    context.clearRect(0, 0, width, height);
+    context.drawImage(baseCanvas, 0, 0);
+
+    stage.dataset.ready = 'true';
+    downloadButton.disabled = false;
+    updateHistoryButtons();
+    setStatus(
+      `${fileStem} · ${width}x${height} · block ${currentBlockSize()}px · colors ${currentPaletteSize()} · palette ${currentPaletteMode()} · dither ${currentDitherMode()} · ${strokes.length} stroke${strokes.length === 1 ? '' : 's'}${
+        resizedOutput ? ' · resized' : ''
+      }`,
+    );
+  };
+
+  const updateHistoryButtons = () => {
+    undoButton.disabled = strokes.length === 0 || !sourceImage;
+    redoButton.disabled = redoStrokes.length === 0 || !sourceImage;
+    downloadButton.disabled = !sourceImage;
+  };
+
+  const resetControls = () => {
+    blockInput.value = '1';
+    paletteInput.value = '16';
+    paintColorInput.value = '#ff3355';
+    brightnessInput.value = '1';
+    contrastInput.value = '1';
+    saturationInput.value = '1';
+    hueInput.value = '0';
+    const medianPalette = paletteModeInputs.find((input) => input.value === 'median');
+    if (medianPalette) medianPalette.checked = true;
+    const bayerDither = ditherInputs.find((input) => input.value === 'bayer');
+    if (bayerDither) bayerDither.checked = true;
+    updateRangeOutputs();
+  };
+
+  const resetImage = () => {
+    loadVersion += 1;
+    dragging = false;
+    activeStroke = null;
+    strokes = [];
+    redoStrokes = [];
+    closeSourceImage();
+    fileInput.value = '';
+    sourceWidth = 0;
+    sourceHeight = 0;
+    resetControls();
+    canvas.removeAttribute('width');
+    canvas.removeAttribute('height');
+    workingCanvas.removeAttribute('width');
+    workingCanvas.removeAttribute('height');
+    baseCanvas.removeAttribute('width');
+    baseCanvas.removeAttribute('height');
+    stage.dataset.ready = 'false';
+    updateHistoryButtons();
+    setStatus('');
+  };
+
+  const clampPoint = (point: Point): Point => ({
+    x: Math.min(Math.max(0, canvas.width - 0.001), Math.max(0, point.x)),
+    y: Math.min(Math.max(0, canvas.height - 0.001), Math.max(0, point.y)),
+  });
+
+  const pointerPoint = (event: PointerEvent, clampToCanvas = false): Point => {
+    const rect = canvas.getBoundingClientRect();
+    const point = {
+      x: ((event.clientX - rect.left) / rect.width) * canvas.width,
+      y: ((event.clientY - rect.top) / rect.height) * canvas.height,
+    };
+
+    return clampToCanvas ? clampPoint(point) : point;
+  };
+
+  const createStroke = (point: Point): Stroke => {
+    return {
+      points: [point],
+      color: paintColorInput.value,
+      size: currentBrushSize(),
+    };
+  };
+
+  const appendPoint = (stroke: Stroke, point: Point) => {
+    const previous = stroke.points.at(-1);
+    if (!previous) {
+      stroke.points.push(point);
+      return;
+    }
+
+    const distance = Math.hypot(point.x - previous.x, point.y - previous.y);
+    if (distance >= 1.5) {
+      stroke.points.push(point);
+    }
+  };
+
+  fileInput.addEventListener('change', async () => {
+    const file = fileInput.files?.[0];
+    if (!file) return;
+
+    const currentVersion = (loadVersion += 1);
+    setStatus('loading');
+
+    try {
+      const nextImage = await loadSourceImage(file);
+      if (currentVersion !== loadVersion) {
+        if (isImageBitmap(nextImage)) nextImage.close();
+        return;
+      }
+
+      closeSourceImage();
+      sourceImage = nextImage;
+      fileStem = fileNameStem(file.name);
+      strokes = [];
+      redoStrokes = [];
+      activeStroke = null;
+      blockInput.value = '1';
+      updateRangeOutputs();
+
+      const size = imageSize(nextImage);
+      sourceWidth = size.width;
+      sourceHeight = size.height;
+
+      renderOutput();
+    } catch {
+      resetImage();
+      setStatus('could not load image');
+    }
+  });
+
+  for (const input of [
+    blockInput,
+    paletteInput,
+    brightnessInput,
+    contrastInput,
+    saturationInput,
+    hueInput,
+  ]) {
+    input.addEventListener('input', () => {
+      updateRangeOutputs();
+      renderOutput(activeStroke);
+    });
+  }
+
+  for (const input of ditherInputs) {
+    input.addEventListener('change', () => {
+      renderOutput(activeStroke);
+    });
+  }
+
+  for (const input of paletteModeInputs) {
+    input.addEventListener('change', () => {
+      renderOutput(activeStroke);
+    });
+  }
+
+  const isPaintPointer = (event: PointerEvent) => event.isPrimary && event.button === 0;
+
+  canvas.addEventListener('pointerdown', (event) => {
+    if (!sourceImage || !isPaintPointer(event)) return;
+
+    event.preventDefault();
+    dragging = true;
+    activeStroke = createStroke(pointerPoint(event, true));
+    canvas.setPointerCapture(event.pointerId);
+    renderOutput(activeStroke);
+  });
+
+  canvas.addEventListener('pointermove', (event) => {
+    if (!dragging || !activeStroke) return;
+
+    appendPoint(activeStroke, pointerPoint(event, true));
+    renderOutput(activeStroke);
+  });
+
+  const finishStroke = (event: PointerEvent) => {
+    if (!dragging || !activeStroke) return;
+
+    appendPoint(activeStroke, pointerPoint(event, true));
+    strokes = [...strokes, activeStroke];
+    redoStrokes = [];
+    activeStroke = null;
+    dragging = false;
+    if (canvas.hasPointerCapture(event.pointerId)) {
+      canvas.releasePointerCapture(event.pointerId);
+    }
+    renderOutput();
+  };
+
+  canvas.addEventListener('pointerup', finishStroke);
+  canvas.addEventListener('pointercancel', finishStroke);
+
+  undoButton.addEventListener('click', () => {
+    const stroke = strokes.at(-1);
+    if (!stroke) return;
+
+    strokes = strokes.slice(0, -1);
+    redoStrokes = [...redoStrokes, stroke];
+    renderOutput();
+  });
+
+  redoButton.addEventListener('click', () => {
+    const stroke = redoStrokes.at(-1);
+    if (!stroke) return;
+
+    redoStrokes = redoStrokes.slice(0, -1);
+    strokes = [...strokes, stroke];
+    renderOutput();
+  });
+
+  resetButton?.addEventListener('click', resetImage);
+
+  downloadButton.addEventListener('click', () => {
+    if (downloadButton.disabled) return;
+
+    renderOutput();
+    canvas.toBlob((blob) => {
+      if (!blob) {
+        setStatus('could not export png');
+        return;
+      }
+
+      const link = document.createElement('a');
+      const url = URL.createObjectURL(blob);
+      link.href = url;
+      link.download = `${fileStem}-pixelated-${blockInput.value}px.png`;
+      link.click();
+      URL.revokeObjectURL(url);
+      setStatus(`downloaded ${link.download}`);
+    }, 'image/png');
+  });
+
+  resetControls();
+  updateHistoryButtons();
+</script>
+
+<style>
+  .pixelate-workbench {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .pixelate-stage {
+    display: grid;
+    place-items: center;
+    min-height: 18rem;
+    border: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-foreground) 3%, transparent);
+    overflow: hidden;
+  }
+
+  .pixelate-stage[data-ready='true'] {
+    min-height: 0;
+  }
+
+  .pixelate-canvas {
+    display: none;
+    width: min(100%, calc(70vh * var(--pixelate-aspect, 1)));
+    height: auto;
+    max-width: 100%;
+    max-height: 70vh;
+    image-rendering: pixelated;
+    touch-action: none;
+    cursor: crosshair;
+  }
+
+  .pixelate-stage[data-ready='true'] .pixelate-canvas {
+    display: block;
+  }
+
+  .empty-state {
+    margin: 0;
+    color: var(--color-muted);
+  }
+
+  .pixelate-stage[data-ready='true'] .empty-state {
+    display: none;
+  }
+
+  .pixelate-controls {
+    display: grid;
+    gap: 0.65rem;
+    color: var(--color-muted);
+  }
+
+  .pixelate-actions {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+  }
+
+  .top-controls {
+    display: grid;
+    gap: 0.45rem;
+  }
+
+  .upload-control,
+  .palette-control,
+  .dither-control {
+    display: grid;
+    grid-template-columns: 5.8rem minmax(0, 1fr);
+    align-items: center;
+    gap: 0.65rem;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+
+  .control-label,
+  .palette-control legend,
+  .dither-control legend {
+    padding: 0;
+    color: var(--color-muted);
+  }
+
+  .file-control {
+    position: relative;
+    display: inline-grid;
+    justify-self: start;
+    min-height: 2rem;
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+    cursor: pointer;
+  }
+
+  .file-control input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .file-control span,
+  .pixelate-actions button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.35rem;
+    min-height: 2rem;
+    padding: 0 0.65rem;
+  }
+
+  .palette-options,
+  .dither-options {
+    display: inline-flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+
+  .palette-options label,
+  .dither-options label {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 2rem;
+    min-width: 4.8rem;
+    padding: 0 0.6rem;
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+    cursor: pointer;
+  }
+
+  .palette-options label:has(input:checked),
+  .dither-options label:has(input:checked) {
+    border-color: var(--color-foreground);
+    color: var(--color-foreground);
+  }
+
+  .palette-options input,
+  .dither-options input {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    cursor: pointer;
+  }
+
+  .range-control,
+  .color-control {
+    display: grid;
+    grid-template-columns: 5.8rem minmax(7rem, 1fr) 3.8rem;
+    align-items: center;
+    gap: 0.65rem;
+    min-height: 1.9rem;
+    word-break: normal;
+    overflow-wrap: normal;
+    white-space: nowrap;
+  }
+
+  .range-control input {
+    width: 100%;
+    accent-color: var(--color-foreground);
+  }
+
+  .range-control output {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .color-control {
+    grid-template-columns: 5.8rem 3rem;
+  }
+
+  .color-control input {
+    width: 3rem;
+    height: 1.7rem;
+    padding: 0;
+    border: 1px solid var(--color-border);
+    background: transparent;
+  }
+
+  .pixelate-actions button {
+    border: 1px solid var(--color-border);
+    background: transparent;
+    color: var(--color-muted);
+    font: inherit;
+    cursor: pointer;
+  }
+
+  .pixelate-actions button[aria-label] {
+    width: 2rem;
+    padding: 0;
+  }
+
+  .file-control:hover,
+  .palette-options label:hover,
+  .dither-options label:hover,
+  .pixelate-actions button:hover:not(:disabled) {
+    border-color: var(--color-foreground);
+    color: var(--color-foreground);
+  }
+
+  .pixelate-actions button:disabled {
+    cursor: not-allowed;
+    opacity: 0.45;
+  }
+
+  @media (max-width: 520px) {
+    .upload-control,
+    .palette-control,
+    .dither-control {
+      grid-template-columns: 1fr;
+      gap: 0.35rem;
+    }
+
+    .range-control {
+      grid-template-columns: 1fr 3.8rem;
+    }
+
+    .range-control > span {
+      grid-column: 1 / -1;
+    }
+  }
+</style>

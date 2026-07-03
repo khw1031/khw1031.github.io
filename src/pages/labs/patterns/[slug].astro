@@ -1,0 +1,701 @@
+---
+import { Copy, Download, RotateCcw, SquareCode } from '@lucide/astro';
+import Base from '../../../layouts/Base.astro';
+import { describeSpec, plotPatternRegistry, type PlotPatternEntry } from '../../../lib/plot/patterns';
+
+export function getStaticPaths() {
+  return Object.entries(plotPatternRegistry).map(([slug, pattern]) => ({
+    params: { slug },
+    props: { pattern },
+  }));
+}
+
+const { pattern } = Astro.props as { pattern: PlotPatternEntry };
+const title = pattern.title;
+const candidates = pattern.candidates.map((candidate) => ({
+  id: candidate.id,
+  name: candidate.name,
+  interpretation: candidate.interpretation,
+  role: candidate.role,
+  spec: candidate.spec,
+  expr: describeSpec(candidate.spec),
+}));
+---
+
+<Base title={`${title} | Patterns | thnkr`}>
+  <article class="space-y-4">
+    <header class="space-y-1">
+      <p class="text-sm text-muted"><a href="/labs/patterns/">patterns</a></p>
+      <h1 class="font-medium">{title}</h1>
+      <p class="text-sm text-muted">{pattern.note}</p>
+    </header>
+
+    <figure class="space-y-2">
+      <div class="three-stage" style={`--pattern-paper: ${pattern.colors.paper}`}>
+        <canvas id="three-scene" class="three-canvas" aria-label={pattern.ariaLabel}></canvas>
+      </div>
+    </figure>
+
+    <section class="effect-tools" aria-label="effects">
+      <div class="effect-toggle-group" aria-label="filter toggles">
+        <label class="effect-toggle">
+          <input type="checkbox" data-effect="invert" />
+          <span>invert</span>
+        </label>
+        <label class="effect-toggle">
+          <input type="checkbox" data-effect="grayscale" />
+          <span>grayscale</span>
+        </label>
+      </div>
+
+      <fieldset class="background-control">
+        <legend>background</legend>
+        <label>
+          <input type="radio" name="background" value="paper" data-effect="background" checked />
+          <span>paper</span>
+        </label>
+        <label>
+          <input type="radio" name="background" value="white" data-effect="background" />
+          <span>white</span>
+        </label>
+        <label>
+          <input type="radio" name="background" value="transparent" data-effect="background" />
+          <span>transparent</span>
+        </label>
+      </fieldset>
+
+      <label class="effect-control">
+        <span>contrast</span>
+        <input type="range" min="0.6" max="2.2" step="0.05" value="1" data-effect="contrast" />
+        <output data-effect-output="contrast">1.00</output>
+      </label>
+
+      <label class="effect-control">
+        <span>saturation</span>
+        <input type="range" min="0" max="2" step="0.05" value="1" data-effect="saturation" />
+        <output data-effect-output="saturation">1.00</output>
+      </label>
+
+      <label class="effect-control">
+        <span>hue</span>
+        <input type="range" min="-180" max="180" step="1" value="0" data-effect="hue" />
+        <output data-effect-output="hue">0</output>
+      </label>
+
+      <label class="effect-control">
+        <span>scale</span>
+        <input type="range" min="0.6" max="1.6" step="0.02" value="1" data-effect="scale" />
+        <output data-effect-output="scale">1.00</output>
+      </label>
+
+      <div class="effect-actions">
+        <button type="button" id="effects-reset" class="icon-button" aria-label="reset effects" title="reset effects">
+          <RotateCcw size={16} stroke-width={1.8} aria-hidden="true" />
+        </button>
+        <button type="button" id="copy-png" class="icon-button" aria-label="copy png" title="copy png">
+          <Copy size={16} stroke-width={1.8} aria-hidden="true" />
+        </button>
+        <button type="button" id="copy-code" class="icon-button" aria-label="copy code" title="copy code">
+          <SquareCode size={16} stroke-width={1.8} aria-hidden="true" />
+        </button>
+        <button type="button" id="download-png" class="icon-button" aria-label="download png" title="download png">
+          <Download size={16} stroke-width={1.8} aria-hidden="true" />
+        </button>
+      </div>
+      <p class="text-sm text-muted" id="copy-status" aria-live="polite"></p>
+    </section>
+
+    <section class="analysis-section">
+      <h2>derived equations</h2>
+      <ol class="formula-list">
+        {
+          candidates.map((candidate, index) => (
+            <li>
+              <button
+                type="button"
+                class="formula-option"
+                data-formula={candidate.id}
+                aria-pressed={index === 0 ? 'true' : 'false'}
+              >
+                <span class="formula-name">{candidate.name}</span>
+                <span class="formula-expr">{candidate.expr}</span>
+                <small>{candidate.interpretation}</small>
+                <small>{candidate.role}</small>
+              </button>
+            </li>
+          ))
+        }
+      </ol>
+    </section>
+
+    <script
+      id="candidate-config"
+      type="application/json"
+      is:inline
+      set:html={JSON.stringify(candidates.map(({ id, name, spec, expr, role }) => ({ id, name, spec, expr, role })))}
+    />
+    <script
+      id="color-config"
+      type="application/json"
+      is:inline
+      set:html={JSON.stringify(pattern.colors)}
+    />
+    <script
+      id="view-config"
+      type="application/json"
+      is:inline
+      set:html={JSON.stringify(pattern.view)}
+    />
+    <script
+      id="source-config"
+      type="application/json"
+      is:inline
+      set:html={JSON.stringify({ source: pattern.source })}
+    />
+  </article>
+</Base>
+
+<script>
+  import * as THREE from 'three';
+  import { buildPlot, type PlotSpec } from '../../../lib/plot/plotter';
+
+  type Candidate = { id: string; name: string; spec: PlotSpec; expr: string; role: string };
+  type Colors = { paper: string; primary: string; secondary: string; accent: string };
+  type Motion = {
+    yawAmplitude: number;
+    yawSpeed: number;
+    rollAmplitude: number;
+    rollSpeed: number;
+    spin?: number;
+  };
+  type View = { rotation: { x: number; y: number; z: number }; zoom?: number; motion: Motion };
+
+  const readJson = <T,>(id: string, fallback: T): T => {
+    const node = document.querySelector<HTMLScriptElement>(`#${id}`);
+    try {
+      return node?.textContent ? (JSON.parse(node.textContent) as T) : fallback;
+    } catch {
+      return fallback;
+    }
+  };
+
+  const candidates = readJson<Candidate[]>('candidate-config', []);
+  const colors = readJson<Colors>('color-config', {
+    paper: '#fbfaf7',
+    primary: '#1b2430',
+    secondary: '#3a8c8a',
+    accent: '#c4495d',
+  });
+  const view = readJson<View>('view-config', {
+    rotation: { x: -0.1, y: 0, z: 0 },
+    motion: { yawAmplitude: 0.1, yawSpeed: 0.0003, rollAmplitude: 0.02, rollSpeed: 0.00015 },
+  });
+  const sourceConfig = readJson<{ source: string }>('source-config', { source: 'pattern' });
+
+  const canvas = document.querySelector<HTMLCanvasElement>('#three-scene');
+  const stage = document.querySelector<HTMLElement>('.three-stage');
+  const formulaButtons = [...document.querySelectorAll<HTMLButtonElement>('[data-formula]')];
+  const inputs = [...document.querySelectorAll<HTMLInputElement>('[data-effect]')];
+  const reset = document.querySelector<HTMLButtonElement>('#effects-reset');
+  const copyPng = document.querySelector<HTMLButtonElement>('#copy-png');
+  const copyCode = document.querySelector<HTMLButtonElement>('#copy-code');
+  const downloadPng = document.querySelector<HTMLButtonElement>('#download-png');
+  const status = document.querySelector<HTMLElement>('#copy-status');
+  if (!canvas || !stage) throw new Error('Missing plot canvas.');
+
+  const width = 720;
+  const height = 540;
+  const motion = view.motion;
+  const zoom = view.zoom ?? 1;
+
+  type BackgroundMode = 'paper' | 'white' | 'transparent';
+  type Effects = {
+    invert: boolean;
+    grayscale: boolean;
+    contrast: number;
+    saturation: number;
+    hue: number;
+    scale: number;
+    background: BackgroundMode;
+  };
+  const defaults: Effects = {
+    invert: false,
+    grayscale: false,
+    contrast: 1,
+    saturation: 1,
+    hue: 0,
+    scale: 1,
+    background: 'paper',
+  };
+
+  let effects = { ...defaults };
+  let selected = candidates[0];
+  let dragging = false;
+  let lastPointer = { x: 0, y: 0 };
+  let animTime = 0;
+  let lastFrame = performance.now();
+  const baseRotation = {
+    x: view.rotation?.x ?? -0.1,
+    y: view.rotation?.y ?? 0,
+    z: view.rotation?.z ?? 0,
+  };
+
+  const renderer = new THREE.WebGLRenderer({
+    canvas,
+    antialias: true,
+    alpha: true,
+    preserveDrawingBuffer: true,
+  });
+  renderer.setClearColor(colors.paper, 1);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(colors.paper);
+  const camera = new THREE.OrthographicCamera(-360, 360, 270, -270, 0.1, 2000);
+  camera.position.set(0, 0, 800);
+  camera.lookAt(0, 0, 0);
+
+  const root = new THREE.Group();
+  root.rotation.set(baseRotation.x, baseRotation.y, baseRotation.z);
+  scene.add(root);
+
+  const line = (points: THREE.Vector3[], color: string, opacity: number) => {
+    const geometry = new THREE.BufferGeometry().setFromPoints(points);
+    const material = new THREE.LineBasicMaterial({ color, transparent: true, opacity, depthWrite: false });
+    return new THREE.Line(geometry, material);
+  };
+
+  const disposeRoot = () => {
+    while (root.children.length) {
+      const child = root.children[0] as THREE.Line;
+      root.remove(child);
+      child.geometry?.dispose();
+      (child.material as THREE.Material)?.dispose();
+    }
+  };
+
+  const render = () => renderer.render(scene, camera);
+
+  const renderCandidate = (candidate: Candidate) => {
+    const result = buildPlot(candidate.spec);
+    disposeRoot();
+
+    const { min, max } = result.bounds;
+    const center = { x: (min.x + max.x) / 2, y: (min.y + max.y) / 2, z: (min.z + max.z) / 2 };
+    // Rotation-invariant framing: fit the bounding sphere so scale stays constant
+    // and the whole figure stays in-frame at every angle.
+    let radius = 1e-6;
+    for (const curve of result.curves) {
+      for (const point of curve.points) {
+        const dx = point.x - center.x;
+        const dy = point.y - center.y;
+        const dz = point.z - center.z;
+        const r = Math.sqrt(dx * dx + dy * dy + dz * dz);
+        if (r > radius) radius = r;
+      }
+    }
+    const scale = 220 / radius;
+    const tf = (p: { x: number; y: number; z: number }) =>
+      new THREE.Vector3((p.x - center.x) * scale, (p.y - center.y) * scale, (p.z - center.z) * scale);
+
+    if (candidate.spec.mode === 'map') {
+      // Iterated maps are point clouds, not paths: connecting successive chaotic
+      // iterates draws meaningless lines across the attractor. Render as many
+      // low-opacity points so density accumulates into the attractor's structure.
+      const positions: number[] = [];
+      for (const curve of result.curves) {
+        for (const point of curve.points) {
+          const v = tf(point);
+          positions.push(v.x, v.y, v.z);
+        }
+      }
+      const geometry = new THREE.BufferGeometry();
+      geometry.setAttribute('position', new THREE.Float32BufferAttribute(positions, 3));
+      const material = new THREE.PointsMaterial({
+        color: colors.primary,
+        size: 1.5,
+        sizeAttenuation: false,
+        transparent: true,
+        opacity: 0.16,
+        depthWrite: false,
+      });
+      root.add(new THREE.Points(geometry, material));
+    } else {
+      const sweeps = Math.max(1, ...result.curves.map((curve) => curve.sweep + 1));
+      const ink = new THREE.Color(colors.primary);
+      const hot = new THREE.Color(colors.accent);
+      for (const curve of result.curves) {
+        const t = sweeps <= 1 ? 0 : curve.sweep / (sweeps - 1);
+        const color = ink.clone().lerp(hot, t).getStyle();
+        root.add(line(curve.points.map(tf), color, 0.9));
+      }
+    }
+  };
+
+  const filterString = () =>
+    [
+      effects.invert ? 'invert(1)' : '',
+      effects.grayscale ? 'grayscale(1)' : '',
+      `contrast(${effects.contrast})`,
+      `saturate(${effects.saturation})`,
+      `hue-rotate(${effects.hue}deg)`,
+    ]
+      .filter(Boolean)
+      .join(' ');
+
+  const backgroundColor = () => (effects.background === 'white' ? '#ffffff' : colors.paper);
+
+  const updateBackground = () => {
+    const transparent = effects.background === 'transparent';
+    const background = backgroundColor();
+    renderer.setClearColor(background, transparent ? 0 : 1);
+    scene.background = transparent ? null : new THREE.Color(background);
+    canvas.style.background = transparent ? 'transparent' : background;
+    if (stage) {
+      stage.dataset.background = effects.background;
+      stage.style.setProperty('--active-background', background);
+    }
+  };
+
+  const resize = () => {
+    const rect = stage.getBoundingClientRect();
+    const w = Math.max(1, Math.round(rect.width));
+    const h = Math.max(1, Math.round(rect.height));
+    renderer.setSize(w, h, false);
+    const aspect = w / h;
+    const viewHeight = height / (effects.scale * zoom);
+    const viewWidth = viewHeight * aspect;
+    camera.left = -viewWidth / 2;
+    camera.right = viewWidth / 2;
+    camera.top = viewHeight / 2;
+    camera.bottom = -viewHeight / 2;
+    camera.updateProjectionMatrix();
+  };
+
+  const updateOutputs = () => {
+    for (const input of inputs) {
+      const key = input.dataset.effect as keyof Effects | undefined;
+      if (!key) continue;
+      const output = document.querySelector<HTMLOutputElement>(`[data-effect-output="${key}"]`);
+      const value = effects[key];
+      if (input.type === 'radio') input.checked = input.value === value;
+      else if (input.type === 'checkbox') input.checked = Boolean(value);
+      else input.value = String(value);
+      if (output && typeof value === 'number') {
+        const formatted = key === 'hue' ? value.toFixed(0) : value.toFixed(2);
+        output.textContent = formatted;
+        output.value = formatted;
+      }
+    }
+    canvas.style.filter = filterString();
+    updateBackground();
+  };
+
+  const collectEffects = () => {
+    for (const input of inputs) {
+      const key = input.dataset.effect as keyof Effects | undefined;
+      if (!key) continue;
+      if (input.type === 'radio') {
+        if (input.checked) effects = { ...effects, [key]: input.value as BackgroundMode };
+        continue;
+      }
+      effects = {
+        ...effects,
+        [key]: input.type === 'checkbox' ? input.checked : Number(input.value),
+      };
+    }
+    updateOutputs();
+    resize();
+  };
+
+  const animate = () => {
+    const now = performance.now();
+    if (!dragging) animTime += now - lastFrame;
+    lastFrame = now;
+    const spin = motion.spin ? animTime * motion.spin : 0;
+    root.rotation.x = baseRotation.x;
+    root.rotation.y = baseRotation.y + spin + Math.sin(animTime * motion.yawSpeed) * motion.yawAmplitude;
+    root.rotation.z = baseRotation.z + Math.sin(animTime * motion.rollSpeed) * motion.rollAmplitude;
+    render();
+    requestAnimationFrame(animate);
+  };
+
+  const setStatus = (message: string) => {
+    if (status) status.textContent = message;
+  };
+
+  const blobFromCanvas = (source: HTMLCanvasElement) =>
+    new Promise<Blob>((resolve, reject) => {
+      source.toBlob((blob) => (blob ? resolve(blob) : reject(new Error('no blob'))), 'image/png');
+    });
+
+  const snapshotBlob = async () => {
+    render();
+    const output = document.createElement('canvas');
+    output.width = canvas.width;
+    output.height = canvas.height;
+    const context = output.getContext('2d');
+    if (!context) throw new Error('no 2d context');
+    if (effects.background !== 'transparent') {
+      context.fillStyle = backgroundColor();
+      context.fillRect(0, 0, output.width, output.height);
+    }
+    context.filter = filterString();
+    context.drawImage(canvas, 0, 0, output.width, output.height);
+    return await blobFromCanvas(output);
+  };
+
+  const downloadBlob = (blob: Blob, ext: string) => {
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+    link.href = url;
+    link.download = `${sourceConfig.source}-${selected.id}.${ext}`;
+    link.click();
+    URL.revokeObjectURL(url);
+  };
+
+  const codeSnippet = () =>
+    `import { buildPlot } from './plotter';\n\nexport const ${sourceConfig.source.replace(/-([a-z])/g, (_, c) => c.toUpperCase())}Plot = ${JSON.stringify(
+      { source: sourceConfig.source, candidate: { id: selected.id, name: selected.name, spec: selected.spec }, effects, colors, view },
+      null,
+      2,
+    )};\n`;
+
+  for (const input of inputs) {
+    input.addEventListener('input', collectEffects);
+    input.addEventListener('change', collectEffects);
+  }
+
+  for (const button of formulaButtons) {
+    button.addEventListener('click', () => {
+      const next = candidates.find((candidate) => candidate.id === button.dataset.formula);
+      if (!next) return;
+      selected = next;
+      renderCandidate(selected);
+      for (const other of formulaButtons)
+        other.setAttribute('aria-pressed', String(other.dataset.formula === selected.id));
+      setStatus('');
+    });
+  }
+
+  reset?.addEventListener('click', () => {
+    effects = { ...defaults };
+    updateOutputs();
+    resize();
+    setStatus('');
+  });
+
+  copyPng?.addEventListener('click', async () => {
+    try {
+      const blob = await snapshotBlob();
+      await navigator.clipboard.write([new ClipboardItem({ 'image/png': blob })]);
+      setStatus('copied png');
+    } catch {
+      downloadBlob(await snapshotBlob(), 'png');
+      setStatus('copy blocked; downloaded png');
+    }
+  });
+
+  copyCode?.addEventListener('click', async () => {
+    try {
+      await navigator.clipboard.writeText(codeSnippet());
+      setStatus('copied code');
+    } catch {
+      downloadBlob(new Blob([codeSnippet()], { type: 'text/javascript' }), 'js');
+      setStatus('copy blocked; downloaded code');
+    }
+  });
+
+  downloadPng?.addEventListener('click', async () => {
+    downloadBlob(await snapshotBlob(), 'png');
+    setStatus('downloaded png');
+  });
+
+  canvas.addEventListener('pointerdown', (event) => {
+    if (!event.isPrimary || event.button !== 0) return;
+    dragging = true;
+    lastPointer = { x: event.clientX, y: event.clientY };
+    canvas.setPointerCapture(event.pointerId);
+  });
+  canvas.addEventListener('pointermove', (event) => {
+    if (!dragging) return;
+    baseRotation.z += (event.clientX - lastPointer.x) * 0.006;
+    baseRotation.x += (event.clientY - lastPointer.y) * 0.004;
+    lastPointer = { x: event.clientX, y: event.clientY };
+  });
+  const stopDragging = (event: PointerEvent) => {
+    if (!dragging) return;
+    dragging = false;
+    if (canvas.hasPointerCapture(event.pointerId)) canvas.releasePointerCapture(event.pointerId);
+  };
+  canvas.addEventListener('pointerup', stopDragging);
+  canvas.addEventListener('pointercancel', stopDragging);
+  window.addEventListener('resize', resize);
+
+  renderCandidate(selected);
+  updateOutputs();
+  resize();
+  animate();
+</script>
+
+<style>
+  .three-stage {
+    width: 100%;
+    aspect-ratio: 4 / 3;
+    background: var(--active-background, var(--pattern-paper, #fbfaf7));
+  }
+  .three-stage[data-background='transparent'] {
+    background: transparent;
+  }
+  .three-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+    background: var(--active-background, var(--pattern-paper, #fbfaf7));
+    cursor: grab;
+  }
+  .three-stage[data-background='transparent'] .three-canvas {
+    background: transparent;
+  }
+  .three-canvas:active {
+    cursor: grabbing;
+  }
+  .plot-expr {
+    font-family: ui-monospace, monospace;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+  .effect-tools {
+    display: grid;
+    gap: 0.65rem;
+    color: var(--color-muted);
+    max-width: 44rem;
+  }
+  .effect-actions {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .effect-toggle-group {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+  }
+  .effect-toggle,
+  .background-control label {
+    display: inline-grid;
+    grid-template-columns: 0.85rem max-content;
+    align-items: center;
+    gap: 0.45rem;
+    min-height: 2rem;
+    padding: 0 0.6rem;
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+    cursor: pointer;
+  }
+  .effect-toggle:has(input:checked),
+  .background-control label:has(input:checked) {
+    border-color: var(--color-foreground);
+    color: var(--color-foreground);
+  }
+  .effect-toggle input,
+  .background-control input {
+    width: 0.85rem;
+    height: 0.85rem;
+    margin: 0;
+  }
+  .background-control {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+    border: 0;
+  }
+  .background-control legend {
+    margin-inline-end: 0.25rem;
+    padding: 0;
+    color: var(--color-muted);
+  }
+  .effect-control {
+    display: grid;
+    grid-template-columns: 6.2rem minmax(7rem, 1fr) 3.4rem;
+    align-items: center;
+    gap: 0.65rem;
+    min-height: 1.9rem;
+    white-space: nowrap;
+  }
+  .effect-control input {
+    width: 100%;
+  }
+  .effect-control output {
+    text-align: right;
+    font-variant-numeric: tabular-nums;
+  }
+  .effect-control input[type='range'] {
+    accent-color: var(--color-foreground);
+  }
+  .effect-tools button,
+  .formula-option {
+    border: 1px solid var(--color-border);
+    color: var(--color-muted);
+    background: transparent;
+    cursor: pointer;
+    font: inherit;
+  }
+  .effect-tools button {
+    width: 2rem;
+    height: 2rem;
+    display: inline-grid;
+    place-items: center;
+    padding: 0;
+  }
+  .effect-tools button:hover {
+    color: var(--color-foreground);
+    border-color: var(--color-foreground);
+  }
+  .analysis-section {
+    display: grid;
+    gap: 0.45rem;
+  }
+  .analysis-section h2 {
+    font-size: 1rem;
+    font-weight: 500;
+  }
+  .analysis-section ol {
+    display: grid;
+    gap: 0.7rem;
+    margin: 0;
+    padding-inline-start: 1.25rem;
+  }
+  .analysis-section small {
+    display: block;
+    color: var(--color-muted);
+  }
+  .formula-option {
+    display: grid;
+    width: 100%;
+    min-width: 0;
+    gap: 0.25rem;
+    padding: 0.45rem 0.55rem;
+    text-align: left;
+  }
+  .formula-option[aria-pressed='true'] {
+    color: var(--color-foreground);
+    border-color: var(--color-foreground);
+  }
+  .formula-name {
+    display: block;
+    color: var(--color-foreground);
+  }
+  .formula-expr {
+    display: block;
+    font-family: ui-monospace, monospace;
+    color: var(--color-foreground);
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+</style>

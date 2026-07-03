@@ -13,6 +13,7 @@ export const collections = {
     loader: glob(md('read-and-write')),
     schema: readAndWriteSchema,
   }),
+  notes: defineCollection({ loader: glob(md('notes')), schema: baseFrontmatter }),
 };
 
 export { baseFrontmatter };

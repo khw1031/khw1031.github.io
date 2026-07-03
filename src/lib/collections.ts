@@ -1,7 +1,7 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import { readingTime } from './reading-time';
 
-export type ListableCollection = 'posts' | 'read-and-write';
+export type ListableCollection = 'posts' | 'read-and-write' | 'notes';
 
 export interface PostListItem {
   href: string;
@@ -13,6 +13,7 @@ export interface PostListItem {
 export const COLLECTION_LABELS: Record<ListableCollection, string> = {
   posts: 'Posts',
   'read-and-write': 'Read & Write',
+  notes: 'Notes',
 };
 
 export const COLLECTION_ORDER: ListableCollection[] = ['posts', 'read-and-write'];

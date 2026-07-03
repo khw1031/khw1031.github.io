@@ -1,0 +1,34 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { aptRegistry } from '../../../lib/apt/registry';
+
+const title = 'edward hopper apt';
+
+const aptPages = Object.entries(aptRegistry).map(([slug, apt]) => ({
+  title: apt.title,
+  href: `/labs/apt/${slug}/`,
+}));
+---
+
+<Base title={`${title} | Labs | thnkr`}>
+  <section class="space-y-4">
+    <header class="space-y-1">
+      <p class="text-sm text-muted"><a href="/labs/">labs</a></p>
+      <h1 class="font-medium">{title}</h1>
+    </header>
+
+    {
+      aptPages.length > 0 && (
+        <ul class="list-none p-0 m-0 space-y-3">
+          {aptPages.map((page) => (
+            <li>
+              <a href={page.href} class="text-foreground hover:underline underline-offset-2">
+                {page.title}
+              </a>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+  </section>
+</Base>

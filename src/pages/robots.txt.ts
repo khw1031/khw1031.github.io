@@ -6,11 +6,11 @@ export function GET(context: APIContext): Response {
   const siteUrl = (context.site ?? new URL('https://khw1031.github.io/')).toString();
   const sitemap = new URL('sitemap-index.xml', siteUrl).toString();
 
+  const disallowed = ['Disallow: /notes/'];
+  const block = (ua: string): string[] => [`User-agent: ${ua}`, 'Allow: /', ...disallowed, ''];
   const lines = [
-    'User-agent: *',
-    'Allow: /',
-    '',
-    ...FRIENDLY_BOTS.flatMap((bot) => [`User-agent: ${bot}`, 'Allow: /', '']),
+    ...block('*'),
+    ...FRIENDLY_BOTS.flatMap((bot) => block(bot)),
     `Sitemap: ${sitemap}`,
     '',
   ];

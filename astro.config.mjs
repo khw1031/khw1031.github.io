@@ -1,3 +1,4 @@
+import { unified } from '@astrojs/markdown-remark';
 import sitemap from '@astrojs/sitemap';
 import tailwindcss from '@tailwindcss/vite';
 import { defineConfig } from 'astro/config';
@@ -7,13 +8,25 @@ export default defineConfig({
   site: 'https://khw1031.github.io',
   trailingSlash: 'always',
   output: 'static',
-  integrations: [sitemap()],
+  devToolbar: {
+    enabled: false,
+  },
+  integrations: [
+    sitemap({
+      filter: (page) => {
+        const path = new URL(page).pathname;
+        return path !== '/notes' && !path.startsWith('/notes/');
+      },
+    }),
+  ],
   markdown: {
-    remarkPlugins,
-    rehypePlugins,
+    processor: unified({ remarkPlugins, rehypePlugins }),
     shikiConfig,
   },
   vite: {
     plugins: [tailwindcss()],
+    server: {
+      allowedHosts: ['hyunwoo-macbookpro.taild4a895.ts.net'],
+    },
   },
 });

@@ -6,6 +6,9 @@ node_modules/
 dist/
 .astro/
 .output/
+public/posts/
+public/read-and-write/
+public/notes/
 
 # env
 .env

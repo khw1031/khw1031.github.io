@@ -50,6 +50,10 @@
 - **CLAUDE.md Symlink** — Whenever an `AGENTS.md` file is created or moved, keep a sibling `CLAUDE.md` symlink pointing to `AGENTS.md` unless the user explicitly requests otherwise. Use a relative symlink like `CLAUDE.md -> AGENTS.md`.
 - **Repository Visibility** — Do not treat this repository as public when creating internal working documents. Internal context, private links, and non-public implementation notes may be recorded in docs when useful. Publication review applies only when moving content into public-facing posts, CV text, or external artifacts.
 
+## Generative Visuals
+
+- **Interpret Before Rendering** — For word/concept-driven generative visuals, use `.agents/skills/interpretive-generative-visuals`. The pipeline is `word → LLM interpretation → formula(s) → Three.js/WebGL graph/shape/repetition/fractal rendering`; deterministic math should render the chosen visual grammar, not replace interpretation.
+
 ## Posts
 
 - **One Project, One Post** — Treat one substantial project as one post. CV entries should stay concise; posts are the space for context, evidence, implementation detail, tradeoffs, and lessons that do not fit in the CV.

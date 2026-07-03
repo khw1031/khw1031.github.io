@@ -1,4 +1,5 @@
 ---
+import OverthinkThreeHero from '../components/OverthinkThreeHero.astro';
 import PostList from '../components/PostList.astro';
 import { Content as HomeIntro } from '../copy/home.md';
 import Base from '../layouts/Base.astro';
@@ -12,6 +13,7 @@ const jsonLd = [websiteJsonLd({ siteUrl }), personJsonLd({ siteUrl })];
 
 <Base title="thnkr" description="개발 노트와 이력을 정리하는 공간." jsonLd={jsonLd}>
   <section class="prose max-w-none">
+    <OverthinkThreeHero />
     <HomeIntro />
   </section>
   <section class="mt-6">

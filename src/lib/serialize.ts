@@ -20,11 +20,20 @@ export function documentPageToMarkdown(page: DocumentPage): string {
       if (detail.role) meta.push(detail.role);
       if (detail.period) meta.push(detail.period);
       if (detail.ect) meta.push(`※ ${detail.ect}`);
+
+      const singleContent = detail.content.length === 1 ? detail.content[0] : undefined;
+      const inlineContentTitle =
+        singleContent?.title && singleContent.description.length === 0
+          ? singleContent.title
+          : undefined;
+      if (inlineContentTitle) meta.push(inlineContentTitle);
+
       if (meta.length > 0) out.push(meta.join(' · '));
 
       out.push('');
 
-      for (const item of detail.content) {
+      const blockContent = inlineContentTitle ? [] : detail.content;
+      for (const item of blockContent) {
         if (item.title) out.push(`#### ${item.title}`, '');
 
         if (item.description.length > 0) {

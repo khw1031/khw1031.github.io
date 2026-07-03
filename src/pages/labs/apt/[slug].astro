@@ -1,0 +1,390 @@
+---
+import Base from '../../../layouts/Base.astro';
+import { aptRegistry, type AptEntry } from '../../../lib/apt/registry';
+
+export function getStaticPaths() {
+  return Object.entries(aptRegistry).map(([slug, entry]) => ({
+    params: { slug },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: AptEntry;
+}
+
+const { entry } = Astro.props;
+const sourceUrl = `${import.meta.env.BASE_URL}labs/apt/source.jpg`;
+
+const reproUrl = 'https://gist.github.com/khw1031/5e3f911eaf33707ac89687de6c3e8733';
+---
+
+<Base title={`${entry.title} | Apt | Labs | thnkr`} description={entry.description}>
+  <article class="space-y-4">
+    <header class="space-y-1">
+      <p class="text-sm text-muted"><a href="/labs/apt/">edward hopper apt</a></p>
+      <h1 class="font-medium">{entry.title}</h1>
+    </header>
+
+    <section
+      class="apt-workbench"
+      aria-label="edward hopper apt scene"
+      data-source={entry.sourcePhrase}
+      data-abstraction={entry.abstraction}
+      data-style-reference={entry.styleReference.title}
+      data-pipeline="photo-structure-to-hopper-masses"
+      data-source-image={sourceUrl}
+    >
+      <div class="apt-stage">
+        <canvas
+          id="apt-canvas"
+          class="apt-canvas"
+          width="900"
+          height="1350"
+          aria-label="A corner apartment reduced to two flat ivory masses — a sunlit face meeting a shadow face at a hard corner — under a wide empty sky, in the light of Edward Hopper's Rooms by the Sea"
+        >
+        </canvas>
+      </div>
+    </section>
+
+    <section class="apt-method space-y-2">
+      <p class="text-sm text-muted">
+        Claude Opus 4.8 (<code>claude-opus-4-8</code>). 기준 컨셉: Edward Hopper,
+        <em>Rooms by the Sea</em> (1951). 구조 소스 사진: Sarguninder Singh / Unsplash
+        (Unsplash License).
+      </p>
+      <p class="text-sm text-muted">
+        <a href={reproUrl} target="_blank" rel="noopener noreferrer">gist</a>
+      </p>
+    </section>
+  </article>
+</Base>
+
+<script>
+  const workbench = document.querySelector<HTMLElement>('.apt-workbench');
+  const canvas = document.querySelector<HTMLCanvasElement>('#apt-canvas');
+
+  if (!canvas || !workbench) {
+    throw new Error('Missing apt canvas.');
+  }
+
+  const context = canvas.getContext('2d', { willReadFrequently: true });
+
+  if (!context) {
+    throw new Error('Missing apt canvas context.');
+  }
+
+  const W = canvas.width;
+  const H = canvas.height;
+  const sourceUrl = workbench.dataset.sourceImage ?? '';
+
+  // The photo supplies only STRUCTURE — the corner silhouette and roofline. Everything
+  // painted here is invented in the manner of Hopper's Rooms by the Sea: one raking
+  // light (a warm sunlit face meeting a cool shadow face at a hard corner), sparse
+  // windows in large blank wall — a few lit warm at dusk — under a wide empty sky, all
+  // laid in with visible matte brushwork.
+  const C = {
+    skyTop: '#3c7191',
+    skyLow: '#82a4b6',
+    litBase: '#e2d6b4', // ivory (sunlit face)
+    litTop: '#f2ecd6', // bright ivory highlight
+    litBrushLight: '#fbf6e6',
+    litBrushDark: '#cdbb8f',
+    shadowBase: '#ab9c7f', // ivory drawn into shadow (warm greige)
+    shadowDeep: '#6f6349',
+    shadowBrushLight: '#c3b596',
+    shadowBrushDark: '#574d3b',
+    eave: '#5a5038',
+  };
+
+  const seeded = (s: number) => {
+    let c = s >>> 0;
+    return () => {
+      c += 0x6d2b79f5;
+      let t = c;
+      t = Math.imul(t ^ (t >>> 15), t | 1);
+      t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
+      return ((t ^ (t >>> 14)) >>> 0) / 4294967296;
+    };
+  };
+
+  const hexRgb = (hex: string): [number, number, number] => {
+    const n = Number.parseInt(hex.slice(1), 16);
+    return [(n >> 16) & 255, (n >> 8) & 255, n & 255];
+  };
+
+  const traceFace = (roof: Float64Array, x0: number, x1: number) => {
+    context.beginPath();
+    context.moveTo(x0, H);
+    context.lineTo(x0, roof[x0] ?? H);
+    for (let x = x0; x <= x1; x += 1) context.lineTo(x, roof[x] ?? H);
+    context.lineTo(x1, H);
+    context.closePath();
+  };
+
+  const gradFill = (top: string, bottom: string) => {
+    const g = context.createLinearGradient(0, 0, 0, H);
+    g.addColorStop(0, top);
+    g.addColorStop(1, bottom);
+    context.fillStyle = g;
+    context.fillRect(0, 0, W, H);
+  };
+
+  // Broad directionless blooms — matte tonal variation without any grain direction.
+  const mottle = (
+    clip: () => void,
+    seed: number,
+    light: string,
+    dark: string,
+    count: number,
+    radiusFraction: number,
+    maxAlpha: number,
+  ) => {
+    const random = seeded(seed);
+    context.save();
+    clip();
+    context.clip();
+    for (let i = 0; i < count; i += 1) {
+      const cx = random() * W;
+      const cy = H * 0.3 + random() * H * 0.7;
+      const radius = W * radiusFraction * (0.5 + random() * 0.7);
+      const [r, g, b] = hexRgb(random() > 0.5 ? light : dark);
+      const a = maxAlpha * (0.4 + random() * 0.6);
+      const grad = context.createRadialGradient(cx, cy, 0, cx, cy, radius);
+      grad.addColorStop(0, `rgba(${r}, ${g}, ${b}, ${a})`);
+      grad.addColorStop(1, `rgba(${r}, ${g}, ${b}, 0)`);
+      context.fillStyle = grad;
+      context.beginPath();
+      context.arc(cx, cy, radius, 0, Math.PI * 2);
+      context.fill();
+    }
+    context.restore();
+  };
+
+  // Value noise (hash grid + smoothstep bilerp, a few octaves) → an organic, direction-
+  // less field used to vary the paint's value like hand-mixed pigment, never as strokes.
+  const hashNoise = (x: number, y: number) => {
+    let h = Math.imul(x | 0, 374761393) ^ Math.imul(y | 0, 668265263);
+    h = Math.imul(h ^ (h >>> 13), 1274126177);
+    return ((h ^ (h >>> 16)) >>> 0) / 4294967295;
+  };
+  const smoothNoise = (x: number, y: number) => {
+    const xi = Math.floor(x);
+    const yi = Math.floor(y);
+    const xf = x - xi;
+    const yf = y - yi;
+    const u = xf * xf * (3 - 2 * xf);
+    const v = yf * yf * (3 - 2 * yf);
+    const a = hashNoise(xi, yi);
+    const b = hashNoise(xi + 1, yi);
+    const c = hashNoise(xi, yi + 1);
+    const d = hashNoise(xi + 1, yi + 1);
+    return a * (1 - u) * (1 - v) + b * u * (1 - v) + c * (1 - u) * v + d * u * v;
+  };
+  const fbm = (x: number, y: number) => {
+    let sum = 0;
+    let amp = 0.5;
+    let freq = 1;
+    for (let o = 0; o < 3; o += 1) {
+      sum += amp * smoothNoise(x * freq, y * freq);
+      freq *= 2.1;
+      amp *= 0.5;
+    }
+    return sum;
+  };
+
+  // Modulate the painting's value by (A) a faint regular canvas weave and (B) soft
+  // organic noise. A coarse low-frequency field varies the texture DENSITY across the
+  // surface, so it pools and thins irregularly like hand-applied paint rather than
+  // sitting at a uniform strength — and no visible strokes or grid.
+  const applyPaintTexture = () => {
+    const img = context.getImageData(0, 0, W, H);
+    const d = img.data;
+    for (let y = 0; y < H; y += 1) {
+      for (let x = 0; x < W; x += 1) {
+        const o = (y * W + x) * 4;
+        const density = 0.3 + 1.4 * fbm(x / 150 + 200, y / 150 + 200); // random-ish density
+        const weave = (Math.sin(x * 1.15) + Math.sin(y * 1.15)) * 0.5; // A: canvas weave
+        const n = fbm(x / 46, y / 46) - 0.5; // B: soft cloud
+        const n2 = fbm(x / 12 + 50, y / 12 + 50) - 0.5; // B: finer tooth
+        const delta = 0.016 * weave + 0.036 * n + 0.018 * n2;
+        const f = 1 + delta * density;
+        d[o] = Math.min(255, (d[o] ?? 0) * f);
+        d[o + 1] = Math.min(255, (d[o + 1] ?? 0) * f);
+        d[o + 2] = Math.min(255, (d[o + 2] ?? 0) * f);
+      }
+    }
+    context.putImageData(img, 0, 0);
+  };
+
+  const grain = () => {
+    const random = seeded(90210);
+    context.save();
+    for (let i = 0; i < 3000; i += 1) {
+      const light = random() > 0.7;
+      context.globalAlpha = light ? 0.025 : 0.04;
+      context.fillStyle = light ? '#f3e7c8' : '#20190f';
+      context.fillRect(Math.floor(random() * W), Math.floor(random() * H), 1, 1);
+    }
+    context.restore();
+  };
+
+  const paintScene = (roof: Float64Array, apex: number) => {
+    const leftClip = () => traceFace(roof, 0, apex);
+    const rightClip = () => traceFace(roof, apex, W - 1);
+    gradFill(C.skyTop, C.skyLow);
+
+    // Left face takes the light; right face falls into shadow. The corner between them
+    // is a hard value jump, not a drawn line. Soft mottle gives matte tonal variation.
+    context.save();
+    leftClip();
+    context.clip();
+    gradFill(C.litTop, C.litBase);
+    context.restore();
+    mottle(leftClip, 3391, C.litBrushLight, C.litBrushDark, 12, 0.22, 0.09);
+
+    context.save();
+    rightClip();
+    context.clip();
+    gradFill(C.shadowBase, C.shadowDeep);
+    context.restore();
+    mottle(rightClip, 8123, C.shadowBrushLight, C.shadowBrushDark, 10, 0.18, 0.12);
+
+    // A thin eave shadow riding just under the sunlit roofline.
+    context.save();
+    leftClip();
+    context.clip();
+    context.globalAlpha = 0.24;
+    context.fillStyle = C.eave;
+    context.beginPath();
+    context.moveTo(0, roof[0] ?? H);
+    for (let x = 0; x <= apex; x += 1) context.lineTo(x, roof[x] ?? H);
+    for (let x = apex; x >= 0; x -= 1) context.lineTo(x, (roof[x] ?? H) + 20);
+    context.closePath();
+    context.fill();
+    context.restore();
+
+    applyPaintTexture();
+    grain();
+  };
+
+  const rooflineFromPhoto = (image: HTMLImageElement) => {
+    const targetRatio = W / H;
+    let sw = image.naturalWidth;
+    let sh = image.naturalHeight;
+    let sx = 0;
+    let sy = 0;
+    if (image.naturalWidth / image.naturalHeight > targetRatio) {
+      sw = image.naturalHeight * targetRatio;
+      sx = (image.naturalWidth - sw) / 2;
+    } else {
+      sh = image.naturalWidth / targetRatio;
+      sy = (image.naturalHeight - sh) / 2;
+    }
+    context.drawImage(image, sx, sy, sw, sh, 0, 0, W, H);
+    const data = context.getImageData(0, 0, W, H).data;
+
+    // Roofline = first non-sky pixel per column (sky ≈ bright and blue-dominant).
+    const raw = new Float64Array(W);
+    for (let x = 0; x < W; x += 1) {
+      let y = 0;
+      for (; y < H; y += 1) {
+        const o = (y * W + x) * 4;
+        const r = data[o] ?? 0;
+        const g = data[o + 1] ?? 0;
+        const b = data[o + 2] ?? 0;
+        if (!(b > 110 && b >= g - 6 && b > r + 8)) break;
+      }
+      raw[x] = y;
+    }
+    const roof = new Float64Array(W);
+    const win = 9;
+    for (let x = 0; x < W; x += 1) {
+      let sum = 0;
+      let count = 0;
+      for (let k = -win; k <= win; k += 1) {
+        const xx = x + k;
+        if (xx >= 0 && xx < W) {
+          sum += raw[xx] ?? 0;
+          count += 1;
+        }
+      }
+      roof[x] = Math.min(H, sum / count);
+    }
+
+    let apex = Math.floor(W / 2);
+    let apexY = H;
+    for (let x = 0; x < W; x += 1) {
+      const value = roof[x] ?? H;
+      if (value < apexY && value < H - 2) {
+        apexY = value;
+        apex = x;
+      }
+    }
+    return { roof, apex };
+  };
+
+  const syntheticRoofline = () => {
+    const apex = Math.round(W * 0.42);
+    const apexY = H * 0.34;
+    const roof = new Float64Array(W);
+    for (let x = 0; x < W; x += 1) {
+      roof[x] =
+        x <= apex
+          ? H * 0.47 + (apexY - H * 0.47) * (x / apex)
+          : apexY + (H * 0.5 - apexY) * ((x - apex) / (W - 1 - apex));
+    }
+    return { roof, apex };
+  };
+
+  const image = new Image();
+  image.onload = () => {
+    const { roof, apex } = rooflineFromPhoto(image);
+    paintScene(roof, apex);
+    canvas.dataset.rendered = 'true';
+  };
+  image.onerror = () => {
+    const { roof, apex } = syntheticRoofline();
+    paintScene(roof, apex);
+    canvas.dataset.rendered = 'fallback';
+  };
+  image.src = sourceUrl;
+</script>
+
+<style>
+  .apt-workbench {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    min-width: 0;
+    gap: 0.6rem;
+  }
+
+  .apt-stage {
+    max-width: 100%;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    background: color-mix(in srgb, var(--color-foreground) 4%, transparent);
+    line-height: 0;
+  }
+
+  .apt-canvas {
+    display: block;
+    width: auto;
+    height: auto;
+    max-width: 100%;
+    max-height: calc(100dvh - 12.5rem);
+  }
+
+  @media (max-height: 640px) {
+    .apt-canvas {
+      max-height: calc(100dvh - 11rem);
+    }
+  }
+
+  .apt-method {
+    width: 100%;
+    max-width: 44rem;
+    margin: 1.5rem auto 0;
+  }
+</style>
