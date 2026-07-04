@@ -11,7 +11,7 @@ const collectionHref = (collection: ListableCollection): string => `/${collectio
 ---
 
 <header class="border-b border-border">
-  <div class="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-2 text-sm">
+  <div class="mx-auto flex max-w-3xl items-center justify-between gap-3 pl-[calc(1rem+env(safe-area-inset-left))] pr-[calc(1rem+env(safe-area-inset-right))] py-2 text-sm">
     <div class="flex items-center gap-5">
       <a href="/" class="font-medium">thnkr</a>
       <nav class="flex items-center gap-2 text-muted">
@@ -31,19 +31,19 @@ const collectionHref = (collection: ListableCollection): string => `/${collectio
             </>
           ))
         }
-        <span aria-hidden="true">|</span>
-        <a
-          href="/labs/"
-          class:list={[
-            'hover:text-foreground transition-colors',
-            isLabsActive && 'text-foreground',
-          ]}
-        >
-          labs
-        </a>
       </nav>
     </div>
-    <nav class="flex items-center text-muted">
+    <nav class="flex items-center gap-2 text-muted">
+      <a
+        href="/labs/"
+        class:list={[
+          'hover:text-foreground transition-colors',
+          isLabsActive && 'text-foreground',
+        ]}
+      >
+        labs
+      </a>
+      <span aria-hidden="true">|</span>
       <a
         href="/cv/"
         class:list={[

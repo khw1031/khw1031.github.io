@@ -3,10 +3,12 @@ const year = new Date().getFullYear();
 ---
 
 <footer class="border-t border-border">
-  <div class="mx-auto flex max-w-3xl items-center justify-between gap-3 px-4 py-2 text-sm text-muted">
+  <div class="mx-auto flex max-w-3xl items-center justify-between gap-3 pl-[calc(1rem+env(safe-area-inset-left))] pr-[calc(1rem+env(safe-area-inset-right))] pt-2 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-sm text-muted">
     <p>© {year} thnkr</p>
-    <nav>
+    <nav class="flex items-center gap-2">
       <a href="/archive/" class="hover:text-foreground transition-colors">archive</a>
+      <span aria-hidden="true">|</span>
+      <a href="/inbox/" class="hover:text-foreground transition-colors">inbox</a>
     </nav>
   </div>
 </footer>

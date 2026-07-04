@@ -21,7 +21,7 @@ const fullOgImage = ogImage ? new URL(ogImage, Astro.site).toString() : null;
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
@@ -44,9 +44,9 @@ const fullOgImage = ogImage ? new URL(ogImage, Astro.site).toString() : null;
 
     {jsonLd && <JsonLd data={jsonLd} />}
   </head>
-  <body class="min-h-screen flex flex-col">
+  <body class="min-h-dvh flex flex-col">
     <Header />
-    <main class="flex-1 w-full max-w-3xl mx-auto px-4 pt-20 pb-20">
+    <main class="flex-1 w-full max-w-3xl mx-auto pl-[calc(1rem+env(safe-area-inset-left))] pr-[calc(1rem+env(safe-area-inset-right))] pt-20 pb-20">
       <slot />
     </main>
     <Footer />
