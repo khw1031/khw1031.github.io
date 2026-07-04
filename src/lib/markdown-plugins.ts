@@ -1,6 +1,8 @@
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeExternalLinks from 'rehype-external-links';
 import rehypeSlug from 'rehype-slug';
+import remarkCjkFriendly from 'remark-cjk-friendly';
+import remarkFlexibleMarkers from 'remark-flexible-markers';
 import remarkGfm from 'remark-gfm';
 import remarkSmartypants from 'remark-smartypants';
 import type { Pluggable, PluggableList } from 'unified';
@@ -46,6 +48,14 @@ function stripLeadingHash(heading: { children?: unknown }): void {
 
 export const remarkPlugins: PluggableList = [
   remarkGfm,
+  // Make CommonMark emphasis flanking rules CJK-aware so patterns like
+  // `**강조**조사` or `**"…"**라는` (closing ** after punctuation, before a
+  // Korean letter) parse as emphasis instead of rendering as literal `**`.
+  remarkCjkFriendly,
+  // Sentence/inline highlight: `==텍스트==` -> <mark>. Handles Korean josa
+  // right after the closing `==` (e.g. `==강조==를`) natively, so no extra
+  // CJK patch is needed here. Styled via `.prose mark` in global.css.
+  remarkFlexibleMarkers,
   [remarkSmartypants, { dashes: 'oldschool' }],
 ];
 

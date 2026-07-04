@@ -239,3 +239,12 @@ main a:hover,
 .prose :is(code)::after {
   content: "";
 }
+
+/* Highlight (`==text==` via remark-flexible-markers -> <mark>). Standard
+   highlighter yellow with body text color and a hair of horizontal padding. */
+.prose :is(mark) {
+  background-color: #fef08a;
+  color: inherit;
+  padding: 0 0.15em;
+  border-radius: 0;
+}

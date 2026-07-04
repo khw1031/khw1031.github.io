@@ -60,7 +60,7 @@ const showTags =
               height="13.65"
               viewBox="0 0 24 24"
               aria-hidden="true"
-              class="shrink-0"
+              class="tldr-mark shrink-0"
             >
               <path
                 fill="currentColor"
@@ -70,7 +70,7 @@ const showTags =
                 d="M12 2c0 5.523-4.477 10-10 10 5.523 0 10 4.477 10 10 0-5.523 4.477-10 10-10-5.523 0-10-4.477-10-10z"
               />
             </svg>
-            <span class="text-[13px] font-semibold leading-[1.3]">TLDR</span>
+            <span class="text-[13px] font-semibold leading-none">핵심요약</span>
           </div>
           <p class="m-0 text-[13px] leading-relaxed">{data.summary}</p>
         </aside>
@@ -93,3 +93,19 @@ const showTags =
     }
   </article>
 </Base>
+
+<style>
+  /* The "핵심요약" glyph ink sits slightly low in its line box, so the flex-
+     centered mark reads a touch high. The optical offset depends on subpixel
+     rounding, which differs by display density: standard (1x) displays need a
+     larger nudge than hi-DPI (retina / mobile) ones. */
+  .tldr-mark {
+    transform: translateY(0.5px);
+  }
+
+  @media (min-resolution: 2dppx) {
+    .tldr-mark {
+      transform: none;
+    }
+  }
+</style>
