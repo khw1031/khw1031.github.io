@@ -9,7 +9,11 @@ const { hideContact = false } = Astro.props;
 <header class="mt-8 flex flex-wrap items-end justify-between gap-2">
   <h1 class="text-base font-semibold flex flex-col leading-tight">
     <span>김현우</span>
-    <span class="text-xs text-muted font-normal">Frontend · AI Transformation · Productivity</span>
+    <span class="text-xs text-muted font-normal"
+      >Frontend · AI Transformation<span class="hidden sm:inline"> · </span><br
+        class="sm:hidden"
+      />Productivity</span
+    >
   </h1>
   {
     !hideContact && (

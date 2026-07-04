@@ -30,20 +30,42 @@ const hasContent = blockContent.length > 0;
 const formerNameMatch = detail.title?.match(/^(.*\S)\s*(\([^)]*\))$/);
 const mainTitle = formerNameMatch ? formerNameMatch[1] : detail.title;
 const titleAnnotation = formerNameMatch ? formerNameMatch[2] : undefined;
+
+// A period range ("start — end") is split so mobile can break after the
+// separator into two lines deterministically, independent of viewport width;
+// on sm+ the <br> is hidden and it renders on a single line. Single dates
+// (no separator) render as-is.
+const periodRange = detail.period?.match(/^(.*\S)\s*([—–-])\s*(\S.*)$/);
 ---
 
 <article
   class:list={[
     hasContent ? 'mt-16' : 'mt-2',
     'first:mt-0',
-    'grid grid-cols-[23ch_1fr] items-baseline gap-x-4',
+    'grid grid-cols-[11ch_1fr] items-baseline gap-x-4 sm:grid-cols-[23ch_1fr]',
   ]}
 >
-  <div class="text-xs text-muted tabular-nums">{detail.period}</div>
+  <div class="text-xs text-muted tabular-nums">
+    {
+      periodRange ? (
+        <>
+          <span class="whitespace-nowrap">
+            {periodRange[1]} {periodRange[2]}
+          </span>{' '}
+          <br class="sm:hidden" />
+          {periodRange[3]}
+        </>
+      ) : (
+        detail.period
+      )
+    }
+  </div>
   <div class="min-w-0">
     {
       hasContent ? (
-        <div class="flex flex-wrap items-baseline gap-x-1.5">
+        // On mobile the role/meta stacks below the title (no leading dot); on
+        // sm+ it stays inline after the title joined by a single dot.
+        <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-1.5">
           {detail.title && (
             <h3 class="text-base font-semibold">
               {detail.url ? (
@@ -61,16 +83,19 @@ const titleAnnotation = formerNameMatch ? formerNameMatch[2] : undefined;
             </h3>
           )}
           {metaParts.length > 0 && (
-            <span class="text-xs text-muted">
-              <span aria-hidden="true">· </span>
+            <span class="mt-0.5 text-xs text-muted sm:mt-0">
+              <span aria-hidden="true" class="hidden sm:inline">
+                ·{' '}
+              </span>
               {metaParts.join(' · ')}
             </span>
           )}
         </div>
       ) : (
-        // Dense entries (career, education) collapse to one line: a lighter,
-        // smaller title with the role/meta joined inline after a single dot.
-        <div class="flex flex-wrap items-baseline gap-x-1.5">
+        // Dense entries (career, education): a lighter, smaller title. On mobile
+        // the role/meta stacks below the title (no leading dot); on sm+ it stays
+        // inline after the title joined by a single dot.
+        <div class="flex flex-col sm:flex-row sm:flex-wrap sm:items-baseline sm:gap-x-1.5">
           {detail.title && (
             <h3 class="text-[12px] font-normal">
               {detail.url ? (
@@ -91,8 +116,10 @@ const titleAnnotation = formerNameMatch ? formerNameMatch[2] : undefined;
             </h3>
           )}
           {metaParts.length > 0 && (
-            <span class="text-xs text-muted">
-              <span aria-hidden="true">· </span>
+            <span class="mt-0.5 text-xs text-muted sm:mt-0">
+              <span aria-hidden="true" class="hidden sm:inline">
+                ·{' '}
+              </span>
               {metaParts.join(' · ')}
             </span>
           )}
