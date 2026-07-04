@@ -8,6 +8,10 @@ export interface PostListItem {
   href: string;
   title: string;
   pubDate: Date;
+  /** Short description shown under the title in listings; absent for labs. */
+  description?: string;
+  /** Topical tags from frontmatter; absent for labs. */
+  tags?: string[];
   /** Omitted for non-collection items such as labs. */
   readingMinutes?: number;
   /** Distinguishes labs from collection entries in shared list UI. */
@@ -37,6 +41,8 @@ function entryToItem(
     href: `/${collection}/${entry.id}/`,
     title: entry.data.title,
     pubDate: entry.data.pubDate,
+    description: entry.data.description,
+    tags: entry.data.tags,
     readingMinutes: readingTime(entryBody(entry)).minutes,
   };
 }
@@ -59,7 +65,7 @@ async function getPublicItems(): Promise<PostListItem[]> {
       ),
     ),
   );
-  return [...collections.flat(), ...getLabItems().map((item) => ({ ...item, label: 'Lab' }))].sort(
+  return [...collections.flat(), ...getLabItems().map((item) => ({ ...item, label: 'Labs' }))].sort(
     (a, b) => b.pubDate.valueOf() - a.pubDate.valueOf(),
   );
 }
@@ -71,6 +77,30 @@ export async function getRecentAcrossCollections(limit: number): Promise<PostLis
 
 export async function getArchiveItems(): Promise<PostListItem[]> {
   return getPublicItems();
+}
+
+export interface TagCount {
+  tag: string;
+  count: number;
+}
+
+// Tags are aggregated only over the public scope (getPublicItems): the
+// COLLECTION_ORDER collections, non-draft. Labs carry no tags, and notes/inbox
+// are unlisted, so neither contributes here — same rule as the archive/search.
+export async function getTagIndex(): Promise<TagCount[]> {
+  const counts = new Map<string, number>();
+  for (const item of await getPublicItems()) {
+    for (const tag of item.tags ?? []) {
+      counts.set(tag, (counts.get(tag) ?? 0) + 1);
+    }
+  }
+  return [...counts.entries()]
+    .map(([tag, count]) => ({ tag, count }))
+    .sort((a, b) => b.count - a.count || a.tag.localeCompare(b.tag));
+}
+
+export async function getItemsByTag(tag: string): Promise<PostListItem[]> {
+  return (await getPublicItems()).filter((item) => (item.tags ?? []).includes(tag));
 }
 
 export function formatDate(d: Date): string {

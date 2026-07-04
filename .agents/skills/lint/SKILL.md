@@ -17,6 +17,19 @@ Verify every content `.md` file has schema-valid, complete frontmatter, and fill
 what is missing by analyzing the post body. The check is deterministic (a script);
 the fill splits work by model tier — **the upper model analyzes, a lower model writes.**
 
+## Principles
+
+- **Every `src/content/**/*.md` is a target.** The checker scans the whole content
+  tree, not a fixed list, and holds every file to the same required-key set (known
+  collections use their configured schema; unknown ones validate with the base
+  schema), so new collections are covered automatically.
+- **The upper model owns all analysis and decisions.** Deriving every field value
+  from content is the upper (current) model's job.
+- **The lower model performs mechanical insertion only.** The delegated Haiku
+  subagent never analyzes content, decides values, rewords, or edits the body — it
+  splices the exact key/value lines it is handed into the frontmatter. If a write
+  would require any judgment, that judgment belongs to the upper model, not the writer.
+
 ## When to use
 
 - Before committing/pushing content changes (the routine gate).
@@ -30,10 +43,15 @@ Optional: `description`, `summary`, `tags` (`string[]`), `draft` (`bool`), `lang
 (`ko`|`en`, default `ko`), `updatedDate`, `canonical` (URL), `ogImage`.
 
 Required-key convention enforced by the checker (`scripts/check-frontmatter.ts`):
+**every `.md` under `src/content/` must have `title`, `pubDate`, `description`,
+`summary`, `lang`, `tags` present** — including `notes` and `inbox`, which are
+unlisted from search/sitemap but still carry complete frontmatter. New/unknown
+directories are held to the same set (validated with the base schema).
 
-- `posts`, `read-and-write` (public, listed): `title`, `pubDate`, `description`,
-  `summary`, `lang`, `tags` must all be **present**.
-- `notes`, `inbox` (unlisted): only `title`, `pubDate` required.
+**Labs** are also a target. They are hand-authored in `src/lib/labs.ts` (a TS
+registry, not `.md`), so they have no frontmatter — the checker instead requires
+each entry to have a non-empty `title` and `description`. Labs share the same
+listings as posts, so their `description` follows the same one-line rule below.
 
 ## Workflow
 
@@ -59,6 +77,12 @@ Required-key convention enforced by the checker (`scripts/check-frontmatter.ts`)
 4. **Re-check.** Run the checker again (no `--json`). Confirm it exits `0`. Report
    any files still flagged (e.g. undeterminable `pubDate`/`title`) for human input.
 
+**Labs** (`collection: "labs"`, `file: "src/lib/labs.ts"`, `ref: <href>`): analyze
+by reading the lab's page under `src/pages/labs/…` for that href, write a one-line
+`description` per the rule below, then delegate the mechanical edit to Haiku — set
+the `description` string on the matching entry in `src/lib/labs.ts` (match by
+`href`), touching nothing else.
+
 ## Field-fill rules (analysis)
 
 Follow the repo language policy: write `description`/`summary`/`tags` in Korean by
@@ -70,7 +94,12 @@ default, preserving standard English technical terms.
   (`251129` → `2025-11-29`, `20251210` → `2025-12-10`) or the file's first git commit
   date (`git log --diff-filter=A --format=%as -- <file> | tail -1`). If neither
   exists, leave it and report — never fabricate a date.
-- **`description`** — one concise sentence (SEO/meta one-liner) capturing the post's core.
+- **`description`** — one front-loaded sentence capturing the post's core, and the
+  SEO/meta description. Listings render it on a **single truncated line**, so the
+  right edges only align when every description fills that line: write it long
+  enough to fill/slightly exceed one line (≈ 60–80 characters incl. spaces) and put
+  the essential words first, since the tail may be clipped with an ellipsis. Never
+  pad with filler to hit the length — if the post is genuinely thin, keep it honest.
 - **`summary`** — a short standalone abstract (1–2 sentences) distinct from
   `description`: what the reader will get, not just the topic label.
 - **`lang`** — detect from the body: `en` if the prose is predominantly English,
@@ -89,6 +118,9 @@ The delegated write must be purely mechanical. Instruct the subagent to:
 - Match the existing YAML quoting style (e.g. `pubDate: '2025-12-01'`).
 - Write arrays inline for tags: `tags: ['a', 'b']`.
 - Return the final frontmatter block it wrote (for verification).
+
+For a lab, the same rule applies to `src/lib/labs.ts`: set only the `description`
+string on the entry whose `href` matches, leaving every other field and entry intact.
 
 Give the subagent the values verbatim — it does not analyze content or decide values.
 

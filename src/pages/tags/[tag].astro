@@ -1,0 +1,29 @@
+---
+import type { GetStaticPaths } from 'astro';
+import PostList from '../../components/PostList.astro';
+import Base from '../../layouts/Base.astro';
+import { type PostListItem, getItemsByTag, getTagIndex } from '../../lib/collections';
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const tags = await getTagIndex();
+  return Promise.all(
+    tags.map(async ({ tag }) => ({
+      params: { tag },
+      props: { items: await getItemsByTag(tag) },
+    })),
+  );
+};
+
+const { tag } = Astro.params as { tag: string };
+const { items } = Astro.props as { items: PostListItem[] };
+---
+
+<Base title={`#${tag} — thnkr`} description={`'${tag}' 태그가 붙은 글 목록.`}>
+  <section class="mt-2">
+    <h1 class="font-medium mb-3">#{tag}</h1>
+    <PostList items={items} />
+    <p class="mt-6 text-sm text-muted">
+      <a href="/tags/" class="hover:text-foreground transition-colors">← all tags</a>
+    </p>
+  </section>
+</Base>

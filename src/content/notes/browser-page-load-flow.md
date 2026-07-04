@@ -2,6 +2,9 @@
 title: Browser Page Load Flow
 pubDate: '2026-07-01'
 description: 브라우저가 페이지를 요청하고 렌더링하고 입력에 반응하기까지의 흐름
+summary: "URL 입력부터 navigation·connection·요청·HTML 파싱·렌더링·JS 실행·입력 처리까지 브라우저 로딩 파이프라인을 단계별 비용 모델로 정리하고, 각 구간에 붙는 성능 지표(TTFB·FCP·LCP·CLS·TBT·INP)와 프론트엔드 개선 체크를 연결한 노트."
+lang: ko
+tags: ['web-performance', 'browser', 'core-web-vitals', 'frontend']
 ---
 
 > 10년차 프론트엔드 개발자는 브라우저 흐름을 "네트워크 → 파싱 → 리소스 발견 → 렌더링 → JavaScript 실행 → 입력 처리"의 비용 모델로 설명할 수 있어야 한다.

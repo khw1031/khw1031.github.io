@@ -2,6 +2,9 @@
 title: DNS Serving Stale Data
 pubDate: '2026-07-01'
 description: RFC 8767이 정의한 recursive resolver의 stale cache serve 동작과 resilience 효과
+summary: "RFC 8767이 정의한, authoritative 장애 시 만료된 캐시를 stale 상태로 serve해 가용성을 높이는 recursive resolver 동작 — 트리거 조건, HTTP stale-while-revalidate와의 차이, 정확성·보안 위험, 주요 resolver 구현을 정리한 노트."
+lang: ko
+tags: ['dns', 'rfc-8767', 'caching', 'network']
 ---
 
 > RFC 8767는 recursive resolver가 authoritative server에 닿지 못할 때 만료된 캐시를 "stale" 상태로라도 serve해 장애 회복력을 높이는 동작을 표준화한다. 캐시를 "TTL 지나면 버린다"는 단순 모델을 넘어서는 부분이다.

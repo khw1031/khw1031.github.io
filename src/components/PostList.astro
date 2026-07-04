@@ -8,14 +8,20 @@ interface Props {
 const { items } = Astro.props;
 ---
 
-<ul class="not-prose list-none p-0 m-0 space-y-3">
+<ul class="not-prose list-none p-0 m-0 space-y-5">
   {
     items.map((item) => (
       <li>
         <a href={item.href} class="text-foreground hover:underline underline-offset-2">
           {item.title}
         </a>
-        <div class="text-sm text-muted">
+        <div class="max-w-md">
+          {item.description && (
+            <p class="not-prose mt-0.5 mb-0 text-sm text-muted text-justify line-clamp-3">
+              {item.description}
+            </p>
+          )}
+          <div class="mt-1 text-sm text-muted">
           {item.label && (
             <>
               <span>{item.label}</span>
@@ -31,9 +37,10 @@ const { items } = Astro.props;
           ) : item.kind === 'lab' ? (
             <>
               <span> · </span>
-              <span>lab</span>
+              <span>labs</span>
             </>
           ) : null}
+          </div>
         </div>
       </li>
     ))

@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import { getTagIndex } from '../../lib/collections';
+
+const tags = await getTagIndex();
+const title = 'Tags';
+---
+
+<Base title={`${title} — thnkr`} description="공개 글에 붙은 태그를 모아본 목록.">
+  <section class="mt-2">
+    <h1 class="font-medium mb-3">{title}</h1>
+    {
+      tags.length > 0 ? (
+        <ul class="not-prose m-0 flex list-none flex-wrap gap-x-3 gap-y-2 p-0 text-sm">
+          {tags.map(({ tag, count }) => (
+            <li>
+              <a
+                href={`/tags/${tag}/`}
+                class="text-foreground underline-offset-2 hover:underline"
+              >
+                #{tag}
+                <span class="text-muted"> {count}</span>
+              </a>
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="text-sm text-muted">아직 태그가 없습니다.</p>
+      )
+    }
+  </section>
+</Base>

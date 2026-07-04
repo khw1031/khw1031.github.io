@@ -2,6 +2,9 @@
 title: Web Worker
 pubDate: '2026-07-01'
 description: Web Worker의 동작 원리, 사용 시나리오, 코드 패턴, 적용 기준
+summary: "무거운 JS 계산을 main thread 밖으로 분리해 입력·렌더링 blocking을 줄이는 Web Worker — 동작 원리, postMessage·Transferable, module worker·Promise wrapper 패턴, 적용/비적용 기준, worker 종류와 성능 측정을 정리한 노트."
+lang: ko
+tags: ['web-worker', 'javascript', 'web-performance', 'frontend']
 ---
 
 > Web Worker는 JavaScript를 "더 빠르게" 만드는 기능이 아니라, main thread에서 오래 걸리는 일을 분리해 UI 입력과 렌더링이 막히지 않게 하는 기능이다.

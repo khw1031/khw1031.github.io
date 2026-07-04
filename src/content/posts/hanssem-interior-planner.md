@@ -1,9 +1,11 @@
 ---
 title: 한샘 인테리어 플래너
 pubDate: '2026-07-04'
-description: 상담부터 시공 완료까지 고객 진행 현황을 일원화한 Flutter 내장 React 웹앱 개발 기록 (작성 예정)
+description: "상담·계약·시공 완료까지 흩어진 고객 진행 현황을 Flutter 앱 내장 React 웹앱으로 일원화한 프로젝트의 개발 기록 (작성 예정)"
 draft: true
 tags: [react, flutter, webview, ai]
+summary: "상담·계약·시공 완료까지 흩어진 고객 진행 현황을 Flutter 앱 내장 React 웹앱으로 일원화한 프로젝트 — 3인 팀·17개 페이지, 5단계 코딩 에이전트 워크플로우로 예상 2~3개월을 21일로 단축한 기록. (작성 예정)"
+lang: ko
 ---
 
 # TL;DR
