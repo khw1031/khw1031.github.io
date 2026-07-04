@@ -61,18 +61,18 @@ describe('cv data', () => {
   });
 
   it('starts with career details without a key achievements section', () => {
-    expect(cv.sections[0]?.title).toBe('경력 사항');
+    expect(cv.sections[0]?.title).toBe('경력');
     expect(cv.sections.map((section) => section.title)).not.toContain('핵심 성과');
   });
 
-  it('includes the 경력 사항 section with Hanssem as the first career', () => {
-    const careers = cv.sections.find((s) => s.title === '경력 사항');
+  it('includes the 경력 section with Hanssem as the first career', () => {
+    const careers = cv.sections.find((s) => s.title === '경력');
     expect(careers).toBeDefined();
-    expect(careers?.details[0]?.title).toBe('(주)한샘');
+    expect(careers?.details[0]?.title).toBe('한샘');
   });
 
   it('keeps career histories as company, role, and period entries only', () => {
-    const careers = cv.sections.find((s) => s.title === '경력 사항');
+    const careers = cv.sections.find((s) => s.title === '경력');
     for (const d of careers?.details ?? []) {
       expect(d.title).toBeTruthy();
       expect(d.role).toBeTruthy();
@@ -82,46 +82,46 @@ describe('cv data', () => {
   });
 
   it('includes the current career history with roles and insurance record periods', () => {
-    const careers = cv.sections.find((s) => s.title === '경력 사항');
+    const careers = cv.sections.find((s) => s.title === '경력');
     const histories =
       careers?.details.map(({ title, role, period }) => ({ title, role, period })) ?? [];
     expect(histories).toEqual([
-      { title: '(주)한샘', role: '프론트엔드 개발자', period: '2023.02.01 — 재직중' },
-      { title: '슈퍼메이커즈', role: '프론트엔드 개발자', period: '2021.12.20 — 2022.12.31' },
-      { title: '(주)한화생명', role: '프론트엔드 개발자', period: '2021.01.18 — 2021.12.25' },
-      { title: '인프랩', role: '프론트엔드 개발자', period: '2018.10.01 — 2020.04.01' },
-      { title: '텀블벅', role: '프론트엔드 개발자', period: '2017.07.03 — 2018.04.07' },
-      { title: '현대엘엔씨(구 - 한화L&C)', role: '재무팀', period: '2014.07.01 — 2016.05.31' },
+      { title: '한샘', role: '프론트엔드 / AI Transformation', period: '2023.02.01 — 재직중' },
+      { title: '슈퍼메이커즈', role: '프론트엔드', period: '2021.12.20 — 2022.12.31' },
+      { title: '한화생명', role: '프론트엔드', period: '2021.01.18 — 2021.12.25' },
+      { title: '인프랩', role: '프론트엔드', period: '2018.10.01 — 2020.04.01' },
+      { title: '텀블벅', role: '프론트엔드', period: '2017.07.03 — 2018.04.07' },
+      { title: '현대엘엔씨(구 한화L&C)', role: '재무팀', period: '2014.07.01 — 2016.05.31' },
     ]);
   });
 
   it('does not expose career move reasons in public cv data', () => {
-    const careers = cv.sections.find((s) => s.title === '경력 사항');
+    const careers = cv.sections.find((s) => s.title === '경력');
     for (const d of careers?.details ?? []) {
       expect(d.ect).toBeUndefined();
     }
   });
 
-  it('every detail in 경력 사항 has a period', () => {
-    const careers = cv.sections.find((s) => s.title === '경력 사항');
+  it('every detail in 경력 has a period', () => {
+    const careers = cv.sections.find((s) => s.title === '경력');
     expect(careers).toBeDefined();
     for (const d of careers?.details ?? []) {
       expect(d.period).toBeTruthy();
     }
   });
 
-  it('has a 주요 프로젝트 section using the What/How/Impact structure', () => {
+  it('has a 주요 프로젝트 section with narrative content and separate impact', () => {
     const projects = cv.sections.find((s) => s.title === '주요 프로젝트');
     expect(projects).toBeDefined();
     expect(projects?.details.length).toBeGreaterThan(0);
     for (const d of projects?.details ?? []) {
-      const titles = d.content.map((c) => c.title);
-      expect(titles).toEqual(['What', 'How', 'Impact']);
+      expect(d.content.some((c) => c.description.length > 0)).toBe(true);
+      expect(d.impact.length).toBeGreaterThan(0);
     }
   });
 
   it('keeps education entries as short title, period, and content rows', () => {
-    const education = cv.sections.find((s) => s.title === '교육 사항');
+    const education = cv.sections.find((s) => s.title === '교육');
     expect(
       education?.details.map(({ title, period, content }) => ({
         title,

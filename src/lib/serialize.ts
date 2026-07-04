@@ -45,6 +45,16 @@ export function documentPageToMarkdown(page: DocumentPage): string {
           }
         }
       }
+
+      if (detail.impact.length > 0) {
+        for (const line of detail.impact) out.push(`- ${line}`);
+        out.push('');
+      }
+
+      if (detail.references.length > 0) {
+        for (const ref of detail.references) out.push(`- [${ref.label}](${ref.url})`);
+        out.push('');
+      }
     }
   }
 

@@ -1,0 +1,103 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+SCRIPT_DIR=$(cd "$(dirname "$0")" && pwd)
+SKILL_DIR=$(cd "$SCRIPT_DIR/.." && pwd)
+REPO_ROOT=$(cd "$SKILL_DIR/../../.." && pwd)
+
+"$SCRIPT_DIR/validate-skill" "$SKILL_DIR"
+
+python3 - "$SKILL_DIR" "$REPO_ROOT" <<'PY'
+from pathlib import Path
+import os
+import subprocess
+import sys
+import tempfile
+
+skill_dir = Path(sys.argv[1])
+repo_root = Path(sys.argv[2])
+validate = skill_dir / "scripts" / "validate-skill"
+
+required = [
+    skill_dir / "references" / "local-policy.md",
+    skill_dir / "references" / "provider-principles.md",
+    skill_dir / "references" / "lifecycle.md",
+    skill_dir / "agents" / "reviewer.md",
+    skill_dir / "agents" / "smoke-tester.md",
+]
+missing = [str(path) for path in required if not path.exists()]
+if missing:
+    raise SystemExit("FAIL missing required files: " + ", ".join(missing))
+
+symlink = repo_root / ".claude" / "skills" / "skill-manager"
+if not symlink.is_symlink():
+    raise SystemExit("FAIL missing .claude/skills/skill-manager symlink")
+target = os.readlink(symlink)
+expected = "../../.agents/skills/skill-manager"
+if target != expected:
+    raise SystemExit(f"FAIL wrong symlink target: {target} != {expected}")
+
+index = (repo_root / ".agents" / "skills" / "index.md").read_text(encoding="utf-8")
+if "[skill-manager](skill-manager/SKILL.md)" not in index:
+    raise SystemExit("FAIL skill-manager missing from .agents/skills/index.md")
+
+body = (skill_dir / "SKILL.md").read_text(encoding="utf-8")
+for phrase in [
+    "project skill 원본은 `.agents/skills/{skill-slug}/`에 둔다",
+    "Do not write project skill originals under `.codex/skills`, `.claude/skills`",
+    "scripts/validate-skill",
+    "repo-operating-targets",
+]:
+    if phrase not in body:
+        raise SystemExit(f"FAIL SKILL.md missing phrase: {phrase}")
+
+
+def write_fixture(root: Path, name: str, body_lines: list[str], extra_frontmatter: str = "") -> Path:
+    fixture_dir = root / name
+    fixture_dir.mkdir()
+    frontmatter = (
+        f"---\nname: {name}\ndescription: fixture skill for portability lint eval.\n{extra_frontmatter}---\n"
+    )
+    (fixture_dir / "SKILL.md").write_text(frontmatter + "\n".join(body_lines) + "\n", encoding="utf-8")
+    return fixture_dir
+
+
+def run_validate(target: Path) -> subprocess.CompletedProcess:
+    return subprocess.run([str(validate), str(target)], text=True, capture_output=True, check=False)
+
+
+with tempfile.TemporaryDirectory() as tmp:
+    tmp_root = Path(tmp)
+    bad = write_fixture(tmp_root, "fixture-bad", ["# Fixture", "", "필수 정책은 `profiles/tools/sample.md` 문서를 읽어 적용한다."])
+    result = run_validate(bad)
+    if result.returncode == 0 or "repo path dependency" not in result.stderr:
+        raise SystemExit("FAIL portability lint did not flag unconditional repo path dependency")
+
+    declared = write_fixture(
+        tmp_root,
+        "fixture-target",
+        ["# Fixture", "", "이 skill은 `queues/proposals/wiki-operations/`에 proposal을 작성한다."],
+        "repo-operating-targets: queues\n",
+    )
+    result = run_validate(declared)
+    if result.returncode != 0:
+        raise SystemExit(f"FAIL declared repo-operating-targets fixture must pass: {result.stderr.strip()}")
+
+    conditional = write_fixture(
+        tmp_root,
+        "fixture-conditional",
+        ["# Fixture", "", "대상 디렉토리의 local rules(`AGENTS.md`)가 있으면 읽고 따른다."],
+    )
+    result = run_validate(conditional)
+    if result.returncode != 0:
+        raise SystemExit(f"FAIL conditional repo path fixture must pass: {result.stderr.strip()}")
+
+skills_root = repo_root / ".agents" / "skills"
+for candidate in sorted(skills_root.iterdir()):
+    if candidate.is_dir() and (candidate / "SKILL.md").exists():
+        result = run_validate(candidate)
+        if result.returncode != 0:
+            raise SystemExit(f"FAIL {candidate.name} does not pass validate-skill: {result.stderr.strip()}")
+
+print("PASS skill-manager eval")
+PY

@@ -1,0 +1,200 @@
+#!/usr/bin/env python3
+"""Validate a project agent skill package with stdlib-only checks."""
+
+from __future__ import annotations
+
+import argparse
+import os
+import re
+import sys
+from pathlib import Path
+
+
+NAME_RE = re.compile(r"^[a-z0-9]+(?:-[a-z0-9]+)*$")
+LINK_RE = re.compile(r"\]\((?P<path>(?:references|scripts|agents)/[^)#]+)\)")
+
+# Portability lint: repo-path tokens a skill body must not depend on unconditionally.
+REPO_PATH_TOKEN_RE = re.compile(
+    r"(?<![\w/.-])("
+    r"(?:\.agents|\.claude|\.codex|raw|user_notes|profiles|learning|wiki|authored|"
+    r"evals|queues|routes|templates|tasks|reports|memory|tools)/[\w.{}*/-]*"
+    r"|AGENTS\.md|CLAUDE\.md"
+    r")"
+)
+# A line counts as conditional/optional/boundary usage if it carries one of these markers.
+CONDITIONAL_MARKERS_EN = ("if present", "unless", "do not", "must not", "optional")
+CONDITIONAL_MARKERS_KO = ("있으면", "없어도", "않는다", "금지", "선택적", "이 repo")
+
+
+def parse_operating_targets(frontmatter: dict[str, str]) -> list[str]:
+    raw_value = frontmatter.get("repo-operating-targets", "")
+    return [entry.strip().rstrip("/") for entry in raw_value.split(",") if entry.strip()]
+
+
+def is_conditional_line(line: str) -> bool:
+    lowered = line.lower()
+    if any(marker in lowered for marker in CONDITIONAL_MARKERS_EN):
+        return True
+    return any(marker in line for marker in CONDITIONAL_MARKERS_KO)
+
+
+def is_declared_target(token: str, declared: list[str]) -> bool:
+    normalized = token.rstrip("/")
+    return any(normalized == entry or normalized.startswith(entry + "/") for entry in declared)
+
+
+def lint_repo_path_dependencies(text: str, body_start: int, declared: list[str]) -> list[str]:
+    issues: list[str] = []
+    if body_start == -1:
+        return issues
+    for lineno, line in enumerate(text.splitlines()[body_start + 1 :], start=body_start + 2):
+        if is_conditional_line(line):
+            continue
+        for match in REPO_PATH_TOKEN_RE.finditer(line):
+            token = match.group(1)
+            if is_declared_target(token, declared):
+                continue
+            issues.append(f"line {lineno}: {token}")
+    return issues
+
+
+def fail(message: str, errors: list[str]) -> None:
+    errors.append(message)
+
+
+def find_repo_root(start: Path) -> Path | None:
+    for candidate in [start, *start.parents]:
+        if (candidate / ".agents" / "skills" / "AGENTS.md").exists():
+            return candidate
+    return None
+
+
+def parse_frontmatter(text: str) -> tuple[dict[str, str], int, list[str]]:
+    errors: list[str] = []
+    lines = text.splitlines()
+    if not lines or lines[0] != "---":
+        return {}, -1, ["SKILL.md must start with YAML frontmatter delimiter"]
+
+    end = -1
+    for index, line in enumerate(lines[1:], start=1):
+        if line == "---":
+            end = index
+            break
+    if end == -1:
+        return {}, -1, ["SKILL.md frontmatter must have closing delimiter"]
+
+    data: dict[str, str] = {}
+    key_re = re.compile(r"^([A-Za-z0-9_-]+):(?:\s*(.*))?$")
+    current_key: str | None = None
+    for raw_line in lines[1:end]:
+        if not raw_line.strip() or raw_line.lstrip().startswith("#"):
+            continue
+        match = key_re.match(raw_line)
+        if match:
+            key, value = match.group(1), (match.group(2) or "").strip()
+            current_key = key
+            if value in {">", "|"}:
+                data[key] = ""
+            else:
+                data[key] = value.strip("\"'")
+            continue
+        if current_key and raw_line.startswith((" ", "\t")):
+            data[current_key] = (data.get(current_key, "") + " " + raw_line.strip()).strip()
+            continue
+        errors.append(f"frontmatter line is not a simple YAML key/value or continuation: {raw_line}")
+    return data, end, errors
+
+
+def validate_skill(skill_dir: Path) -> tuple[bool, list[str], list[str]]:
+    errors: list[str] = []
+    warnings: list[str] = []
+    skill_dir = skill_dir.resolve()
+    skill_md = skill_dir / "SKILL.md"
+
+    if not skill_dir.is_dir():
+        fail(f"skill directory does not exist: {skill_dir}", errors)
+        return False, errors, warnings
+    if not skill_md.exists():
+        fail("SKILL.md not found", errors)
+        return False, errors, warnings
+
+    text = skill_md.read_text(encoding="utf-8")
+    frontmatter, body_start, fm_errors = parse_frontmatter(text)
+    errors.extend(fm_errors)
+
+    name = frontmatter.get("name", "").strip()
+    description = frontmatter.get("description", "").strip()
+    if not name:
+        fail("frontmatter missing name", errors)
+    elif not NAME_RE.match(name):
+        fail(f"name must be lowercase kebab-case: {name}", errors)
+    elif len(name) > 64:
+        fail(f"name must be at most 64 chars: {len(name)}", errors)
+    elif name != skill_dir.name:
+        fail(f"name must match directory basename: {name} != {skill_dir.name}", errors)
+
+    if not description:
+        fail("frontmatter missing description", errors)
+    elif len(description) > 1024:
+        fail(f"description must be at most 1024 chars: {len(description)}", errors)
+    elif "<" in description or ">" in description:
+        fail("description must not contain angle brackets", errors)
+
+    line_count = len(text.splitlines())
+    if line_count > 500:
+        fail(f"SKILL.md must be at most 500 lines: {line_count}", errors)
+
+    for match in LINK_RE.finditer(text):
+        rel = match.group("path")
+        if not (skill_dir / rel).exists():
+            fail(f"relative link target missing: {rel}", errors)
+
+    declared_targets = parse_operating_targets(frontmatter)
+    for issue in lint_repo_path_dependencies(text, body_start, declared_targets):
+        fail(
+            "repo path dependency must be conditional/optional or declared in "
+            f"frontmatter repo-operating-targets: {issue}",
+            errors,
+        )
+
+    repo_root = find_repo_root(skill_dir)
+    if repo_root:
+        project_root = repo_root / ".agents" / "skills"
+        if skill_dir.is_relative_to(project_root):
+            symlink_path = repo_root / ".claude" / "skills" / skill_dir.name
+            expected_target = f"../../.agents/skills/{skill_dir.name}"
+            if not symlink_path.is_symlink():
+                fail(f"missing .claude compatibility symlink: {symlink_path}", errors)
+            else:
+                actual = os.readlink(symlink_path)
+                if actual != expected_target:
+                    fail(f"wrong .claude symlink target: {actual} != {expected_target}", errors)
+        if ".codex/skills" in str(skill_dir) or ".claude/skills" in str(skill_dir):
+            fail("project skill original must not live under .codex/skills or .claude/skills", errors)
+    else:
+        warnings.append("repo root not found; skipped project symlink checks")
+
+    if body_start == -1:
+        fail("markdown body missing after frontmatter", errors)
+
+    return not errors, errors, warnings
+
+
+def main() -> int:
+    parser = argparse.ArgumentParser(description="Validate a project agent skill package.")
+    parser.add_argument("skill_dir", help="Path to a skill directory containing SKILL.md")
+    args = parser.parse_args()
+
+    ok, errors, warnings = validate_skill(Path(args.skill_dir))
+    for warning in warnings:
+        print(f"WARN {warning}")
+    if ok:
+        print(f"PASS skill valid: {Path(args.skill_dir)}")
+        return 0
+    for error in errors:
+        print(f"FAIL {error}", file=sys.stderr)
+    return 1
+
+
+if __name__ == "__main__":
+    raise SystemExit(main())

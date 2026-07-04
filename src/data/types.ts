@@ -19,6 +19,12 @@ export const detailSchema = z.object({
   url: z.string().min(1).optional(),
   ect: z.string().min(1).optional(),
   content: z.array(detailContentSchema).default([]),
+  // Concrete, quantified outcomes shown as a separate block below the narrative.
+  impact: z.array(z.string().min(1)).default([]),
+  // Optional related links shown under an entry (e.g. post, repo, demo).
+  references: z
+    .array(z.object({ label: z.string().min(1), url: z.string().min(1) }))
+    .default([]),
 });
 
 export const sectionSchema = z.object({

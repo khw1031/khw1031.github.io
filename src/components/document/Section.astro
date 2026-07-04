@@ -7,12 +7,12 @@ interface Props {
 }
 
 const { section } = Astro.props;
-const showCareerDuration = section.title === '경력 사항';
+const showCareerDuration = section.title === '경력';
 const careerPeriods = section.details.map((detail) => detail.period).filter((period) => period);
 ---
 
-<section class="mt-10">
-  <h2 class="flex items-baseline justify-between gap-3 border-b border-border pb-2 text-base font-semibold">
+<section class="mt-[4.45rem]">
+  <h2 class="flex items-baseline justify-between gap-3 text-base font-semibold text-foreground/80">
     <span>{section.title}</span>
     {
       showCareerDuration && (

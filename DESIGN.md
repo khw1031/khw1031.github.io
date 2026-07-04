@@ -162,6 +162,18 @@ HN의 `1. ▲ Title (domain)` + submeta 구조를 차용하되 화살표·번호
   - 인용은 좌측 보더 + `text-muted`
   - `prose-a`: 본문 링크 규칙 (아래)
 
+### 문서 페이지 (CV / DocumentLayout)
+
+CV·이력 문서는 "타자기로 친 인쇄물" 미학을 **타이포·레이아웃만으로** 낸다. 종이 질감·그림자·테두리 프레임 같은 스큐어모피즘은 §4 안티패턴이라 쓰지 않는다. Geist Mono(라틴) + Pretendard(한글) 단일 스택을 그대로 사용한다.
+
+- **카드 금지** — 항목별 배경 틴트/박스 없이 평면 텍스트. (기존 `bg-foreground/[0.025]` 카드는 제거됨)
+- **기간은 우측 tabular 컬럼** — 각 항목 제목 줄 오른쪽에 `period`를 `text-xs text-muted tabular-nums`로 정렬해 타이핑 문서처럼 열을 맞춘다.
+- **메타 서브라인** — role · (단일 title) · ※ect는 제목 아래 한 줄(`text-xs text-muted`).
+- **콘텐츠 라벨** — What/How/Impact 등 블록 라벨은 `text-xs font-semibold uppercase tracking-wide text-muted`. 영문은 대문자 타입 라벨로, 한글 라벨은 대문자 변환이 no-op이라 그대로 표시된다.
+- **본문은 foreground, 메타는 muted** — 서술/불릿 본문은 잉크(foreground), 라벨·역할·기간·부제는 muted로 위계를 준다. 불릿은 `-` 마커 + `grid-cols-[1ch_1fr]` 행잉 인덴트.
+- **밀도** — 본문 블록이 없는 항목(경력·학력)은 `mt-2`로 촘촘하게, 본문이 있는 항목(프로젝트)은 `mt-16`로 분리. 섹션 간격은 `mt-[4.45rem]`.
+- **구분선 없음** — 이름(레터헤드) 아래·섹션 제목 아래 `border-b`를 쓰지 않는다. 위계는 크기·굵기·여백으로만 준다.
+
 ### 링크 — **본 사이트의 단일 규칙**
 
 색이 아닌 **밑줄**로 링크임을 표시한다. 모든 본문 링크에 동일 적용.

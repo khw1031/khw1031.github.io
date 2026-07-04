@@ -8,6 +8,88 @@ import Base from '../layouts/Base.astro';
     <div id="search"></div>
   </section>
 
+  <style>
+    /* Pagefind's default UI ships large type, 2px borders, 8px radius and a blue
+       accent — all at odds with DESIGN.md (flat, no round/shadow, gray scale,
+       density). Remap its exposed CSS vars to our tokens. Set on #search so the
+       values inherit into Pagefind's runtime-injected children. */
+    #search {
+      --pagefind-ui-scale: 0.62;
+      --pagefind-ui-primary: var(--color-foreground);
+      --pagefind-ui-text: var(--color-foreground);
+      --pagefind-ui-background: var(--color-background);
+      --pagefind-ui-border: var(--color-border);
+      --pagefind-ui-tag: var(--color-surface);
+      --pagefind-ui-border-width: 1px;
+      --pagefind-ui-border-radius: 0px;
+      --pagefind-ui-font: var(--font-display);
+    }
+
+    /* Pagefind's input ships font-weight:700 and a tall, scale-driven box that
+       reads far bigger than the rest of the site. Flatten it: normal weight,
+       14px font, shorter height. Note: <16px reintroduces iOS focus-zoom. */
+    #search :global(.pagefind-ui__search-input) {
+      height: 2rem;
+      font-weight: 400;
+      font-size: 14px;
+    }
+    #search :global(.pagefind-ui__search-input::placeholder) {
+      font-size: 13px;
+    }
+    /* Drop the browser's default blue focus ring (Pagefind resets to `revert`). */
+    #search :global(.pagefind-ui__search-input:focus),
+    #search :global(.pagefind-ui__search-input:focus-visible) {
+      outline: none;
+      box-shadow: none;
+    }
+    /* The magnifier and clear button are absolutely positioned against the
+       original scale-derived height, so they drift once the input height is
+       overridden. Re-anchor both to the new 2rem (32px) input.
+       - Magnifier (~11px tall at scale 0.62): center it vertically. Can't use
+         top:50% — its containing block is the whole form (input + results), so
+         50% lands far below. Use a fixed top instead.
+       - Clear button: inset 1px top/bottom so its background doesn't paint over
+         the input's 1px border. */
+    #search :global(.pagefind-ui__form::before) {
+      top: 8px;
+    }
+    #search :global(.pagefind-ui__search-clear) {
+      top: 1px;
+      height: calc(2rem - 2px);
+      display: flex;
+      align-items: center;
+    }
+
+    /* Date meta renders as a blue chip by default. Per DESIGN.md (flat, gray
+       scale, right-aligned dates), strip the background and float it to the
+       right as small muted text. The "Date:" label is kept as-is. */
+    /* Tighten each result row's vertical padding (default 30px/40px * scale is
+       loose). Slightly smaller bottom than top per request. */
+    #search :global(.pagefind-ui__result) {
+      padding: 0.75rem 0 0.65rem;
+    }
+    #search :global(.pagefind-ui__result-tags) {
+      /* The sub-result variant isn't full width, so it shrink-wraps to the left
+         and the child has no room to push right. Force full width, then align. */
+      width: 100%;
+      justify-content: flex-end;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+    }
+    #search :global([data-pagefind-ui-meta='date']) {
+      /* Right-align on the element itself (not the parent's justify-content),
+         so it works whether the parent is flex or block. */
+      display: block;
+      width: fit-content;
+      margin-left: auto;
+      text-align: right;
+      padding: 0;
+      background: transparent;
+      font-size: 11px;
+      color: var(--color-muted);
+    }
+  </style>
+
   {/* Pagefind assets are generated into /pagefind at build time (`pnpm build`).
       They do not exist under `astro dev`; verify search with `pnpm build && pnpm preview`. */}
   <link rel="stylesheet" href="/pagefind/pagefind-ui.css" />
@@ -16,16 +98,21 @@ import Base from '../layouts/Base.astro';
     window.addEventListener('DOMContentLoaded', () => {
       // Pagefind assets only exist in the built site (not under `astro dev`).
       if (typeof PagefindUI === 'undefined') return;
-      new PagefindUI({ element: '#search', showImages: false, showSubResults: true });
+      new PagefindUI({
+        element: '#search',
+        showImages: false,
+        showSubResults: true,
+        translations: { placeholder: 'search' },
+      });
+      const input = document.querySelector('#search input');
       // Prefill and run the query passed from the home search box (/search/?q=...).
       const q = new URLSearchParams(window.location.search).get('q');
-      if (q) {
-        const input = document.querySelector('#search input');
-        if (input) {
-          input.value = q;
-          input.dispatchEvent(new Event('input', { bubbles: true }));
-        }
+      if (input && q) {
+        input.value = q;
+        input.dispatchEvent(new Event('input', { bubbles: true }));
       }
+      // Auto-focus so the cursor lands in the search box on arrival.
+      if (input) input.focus();
     });
   </script>
 </Base>

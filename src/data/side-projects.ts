@@ -5,6 +5,7 @@ const data: Detail[] = [
     title: 'glowed',
     url: 'https://github.com/khw1031/glowed',
     role: 'Open Source / Go TUI',
+    period: '2026.05',
     subtitle: 'Ghostty 중심 터미널 Markdown 브라우저/에디터',
     content: [
       {
@@ -36,6 +37,7 @@ const data: Detail[] = [
     title: '@hynu/swagger-mcp',
     url: 'https://github.com/khw1031/swagger-mcp',
     role: 'Open Source / NPM Package',
+    period: '2025.12',
     subtitle: 'Swagger/OpenAPI MCP Server',
     content: [
       {

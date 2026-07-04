@@ -177,6 +177,18 @@ main a:hover,
   opacity: 0.6;
 }
 
+/* CV / document links: one unified colored style (blue text + blue underline),
+   visited turns purple. Class-scoped so it overrides the unlayered `main a`
+   rule above (higher specificity). Note: browsers restrict :visited to color
+   changes, so the visited underline stays blue while the text goes purple. */
+.cv-links a:not([data-copy-md]) {
+  color: #5a9af8;
+  text-decoration-color: currentColor;
+}
+.cv-links a:not([data-copy-md]):visited {
+  color: #8b5cf6;
+}
+
 /* Tailwind typography defaults blockquote to italic + font-weight 500
    which reads heavier than body especially with Korean (Pretendard).
    Bring it down to body scale, drop italic, lighten the side rule. */
