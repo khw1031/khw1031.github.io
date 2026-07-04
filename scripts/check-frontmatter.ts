@@ -11,13 +11,17 @@
  * Usage:
  *   tsx scripts/check-frontmatter.ts          # human report, exit 1 on errors
  *   tsx scripts/check-frontmatter.ts --json    # machine-readable report on stdout
+ *   tsx scripts/check-frontmatter.ts --stamp   # write lintHash = current body hash
  *
  * Severity model:
- *   - error : schema-invalid OR missing a required key for that collection.
- *             Blocks the pre-push hook.
- *   The /lint skill consumes --json to auto-fill the gaps.
+ *   - error   : schema-invalid OR missing a required key. Blocks the pre-push hook.
+ *   - warning : stale — the body changed since the AI-derived fields were last
+ *               generated (lintHash mismatch/absent). Reported but does NOT block.
+ *   The /lint skill consumes --json to auto-fill gaps, regenerate stale fields,
+ *   and re-stamp the hash (via --stamp) once the content is fresh.
  */
-import { existsSync, readdirSync, readFileSync } from 'node:fs';
+import { createHash } from 'node:crypto';
+import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, relative, resolve, sep } from 'node:path';
 import matter from 'gray-matter';
 import type { ZodType } from 'zod';
@@ -53,8 +57,21 @@ interface FileReport {
   collection: string;
   missing: string[];
   invalid: { field: string; message: string }[];
+  /** Warning (non-blocking): body changed since the derived fields were generated. */
+  stale?: boolean;
+  /** Current body hash — what /lint should stamp after refreshing the file. */
+  bodyHash?: string;
   /** Identifies a specific entry within a multi-entry source (e.g. a lab href). */
   ref?: string;
+}
+
+/** Short hash of the markdown body only (frontmatter excluded) to detect drift. */
+function bodyHash(raw: string): string {
+  return createHash('sha256').update(matter(raw).content).digest('hex').slice(0, 12);
+}
+
+function hasError(r: FileReport): boolean {
+  return r.missing.length > 0 || r.invalid.length > 0;
 }
 
 /** Labs are a hand-authored TS registry, not .md; require a non-empty title/description. */
@@ -104,24 +121,56 @@ function inspect(file: string): FileReport {
     }
   }
 
-  return { file: relative(process.cwd(), file), collection, missing, invalid };
+  const hash = bodyHash(raw);
+  const stale = String(data.lintHash ?? '') !== hash;
+
+  return { file: relative(process.cwd(), file), collection, missing, invalid, stale, bodyHash: hash };
+}
+
+/** Deterministically write `lintHash: '<body hash>'` into every content file. */
+function stampHashes(): number {
+  let stamped = 0;
+  for (const file of contentFiles()) {
+    const raw = readFileSync(file, 'utf-8');
+    const hash = bodyHash(raw);
+    const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+    if (!match) continue;
+    const block = match[1];
+    const line = `lintHash: '${hash}'`;
+    const nextBlock = /^lintHash:.*$/m.test(block)
+      ? block.replace(/^lintHash:.*$/m, line)
+      : `${block}\n${line}`;
+    if (nextBlock === block) continue;
+    writeFileSync(file, raw.replace(block, nextBlock));
+    stamped += 1;
+  }
+  return stamped;
 }
 
 function main(): void {
+  if (process.argv.includes('--stamp')) {
+    const stamped = stampHashes();
+    process.stdout.write(`✓ stamped lintHash on ${stamped} file(s)\n`);
+    process.exit(0);
+  }
+
   const json = process.argv.includes('--json');
   const reports: FileReport[] = [];
 
   for (const file of contentFiles()) {
     const report = inspect(file);
-    if (report.missing.length > 0 || report.invalid.length > 0) {
+    if (hasError(report) || report.stale) {
       reports.push(report);
     }
   }
   reports.push(...labReports());
 
+  const errors = reports.filter(hasError);
+  const stale = reports.filter((r) => r.stale && !hasError(r));
+
   if (json) {
     process.stdout.write(`${JSON.stringify(reports, null, 2)}\n`);
-    process.exit(reports.length > 0 ? 1 : 0);
+    process.exit(errors.length > 0 ? 1 : 0);
   }
 
   if (reports.length === 0) {
@@ -129,18 +178,30 @@ function main(): void {
     process.exit(0);
   }
 
-  process.stdout.write(`✗ frontmatter issues in ${reports.length} file(s):\n\n`);
-  for (const r of reports) {
-    process.stdout.write(`  ${r.file}${r.ref ? ` (${r.ref})` : ''}\n`);
-    if (r.missing.length > 0) {
-      process.stdout.write(`    missing: ${r.missing.join(', ')}\n`);
+  if (errors.length > 0) {
+    process.stdout.write(`✗ frontmatter issues in ${errors.length} file(s):\n\n`);
+    for (const r of errors) {
+      process.stdout.write(`  ${r.file}${r.ref ? ` (${r.ref})` : ''}\n`);
+      if (r.missing.length > 0) {
+        process.stdout.write(`    missing: ${r.missing.join(', ')}\n`);
+      }
+      for (const i of r.invalid) {
+        process.stdout.write(`    invalid: ${i.field} — ${i.message}\n`);
+      }
     }
-    for (const i of r.invalid) {
-      process.stdout.write(`    invalid: ${i.field} — ${i.message}\n`);
-    }
+    process.stdout.write('\n');
   }
-  process.stdout.write('\nRun /lint to auto-fill missing frontmatter, then re-check.\n');
-  process.exit(1);
+
+  if (stale.length > 0) {
+    process.stdout.write(`⚠ ${stale.length} file(s) stale (body changed since last lint):\n\n`);
+    for (const r of stale) {
+      process.stdout.write(`  ${r.file}\n`);
+    }
+    process.stdout.write('\n');
+  }
+
+  process.stdout.write('Run /lint to refresh frontmatter (fills gaps, regenerates stale fields).\n');
+  process.exit(errors.length > 0 ? 1 : 0);
 }
 
 main();

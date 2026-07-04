@@ -6,6 +6,7 @@ draft: true
 tags: [ai, developer-tools, mcp, productivity]
 summary: "개별 개발자에게 흩어진 AI 활용을 팀 단위로 배포·재사용 가능한 도구 생태계로 전환한 기록 — Frontend AI Library, Swagger MCP, Figma MCP·AI-Ready 가이드 세 축과 CI/CD·semver 릴리즈 운영. (작성 예정)"
 lang: ko
+lintHash: 'b01dfb113a8e'
 ---
 
 # TL;DR

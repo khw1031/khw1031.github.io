@@ -53,6 +53,14 @@ registry, not `.md`), so they have no frontmatter — the checker instead requir
 each entry to have a non-empty `title` and `description`. Labs share the same
 listings as posts, so their `description` follows the same one-line rule below.
 
+**Staleness** (warning, non-blocking). The AI-derived fields (`description`,
+`summary`, `tags`) go stale when the body is edited but the fields are not. The
+checker stamps a `lintHash` = short hash of the **body only** (frontmatter
+excluded) and flags a file `stale` when the current body hash differs (or the hash
+is absent). Stale files are a **warning** — they do NOT block the pre-push hook
+(exit `0`); only `missing`/`invalid` block (exit `1`). `/lint` regenerates the
+derived fields on stale files and re-stamps.
+
 ## Workflow
 
 1. **Check** — run the deterministic checker and read its JSON:
@@ -61,11 +69,14 @@ listings as posts, so their `description` follows the same one-line rule below.
    npx tsx scripts/check-frontmatter.ts --json
    ```
 
-   Each entry is `{ file, collection, missing[], invalid[] }`. Exit code is `1`
-   when any file has issues, `0` when clean. If clean, stop — report success.
+   Each entry is `{ file, collection, missing[], invalid[], stale?, bodyHash? }`.
+   Exit code is `1` only when a file has `missing`/`invalid` (errors); `stale`-only
+   files exit `0` (warning). If there are no reports at all, stop — report success.
 
-2. **Analyze (upper model — you).** For each flagged file, read the full file and
-   derive concrete values for every `missing`/`invalid` field using the rules below.
+2. **Analyze (upper model — you).** For each flagged file, read the full file and:
+   - fill every `missing`/`invalid` field using the rules below;
+   - if `stale` (body changed), also regenerate the derived fields
+     (`description`, `summary`, `tags`) from the current body.
    Never invent facts. If a value cannot be derived safely (e.g. no date source),
    leave it out and report it as needing human input — do not guess.
 
@@ -74,8 +85,13 @@ listings as posts, so their `description` follows the same one-line rule below.
    pairs to set. The subagent does a mechanical merge only (see "Writer contract").
    Independent files → spawn the subagents in parallel.
 
-4. **Re-check.** Run the checker again (no `--json`). Confirm it exits `0`. Report
-   any files still flagged (e.g. undeterminable `pubDate`/`title`) for human input.
+4. **Stamp.** After the content is fresh, re-stamp the body hashes deterministically
+   (no model): `npx tsx scripts/check-frontmatter.ts --stamp`. This clears the
+   `stale` warnings by recording the current body hash as `lintHash`.
+
+5. **Re-check.** Run the checker again (no `--json`). Confirm it exits `0` with no
+   warnings. Report any files still flagged (e.g. undeterminable `pubDate`/`title`)
+   for human input.
 
 **Labs** (`collection: "labs"`, `file: "src/lib/labs.ts"`, `ref: <href>`): analyze
 by reading the lab's page under `src/pages/labs/…` for that href, write a one-line
@@ -113,8 +129,9 @@ default, preserving standard English technical terms.
 The delegated write must be purely mechanical. Instruct the subagent to:
 
 - Edit ONLY the frontmatter block. Never touch the body.
-- ADD the provided missing keys and CORRECT the provided invalid keys. Do not remove,
-  reorder, or rewrite existing valid keys or their values.
+- Set exactly the keys you are handed to the provided values (adding a missing key
+  or replacing an existing value). Do not remove, reorder, or alter any key you were
+  not given. Never write `lintHash` — that is stamped deterministically by `--stamp`.
 - Match the existing YAML quoting style (e.g. `pubDate: '2025-12-01'`).
 - Write arrays inline for tags: `tags: ['a', 'b']`.
 - Return the final frontmatter block it wrote (for verification).

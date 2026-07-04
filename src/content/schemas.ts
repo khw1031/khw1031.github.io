@@ -16,6 +16,9 @@ export const baseFrontmatter = z.object({
   lang: z.enum(['ko', 'en']).default('ko'),
   canonical: z.url().optional(),
   ogImage: z.string().optional(),
+  // Body-content hash stamped by the /lint tooling; used to detect when
+  // AI-derived fields (description/summary/tags) have gone stale. Not rendered.
+  lintHash: z.string().optional(),
 });
 
 export const postSchema = baseFrontmatter;

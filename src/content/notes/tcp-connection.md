@@ -5,6 +5,7 @@ description: 브라우저와 서버가 신뢰 가능한 연결을 만드는 TCP 
 summary: "HTTP가 올라타는 신뢰 가능한 byte stream을 만드는 TCP — 3-way handshake, 협상 옵션(MSS·Window Scale·SACK), 손실·재전송·혼잡 제어, HTTP/1.1~3와의 관계, preconnect 등 프론트엔드 성능 접점을 정리한 노트."
 lang: ko
 tags: ['tcp', 'network', 'web-performance', 'frontend']
+lintHash: 'd4a2c4944e13'
 ---
 
 > TCP는 HTTP 요청을 보내는 프로토콜이 아니라, HTTP가 올라타는 신뢰 가능한 ordered byte stream을 만드는 전송 계층 프로토콜이다.

@@ -6,6 +6,7 @@ draft: true
 tags: [ai, workflow, sdd, frontend]
 summary: "AI 에이전트 기능 구현의 비결정성·컨텍스트 한계·재현성 문제를 Requirements→Design→Task→Implementation→Review 5단계 문서 기반 워크플로우로 표준화한 기록 — 문서를 인터페이스로 삼는 Spec-Driven Development 관점에서."
 lang: ko
+lintHash: '29b0162962bc'
 ---
 
 # TL;DR
