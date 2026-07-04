@@ -58,7 +58,7 @@
 
 - **One Project, One Post** — Treat one substantial project as one post. CV entries should stay concise; posts are the space for context, evidence, implementation detail, tradeoffs, and lessons that do not fit in the CV.
 - **Rules Location** — Do not place `AGENTS.md` under `src/content/posts/` unless the Astro content loader is changed to ignore it. The current loader reads `**/*.md` as post content, so post writing rules live here.
-- **Frontmatter** — Every post must keep valid frontmatter for the content schema: `title` and `pubDate` are required; `description`, `tags`, `draft`, `updatedDate`, `canonical`, and `ogImage` are optional.
+- **Frontmatter** — Every post must keep valid frontmatter for the content schema: `title` and `pubDate` are required; `description`, `summary`, `tags`, `draft`, `lang`, `updatedDate`, `canonical`, and `ogImage` are optional. `lang` accepts `ko` or `en` (defaults to `ko`); `summary` is a short standalone abstract separate from `description`.
 - **Opening Structure** — Start with `# TL;DR` for project posts. Put the conclusion and 2–4 core claims first, then expand into definitions, context, implementation, evidence, tradeoffs, and conclusion.
 - **Project Post Structure** — Prefer this order: TL;DR → problem/context → key concepts or definitions → implementation/design → workflow or architecture → results/evidence → tradeoffs/risks → conclusion.
 - **Style Model** — Match the tone of `src/content/posts/20251210.md`: clear technical argument, explicit definitions, contrast between alternatives, concrete file/command/workflow examples, and measured claims supported by links or project evidence.

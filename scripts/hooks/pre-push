@@ -1,0 +1,13 @@
+#!/bin/sh
+# Block pushes when any content .md file has incomplete/invalid frontmatter.
+# This only CHECKS. To auto-fill the gaps, run the /lint skill, then push again.
+#
+# Enable once per clone:  git config core.hooksPath scripts/hooks
+
+echo "pre-push: checking content frontmatter…"
+if ! npx tsx scripts/check-frontmatter.ts; then
+  echo ""
+  echo "pre-push blocked: fix frontmatter (run /lint to auto-fill), then push again."
+  echo "To bypass intentionally: git push --no-verify"
+  exit 1
+fi
