@@ -1,0 +1,125 @@
+---
+title: 'Qdrant 벡터 검색 엔진 공식 문서 개요'
+pubDate: '2026-07-05'
+description: 'Qdrant 벡터 검색 엔진의 데이터 모델, 검색, Inference, Edge 등 핵심 기능 구조를 정리한 학습 노트'
+summary: 'Qdrant의 아키텍처와 기능 영역을 MECE 맵으로 파악하여, 벡터 검색 엔진의 전체 구조를 빠르게 이해할 수 있다.'
+lang: ko
+tags:
+  - 'ai'
+  - 'vector-search'
+  - 'qdrant'
+  - 'semantic-search'
+  - 'embedding'
+canonical: 'https://qdrant.tech/documentation/'
+lintHash: '49a0df5ce4ec'
+---
+
+> 한 줄 명제: Qdrant는 비정형 데이터에서 의미 정보를 추출하는 AI-native 벡터 검색 엔진으로, 포인트·벡터·payload 데이터 모델 위에 dense/sparse/multi-vector 검색과 온디바이스 Edge 배포까지 아우르는 풀스택 시맨틱 검색 플랫폼이다.
+
+## 큰 그림
+
+```text
+                    Qdrant: AI-native Vector Search Engine
+                                    │
+        ┌───────────┬───────────┬───┴───────┬───────────┬───────────┐
+        │           │           │           │           │           │
+  ①데이터모델  ②인덱싱·압축  ③검색     ④Inference  ⑤Edge     ⑥생태계
+  Points     Indexing      Search    Embedding   On-Device  FastEmbed
+  Vectors    Quantization  Filtering BM25        Offline    MCP Server
+  Payload    Storage       Hybrid    Cloud Inf.  Sync       SDKs
+  Collections              Text Srch Matryoshka
+  Multitenancy
+```
+
+## 핵심
+
+Qdrant는 비정형 데이터(텍스트, 이미지, 오디오 등)를 벡터로 변환하여 저장하고, 의미 기반 유사도 검색을 수행하는 오픈소스 검색 엔진이다. 공식 문서는 Qdrant를 "AI-native vector search and a semantic search engine"으로 정의하며, 구조화되지 않은 데이터에서 의미 있는 정보를 끌어내는 것을 핵심 목표로 삼는다.
+
+데이터의 기본 단위는 **point**이며, 각 point는 하나 이상의 **vector**(숫자 배열)와 선택적 **payload**(JSON 메타데이터)를 갖는다. Point들은 **collection** 단위로 묶여 관리된다. 검색은 크게 dense vector 기반의 시맨틱 검색, sparse vector 기반의 full-text 검색(BM25), 그리고 이 둘을 결합한 hybrid 검색으로 나뉜다. Filtering은 payload 조건으로 검색 범위를 좁히고, multitenancy는 collection 수준 또는 payload 수준에서 다중 테넌트를 격리한다.
+
+Qdrant는 자체적으로 embedding 모델을 호스팅하지 않지만, **Inference API**를 통해 외부 embedding provider(OpenAI 등)나 Qdrant Cloud에서 호스팅하는 모델을 직접 호출할 수 있다. **FastEmbed**는 Qdrant 팀이 제공하는 경량 embedding 라이브러리로, CPU에서도 빠르게 동작하는 모델을 제공한다. **Qdrant Edge**는 로봇, 키오스크, 모바일 기기 등에서 네트워크 없이 인프로세스(in-process)로 벡터 검색을 수행할 수 있는 경량 임베디드 엔진이다.
+
+원문(개요 페이지)에 실행 예제 없음 — Quickstart 페이지로 안내하고 있으나, 해당 페이지 내용은 이 입력에 포함되지 않았다.
+
+## 깊이
+
+### ① 데이터 모델 — Points, Vectors, Payload, Collections, Multitenancy
+⭐ **Point**는 Qdrant의 최소 저장 단위로, 고유 ID(정수 또는 UUID) 하나에 다수의 named vector와 임의의 JSON payload를 결합한다. 하나의 point에 여러 벡터를 담을 수 있으므로, 예를 들어 텍스트 임베딩과 이미지 임베딩을 같은 point에 저장하는 multi-representation 설계가 가능하다.
+
+⭐ **Payload**는 point에 딸린 구조화된 메타데이터다. 문자열, 숫자, 배열, 중첩 객체 등을 저장할 수 있으며, payload index를 명시적으로 생성하면 해당 필드에 대한 필터링 성능이 크게 향상된다. 인덱스를 만들지 않으면 필터링 시 full scan이 발생하므로, 필터로 자주 쓰는 필드는 반드시 인덱싱해야 한다.
+
+📎 **Collection**은 스키마(벡터 크기, 거리 함수, on-disk 여부 등)를 정의하는 최상위 컨테이너다. 거리 함수는 Cosine, Euclidean, Dot Product 중 선택한다. Multitenancy는 collection-per-tenant 방식과 payload-based tenant 필드 방식이 있으며, 후자가 운영 효율 면에서 대규모 테넌트에 유리하다.
+
+### ② 인덱싱·압축 — Indexing, Quantization, Storage
+⭐ Qdrant는 벡터 인덱스로 **HNSW(Hierarchical Navigable Small World)** 그래프를 사용한다. `m`(노드당 최대 연결 수)과 `ef_construct`(빌드 시 탐색 폭)이 주요 조절 변수이며, m을 늘리면 정확도가 오르지만 메모리와 빌드 시간이 증가하고, ef_construct를 늘리면 인덱스 품질이 좋아지지만 빌드 속도가 느려진다. 검색 시에는 `ef` 파라미터로 recall-latency 트레이드오프를 조절한다.
+
+⭐ **Quantization**은 벡터의 정밀도를 낮춰 메모리 사용량을 줄이는 기법이다. Scalar Quantization(float32→uint8), Product Quantization, Binary Quantization 세 가지가 있으며, 원문에 따르면 Scalar Quantization이 가장 일반적으로 사용된다. Quantized 벡터로 1차 후보를 빠르게 추린 뒤, 원본 벡터로 rerank하는 패턴이 recall 손실을 최소화하는 표준 접근이다.
+
+📎 **Storage**는 in-memory 모드와 on-disk 모드를 지원한다. On-disk 모드는 벡터 데이터를 mmap으로 디스크에 올려 RAM을 절약하지만, 랜덤 접근이 늘어나므로 검색 지연이 커질 수 있다. 대규모 컬렉션에서 RAM 비용을 절감할 때 선택한다.
+
+### ③ 검색 — Search, Filtering, Hybrid Queries, Text Search
+⭐ **Search**는 query vector를 받아 가장 유사한 top-k point를 반환한다. 이때 payload filter를 함께 전달하면 필터 조건을 만족하는 point 중에서만 최근접 이웃을 찾는다. Qdrant는 필터를 인덱스 레벨에서 적용(pre-filtering)하므로, 필터링 후 candidate가 줄어드는 효과가 있어 대규모 데이터셋에서도 일관된 지연 시간을 유지한다.
+
+⭐ **Hybrid Queries**는 dense vector 검색 결과와 sparse vector(BM25) 검색 결과를 **Reciprocal Rank Fusion(RRF)** 또는 가중 합산 방식으로 결합한다. Dense vector만으로는 놓칠 수 있는 정확한 키워드 매칭을 sparse vector가 보완하므로, RAG 파이프라인에서 recall을 안정적으로 올릴 수 있다. dense 검색과 sparse 검색의 속도는 인덱스 크기, 하드웨어, 벡터 차원 등에 따라 달라지므로 어느 쪽이 빠르다고 일반화할 수 없다.
+
+📎 **Text Search** 영역은 full-text index(BM25 tokenizer 기반)를 collection 내부에 구축하여, 외부 Elasticsearch 없이도 Qdrant 단독으로 lexical 검색을 가능하게 한다. Hybrid Search는 dense + full-text 결과를 fusion하는 파이프라인을 의미한다.
+
+### ④ Inference — Embedding, BM25, Cloud Inference, Matryoshka
+⭐ Qdrant의 **Inference API**는 서버 측에서 텍스트를 벡터로 변환할 수 있게 해준다. 외부 provider(OpenAI, Voyage 등)의 API 키를 등록하면, 클라이언트가 embedding 모델을 직접 호출하지 않고 Qdrant 서버에 텍스트만 보내도 벡터화 후 저장이 가능하다. 이는 클라이언트-서버 간 데이터 전송량을 줄이고 아키텍처를 단순화한다.
+
+📎 **Matryoshka Representation Learning** 모델은 벡터의 앞부분만 잘라서 사용해도 의미 있는 유사도를 유지한다. 예를 들어 1024차원 벡터의 앞 256차원만 사용하여 저장 공간을 75% 줄이면서도 recall을 크게 훼손하지 않는다. Qdrant는 이 모델을 지원하여 차원 축소를 통한 비용 최적화를 가능하게 한다.
+
+### ⑤ Edge — On-Device, Offline, Synchronization
+⭐ **Qdrant Edge**는 서버 프로세스 없이 애플리케이션 프로세스 내부에서 동작하는 경량 벡터 검색 엔진이다. 로봇, 키오스크, IoT 기기 등 네트워크가 불안정하거나 없는 환경을 겨냥한다. 메모리 사용량이 적고, 서버 Qdrant 인스턴스와의 데이터 동기화 패턴을 문서에서 제공한다.
+
+📎 **Data Synchronization Patterns** 문서는 Edge 디바이스와 중앙 서버 간 데이터를 동기화하는 여러 패턴(push/pull/bidirectional)을 다룬다. 오프라인에서 수집한 데이터를 온라인이 복구되었을 때 어떻게 병합할지가 핵심 설계 결정이다.
+
+### ⑥ 생태계 — FastEmbed, MCP Server, SDKs, Agent Skills
+⭐ **FastEmbed**는 Qdrant 팀이 관리하는 경량 Python embedding 라이브러리로, ONNX Runtime 위에서 CPU 친화적인 모델들을 제공한다. SPLADE(sparse), ColBERT(multi-vector), miniCOIL 등의 모델을 지원하며, 별도 GPU 없이 로컬에서 빠르게 embedding을 생성할 수 있다.
+
+📎 **Qdrant MCP Server**는 Model Context Protocol을 통해 AI 에이전트가 Qdrant를 도구로 호출할 수 있게 하는 서버 구현체다. Agent Skills 문서와 함께, Qdrant가 단순 DB를 넘어 agentic AI 워크플로우의 메모리 레이어로 위치하고 있음을 보여준다.
+
+## 비유
+
+**Qdrant를 도서관에 비유하면**: collection은 서가(section), point는 책, vector는 책의 내용 요약 카드, payload는 책의 메타데이터(저자, 출판일, 장르)다. 사서(HNSW 인덱스)는 유사한 요약 카드를 가진 책들을 서로 연결해 두고, 손님이 질문 카드를 가져오면 가장 비슷한 카드들을 빠르게 찾아준다.
+
+**깨지는 지점**: 도서관의 사서는 책의 의미를 '이해'하지 않는다 — 사서는 카드 간의 거리(수학적 유사도)만 계산할 뿐, 의미론적 판단을 하지 않는다. 또한 도서관 책은 한 번 꽂으면 고정되지만, Qdrant의 point는 실시간으로 upsert/delete가 가능하며 HNSW 그래프가 동적으로 재구성된다.
+
+## 곁가지
+
+- **HNSW 심화**: `ef`, `m`, `ef_construct` 파라미터 튜닝이 실제 recall-latency 곡선에 미치는 영향을 실험해야 할 때 → ANN Recall 튜토리얼 참조
+- **Quantization 심화**: Scalar/Product/Binary 중 어떤 양자화를 선택할지, rerank 전략을 어떻게 설계할지 결정해야 할 때 → Quantization 문서 참조
+- **Hybrid Search 심화**: RRF vs 가중 합산 선택, reranker 결합 파이프라인을 설계해야 할 때 → Hybrid Search 튜토리얼 참조
+- **Qdrant Edge 심화**: 온디바이스 배포 시 서버 동기화 충돌 해결이나 오프라인-first 아키텍처 설계가 필요할 때 → Edge Data Synchronization Patterns 참조
+- **Multitenancy 심화**: 수천 테넌트 환경에서 collection-per-tenant vs payload-based 격리 방식의 성능 차이를 측정해야 할 때 → Multitenancy 문서 참조
+
+## 연결
+
+- **pgvector**: PostgreSQL 확장으로 벡터 검색을 제공하는 도구. Qdrant가 전용 벡터 DB로서 HNSW 튜닝, quantization, hybrid search 등 고급 기능을 제공하는 반면, pgvector는 기존 PostgreSQL 인프라를 그대로 쓰면서 벡터 기능을 추가하는 접근이다. 규모가 작고(수십만 벡터 이하) 기존 PostgreSQL 운영 환경을 떠나기 싫으며, HNSW 파라미터를 세밀하게 튜닝할 필요 없이 기본 IVFFlat/HNSW로 충분한 경우에 pgvector를 선택한다. 반대로 벡터 수가 수백만 이상이거나 quantization·hybrid search·multi-vector 등 고급 기능이 필요하면 Qdrant가 더 적합하다.
+- **FastEmbed ↔ RAG 파이프라인**: FastEmbed로 로컬에서 embedding을 생성하고 Qdrant에 저장하면, 외부 API 호출 없이 end-to-end 시맨틱 검색 파이프라인을 구축할 수 있다.
+- **MCP Server ↔ AI Agent**: Qdrant MCP Server를 통해 에이전트가 장기 메모리로 Qdrant를 사용하면, 대화 히스토리나 지식 기반을 벡터로 검색하는 agentic workflow를 구성할 수 있다.
+- **BM25 ↔ Elasticsearch**: Qdrant의 full-text search는 BM25 기반이지만, Elasticsearch만큼 복잡한 tokenizer 플러그인 생태계는 없다. 대규모 전문(full-text) 검색이 주목적이면 Elasticsearch가 여전히 유리하다.
+
+## 레퍼런스
+
+- [Qdrant Documentation Overview](https://qdrant.tech/documentation/) — 공식 문서 랜딩 페이지로 전체 문서 구조와 Qdrant 정의를 제공 (1차)
+- [What is Qdrant?](https://qdrant.tech/documentation/overview/what-is-qdrant/) — Qdrant의 정체성과 핵심 개념 설명 (1차)
+- [Local Quickstart](https://qdrant.tech/documentation/quickstart/) — 로컬 Docker 환경에서의 최소 기동 가이드 (1차)
+- [Manage Data](https://qdrant.tech/documentation/manage-data/) — Points, Vectors, Payload, Collections, Indexing, Quantization, Multitenancy 전체 관리 문서 허브 (1차)
+- [Search](https://qdrant.tech/documentation/search/) — Similarity search, filtering, hybrid queries, text search 문서 허브 (1차)
+- [Inference](https://qdrant.tech/documentation/inference/) — Inference API, BM25, Cloud Inference, Matryoshka 모델 지원 문서 (1차)
+- [Qdrant Edge](https://qdrant.tech/documentation/edge/) — 온디바이스 경량 벡터 검색 엔진 문서 (1차)
+- [FastEmbed](https://qdrant.tech/documentation/fastembed/) — 경량 embedding 라이브러리 문서 (1차)
+- [Qdrant MCP Server (GitHub)](https://github.com/qdrant/mcp-server-qdrant) — Model Context Protocol 기반 에이전트 도구 서버 (1차)
+- [Qdrant API Reference](https://api.qdrant.tech/api-reference) — REST API 전체 레퍼런스 (1차, 버전 명시 없음)
+
+---
+## 인출 질문
+
+1. Qdrant의 데이터 계층을 point → vector → payload → collection 순서로 설명하고, 각 계층이 검색 과정에서 어떤 역할을 하는지 서술하라.
+2. Hybrid Search에서 dense vector 검색과 sparse vector(BM25) 검색을 결합할 때, Qdrant가 사용하는 두 가지 fusion 방식은 무엇이며 왜 이 결합이 RAG 파이프라인의 recall을 안정적으로 올리는가?
+3. Qdrant Edge가 필요한 환경적 조건 두 가지와, 중앙 서버와의 관계에서 반드시 설계해야 할 동기화 문제를 설명하라.
+
+## 내 관점
+
+<!-- 학습자가 직접 채우는 섹션 — 파이프라인은 대필하지 않는다 -->
