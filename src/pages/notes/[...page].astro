@@ -7,7 +7,12 @@ import Base from '../../layouts/Base.astro';
 import { COLLECTION_LABELS, type PostListItem, getListItems } from '../../lib/collections';
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-  const items = await getListItems('notes');
+  const all = await getListItems('notes');
+  // Child notes (e.g. /notes/foo/bar/ under the hub /notes/foo/) are reachable
+  // from their hub's TOC; only hubs and standalone notes appear in the list.
+  const items = all.filter(
+    (item) => !all.some((other) => other !== item && item.href.startsWith(other.href)),
+  );
   return paginate(items, { pageSize: 10 });
 };
 

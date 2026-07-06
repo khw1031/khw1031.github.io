@@ -25,7 +25,9 @@ const jsonLd = blogPostingJsonLd({
   siteUrl,
 });
 const mdHref = `${Astro.url.pathname.replace(/\/$/, '')}/raw.md`;
-const sourcePath = `src/content/${entry.collection}/${entry.id}.md`;
+// entry.id is not always the file path (hub notes live at <id>/index.md), so
+// prefer the loader-provided filePath and keep the id-based form as fallback.
+const sourcePath = entry.filePath ?? `src/content/${entry.collection}/${entry.id}.md`;
 // Search principle: index only public, listed collections. Notes and inbox are
 // unlisted (excluded from sitemap too) and must never enter the search index.
 // Drafts are hidden from listings, so they must stay out of the index as well.

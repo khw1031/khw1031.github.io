@@ -1,21 +1,48 @@
 ---
 import { getCollection, render } from 'astro:content';
 import PostLayout from '../../layouts/PostLayout.astro';
+import { formatDate } from '../../lib/collections';
 import { readingTime } from '../../lib/reading-time';
 
 export async function getStaticPaths() {
   const entries = await getCollection('notes');
   return entries.map((entry) => ({
     params: { slug: entry.id },
-    props: { entry },
+    props: {
+      entry,
+      childEntries: entries.filter((e) => e.id.startsWith(`${entry.id}/`)),
+    },
   }));
 }
 
-const { entry } = Astro.props;
+const { entry, childEntries } = Astro.props;
 const { Content } = await render(entry);
 const minutes = readingTime((entry as { body?: string }).body ?? '').minutes;
+// Hub pages list their child notes as a TOC: adding a file under the hub's
+// directory is all it takes to appear here. Oldest first — reading order.
+const childItems = childEntries
+  .map((child) => ({
+    href: `/notes/${child.id}/`,
+    title: child.data.title,
+    pubDate: child.data.pubDate,
+  }))
+  .sort((a, b) => a.pubDate.valueOf() - b.pubDate.valueOf());
 ---
 
 <PostLayout entry={entry} readingMinutes={minutes}>
+  {
+    childItems.length > 0 && (
+      <nav aria-label="하위 문서">
+        <ul>
+          {childItems.map((child) => (
+            <li>
+              <a href={child.href}>{child.title}</a>
+              <span class="text-sm text-muted"> · {formatDate(child.pubDate)}</span>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )
+  }
   <Content />
 </PostLayout>

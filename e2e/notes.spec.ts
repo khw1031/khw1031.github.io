@@ -11,9 +11,28 @@ test.describe('notes (private route)', () => {
   });
 
   test('detail page is reachable by direct URL and renders title', async ({ page }) => {
-    const response = await page.goto('/notes/welcome/');
+    const response = await page.goto('/notes/web-worker/');
     expect(response?.status()).toBe(200);
-    await expect(page.locator('article h1').first()).toContainText('Notes');
+    await expect(page.locator('article h1').first()).toContainText('Web Worker');
+  });
+
+  test('hub page renders child notes as a TOC and children resolve', async ({ page }) => {
+    await page.goto('/notes/browser-page-load/');
+    const tocLink = page.locator(
+      'article nav[aria-label="하위 문서"] a[href="/notes/browser-page-load/dns-resolution/"]',
+    );
+    await expect(tocLink).toHaveCount(1);
+    const response = await page.goto('/notes/browser-page-load/dns-resolution/');
+    expect(response?.status()).toBe(200);
+    await expect(page.locator('article h1').first()).toContainText('DNS Resolution');
+  });
+
+  test('list page shows hubs and standalone notes but not children', async ({ page }) => {
+    await page.goto('/notes/');
+    await expect(page.locator('main a[href="/notes/browser-page-load/"]')).toHaveCount(1);
+    await expect(
+      page.locator('main a[href="/notes/browser-page-load/dns-resolution/"]'),
+    ).toHaveCount(0);
   });
 
   test('header nav does not link to /notes/', async ({ page }) => {
@@ -40,11 +59,16 @@ test.describe('notes (private route)', () => {
     expect(body).toContain('Disallow: /notes/');
   });
 
-  test('copy-markdown raw endpoint works for notes', async ({ page, request }) => {
-    await page.goto('/notes/welcome/');
-    await expect(page.locator('a[data-copy-md][href="/notes/welcome/raw.md"]')).toHaveCount(1);
-    const res = await request.get('/notes/welcome/raw.md');
-    expect(res.status()).toBe(200);
-    expect(res.headers()['content-type']).toContain('text/markdown');
+  test('copy-markdown raw endpoint works for notes, including nested notes', async ({
+    page,
+    request,
+  }) => {
+    for (const slug of ['/notes/browser-page-load/', '/notes/browser-page-load/dns-resolution/']) {
+      await page.goto(slug);
+      await expect(page.locator(`a[data-copy-md][href="${slug}raw.md"]`)).toHaveCount(1);
+      const res = await request.get(`${slug}raw.md`);
+      expect(res.status()).toBe(200);
+      expect(res.headers()['content-type']).toContain('text/markdown');
+    }
   });
 });

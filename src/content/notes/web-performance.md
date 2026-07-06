@@ -5,7 +5,7 @@ description: 공부 내용을 개인적으로 정리하는 비공개 노트
 summary: "웹 성능을 지표(Core Web Vitals) ↔ 필드 데이터(CrUX·RUM) ↔ 랩 데이터(Lighthouse) 세 층위로 분리해 정리하고, LCP/INP/CLS/TTFB 해석, 2025 한샘몰 개선 수치, 측정 도구의 트레이드오프와 실무 조합을 다룬 노트."
 lang: ko
 tags: ['web-performance', 'core-web-vitals', 'rum', 'lighthouse']
-lintHash: '7c9ea6358f6e'
+lintHash: '37da62280eeb'
 ---
 
 > 웹 성능 "표준"은 한 도구가 아니라 **지표 ↔ 필드 데이터 ↔ 랩 데이터** 세 층위로 나뉜다. Lighthouse는 그 중 랩 측정 도구일 뿐이다.
@@ -106,7 +106,7 @@ TTFB는 브라우저가 서버의 첫 응답을 받기까지의 시간이다. TT
 | INP | 사용자 입력부터 다음 paint까지 | 이벤트 핸들러 지연, 긴 task, 무거운 re-render | task 쪼개기, handler 경량화, virtualization, Worker, hydration 범위 축소 |
 | TBT | FCP 이후 main thread blocking | 번들 평가, hydration, third-party script | code splitting, dynamic import, tree shaking, barrel export 정리 |
 
-따라서 성능 개선은 "점수 올리기"보다 "어느 브라우저 단계가 막히는지 찾고 그 단계의 비용을 줄이는 일"에 가깝다. 브라우저 로딩 흐름 자체는 [Browser Page Load Flow](/notes/browser-page-load-flow/)에 따로 정리한다.
+따라서 성능 개선은 "점수 올리기"보다 "어느 브라우저 단계가 막히는지 찾고 그 단계의 비용을 줄이는 일"에 가깝다. 브라우저 로딩 흐름 자체는 [Browser Page Load](/notes/browser-page-load/)에 따로 정리한다.
 
 ## 3. 프로젝트 metrics 해석 — 2025 한샘몰 성능 개선
 
