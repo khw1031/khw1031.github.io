@@ -1,0 +1,132 @@
+---
+title: DESIGN.md
+pubDate: '2026-07-05'
+description: 시각 아이덴티티를 코딩 에이전트에게 전달하기 위한 포맷 스펙 — YAML 디자인 토큰 + 마크다운 산문
+summary: "코딩 에이전트가 프로젝트의 디자인 시스템을 지속적·구조적으로 이해하지 못하는 문제를, YAML frontmatter(디자인 토큰) + 마크다운 산문(디자인 의도)의 단일 파일 포맷과 lint/diff/export CLI로 푸는 Google Labs의 DESIGN.md(alpha, v0.3.0)를 정리한 레퍼런스 노트."
+lang: ko
+tags: ['design-md', 'design-tokens', 'ai-agents', 'design-system', 'frontend']
+lintHash: '3c2cb0c5f71a'
+---
+
+> 한 줄 명제: DESIGN.md는 "AGENTS.md의 시각 디자인 버전"이다 — 기계가 읽는 토큰(YAML)과 사람이 쓰는 의도(마크다운 산문)를 한 파일에 담아, 코딩 에이전트에게 디자인 시스템의 지속적 기억을 준다.
+
+## 큰 그림
+
+```text
+DESIGN.md
+├─ 1 문제   — 코딩 에이전트가 시각 아이덴티티를 지속·구조적으로 이해하지 못함
+├─ 2 포맷   — YAML frontmatter(토큰) + 마크다운 산문(의도·적용 지침), 정해진 섹션 순서
+├─ 3 토큰   — Color / Dimension / Typography / 토큰 참조 {path.to.token}
+├─ 4 CLI    — lint(구조 검증) / diff(버전 비교) / export(tailwind·DTCG) / spec
+├─ 5 소비자 — 1차 소비자는 코딩 에이전트; export로 코드 파이프라인(Tailwind 테마)에도 연결
+└─ 6 상태   — alpha, v0.3.0 (2026-06-15). 스펙·토큰 스키마·CLI 변동 예상
+```
+
+## 핵심
+
+코딩 에이전트는 프롬프트마다 디자인 맥락을 다시 받지 않으면 프로젝트의 시각 아이덴티티를 모른다. DESIGN.md(google-labs-code, Apache-2.0)는 이 문제를 두 층으로 푼다: **YAML frontmatter**에 색·타이포·라운딩·간격·컴포넌트 같은 디자인 토큰을 기계가 파싱 가능하게 담고, 그 아래 **마크다운 산문**(Overview → Colors → Typography → Layout → Elevation & Depth → Shapes → Components → Do's and Don'ts의 정해진 섹션 순서)에 "왜 이런 디자인인지, 어떻게 적용해야 하는지"를 사람 언어로 쓴다. 토큰만으로는 판단이 안 되는 상황(어떤 색을 어디에, 언제 예외인지)을 산문이 채우는 구조다.
+
+원문의 최소 예시(레포 발췌 — CLI로 lint 실행은 하지 않음, 아래 검증 상태 참조):
+
+```markdown
+---
+name: Heritage
+colors:
+  primary: "#1A1C1E"
+  secondary: "#6C7278"
+  neutral: "#F7F5F2"
+typography:
+  body-md:
+    fontFamily: Public Sans
+    fontSize: 1rem
+rounded:
+  sm: 4px
+spacing:
+  md: 16px
+---
+
+## Overview
+
+Architectural Minimalism meets Journalistic Gravitas...
+
+## Colors
+
+The palette is rooted in high-contrast neutrals...
+```
+
+같이 배포되는 CLI가 이 파일의 생애주기를 관리한다 — 작성하면 `lint`로 구조를 검증하고, 바뀌면 `diff`로 토큰 수준 변경(추가/삭제/수정, 회귀 여부)을 보고, `export`로 Tailwind 테마나 W3C DTCG 토큰 파일로 내보내 실제 코드와 동기화한다:
+
+```bash
+npx @google/design.md lint DESIGN.md
+npx @google/design.md diff DESIGN.md DESIGN-v2.md
+npx @google/design.md export --format css-tailwind DESIGN.md > theme.css
+```
+
+**검증 상태**: 코드 예시는 레포 발췌이며 이 노트 작성 시 CLI를 직접 실행하지는 않았다(외부 패키지 실행 미승인). 대신 npm 레지스트리에서 패키지 존재를 확인했다 — `@google/design.md` v0.3.0, bin 이름 `design.md`/`designmd`, 저장소 일치 (확인일 2026-07-05).
+
+## 깊이
+
+### 가지 3 확대 — 토큰 스키마
+
+⭐ 토큰 타입은 네 가지 축으로 이해하면 된다:
+
+| 타입 | 형식 | 예 |
+|---|---|---|
+| Color | CSS color 문법 | `"#1A1C1E"`, `"oklch(62% 0.18 250)"` |
+| Dimension | 숫자 + 단위 | `48px`, `-0.02em` |
+| Typography | 객체 | `fontFamily`, `fontSize`, `fontWeight`, `lineHeight` … |
+| 토큰 참조 | `{path.to.token}` | `{colors.primary}` |
+
+⭐ 토큰 참조가 핵심 장치다 — `components.button.background: "{colors.primary}"`처럼 컴포넌트 토큰이 기반 토큰을 가리키게 해서, 색 하나를 바꾸면 참조하는 모든 곳이 따라오게 한다. 토큰 설계는 W3C Design Token Format(DTCG)에서 영감을 받았다고 명시하며, `export --format dtcg`로 DTCG 호환 `tokens.json`을 만들 수 있다.
+
+### 가지 4 확대 — CLI 레시피
+
+📎 자주 쓸 순서대로:
+
+1. 작성 후 검증 — `npx @google/design.md lint DESIGN.md` (JSON 출력은 `--format json`, stdin은 `-`). 에러가 있으면 exit code 1.
+2. 리뷰 시 변경 파악 — `npx @google/design.md diff old.md new.md` → 섹션별 토큰 추가/삭제/수정과 회귀(regression) 플래그.
+3. 코드 동기화 — `export --format json-tailwind`(Tailwind v3 config), `css-tailwind`(v4 `@theme` 블록), `dtcg`(표준 토큰).
+4. 스펙 자체 조회 — `npx @google/design.md spec --rules --format json` (에이전트가 규칙을 프로그래매틱하게 읽는 용도).
+
+📎 프로그래매틱 API도 있다: `import { lint } from '@google/design.md/linter'` → `findings`/`summary`/`designSystem`(파싱된 상태)를 반환. CI에서 디자인 토큰 회귀를 막는 용도로 쓸 수 있다.
+
+**Gotcha**: Windows PowerShell에서는 패키지명 그대로 실행이 안 되어 `npx -p @google/design.md designmd …` 별칭을 쓴다. 그리고 상태가 alpha다 — "Expect changes to the format as it matures"라고 스스로 명시하므로, 도입 시 스펙 버전을 고정해 두는 편이 안전하다.
+
+## 비유
+
+DESIGN.md는 악보와 연주 노트의 결합이다. 토큰(YAML)은 음표 — 기계적으로 정확하고 누가 읽어도 같은 값이다. 산문은 악보 위의 셈여림·해석 지시 — "여기는 절제되게, 이 대비는 의도된 긴장"처럼 값만으로 전달되지 않는 의도를 싣는다. 연주자(에이전트)는 둘 다 읽어야 곡을 그 곡답게 연주한다.
+
+**깨지는 지점**: 악보는 따라 연주하면 "그 곡"임이 청중에게 검증되지만, DESIGN.md에는 산출물 검증 루프가 없다. `lint`는 파일의 구조만 검사할 뿐, 에이전트가 생성한 UI가 실제로 이 디자인을 따랐는지는 포맷도 CLI도 확인해주지 않는다. 준수 여부 판정은 여전히 사람의 눈(리뷰)에 남아 있다.
+
+## 곁가지
+
+- **spec.md 정독 (섹션 규칙·토큰 스키마 전문)** — DESIGN.md 파일을 직접 작성하거나 파서를 만들 때.
+- **이 블로그에 DESIGN.md 도입 실험** — 이 레포의 시각 스타일(색·타이포·간격)을 에이전트에게 표준 포맷으로 전달하고 싶을 때. lint CLI 실행 검증도 이때 함께.
+- **W3C DTCG(Design Tokens) 표준** — 토큰 포맷 자체의 표준화 지형을 이해해야 할 때.
+
+## 연결
+
+- [Open Knowledge Format](/notes/open-knowledge-format/) — "YAML frontmatter + 마크다운 = 에이전트용 컨텍스트 파일"이라는 같은 패턴의 데이터 지식 버전. OKF가 조직의 데이터 지식을 담는다면 DESIGN.md는 시각 아이덴티티를 담는다. 같은 시기(2026 상반기) Google에서 나온 형제 스펙.
+- AGENTS.md/CLAUDE.md 관습 — 행동 규칙을 담는 에이전트 컨텍스트 파일의 선행 사례. DESIGN.md는 그 시각 디자인 특화형.
+
+## 레퍼런스
+
+- [google-labs-code/design.md — GitHub](https://github.com/google-labs-code/design.md) — 1차. 스펙·CLI·예제의 원 저장소. 기준 버전 v0.3.0, alpha (확인일 2026-07-05).
+- [DESIGN.md Specification — stitch.withgoogle.com](https://stitch.withgoogle.com/docs/design-md/specification) — 1차. 포맷 스펙 전문.
+- [@google/design.md — npm](https://www.npmjs.com/package/@google/design.md) — 1차. CLI 패키지 (v0.3.0, 2026-06-15 게시, 레지스트리에서 존재 확인).
+- [W3C Design Tokens (DTCG)](https://www.designtokens.org/) — 2차. 토큰 포맷의 영감이자 export 대상 표준.
+
+---
+
+## 인출 질문
+
+- DESIGN.md의 두 층(기계용/사람용)은 각각 무엇을 담고, 왜 둘 다 필요한가?
+- 토큰 타입 네 가지와 토큰 참조(`{path.to.token}`)의 역할을 말해보기.
+- CLI 네 커맨드(lint/diff/export/spec)의 용도를 재생해보기. export가 지원하는 세 포맷은?
+- 악보 비유가 깨지는 지점은? — 이 포맷이 검증하지 **못하는** 것은 무엇인가?
+- 전이: 이 블로그의 시각 스타일을 DESIGN.md로 옮긴다면 frontmatter에 어떤 토큰이 들어가고, 산문 섹션에는 무엇을 써야 하나?
+- 전이: OKF와 DESIGN.md의 공통 설계 패턴 세 가지를 꼽아보기.
+
+## 내 관점
+
+(학습자 영역 — 비어 있음)
