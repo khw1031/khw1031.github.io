@@ -390,7 +390,12 @@ test('apt index links to apt.1', async ({ page }) => {
   await expect(link).toContainText('apt.1');
 });
 
-test('apt.1 renders a nonblank apartment scene', async ({ page }) => {
+// @webgl: excluded from the default e2e gate (see package.json `test:e2e`).
+// These generative canvas/Three.js scene tests are unreliable in headless
+// SwiftShader — WebGL readback returns 0 (preserveDrawingBuffer:false) and the
+// scenes drift; run with `pnpm test:e2e:webgl`. (apt.1 is a 2D canvas but is
+// grouped here as the same generative-scene class.)
+test('apt.1 renders a nonblank apartment scene', { tag: '@webgl' }, async ({ page }) => {
   await page.goto('/labs/apt/1/');
 
   await expect(page.locator('main h1')).toContainText('apt.1');
@@ -418,7 +423,9 @@ test('apt.1 keeps a vertical apartment-photo composition', async ({ page }) => {
   expect(box.y + box.height).toBeLessThanOrEqual(760);
 });
 
-test('game of life lab renders a Three.js simulation and steps a blinker', async ({ page }) => {
+test('game of life lab renders a Three.js simulation and steps a blinker', {
+  tag: '@webgl',
+}, async ({ page }) => {
   await page.goto('/labs/game-of-life/');
 
   await expect(page.locator('main h1')).toContainText('Game of Life');
@@ -448,7 +455,7 @@ test('game of life lab renders a Three.js simulation and steps a blinker', async
   await expect(page.locator('#life-toggle-label')).toContainText('run');
 });
 
-test('game of life canvas is nonblank across viewports', async ({ page }) => {
+test('game of life canvas is nonblank across viewports', { tag: '@webgl' }, async ({ page }) => {
   for (const viewport of [
     { width: 1024, height: 768 },
     { width: 390, height: 844 },
@@ -497,7 +504,7 @@ test('patterns index links to the http pattern', async ({ page }) => {
   await expect(link).toContainText('http');
 });
 
-test('http pattern page renders protocol gate controls', async ({ page }) => {
+test('http pattern page renders protocol gate controls', { tag: '@webgl' }, async ({ page }) => {
   await page.goto('/labs/patterns/http/');
 
   await expect(page.locator('main h1')).toContainText('http');
@@ -511,7 +518,7 @@ test('http pattern page renders protocol gate controls', async ({ page }) => {
   });
 });
 
-test('http pattern canvas is nonblank across viewports', async ({ page }) => {
+test('http pattern canvas is nonblank across viewports', { tag: '@webgl' }, async ({ page }) => {
   for (const viewport of [
     { width: 1024, height: 768 },
     { width: 390, height: 844 },
@@ -532,7 +539,9 @@ test('http pattern canvas is nonblank across viewports', async ({ page }) => {
   }
 });
 
-test('read and write pattern page renders formula controls', async ({ page }) => {
+test('read and write pattern page renders formula controls', { tag: '@webgl' }, async ({
+  page,
+}) => {
   await page.goto('/labs/patterns/read-write/');
 
   await expect(page.locator('main h1')).toContainText('read & write');
@@ -546,7 +555,9 @@ test('read and write pattern page renders formula controls', async ({ page }) =>
   });
 });
 
-test('read and write pattern canvas is nonblank across viewports', async ({ page }) => {
+test('read and write pattern canvas is nonblank across viewports', { tag: '@webgl' }, async ({
+  page,
+}) => {
   for (const viewport of [
     { width: 1024, height: 768 },
     { width: 390, height: 844 },
@@ -567,7 +578,9 @@ test('read and write pattern canvas is nonblank across viewports', async ({ page
   }
 });
 
-test('failed trial constellation pattern page renders formula controls', async ({ page }) => {
+test('failed trial constellation pattern page renders formula controls', { tag: '@webgl' }, async ({
+  page,
+}) => {
   await page.goto('/labs/patterns/failed-trial-constellation/');
 
   await expect(page.locator('main h1')).toContainText('failed trial constellation');
@@ -581,7 +594,9 @@ test('failed trial constellation pattern page renders formula controls', async (
   });
 });
 
-test('failed trial constellation pattern canvas is nonblank across viewports', async ({ page }) => {
+test('failed trial constellation pattern canvas is nonblank across viewports', {
+  tag: '@webgl',
+}, async ({ page }) => {
   for (const viewport of [
     { width: 1024, height: 768 },
     { width: 390, height: 844 },

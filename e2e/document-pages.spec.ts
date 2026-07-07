@@ -12,7 +12,7 @@ const DOCS: DocSpec[] = [
     path: '/cv/',
     h1Includes: '김현우',
     expectsContact: true,
-    sectionTitles: ['경력 사항', '주요 프로젝트', '사이드 프로젝트', '교육 사항'],
+    sectionTitles: ['경력', '주요 프로젝트', '사이드 프로젝트', '교육'],
   },
 ];
 
@@ -49,12 +49,18 @@ test('removed /portfolio/ and /cover-letter/ pages 404', async ({ request }) => 
   }
 });
 
-test('cv projects use the What/How/Impact structure in markdown export', async ({ request }) => {
+test('cv markdown export renders sections, project headings, and detail bullets', async ({
+  request,
+}) => {
   const res = await request.get('/cv.md');
   const body = await res.text();
-  expect(body).toContain('#### What');
-  expect(body).toContain('#### How');
-  expect(body).toContain('#### Impact');
+  expect(body).toContain('# 김현우');
+  expect(body).toContain('## 주요 프로젝트');
+  expect(body).toMatch(/^### /m); // project entries render as level-3 headings
+  expect(body).toMatch(/^- /m); // impact / reference detail bullets
+  // The legacy English What/How/Impact scaffold has been retired for narrative
+  // prose + Korean sub-headings (프로젝트 개요 / 주요 기능 / 성과·특징).
+  expect(body).not.toContain('#### What');
 });
 
 for (const doc of DOCS) {

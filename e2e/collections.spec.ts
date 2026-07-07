@@ -91,7 +91,11 @@ test('post detail pages expose copy-markdown link + raw md endpoint', async ({ p
   }
 });
 
-test('read and write list page renders the generated hero at the top', async ({ page }) => {
+// @webgl: excluded from the default e2e gate — headless SwiftShader can't do
+// reliable WebGL readback (preserveDrawingBuffer:false). Run `pnpm test:e2e:webgl`.
+test('read and write list page renders the generated hero at the top', { tag: '@webgl' }, async ({
+  page,
+}) => {
   await page.goto('/read-and-write/');
 
   const firstSection = page.locator('main section').first();
@@ -113,7 +117,9 @@ test('read and write list page renders the generated hero at the top', async ({ 
   expect(pixels.changed).toBeGreaterThan(40);
 });
 
-test('posts list page renders the generated hero at the top', async ({ page }) => {
+test('posts list page renders the generated hero at the top', { tag: '@webgl' }, async ({
+  page,
+}) => {
   await page.goto('/posts/');
 
   const firstSection = page.locator('main section').first();

@@ -19,7 +19,8 @@
     "format:check": "biome format .",
     "test": "vitest run",
     "test:watch": "vitest",
-    "test:e2e": "playwright test",
+    "test:e2e": "playwright test --grep-invert @webgl",
+    "test:e2e:webgl": "playwright test --grep @webgl",
     "import:legacy": "tsx scripts/import-from-legacy.ts",
     "theme:gen": "tsx scripts/iterm-to-css.ts",
     "prebuild": "tsx scripts/iterm-to-css.ts && tsx scripts/generate-raw-markdown.ts"
