@@ -1,6 +1,6 @@
 import { defineCollection } from 'astro:content';
 import { glob } from 'astro/loaders';
-import { baseFrontmatter, postSchema, readAndWriteSchema } from './content/schemas';
+import { baseFrontmatter, postSchema, readAndWriteSchema, wikiSchema } from './content/schemas';
 
 const md = (folder: string) => ({
   pattern: '**/*.md',
@@ -15,6 +15,7 @@ export const collections = {
   }),
   notes: defineCollection({ loader: glob(md('notes')), schema: baseFrontmatter }),
   inbox: defineCollection({ loader: glob(md('inbox')), schema: baseFrontmatter }),
+  wiki: defineCollection({ loader: glob(md('wiki')), schema: wikiSchema }),
 };
 
 export { baseFrontmatter };

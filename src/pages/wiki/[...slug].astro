@@ -1,0 +1,65 @@
+---
+import { getCollection, render } from 'astro:content';
+import { formatDate } from '../../lib/collections';
+import { readingTime } from '../../lib/reading-time';
+import WikiLayout from '../../layouts/WikiLayout.astro';
+
+export async function getStaticPaths() {
+  const entries = await getCollection('wiki');
+  // The root hub (src/content/wiki/index.md) is served at /wiki/ by index.astro,
+  // so it is excluded here — otherwise its folded id would also claim /wiki/.
+  // Inlined (not a top-level helper): getStaticPaths runs in an isolated scope.
+  return entries
+    .filter((entry) => !entry.filePath?.endsWith('/wiki/index.md'))
+    .map((entry) => ({
+      params: { slug: entry.id },
+      props: {
+        entry,
+        // OKF progressive disclosure: a hub lists only its *immediate* children
+        // (leaf cards + subcategory hubs), never all descendants. A child's id
+        // is exactly the hub id plus one path segment.
+        childEntries: entries.filter((e) => {
+          const rest = e.id.startsWith(`${entry.id}/`) ? e.id.slice(entry.id.length + 1) : null;
+          return rest !== null && !rest.includes('/');
+        }),
+      },
+    }));
+}
+
+const { entry, childEntries } = Astro.props;
+const { Content } = await render(entry);
+const minutes = readingTime((entry as { body?: string }).body ?? '').minutes;
+const childItems = childEntries
+  .map((child) => ({
+    href: `/wiki/${child.id}/`,
+    title: child.data.title,
+    description: child.data.description,
+    pubDate: child.data.pubDate,
+  }))
+  .sort((a, b) => a.pubDate.valueOf() - b.pubDate.valueOf());
+---
+
+<WikiLayout entry={entry} readingMinutes={minutes}>
+  {
+    childItems.length > 0 && (
+      <nav aria-label="하위 문서" class="not-prose mb-8">
+        <ul class="list-none p-0 m-0 space-y-3">
+          {childItems.map((child) => (
+            <li>
+              <a href={child.href} class="text-foreground hover:underline underline-offset-2">
+                {child.title}
+              </a>
+              <span class="text-sm text-muted"> · {formatDate(child.pubDate)}</span>
+              {child.description && (
+                <p class="mt-0.5 mb-0 max-w-md text-sm text-muted line-clamp-2">
+                  {child.description}
+                </p>
+              )}
+            </li>
+          ))}
+        </ul>
+      </nav>
+    )
+  }
+  <Content />
+</WikiLayout>

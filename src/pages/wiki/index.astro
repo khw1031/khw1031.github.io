@@ -1,0 +1,29 @@
+---
+import { getCollection } from 'astro:content';
+import PostList from '../../components/PostList.astro';
+import Base from '../../layouts/Base.astro';
+import { type PostListItem } from '../../lib/collections';
+
+const entries = await getCollection('wiki');
+// Top-level categories and standalone docs: ids with no '/'. Each links to its
+// /wiki/<id>/ hub. The wiki has no root index.md — its charter (purpose,
+// principles, structure) lives in AGENTS.md and is intentionally not surfaced
+// here; this landing is a navigational category index only.
+const categories: PostListItem[] = entries
+  .filter((e) => !e.id.includes('/'))
+  .map((e) => ({
+    href: `/wiki/${e.id}/`,
+    title: e.data.title,
+    description: e.data.description,
+    pubDate: e.data.pubDate,
+    label: e.data.type,
+  }))
+  .sort((a, b) => a.pubDate.valueOf() - b.pubDate.valueOf());
+---
+
+<Base title="Wiki — thnkr" description="분야별로 정리한 공식·1차 레퍼런스 라이브러리 (OKF).">
+  <section class="mt-2">
+    <h1 class="font-medium mb-3">Wiki</h1>
+    <PostList items={categories} />
+  </section>
+</Base>

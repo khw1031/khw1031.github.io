@@ -2,17 +2,12 @@
 import type { CollectionEntry } from 'astro:content';
 import CopyMarkdown from '../components/CopyMarkdown.astro';
 import CopyPath from '../components/CopyPath.astro';
-import {
-  COLLECTION_ORDER,
-  type ListableCollection,
-  SEARCHABLE_COLLECTIONS,
-  formatDate,
-} from '../lib/collections';
+import { formatDate } from '../lib/collections';
 import { blogPostingJsonLd } from '../lib/jsonld';
 import Base from './Base.astro';
 
 interface Props {
-  entry: CollectionEntry<ListableCollection>;
+  entry: CollectionEntry<'wiki'>;
   readingMinutes: number;
 }
 
@@ -30,18 +25,12 @@ const jsonLd = blogPostingJsonLd({
   siteUrl,
 });
 const mdHref = `${Astro.url.pathname.replace(/\/$/, '')}/raw.md`;
-// entry.id is not always the file path (hub notes live at <id>/index.md), so
-// prefer the loader-provided filePath and keep the id-based form as fallback.
-const sourcePath = entry.filePath ?? `src/content/${entry.collection}/${entry.id}.md`;
-// Search scope (single source of truth: SEARCHABLE_COLLECTIONS). Notes and inbox
-// are unlisted (excluded from sitemap too) and must never enter the search index.
-// Drafts are hidden from listings, so they must stay out of the index as well.
-// (wiki is also searchable but renders via WikiLayout, not here.)
-const searchable = SEARCHABLE_COLLECTIONS.includes(entry.collection) && !data.draft;
-// Tag chips link to /tags/[tag], which only exists for the public scope. Only
-// public collections show them so a chip never points at a missing tag page.
-const showTags =
-  (COLLECTION_ORDER as ListableCollection[]).includes(entry.collection) && data.tags.length > 0;
+// entry.id folds `/index`, so prefer the loader-provided filePath for display.
+const sourcePath = entry.filePath ?? `src/content/wiki/${entry.id}.md`;
+// wiki is the public, searchable scope (unlike notes/inbox): every non-draft
+// doc goes into the pagefind index. Tag chips are intentionally omitted — the
+// /tags pages cover only the timeline scope, so a wiki tag would 404.
+const searchable = !data.draft;
 ---
 
 <Base title={`${data.title} — thnkr`} description={description} jsonLd={jsonLd}>
@@ -51,11 +40,17 @@ const showTags =
   </div>
   <article class="prose max-w-none mt-2" data-pagefind-body={searchable ? true : undefined}>
     <h1>{data.title}</h1>
-    <div class="not-prose text-sm text-muted mb-6">
+    <div class="not-prose text-sm text-muted mb-6 flex flex-wrap items-center gap-x-2">
+      <span
+        class="border border-border px-1.5 py-0.5 text-[11px] uppercase tracking-wide"
+        data-pagefind-filter="type"
+      >
+        {data.type}
+      </span>
       <time datetime={data.pubDate.toISOString()} data-pagefind-meta="date">
         {formatDate(data.pubDate)}
       </time>
-      <span> · </span>
+      <span>·</span>
       <span>{readingMinutes} min</span>
     </div>
     {
@@ -84,28 +79,11 @@ const showTags =
       )
     }
     <slot />
-    {
-      showTags && (
-        <div class="not-prose mt-10 flex flex-wrap gap-x-3 gap-y-2 text-sm">
-          {data.tags.map((tag) => (
-            <a
-              href={`/tags/${tag}/`}
-              class="text-muted transition-colors hover:text-foreground"
-            >
-              #{tag}
-            </a>
-          ))}
-        </div>
-      )
-    }
   </article>
 </Base>
 
 <style>
-  /* The "핵심요약" glyph ink sits slightly low in its line box, so the flex-
-     centered mark reads a touch high. The optical offset depends on subpixel
-     rounding, which differs by display density: standard (1x) displays need a
-     larger nudge than hi-DPI (retina / mobile) ones. */
+  /* Optical centering of the 핵심요약 glyph — mirrors PostLayout. */
   .tldr-mark {
     transform: translateY(0.5px);
   }

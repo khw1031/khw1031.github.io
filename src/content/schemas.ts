@@ -23,3 +23,12 @@ export const baseFrontmatter = z.object({
 
 export const postSchema = baseFrontmatter;
 export const readAndWriteSchema = baseFrontmatter;
+
+// Wiki is the OKF-conformant reference library. OKF's single required field is
+// `type` (e.g. 'Category' for hubs, 'Reference' for leaf cards). `resource` is
+// the canonical URL of the concept the doc describes (optional). title/pubDate
+// stay required (inherited) because the site still renders and sorts by them.
+export const wikiSchema = baseFrontmatter.extend({
+  type: z.string().min(1),
+  resource: z.url().optional(),
+});

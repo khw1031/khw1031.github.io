@@ -2,7 +2,7 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 import { getLabItems } from './labs';
 import { readingTime } from './reading-time';
 
-export type ListableCollection = 'posts' | 'read-and-write' | 'notes' | 'inbox';
+export type ListableCollection = 'posts' | 'read-and-write' | 'notes' | 'inbox' | 'wiki';
 
 export interface PostListItem {
   href: string;
@@ -25,9 +25,21 @@ export const COLLECTION_LABELS: Record<ListableCollection, string> = {
   'read-and-write': 'Read & Write',
   notes: 'Notes',
   inbox: 'Inbox',
+  wiki: 'Wiki',
 };
 
+// Timeline scope: home "Recent", the archive, tags, and RSS. Kept to the
+// chronological blog collections (+ labs, added in getPublicItems). wiki, notes
+// and inbox are deliberately absent — wiki is a category-tree reference library,
+// not a dated timeline, and notes/inbox are unlisted.
 export const COLLECTION_ORDER: ListableCollection[] = ['posts', 'read-and-write'];
+
+// Search scope: which collections enter the pagefind index (+ sitemap +
+// robots-allowed). This is COLLECTION_ORDER plus wiki — wiki is public and
+// searchable but stays out of the timeline surfaces above. notes/inbox are in
+// neither scope (unlisted). The pagefind gate lives in the layouts:
+// PostLayout keys off COLLECTION_ORDER, WikiLayout marks wiki bodies directly.
+export const SEARCHABLE_COLLECTIONS: ListableCollection[] = [...COLLECTION_ORDER, 'wiki'];
 
 function entryBody(entry: CollectionEntry<ListableCollection>): string {
   return 'body' in entry && typeof entry.body === 'string' ? entry.body : '';
