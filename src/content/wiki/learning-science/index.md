@@ -6,7 +6,7 @@ description: 학습·기억·전이의 근거가 되는 인지·교육심리학 
 summary: "무엇이 장기 파지와 전이를 만드는가에 대한 인지·교육심리학의 1차 문헌을 모은 카테고리. Bjork의 'desirable difficulties'를 우산 개념으로, 인출 연습·분산 학습·인터리빙 등 개별 원리를 각 레퍼런스 카드로 정리한다."
 lang: ko
 tags: ['learning-science', 'memory', 'cognition', 'education']
-lintHash: 'a998516057e2'
+lintHash: 'eee78adc27be'
 ---
 
 > 한 줄 명제: 습득을 느리게 만드는 조건(인출·간격·인터리빙 등)이 오히려 장기 파지와 전이를 가속한다 — 이것이 학습 과학의 핵심 발견이고, 아래 레퍼런스들은 그 각론이다.
@@ -24,7 +24,9 @@ learning science
 ├─ transfer                      — 표면이 달라도 구조를 옮기는 능력 (near/far transfer)
 ├─ icap framework                — 수동<능동<구성<상호작용, 관여 양식이 깊을수록 학습이 커진다
 ├─ self-explanation              — "왜/언제 아닌가"를 설명하면 이해가 깊어진다
-└─ worked examples               — 초기엔 예제 학습이 스키마 형성에 효율적 (cognitive load)
+├─ worked examples               — 초기엔 예제 학습이 스키마 형성에 효율적 (cognitive load)
+├─ pareto principle in learning  — "핵심 20%면 80% 응용 가능"은 검증된 법칙이 아니라 경영학 유비
+└─ simple-to-complex sequencing  — "단순화된 전체부터, 복잡도는 나중에"는 이론마다 증거 수준이 다르다
 ```
 
 ## 핵심
@@ -43,6 +45,8 @@ learning science
 
 - [Retrieval Practice](/wiki/learning-science/retrieval-practice/) · [Spacing](/wiki/learning-science/spacing/) · [Interleaving](/wiki/learning-science/interleaving/) — 이 카테고리의 핵심 세 원리.
 - [손글씨 필기 vs 타이핑](/wiki/learning-science/handwriting-note-taking/) · [ICAP Framework](/wiki/learning-science/icap-framework/) · [Transfer](/wiki/learning-science/transfer/) · [Procedural vs Conceptual Knowledge](/wiki/learning-science/procedural-vs-conceptual-knowledge/) — "손으로 쓰면 이해가 깊어진다"는 통속 주장을 검증할 때 함께 보는 네 카드.
+- [Pareto Principle in Learning](/wiki/learning-science/pareto-principle-in-learning/) — "핵심 20%만 배우면 80%를 응용할 수 있다"는 통속 주장의 출처(파레토→주란→코치/페리스)와 검증 한계를 다루는, 학습과학 실험이 아니라 경영학 휴리스틱 계보의 대조 사례.
+- [Simple-to-Complex Sequencing](/wiki/learning-science/simple-to-complex-sequencing/) — "핵심부터 배우고 확장하라"는 커리큘럼 순서 자체는 worked-example effect·4C/ID 등 통제 실험으로 뒷받침되는, 위 카드와는 결이 다른 더 구체적인 처방.
 - [Computing Education](/wiki/computing-education/) — 이 원리들을 AI 시대 프로그래밍 교육 맥락에 적용한 실증 카드는 이쪽 카테고리에 있다.
 
 ## 레퍼런스

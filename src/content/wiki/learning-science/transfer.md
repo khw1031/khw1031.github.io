@@ -7,7 +7,7 @@ description: 배운 것이 표면이 다른 새 상황에 얼마나 옮겨가는
 summary: "Barnett & Ceci(2002)는 '전이'라는 말이 연구마다 다른 뜻으로 쓰여 비교가 불가능해진 문제를 지적하고, 전이가 일어나는 맥락을 9개 차원(지식 영역, 물리적·사회적·시간적 맥락, 기능적 맥락, 자발성 등)으로 나눈 분류체계를 제시했다. '도구를 능숙히 쓰는 것'과 '원리가 새 문제로 전이되는 것'을 같은 것으로 뭉뚱그리지 말라는 이 분류체계는, '활용 능력과 이해는 다른 능력'이라는 주장을 검증 가능한 형태로 다듬는 데 쓸 수 있다."
 lang: ko
 tags: ['transfer', 'far-transfer', 'learning-science']
-lintHash: '2959ef485384'
+lintHash: 'd0250f08bcf7'
 ---
 
 > 한 줄 명제: "배운 것을 새 상황에 쓸 수 있는가"라는 질문은 하나가 아니라, 원 학습 맥락과 새 맥락이 얼마나 다른가에 따라 완전히 다른 질문들의 묶음이다.
@@ -27,3 +27,4 @@ lintHash: '2959ef485384'
 - [Learning Science](/wiki/learning-science/) — desirable difficulties(인출·간격·인터리빙)가 목표로 삼는 최종 결과가 바로 전이다.
 - [Procedural vs Conceptual Knowledge](/wiki/learning-science/procedural-vs-conceptual-knowledge/) — 절차 지식은 가까운 전이에, 개념 지식은 먼 전이에 더 강하게 연결된다는 논의와 이어진다.
 - [AI Coding Tools & Conceptual Understanding](/wiki/computing-education/ai-coding-tools-and-conceptual-understanding/) — "AI 도구 숙련이 새 문제로 전이되는가"라는 질문을 프로그래밍 교육 맥락에서 실증적으로 다룬 카드.
+- [Simple-to-Complex Sequencing](/wiki/learning-science/simple-to-complex-sequencing/) — "핵심부터 배우면 나머지에 응용 가능하다"는 커리큘럼 설계 주장도 결국 far transfer가 일어나는지의 질문이며, 이 분류체계로 검증 범위를 구체화할 수 있다.
