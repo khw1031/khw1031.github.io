@@ -27,7 +27,7 @@ const jsonLd = blogPostingJsonLd({
 const mdHref = `${Astro.url.pathname.replace(/\/$/, '')}/raw.md`;
 // entry.id folds `/index`, so prefer the loader-provided filePath for display.
 const sourcePath = entry.filePath ?? `src/content/wiki/${entry.id}.md`;
-// wiki is the public, searchable scope (unlike notes/inbox): every non-draft
+// wiki is the public, searchable scope (unlike notes/inbox/specs): every non-draft
 // doc goes into the pagefind index. Tag chips are intentionally omitted — the
 // /tags pages cover only the timeline scope, so a wiki tag would 404.
 const searchable = !data.draft;

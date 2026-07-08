@@ -79,12 +79,18 @@
   `wiki` is **public + searchable** (unlike notes) and each doc carries a required `type` (`Category` for hubs, `Reference` for leaf cards). Hub pages auto-render an *immediate-children* TOC (`wiki/[...slug].astro`); `/wiki/` is a navigational category index only (no root `index.md`). Keep the two collections distinct: personal learning → notes; sourced public references → wiki.
 - **qmd forward-compat** — The `wiki` collection is plain markdown (`glob('**/*.md')`). When Quarto (`.qmd`) is later added, render it to `.md` into `src/content/wiki/` via a prebuild step (the glob loader and `scripts/generate-raw-markdown.ts` already handle nested `.md`); do not point the collection loader at raw `.qmd`, which Astro cannot parse.
 
+## Specs
+
+- **Purpose** — `src/content/specs` holds **agent-operational instruction documents**: turn-by-turn protocols meant to be handed to *another agent* as context so it can drive a live session (e.g. a study session where the agent scaffolds structure/direction while a human does the actual generative work), as distinct from `notes` (human-facing rationale/evidence, read for retrieval) and `wiki` (public sourced references). A spec should read like an executable instruction set — explicit agent do/don't rules, checkpoints, detection heuristics — not prose synthesis, analogies, or self-reflection prompts; those belong in the `notes`/`wiki` doc the spec is grounded in, referenced rather than duplicated.
+- **Structure** — same layout convention as `notes`: `{topic}.md` flat by default, promoted to `{topic}/index.md` (+ child specs) only once a genuine sub-spec is needed. Frontmatter follows `baseFrontmatter` (`title`/`pubDate` required; `description`/`summary`/`tags` recommended).
+- **Scope** — `specs` is **unlisted**, same as `notes`/`inbox`: URL-only, footer link (`/specs/`), excluded from search index, sitemap, and robots.
+
 ## Site Listing & Search
 
 The site has two distinct public scopes — keep them separate so the rules cannot silently drift:
 
-- **Search scope** (pagefind index + sitemap + robots-allowed): the `COLLECTION_ORDER` collections **plus `wiki`** (see `SEARCHABLE_COLLECTIONS` in `src/lib/collections.ts`). `notes` and `inbox` are unlisted and must **never** enter the search index or sitemap. The pagefind gate lives in the layouts and keys off `SEARCHABLE_COLLECTIONS`: `PostLayout` gates on it directly; `WikiLayout` marks every non-draft wiki body searchable (wiki ∈ `SEARCHABLE_COLLECTIONS`). The sitemap filter (`astro.config.mjs`) and `robots.txt.ts` exclude only `/notes` and `/inbox`, so `/wiki/` is public by default.
-- **Timeline scope** (home "Recent", the archive, tags, RSS): the `COLLECTION_ORDER` collections plus labs, via `getPublicItems`/`getListItems`. Do **not** add `wiki`, `notes`, or `inbox` here — `wiki` is a category tree, not a dated timeline, and it carries no `/tags/` chips. Entry points: `posts`/`read-and-write` in the header nav; `wiki`/`notes`/`inbox` in the footer only.
+- **Search scope** (pagefind index + sitemap + robots-allowed): the `COLLECTION_ORDER` collections **plus `wiki`** (see `SEARCHABLE_COLLECTIONS` in `src/lib/collections.ts`). `notes`, `inbox`, and `specs` are unlisted and must **never** enter the search index or sitemap. The pagefind gate lives in the layouts and keys off `SEARCHABLE_COLLECTIONS`: `PostLayout` gates on it directly; `WikiLayout` marks every non-draft wiki body searchable (wiki ∈ `SEARCHABLE_COLLECTIONS`). The sitemap filter (`astro.config.mjs`) and `robots.txt.ts` exclude `/notes`, `/inbox`, and `/specs`, so `/wiki/` is public by default.
+- **Timeline scope** (home "Recent", the archive, tags, RSS): the `COLLECTION_ORDER` collections plus labs, via `getPublicItems`/`getListItems`. Do **not** add `wiki`, `notes`, `inbox`, or `specs` here — `wiki` is a category tree, not a dated timeline, and it carries no `/tags/` chips. Entry points: `posts`/`read-and-write` in the header nav; `wiki`/`notes`/`specs`/`inbox` in the footer only.
 
 ## Safety
 

@@ -11,6 +11,7 @@ public/read-and-write/
 public/notes/
 public/inbox/
 public/wiki/
+public/specs/
 
 # local-only content (internal/non-public)
 src/content/inbox/2026-h1-kpi.md

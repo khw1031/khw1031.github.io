@@ -1,0 +1,32 @@
+---
+import type { GetStaticPaths, Page } from 'astro';
+import Pagination from '../../components/Pagination.astro';
+import PostList from '../../components/PostList.astro';
+import { Content as Intro } from '../../copy/specs.md';
+import Base from '../../layouts/Base.astro';
+import { COLLECTION_LABELS, type PostListItem, getListItems } from '../../lib/collections';
+
+export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
+  const all = await getListItems('specs');
+  // Child specs (e.g. /specs/foo/bar/ under the hub /specs/foo/) are reachable
+  // from their hub's TOC; only hubs and standalone specs appear in the list.
+  const items = all.filter(
+    (item) => !all.some((other) => other !== item && item.href.startsWith(other.href)),
+  );
+  return paginate(items, { pageSize: 10 });
+};
+
+const { page } = Astro.props as { page: Page<PostListItem> };
+const title = COLLECTION_LABELS.specs;
+---
+
+<Base title={`${title} — thnkr`} description={`${title} — 에이전트 운영 스펙`}>
+  <section class="prose max-w-none">
+    <Intro />
+  </section>
+  <section class="mt-6">
+    <h2 class="font-medium mb-3">{title}</h2>
+    <PostList items={page.data} />
+    <Pagination page={page} />
+  </section>
+</Base>

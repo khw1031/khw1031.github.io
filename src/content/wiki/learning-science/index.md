@@ -6,7 +6,7 @@ description: 학습·기억·전이의 근거가 되는 인지·교육심리학 
 summary: "무엇이 장기 파지와 전이를 만드는가에 대한 인지·교육심리학의 1차 문헌을 모은 카테고리. Bjork의 'desirable difficulties'를 우산 개념으로, 인출 연습·분산 학습·인터리빙 등 개별 원리를 각 레퍼런스 카드로 정리한다."
 lang: ko
 tags: ['learning-science', 'memory', 'cognition', 'education']
-lintHash: '205641c85830'
+lintHash: 'a998516057e2'
 ---
 
 > 한 줄 명제: 습득을 느리게 만드는 조건(인출·간격·인터리빙 등)이 오히려 장기 파지와 전이를 가속한다 — 이것이 학습 과학의 핵심 발견이고, 아래 레퍼런스들은 그 각론이다.
@@ -15,13 +15,16 @@ lintHash: '205641c85830'
 
 ```text
 learning science
-├─ desirable difficulties   — 습득을 늦추는 조건이 파지·전이를 높인다 (우산 개념, Bjork)
-├─ retrieval practice       — 다시 읽기보다 인출이 파지를 만든다 (testing effect)
-├─ spacing                  — 몰아서보다 나눠서가 오래 간다 (distributed practice)
-├─ interleaving             — 섞어 풀면 '전략 고르기'를 학습한다
-├─ self-explanation         — "왜/언제 아닌가"를 설명하면 이해가 깊어진다
-├─ worked examples          — 초기엔 예제 학습이 스키마 형성에 효율적 (cognitive load)
-└─ transfer                 — 표면이 달라도 구조를 옮기는 능력 (near/far transfer)
+├─ desirable difficulties        — 습득을 늦추는 조건이 파지·전이를 높인다 (우산 개념, Bjork)
+├─ retrieval practice            — 다시 읽기보다 인출이 파지를 만든다 (testing effect)
+├─ spacing                       — 몰아서보다 나눠서가 오래 간다 (distributed practice)
+├─ interleaving                  — 섞어 풀면 '전략 고르기'를 학습한다
+├─ handwriting note-taking       — "손으로 쓰면 이해가 깊어진다"는 통속 주장과 재현 실패
+├─ procedural vs conceptual      — '하는 법'과 '왜 되는지'는 다른 지식이지만 위계가 아니라 상호작용
+├─ transfer                      — 표면이 달라도 구조를 옮기는 능력 (near/far transfer)
+├─ icap framework                — 수동<능동<구성<상호작용, 관여 양식이 깊을수록 학습이 커진다
+├─ self-explanation              — "왜/언제 아닌가"를 설명하면 이해가 깊어진다
+└─ worked examples               — 초기엔 예제 학습이 스키마 형성에 효율적 (cognitive load)
 ```
 
 ## 핵심
@@ -34,12 +37,13 @@ learning science
 
 - **self-explanation / elaborative interrogation 심화** — "왜?" 질문의 효과크기와 자기설명 훈련이 실제 과제(수학 등)에 미치는 효과를 다룰 때.
 - **worked example effect / cognitive load** — 초기 스키마 형성 단계에서 예제 학습이 문제풀이보다 효율적인 이유(Sweller)를 정리할 때.
-- **transfer (near/far)** — Barnett & Ceci의 전이 taxonomy와 "메커니즘 이해 vs 새 문제 전이 실패"의 분리를 다룰 때.
 - **expertise & chunking** — 전문가의 빠른 패턴 인식(Chase & Simon 체스 연구)을 학습 목표 속도와 연결할 때.
 
 ## 연결
 
 - [Retrieval Practice](/wiki/learning-science/retrieval-practice/) · [Spacing](/wiki/learning-science/spacing/) · [Interleaving](/wiki/learning-science/interleaving/) — 이 카테고리의 핵심 세 원리.
+- [손글씨 필기 vs 타이핑](/wiki/learning-science/handwriting-note-taking/) · [ICAP Framework](/wiki/learning-science/icap-framework/) · [Transfer](/wiki/learning-science/transfer/) · [Procedural vs Conceptual Knowledge](/wiki/learning-science/procedural-vs-conceptual-knowledge/) — "손으로 쓰면 이해가 깊어진다"는 통속 주장을 검증할 때 함께 보는 네 카드.
+- [Computing Education](/wiki/computing-education/) — 이 원리들을 AI 시대 프로그래밍 교육 맥락에 적용한 실증 카드는 이쪽 카테고리에 있다.
 
 ## 레퍼런스
 

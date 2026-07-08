@@ -16,6 +16,7 @@ export const collections = {
   notes: defineCollection({ loader: glob(md('notes')), schema: baseFrontmatter }),
   inbox: defineCollection({ loader: glob(md('inbox')), schema: baseFrontmatter }),
   wiki: defineCollection({ loader: glob(md('wiki')), schema: wikiSchema }),
+  specs: defineCollection({ loader: glob(md('specs')), schema: baseFrontmatter }),
 };
 
 export { baseFrontmatter };
