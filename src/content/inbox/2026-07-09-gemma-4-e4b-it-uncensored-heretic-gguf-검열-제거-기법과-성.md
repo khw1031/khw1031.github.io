@@ -10,7 +10,8 @@ tags:
   - 'reasoning'
   - 'optimization'
 canonical: 'https://huggingface.co/llmfan46/gemma-4-E4B-it-ultra-uncensored-heretic-GGUF'
-lintHash: '1c99b2c844f9'
+lintHash: 'd4941eb3160d'
+polishHash: 'd4941eb3160d'
 ---
 
 ## TL;DR
@@ -47,7 +48,7 @@ llmfan46/gemma-4-E4B-it-ultra-uncensored-heretic
 
 ## 핵심
 
-이 모델의 핵심은 **abliteration**이라는 사후 기법으로, 이미 학습된 LLM의 weight에서 "거부(refusal)를 유발하는 방향"을 수학적으로 제거한다는 것이다. 구체적으로는 모델의 특정 layer(7~36)에서 attention 출력 projection(`attn.o_proj`)의 weight 행렬을 분석하고, refusal과 상관 높은 방향 벡터를 ablation(제거/무효화)한다. 이 과정에서 원본 모델의 "좋은 동작"(유용한 답변 능력)을 보존하기 위해 `preserve_good_behavior_weight` 파라미터를 사용하고, 과도한 보정을 막기 위해 `overcorrect_relative_weight`를 조절한다.
+==이 모델의 핵심은 abliteration이라는 사후 기법으로, 이미 학습된 LLM의 weight에서 "거부(refusal)를 유발하는 방향"을 수학적으로 제거한다는 것이다.== 구체적으로는 모델의 특정 layer(7~36)에서 attention 출력 projection(`attn.o_proj`)의 weight 행렬을 분석하고, refusal과 상관 높은 방향 벡터를 ablation(제거/무효화)한다. 이 과정에서 원본 모델의 "좋은 동작"(유용한 답변 능력)을 보존하기 위해 `preserve_good_behavior_weight` 파라미터를 사용하고, 과도한 보정을 막기 위해 `overcorrect_relative_weight`를 조절한다.
 
 그 결과, 거부율은 99/100에서 3/100으로 급감했지만, 이는 검열 제거가 "무료"가 아님을 의미한다. PIQA(-0.17%p)와 MMLU(-0.86%p)에서 소폭의 성능 저하가 관측되었고, KL divergence 0.0076은 원본과 매우 가깝지만 완전히 동일하지는 않음을 보여준다. 최종적으로 이 모델은 GGUF 포맷으로 양자화되어 llama.cpp, LM Studio, Ollama 등 로컬 추론 도구에서 바로 사용할 수 있게 배포된다.
 
