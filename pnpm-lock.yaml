@@ -27,9 +27,6 @@ importers:
       '@fontsource/kiwi-maru':
         specifier: ^5.2.8
         version: 5.2.8
-      '@fontsource/nanum-gothic-coding':
-        specifier: ^5.2.8
-        version: 5.2.8
       '@lucide/astro':
         specifier: ^1.22.0
         version: 1.22.0(astro@7.0.4(@astrojs/markdown-remark@7.2.0)(@emnapi/core@1.11.1)(@emnapi/runtime@1.11.1)(@types/node@25.8.0)(jiti@2.7.0)(tsx@4.22.4)(yaml@2.9.0))
@@ -574,9 +571,6 @@ packages:
 
   '@fontsource/kiwi-maru@5.2.8':
     resolution: {integrity: sha512-2ENkh90aXGQDmhClqkrIjDpFJ1BQIuVeVKcYQC7ZYKbUcybBdth8mTAIkEPJsfMKc1RX7S63QMr9B+Bk/FtXjA==}
-
-  '@fontsource/nanum-gothic-coding@5.2.8':
-    resolution: {integrity: sha512-K4bfKS8lSnVvAcGq0mbHKSddxalm+wgmQxhggbmdK/76RRrf72SOWPAWyESuu/m1pXgNmM8ekhuCY7yADBGfqA==}
 
   '@img/colour@1.1.0':
     resolution: {integrity: sha512-Td76q7j57o/tLVdgS746cYARfSyxk8iEfRxewL9h4OMzYhbW4TAcppl0mT4eyqXddh6L/jwoM75mo7ixa/pCeQ==}
@@ -3067,8 +3061,6 @@ snapshots:
   '@fontsource/geist-mono@5.2.8': {}
 
   '@fontsource/kiwi-maru@5.2.8': {}
-
-  '@fontsource/nanum-gothic-coding@5.2.8': {}
 
   '@img/colour@1.1.0':
     optional: true
