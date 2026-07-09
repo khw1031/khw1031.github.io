@@ -1,7 +1,7 @@
 ---
 name: notes-polish
 description: >
-  Batch-polish agent-authored content collections (notes, inbox, specs, wiki) —
+  Batch-polish agent-authored content collections (notes, inbox, specs, wiki, idea) —
   NOT user-authored posts/read-and-write. Two body edits: (1) highlight the
   load-bearing spans with `==마커==`, sparingly; (2) align structure to each
   collection's own charter (hub 통합 + 하위 목차 재구성), deferring to the owning
