@@ -9,7 +9,7 @@ tags:
   - 'open-source'
   - 'assessment'
 canonical: 'https://github.com/withmarbleapp/os-taxonomy'
-lintHash: '5bdf3cf1e9db'
+lintHash: 'f16d936c5185'
 polishHash: 'f16d936c5185'
 ---
 

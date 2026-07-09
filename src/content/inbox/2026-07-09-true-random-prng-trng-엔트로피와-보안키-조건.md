@@ -5,7 +5,7 @@ description: 알고리즘 기반 난수(PRNG/CSPRNG)와 물리 기반 진난수(
 summary: "컴퓨터의 난수는 대부분 결정론적 알고리즘이 만드는 '무작위처럼 보이는' 수열(PRNG)이고, 진짜 무작위(TRNG/QRNG)는 열잡음·양자현상 같은 물리 엔트로피를 채취한 것이다. PRNG의 보안 취약점은 '무차별 시도로 같은 키를 맞힌다'가 아니라 시드 공간이 좁거나(엔트로피 부족) 출력에서 내부 상태를 역산할 수 있어(예: Mersenne Twister는 출력 624개로 상태 복원) 시도 없이 계산으로 뚫린다는 데 있다. CSPRNG는 여전히 결정론적 PRNG지만 역산이 계산적으로 불가능하도록 설계된 것(계산적 안전성)이고, TRNG/QRNG는 값 자체가 존재하지 않는 정보이론적 안전성을 준다. '역산 불가능성'은 안전한 키의 필요조건일 뿐이며 실제 조건은 충분한 엔트로피 + 역산 불가(backward) + 전방 안전성(forward) 세 가지다. LLM 비결정성은 밑단 PRNG 샘플링 + 제거 대상인 부동소수점 지터라서 근본적이지도 균등하지도 효율적이지도 않아 난수 소스로 부적합하다."
 lang: ko
 tags: ['random', 'prng', 'csprng', 'trng', 'qrng', 'entropy', 'cryptography', 'security-key', 'llm']
-lintHash: '26577408cb20'
+lintHash: 'bb7d6a9ab6b4'
 polishHash: 'bb7d6a9ab6b4'
 ---
 

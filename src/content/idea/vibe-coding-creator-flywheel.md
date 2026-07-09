@@ -5,7 +5,7 @@ description: '바이브 코딩 노하우를 발신해 개인 오디언스를 먼
 summary: '"결과물 공유 + 격주 랭킹 커뮤니티"로 시작했던 캡처는 소크라틱 압박 검증에서 순환성 문제에 걸렸다 — 남의 결과물이 "내 영향을 받았다"로 읽히려면 그 인식이 먼저 있어야 하는데, 그건 플라이휠이 이미 돌고 있어야 나오는 산출물이다. 이 노트는 그래서 순서를 뒤집어 Phase 0(개인 콘텐츠·오디언스) → Phase 1(강의 수익화·콜드스타트 공급자 확보) → Phase 2(커뮤니티/쇼케이스)로 재배치하고, JTBD로 오디언스의 수요를 정의하고 Lean Startup으로 각 단계가 의존하는 leap-of-faith 가정을 위험도순으로 나열해 값싼 검증 실험을 설계한다.'
 lang: ko
 tags: [creator-flywheel, vibe-coding, lean-startup, jtbd, personal-brand]
-lintHash: '6390a62482b6'
+lintHash: '675a314408d6'
 polishHash: '675a314408d6'
 ---
 

@@ -11,7 +11,7 @@ tags:
   - 'agentic-coding'
   - 'developer-productivity'
 canonical: 'https://x.com/sexyguy/status/2075188856941605248?s=12'
-lintHash: '32fdcc25efda'
+lintHash: 'd4131b7dd6dd'
 polishHash: 'd4131b7dd6dd'
 ---
 

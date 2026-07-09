@@ -5,7 +5,7 @@ description: 카메라로 사물을 찍어 한글·영어 단어를 수집하고
 summary: 사물을 카메라로 찍어 단어를 수집하고 손글씨로 레벨업하는 포켓몬 도감형 어휘 학습 앱 아이디어를, 이미 더 깊게 발전된 선행 노트(유아 한글수집·iOS+Flutter 네이티브·온디바이스 인식)와 항목별로 대조해 실제 delta(웹 시작·한영 동시·수학·과학 확장)를 좁혀내는 인박스 캡처.
 lang: ko
 tags: [idea-inbox, edtech, gamification, vocabulary, language-learning]
-lintHash: '3c74b96e74af'
+lintHash: '9e93771e2d58'
 polishHash: '9e93771e2d58'
 ---
 
