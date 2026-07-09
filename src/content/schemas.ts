@@ -19,6 +19,10 @@ export const baseFrontmatter = z.object({
   // Body-content hash stamped by the /lint tooling; used to detect when
   // AI-derived fields (description/summary/tags) have gone stale. Not rendered.
   lintHash: z.string().optional(),
+  // Body-content hash stamped by the /notes-polish tooling (agent-authored
+  // collections only); detects when a note's body changed since it was last
+  // polished (highlight + structure). Independent of lintHash. Not rendered.
+  polishHash: z.string().optional(),
 });
 
 export const postSchema = baseFrontmatter;

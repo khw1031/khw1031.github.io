@@ -153,3 +153,8 @@ Give the subagent the values verbatim — it does not analyze content or decide 
 `scripts/hooks/pre-push` runs the checker and blocks the push on frontmatter errors,
 pointing the user to `/lint`. It only *checks* — it never calls a model, so auto-fill
 stays an explicit `/lint` invocation. Enabled via `git config core.hooksPath scripts/hooks`.
+
+The hook also runs the `notes-polish` check first (advisory, non-blocking). For
+agent-authored collections, run `/notes-polish` *before* `/lint`: it mutates note
+bodies (highlight + structure), so lint's body-hash staleness must be re-derived
+after it. `lintHash` and `polishHash` are independent body-only hashes.
