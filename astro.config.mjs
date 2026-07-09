@@ -16,7 +16,12 @@ export default defineConfig({
       filter: (page) => {
         const path = new URL(page).pathname;
         const isPrivate = (base) => path === base || path.startsWith(`${base}/`);
-        return !isPrivate('/notes') && !isPrivate('/inbox') && !isPrivate('/specs');
+        return (
+          !isPrivate('/notes') &&
+          !isPrivate('/inbox') &&
+          !isPrivate('/specs') &&
+          !isPrivate('/idea')
+        );
       },
     }),
   ],

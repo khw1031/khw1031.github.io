@@ -31,6 +31,7 @@
     "@astrojs/sitemap": "^3.7.3",
     "@fontsource/geist-mono": "^5.2.8",
     "@fontsource/kiwi-maru": "^5.2.8",
+    "@fontsource/nanum-gothic-coding": "^5.2.8",
     "@lucide/astro": "^1.22.0",
     "astro": "^7.0.4",
     "expr-eval": "^2.0.2",

@@ -1,0 +1,2 @@
+# Keeps the idea collection dir present on fresh clones. Ideas: {slug}.md (plaintext, committed).
+# /idea is an unlisted route (excluded from search/sitemap/robots) and is NOT linked in the footer.

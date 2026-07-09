@@ -5,12 +5,20 @@
    - Pretendard Variable: Hangul; picked up automatically via fallback.
      The dynamic-subset CSS uses unicode-range so only the needed
      Hangul shards download on first paint.
-   - Geist Mono: code blocks and inline code. */
+   - Geist Mono: code blocks and inline code.
+   - Nanum Gothic Coding: Hangul fallback inside code blocks only.
+     Pretendard is a proportional font, so its Hangul advance width
+     isn't guaranteed to be exactly 2x a Latin monospace cell — that
+     breaks column alignment in ASCII box-drawing diagrams that mix
+     Hangul and box-drawing characters. Nanum Gothic Coding is a true
+     monospace font built with a fixed 2:1 Hangul:Latin width ratio. */
 @import "@fontsource/kiwi-maru/latin-400.css";
 @import "@fontsource/kiwi-maru/latin-500.css";
 @import "@fontsource/geist-mono/400.css";
 @import "@fontsource/geist-mono/500.css";
 @import "@fontsource/geist-mono/600.css";
+@import "@fontsource/nanum-gothic-coding/korean-400.css";
+@import "@fontsource/nanum-gothic-coding/korean-700.css";
 @import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 
 /* Theme colors sourced from src/styles/themes/<name>.itermcolors,
@@ -42,8 +50,8 @@
 
   --font-display: "Kiwi Maru", "Pretendard Variable", ui-sans-serif, system-ui, sans-serif;
   --font-mono:
-    "Geist Mono", "Pretendard Variable", ui-monospace, SFMono-Regular, "SF Mono", Menlo, Monaco,
-    Consolas, monospace;
+    "Geist Mono", "Nanum Gothic Coding", "Pretendard Variable", ui-monospace, SFMono-Regular,
+    "SF Mono", Menlo, Monaco, Consolas, monospace;
 }
 
 @layer base {

@@ -1,0 +1,31 @@
+---
+import PostList from '../../../components/PostList.astro';
+import Base from '../../../layouts/Base.astro';
+import { getListItems } from '../../../lib/collections';
+
+// Idea inbox: lightweight captures authored by the `ideabox` skill. Kept in the
+// same unlisted /idea tree (out of search/sitemap/footer). An item graduates to
+// a developed idea via the `idea` skill, which deletes the inbox source on
+// promotion — so this list is a staging area, not an archive.
+const items = (await getListItems('idea')).filter((item) => item.href.startsWith('/idea/inbox/'));
+---
+
+<Base title="Idea Inbox — thnkr" description="Idea 인박스 — 가볍게 정리한 후보">
+  <section class="mt-2">
+    <p class="not-prose mb-1 text-sm text-muted">
+      <a href="/idea/" class="underline underline-offset-2 hover:text-foreground">← Idea</a>
+    </p>
+    <h2 class="font-medium mb-1">Idea Inbox</h2>
+    <p class="not-prose mb-6 text-sm text-muted">
+      가볍게 정리한 아이디어 후보 — 요약, 더 해볼 질문, 관련·서비스 레퍼런스. 발전시키면 노트로
+      승격되고 여기서는 사라집니다.
+    </p>
+    {
+      items.length > 0 ? (
+        <PostList items={items} />
+      ) : (
+        <p class="text-sm text-muted">인박스가 비어 있습니다.</p>
+      )
+    }
+  </section>
+</Base>

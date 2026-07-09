@@ -1,0 +1,35 @@
+---
+import PostList from '../../components/PostList.astro';
+import Base from '../../layouts/Base.astro';
+import { getListItems } from '../../lib/collections';
+
+// Unlisted TOC for /idea (reachable by direct URL; excluded from search, sitemap,
+// and the footer). Inbox captures live under /idea/inbox/ with their own TOC, so
+// the main list shows developed ideas only. Hub children are collapsed the same
+// way the notes list does it — only hubs and standalone ideas appear here.
+const all = await getListItems('idea');
+const developed = all.filter((item) => !item.href.startsWith('/idea/inbox/'));
+const ideas = developed.filter(
+  (item) => !developed.some((other) => other !== item && item.href.startsWith(other.href)),
+);
+const inboxCount = all.length - developed.length;
+---
+
+<Base title="Idea — thnkr" description="Idea — 아이디어 개발 노트">
+  <section class="mt-2">
+    <h2 class="font-medium mb-1">Idea</h2>
+    <p class="not-prose mb-6 text-sm text-muted">
+      아이디어를 방법론과 근거로 발전시킨 노트. 가볍게 정리 중인 후보는{' '}
+      <a href="/idea/inbox/" class="underline underline-offset-2 hover:text-foreground"
+        >인박스</a
+      >{inboxCount > 0 && <span> ({inboxCount})</span>}에 쌓입니다.
+    </p>
+    {
+      ideas.length > 0 ? (
+        <PostList items={ideas} />
+      ) : (
+        <p class="text-sm text-muted">아직 발전된 아이디어가 없습니다.</p>
+      )
+    }
+  </section>
+</Base>

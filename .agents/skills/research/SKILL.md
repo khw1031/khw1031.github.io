@@ -66,7 +66,7 @@ wiki/
    - 없으면 새 카테고리 디렉토리 + `index.md` 허브를 만든다(고아 문서 금지).
 4. **Write OKF doc** — 아래 템플릿. §핵심은 **산문**(키워드 덤프 금지, 사용자가 읽고 이해 가능해야 함).
 5. **하이브리드 밀도** — 카테고리 `index.md`는 "큰 그림 맵" 허브, leaf는 lean 카드. 학습 대상이 되면
-   note-writer 전체 템플릿(큰 그림/깊이/비유/인출 질문/내 관점)으로 승격한다.
+   note-promoter 전체 템플릿(큰 그림/깊이/비유/인출 질문/내 관점)으로 승격한다.
 6. **Verify** — `/lint` 스킬로 frontmatter 무결성을 확인한다. (선택) 카테고리 `log.md`에 변경을 남긴다.
 
 ## Doc template
@@ -119,6 +119,6 @@ tags: [...]
 ## Boundary
 
 - `src/content/wiki/` 아래에만 쓴다. 컬렉션 설정·라우팅·목록 코드는 이 스킬이 수정하지 않는다.
-- notes(unlisted 개인 학습, note-writer)와 구분한다. 개인 학습 노트는 note-writer로, 공개 레퍼런스
+- notes(unlisted 개인 학습, note-promoter)와 구분한다. 개인 학습 노트는 note-promoter로, 공개 레퍼런스
   라이브러리는 research로 간다.
 - 비밀값·내부 URL·비공개 데이터를 위키에 넣지 않는다(위키는 공개·검색 가능).

@@ -14,7 +14,8 @@
  *
  * Warning-only: this NEVER blocks a push (always exit 0). The pre-push hook runs
  * it for an advisory before the frontmatter check; the actual polish is an
- * explicit /notes-polish invocation, run before /lint.
+ * explicit /notes-polish invocation (scoped by note-promoter at promotion, or a
+ * manual batch); it is independent of /lint.
  *
  * Usage:
  *   tsx scripts/check-notes-polish.ts          # human report, exit 0
@@ -147,7 +148,7 @@ function main(): void {
     process.stdout.write(`  ${r.file} (${r.reason})\n`);
   }
   process.stdout.write(
-    '\nRun /notes-polish to highlight key content and align structure (before /lint).\n',
+    '\nRun /notes-polish to highlight key content and align structure.\n',
   );
   process.exit(0);
 }

@@ -2,7 +2,14 @@ import { type CollectionEntry, getCollection } from 'astro:content';
 import { getLabItems } from './labs';
 import { readingTime } from './reading-time';
 
-export type ListableCollection = 'posts' | 'read-and-write' | 'notes' | 'inbox' | 'wiki' | 'specs';
+export type ListableCollection =
+  | 'posts'
+  | 'read-and-write'
+  | 'notes'
+  | 'inbox'
+  | 'wiki'
+  | 'specs'
+  | 'idea';
 
 export interface PostListItem {
   href: string;
@@ -27,6 +34,7 @@ export const COLLECTION_LABELS: Record<ListableCollection, string> = {
   inbox: 'Inbox',
   wiki: 'Wiki',
   specs: 'Specs',
+  idea: 'Idea',
 };
 
 // Timeline scope: home "Recent", the archive, tags, and RSS. Kept to the

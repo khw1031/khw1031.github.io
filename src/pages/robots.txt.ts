@@ -6,7 +6,12 @@ export function GET(context: APIContext): Response {
   const siteUrl = (context.site ?? new URL('https://khw1031.github.io/')).toString();
   const sitemap = new URL('sitemap-index.xml', siteUrl).toString();
 
-  const disallowed = ['Disallow: /notes/', 'Disallow: /inbox/', 'Disallow: /specs/'];
+  const disallowed = [
+    'Disallow: /notes/',
+    'Disallow: /inbox/',
+    'Disallow: /specs/',
+    'Disallow: /idea/',
+  ];
   const block = (ua: string): string[] => [`User-agent: ${ua}`, 'Allow: /', ...disallowed, ''];
   const lines = [
     ...block('*'),

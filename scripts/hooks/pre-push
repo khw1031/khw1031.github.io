@@ -5,7 +5,7 @@
 # Enable once per clone:  git config core.hooksPath scripts/hooks
 
 # Advisory only (never blocks): flags agent-authored notes whose body changed
-# since their last /notes-polish pass. Run /notes-polish (then /lint) to refresh.
+# since their last /notes-polish pass. Run /notes-polish to refresh.
 echo "pre-push: checking agent-authored content polish…"
 npx tsx scripts/check-notes-polish.ts || true
 
