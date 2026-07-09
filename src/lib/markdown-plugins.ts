@@ -47,7 +47,10 @@ function stripLeadingHash(heading: { children?: unknown }): void {
 }
 
 export const remarkPlugins: PluggableList = [
-  remarkGfm,
+  // singleTilde: false — GFM strikethrough only via `~~...~~`. A single
+  // `~` is kept literal, so Korean range notation (`8~12배`, `140만~160만`)
+  // no longer pairs up into accidental strikethrough within a block.
+  [remarkGfm, { singleTilde: false }],
   // Make CommonMark emphasis flanking rules CJK-aware so patterns like
   // `**강조**조사` or `**"…"**라는` (closing ** after punctuation, before a
   // Korean letter) parse as emphasis instead of rendering as literal `**`.
