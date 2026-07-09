@@ -21,7 +21,10 @@ const fullOgImage = ogImage ? new URL(ogImage, Astro.site).toString() : null;
 <html lang="ko">
   <head>
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover"
+    />
     <meta name="generator" content={Astro.generator} />
 
     <title>{title}</title>
@@ -43,6 +46,17 @@ const fullOgImage = ogImage ? new URL(ogImage, Astro.site).toString() : null;
     <link rel="alternate" type="application/rss+xml" title="thnkr" href="/rss.xml" />
 
     {jsonLd && <JsonLd data={jsonLd} />}
+
+    <script>
+      // iOS Safari restores a suspended page snapshot (bfcache) instead of
+      // re-fetching when reopening from a home-screen bookmark — force a
+      // real reload so newly published content isn't stuck showing stale.
+      window.addEventListener('pageshow', (event) => {
+        if (event.persisted) {
+          location.reload();
+        }
+      });
+    </script>
   </head>
   <body class="min-h-dvh flex flex-col">
     <Header />
