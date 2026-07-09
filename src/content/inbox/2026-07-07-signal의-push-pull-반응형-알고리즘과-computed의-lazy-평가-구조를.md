@@ -1,6 +1,6 @@
 ---
 title: 'Signal의 push-pull 반응형 알고리즘과 computed의 lazy 평가 구조를 해부한 학습용 리포트'
-pubDate: '2026-07-07'
+pubDate: '2026-07-08'
 description: 'Signal의 push-pull 기반 반응형 알고리즘 내부 구조와 computed의 lazy 평가 매커니즘을 자세히 설명한다'
 summary: 'Signal이 push(알림 전파)와 pull(지연 재평가)을 결합해 의존성 그래프에서 불필요한 계산을 줄이는 fine-grained reactivity 구조를, 알고리즘 흐름과 구현 원리 단계로 정리했다.'
 lang: ko

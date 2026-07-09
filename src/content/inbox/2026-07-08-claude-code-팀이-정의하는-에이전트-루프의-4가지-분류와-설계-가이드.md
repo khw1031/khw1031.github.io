@@ -1,6 +1,6 @@
 ---
 title: 'Claude Code 팀이 정의하는 에이전트 루프의 4가지 분류와 설계 가이드'
-pubDate: '2026-07-08'
+pubDate: '2026-07-09'
 description: 'Claude Code 팀이 루프를 trigger·stop·primitive·task type 4가지 기준으로 분류하고 각 유형별 사용 시점을 설명한 가이드.'
 summary: '에이전트 루프를 ''반복 작업 사이클 + 종료 조건''으로 정의하고, 4가지 분류 기준에 따라 Turn-based, Goal-based, Time-based, Proactive 루프를 구분하는 법을 다룬다.'
 lang: ko

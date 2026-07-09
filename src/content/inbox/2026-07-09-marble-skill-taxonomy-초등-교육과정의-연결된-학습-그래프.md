@@ -1,6 +1,6 @@
 ---
 title: 'Marble Skill Taxonomy: 초등 교육과정의 연결된 학습 그래프'
-pubDate: '2026-07-09'
+pubDate: '2026-07-10'
 description: '1590개 micro-topic과 3221개 선행학습 엣지로 구성된 초등 교육과정 오픈소스 택소노미 데이터셋 구조와 활용법 정리'
 summary: 'Marble이 공개한 초등 교육과정 연결 그래프 데이터셋의 구조(노드·엣지·표준 정렬)와 다중 라이선스 체계를 한눈에 파악할 수 있다.'
 lang: ko

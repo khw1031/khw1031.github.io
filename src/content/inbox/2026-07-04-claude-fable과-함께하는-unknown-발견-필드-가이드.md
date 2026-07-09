@@ -1,6 +1,6 @@
 ---
 title: 'Claude Fable과 함께하는 Unknown 발견 필드 가이드'
-pubDate: '2026-07-04'
+pubDate: '2026-07-05'
 description: 'Claude Fable 5 협업 시 unknown을 4가지 사분면으로 분류하고 pre/during/post 구현 단계별 발견 기법을 정리한 실무 가이드'
 summary: 'Map(프롬프트)과 Territory(코드베이스)의 간극을 unknown으로 정의하고, blind spot pass·프로토타입·인터뷰·퀴즈 등 단계별 기법으로 unknown을 저렴하게 해소하는 방법론을 다룬다.'
 lang: ko
