@@ -11,11 +11,12 @@ tags:
   - 'llm'
   - 'workflow'
 canonical: 'https://x.com/trq212/status/2073100352921215386?s=46'
-lintHash: '403643f4efd5'
+lintHash: 'b62a97b4ff37'
+polishHash: 'b62a97b4ff37'
 ---
 
 ## TL;DR
-- (저자 주장) Claude Fable 5 수준의 모델에서는 작업 품질의 병목이 모델 능력이 아니라 **사용자가 자신의 unknown을 얼마나 빨리·싸게 발견하느냐**에 달려 있다.
+- (저자 주장) Claude Fable 5 수준의 모델에서는 작업 품질의 병목이 모델 능력이 아니라 ==**사용자가 자신의 unknown을 얼마나 빨리·싸게 발견하느냐**==에 달려 있다.
 
 ## 큰 그림
 
@@ -54,7 +55,7 @@ lintHash: '403643f4efd5'
 
 ## 핵심
 
-Thariq은 Claude Fable 5와 작업하며 **"지도(map)는 영토(territory)가 아니다"**라는 오래된 교훈을 반복적으로 체득했다고 말한다. 여기서 지도는 사용자가 모델에게 주는 프롬프트·스킬·컨텍스트이고, 영토는 실제 코드베이스와 그 제약이다. 이 둘 사이의 간극이 곧 **unknown**이며, 모델은 unknown을 마주할 때마다 최선의 추측으로 결정해야 한다.
+Thariq은 Claude Fable 5와 작업하며 **"지도(map)는 영토(territory)가 아니다"**라는 오래된 교훈을 반복적으로 체득했다고 말한다. 여기서 지도는 사용자가 모델에게 주는 프롬프트·스킬·컨텍스트이고, 영토는 실제 코드베이스와 그 제약이다. ==이 둘 사이의 간극이 곧 **unknown**이며==, 모델은 unknown을 마주할 때마다 최선의 추측으로 결정해야 한다.
 
 이 unknown은 단일 차원이 아니다. 저자는 Donald Rumsfeld의 프레임워크에서 차용한 **4가지 사분면**으로 분류한다. Known Knowns는 프롬프트에 명시적으로 적는 내용이고, Known Unknowns는 아직 답을 찾지 못했지만 존재를 아는 질문들이다. Unknown Knowns는 "당연해서" 적지 않지만 보면 알 수 있는 기준들이며, Unknown Unknowns는 아예 존재를 모르는 맹점이다.
 

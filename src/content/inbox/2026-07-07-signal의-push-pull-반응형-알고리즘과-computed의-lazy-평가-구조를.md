@@ -9,7 +9,8 @@ tags:
   - 'signals'
   - 'reactivity'
 canonical: 'https://willybrauner.com/journal/signal-the-push-pull-based-algorithm'
-lintHash: 'f91e345ee7fd'
+lintHash: '13b51028b662'
+polishHash: '13b51028b662'
 ---
 
 ## TL;DR
@@ -55,7 +56,7 @@ lintHash: 'f91e345ee7fd'
 ```
 
 ## 핵심
-Signal 기반 반응형 시스템은 하나의 의존성 그래프로 작동한다. 개발자가 `y = f(x)` 같은 규칙을 정의하면, 프로그램은 이 관계를 고정된 세계의 법칙으로 삼고 실행 시간 내내 유지한다. 여기서 핵심은 변경 전파가 두 단계로 나뉜다는 점이다. Signal이 `set()`으로 값을 바꾸면, 이는 즉각적으로 자신의 모든 subscriber에게 "내가 변경되었다"는 알림만 **push**한다. 이때 실제 값이 전송되는 것이 아니라 캐시 무효화 신호가 전달되는 것이 핵심이다. 알림을 받은 computed는 즉시 재계산하지 않고 `dirty = true`로 자신을 무효화 표시만 한 채 대기한다. 그러다가 누군가 해당 computed의 `value`를 **read**하는 시점에야 비로소 자신의 의존성을 따라 올라가며 재계산을 수행하는 **pull**이 발생한다. 이 두 메커니즘이 결합되어, 변경의 영향권에만 정확히 계산이 집중되는 fine-grained reactivity가 구현된다.
+Signal 기반 반응형 시스템은 하나의 의존성 그래프로 작동한다. 개발자가 `y = f(x)` 같은 규칙을 정의하면, 프로그램은 이 관계를 고정된 세계의 법칙으로 삼고 실행 시간 내내 유지한다. 여기서 핵심은 변경 전파가 두 단계로 나뉜다는 점이다. Signal이 `set()`으로 값을 바꾸면, 이는 즉각적으로 자신의 모든 subscriber에게 "내가 변경되었다"는 알림만 **push**한다. ==이때 실제 값이 전송되는 것이 아니라 캐시 무효화 신호가 전달되는 것이 핵심이다.== 알림을 받은 computed는 즉시 재계산하지 않고 `dirty = true`로 자신을 무효화 표시만 한 채 대기한다. 그러다가 누군가 해당 computed의 `value`를 **read**하는 시점에야 비로소 자신의 의존성을 따라 올라가며 재계산을 수행하는 **pull**이 발생한다. ==이 두 메커니즘이 결합되어, 변경의 영향권에만 정확히 계산이 집중되는 fine-grained reactivity가 구현된다.==
 
 ## 깊이
 - **[Signal-Push] 알림은 값이 아닌 "변경 사실"이다**  

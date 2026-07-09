@@ -6,7 +6,8 @@ description: 학습·기억·전이의 근거가 되는 인지·교육심리학 
 summary: "무엇이 장기 파지와 전이를 만드는가에 대한 인지·교육심리학의 1차 문헌을 모은 카테고리. Bjork의 'desirable difficulties'를 우산 개념으로, 인출 연습·분산 학습·인터리빙 등 개별 원리를 각 레퍼런스 카드로 정리한다."
 lang: ko
 tags: ['learning-science', 'memory', 'cognition', 'education']
-lintHash: 'eee78adc27be'
+lintHash: '20ef412f2144'
+polishHash: '20ef412f2144'
 ---
 
 > 한 줄 명제: 습득을 느리게 만드는 조건(인출·간격·인터리빙 등)이 오히려 장기 파지와 전이를 가속한다 — 이것이 학습 과학의 핵심 발견이고, 아래 레퍼런스들은 그 각론이다.
@@ -31,7 +32,7 @@ learning science
 
 ## 핵심
 
-학습 과학의 실무 결론은 대체로 하나로 수렴한다: **다시 읽기·형광펜 같은 "쉬운" 공부는 숙달 착각을 만들고, 인출·분산·인터리빙 같은 "어려운" 공부가 오래 남는다.** Dunlosky 등(2013)의 종합 리뷰는 열 가지 학습 기법을 효용순으로 평가하면서 practice testing(인출)과 distributed practice(간격)를 최상위(high utility)에, 재읽기·요약·형광펜을 하위(low utility)에 두었다. Bjork는 이 현상들을 "desirable difficulties"라는 우산 아래 묶어, 노력이 파지의 대가라고 정리한다.
+==학습 과학의 실무 결론은 대체로 하나로 수렴한다: **다시 읽기·형광펜 같은 "쉬운" 공부는 숙달 착각을 만들고, 인출·분산·인터리빙 같은 "어려운" 공부가 오래 남는다.**== ==Dunlosky 등(2013)의 종합 리뷰는 열 가지 학습 기법을 효용순으로 평가하면서 practice testing(인출)과 distributed practice(간격)를 최상위(high utility)에, 재읽기·요약·형광펜을 하위(low utility)에 두었다.== Bjork는 이 현상들을 "desirable difficulties"라는 우산 아래 묶어, 노력이 파지의 대가라고 정리한다.
 
 이 카테고리의 각 레퍼런스 카드는 하나의 원리를 1차 출처와 함께 담는다. 위 목차(상단 하위 문서)에서 개별 원리로 들어가면 정의·근거·핵심 결과를 볼 수 있다.
 

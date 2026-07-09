@@ -10,11 +10,12 @@ tags:
   - 'developer-productivity'
   - 'open-source'
 canonical: 'https://github.com/nicobailon/pi-subagents'
-lintHash: 'b96c24cd313c'
+lintHash: 'c9d0be585f09'
+polishHash: 'c9d0be585f09'
 ---
 
 ## TL;DR
-- pi-subagents는 Pi 코딩 에이전트가 전문화된 자식 세션(서브에이전트)에게 작업을 위임·병렬화·체인화할 수 있게 하는 확장이다.
+- ==pi-subagents는 Pi 코딩 에이전트가 전문화된 자식 세션(서브에이전트)에게 작업을 위임·병렬화·체인화할 수 있게 하는 확장이다.==
 
 ## 큰 그림
 
@@ -68,7 +69,7 @@ pi-subagents는 Pi 에이전트(부모 세션)가 **전문 자식 Pi 세션**을
 
 실행 모드는 크게 **Single**(단일 에이전트), **Parallel**(동시 다수), **Chain**(순차+병렬 조합) 세 가지이며, 각각 foreground(실시간 스트리밍) 또는 background(비동기, `--bg`)로 실행할 수 있다. Background 실행 시 `wait` tool로 완료를 기다리며, 완료 시 알림과 아티팩트가 생성된다.
 
-내장 에이전트는 역할별로 분리되어 있다: 코드 정찰(`scout`), 외부 조사(`researcher`), 계획 수립(`planner`), 구현(`worker`), 리뷰(`reviewer`), 맥락 구축(`context-builder`), 방향 검토(`oracle`), 일반 위임(`delegate`). 각 에이전트는 독립된 시스템 프롬프트와 도구 허용 목록을 가지며, 기본적으로 부모의 전체 프롬프트를 상속하지 않는다(**의도적으로 좁게 설계**).
+내장 에이전트는 역할별로 분리되어 있다: 코드 정찰(`scout`), 외부 조사(`researcher`), 계획 수립(`planner`), 구현(`worker`), 리뷰(`reviewer`), 맥락 구축(`context-builder`), 방향 검토(`oracle`), 일반 위임(`delegate`). 각 에이전트는 독립된 시스템 프롬프트와 도구 허용 목록을 가지며, ==기본적으로 부모의 전체 프롬프트를 상속하지 않는다==(**의도적으로 좁게 설계**).
 
 자식 에이전트는 기본적으로 `subagent` tool을 받지 못해 **재귀적 위임이 차단**되며, 명시적으로 `tools: subagent`를 선언한 에이전트만 `maxSubagentDepth` 제한 내에서 팬아웃(fan-out)할 수 있다. 이 child-safety 경계는 fork된 자식 컨텍스트에서도 부모 전용 아티팩트를 필터링하여 강제된다.
 

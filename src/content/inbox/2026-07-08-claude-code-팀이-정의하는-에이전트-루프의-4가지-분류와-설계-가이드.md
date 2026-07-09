@@ -11,7 +11,8 @@ tags:
   - 'developer-productivity'
   - 'prompting'
 canonical: 'https://x.com/claudedevs/status/2074208949205881033?s=12'
-lintHash: '2abf2f09ffb7'
+lintHash: '15d8dec58fd8'
+polishHash: '15d8dec58fd8'
 ---
 
 ## TL;DR
@@ -56,13 +57,13 @@ lintHash: '2abf2f09ffb7'
 
 ## 핵심
 
-Claude Code 팀은 "루프 설계(designing loops)"를 프롬프트 엔지니어링의 다음 단계로 제시한다. 그들의 정의에 따르면 루프란 **에이전트가 종료 조건(stop condition)을 만족할 때까지 작업 사이클을 반복하는 것**이다. 이때 루프는 단일 개념이 아니라 **4가지 독립 기준** — 어떻게 시작되는가(trigger), 어떻게 끝나는가(stop), 어떤 Claude Code primitive를 사용하는가, 어떤 작업 유형에 맞는가 — 에 따라 분류되며, 이 기준들의 조합이 4가지 루프 유형(Turn-based, Goal-based, Time-based, Proactive)을 만들어낸다.
+Claude Code 팀은 "루프 설계(designing loops)"를 프롬프트 엔지니어링의 다음 단계로 제시한다. ==그들의 정의에 따르면 루프란 **에이전트가 종료 조건(stop condition)을 만족할 때까지 작업 사이클을 반복하는 것**이다.== 이때 루프는 단일 개념이 아니라 **4가지 독립 기준** — 어떻게 시작되는가(trigger), 어떻게 끝나는가(stop), 어떤 Claude Code primitive를 사용하는가, 어떤 작업 유형에 맞는가 — 에 따라 분류되며, 이 기준들의 조합이 4가지 루프 유형(Turn-based, Goal-based, Time-based, Proactive)을 만들어낸다.
 
 가장 기본인 **Turn-based 루프**는 사용자가 프롬프트를 보내면 에이전트가 컨텍스트 수집 → 실행 → 검증 → 응답하는 "agentic loop"를 한 바퀴 도는 구조다. 여기서 Claude가 스스로 "완료됐다"고 판단하면 멈춘다. 이 루프의 한계는 **무엇이 "충분히 좋은" 결과인지를 Claude가 스스로 결정**해야 한다는 점인데, 이를 보완하는 것이 **Goal-based 루프(/goal)** 이다. /goal은 성공 기준을 명시적으로 정의하고, Claude가 멈추려 할 때마다 **evaluator 모델**이 조건을 점검하여 미달이면 다시 작업하게 보낸다. 테스트 통과 수, 점수 임계값 같은 **결정론적(deterministic) 기준**이 특히 효과적이다.
 
 반복적이지만 입력만 달라지는 작업(예: 매일 Slack 요약, PR 리뷰 대응)에는 **Time-based 루프(/loop, /schedule)** 가 적합하다. /loop은 로컬에서 일정 간격으로 재실행하고, /schedule은 클라우드로 옮겨 지속 실행한다. 마지막으로 **Proactive 루프**는 위 primitive들을 조합하여 **사람 없이도** 돌아가는 장기 자동화 파이프라인을 만든다. 예를 들어 /schedule로 버그 리포트를 정기 수집 → /goal로 완료 조건 설정 → dynamic workflows로 트리아지·수정·리뷰 에이전트를 오케스트레이션 → auto mode로 권한 승인 없이 전자동化する 식이다.
 
-저자는 "모든 작업에 복잡한 루프가 필요한 것은 아니며, 가장 단순한 해결책부터 시작해 선택적으로 패턴을 적용하라"고 강조한다.
+==저자는 "모든 작업에 복잡한 루프가 필요한 것은 아니며, 가장 단순한 해결책부터 시작해 선택적으로 패턴을 적용하라"고 강조한다.==
 
 ## 깊이
 

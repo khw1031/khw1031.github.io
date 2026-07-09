@@ -11,11 +11,12 @@ tags:
   - 'prompting'
   - 'api'
 canonical: 'https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool'
-lintHash: 'fe6501191953'
+lintHash: '32ffe5009d03'
+polishHash: '32ffe5009d03'
 ---
 
 ## TL;DR
-- Anthropic의 Advisor Tool(베타)은 저렴한 executor 모델이 고지능 advisor 모델에게 생성 중간에 전략적 조언을 요청하는 "2단 추론" 패턴으로, 장기 에이전트 작업에서 advisor 단독 사용에 가까운 품질을 executor 요금으로 대부분 생성하면서 비용을 절감한다(저자 주장).
+- Anthropic의 Advisor Tool(베타)은 ==저렴한 executor 모델이 고지능 advisor 모델에게 생성 중간에 전략적 조언을 요청하는 "2단 추론" 패턴==으로, 장기 에이전트 작업에서 ==advisor 단독 사용에 가까운 품질을 executor 요금으로 대부분 생성하면서 비용을 절감한다==(저자 주장).
 
 ## 큰 그림
 
@@ -65,7 +66,7 @@ lintHash: 'fe6501191953'
 ```
 
 ## 핵심
-- Advisor Tool은 단일 API 요청 안에서 executor가 생성 중 특정 시점에 advisor를 호출하면, 서버가 자동으로 전체 대화 기록을 advisor에게 전달하여 별도 추론을 수행하고 그 결과 텍스트를 executor에게 다시 주입한다. 개발자는 추가 라운드트립 없이 한 번의 `/v1/messages` 호출로 이 모든 흐름을 얻는다(사실 — 문서 기준).
+- Advisor Tool은 단일 API 요청 안에서 executor가 생성 중 특정 시점에 advisor를 호출하면, 서버가 자동으로 전체 대화 기록을 advisor에게 전달하여 별도 추론을 수행하고 그 결과 텍스트를 executor에게 다시 주입한다. ==개발자는 추가 라운드트립 없이 한 번의 `/v1/messages` 호출로 이 모든 흐름을 얻는다==(사실 — 문서 기준).
 - 이 패턴의 경제적 논리는 "대부분의 토큰 생성은 executor의 저렴한 요금으로 수행하고, 계획·수정 같은 고품질 판단만 advisor의 높은 요금으로 수행한다"는 것이다. 문서에 따르면 advisor 출력은 전형적으로 400~700 텍스트 토큰(사고 포함 총 1,400~1,800 토큰) 수준이므로, 최종 출력 전체를 advisor가 만드는 것보다 비용이 낮다(저자 주장 — 수치 근거 제시).
 - Advisor 호출 타이밍은 executor 모델이 스스로 판단하지만, Anthropic은 코딩 에이전트 작업에서 "초기 설계 단계 1회 + 완료 직전 1회 + 난관 시 추가 호출" 패턴을 권장하며 이를 유도하는 system prompt 예시를 제공한다(저자 주장).
 - 비용 제어는 세 층위에서 이루어진다: ①요청 단위 `max_uses` 캡, ②호출 단위 `max_tokens` 캡(최소 1024), ③대화 단위 클라이언트 측 카운팅 후 도구 제거. 대화 단위 제거 시 `advisor_tool_result` 블록도 함께 제거해야 400 오류를 피할 수 있다(사실 — API 스펙).

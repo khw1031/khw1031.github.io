@@ -11,11 +11,12 @@ tags:
   - 'workflow'
   - 'reasoning'
 canonical: 'https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5'
-lintHash: '481b0e00e679'
+lintHash: '7495c67b4a01'
+polishHash: '7495c67b4a01'
 ---
 
 ## TL;DR
-- Claude Fable 5는 시간 단위~주 단위의 복잡한 자율 작업에 특화되어 있으며, **effort 레벨 조정 · 간결한 지시 · 비동기 서브에이전트 · 외부 메모리 시스템** 네 가지가 핵심 프롬프팅 축이다.
+- Claude Fable 5는 시간 단위~주 단위의 복잡한 자율 작업에 특화되어 있으며, ==**effort 레벨 조정 · 간결한 지시 · 비동기 서브에이전트 · 외부 메모리 시스템**== 네 가지가 핵심 프롬프팅 축이다.
 
 ## 큰 그림
 
@@ -62,7 +63,7 @@ Effort 레벨은 이 모델에서 intelligence, latency, cost 세 가지 축을 
 
 - **[Instruction Following — 간결함의 효과]** 원문은 "짧은 간결성 지시(brevity instruction)가 각 패턴을 열거하는 것만큼 효과적"이라고 **주장**한다. 예시로 제시된 프롬프트는 "Be concise. No narration of obvious steps." 정도로 단순하다. 이는 모델의 지시 이해력이 향상되어 **메타 지시(스타일에 대한 지시) 하나로 여러 구체적 행동을 통제**할 수 있음을 시사한다.
 
-- **[프롬프팅 — 진행 입증(Ground progress claims)]** 장기 자율 실행에서 Anthropic의 테스트 결과, "실제 도구 결과를 기준으로 진행 상황을 감사하라"는 지시가 **진행 상태 보고 날조를 거의 제거했다**고 원문은 **주장**한다. 이는 LLM의 환각(hallucination)이 장기 작업에서 특히 위험할 수 있으며, 외부 도구 결과를 '앵커'로 활용하는 것이 효과적인 방어책임을 보여준다.
+- **[프롬프팅 — 진행 입증(Ground progress claims)]** 장기 자율 실행에서 Anthropic의 테스트 결과, "실제 도구 결과를 기준으로 진행 상황을 감사하라"는 지시가 ==**진행 상태 보고 날조를 거의 제거했다**==고 원문은 **주장**한다. 이는 LLM의 환각(hallucination)이 장기 작업에서 특히 위험할 수 있으며, 외부 도구 결과를 '앵커'로 활용하는 것이 효과적인 방어책임을 보여준다.
 
 - **[서브에이전트 — 비동기·장기 운용]** Claude Fable 5는 이전 모델보다 병렬 서브에이전트를 더 적극적으로 생성하며, **비동기 통신**을 선호한다고 원문은 설명한다. 또한 **장기 서브에이전트(long-lived subagents)** 는 하위 작업 간 컨텍스트를 유지하여 cache read를 통해 시간과 비용을 절감하고, 가장 느린 서브에이전트에 의한 병목을 피할 수 있다고 **주장**한다. → 오케스트레이터는 각 서브에이전트의 반환을 blocking하며 기다리기보다 비동기로 통신하는 구조가 권장된다.
 
