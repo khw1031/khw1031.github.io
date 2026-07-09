@@ -12,6 +12,7 @@ tags:
   - 'developer-productivity'
 canonical: 'https://x.com/sexyguy/status/2075188856941605248?s=12'
 lintHash: '32fdcc25efda'
+polishHash: 'd4131b7dd6dd'
 ---
 
 ## TL;DR
@@ -41,7 +42,7 @@ AI 코딩 디자인 일관성 워크플로
 ```
 
 ## 핵심
-- 저자의 **주장**에 따르면, AI 코딩 도구(Cursor, Claude Code 등)에게 UI 스타일을 자연어로 설명하는 것보다 **DESIGN.md 파일**을 프로젝트에 넣고 참조하도록 지시하는 것이 결과물의 일관성을 훨씬 더 안정적으로 만든다.
+- ==저자의 **주장**에 따르면, AI 코딩 도구(Cursor, Claude Code 등)에게 UI 스타일을 자연어로 설명하는 것보다 **DESIGN.md 파일**을 프로젝트에 넣고 참조하도록 지시하는 것이 결과물의 일관성을 훨씬 더 안정적으로 만든다.==
 - DESIGN.md는 색상·타이포·간격·컴포넌트 패턴을 AI가 파싱 가능한 마크다운 형태로 구조화한 파일로, AI 도구에게는 사실상 **디자인 시스템의 최소 스펙** 역할을 한다.
 - 다섯 가지 소스는 크게 (1) 실제 서비스에서 추출한 DESIGN.md 컬렉션, (2) 커뮤니티 기반 마켓·플랫폼, (3) Google Labs의 독립적 UI 생성 툴로 분류된다.
 

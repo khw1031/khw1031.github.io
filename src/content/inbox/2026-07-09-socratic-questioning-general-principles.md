@@ -6,6 +6,7 @@ summary: "소크라테스식 질문법은 결론을 '주입'하는 것이 아니
 lang: ko
 tags: ['socratic-method', 'critical-thinking', 'questioning', 'cbt', 'legal-education', 'philosophy']
 lintHash: '55333d3a8527'
+polishHash: '55333d3a8527'
 ---
 
 > 한 줄 명제: 소크라테스식 질문법은 지식을 상대에게 "부어 넣는" 것이 아니라, 상대가 이미 갖고 있는 전제로부터 스스로 모순 또는 새 이해를 발견하도록 규율된 질문으로 이끄는 기술이다. 이 하나의 엔진이 철학적 대화, 비판적 사고 교육, 법학, 심리치료, 코칭에서 표면만 바꿔 반복된다.

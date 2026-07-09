@@ -6,6 +6,7 @@ summary: '오프라인 모임을 열고 싶지만 장소 섭외·초대장·구�
 lang: ko
 tags: [idea-inbox, marketplace, events, outsourcing, operations]
 lintHash: '9d39e114f66d'
+polishHash: '9d39e114f66d'
 ---
 
 ## 아이디어

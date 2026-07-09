@@ -6,6 +6,7 @@ summary: 'Instagram/Litt.ly로 유입돼 카톡 상담으로 넘어가는 소상
 lang: ko
 tags: [idea-inbox, reservation, linkshop, small-business, vertical-mvp, human-in-the-loop]
 lintHash: 'bfceee14e1d4'
+polishHash: 'bfceee14e1d4'
 ---
 
 ## 아이디어
