@@ -10,7 +10,8 @@ tags:
   - 'api'
   - 'scraping'
 canonical: 'https://github.com/unclecode/crawl4ai'
-lintHash: '830c56b83353'
+lintHash: 'a372190783a9'
+polishHash: 'a372190783a9'
 ---
 
 > 한 줄 명제: Crawl4AI는 웹 페이지를 LLM·RAG·agent가 즉시 소비할 수 있는 구조화된 Markdown과 JSON으로 변환하는 async-first 오픈소스 크롤링 파이프라인이다.
@@ -33,7 +34,7 @@ lintHash: '830c56b83353'
 
 ## 핵심
 
-Crawl4AI는 Python async 기반으로 동작하는 웹 크롤링 라이브러리로, Playwright 브라우저 풀을 사용해 JavaScript가 렌더링하는 동적 페이지까지 포함한 뒤 그 결과를 LLM이 바로 프롬프트에 넣을 수 있는 Markdown 또는 구조화된 JSON으로 변환한다. 핵심 진입점은 `AsyncWebCrawler`이며, `BrowserConfig`로 브라우저 동작을, `CrawlerRunConfig`로 크롤링·추출·캐싱 전략을 각각 선언형으로 지정한다. v0.9 기준으로 pip 라이브러리(pip install 후 in-process 사용)와 Docker API 서버(FastAPI 기반 self-hosted) 두 가지 배포 형태를 제공하며, 이 둘은 독립적으로 버전 관리된다 — pip 라이브러리는 v0.9에서도 breaking change가 없었지만, Docker API 서버는 secure-by-default 전환으로 breaking change가 발생했다.
+Crawl4AI는 Python async 기반으로 동작하는 웹 크롤링 라이브러리로, Playwright 브라우저 풀을 사용해 JavaScript가 렌더링하는 동적 페이지까지 포함한 뒤 ==그 결과를 LLM이 바로 프롬프트에 넣을 수 있는 Markdown 또는 구조화된 JSON으로 변환한다==. 핵심 진입점은 `AsyncWebCrawler`이며, `BrowserConfig`로 브라우저 동작을, `CrawlerRunConfig`로 크롤링·추출·캐싱 전략을 각각 선언형으로 지정한다. v0.9 기준으로 pip 라이브러리(pip install 후 in-process 사용)와 Docker API 서버(FastAPI 기반 self-hosted) 두 가지 배포 형태를 제공하며, 이 둘은 독립적으로 버전 관리된다 — pip 라이브러리는 v0.9에서도 breaking change가 없었지만, Docker API 서버는 secure-by-default 전환으로 breaking change가 발생했다.
 
 Markdown 생성 파이프라인은 세 단계 필터를 거친다. 첫째, `DefaultMarkdownGenerator`가 HTML을 구조화된 raw Markdown으로 변환한다. 둘째, `PruningContentFilter`(휴리스틱 기반 노이즈 제거) 또는 `BM25ContentFilter`(사용자 쿼리 기준 관련성 필터)를 적용해 fit Markdown을 만든다. fit Markdown은 RAG 파이프라인에 넣을 때 토큰 비용을 크게 줄여준다.
 

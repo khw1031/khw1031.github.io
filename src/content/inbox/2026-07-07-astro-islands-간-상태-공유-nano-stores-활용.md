@@ -11,7 +11,8 @@ tags:
   - 'state-management'
   - 'islands-architecture'
 canonical: 'https://docs.astro.build/en/recipes/sharing-state-islands/'
-lintHash: '0303c4e7671b'
+lintHash: '4480b5801e19'
+polishHash: '4480b5801e19'
 ---
 
 > 한 줄 명제: Astro Islands 아키텍처에서는 React/Vue의 Context 같은 프레임워크 전용 상태 전파 수단을 쓸 수 없으므로, Nano Stores라는 프레임워크 독립적인 경량 상태 저장소를 통해 클라이언트 측 Island 간 상태를 공유한다.
@@ -38,7 +39,7 @@ Astro Islands 간 상태 공유 (Nano Stores)
 
 ## 핵심
 
-Astro의 Islands 아키텍처에서 컴포넌트는 각각 독립적으로 하이드레이션된다. React의 Context나 Vue의 provide/inject 같은 프레임워크 전용 상태 전파 메커니즘은 Astro 환경에서 동작하지 않는다. 왜냐하면 각 Island가 서로 다른 렌더러로 구동되며, 공통의 상위 provider tree를 공유하지 않기 때문이다. Astro 공식 문서가 권장하는 해법은 Nano Stores다. Nano Stores는 1KB 미만의 경량 라이브러리로, 의존성이 없으며 모든 UI 프레임워크에서 동일한 API로 상태를 읽고 쓸 수 있다.
+Astro의 Islands 아키텍처에서 컴포넌트는 각각 독립적으로 하이드레이션된다. React의 Context나 Vue의 provide/inject 같은 프레임워크 전용 상태 전파 메커니즘은 Astro 환경에서 동작하지 않는다. 왜냐하면 각 Island가 서로 다른 렌더러로 구동되며, 공통의 상위 provider tree를 공유하지 않기 때문이다. Astro 공식 문서가 권장하는 해법은 Nano Stores다. Nano Stores는 ==1KB 미만의 경량 라이브러리로, 의존성이 없으며 모든 UI 프레임워크에서 동일한 API로 상태를 읽고 쓸 수 있==다.
 
 Nano Stores는 두 가지 기본 타입을 제공한다. `atom`은 단일 값(불리언, 숫자, 문자열 등)을 저장할 때 사용하고, `map`은 객체 형태 상태를 저장할 때 사용하며 `.setKey()` 메서드로 특정 키만 효율적으로 업데이트할 수 있다. 프레임워크별 helper 패키지를 설치하면 `useStore` hook을 통해 컴포넌트 렌더링과 상태 변경을 연동할 수 있다. Svelte는 helper 없이 기본 Svelte store 문법(`$` 접두사)을 그대로 사용할 수 있다.
 

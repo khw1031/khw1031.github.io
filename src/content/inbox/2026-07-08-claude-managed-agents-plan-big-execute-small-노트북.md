@@ -9,7 +9,8 @@ tags:
   - 'ai'
   - 'agentic-coding'
 canonical: 'https://github.com/anthropics/claude-cookbooks/blob/main/managed_agents/CMA_plan_big_execute_small.ipynb'
-lintHash: 'fe43f0643c33'
+lintHash: 'ca94a51f782d'
+polishHash: 'ca94a51f782d'
 ---
 
 > 한 줄 명제: "읽기"가 비용을 지배하는 리서치 작업에서, 도구 없는 비싼 코디네이터는 계획·종합만 맡고 값싼 worker들이 병렬로 원문을 읽어 distilled 결과만 보고하게 하면, 같은 검증 기준을 유지한 채 비용과 시간을 크게 줄일 수 있다 — 단, 코디네이터가 세운 전제 자체는 아무도 검증하지 않는다는 대가를 진다.
@@ -31,7 +32,7 @@ Coordinator 패턴 (노트북 파일명은 plan_big_execute_small, 본문 제목
 
 이 패턴이 다루는 문제는 경제학적이다. 대부분의 에이전트 워크로드는 소량의 계획·판단과 대량의 기계적 읽기로 구성되는데, 웹 리서치는 그 극단적 사례다. 여러 사실을 권위 있는 출처에 대조 검증하려면 수십만 토큰의 웹페이지를 모델에 통과시켜야 하고, 이 읽기를 전부 frontier 모델 rate로 처리하면 청구서를 지배하는 쪽은 "판단"이 아니라 "읽기"가 된다. 그래서 노트북은 읽기 자체를 값싼 rate로, 병렬로 옮기는 것을 arbitrage의 본질로 제시한다.
 
-아키텍처는 단순하다. 사용자 질문이 들어오면 **도구가 전혀 없는 frontier 모델 코디네이터**가 질문을 하위 질문으로 쪼개 **병렬 worker들**에게 위임한다. worker만 `web_search`/`web_fetch`로 실제 웹을 만지고, 그 결과 요약(distilled findings)만 코디네이터에게 돌아온다. 코디네이터가 실제로 읽는 웹페이지는 **한 페이지도 없다** — worker가 읽은 원문 전체가 코디네이터 컨텍스트에 절대 들어가지 않는다는 점이 비용 절감의 전부다.
+아키텍처는 단순하다. 사용자 질문이 들어오면 **도구가 전혀 없는 frontier 모델 코디네이터**가 질문을 하위 질문으로 쪼개 **병렬 worker들**에게 위임한다. worker만 `web_search`/`web_fetch`로 실제 웹을 만지고, 그 결과 요약(distilled findings)만 코디네이터에게 돌아온다. 코디네이터가 실제로 읽는 웹페이지는 **한 페이지도 없다** — ==worker가 읽은 원문 전체가 코디네이터 컨텍스트에 절대 들어가지 않는다는 점이 비용 절감의 전부다.==
 
 API 표면은 Anthropic **Managed Agents**(hosted 런타임) beta다. Python `anthropic` SDK의 `client.beta.agents/environments/sessions` 네임스페이스와 beta 헤더 `managed-agents-2026-04-01`을 쓴다. 조율의 핵심은 `multiagent={"type": "coordinator", "agents": [...]}` 필드 하나뿐이다. 이 필드가 있으면 서버가 자동으로 코디네이터에게 `create_agent`/`send_to_agent`/`wait_for_agents`/`list_agents`를, worker에게 `submit_result`/`send_to_parent`를 부여한다 — 개발자가 이 도구들을 직접 정의하지 않는다. 노트북에서 코디네이터는 `claude-fable-5`(비싼 frontier), worker는 `claude-sonnet-5`(값싼)를 쓴다.
 

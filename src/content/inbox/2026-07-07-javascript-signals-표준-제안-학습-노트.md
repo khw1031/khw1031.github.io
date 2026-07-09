@@ -10,7 +10,8 @@ tags:
   - 'tc39'
   - 'javascript'
 canonical: 'https://github.com/tc39/proposal-signals'
-lintHash: 'bd551939bf9c'
+lintHash: '75988edf36e0'
+polishHash: '75988edf36e0'
 ---
 
 > 한 줄 명제: JavaScript Signals는 반응형 상태 관리를 위해 자동 의존성 추적·지연 평가·glitch-free 전파를 그래프 기반 원시 타입으로 제공하는 TC39 표준 제안이다.
@@ -39,7 +40,7 @@ JavaScript 애플리케이션의 UI 상태 관리는 단순 값 저장뿐 아니
 
 Signal 그래프는 세 가지 구성 요소로 이루어진다. `Signal.State`는 개발자가 명시적으로 `.set()`으로 값을 바꾸는 읽기-쓰기 셀이다. `Signal.Computed`는 다른 Signal들을 읽는 콜백을 받아 파생 값을 계산하는 셀로, 자동으로 의존성을 추적한다. `Signal.subtle.Watcher`는 그래프의 변화를 감지해 `notify` 콜백을 실행하는 관찰자로, 프레임워크가 이 위에서 effect를 구현한다. 이 세 요소의 분리는 응용 개발자(API의 `State`/`Computed`만 사용)와 프레임워크 개발자(`Watcher`까지 사용)의 관심사를 나눈다.
 
-Computed Signal은 pull-based(요청 시점 평가)로 동작한다. 의존 State가 바뀌더라도 Computed는 즉시 재계산하지 않고, `.get()`이 호출될 때만 자신의 상태를 확인하고 필요하면 재계산한다. 이때 값은 캐시되므로 의존이 실제로 변하지 않았다면 콜백이 다시 실행되지 않는다. `.set()`이 호출되면 그래프의 sink들에 대해 topological 순서로 "더티 마킹"이 전파되어, 중복 계산이나 중간 상태 노출(glitch)이 발생하지 않는다. 이 구조를 glitch-free라고 한다.
+Computed Signal은 pull-based(요청 시점 평가)로 동작한다. 의존 State가 바뀌더라도 Computed는 즉시 재계산하지 않고, `.get()`이 호출될 때만 자신의 상태를 확인하고 필요하면 재계산한다. 이때 값은 캐시되므로 의존이 실제로 변하지 않았다면 콜백이 다시 실행되지 않는다. `.set()`이 호출되면 ==그래프의 sink들에 대해 topological 순서로 "더티 마킹"이 전파되어, 중복 계산이나 중간 상태 노출(glitch)이 발생하지 않는다.== 이 구조를 glitch-free라고 한다.
 
 실행의 soundness를 위해 `frozen` 전역 상태가 관리된다. `Watcher`의 `notify` 콜백은 `.set()` 처리 도중 동기적으로 호출되는데, 이때 그래프가 일관되지 않은 중간 상태에 있을 수 있으므로 `notify` 내부에서 어떤 Signal도 읽거나 쓰는 것이 금지된다. 이 제한을 우회하려면 `queueMicrotask` 등으로 작업을 지연시켜야 한다. `Signal.subtle.untrack`은 의존성 추적을 일시 해제하지만 `frozen` 상태에서는 작동하지 않는다.
 

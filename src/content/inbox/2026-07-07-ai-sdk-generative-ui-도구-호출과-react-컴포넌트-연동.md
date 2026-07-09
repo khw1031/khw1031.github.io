@@ -10,7 +10,8 @@ tags:
   - 'frontend'
   - 'workflow'
 canonical: 'https://ai-sdk.dev/docs/ai-sdk-ui/generative-user-interfaces'
-lintHash: 'dd007f23d68a'
+lintHash: '85088251c14d'
+polishHash: '85088251c14d'
 ---
 
 > 한 줄 명제: Generative UI는 LLM의 도구 호출 결과를 React 컴포넌트 매핑으로 전환하여 텍스트 너머의 동적 인터페이스를 생성하는 파이프라인이다.
@@ -28,7 +29,7 @@ Generative UI: LLM 도구 호출 → React 렌더링 파이프라인
 
 ## 핵심
 
-Generative UI의 핵심은 LLM이 대화를 분석하여 도구 호출을 결정하고, 해당 도구가 반환한 데이터를 React 컴포넌트에 주입하는 연결 고리에 있다. 모델은 프롬프트와 대화 맥락을 바탕으로 언제 도구를 호출할지 자체적으로 판단하며, 호출이 발생하면 도구가 실행되어 데이터를 반환하고 이 데이터가 React 컴포넌트의 props로 전달된다. 이 과정에서 Vercel AI SDK는 서버측 `streamText`와 클라이언트측 `useChat` 훅을 스트리밍 프로토콜로 연결하며, AI SDK 5.0에서는 도구 파트가 `tool-${toolName}` 타입으로 명시적으로 구분된다.
+Generative UI의 핵심은 ==LLM이 대화를 분석하여 도구 호출을 결정하고, 해당 도구가 반환한 데이터를 React 컴포넌트에 주입하는 연결 고리==에 있다. 모델은 프롬프트와 대화 맥락을 바탕으로 언제 도구를 호출할지 자체적으로 판단하며, 호출이 발생하면 도구가 실행되어 데이터를 반환하고 이 데이터가 React 컴포넌트의 props로 전달된다. 이 과정에서 Vercel AI SDK는 서버측 `streamText`와 클라이언트측 `useChat` 훅을 스트리밍 프로토콜로 연결하며, AI SDK 5.0에서는 도구 파트가 `tool-${toolName}` 타입으로 명시적으로 구분된다.
 
 다음은 원문에서 제공하는 최소 동작 예제 전체 흐름이다.
 

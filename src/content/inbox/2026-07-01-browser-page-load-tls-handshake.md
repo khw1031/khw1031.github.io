@@ -5,10 +5,11 @@ description: HTTPS에서 서버 인증과 암호화 채널을 만드는 TLS hand
 summary: "HTTPS의 TLS handshake를 서버 인증·키 합의·cipher 선택·ALPN 협상 관점에서 정리 — TLS 1.3 흐름, 인증서 검증, SNI/ALPN, session resumption·0-RTT, HTTP/2·3와 QUIC, 프론트엔드 성능·운영 체크를 다룬 노트."
 lang: ko
 tags: ['tls', 'https', 'network', 'web-performance']
-lintHash: '381e8ac8c31d'
+lintHash: '625d5bab44e8'
+polishHash: '625d5bab44e8'
 ---
 
-> TLS handshake는 "암호화 시작"만이 아니라 서버 인증, 키 합의, 암호 스위트 선택, ALPN 기반 HTTP 버전 협상을 함께 수행하는 과정이다.
+> TLS handshake는 "암호화 시작"만이 아니라 ==서버 인증, 키 합의, 암호 스위트 선택, ALPN 기반 HTTP 버전 협상을 함께 수행하는 과정이다==.
 
 ## 1. TLS가 하는 일
 

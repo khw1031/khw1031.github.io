@@ -11,7 +11,8 @@ tags:
   - 'open-source'
   - 'agentic-coding'
 canonical: 'https://github.com/firecrawl/firecrawl'
-lintHash: 'bc0f2df9db83'
+lintHash: 'a28f630c73e7'
+polishHash: 'a28f630c73e7'
 ---
 
 > 한 줄 명제: Firecrawl은 웹 페이지를 AI 에이전트가 바로 소비할 수 있는 Markdown·구조화 JSON으로 변환하는 범용 웹 컨텍스트 API다.
@@ -31,7 +32,7 @@ Firecrawl — 웹 → LLM-ready 데이터 파이프라인
 
 ## 핵심
 
-Firecrawl은 웹 페이지를 AI 시스템이 직접 읽을 수 있는 형태로 변환하는 API 플랫폼이다. 핵심 가치는 "프록시 회전, JS 렌더링, rate limit 처리 같은 스크래핑 인프라를 개발자가 직접 구축하지 않아도 된다"는 점으로, P95 latency 3.4초에 웹 96%를 커버한다고 주장한다(원문 기준, 벤치마크 링크 별도 제공). 출력 형식은 clean markdown, 구조화 JSON, screenshot 등을 지원하여 LLM 토큰 소모를 줄이는 데 초점을 맞춘다.
+Firecrawl은 웹 페이지를 AI 시스템이 직접 읽을 수 있는 형태로 변환하는 API 플랫폼이다. 핵심 가치는 =="프록시 회전, JS 렌더링, rate limit 처리 같은 스크래핑 인프라를 개발자가 직접 구축하지 않아도 된다"==는 점으로, P95 latency 3.4초에 웹 96%를 커버한다고 주장한다(원문 기준, 벤치마크 링크 별도 제공). 출력 형식은 clean markdown, 구조화 JSON, screenshot 등을 지원하여 LLM 토큰 소모를 줄이는 데 초점을 맞춘다.
 
 API는 크게 세 계층으로 나뉜다. 첫째는 **Search·Scrape**로, 각각 웹 검색 결과와 단일 URL을 LLM-ready 데이터로 변환하는 기본 엔드포인트다. 둘째는 **Interact**로, scrape한 페이지에 대해 AI prompt나 코드로 추가 상호작용(클릭, 검색 등)을 수행한다. 셋째는 **Agent**로, URL을 몰라도 자연어 설명만으로 데이터를 자동으로 수집하는 자율 계층이다. 이 외에 **Crawl**(사이트 전체), **Map**(URL 발견), **Batch Scrape**(대량 비동기)가 보조 엔드포인트로 제공된다.
 

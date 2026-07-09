@@ -10,7 +10,8 @@ tags:
   - 'open-source'
   - 'workflow'
 canonical: 'https://github.com/coreyhaines31/marketingskills'
-lintHash: '53db97a74990'
+lintHash: '6cc0887bf3a0'
+polishHash: '6cc0887bf3a0'
 ---
 
 > 한 줄 명제: marketingskills는 product-marketing을 루트로 하는 markdown 스킬 트리이며, AI 코딩 에이전트가 마케팅 작업을 인식하고 전문 프레임워크를 적용하도록 만든다.
@@ -30,7 +31,7 @@ marketingskills — AI 에이전트 마케팅 스킬 컬렉션 (v2.0)
 
 marketingskills는 AI 코딩 에이전트(Claude Code, OpenAI Codex, Cursor, Windsurf 등)가 마케팅 업무를 수행할 때 전문 프레임워크와 베스트 프랙티스를 적용할 수 있도록 하는 markdown 파일 컬렉션이다. Agent Skills spec(agentskills.io)을 따르는 모든 에이전트와 호환되며, 각 스킬은 독립적인 markdown 파일로 프로젝트의 `.agents/skills/` 디렉토리에 설치된다. 설치 후 에이전트는 사용자가 마케팅 관련 작업을 요청하면 해당하는 스킬을 자동으로 로드하여 적용한다.
 
-전체 아키텍처의 중심에는 `product-marketing` 스킬이 위치한다. 이 스킬은 제품·청중·포지셔닝에 대한 맥락 문서 역할을 하며, 다른 모든 스킬이 실제 작업을 시작하기 전에 가장 먼저 참조하는 기반이 된다. 예를 들어 `cro` 스킬이 전환 최적화 작업을 수행할 때도, `copywriting` 스킬이 홈페이지 카피를 작성할 때도, 각 스킬은 먼저 `product-marketing`의 맥락을 읽은 뒤 자신만의 전문 프레임워크를 적용한다. 스킬들은 서로 상호 참조하기도 하는데, `copywriting ↔ cro ↔ ab-testing` 체인이나 `seo-audit ↔ schema ↔ ai-seo` 체인처럼 연관된 스킬들이 협력 네트워크를 형성한다.
+전체 아키텍처의 중심에는 `product-marketing` 스킬이 위치한다. 이 스킬은 제품·청중·포지셔닝에 대한 맥락 문서 역할을 하며, ==다른 모든 스킬이 실제 작업을 시작하기 전에 가장 먼저 참조하는 기반이 된다.== 예를 들어 `cro` 스킬이 전환 최적화 작업을 수행할 때도, `copywriting` 스킬이 홈페이지 카피를 작성할 때도, 각 스킬은 먼저 `product-marketing`의 맥락을 읽은 뒤 자신만의 전문 프레임워크를 적용한다. 스킬들은 서로 상호 참조하기도 하는데, `copywriting ↔ cro ↔ ab-testing` 체인이나 `seo-audit ↔ schema ↔ ai-seo` 체인처럼 연관된 스킬들이 협력 네트워크를 형성한다.
 
 설치 방법은 총 6가지를 제공한다. 권장 방식은 Vercel Labs의 `npx skills` CLI를 사용하는 것이며, 이 방식은 `.agents/skills/` 디렉토리에 자동 설치하고 Claude Code 호환을 위해 `.claude/skills/`에 심볼릭 링크를 생성한다. 그 외에 Claude Code 내장 플러그인 시스템, git clone 후 수동 복사, git submodule, fork 후 커스터마이징, SkillKit을 이용한 멀티 에이전트 설치 방식을 지원한다.
 

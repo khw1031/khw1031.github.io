@@ -5,7 +5,8 @@ description: 브라우저가 페이지를 요청하고 렌더링하고 입력에
 summary: "URL 입력부터 navigation·connection·요청·HTML 파싱·렌더링·JS 실행·입력 처리까지 브라우저 로딩 파이프라인을 단계별 비용 모델로 정리하고, 각 구간에 붙는 성능 지표(TTFB·FCP·LCP·CLS·TBT·INP)와 프론트엔드 개선 체크를 연결한 허브 노트."
 lang: ko
 tags: ['web-performance', 'browser', 'core-web-vitals', 'frontend']
-lintHash: '2a73481de466'
+lintHash: 'a464d5394b3d'
+polishHash: 'a464d5394b3d'
 ---
 
 > 한 줄 명제: 페이지 로드는 "네트워크 준비 → 응답 → 파싱·리소스 발견 → 렌더링 → JS 실행 → 입력 처리"로 이어지는 비용 파이프라인이고, 성능 지표는 이 파이프라인의 특정 구간에 붙는 계기판이다.
@@ -36,7 +37,7 @@ browser page load
 
 브라우저는 URL 하나를 상호작용 가능한 문서로 만들기 위해 여러 파이프라인을 동시에 움직인다. 네트워크 준비(DNS/TCP/TLS)를 마치면 요청을 보내고, 응답 HTML이 도착하는 대로 streaming으로 파싱을 시작하면서 preload scanner로 CSS·JS·이미지를 미리 발견해 병렬 다운로드를 건다. DOM과 CSSOM이 만들어지면 style → layout → paint → composite를 거쳐 픽셀이 화면에 올라가고, JavaScript는 다운로드·파싱·실행·hydration 비용으로 main thread를 점유하며, 그 이후의 모든 입력 처리도 같은 main thread를 두고 경쟁한다.
 
-성능 개선이 "Lighthouse 점수 올리기"가 아니라 "어느 구간이 막히는지 찾고 그 구간의 비용을 줄이는 일"인 이유가 여기 있다. LCP가 느리면 리소스 발견/다운로드/렌더링 지연 중 어디인지, TBT/INP가 나쁘면 long task·hydration·re-render 범위 중 무엇인지 — 지표를 파이프라인의 구간으로 번역해서 접근한다.
+성능 개선이 "Lighthouse 점수 올리기"가 아니라 ==어느 구간이 막히는지 찾고 그 구간의 비용을 줄이는 일==인 이유가 여기 있다. LCP가 느리면 리소스 발견/다운로드/렌더링 지연 중 어디인지, TBT/INP가 나쁘면 long task·hydration·re-render 범위 중 무엇인지 — 지표를 파이프라인의 구간으로 번역해서 접근한다.
 
 실무 디버깅 순서도 파이프라인 순서를 따른다:
 

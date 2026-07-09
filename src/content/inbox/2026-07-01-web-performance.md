@@ -5,7 +5,8 @@ description: 공부 내용을 개인적으로 정리하는 비공개 노트
 summary: "웹 성능을 지표(Core Web Vitals) ↔ 필드 데이터(CrUX·RUM) ↔ 랩 데이터(Lighthouse) 세 층위로 분리해 정리하고, LCP/INP/CLS/TTFB 해석, 2025 한샘몰 개선 수치, 측정 도구의 트레이드오프와 실무 조합을 다룬 노트."
 lang: ko
 tags: ['web-performance', 'core-web-vitals', 'rum', 'lighthouse']
-lintHash: '37da62280eeb'
+lintHash: '1651f12151c3'
+polishHash: '1651f12151c3'
 ---
 
 > 웹 성능 "표준"은 한 도구가 아니라 **지표 ↔ 필드 데이터 ↔ 랩 데이터** 세 층위로 나뉜다. Lighthouse는 그 중 랩 측정 도구일 뿐이다.
@@ -18,7 +19,7 @@ lintHash: '37da62280eeb'
 | 필드 데이터(field/RUM) | 실사용자 실측. UX와 직결 | CrUX, `web-vitals`, 상용 RUM |
 | 랩 데이터(lab/synthetic) | 통제된 환경의 합성 측정 | Lighthouse, WebPageTest |
 
-핵심: Lighthouse는 1번 지표를 3번 방식으로 측정하는 *도구*다. 지표 자체가 표준이지 Lighthouse가 표준은 아니다.
+핵심: Lighthouse는 1번 지표를 3번 방식으로 측정하는 *도구*다. ==지표 자체가 표준이지 Lighthouse가 표준은 아니다.==
 
 ## 2. 성능 지표 — Core Web Vitals
 
