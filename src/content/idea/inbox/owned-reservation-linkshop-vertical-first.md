@@ -5,6 +5,7 @@ description: 'Instagram-first 소상공인의 상담 주도 예약 병목을, DM
 summary: 'Instagram/Litt.ly로 유입돼 카톡 상담으로 넘어가는 소상공인의 반복 확인 병목을, DM을 AI로 대체하는 게 아니라 고객이 링크를 눌러 상품·행사일·재고·스케줄·예약금을 한 흐름에서 처리하는 "소유한 예약 링크샵"으로 푸는 아이디어. 범용 SaaS가 아니라 한 업종(백일상/돌상 대여) 전용 vertical MVP로 먼저 좁히고, AI는 full automation이 아니라 human-in-the-loop operator assist부터 시작한다는 게 핵심 논지. 인박스 캡처.'
 lang: ko
 tags: [idea-inbox, reservation, linkshop, small-business, vertical-mvp, human-in-the-loop]
+lintHash: 'bfceee14e1d4'
 ---
 
 ## 아이디어
