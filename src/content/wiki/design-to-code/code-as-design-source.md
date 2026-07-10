@@ -1,7 +1,7 @@
 ---
 type: Reference
 title: 코드·캔버스 자체를 디자인 소스로 쓰는 도구
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T17:23:17+09:00'
 description: 내보낸 디자인 파일이라는 중간 단계를 없애고, 실제 소스코드나 캔버스 데이터 모델 자체를 에이전트가 직접 읽고 고치게 하는 도구들
 lang: ko
 tags: ['design-to-code', 'ai-agent-workflow', 'canvas-sdk']

@@ -1,7 +1,7 @@
 ---
 type: Reference
 title: 이식 가능한 텍스트 디자인 스펙 (DESIGN.md)
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T17:23:17+09:00'
 description: 디자인 시스템을 바이너리 Figma 파일이 아니라 평범한 마크다운으로 표현해, 어떤 코딩 에이전트에도 그대로 넘길 수 있게 만드는 접근
 lang: ko
 tags: ['design-to-code', 'design-tokens', 'ai-agent-workflow']

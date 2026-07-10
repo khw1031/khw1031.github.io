@@ -1,6 +1,6 @@
 ---
 title: 'Gemma 4 E4B-it_uncensored Heretic GGUF: 검열 제거 기법과 성능 트레이드오프 분석'
-pubDate: '2026-07-10'
+pubDate: '2026-07-10T02:17:16+09:00'
 description: 'Google Gemma 4 E4B-it 모델에 Heretic ARA 기법을 적용해 검열을 제거한 GGUF 모델의 구조, 벤치마크 결과, 트레이드오프를 정리한 학습용 리포트'
 summary: '이 리포트는 Gemma 4 E4B-it의 검열 제거(decensoring) 버전이 어떻게 만들어졌는지, 어떤 성능 변화를 겪는지, 그리고 GGUF 양자화로 어떻게 배포되는지를 한 장에 정리한다. 읽으면 abliteration 기법의 원리와 검열 제거가 모델 품질에 미치는 영향을 빠르게 파악할 수 있다.'
 lang: ko

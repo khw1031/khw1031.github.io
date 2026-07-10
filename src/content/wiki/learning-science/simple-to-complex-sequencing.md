@@ -1,7 +1,7 @@
 ---
 type: Reference
 title: 단순한 전체부터, 복잡도는 나중에 (Simple-to-Complex Sequencing)
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T16:31:32+09:00'
 resource: https://doi.org/10.1007/s10984-021-09373-y
 description: 초심자에게 단순화된 전체 과제를 먼저 경험시키고 점차 복잡도를 높이는 커리큘럼 순서 설계 이론들의 증거 수준 비교
 summary: '"핵심을 먼저 배우고 확장하라"는 직관은 교수설계(instructional design) 문헌에서 최소 60년간 다뤄온 시퀀싱 문제다. Sweller의 worked-example effect와 van Merriënboer의 4C/ID whole-task sequencing, Carroll의 minimal manual은 통제 실험·메타분석으로 뒷받침되는 반면, Bruner의 spiral curriculum과 Reigeluth의 Elaboration Theory는 널리 쓰이지만 그 자체를 검증한 통제 실험은 부족한 설계 프레임워크다. 이 카드는 여섯 갈래 문헌을 증거 수준별로 정리한다.'

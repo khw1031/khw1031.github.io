@@ -1,6 +1,6 @@
 ---
 title: 한샘 인테리어 플래너
-pubDate: '2026-07-04'
+pubDate: '2026-07-04T11:40:24+09:00'
 description: "상담·계약·시공 완료까지 흩어진 고객 진행 현황을 Flutter 앱 내장 React 웹앱으로 일원화한 프로젝트의 개발 기록 (작성 예정)"
 draft: true
 tags: [react, flutter, webview, ai]

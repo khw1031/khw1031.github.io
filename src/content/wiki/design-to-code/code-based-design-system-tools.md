@@ -1,7 +1,7 @@
 ---
 type: Reference
 title: 코드 기반 디자인 시스템 관리 도구
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T17:23:17+09:00'
 description: 디자인 토큰·컴포넌트·문서 자체를 코드/텍스트로 관리해, Figma 없이도 디자인 시스템의 원본을 유지하는 산업 전반의 도구들
 lang: ko
 tags: ['design-to-code', 'design-tokens', 'design-system', 'ai-agent-workflow', 'mcp']

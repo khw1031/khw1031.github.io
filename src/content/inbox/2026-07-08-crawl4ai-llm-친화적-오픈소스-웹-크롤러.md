@@ -1,6 +1,6 @@
 ---
 title: 'Crawl4AI: LLM 친화적 오픈소스 웹 크롤러'
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T19:24:51+09:00'
 description: 'Crawl4AI의 핵심 API와 Markdown 생성, 구조화 추출, 브라우저 제어, 배포 기능을 다루는 학습 노트'
 summary: '웹 페이지를 LLM이 바로 사용할 수 있는 Markdown으로 변환하는 Crawl4AI의 아키텍처와 핵심 API를 정리한 한 장 학습 노트.'
 lang: ko

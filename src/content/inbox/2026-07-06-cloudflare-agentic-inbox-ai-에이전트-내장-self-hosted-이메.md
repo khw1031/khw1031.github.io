@@ -1,6 +1,6 @@
 ---
 title: 'Cloudflare Agentic Inbox — AI 에이전트 내장 self-hosted 이메일 클라이언트 아키텍처'
-pubDate: '2026-07-06'
+pubDate: '2026-07-06T02:07:43+09:00'
 description: 'Cloudflare Workers, Durable Objects, Workers AI를 조합해 AI 에이전트가 내장된 self-hosted 이메일 시스템을 구축하는 레퍼런스 아키텍처와 설정 흐름'
 summary: 'Cloudflare 인프라 위에서 Email Routing, Durable Object 격리, Workers AI 에이전트를 조합하여 AI가 이메일을 읽고 답장 초안을 작성하는 self-hosted 이메일 클라이언트의 전체 아키텍처와 배포 절차를 다룬다.'
 lang: ko

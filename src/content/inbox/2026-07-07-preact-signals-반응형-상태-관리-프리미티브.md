@@ -1,6 +1,6 @@
 ---
 title: 'Preact Signals — 반응형 상태 관리 프리미티브'
-pubDate: '2026-07-07'
+pubDate: '2026-07-07T01:20:29+09:00'
 description: 'Preact Signals의 신호(signal)·파생(computed)·사이드이펙트(effect) API로 반응형 상태를 관리한다'
 summary: 'Preact Signals가 제공하는 reactive primitives(signal, computed, effect, batch, model)를 통해 컴포넌트 렌더링 최적화와 상태 관리를 구현하는 방법'
 lang: ko

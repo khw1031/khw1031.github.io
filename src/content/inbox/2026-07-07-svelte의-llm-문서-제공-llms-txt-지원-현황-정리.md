@@ -1,6 +1,6 @@
 ---
 title: 'Svelte의 LLM 문서 제공(llms.txt) 지원 현황 정리'
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T01:38:52+09:00'
 description: 'Svelte 공식 문서가 LLM 애플리케이션을 위해 llms.txt 컨벤션을 지원하며, 컨텍스트 크기에 따른 압축 버전을 제공한다.'
 summary: 'Svelte가 LLM 및 AI 애플리케이션을 위해 llms.txt 표준 컨벤션을 도입했다. 전체·중간·소형 컨텍스트 윈도우별로 압축 문서를 제공하고, Svelte/SvelteKit/CLI 단위에서도 개별 문서를 배포한다.'
 lang: ko

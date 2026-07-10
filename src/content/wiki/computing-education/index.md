@@ -1,7 +1,7 @@
 ---
 type: Category
 title: Computing Education
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T13:54:01+09:00'
 description: AI 시대 프로그래밍/컴퓨팅 교육에서 도구 활용 능력과 개념적 이해의 관계를 실증적으로 다루는 레퍼런스 모음
 lang: ko
 tags: ['computing-education', 'ai-education', 'programming-education']

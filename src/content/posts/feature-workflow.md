@@ -1,6 +1,6 @@
 ---
 title: 프론트엔드 개발 워크플로우 설계 및 표준화
-pubDate: '2026-07-04'
+pubDate: '2026-07-04T11:40:24+09:00'
 description: "AI 에이전트 기능 구현의 비결정성·재현성 문제를 Requirements→Design→Task→Implementation→Review 5단계 문서 워크플로우로 표준화한 기록"
 draft: true
 tags: [ai, workflow, sdd, frontend]

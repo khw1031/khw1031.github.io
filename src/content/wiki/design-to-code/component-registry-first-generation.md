@@ -1,7 +1,7 @@
 ---
 type: Reference
 title: 컴포넌트 레지스트리 기반 생성 (shadcn/v0)
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T17:23:17+09:00'
 description: 열린 시각적 디자인을 해석시키는 대신, 정해진 실제 컴포넌트 집합을 구조화된 레지스트리로 노출해 에이전트가 그 안에서 고르고 조합하게 하는 접근
 lang: ko
 tags: ['design-to-code', 'component-registry', 'shadcn', 'mcp', 'ai-agent-workflow']

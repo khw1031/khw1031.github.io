@@ -1,6 +1,6 @@
 ---
 title: 'Firecrawl — 웹 데이터를 LLM용으로 변환하는 API 플랫폼'
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T19:18:59+09:00'
 description: 'Firecrawl API로 웹 페이지를 검색·스크래핑·상호작용하여 AI 에이전트가 소비 가능한 Markdown·JSON으로 변환하는 방법'
 summary: 'Firecrawl은 웹 96%를 커버하는 스크래핑·검색 API로, URL 하나를 LLM-ready Markdown이나 구조화 JSON으로 바꿔준다. Search, Scrape, Interact 세 핵심 엔드포인트와 Agent 자동화 계층으로 구성된다.'
 lang: ko

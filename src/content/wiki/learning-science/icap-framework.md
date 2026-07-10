@@ -1,7 +1,7 @@
 ---
 type: Reference
 title: ICAP 프레임워크 (Interactive-Constructive-Active-Passive)
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T13:54:01+09:00'
 resource: https://doi.org/10.1080/00461520.2014.965823
 description: 학습자가 자료를 대하는 인지적 관여 양식을 수동-능동-구성-상호작용 네 단계로 나누고, 단계가 깊을수록 학습 효과가 커진다고 예측하는 틀
 summary: "Chi & Wylie(2014)의 ICAP 프레임워크는 학습자의 겉으로 드러나는 행동을 Passive(그냥 보기·듣기)·Active(밑줄·따라 쓰기)·Constructive(자기 언어로 재구성·자기설명)·Interactive(서로 아이디어를 주고받으며 구성)의 네 양식으로 나눈다. 필기·개념도·자기설명을 다룬 실험들에서 관여 양식이 P<A<C<I 순으로 깊어질수록 학습 성과가 커진다는 것이 반복적으로 확인되며, 이는 '손이냐 키보드냐'가 아니라 '무엇을 하고 있는가'가 핵심 변수임을 보여준다."

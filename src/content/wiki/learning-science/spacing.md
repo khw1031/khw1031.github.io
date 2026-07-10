@@ -1,7 +1,7 @@
 ---
 type: Reference
 title: Spacing (분산 학습)
-pubDate: '2026-07-07'
+pubDate: '2026-07-07T22:32:16+09:00'
 resource: https://pubmed.ncbi.nlm.nih.gov/16719566/
 description: 같은 양의 학습을 몰아서(massed)보다 시간에 나눠(spaced) 하면 파지가 높아진다는 분산 학습 효과
 summary: "동일한 학습량이라도 한 번에 몰아치기보다 시간 간격을 두고 나눠 반복하면 장기 파지가 높아진다는 원리. Cepeda 등(2006)의 대규모 메타분석은 목표 파지 기간이 길수록 최적 복습 간격도 함께 길어진다는 관계를 보였다 — 복습 스케줄 설계의 근거."

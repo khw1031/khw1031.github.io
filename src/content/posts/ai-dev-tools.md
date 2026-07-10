@@ -1,6 +1,6 @@
 ---
 title: IT AI 개발 도구 생태계 구축
-pubDate: '2026-07-04'
+pubDate: '2026-07-04T11:40:24+09:00'
 description: "Frontend AI Library·Swagger MCP·Figma MCP를 축으로 개인기에 머물던 AI 활용을 팀 단위 배포·재사용 도구 생태계로 전환한 구축 기록"
 draft: true
 tags: [ai, developer-tools, mcp, productivity]

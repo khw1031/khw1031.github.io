@@ -1,6 +1,6 @@
 ---
 title: 'JavaScript Signals 표준 제안 학습 노트'
-pubDate: '2026-07-07'
+pubDate: '2026-07-07T00:51:16+09:00'
 description: 'TC39 Stage 1 신호 기반 반응형 프로그래밍 API의 그래프 구조와 lazy 평가 전략을 구조적으로 정리한 학습 노트'
 summary: 'JavaScript Signals는 반응형 상태 관리를 위해 그래프 기반 자동 의존성 추적과 지연 평가를 제공하는 TC39 Stage 1 표준 제안이다. 프레임워크 간 상호운용성을 위해 핵심 그래프 의미론에 집중한다.'
 lang: ko

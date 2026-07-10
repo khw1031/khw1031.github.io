@@ -1,6 +1,6 @@
 ---
 title: 'Loop Engineering — 에이전트 루프의 네 가지 아키텍처'
-pubDate: '2026-07-09'
+pubDate: '2026-07-09T17:09:47+09:00'
 description: 'AI 에이전트 엔지니어링에서 "루프"가 실제로 가리키는 네 가지 아키텍처(execution·task·product·system)의 반복 대상, 종료 조건, 인간 역할을 비교 분류한 학습 노트.'
 summary: 'Aparna Dhinakaran의 분류를 중심으로, 루프라는 용어 아래 혼재된 다섯 아키텍처의 반복 대상과 종료 조건, 자율성 다이얼의 위치를 정리한다.'
 tags: ['ai-engineering', 'agent-loops', 'software-factory', 'loop-engineering']

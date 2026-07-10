@@ -1,6 +1,6 @@
 ---
 title: 'APIs·Agents를 위한 MCP: 제품 후보 맵'
-pubDate: '2026-07-09'
+pubDate: '2026-07-09T22:16:25+09:00'
 description: "'API를 감싸는 MCP'라는 테마에서 만들 수 있는 제품 후보를 발산하고 사업성 렌즈로 수렴한 맵"
 summary: 'OpenAPI→MCP 자동 생성이 「단순 래퍼」를 이미 상품화했으므로, MCP 제품의 가치는 API가 주지 않는 데이터·판단·번들에 있다. Threads 바이럴 생성기를 포함한 6개 후보를 Double Diamond로 발산하고 Lean Canvas·JTBD로 수렴해 방어 가능성이 높은 방향을 골랐다.'
 lang: ko

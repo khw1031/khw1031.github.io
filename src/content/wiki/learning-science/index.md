@@ -1,7 +1,7 @@
 ---
 type: Category
 title: Learning Science
-pubDate: '2026-07-07'
+pubDate: '2026-07-07T22:32:16+09:00'
 description: 학습·기억·전이의 근거가 되는 인지·교육심리학 1차 문헌 모음
 summary: "무엇이 장기 파지와 전이를 만드는가에 대한 인지·교육심리학의 1차 문헌을 모은 카테고리. Bjork의 'desirable difficulties'를 우산 개념으로, 인출 연습·분산 학습·인터리빙 등 개별 원리를 각 레퍼런스 카드로 정리한다."
 lang: ko

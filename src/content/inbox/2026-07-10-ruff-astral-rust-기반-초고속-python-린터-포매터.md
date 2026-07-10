@@ -1,6 +1,6 @@
 ---
 title: 'Ruff: Astral의 Rust 기반 초고속 Python 린터·포매터'
-pubDate: '2026-07-10'
+pubDate: '2026-07-10T11:50:14+09:00'
 description: 'Ruff는 Flake8·Black·isort 등 파편화된 Python 도구 체인을 Rust로 재구현해 하나로 통합한 린터 겸 포매터로, 900개 이상의 규칙과 10~100배 빠른 속도를 제공한다.'
 summary: 'Ruff는 Astral(uv 제작사)이 Rust로 만든 Python 린터 겸 포매터다. Flake8과 60여 개 플러그인, Black, isort, pydocstyle, pyupgrade, autoflake 등 서로 다른 도구가 나눠 하던 일을 900개 이상의 내장 규칙 하나로 흡수하고, --fix로 자동 교정한다. 기존 도구 대비 10~100배 빠르며(CPython 전체 스캔 약 0.4초), FastAPI·Pandas·SciPy·Hugging Face·Apache Airflow 등이 채택했다. MIT 라이선스, GitHub 48.5k 스타.'
 lang: ko

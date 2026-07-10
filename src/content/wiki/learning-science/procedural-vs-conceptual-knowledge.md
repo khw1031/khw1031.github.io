@@ -1,7 +1,7 @@
 ---
 type: Reference
 title: 절차적 지식 vs 개념적 지식 (Procedural vs Conceptual Knowledge)
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T13:54:01+09:00'
 resource: https://www.taylorfrancis.com/books/edit/10.4324/9780203063538/conceptual-procedural-knowledge-james-hiebert
 description: "'하는 법을 아는 것'과 '왜 되는지 아는 것'을 구분하는 수학교육 심리학의 고전적 틀과, 둘의 관계가 위계가 아니라 상호작용이라는 후속 연구"
 summary: "Hiebert & Lefevre(1986)는 절차적 지식(단계를 실행하는 법)과 개념적 지식(그 절차가 왜 성립하는지에 대한 이해)을 구분하는 틀을 수학교육 연구에 제공했다. 그러나 Rittle-Johnson & Schneider(2015)의 종합은 두 지식이 한쪽이 원인이고 다른 쪽이 결과인 단순한 위계가 아니라, 서로를 발달시키는 양방향·반복적 관계임을 보여준다."

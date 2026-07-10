@@ -1,7 +1,7 @@
 ---
 type: Reference
 title: AI by Hand과 Tom Yeh — 실체 확인
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T13:54:01+09:00'
 resource: https://www.byhand.ai
 description: CU Boulder 컴퓨터과학과 부교수 Tom Yeh가 운영하는 "AI by Hand" 아웃리치 프로그램의 공식 출처 확인과, 핵심 주장의 근거 수준
 summary: "Tom Yeh는 CU Boulder 컴퓨터과학과의 실존 부교수(human-centered AI 연구)이며, 'AI by Hand'는 그의 학교 공식 소개 페이지에도 명시된 실재하는 아웃리치·교육 이니셔티브다. 실체는 구독자 7만 명 이상을 가진 Substack 퍼블리케이션(byhand.ai, 운영 주체 'By Hand Research')이며, 손 계산이 이해를 돕는다는 방법론적 근거로는 파인만의 격언 하나만 제시할 뿐 동료심사 연구는 없다 — 존재와 도달 범위는 확인되지만, 방법론의 학습효과 자체는 아직 검증된 주장이 아니라 실천가의 선언에 가깝다."

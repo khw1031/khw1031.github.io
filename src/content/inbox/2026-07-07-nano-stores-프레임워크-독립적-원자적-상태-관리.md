@@ -1,6 +1,6 @@
 ---
 title: 'Nano Stores — 프레임워크 독립적 원자적 상태 관리'
-pubDate: '2026-07-07'
+pubDate: '2026-07-07T01:27:36+09:00'
 description: 'React·Vue·Svelte 등에서 동작하는 340~864바이트 제로-의존성 상태 관리 라이브러리의 구조와 사용법.'
 summary: '프레임워크에 독립적인 원자적 스토어 아키텍처로, 컴포넌트에서 비즈니스 로직을 분리하고 lazy mount 패턴으로 리소스를 최적화한다.'
 lang: ko

@@ -1,7 +1,7 @@
 ---
 type: Reference
 title: 손글씨 필기 vs 타이핑 (Handwriting vs Typing Note-Taking)
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T13:54:01+09:00'
 resource: https://doi.org/10.1177/0956797614524581
 description: 손으로 필기하면 개념 이해가 깊어진다는 유명한 주장의 1차 근거와, 이를 재현하지 못한 후속 연구
 summary: "Mueller & Oppenheimer(2014)는 노트북 필기가 강의를 그대로 받아적게 만들어(verbatim transcription) 개념 문제 성적을 낮춘다고 보고했다. 그러나 Morehead, Dunlosky & Rawson(2019)의 직접 재현·확장 연구는 이 효과가 통계적으로 유의하지 않은 수준으로 작아, '손으로 써야 이해가 깊어진다'는 대중적 서사는 원 연구가 뒷받침하는 것보다 훨씬 강하게 퍼져 있음을 보여준다."

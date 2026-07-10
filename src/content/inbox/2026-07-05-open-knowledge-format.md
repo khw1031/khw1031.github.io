@@ -1,6 +1,6 @@
 ---
 title: Open Knowledge Format (OKF)
-pubDate: '2026-07-05'
+pubDate: '2026-07-05T14:23:53+09:00'
 description: 조직 지식을 markdown + YAML frontmatter 파일 트리로 표준화해 AI 에이전트가 소비하게 하는 Google의 오픈 스펙
 summary: "AI 에이전트가 쓰는 조직 내부 지식(스키마·지표 정의·조인 경로·런북)이 카탈로그·위키·코드에 분산된 fragmented context 문제를, markdown 파일 + YAML frontmatter + 마크다운 링크 그래프라는 최소 스펙(OKF v0.1)으로 표준화하려는 시도를 정리한 레퍼런스 노트."
 lang: ko

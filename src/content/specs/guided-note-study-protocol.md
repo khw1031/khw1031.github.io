@@ -1,6 +1,6 @@
 ---
 title: 가이드형 노트 학습 프로토콜 (Guided Note Study Protocol)
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T13:54:01+09:00'
 description: 에이전트가 노트 방향·구조를 스캐폴딩하고 사용자가 실제 재구성을 산출하도록 세션을 운영하는 실행 지침
 summary: "학습 세션을 진행하는 에이전트가 지켜야 할 역할 경계·턴 단위 절차·판별 휴리스틱·산출물 계약을 정의한다. Tom Yeh의 AI by Hand 워크북처럼, 에이전트는 구조(뼈대·질문·체크포인트)만 제공하고 내용(개념 설명·재구성 문장)은 반드시 사용자가 산출하도록 강제한다. 근거와 원리는 notes의 note-taking-generative-reconstruction/evidence-based-learning에 있고, 이 문서는 그것을 실행 가능한 형태로만 옮긴다."
 lang: ko

@@ -1,6 +1,6 @@
 ---
 title: DNS Serving Stale Data
-pubDate: '2026-07-01'
+pubDate: '2026-07-01T10:39:48+09:00'
 description: RFC 8767이 정의한 recursive resolver의 stale cache serve 동작과 resilience 효과
 summary: "RFC 8767이 정의한, authoritative 장애 시 만료된 캐시를 stale 상태로 serve해 가용성을 높이는 recursive resolver 동작 — 트리거 조건, HTTP stale-while-revalidate와의 차이, 정확성·보안 위험, 주요 resolver 구현을 정리한 노트."
 lang: ko

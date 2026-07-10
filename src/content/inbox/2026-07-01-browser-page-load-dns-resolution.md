@@ -1,6 +1,6 @@
 ---
 title: DNS Resolution
-pubDate: '2026-07-01'
+pubDate: '2026-07-01T10:39:48+09:00'
 description: 브라우저가 도메인 이름을 IP 주소로 바꾸는 DNS 조회 과정
 summary: "도메인 이름을 IP로 바꾸는 DNS 조회를 브라우저/OS 캐시 → recursive resolver → root → TLD → authoritative 계층으로 정리하고, 전송 방식(UDP/TCP/DoH/DoT/DoQ), record 종류, dns-prefetch·preconnect 등 프론트엔드 성능 접점을 다룬 노트."
 lang: ko

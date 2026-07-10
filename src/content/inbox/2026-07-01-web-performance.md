@@ -1,6 +1,6 @@
 ---
 title: Web Performance
-pubDate: '2026-07-01'
+pubDate: '2026-07-01T10:39:48+09:00'
 description: 공부 내용을 개인적으로 정리하는 비공개 노트
 summary: "웹 성능을 지표(Core Web Vitals) ↔ 필드 데이터(CrUX·RUM) ↔ 랩 데이터(Lighthouse) 세 층위로 분리해 정리하고, LCP/INP/CLS/TTFB 해석, 2025 한샘몰 개선 수치, 측정 도구의 트레이드오프와 실무 조합을 다룬 노트."
 lang: ko

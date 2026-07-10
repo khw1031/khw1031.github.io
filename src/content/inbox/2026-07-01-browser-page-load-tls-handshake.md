@@ -1,6 +1,6 @@
 ---
 title: TLS Handshake
-pubDate: '2026-07-01'
+pubDate: '2026-07-01T10:39:48+09:00'
 description: HTTPS에서 서버 인증과 암호화 채널을 만드는 TLS handshake 과정
 summary: "HTTPS의 TLS handshake를 서버 인증·키 합의·cipher 선택·ALPN 협상 관점에서 정리 — TLS 1.3 흐름, 인증서 검증, SNI/ALPN, session resumption·0-RTT, HTTP/2·3와 QUIC, 프론트엔드 성능·운영 체크를 다룬 노트."
 lang: ko

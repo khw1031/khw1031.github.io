@@ -1,6 +1,6 @@
 ---
 title: Web Worker
-pubDate: '2026-07-01'
+pubDate: '2026-07-01T10:39:48+09:00'
 description: Web Worker의 동작 원리, 사용 시나리오, 코드 패턴, 적용 기준
 summary: "무거운 JS 계산을 main thread 밖으로 분리해 입력·렌더링 blocking을 줄이는 Web Worker — 동작 원리, postMessage·Transferable, module worker·Promise wrapper 패턴, 적용/비적용 기준, worker 종류와 성능 측정을 정리한 노트."
 lang: ko

@@ -1,6 +1,6 @@
 ---
 title: 'AI SDK Generative UI: 도구 호출과 React 컴포넌트 연동'
-pubDate: '2026-07-07'
+pubDate: '2026-07-07T01:54:35+09:00'
 description: 'LLM 도구 호출 결과를 React 컴포넌트에 연결하여 대화형 UI를 동적으로 생성하는 Vercel AI SDK 패턴'
 summary: 'Generative UI는 LLM이 도구(tool)를 호출하고 그 결과를 React 컴포넌트로 렌더링하는 패턴이다. Vercel AI SDK의 useChat 훅과 streamText API를 결합해 구현하며, 도구 정의→API 라우팅→클라이언트 렌더링→확장의 단계로 구성된다.'
 lang: ko

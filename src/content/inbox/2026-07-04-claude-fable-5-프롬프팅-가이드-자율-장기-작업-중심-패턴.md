@@ -1,6 +1,6 @@
 ---
 title: 'Claude Fable 5 프롬프팅 가이드 — 자율·장기 작업 중심 패턴'
-pubDate: '2026-07-05'
+pubDate: '2026-07-05T03:11:28+09:00'
 description: 'Claude Fable 5의 effort 제어, 서브에이전트, 메모리 시스템 등 장기 자율 작업 프롬프팅 패턴을 정리한 학습용 리포트.'
 summary: 'Claude Fable 5가 이전 모델과 어떻게 다른지, 장기간 복잡한 작업을 안정적으로 수행하기 위한 핵심 프롬프팅 전략( effort, 지시_following, 비동기 서브에이전트, 메모리)을 한눈에 파악할 수 있습니다.'
 lang: ko

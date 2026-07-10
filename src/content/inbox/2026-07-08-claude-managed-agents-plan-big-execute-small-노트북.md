@@ -1,6 +1,6 @@
 ---
 title: 'Claude Managed Agents: Plan Big, Execute Small 노트북'
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T12:09:07+09:00'
 description: 'Anthropic Managed Agents의 coordinator 패턴 — 값싼 worker에게 웹 리서치 읽기를 위임하는 구조를 분석한다.'
 summary: 'anthropics/claude-cookbooks의 CMA_plan_big_execute_small.ipynb 원문을 직접 확보해 분석했다. 실제 노트북 제목은 "Coordinator pattern"이며, 무도구 frontier 코디네이터가 web_search/web_fetch만 가진 값싼 worker 팀에게 리서치 읽기를 위임해 같은 검증 기준으로 약 2.5배 싸고 3배 빠른 결과를 얻는 구조와, rigor matching·delegation floor cost 등 4가지 caveat를 다룬다.'
 lang: ko

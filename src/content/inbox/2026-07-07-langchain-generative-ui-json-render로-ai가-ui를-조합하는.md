@@ -1,6 +1,6 @@
 ---
 title: 'LangChain Generative UI: json-render로 AI가 UI를 조합하는 패턴'
-pubDate: '2026-07-07'
+pubDate: '2026-07-07T01:48:52+09:00'
 description: 'LangChain json-render를 사용한 Generative UI 패턴으로 AI가 컴포넌트 카탈로그를 조합하여 UI를 생성하는 방법'
 summary: 'AI가 JSON spec을 통해 선언된 컴포넌트 카탈로그를 조합하여 UI를 생성하는 Generative UI 패턴의 전체 워크플로우를 다룬다. 카탈로그 정의부터 progressive rendering까지의 파이프라인을 이해할 수 있다.'
 lang: ko

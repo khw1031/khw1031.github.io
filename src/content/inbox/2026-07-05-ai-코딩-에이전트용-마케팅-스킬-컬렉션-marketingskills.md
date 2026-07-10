@@ -1,6 +1,6 @@
 ---
 title: 'AI 코딩 에이전트용 마케팅 스킬 컬렉션 — marketingskills'
-pubDate: '2026-07-05'
+pubDate: '2026-07-05T00:22:47+09:00'
 description: 'Claude Code 등 AI 코딩 에이전트에 CRO, SEO, 카피라이팅 등 마케팅 전문 스킬을 추가하는 오픈소스 markdown 컬렉션'
 summary: 'marketingskills의 아키텍처, 설치법, 사용법, 카테고리 체계, v2 마이그레이션을 정리한 학습 노트로, AI 에이전트에 마케팅 스킬을 도입하는 전 과정을 파악할 수 있다.'
 lang: ko

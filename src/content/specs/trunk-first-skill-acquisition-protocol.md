@@ -1,6 +1,6 @@
 ---
 title: 몸통-우선 스킬 습득 프로토콜 (Trunk-First Skill Acquisition Protocol)
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T16:31:32+09:00'
 description: 새 언어·프레임워크 같은 스킬 습득 도메인을 처음 배울 때, 완결 실행 가능한 최소 단위부터 잡고 복잡도를 계단식으로 넓히도록 에이전트가 세션을 운영하는 실행 지침
 summary: "허브 학습 주제가 '이걸 할 수 있게 되고 싶다'류 스킬 습득 도메인일 때, 에이전트가 맵을 추상화 층위가 아니라 몸통(완결 실행 가능한 최소집합)→굵은 가지→잔가지/잎의 능력-해금 순서로 라벨링하도록 강제하는 턴 단위 절차다. 근거(왜 이 순서가 맞는가)는 wiki의 simple-to-complex-sequencing/pareto-principle-in-learning 카드에 있고, 이 문서는 그것을 실행 가능한 형태로만 옮긴다."
 lang: ko

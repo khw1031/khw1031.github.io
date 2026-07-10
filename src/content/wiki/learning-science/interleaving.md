@@ -1,7 +1,7 @@
 ---
 type: Reference
 title: Interleaving (인터리빙)
-pubDate: '2026-07-07'
+pubDate: '2026-07-07T22:32:16+09:00'
 resource: https://onlinelibrary.wiley.com/doi/abs/10.1002/acp.1598
 description: 여러 유형의 문제를 섞어 연습하면 '문제를 보고 전략을 고르는' 능력이 학습된다는 원리
 summary: "한 유형만 블록으로 몰아 풀기(blocked)보다 여러 유형을 섞어(interleaved) 연습하면, 연속한 문제를 같은 전략으로 풀 수 없게 되어 '문제 자체로부터 전략을 고르는' 능력이 길러진다. Taylor & Rohrer(2010)에서 인터리빙군의 지연 시험 성적이 블록군을 크게 앞섰다."

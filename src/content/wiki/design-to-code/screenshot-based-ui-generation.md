@@ -1,7 +1,7 @@
 ---
 type: Reference
 title: Screenshot 기반 UI 생성 (소스 무관)
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T17:23:17+09:00'
 description: 어떤 도구로 만들었든 상관없는 스크린샷/스케치 이미지를 비전 모델에 그대로 넣어 코드를 생성하는, 구조화된 디자인 파일 파싱이 필요 없는 접근
 lang: ko
 tags: ['design-to-code', 'vision-model', 'screenshot-to-code', 'ai-agent-workflow']

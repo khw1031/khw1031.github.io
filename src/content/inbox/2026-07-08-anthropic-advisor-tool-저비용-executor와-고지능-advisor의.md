@@ -1,6 +1,6 @@
 ---
 title: 'Anthropic Advisor Tool — 저비용 executor와 고지능 advisor의 2단 추론 아키텍처'
-pubDate: '2026-07-08'
+pubDate: '2026-07-08T12:07:02+09:00'
 description: 'Anthropic Advisor Tool의 작동 원리, 모델 호환 규칙, 비용 구조, 프롬프팅 전략을 정리한 학습 리포트.'
 summary: '빠른 executor 모델이 고지능 advisor 모델에게 생성 도중 전략적 조언을 구하는 Advisor Tool의 구조와 비용 절감 메커니즘, 프롬프팅 핵심을 한 장에 담았다.'
 lang: ko

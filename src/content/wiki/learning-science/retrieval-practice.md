@@ -1,7 +1,7 @@
 ---
 type: Reference
 title: Retrieval Practice (인출 연습)
-pubDate: '2026-07-07'
+pubDate: '2026-07-07T22:32:16+09:00'
 resource: https://journals.sagepub.com/doi/10.1111/j.1467-9280.2006.01693.x
 description: 기억에서 능동적으로 꺼내는 행위가 다시 읽기보다 장기 파지를 크게 높인다는 testing effect
 summary: "정보를 다시 읽는 것보다 기억에서 인출하는 행위 자체가 장기 파지를 강화한다는 원리(testing effect). 지연 시험에서 인출 연습군이 반복 학습군을 앞서며, 이미 인출한 정보가 이후 새 학습의 파지까지 높이는 forward effect도 관찰된다."

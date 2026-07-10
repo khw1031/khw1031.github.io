@@ -1,6 +1,6 @@
 ---
 title: 'Astro Islands 간 상태 공유: Nano Stores 활용'
-pubDate: '2026-07-07'
+pubDate: '2026-07-07T01:34:35+09:00'
 description: 'Astro의 Islands 아키텍처에서 Nano Stores를 사용해 프레임워크 간 클라이언트 상태를 공유하는 방법과 API 사용법'
 summary: 'Astro의 Islands 아키텍처에서 React, Vue, Svelte 등 서로 다른 프레임워크 컴포넌트 간 상태를 공유하려면 Nano Stores를 사용한다. atom과 map API로 경량 프레임워크 독립 상태 관리를 구현할 수 있다.'
 lang: ko
