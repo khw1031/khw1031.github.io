@@ -47,10 +47,13 @@ repo-operating-targets: src/content/idea, .agents/skills/ideabox
 
 ## Template
 
+`pubDate`는 초 단위 KST 타임스탬프로 스탬프한다(같은 날 항목의 정렬 순서를 결정적으로
+만든다). `date "+%Y-%m-%dT%H:%M:%S%z"`로 얻어 offset에 콜론을 넣어 아래 형태로 쓴다.
+
 ```markdown
 ---
 title: (아이디어 한 줄)
-pubDate: 'YYYY-MM-DD'
+pubDate: '2026-07-10T02:35:45+09:00'
 description: (한 줄)
 tags: [idea-inbox, ...]
 ---
