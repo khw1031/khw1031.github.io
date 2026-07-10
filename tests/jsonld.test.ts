@@ -30,8 +30,11 @@ describe('blogPostingJsonLd', () => {
     });
     expect(ld['@type']).toBe('BlogPosting');
     expect(ld.headline).toBe('Hello');
-    expect(ld.datePublished).toBe('2025-01-15T00:00:00.000Z');
-    expect(ld.dateModified).toBe('2025-01-15T00:00:00.000Z');
+    // KST offset (+09:00), not toISOString()'s UTC — 2025-01-15T00:00:00Z is
+    // 2025-01-15 09:00 in KST, so the calendar date matches the page's
+    // formatDate() rendering instead of drifting a day on the UTC side.
+    expect(ld.datePublished).toBe('2025-01-15T09:00:00+09:00');
+    expect(ld.dateModified).toBe('2025-01-15T09:00:00+09:00');
   });
 
   it('uses updatedDate for dateModified when provided', () => {
@@ -42,7 +45,7 @@ describe('blogPostingJsonLd', () => {
       url: 'https://khw1031.github.io/posts/hello/',
       siteUrl: SITE,
     });
-    expect(ld.dateModified).toBe('2025-02-01T00:00:00.000Z');
+    expect(ld.dateModified).toBe('2025-02-01T09:00:00+09:00');
   });
 
   it('omits description when empty', () => {

@@ -1,3 +1,5 @@
+import { toKSTISOString } from './kst';
+
 export interface PersonInput {
   siteUrl: string;
 }
@@ -43,8 +45,8 @@ export function blogPostingJsonLd(input: BlogPostingInput): Record<string, unkno
     '@context': 'https://schema.org',
     '@type': 'BlogPosting',
     headline: input.title,
-    datePublished: input.pubDate.toISOString(),
-    dateModified: (input.updatedDate ?? input.pubDate).toISOString(),
+    datePublished: toKSTISOString(input.pubDate),
+    dateModified: toKSTISOString(input.updatedDate ?? input.pubDate),
     url: input.url,
     inLanguage: 'ko',
     author: {

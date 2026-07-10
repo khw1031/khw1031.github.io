@@ -124,17 +124,6 @@ export async function getItemsByTag(tag: string): Promise<PostListItem[]> {
   return (await getPublicItems()).filter((item) => (item.tags ?? []).includes(tag));
 }
 
-// Render the calendar date in KST (Asia/Seoul), the authoring-timezone ground
-// truth for pubDate. A plain toISOString().slice(0,10) formats in UTC, which
-// shows the previous day for notes authored 00:00-09:00 KST — the off-by-one
-// this project has explicitly fixed. en-CA yields a YYYY-MM-DD string.
-const KST_DATE = new Intl.DateTimeFormat('en-CA', {
-  timeZone: 'Asia/Seoul',
-  year: 'numeric',
-  month: '2-digit',
-  day: '2-digit',
-});
-
-export function formatDate(d: Date): string {
-  return KST_DATE.format(d);
-}
+// KST formatting has no astro:content dependency, so it lives in ./kst and is
+// re-exported here for existing callers (`formatDate` from './collections').
+export { formatDate } from './kst';
