@@ -6,14 +6,24 @@ interface Props {
 }
 
 const { items } = Astro.props;
+
+// List-display only: truncate long titles with an ellipsis.
+// Full title stays intact in headings, SEO meta, and RSS.
+const TITLE_MAX = 50;
+const truncateTitle = (title: string) =>
+  title.length > TITLE_MAX ? `${title.slice(0, TITLE_MAX).replace(/\s+$/, '')}…` : title;
 ---
 
 <ul class="not-prose list-none p-0 m-0 space-y-5">
   {
     items.map((item) => (
       <li>
-        <a href={item.href} class="text-foreground hover:underline underline-offset-2">
-          {item.title}
+        <a
+          href={item.href}
+          title={item.title}
+          class="text-foreground hover:underline underline-offset-2"
+        >
+          {truncateTitle(item.title)}
         </a>
         <div class="max-w-md">
           {item.description && (
