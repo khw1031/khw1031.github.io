@@ -40,3 +40,6 @@ coverage/
 playwright-report/
 test-results/
 .lighthouseci/
+
+# personal performance-review drafts (sensitive; keep local only)
+src/content/inbox/2026-h1-self-review*.md
