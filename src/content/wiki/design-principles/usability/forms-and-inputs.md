@@ -8,6 +8,7 @@ lang: ko
 tags: ['forms', 'input', 'validation', 'wcag', 'accessibility', 'usability']
 summary: "폼은 사용자가 시스템과 데이터를 주고받는 가장 부하 높은 접점이라 사용성 원칙이 촘촘하다. WCAG는 규범 하한을 정한다 — 3.3.1 에러 식별(A)·3.3.2 레이블/지시(A)·3.3.3 에러 제안(AA)·3.3.4 에러 예방(AA)·1.3.5 입력 목적 식별(AA, autocomplete)·4.1.2 접근 가능한 이름(A), 그리고 2.2 신설 3.3.7 중복 입력·3.3.8 접근 가능한 인증. 실무 근거는 Wroblewski(상단 정렬 레이블이 가장 빠름)·NN/g(인라인 검증, 필드 옆 에러)·Baymard. placeholder를 레이블로 쓰는 것은 안티패턴 — 입력 시작하면 사라져 기억·에러 확인·접근성을 해친다."
 lintHash: '5c89853db218'
+polishHash: '5c89853db218'
 ---
 
 > 한 줄 명제: 레이블은 항상 보이게, 에러는 필드 옆에서 고칠 방법과 함께, 입력은 네이티브 시맨틱으로 — placeholder를 레이블 대신 쓰지 마라.

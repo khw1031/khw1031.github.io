@@ -8,6 +8,7 @@ lang: ko
 tags: ['apple', 'hig', 'design-system', 'liquid-glass', 'sf-symbols', 'accessibility']
 summary: "Apple HIG는 이 라이브러리의 원리들이 플랫폼 네이티브로 구현된 한 사례다. 현행 디자인 언어는 Liquid Glass(WWDC25, 2025-06-09 발표; iOS 26·macOS Tahoe 26 등 model-year 26에 탑재) — 반투명·굴절 재질. 검증된 구체값: 터치 타깃 44pt, 시스템 폰트 SF Pro/SF Compact/New York + Dynamic Type(11 텍스트 스타일, 사용자 확대), SF Symbols 7,000+·9 웨이트·3 스케일·4 렌더 모드, Materials 5단계(ultraThin~ultraThick)+vibrancy, 시맨틱 색(고정 hex 미공개·자동 적응), 연속 곡률(squircle). 레이아웃은 고정 브레이크포인트가 아니라 축별 size class(regular/compact). 단 HIG 페이지는 SPA라 일부는 2차·SwiftUI/UIKit 문서로 검증."
 lintHash: '5d465f0ca7e5'
+polishHash: '5d465f0ca7e5'
 ---
 
 > 한 줄 명제: Apple HIG는 원리들이 플랫폼 네이티브로 구현된 사례 — 깊이는 그림자 램프가 아니라 반투명 Materials·vibrancy로, 반응형은 브레이크포인트가 아니라 축별 size class로, 색은 고정 hex 없는 시맨틱 색으로 푼다.

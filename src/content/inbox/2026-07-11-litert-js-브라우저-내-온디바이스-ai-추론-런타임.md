@@ -11,11 +11,12 @@ tags:
   - 'open-source'
   - 'optimization'
 canonical: 'https://github.com/google-ai-edge/LiteRT/tree/main/litert/js'
-lintHash: 'b86bb948a5ec'
+lintHash: '21b8995f1d44'
+polishHash: '21b8995f1d44'
 ---
 
 ## TL;DR
-- LiteRT.js는 브라우저에서 .tflite 모델을 WebGPU/WASM으로 추론하는 Google 오픈소스 런타임으로, TFJS 대체·혼용이 가능하나 모델 크기와 WebGPU op 지원 범위에 제약이 있다.
+- LiteRT.js는 브라우저에서 .tflite 모델을 WebGPU/WASM으로 추론하는 Google 오픈소스 런타임으로, TFJS 대체·혼용이 가능하나 ==모델 크기와 WebGPU op 지원 범위에 제약이 있다==.
 
 ## 큰 그림
 ```

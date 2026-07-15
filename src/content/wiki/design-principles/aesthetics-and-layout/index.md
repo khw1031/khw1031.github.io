@@ -7,6 +7,7 @@ lang: ko
 tags: ['typography', 'layout', 'grid', 'spacing', 'vertical-rhythm', 'web-design']
 summary: "좋은 웹 디자인의 미감은 무에서 발명된 게 아니라 500년 활자·인쇄 전통에서 계승됐다. 이 하위 허브는 그 계보를 네 카드로 추적한다: 주조소 점 크기에서 나온 조화 비율(typographic scale), 인쇄 베이스라인 그리드에서 온 웹 수직 리듬, 스위스 국제 타이포그래피 양식의 그리드가 12컬럼 웹 그리드와 CSS Grid로 이어진 계보(layout grid), 그리고 그 정점의 8pt spacing 시스템. 미감은 부분적으로 주관적이지만, 이 형식 골격은 처리 유창성이라는 규칙성에 기대어 반복 선호된다."
 lintHash: 'd65a6ac54ffb'
+polishHash: 'd65a6ac54ffb'
 ---
 
 > 한 줄 명제: 웹의 미감은 발명이 아니라 계승이다 — 활자 주조소의 점 크기, 인쇄의 베이스라인 그리드, 스위스 양식의 그리드가 각각 웹의 타입 스케일·수직 리듬·컬럼 그리드로 이어졌고, 그 정점에 8pt spacing이 있다.

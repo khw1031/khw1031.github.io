@@ -8,6 +8,7 @@ lang: ko
 tags: ['baseline-grid', 'vertical-rhythm', 'typography', 'line-height', 'css']
 summary: "인쇄에서 텍스트가 일정한 베이스라인에 정렬되던 규칙이 웹으로 넘어와 '수직 리듬'이 됐다. Richard Rutter(24 ways, 2006)가 그 웹 규칙을 정식화했다: line-height를 기본 리듬 단위로 정하고, 모든 수직 측정(line-height·margin·padding)을 그 단위의 배수(또는 깔끔한 약수)로 둬, 텍스트가 보이지 않는 일정 격자에 얹히게 한다. 원리는 Bringhurst의 인쇄 베이스라인 그리드이고, CSS box model이 이를 형식화한다."
 lintHash: '13e28c8fc3eb'
+polishHash: '13e28c8fc3eb'
 ---
 
 > 한 줄 명제: line-height 하나를 리듬 단위로 정하고, 모든 수직 간격을 그 배수로 두면 텍스트가 보이지 않는 격자에 얹혀 안정된 리듬이 생긴다.

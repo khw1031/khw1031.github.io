@@ -8,6 +8,7 @@ lang: ko
 tags: ['touch-target', 'accessibility', 'wcag', 'usability', 'mobile']
 summary: "Fitts의 법칙이 물리 수치 규범으로 굳은 결과. 플랫폼별로 값이 다르다: Apple HIG 44×44 pt, Google Material 48×48 dp(≈9mm)에 타깃 간 8dp 이상. 웹 표준은 두 기준이 병존한다 — WCAG 2.1 SC 2.5.5(44×44 CSS px, Level AAA)와 WCAG 2.2 SC 2.5.8(24×24 CSS px, Level AA + 간격 예외). 24와 44는 대체가 아니라 별개 기준이다. 작은 타깃은 오조준 에러를 늘리므로 크기와 함께 '간격'이 규범에 포함된다."
 lintHash: 'bcb26e811229'
+polishHash: 'bcb26e811229'
 ---
 
 > 한 줄 명제: 손가락은 정밀하지 않다 — Apple 44pt, Material 48dp, WCAG 2.2 최소 24 / 2.1 권장 44 CSS px. 크기만큼 타깃 사이 간격도 규범이다.

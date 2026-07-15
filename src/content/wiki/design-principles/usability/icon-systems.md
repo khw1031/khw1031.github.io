@@ -8,6 +8,7 @@ lang: ko
 tags: ['icons', 'pictograms', 'recognition', 'accessibility', 'wcag', 'material-symbols']
 summary: "아이콘은 인식-over-회상(Nielsen 6)을 활용하지만, 그 의미가 이미 학습·관습화됐을 때만 통한다 — NN/g 연구는 보편적으로 이해되는 아이콘은 극소수(홈·검색·프린트)이고 대부분 텍스트 레이블이 필요하다고 본다. 애매한 아이콘은 부하만 늘린다. 접근성상 아이콘 전용 버튼은 접근 가능한 이름(WCAG 4.1.2·1.1.1: aria-label/시각 숨김 텍스트)이 필요하고, 의미 있는 아이콘은 3:1 대비(1.4.11)를 지켜야 한다. Material Symbols(가변 폰트 4축)·SF Symbols는 24dp 그리드·옵티컬 사이징으로 체계화한다."
 lintHash: '4028d74251c9'
+polishHash: '4028d74251c9'
 ---
 
 > 한 줄 명제: 아이콘은 관습화됐을 때만 인식되고, 대부분 텍스트 레이블이 필요하다 — 아이콘 전용 버튼엔 접근 가능한 이름을, 의미 있는 아이콘엔 3:1 대비를.

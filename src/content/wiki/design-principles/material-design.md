@@ -8,6 +8,7 @@ lang: ko
 tags: ['material-design', 'design-system', '8dp-grid', 'material-you', 'accessibility', 'example']
 summary: "Material Design은 이 카테고리의 앵커가 아니라, 이 라이브러리가 다루는 원리(타이포·spacing·elevation·색·접근성)가 한 시스템으로 어떻게 구현되는지 보여주는 '한 사례'다 — Apple HIG·IBM Carbon·Tailwind와 나란한. 인쇄 기반 요소를 시각 기반으로 삼고, 8dp/4dp 그리드·12컬럼 반응형·48×48dp 타깃·4.5:1 대비로 규범화하며, M3(Material You)의 동적 색은 개인 표현이 접근 가능한 대비를 깨지 않게 설계됐다. 이런 시스템의 토큰·의도를 코딩 에이전트에 넘기는 산출물 포맷이 앵커인 DESIGN.md다."
 lintHash: '2e79f28a5341'
+polishHash: '2e79f28a5341'
 ---
 
 > 한 줄 명제: Material Design은 이 라이브러리의 원리들이 한 시스템으로 실제 구현된 **사례**다(앵커가 아니라 예시) — Apple·Carbon·Tailwind처럼, DESIGN.md로 인코딩할 수 있는 여러 디자인 시스템 중 하나.

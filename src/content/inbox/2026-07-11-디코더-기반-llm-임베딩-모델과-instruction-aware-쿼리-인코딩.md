@@ -11,7 +11,8 @@ tags:
   - 'embeddings'
   - 'research'
 canonical: 'https://huggingface.co/Qwen/Qwen3-Embedding-8B'
-lintHash: 'f01a32911c6c'
+lintHash: 'e38016b8d3e0'
+polishHash: 'e38016b8d3e0'
 ---
 
 ## TL;DR
@@ -35,7 +36,7 @@ lintHash: 'f01a32911c6c'
 - **왜 디코더 기반 LLM을 임베딩 백본으로 쓰나**: E5-mistral 논문의 핵심 논거는 "generative language modeling and text embeddings are the two sides of the same coin" — 생성과 임베딩이 같은 언어 이해 능력에서 나온다는 것. 또한 "Since LLMs such as Mistral have been extensively pre-trained on web-scale data, contrastive pre-training offers little additional benefit" — 이미 웹 규모로 사전학습된 LLM은 BERT류가 필요로 했던 별도 대규모 대조학습 없이도 소량 파인튜닝만으로 강한 임베딩을 얻는다(논문 실험: 대조 사전학습 유무 차이 66.6 vs 66.7, 거의 없음).
 - **Last-token([EOS]) pooling**: causal attention에서는 토큰이 자기 이전 토큰만 본다. 시퀀스의 마지막 토큰만 유일하게 "앞의 모든 내용을 다 본" 위치라서, 그 지점의 hidden state를 문장 전체의 압축 표현으로 쓴다. 논문 실험에서 last-token pooling이 mean pooling보다 근소 우세(64.5 vs 64.1)했지만, 강한 이론적 근거는 따로 제시되지 않는다.
 - **Instruction-aware 인코딩**: 쿼리 앞에 `Instruct: {task_description}\nQuery: {query}` 형식으로 태스크 설명을 붙인다(Qwen3-Embedding 공식 모델 카드에 정확한 포맷 명시). 같은 모델 하나로 "웹 검색", "중복 질문 탐지", "사실 확인용 검색" 등 서로 다른 "관련성" 정의를 요구하는 태스크를 다 커버하려면, 그 태스크가 뭔지 텍스트로 명시해야 임베딩 공간이 그 목적에 맞게 조정된다.
-- **왜 쿼리에만 instruction을 붙이고 문서엔 안 붙이나(핵심 질문)**: E5-mistral 논문 원문 — "In this way, the document index can be prebuilt, and we can customize the task to perform by changing only the query side." 순전히 실무적 효율성 문제다. 문서 쪽에도 instruction을 붙이면 태스크가 바뀔 때마다 전체 문서 인덱스를 다시 임베딩해야 한다(비용 큼). 쿼리 쪽에만 붙이면 문서 인덱스는 한 번 만들어두고 재사용하면서 쿼리만 바꿔 여러 태스크에 대응할 수 있다. Qwen3-Embedding 모델 카드도 "No need to add instruction for retrieval documents"로 동일하게 확인해준다.
+- **왜 쿼리에만 instruction을 붙이고 문서엔 안 붙이나(핵심 질문)**: E5-mistral 논문 원문 — "In this way, the document index can be prebuilt, and we can customize the task to perform by changing only the query side." 순전히 실무적 효율성 문제다. 문서 쪽에도 instruction을 붙이면 태스크가 바뀔 때마다 전체 문서 인덱스를 다시 임베딩해야 한다(비용 큼). ==쿼리 쪽에만 붙이면 문서 인덱스는 한 번 만들어두고 재사용하면서 쿼리만 바꿔 여러 태스크에 대응할 수 있다==. Qwen3-Embedding 모델 카드도 "No need to add instruction for retrieval documents"로 동일하게 확인해준다.
 
 ## 깊이
 - **[실제 코드 적용 사례]** `llm-service-dev` 실습 프로젝트의 `Qwen3Embeddings` 래퍼가 이 컨벤션을 정확히 구현한다: `embed_query()`만 오버라이드해 `f"Instruct: {self.instruction}\nQuery: {text}"`로 감싸고, `embed_documents()`(문서용)는 오버라이드하지 않아 원문 그대로 나간다. 기본 instruction 문자열 `"Given a web search query, retrieve relevant passages that answer the query"`도 E5-mistral/Qwen3-Embedding 쪽이 예시로 드는 "웹 검색" 태스크 설명 그대로다.

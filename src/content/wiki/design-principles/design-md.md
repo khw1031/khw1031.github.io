@@ -8,6 +8,7 @@ lang: ko
 tags: ['design-md', 'design-tokens', 'ai-agents', 'design-system', 'design-to-code']
 summary: "이 카테고리의 앵커는 특정 디자인 시스템(Material 등)이 아니라 산출물 포맷 DESIGN.md다. DESIGN.md(google-labs-code, alpha v0.3.0)는 'AGENTS.md의 시각 디자인 버전' — YAML frontmatter(기계용 토큰: color/dimension/typography/rounded/spacing)와 마크다운 산문(사람·에이전트용 의도)을 한 파일에 담고, 섹션 순서를 Overview→Colors→Typography→Layout→Elevation&Depth→Shapes→Components→Do's and Don'ts로 고정한다. 토큰만으로 판단 안 되는 '왜·언제·예외'를 산문이 채운다. 이 라이브러리의 원리 카드들이 바로 그 산문 섹션을 채울 근거다 — 즉 DESIGN.md의 섹션 구조가 이 카테고리의 조직 렌즈다."
 lintHash: 'd09305db614c'
+polishHash: 'd09305db614c'
 ---
 
 > 한 줄 명제: 이 카테고리의 산출물은 특정 디자인 시스템이 아니라 **DESIGN.md** — 좋은 UI/UX 원리를, 코딩 에이전트가 읽는 토큰+산문 포맷의 각 섹션(Colors·Typography·Layout·Elevation·Shapes·Components·Do's&Don'ts)에 채우는 것이 목표다.

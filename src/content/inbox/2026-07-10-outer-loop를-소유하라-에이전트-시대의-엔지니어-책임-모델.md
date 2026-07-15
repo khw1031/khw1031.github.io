@@ -11,11 +11,12 @@ tags:
   - 'workflow'
   - 'organization'
 canonical: 'https://x.com/addyosmani/status/2074927530482835916?s=52'
-lintHash: '7ac64b3e880b'
+lintHash: '48d59b07ab30'
+polishHash: '48d59b07ab30'
 ---
 
 ## TL;DR
-- 에이전트가 실행(inner loop)을 맡을수록 엔지니어는 검증·판단·책임(outer loop)을 반드시 소유해야 하며, 그렇지 않으면 cognitive debt와 trust gap이 누적된다.
+- 에이전트가 실행(inner loop)을 맡을수록 ==엔지니어는 검증·판단·책임(outer loop)을 반드시 소유해야== 하며, 그렇지 않으면 cognitive debt와 trust gap이 누적된다.
 
 ## 큰 그림
 

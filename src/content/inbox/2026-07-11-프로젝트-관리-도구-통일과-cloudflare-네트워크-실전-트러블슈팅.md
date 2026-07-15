@@ -10,11 +10,12 @@ tags:
   - 'agentic-coding'
   - 'troubleshooting'
 canonical: 'https://x.com/lqez/status/2075419299527983354?s=12'
-lintHash: 'd5ebb3d68e23'
+lintHash: '7d4282ed59b9'
+polishHash: '7d4282ed59b9'
 ---
 
 ## TL;DR
-- 프로젝트 명령을 Makefile/Taskfile로 통일하면 사람과 AI 에이전트 모두의 인지부하가 줄고, cloudflared는 ISP가 UDP를 제한하면 QUIC 대신 HTTP/2로 바꿔야 정상 속도가 나온다.
+- 프로젝트 명령을 Makefile/Taskfile로 통일하면 사람과 AI 에이전트 모두의 인지부하가 줄고, ==cloudflared는 ISP가 UDP를 제한하면 QUIC 대신 HTTP/2로 바꿔야 정상 속도가 나온다==.
 
 ## 큰 그림
 
@@ -34,7 +35,7 @@ lintHash: 'd5ebb3d68e23'
 ## 핵심
 - 이 스레드는 단일 주제가 아닌 **여러 독립 주제의 모음**이다. 기술적으로 가장 정보가 밀집된 부분은 **주제A(명령 표준화)**와 **주제B(cloudflared 프로토콜)**이다.
 - 주제A에서 저자는 Makefile 대신 **Taskfile**(taskfile.dev)을 선택했다고 밝혔고, 답글에서는 `check:all` 같은 **명령 이름·종료 코드 형식을 통일**하면 여러 리포지토리를 오가는 AI 에이전트가 매번 검증법을 재추론하지 않아도 된다는 주장이 제기되었다(저자 주장은 아니고 답글자의 제안).
-- 주제B에서 저자는 cloudflared의 **기본 프로토콜이 QUIC(UDP 기반)**인 탓에 속도가 400KB/s로 느렸으나, 원인은 Cloudflare가 아니라 **ISP(KT)가 UDP를 제한**하는 것이었고 `--protocol http2` 옵션으로 35MB/s까지 회복했다고 한다.
+- 주제B에서 저자는 cloudflared의 **기본 프로토콜이 QUIC(UDP 기반)**인 탓에 속도가 400KB/s로 느렸으나, ==원인은 Cloudflare가 아니라 ISP(KT)가 UDP를 제한하는 것==이었고 `--protocol http2` 옵션으로 35MB/s까지 회복했다고 한다.
 
 ## 깊이
 - **[주제A — 명령 표준화와 에이전트]** Makefile은 언어 종속성이 적고 범용적이지만 문법이 까다롭다. Taskfile은 YAML 기반이라 가독성이 좋고 크로스 플랫폼 지원이 강점이다. 답글자가 제안한 `check:all` 규약은 **명령 시그니처 계약(interface contract)**과 같다 — 모든 리포가 같은 이름·같은 종료 코드 형식을 쓰면, CI나 에이전트가 리포별 차이를 학습할 필요가 사라진다. (저자 주장은 아니며 답글자의 제안임을 명시)

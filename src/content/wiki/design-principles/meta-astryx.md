@@ -8,6 +8,7 @@ lang: ko
 tags: ['astryx', 'meta', 'design-system', 'mcp', 'agent-ready', 'design-md']
 summary: "Meta가 2026-06-18 오픈소스로 공개한 Astryx는 사내 8년(코드명 XDS, 13,000+ 앱)을 거친 코드 기반 디자인 시스템이다. 이 카테고리의 앵커 DESIGN.md와 같은 문제 — '에이전트에게 디자인 컨텍스트를 지속적으로 전달' — 를 한 단계 더 밀어붙인 구현 사례다. 핵심은 컴포넌트마다 하나뿐인 .doc.mjs 문서 파일이 CLI·문서 사이트·MCP 서버(search/get 두 도구)로 동시에 파생된다는 아키텍처. DESIGN.md가 '에이전트에게 주는 편지'라면 Astryx는 '에이전트가 직접 열람하는 서고'다. StyleX로 작성되지만 소비자는 몰라도 되게 분리했고(이 분리 자체가 LLM 코드 품질 이슈에서 나옴), 접근성은 WAI-ARIA APG + PR별 axe 감사. beta(0.x)."
 lintHash: 'c3d452d29f49'
+polishHash: 'c3d452d29f49'
 ---
 
 > 한 줄 명제: Astryx는 컴포넌트당 하나의 `.doc.mjs`를 유일 원본으로 두고 CLI·문서사이트·MCP를 파생해 사람과 에이전트가 같은 참조를 읽게 한 코드 기반 디자인 시스템 — DESIGN.md가 "에이전트에게 주는 편지"라면 Astryx는 "에이전트가 직접 열람하는 서고"다.

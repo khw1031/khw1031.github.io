@@ -8,6 +8,7 @@ lang: ko
 tags: ['norman', 'gulf-of-execution', 'gulf-of-evaluation', 'affordance', 'signifier', 'mental-model']
 summary: "Don Norman(User Centered System Design 1986, The Design of Everyday Things 2013)의 통합 프레임. 사람이 무언가를 쓸 때 두 간극에 부딪힌다 — 실행의 간극(어떻게 조작하지?)과 평가의 간극(무슨 일이 일어났지?). 7단계 행동 주기 중 실행 3단계(plan·specify·perform)가 앞의 간극을, 평가 3단계(perceive·interpret·compare)가 뒤의 간극을 건넌다. 디자이너는 실행의 간극을 시그니파이어·제약·매핑·개념 모델로, 평가의 간극을 피드백·개념 모델로 좁힌다. 이 카테고리의 사용성 법칙들이 왜 통하는지 설명하는 상위 이론."
 lintHash: '11e501f400e8'
+polishHash: '11e501f400e8'
 ---
 
 > 한 줄 명제: 좋은 디자인 = 사용자 의도와 시스템 사이의 두 간극을 좁히는 것 — "어떻게 하지?"(실행)는 시그니파이어·매핑으로, "먹혔나?"(평가)는 피드백으로.

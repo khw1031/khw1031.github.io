@@ -8,6 +8,7 @@ lang: ko
 tags: ['spacing', '8pt-grid', 'design-tokens', 'whitespace', 'web-design', 'material-design']
 summary: "spacing은 좋은 웹 디자인에서 가장 과소평가되면서 가장 결정적인 골격이다. 현대 디자인 시스템은 간격을 임의로 두지 않고 고정 스케일(대개 4px 기준, 8px 격자)의 토큰으로 관리한다: Material 8dp/4dp, Carbon 13스텝(2·4·8·…·160px), Polaris(4px 기준), Atlassian(8px 기준), Tailwind(4px 기준). 8을 쓰는 이유는 대부분의 화면 밀도가 8로 나눠떨어지고 @2x·@3x에서도 정수로 유지돼 결정을 줄이기 때문 — 단 이 '나눗셈' 근거는 주로 2차 출처다. spacing은 미감(리듬)이자 사용성(Gestalt 근접성으로 정보 구조 전달)이다."
 lintHash: '3cf85256b9f4'
+polishHash: '3cf85256b9f4'
 ---
 
 > 한 줄 명제: 간격을 임의로 두지 말고 하나의 스케일(4px 기준·8px 격자)로 토큰화하라 — 8은 화면 밀도로 잘 나눠떨어지고, 간격은 미감(리듬)이자 사용성(그룹핑)이다.

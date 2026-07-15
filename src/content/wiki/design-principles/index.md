@@ -8,6 +8,7 @@ lang: ko
 tags: ['design-principles', 'ui-ux', 'usability', 'typography', 'design-md', 'web-design']
 summary: "이 카테고리의 산출물 프레임은 DESIGN.md — 코딩 에이전트에게 시각 아이덴티티를 넘기는 포맷(YAML 토큰 + 마크다운 산문)이다. '좋은 UI/UX가 무엇인가'를 사용성(취향이 아니라 인지 법칙으로 측정·근거화 가능; Fitts·Hick·Nielsen·WCAG·Gestalt)과 미감(처리 유창성이라는 규칙성; 출판→웹의 typographic scale·baseline·grid·8pt spacing 계보)의 두 축으로 1차 출처로 정리하고, 그 원리들을 DESIGN.md의 섹션(Overview·Colors·Typography·Layout·Elevation&Depth·Shapes·Components·Do's and Don'ts)에 매핑한다. Material Design 등은 앵커가 아니라 이 원리들이 한 시스템으로 구현된 '사례'다."
 lintHash: '2094038f31f2'
+polishHash: '2094038f31f2'
 ---
 
 > 한 줄 명제: 좋은 UI/UX는 취향으로 끝나지 않는다 — 사용성은 인지 법칙으로 측정·근거화되고, 미감도 "쉽게 처리되는 것을 아름답다고 느낀다"는 규칙성을 가진다. 이 카테고리는 그 근거를 모아, **DESIGN.md(에이전트에 시각 아이덴티티를 넘기는 포맷)의 각 섹션을 무슨 근거로 채울지**의 라이브러리로 조직한다.

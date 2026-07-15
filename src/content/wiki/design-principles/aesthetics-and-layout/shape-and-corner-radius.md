@@ -8,6 +8,7 @@ lang: ko
 tags: ['shape', 'border-radius', 'squircle', 'corner-radius', 'design-tokens', 'material-design']
 summary: "형태(모서리 처리)는 DESIGN.md의 Shapes 섹션이자 rounded 토큰의 근거다. CSS border-radius가 프리미티브(사각/원형/타원 모서리, 음수 불가). 연속 곡률(squircle=superellipse)은 단순 원호와 수학적으로 다르며 곡률이 매끄럽게 이어져(G2 연속) 눈에 '흐르듯' 보인다 — 오래 SVG로 흉내냈으나 이제 CSS corner-shape/superellipse() 제안(Borders L4, 실험적)이 다룬다. Material은 셰이프를 토큰 스케일(None 0→ExtraLarge 28dp→Full 50%)로 두고 rounded/cut/square 세 처리를 지원하며, 셰이프가 주의·브랜드·상태를 전달한다고 본다. 둥근 형태는 따뜻하고 친근하게 지각된다(UXPA)."
 lintHash: 'f4b76cd66368'
+polishHash: 'f4b76cd66368'
 ---
 
 > 한 줄 명제: 모서리 형태는 브랜드·의미를 나르는 토큰이다 — border-radius가 프리미티브, squircle(superellipse)은 곡률이 매끄럽게 이어지는 형태, Material은 셰이프를 스케일로 토큰화한다.

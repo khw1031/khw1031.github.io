@@ -8,6 +8,7 @@ lang: ko
 tags: ['dark-mode', 'theming', 'design-tokens', 'prefers-color-scheme', 'color', 'accessibility']
 summary: "테마는 색을 하드코딩하지 않고 '역할(role)' 토큰에 매핑해, 값만 바꿔 전체를 다시 칠하는 것이다. 웹은 prefers-color-scheme로 OS 선호를 감지하고 color-scheme/light-dark()로 선언한다. 시맨틱 토큰(surface·on-surface·text-primary)이 라이트/다크에서 다른 값으로 해석된다 — Carbon 4테마(White·g10·g90·g100), Material 색 역할, Apple 동적 시스템 색. Material 다크는 순수 검정 대신 어두운 회색(#121212)·탈채도 색을 권하고 M3는 톤 오버레이로 깊이를 낸다. WCAG 대비(4.5:1)는 두 테마 모두에 동일 적용."
 lintHash: '7acacc8f26e1'
+polishHash: '7acacc8f26e1'
 ---
 
 > 한 줄 명제: 테마는 색을 하드코딩하지 말고 역할 토큰에 매핑해 값만 바꾸는 것 — 순수 검정 대신 어두운 회색, 그리고 두 테마 모두 WCAG 대비를 지켜라.

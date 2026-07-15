@@ -8,6 +8,7 @@ lang: ko
 tags: ['cognitive-load', 'working-memory', 'progressive-disclosure', 'information-density', 'usability']
 summary: "작업기억은 심하게 제한적이다 — Miller(1956)의 유명한 7±2는 사실 절반은 수사였고 핵심은 '청킹'이며, 통제된 조건의 실제 순수 용량은 Cowan(2001)의 ~4 청크에 가깝다. Sweller의 인지 부하 이론은 이해(스키마 구축)에 기여하지 않는 외재 부하(extraneous load)가 성능·학습을 해친다고 본다. 그래서 좋은 UI는 비핵심 복잡도를 뒤로 미루고(progressive disclosure, NN/g) 비데이터 잉크를 걷어낸다(Tufte data-ink). 밀도는 맥락 의존이다."
 lintHash: '177bd80e0499'
+polishHash: '177bd80e0499'
 ---
 
 > 한 줄 명제: 사람이 한 번에 머릿속에 붙들 수 있는 건 몇 덩어리뿐(~4 청크)이다 — 이해에 기여하지 않는 부하를 줄이고, 비핵심은 뒤로 미뤄라.

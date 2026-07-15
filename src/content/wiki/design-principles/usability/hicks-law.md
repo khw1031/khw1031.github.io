@@ -8,6 +8,7 @@ lang: ko
 tags: ['hicks-law', 'usability', 'decision-time', 'cognitive-load', 'hci']
 summary: "W. E. Hick(1952)과 Ray Hyman(1953)이 독립적으로 보인, 결정·반응 시간이 선택지 집합이 담은 정보량(비트)에 선형으로 — 즉 선택지 수의 로그에 — 비례한다는 법칙: RT = a + b·log₂(n+1). UI 함의는 선택지를 줄이고·계층화하고·기본값을 제공하라는 것. 단, 무조건 적게가 아니라 정보 구조·친숙도와 함께 판단해야 한다."
 lintHash: '1449c1b3a95e'
+polishHash: '1449c1b3a95e'
 ---
 
 > 한 줄 명제: 선택지가 늘면 결정 시간은 로그로 늘어난다 — 그러니 줄이고, 묶고, 기본값을 줘라.

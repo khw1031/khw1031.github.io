@@ -8,6 +8,7 @@ lang: ko
 tags: ['ux-writing', 'microcopy', 'plain-language', 'error-messages', 'content-design', 'accessibility']
 summary: "인터페이스의 단어는 읽히고 음미되려는 게 아니라 사용자를 원하는 것으로 통과시키는 도구다(Podmajersky). 좋은 UX 라이팅은 목적 지향·간결·대화체·명료하고, voice/tone을 일관되게 유지한다. plain language(미국 Plain Writing Act 2010·ISO 24495-1:2023)는 쉬운 단어·짧은 문장·능동태·'you' 호칭을 권한다. WCAG 3.1.5(AAA)는 하위 중등 교육 수준 초과 시 대체본을 요구한다. 에러 메시지는 사람이 읽을 수 있게·사용자를 탓하지 말고·복구를 도와야 한다(NN/g, 휴리스틱 9). 버튼은 결과를 서술하는 액션 레이블('변경 저장')이 'OK/제출'보다 낫다."
 lintHash: 'a892f5ad04fb'
+polishHash: 'a892f5ad04fb'
 ---
 
 > 한 줄 명제: 인터페이스의 단어는 장식이 아니라 사용자를 목적지로 통과시키는 도구다 — 쉬운 말로, 사용자를 탓하지 말고, 버튼은 결과를 서술하라.

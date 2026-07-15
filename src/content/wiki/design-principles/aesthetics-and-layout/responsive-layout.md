@@ -8,6 +8,7 @@ lang: ko
 tags: ['responsive-design', 'media-queries', 'container-queries', 'css-grid', 'flexbox', 'mobile-first']
 summary: "layout-grid가 그리드의 계보라면, 이 카드는 그 그리드가 화면 크기에 어떻게 적응하는가다. Ethan Marcotte(2010)가 반응형 웹 디자인을 정의한 세 재료: 유동 그리드·유연한 이미지·미디어 쿼리. Wroblewski의 모바일 퍼스트는 작은 화면부터 설계하고 min-width로 향상한다. CSS Grid(2D)와 Flexbox(1D)는 배타가 아니라 조합한다. 컨테이너 쿼리(@container)는 뷰포트가 아니라 '컴포넌트가 놓인 공간'에 반응하는 전환이다(size 쿼리 2024 Baseline). Jen Simmons의 intrinsic web design은 minmax()·auto-fit·fr로 브레이크포인트 없이 적응한다."
 lintHash: '89b877cf2395'
+polishHash: '89b877cf2395'
 ---
 
 > 한 줄 명제: 그리드가 화면에 맞춰 적응하게 하라 — 유동 그리드·유연한 이미지·미디어 쿼리로 시작해, 모바일 퍼스트로 쌓고, 이제는 컨테이너 쿼리로 "컴포넌트가 놓인 공간"에 반응한다.

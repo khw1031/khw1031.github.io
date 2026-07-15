@@ -8,6 +8,7 @@ lang: ko
 tags: ['layout-grid', 'grid-system', 'swiss-design', 'css-grid', 'columns']
 summary: "레이아웃 그리드는 페이지를 컬럼·행·모듈로 나눠 마진·거터로 질서를 주는 체계다. 뿌리는 Jan Tschichold의 신 타이포그래피(1928)와 Josef Müller-Brockmann의 《Grid Systems in Graphic Design》(1981) — 스위스 국제 타이포그래피 양식의 '질서에의 의지'. 이것이 Nathan Smith의 960 Grid System(2008, 960px·12/16컬럼)으로 웹에 이식됐고, 다시 W3C CSS Grid Layout 스펙(2차원 격자, 아직 Candidate Recommendation)으로 브라우저 네이티브가 됐다."
 lintHash: 'e4c8cdd71555'
+polishHash: 'e4c8cdd71555'
 ---
 
 > 한 줄 명제: 페이지를 컬럼·모듈·거터로 나눠 질서를 주는 그리드는 스위스 인쇄 양식에서 왔고, 960.gs 12컬럼을 거쳐 CSS Grid로 웹의 뼈대가 됐다.

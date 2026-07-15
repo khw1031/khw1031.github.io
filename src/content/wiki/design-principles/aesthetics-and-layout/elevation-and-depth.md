@@ -9,6 +9,7 @@ lang: ko
 tags: ['elevation', 'depth', 'shadow', 'z-index', 'layering', 'design-tokens']
 summary: "깊이는 z축으로 표면 간 위계를 표현하는 것이다. 지각 근거는 Ramachandran(1988)의 '빛은 위에서 온다' 가정 — 위에서 진 그림자는 '올라옴', 반대는 '들어감'으로 읽힌다. 웹 프리미티브는 box-shadow(사각 박스), filter:drop-shadow(알파 윤곽), z-index/stacking context(opacity·transform·filter가 조용히 새 컨텍스트 생성). 현행 디자인 시스템은 무거운 스키어모픽 그림자 대신 낮은 불투명도의 다층 그림자(Tailwind ≤0.1, Fluent key+ambient, Radix 알파+1px 링)나 색 기반 레이어링(Carbon layer 토큰, Material 3 톤 엘리베이션, Apple 반투명 머티리얼)로 이동했다. 단 완전 플랫은 클릭 단서를 없애 역효과(NN/g)."
 lintHash: 'b3a2bfb78f99'
+polishHash: 'b3a2bfb78f99'
 ---
 
 > 한 줄 명제: 깊이는 "빛은 위에서 온다"는 지각을 이용해 z축 위계를 만드는 것 — 현행 흐름은 무거운 그림자가 아니라 낮은 불투명도 다층 그림자 + 색/머티리얼 기반 레이어링이다.

@@ -8,6 +8,7 @@ lang: ko
 tags: ['design-systems', 'landscape', 'design-tokens', 'mcp', 'comparison']
 summary: "이 라이브러리의 원리가 어느 한 벤더(Material)의 소유물이 아님을 보이는 비교 카탈로그. 다섯 이상 독립 조직의 현행 시스템을 놓고 보면 수렴이 뚜렷하다 — (1) 토큰화, (2) 시맨틱/파생 레이어, (3) 접근성 1급, (4) 단일 원본에서 멀티플랫폼, 그리고 (5) 가장 최근 축: 에이전트에 노출(Adobe spectrum-design-data-mcp·Spotify Encore MCP·Meta Astryx MCP). 갈리는 것은 전달 메커니즘·기준 단위·색 스케일 모양·파생 철학·컴포넌트 철학 — 즉 구현 표면은 교체 가능하고 원리는 아니다. 이것이 이 카테고리가 한 벤더가 아니라 이식 가능한 포맷 DESIGN.md에 앵커하는 이유다."
 lintHash: 'f6d4cac7cac4'
+polishHash: 'f6d4cac7cac4'
 ---
 
 > 한 줄 명제: 다섯 이상 독립 조직의 현행 디자인 시스템이 같은 원리(토큰·시맨틱·접근성·단일원본 멀티플랫폼·에이전트 노출)에 독립적으로 수렴한다 — 구현 표면(단위·스케일·API)만 다를 뿐. 그래서 원리는 벤더의 소유물이 아니다.

@@ -9,11 +9,12 @@ tags:
   - 'developer-productivity'
   - 'open-source'
 canonical: 'https://taskfile.dev/docs/getting-started'
-lintHash: '1be9ff87f1c3'
+lintHash: 'c93abd28e8fe'
+polishHash: 'c93abd28e8fe'
 ---
 
 ## TL;DR
-- Task는 `Taskfile.yml`에 쉘 명령을 YAML로 선언하면 `task <이름>` 한 줄로 실행하는 태스크 러너이며, Windows에서도 sh/bash 구문을 그대로 돌릴 수 있는 크로스플랫폼 쉘(mvdan/sh)이 핵심이다.
+- Task는 `Taskfile.yml`에 쉘 명령을 YAML로 선언하면 `task <이름>` 한 줄로 실행하는 태스크 러너이며, ==Windows에서도 sh/bash 구문을 그대로 돌릴 수 있는 크로스플랫폼 쉘(mvdan/sh)==이 핵심이다.
 
 ## 큰 그림
 ```

@@ -8,6 +8,7 @@ lang: ko
 tags: ['typographic-scale', 'modular-scale', 'typography', 'bringhurst', 'web-design']
 summary: "16세기 활자 주조소가 주조한 표준 점 크기(6·7·8·…·72pt)는 임의가 아니라 조화로운 비율의 집합이었다. Robert Bringhurst는 이를 '음악 음계에 비유되는 미리 정해진 조화 비율'로 정식화했다. Tim Brown(A List Apart, 2011)이 이를 웹으로 옮겨 '모듈러 스케일' — 기준 크기 × 비율(황금비 1.618, 완전4도 1.333, 장3도 1.25 등)로 크기를 생성 — 을 대중화했다. 크기를 임의로 고르지 않고 비율로 관계 지으면 위계가 조화롭게 들린다. 단 스케일은 규칙이 아니라 도구다."
 lintHash: 'a93fbdbf483b'
+polishHash: 'a93fbdbf483b'
 ---
 
 > 한 줄 명제: 글자 크기를 임의로 고르지 말고 하나의 비율로 관계 지어라 — 활자 주조소의 점 크기가 음악 음계 같은 조화 비율이었고, 웹의 모듈러 스케일이 그 후예다.

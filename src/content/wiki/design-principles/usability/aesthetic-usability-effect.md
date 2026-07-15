@@ -8,6 +8,7 @@ lang: ko
 tags: ['aesthetic-usability-effect', 'usability', 'aesthetics', 'perception', 'emotional-design']
 summary: "Masaaki Kurosu & Kaori Kashimura(1995, CHI)가 26개 ATM 레이아웃을 252명에게 평가시켜, '겉보기 사용성(apparent usability)'과 '아름다움'의 상관이 강하다는 것을 처음 보였다. Noam Tractinsky et al.(2000, 'What is beautiful is usable')은 이를 재현·확장해, 시스템의 미감이 사용 전후 사용성 인식에 영향을 준 반면 실제 사용성은 미감 인식에 영향을 주지 못했음을 보였다. 미감이 주관적이어서 무시할 수 있다는 통념을 깨는, 두 축을 잇는 다리."
 lintHash: '491bff2fe6d8'
+polishHash: '491bff2fe6d8'
 ---
 
 > 한 줄 명제: 예쁜 것을 사람들은 실제로 "더 쓰기 쉽다"고 느낀다 — 미감은 사용성 인식에 직접 영향을 주며, 작은 결함에 대한 관용마저 만든다.

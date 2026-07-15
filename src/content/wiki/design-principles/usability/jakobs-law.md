@@ -8,6 +8,7 @@ lang: ko
 tags: ['jakobs-law', 'usability', 'convention', 'mental-model', 'consistency']
 summary: "Jakob Nielsen이 2000년 'End of Web Design'에서 정립한 법칙: '사용자는 다른 사이트에서 대부분의 시간을 보낸다.' 따라서 사용자는 당신 사이트도 이미 아는 다른 사이트들처럼 동작하기를 기대한다. 함의는 관습(장바구니 우상단, 로고=홈, 밑줄=링크)을 따라 기존 멘탈 모델을 재사용시키라는 것 — 새 규칙 학습 비용을 없앤다. 차별화는 관습을 지킨 위에서 선택적으로."
 lintHash: '4aae319d41bd'
+polishHash: '4aae319d41bd'
 ---
 
 > 한 줄 명제: 사용자는 당신 사이트보다 다른 사이트에서 더 오래 산다 — 그들이 이미 아는 대로 동작하게 만들면 학습 비용이 사라진다.

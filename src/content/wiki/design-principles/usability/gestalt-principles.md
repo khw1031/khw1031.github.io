@@ -8,6 +8,7 @@ lang: ko
 tags: ['gestalt', 'perception', 'grouping', 'proximity', 'visual-design']
 summary: "Max Wertheimer(1923)가 처음 제기한 perceptual grouping의 법칙들 — 근접(proximity), 유사(similarity), 공동운명(common fate), 좋은 연속(continuation), 폐쇄(closure), 대칭, 공동영역(common region) 등. 사람은 시각 요소를 낱개가 아니라 그룹으로 조직해 지각한다. UI에서 이는 '관련된 것끼리 붙이고 무관한 것을 떼는' 간격 설계(=spacing)가 왜 정보 구조를 말없이 전달하는지의 근거다. 미감이자 동시에 사용성인 지점."
 lintHash: '42f405c80c66'
+polishHash: '42f405c80c66'
 ---
 
 > 한 줄 명제: 사람은 요소를 낱개가 아니라 그룹으로 본다 — 그래서 무엇을 붙이고 무엇을 떼는가(간격)가 곧 정보 구조가 된다.

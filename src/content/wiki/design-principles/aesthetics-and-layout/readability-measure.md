@@ -8,6 +8,7 @@ lang: ko
 tags: ['readability', 'measure', 'line-length', 'typography', 'accessibility']
 summary: "measure(한 줄에 담기는 글자 수)는 본문 가독성을 좌우하는 인쇄 전통의 핵심 변수다. 너무 길면 다음 줄 첫머리를 놓치고, 너무 짧으면 눈이 자주 되돌아 리듬이 깨진다. Butterick의 Practical Typography는 평균 45~90자(공백 포함)를 권한다. 웹 표준 WCAG 2.1 SC 1.4.8(AAA)은 본문 폭 80자(CJK 40자) 이하 + 행간 1.5·문단 간격 1.5×를 규정한다. CSS에서는 ch 단위(0의 폭)로 measure를 직접 제어한다."
 lintHash: 'f15b38261f9a'
+polishHash: 'f15b38261f9a'
 ---
 
 > 한 줄 명제: 한 줄이 너무 길면 다음 줄을 놓치고 너무 짧으면 눈이 자주 되돌아온다 — 본문은 45~90자(웹 표준은 80자 이하)가 편안하다.

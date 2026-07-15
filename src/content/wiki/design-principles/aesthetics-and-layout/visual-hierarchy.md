@@ -8,6 +8,7 @@ lang: ko
 tags: ['visual-hierarchy', 'pre-attentive', 'focal-point', 'contrast', 'typography', 'perception']
 summary: "시각 위계는 요소를 배치해 '눈이 의도된 중요도 순서로 소비하도록' 유도하는 것이다. 근거는 pre-attentive 처리 — Treisman & Gelade(1980)의 특징 통합 이론에 따르면 색·형태·위치 같은 개별 특징은 초기·자동·병렬로(시각화 전통에서 ≤200~250ms) 등록되고, 그 뒤 초점 주의가 특징을 결합한다. 그래서 크기·대비·색·위치가 읽기 전에 '어디를 먼저 볼지'를 정한다. 핵심 도구는 대비이며(강조는 상대적 — 다 강조하면 아무것도 강조 안 됨), Gestalt와 같은 지각 기반을 공유한다."
 lintHash: '9a8da88bffba'
+polishHash: '9a8da88bffba'
 ---
 
 > 한 줄 명제: 눈은 읽기 전에 이미 어디를 볼지 정한다 — 크기·대비·색·위치로 초점과 순서를 만들되, 다 강조하면 아무것도 강조되지 않는다.

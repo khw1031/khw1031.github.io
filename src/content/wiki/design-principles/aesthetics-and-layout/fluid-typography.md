@@ -8,6 +8,7 @@ lang: ko
 tags: ['fluid-typography', 'clamp', 'viewport-units', 'responsive', 'css', 'accessibility']
 summary: "고정 타입 스케일을 브레이크포인트마다 바꾸는 대신, CSS clamp(MIN, VAL, MAX)와 뷰포트 단위(vw)로 화면 폭에 따라 글자 크기를 연속 보간하는 기법. clamp는 max(MIN, min(VAL, MAX))로 해석돼 하한·상한 사이에서 선호값을 따른다. 핵심 관용구는 font-size: clamp(하한, rem항 + vw항, 상한). 단 vw만 쓰면 사용자 확대(WCAG 1.4.4 Resize Text, 200%)를 깨므로 선호값에 반드시 rem 항을 섞는다. Utopia는 이를 최소·최대 뷰포트의 두 스케일 사이 보간으로 확장한다."
 lintHash: 'fb95c0dab633'
+polishHash: 'fb95c0dab633'
 ---
 
 > 한 줄 명제: 브레이크포인트마다 글자 크기를 바꾸지 말고, clamp()와 vw로 화면 폭에 따라 연속 보간하라 — 단 vw만 쓰면 사용자 확대가 깨지니 선호값에 rem을 섞어라.
