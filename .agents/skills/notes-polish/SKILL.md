@@ -12,6 +12,7 @@ description: >
   check flags drift.
 compatibility: Project source .agents/skills; Claude Code via .claude/skills relative symlink.
 repo-operating-targets: src/content/notes, src/content/inbox, src/content/specs, src/content/wiki, scripts/check-notes-polish.ts
+argument-hint: "[대상 컬렉션|파일 (선택 — 기본: 전체 배치)]"
 ---
 
 # notes-polish — highlight + structure alignment for agent-authored notes

@@ -1,6 +1,7 @@
 ---
 name: interpretive-generative-visuals
 description: Interpret abstract words, compressed names, brand-like tokens, or concepts into mathematical generative visual grammars, confirm the interpretation direction with the user, then implement Three.js/WebGL or another renderer. Use when creating concept-driven visuals where the user expects semantic interpretation, recursive/metaphorical structure, formula-based shapes, 3D fields, or custom generated graph forms rather than literal text rendering or fixed chart/math-pattern presets.
+argument-hint: "[해석할 단어|개념|브랜드 토큰]"
 ---
 
 # Interpretive Generative Visuals

@@ -10,6 +10,7 @@ description: >
   위키 카테고리 정리·공식 문서 우선 조사 요청에 사용.
 compatibility: Project-scoped; targets this repo's Astro `wiki` collection. Claude Code compatibility through a .claude/skills relative symlink.
 repo-operating-targets: src/content/wiki, .agents/skills/research
+argument-hint: "[조사 주제 → 위키 카테고리 정리]"
 ---
 
 # research

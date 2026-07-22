@@ -10,6 +10,7 @@ description: >
   organize an idea. 아이디어를 가볍게 정리·질문·레퍼런스 스캔해 idea 인박스에 남길 때 사용.
 compatibility: Project-scoped; targets this repo's /idea/inbox route. Claude Code compatibility through a .claude/skills relative symlink.
 repo-operating-targets: src/content/idea, .agents/skills/ideabox
+argument-hint: "[캡처할 아이디어 (한 개 이상)]"
 ---
 
 # ideabox

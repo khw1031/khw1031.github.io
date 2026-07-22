@@ -12,6 +12,7 @@ description: >
   스펙·inbox 문서 안전 삭제, 참조 파악 후 삭제, dangling 링크 없이 정리 요청에 사용.
 compatibility: Project-scoped; targets this repo's Astro content collections. Claude Code compatibility through a .claude/skills relative symlink.
 repo-operating-targets: src/content/notes, src/content/inbox, src/content/specs, src/content/wiki
+argument-hint: "[삭제할 문서 경로|slug (notes|inbox|specs|wiki)]"
 ---
 
 # content-delete — reference-safe deletion for agent-authored content

@@ -8,6 +8,7 @@ description: >
   CV 항목 작성·수정, 이력서 문체(개조식) 정리, 프로젝트 추가 시 사용.
 compatibility: Project source .agents/skills; Claude Code via .claude/skills relative symlink.
 repo-operating-targets: src/data/cv.ts, src/data/side-projects.ts
+argument-hint: "[추가·수정할 CV 항목|프로젝트 (+ 요청사항)]"
 ---
 
 # CV Entry Writer

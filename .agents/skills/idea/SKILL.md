@@ -11,6 +11,7 @@ description: >
   근거로 조사·발전시켜 unlisted /idea 노트로 남길 때 사용. 아이디어 정리·발전·검증 요청에 사용.
 compatibility: Project-scoped; targets this repo's unlisted /idea route. Claude Code compatibility through a .claude/skills relative symlink.
 repo-operating-targets: src/content/idea, .agents/skills/idea
+argument-hint: "[발전시킬 아이디어 | idea/inbox slug(승격)]"
 ---
 
 # idea

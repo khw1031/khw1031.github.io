@@ -13,6 +13,7 @@ description: >
   곁가지 심화, 노트 허브 재구성 요청에 사용.
 compatibility: Project-scoped; targets this repo's Astro notes/inbox collections. Claude Code compatibility through a .claude/skills relative symlink.
 repo-operating-targets: src/content/notes, src/content/inbox, .agents/skills/note-promoter
+argument-hint: "[승격할 inbox 문서 이름|경로]"
 ---
 
 # note-promoter

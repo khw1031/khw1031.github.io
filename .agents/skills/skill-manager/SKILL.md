@@ -4,6 +4,7 @@ description: >
   Creates, updates, reviews, and tests project agent skills under .agents/skills with .claude symlink compatibility. Use when the user asks to write or improve SKILL.md, create a reusable skill, validate skill structure, restructure skill-manager, or prepare workflow skills such as git-stash-pull. 스킬 생성, 수정, 리뷰, 검증, SKILL.md 작성 요청에 사용.
 compatibility: Project source .agents/skills; Claude Code compatibility through .claude/skills relative symlink.
 repo-operating-targets: .agents/skills, .claude/skills, .codex/skills, AGENTS.md
+argument-hint: "[create | update | review | test <skill>]"
 ---
 
 # Skill Manager
