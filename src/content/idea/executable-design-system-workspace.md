@@ -12,6 +12,7 @@ summary: >
   우연층을 다룬다.
 lang: ko
 tags: [design-system, ai-agents, first-principles, ports-adapters, mcp, stylex, astryx, figma, saas, subscription, product-idea]
+lintHash: '10909c676dd0'
 ---
 
 > 한 줄 명제: 디자인 결정을 **형식화·버전관리되는 하나의 원본**으로 두고, 소비자별 표현을 거기서 **기계 파생**하며, 합의를 **원본에 대한 연산**으로 두면 — 사람과 에이전트가 어긋나지 않게 협업하는 실행 가능한 워크스페이스가 된다. Astryx·Figma·MCP·구독은 이 원리의 (교체 가능한) 현재 구현일 뿐이다.

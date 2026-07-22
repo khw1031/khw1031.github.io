@@ -22,7 +22,7 @@ tags:
   - ai-literacy
   - edtech
 lang: ko
-lintHash: '9a5d90da46c7'
+lintHash: '0bc260955f17'
 ---
 
 > 한 줄 명제: 목표는 학습자가 자연스럽게 **AI Native**가 되는 것 — 어떤 과정(소프트웨어 코드든
