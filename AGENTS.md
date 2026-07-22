@@ -107,31 +107,7 @@ The site has two distinct public scopes — keep them separate so the rules cann
 - **Sensitive Areas** — Be especially careful around external command launching, credential handling, path traversal/root guards, and temporary files.
 - **Secrets** — Never expose secrets, API keys, tokens, or private data in logs, tests, commits, or issue text.
 
-<!-- dotagents:rule:agent-principles:begin (managed by ~/.agents/rules/apply — edit the source, not this block) -->
-# Agent Principles
-
-어느 프로젝트·디렉토리에서든 통하는 벤더 중립 행동 원칙. 특정 repo나 스택에 종속되지
-않는 것만 담는다 (`.agents` repo 운영 규칙은 여기 넣지 않는다 — 그건 `~/.agents/AGENTS.md`).
-
-## Core Principles
-
-- **Think Before Acting** — 행동 전에 가정을 명시한다. 불확실하면 질문한다.
-- **Simplicity First** — 요청되지 않은 것을 추가하지 않는다. 문제만 풀고, 그 이상은 하지 않는다.
-- **Surgical Changes** — 요청된 것만 바꾼다. 나머지는 건드리지 않는다.
-- **Goal-Driven** — 모호한 의도가 아니라 검증 가능한 결과를 목표로 한다.
-- **필요 증명 전 선구축 금지** — 인프라·추상화·확장 지점은 실제 수요가 증명된 뒤에 짓는다.
-
-## Communication
-
-- **Ask When Ambiguous** — 추측 대신 질문한다. 해석이 여럿이면 선택지를 제시한다.
-- **Surface Tradeoffs** — 트레이드오프는 숨기지 않고 드러낸다.
-- **Review Before Accepting** — 수용 전에 장단점을 확률적으로 검토한다. 극단을 피한다.
-- **Reasoned Pushback** — 약한 전제와 대안은 실행 전에 지적한다.
-- **Example as Sample** — 예시는 닫힌 명세가 아니라 open set의 샘플로 취급한다.
-- 사용자가 읽는 새 문서·노트는 기본 한글로 쓴다. 고유명사·코드·공식 용어는 원문 유지.
-<!-- dotagents:rule:agent-principles:end -->
-
-<!-- dotagents:rule:advisor-triage:begin (managed by ~/.agents/rules/apply — edit the source, not this block) -->
+<!-- from: ~/.agents/skills/advisor (advisor-triage) -->
 # Advisor Triage — 명시적 자동 발동 규칙
 
 하위 티어 executor 세션이 스스로 판단해 고지능 advisor 서브에이전트에게 **전략 조언만**
@@ -147,9 +123,8 @@ The site has two distinct public scopes — keep them separate so the rules cann
   최대 3회. 사용성 우선 — 확신이 서면 advisor 없이 그냥 진행한다.
 - **발동 시**: advisor 스킬 절차를 따르고, 조언 문서(`~/.agents/advisor/`)를 읽어
   후속 작업·보고에서 해당 파일 경로를 인용한다.
-<!-- dotagents:rule:advisor-triage:end -->
 
-<!-- dotagents:rule:software-engineering:begin (managed by ~/.agents/rules/apply — edit the source, not this block) -->
+<!-- from: patterns/software-engineering -->
 # Software Engineering Rules
 
 변하기 쉬운 지식이 코드 곳곳에 퍼지는 것을 막는 원형(seed) 규칙. React, FastAPI,
@@ -217,4 +192,3 @@ repository, custom hook, wrapper 같은 경계 객체 한 곳에 둔다.
 3. 구현/표현 지식이 여러 곳에 퍼져 있으면 경계 객체로 모은다.
 4. 경계가 필요한지는 강도 × 거리 × 변동성으로 판단한다.
 5. 계약은 소비자가 반드시 알아야 하는 의미만 남긴다.
-<!-- dotagents:rule:software-engineering:end -->
