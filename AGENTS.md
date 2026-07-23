@@ -68,6 +68,20 @@
 - **Confidentiality** — Do not expose internal URLs, private repository names, customer data, credentials, or screenshots containing non-public information. Ask the user for sanitized/public references when evidence is missing.
 - **Language** — Write posts in Korean by default. Preserve English technical terms when they are standard terms or identifiers, and explain them in Korean when first introduced.
 
+## Diagrams
+
+Applies to all authored content (posts, notes, wiki, specs).
+
+- **One Arrow Style, One Relation Kind** — Never express two different relation kinds (dependency vs implementation, import vs call) with the same arrow style in one diagram; the mixing creates direction misconceptions in readers. (Origin: study-skill learning log 2026-07-21 — an ASCII diagram mixing import-dependency and inversion arrows caused exactly this confusion.)
+- **Mermaid for Multi-Relation Diagrams** — When a diagram carries multiple relation kinds or arrow direction is semantic, write it as a ```` ```mermaid ```` code block. It renders to inline SVG at build time (`rehype-mermaid` in `src/lib/markdown-plugins.ts`; `mermaid` is excluded from Shiki in `astro.config.mjs`; CI/deploy install chromium before build). Distinguish relations by line type — solid `-->` for dependency/call, dotted triangle `..|>` for implementation; `classDiagram` is the standard for dependency inversion.
+- **ASCII for Simple Relations Only** — Single-relation structures (containment trees, linear flows, MECE branch maps) may stay as ASCII fenced blocks.
+
+## Math
+
+Applies to all authored content (posts, notes, wiki, specs).
+
+- **Double-Dollar Only** — Write math with `$$…$$` (inline or block); it renders via KaTeX (`remark-math` + `rehype-katex` in `src/lib/markdown-plugins.ts`, `singleDollarTextMath: false`; stylesheet imported in `src/styles/global.css`). A single `$` is **not** math — it stays literal so prose dollars (`$1.4B`, `$0.21→$0.12`) and identifiers (`$state`, `$derived`) do not break. Never rely on `$…$` inline math; use `$$…$$` or a plain glyph (e.g. `→` instead of `$\rightarrow$`).
+
 ## Notes & Wiki
 
 - **Note Authoring** — Notes under `src/content/notes` are created only by **promoting an inbox capture**: `inbox` is the single front door, and `.agents/skills/note-promoter` graduates a user-named inbox candidate into a note — hub note (`{topic}/index.md`, 큰 그림 맵 + 핵심 20%) with child notes promoted on demand, or absorbed into an existing hub / cross-referenced with neighbors. On success it moves (deletes) the inbox source and runs a scoped `notes-polish` on the result. Hub pages auto-render a child TOC and the `/notes` list shows hubs and standalone notes only. `notes` is **unlisted** (personal learning): URL-only, footer link, excluded from search/sitemap/timeline.

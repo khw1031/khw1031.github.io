@@ -13,6 +13,9 @@
 @import "@fontsource/geist-mono/600.css";
 @import "pretendard/dist/web/variable/pretendardvariable-dynamic-subset.css";
 
+/* KaTeX math rendering (rehype-katex output). */
+@import "katex/dist/katex.min.css";
+
 /* Theme colors sourced from src/styles/themes/<name>.itermcolors,
    compiled by `pnpm theme:gen` (also runs as prebuild). To switch
    themes: replace the .itermcolors file under src/styles/themes/

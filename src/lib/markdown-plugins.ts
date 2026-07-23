@@ -1,9 +1,12 @@
 import rehypeAutolinkHeadings from 'rehype-autolink-headings';
 import rehypeExternalLinks from 'rehype-external-links';
+import rehypeKatex from 'rehype-katex';
+import rehypeMermaid from 'rehype-mermaid';
 import rehypeSlug from 'rehype-slug';
 import remarkCjkFriendly from 'remark-cjk-friendly';
 import remarkFlexibleMarkers from 'remark-flexible-markers';
 import remarkGfm from 'remark-gfm';
+import remarkMath from 'remark-math';
 import remarkSmartypants from 'remark-smartypants';
 import type { Pluggable, PluggableList } from 'unified';
 
@@ -59,10 +62,22 @@ export const remarkPlugins: PluggableList = [
   // right after the closing `==` (e.g. `==강조==를`) natively, so no extra
   // CJK patch is needed here. Styled via `.prose mark` in global.css.
   remarkFlexibleMarkers,
+  // Math via KaTeX. singleDollarTextMath: false disables single-`$` inline
+  // math so existing prose dollars ($1.4B, $0.21→$0.12, Svelte `$state`)
+  // stay literal; only `$$…$$` (and ```math fences) are treated as math.
+  // Pairs with rehypeKatex in the rehype phase.
+  [remarkMath, { singleDollarTextMath: false }],
   [remarkSmartypants, { dashes: 'oldschool' }],
 ];
 
 export const rehypePlugins: ReadonlyArray<Pluggable> = [
+  // ```mermaid blocks -> build-time inline <svg> (browser via playwright).
+  // Requires `mermaid` in markdown.syntaxHighlight.excludeLangs
+  // (astro.config.mjs) so Shiki leaves the block for this plugin.
+  rehypeMermaid,
+  // Renders remark-math nodes ($$…$$, ```math) to KaTeX HTML. Requires the
+  // KaTeX stylesheet, imported globally in src/styles/global.css.
+  rehypeKatex,
   rehypeShiftHeadings,
   rehypeSlug,
   [rehypeAutolinkHeadings, { behavior: 'wrap' }],

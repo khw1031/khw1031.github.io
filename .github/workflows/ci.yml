@@ -32,11 +32,8 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
-      - run: pnpm lint
-      - run: pnpm check
-      - run: pnpm test
-      - run: pnpm build
-
+      # Browser install runs before test/build: rehype-mermaid renders
+      # ```mermaid blocks with chromium at build (and in vitest).
       - name: Cache Playwright browsers
         uses: actions/cache@v6
         with:
@@ -44,4 +41,10 @@ jobs:
           key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
 
       - run: pnpm exec playwright install --with-deps chromium
+
+      - run: pnpm lint
+      - run: pnpm check
+      - run: pnpm test
+      - run: pnpm build
+
       - run: pnpm test:e2e

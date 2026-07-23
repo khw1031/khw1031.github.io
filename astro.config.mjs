@@ -64,6 +64,9 @@ export default defineConfig({
   ],
   markdown: {
     processor: unified({ remarkPlugins, rehypePlugins }),
+    // Keep the default 'math' exclusion and add 'mermaid' so Shiki skips
+    // ```mermaid blocks, leaving them to rehype-mermaid (markdown-plugins.ts).
+    syntaxHighlight: { type: 'shiki', excludeLangs: ['math', 'mermaid'] },
     shikiConfig,
   },
   vite: {

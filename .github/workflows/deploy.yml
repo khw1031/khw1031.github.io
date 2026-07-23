@@ -34,6 +34,15 @@ jobs:
 
       - run: pnpm install --frozen-lockfile
 
+      # rehype-mermaid renders ```mermaid blocks with chromium at build time.
+      - name: Cache Playwright browsers
+        uses: actions/cache@v6
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - run: pnpm exec playwright install --with-deps chromium
+
       - name: Build site
         env:
           PUBLIC_GA_MEASUREMENT_ID: ${{ secrets.PUBLIC_GA_MEASUREMENT_ID }}

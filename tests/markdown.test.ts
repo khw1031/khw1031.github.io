@@ -61,4 +61,26 @@ describe('markdown pipeline', () => {
     const html = await render('a --- b');
     expect(html).toContain('—');
   });
+
+  // Launches a headless chromium via playwright (mermaid-isomorphic), so it
+  // needs `playwright install chromium` — CI runs that before `pnpm test`.
+  it('renders mermaid code blocks as inline svg', async () => {
+    const html = await render('```mermaid\nflowchart LR\n  A --> B\n```');
+    expect(html).toContain('<svg');
+    expect(html).not.toContain('language-mermaid');
+  }, 30_000);
+
+  it('renders $$…$$ math via KaTeX', async () => {
+    const html = await render('$$\\rightarrow$$');
+    expect(html).toContain('class="katex"');
+  });
+
+  // singleDollarTextMath: false — a lone `$` in prose (prices, Svelte runes)
+  // must stay literal, not become math.
+  it('leaves single-dollar prose untouched', async () => {
+    const html = await render('cost dropped from $0.21 to $0.12 with `$state`');
+    expect(html).not.toContain('katex');
+    expect(html).toContain('$0.21');
+    expect(html).toContain('$0.12');
+  });
 });
