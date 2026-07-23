@@ -92,8 +92,12 @@ async function getPublicItems(): Promise<PostListItem[]> {
 }
 
 export async function getRecentAcrossCollections(limit: number): Promise<PostListItem[]> {
-  // Recent keeps its compact look: no source label; labs are marked via `kind`.
-  return (await getPublicItems()).slice(0, limit).map(({ label: _label, ...item }) => item);
+  // Home "Recent" excludes labs (kind: 'lab'); labs stay in the archive, tags,
+  // and RSS. Compact look: no source label.
+  return (await getPublicItems())
+    .filter((item) => item.kind !== 'lab')
+    .slice(0, limit)
+    .map(({ label: _label, ...item }) => item);
 }
 
 export async function getArchiveItems(): Promise<PostListItem[]> {
