@@ -1,22 +1,33 @@
 ---
 const year = new Date().getFullYear();
+// wiki/notes/specs/inbox/idea 메뉴는 dev 모드(`astro dev`)에서만 노출한다.
+const isDev = import.meta.env.DEV;
 ---
 
 <footer class="border-t border-border">
   <div class="mx-auto flex max-w-3xl items-center justify-between gap-3 pl-[calc(1rem+env(safe-area-inset-left))] pr-[calc(1rem+env(safe-area-inset-right))] pt-2 pb-[calc(0.75rem+env(safe-area-inset-bottom))] text-sm text-muted">
-    <p><a href="/idea/" class="hover:text-foreground transition-colors">©</a> {year} thnkr</p>
+    <p>
+      {isDev ? <a href="/idea/" class="hover:text-foreground transition-colors">©</a> : '©'}
+      {year} thnkr
+    </p>
     <nav class="flex items-center gap-2">
       <a href="/archive/" class="hover:text-foreground transition-colors">archive</a>
       <span aria-hidden="true">|</span>
       <a href="/tags/" class="hover:text-foreground transition-colors">tags</a>
-      <span aria-hidden="true">|</span>
-      <a href="/wiki/" class="hover:text-foreground transition-colors">wiki</a>
-      <span aria-hidden="true">|</span>
-      <a href="/notes/" class="hover:text-foreground transition-colors">notes</a>
-      <span aria-hidden="true">|</span>
-      <a href="/specs/" class="hover:text-foreground transition-colors">specs</a>
-      <span aria-hidden="true">|</span>
-      <a href="/inbox/" class="hover:text-foreground transition-colors">inbox</a>
+      {
+        isDev && (
+          <>
+            <span aria-hidden="true">|</span>
+            <a href="/wiki/" class="hover:text-foreground transition-colors">wiki</a>
+            <span aria-hidden="true">|</span>
+            <a href="/notes/" class="hover:text-foreground transition-colors">notes</a>
+            <span aria-hidden="true">|</span>
+            <a href="/specs/" class="hover:text-foreground transition-colors">specs</a>
+            <span aria-hidden="true">|</span>
+            <a href="/inbox/" class="hover:text-foreground transition-colors">inbox</a>
+          </>
+        )
+      }
     </nav>
   </div>
 </footer>
