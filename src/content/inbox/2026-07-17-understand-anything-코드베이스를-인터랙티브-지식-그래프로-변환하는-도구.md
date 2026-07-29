@@ -10,7 +10,8 @@ tags:
   - 'open-source'
   - 'knowledge-graph'
 canonical: 'https://github.com/Egonex-AI/Understand-Anything'
-lintHash: '786937450a7b'
+lintHash: 'd5b40c223cd0'
+polishHash: 'd5b40c223cd0'
 ---
 
 ## TL;DR
@@ -48,12 +49,12 @@ lintHash: '786937450a7b'
 
 ## 핵심
 - Understand Anything은 "20만 줄 코드베이스에 새로 합류한 개발자가 어디서부터 읽어야 할까?"라는 문제에서 출발한다. 저자는 코드를 눈으로 읽는 대신 **그래프를 탐색**하며 구조를 파악하는 접근을 제안한다.
-- 파이프라인은 **Tree-sitter가 구조(imports, exports, 함수·클래스 정의, 호출 관계)를 결정론적으로 추출**하고, **LLM이 그 위에 의미(요약, 아키텍처 레이어, 비즈니스 도메인 매핑)를 입히는 이층 구조**다. 이 분업 덕분에 구조 측면은 동일 입력→동일 출력의 재현성을 갖고, 의미 측면은 파서 alone으로는 얻을 수 없는 "이 파일이 무엇을 위한 것인지"를 포착한다는 것이 저자의 핵심 주장이다.
+- ==파이프라인은 **Tree-sitter가 구조(imports, exports, 함수·클래스 정의, 호출 관계)를 결정론적으로 추출**하고, **LLM이 그 위에 의미(요약, 아키텍처 레이어, 비즈니스 도메인 매핑)를 입히는 이층 구조**다.== 이 분업 덕분에 구조 측면은 동일 입력→동일 출력의 재현성을 갖고, 의미 측면은 파서 alone으로는 얻을 수 없는 "이 파일이 무엇을 위한 것인지"를 포착한다는 것이 저자의 핵심 주장이다.
 - `/understand` 한 번으로 전체 스캔 → 그래프 생성 → `.ua/knowledge-graph.json` 저장까지 진행되며, 이후 실행은 **fingerprint 기반 변경 감지**로 증분 업데이트만 수행해 토큰 소비를 줄인다.
 - 생성된 그래프는 JSON이므로 **git에 커밋해 팀원과 공유**할 수 있고, 대시보드 뷰어는 Node.js만 있으면 LLM 없이도 로컬에서 열람 가능하다.
 
 ## 깊이
-- **[Tree-sitter + LLM 분업]** Tree-sitter는 C 기반 파서로 수십 개 언어의 구체적 구문 트리(CST)를 제공하는 라이브러리다. 비유하면 "건물의 설계도에서 벽·기둥·배관을 자동으로 뽑아내는 스캐너"이고, LLM은 "이 방이 거실인지 침실인지, 동선이 어떻게 되는지 설명해주는 건축가" 역할이다. 이 비유가 깨지는 지점: Tree-sitter는 구문은 정확히 잡지만 **타입 해석·런타임 동작·매크로 확장** 같은 의미론은 잡지 못한다. 또한 동적 언어(JavaScript 등)에서는 import 경로 해결이 불완전할 수 있어 `importMap` 전처리 단계가 별도로 존재한다.
+- **[Tree-sitter + LLM 분업]** Tree-sitter는 C 기반 파서로 수십 개 언어의 구체적 구문 트리(CST)를 제공하는 라이브러리다. 비유하면 "건물의 설계도에서 벽·기둥·배관을 자동으로 뽑아내는 스캐너"이고, LLM은 "이 방이 거실인지 침실인지, 동선이 어떻게 되는지 설명해주는 건축가" 역할이다. 이 비유가 깨지는 지점: ==Tree-sitter는 구문은 정확히 잡지만 **타입 해석·런타임 동작·매크로 확장** 같은 의미론은 잡지 못한다.== 또한 동적 언어(JavaScript 등)에서는 import 경로 해결이 불완전할 수 있어 `importMap` 전처리 단계가 별도로 존재한다.
 - **[Multi-Agent 파이프라인]** 5개 기본 에이전트(`project-scanner`, `file-analyzer`, `architecture-analyzer`, `tour-builder`, `graph-reviewer`)가 순차·병렬로 동작한다. file-analyzer는 최대 5 동시, 배치당 20~30개 파일로 병렬 처리된다. `/understand-domain`은 `domain-analyzer`를, `/understand-knowledge`는 `article-analyzer`를 추가한다. 이는 단일 monolithic 프롬프트 대신 **전문화된 작은 에이전트를 엮어 비용·품질·속도를 절충**하는 agentic 패턴의 사례다.
 - **[플랫폼 호환성 — 묶음 표]** 원문은 17개 플랫폼을 나열하나, 설치 방식 기준으로 압축하면 다음과 같다.
 
@@ -88,7 +89,7 @@ lintHash: '786937450a7b'
 - **(저자 주장)** 구조는 결정론적, 의미만 LLM 의존 → 재현성과 풍부함의 절충.
 - **(검증 필요·불확실)** 20만 줄 규모에서의 실제 토큰 비용·정확도 벤치마크는 원문에 제시되지 않음. "significant tokens"이라는 정성적 표현만 존재.
 - **(검증 필요·불확실)** `graph-reviewer`의 "referential integrity" 검증이 어느 수준(단순 참조 검사 vs LLM 기반 의미 검토)인지 명확하지 않음(`--review` 플래그로 LLM 리뷰 옵션 존재).
-- **(경계)** LLM 환각이 노드 요약·도메인 매핑에 섞일 가능성. 구조 엣지는 신뢰 가능하나 의미 레이어는 교차 검증 필요.
+- **(경계)** LLM 환각이 노드 요약·도메인 매핑에 섞일 가능성. ==구조 엣지는 신뢰 가능하나 의미 레이어는 교차 검증 필요.==
 
 ## 레퍼런스
 - Understand Anything GitHub — https://github.com/Egonex-AI/Understand-Anything · (1차) · README 원본, 기능·설치·아키텍처 공식 설명.

@@ -14,6 +14,8 @@ tags:
   - 'openai'
   - 'interview'
 canonical: 'https://www.youtube.com/watch?v=vq5WhoPCWQ8'
+polishHash: 'bed0dee74869'
+lintHash: 'bed0dee74869'
 ---
 
 > 한 줄 명제: ==대학이 기초 지식(foundational knowledge)을 독점하던 시대는 끝났고==, 문제에서 출발해 필요한 지식을 재귀적으로 파고드는 **톱다운 학습**을 ChatGPT가 저비용·온디맨드로 가능하게 만들었다 — Gabriel Petersson은 그 방식으로 수학·ML을 독학해 고교 중퇴 5년 만에 OpenAI Sora 리서처가 됐다고 주장한다.

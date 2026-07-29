@@ -13,6 +13,7 @@ public/inbox/
 public/wiki/
 public/specs/
 public/idea/
+public/docs/
 
 # local-only content (internal/non-public)
 src/content/inbox/2026-h1-kpi.md

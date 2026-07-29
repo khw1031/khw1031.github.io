@@ -10,11 +10,12 @@ tags:
   - 'ontology'
   - 'semantic-web'
 canonical: 'https://www.linkedin.com/posts/%EB%AC%B4%EC%A4%80-%EC%9A%B0-b5737a239_agenticai-ontology-semanticweb-ugcPost-7482710911447650304-n-5E/?utm_source=social_share_send&utm_medium=ios_app&rcm=ACoAAB15JU0Bh0ozoFHKUp6BqJa4W5v2yqNn5k8&utm_campaign=share_via'
-lintHash: '8f367d443ab7'
+lintHash: 'b9478279b8b6'
+polishHash: 'b9478279b8b6'
 ---
 
 ## TL;DR
-- **원문 추출 실패.** LinkedIn이 비로그인 사용자에게 게시물 본문을 차단하여, Jina reader가 로그인/회원가입 페이지만 수집했다. URL 해시태그로 주제어 3개(AgenticAI, Ontology, SemanticWeb)만 확인된다.
+- ==**원문 추출 실패.** LinkedIn이 비로그인 사용자에게 게시물 본문을 차단하여, Jina reader가 로그인/회원가입 페이지만 수집했다.== URL 해시태그로 주제어 3개(AgenticAI, Ontology, SemanticWeb)만 확인된다.
 
 ## 큰 그림
 ```
@@ -30,7 +31,7 @@ LinkedIn Post (우무준, ugcPost:7482710911447650304)
 
 ## 핵심
 - Jina scraper가 반환한 HTML 전체가 LinkedIn의 **인증 게이트**(Sign Up / Sign In 폼, 쿠키 동의, 언어 선택)로 구성되어 있다. 게시물 본문·이미지·댓글·공유 수는 **원문에 없음**.
-- 해시태그 조합(AgenticAI + Ontology + SemanticWeb)으로 미루어, 저자는 **"Agentic AI가 온톨로지·시맨틱 웹 기술과 결합하여 지식 기반 추론을 수행하는 방향"**을 논의했을 가능성이 있으나, 이는 **추측**이며 원문으로 검증 필요하다.
+- 해시태그 조합(AgenticAI + Ontology + SemanticWeb)으로 미루어, 저자는 **"Agentic AI가 온톨로지·시맨틱 웹 기술과 결합하여 지식 기반 추론을 수행하는 방향"**을 논의했을 가능성이 있으나, ==이는 **추측**이며 원문으로 검증 필요하다.==
 
 ## 깊이
 - [인증 게이트 구조] LinkedIn은 `ugcPost` URL에 비로그인 접근 시 `registration-frontend_join-form` 렌더링으로 리다이렉트한다. Jina reader는 JS 실행 후 DOM을 수집하므로, 이 로그인 폼 자체가 최종 출력물이 된다.

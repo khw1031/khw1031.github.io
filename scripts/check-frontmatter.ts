@@ -52,6 +52,14 @@ const KNOWN_SCHEMA: Record<string, ZodType> = {
  */
 const REQUIRED_KEYS = ['title', 'pubDate', 'description', 'summary', 'lang', 'tags'];
 
+/**
+ * Collections intentionally exempt from the frontmatter contract: free-form
+ * documents (PRDs, drafts) whose title is derived from the body, so they carry
+ * no required keys and are neither validated nor stamped here. They are still
+ * unlisted from search/sitemap/robots by the usual path-based rules.
+ */
+const SCHEMA_FREE = new Set(['docs']);
+
 interface FileReport {
   file: string;
   collection: string;
@@ -82,7 +90,13 @@ function labReports(): FileReport[] {
     if (!lab.title?.trim()) missing.push('title');
     if (!lab.description?.trim()) missing.push('description');
     if (missing.length > 0) {
-      reports.push({ file: 'src/lib/labs.ts', collection: 'labs', ref: lab.href, missing, invalid: [] });
+      reports.push({
+        file: 'src/lib/labs.ts',
+        collection: 'labs',
+        ref: lab.href,
+        missing,
+        invalid: [],
+      });
     }
   }
   return reports;
@@ -124,13 +138,21 @@ function inspect(file: string): FileReport {
   const hash = bodyHash(raw);
   const stale = String(data.lintHash ?? '') !== hash;
 
-  return { file: relative(process.cwd(), file), collection, missing, invalid, stale, bodyHash: hash };
+  return {
+    file: relative(process.cwd(), file),
+    collection,
+    missing,
+    invalid,
+    stale,
+    bodyHash: hash,
+  };
 }
 
 /** Deterministically write `lintHash: '<body hash>'` into every content file. */
 function stampHashes(): number {
   let stamped = 0;
   for (const file of contentFiles()) {
+    if (SCHEMA_FREE.has(collectionOf(file))) continue;
     const raw = readFileSync(file, 'utf-8');
     const hash = bodyHash(raw);
     const match = raw.match(/^---\r?\n([\s\S]*?)\r?\n---/);
@@ -158,6 +180,7 @@ function main(): void {
   const reports: FileReport[] = [];
 
   for (const file of contentFiles()) {
+    if (SCHEMA_FREE.has(collectionOf(file))) continue;
     const report = inspect(file);
     if (hasError(report) || report.stale) {
       reports.push(report);
@@ -200,7 +223,9 @@ function main(): void {
     process.stdout.write('\n');
   }
 
-  process.stdout.write('Run /lint to refresh frontmatter (fills gaps, regenerates stale fields).\n');
+  process.stdout.write(
+    'Run /lint to refresh frontmatter (fills gaps, regenerates stale fields).\n',
+  );
   process.exit(errors.length > 0 ? 1 : 0);
 }
 

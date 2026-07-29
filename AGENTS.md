@@ -82,9 +82,23 @@ Applies to all authored content (posts, notes, wiki, specs).
 
 - **Double-Dollar Only** — Write math with `$$…$$` (inline or block); it renders via KaTeX (`remark-math` + `rehype-katex` in `src/lib/markdown-plugins.ts`, `singleDollarTextMath: false`; stylesheet imported in `src/styles/global.css`). A single `$` is **not** math — it stays literal so prose dollars (`$1.4B`, `$0.21→$0.12`) and identifiers (`$state`, `$derived`) do not break. Never rely on `$…$` inline math; use `$$…$$` or a plain glyph (e.g. `→` instead of `$\rightarrow$`).
 
+## Inbox
+
+- **Two collections share the name "inbox"** — `src/content/inbox/` (top-level collection, `/inbox/`) and `src/content/idea/inbox/` (idea staging, `/idea/inbox/`). They are **different collections with different purposes**, and the bare word "inbox" is therefore ambiguous. Keep them straight:
+
+  | | `src/content/inbox/` | `src/content/idea/inbox/` |
+  | --- | --- | --- |
+  | Holds | Research/analysis captures: external-content reports, reference sweeps, reading notes — "무엇을 알게 되었나" | Product/business idea captures — "무엇을 만들 수 있나" |
+  | Filename | `YYYY-MM-DD-{slug}.md` (**date prefix required**) | `{slug}.md` (no date prefix) |
+  | Owning skill | **none** — the agent writes these directly | `.agents/skills/ideabox` (`/ideabox`) |
+  | Graduates to | `notes` via `.agents/skills/note-promoter`, or `wiki` via `.agents/skills/research` | `src/content/idea/{slug}.md` via `.agents/skills/idea` |
+
+- **Routing rule for a bare "inbox"** — When the user says only "inbox" (e.g. "inbox에 추가해줘") with no idea/product framing, the default is **`src/content/inbox/`**, not the idea staging. Route to `idea/inbox/` only when the request is explicitly about an idea to build (or the user says `idea`/`ideabox`). **Do not let skill availability decide the route** — `ideabox` is the only capture *skill*, so it is the only match a skill search returns; that is not evidence the user meant it. If the material is a research/조사 result rather than a thing to build, it belongs in `src/content/inbox/`. When genuinely ambiguous, ask which one before writing. (Origin: 2026-07-29 — a Building in Public research sweep was written to `idea/inbox/` on a bare "inbox에 추가해줘"; `content.config.ts` had been read in the same session and still the collision went unnoticed.)
+- **Frontmatter** — both follow `baseFrontmatter`; `title`/`pubDate` required, `description`/`summary`/`tags`/`lang` expected by the frontmatter checker. Stamp `pubDate` as a second-precision KST timestamp so same-day ordering is deterministic.
+
 ## Notes & Wiki
 
-- **Note Authoring** — Notes under `src/content/notes` are created only by **promoting an inbox capture**: `inbox` is the single front door, and `.agents/skills/note-promoter` graduates a user-named inbox candidate into a note — hub note (`{topic}/index.md`, 큰 그림 맵 + 핵심 20%) with child notes promoted on demand, or absorbed into an existing hub / cross-referenced with neighbors. On success it moves (deletes) the inbox source and runs a scoped `notes-polish` on the result. Hub pages auto-render a child TOC and the `/notes` list shows hubs and standalone notes only. `notes` is **unlisted** (personal learning): URL-only, footer link, excluded from search/sitemap/timeline.
+- **Note Authoring** — Notes under `src/content/notes` are created only by **promoting an inbox capture** (`src/content/inbox/` — see the Inbox section above): `inbox` is the single front door, and `.agents/skills/note-promoter` graduates a user-named inbox candidate into a note — hub note (`{topic}/index.md`, 큰 그림 맵 + 핵심 20%) with child notes promoted on demand, or absorbed into an existing hub / cross-referenced with neighbors. On success it moves (deletes) the inbox source and runs a scoped `notes-polish` on the result. Hub pages auto-render a child TOC and the `/notes` list shows hubs and standalone notes only. `notes` is **unlisted** (personal learning): URL-only, footer link, excluded from search/sitemap/timeline.
 - **Wiki Authoring** — The curated public reference library under `src/content/wiki` answers "무엇이 이 주장의 근거인가", organized as a category tree. Author it with `.agents/skills/research`. Charter (specified here on purpose — do **not** surface it on the `/wiki/` landing page):
   - **공식·1차 우선** — cite official/primary sources first (vendor docs, standards/RFC·W3C·ECMA, original papers, canonical repos); secondary sources (blogs, summaries) are supporting only; label 1차/2차 per link, no bare URLs.
   - **OKF 준수** — one concept = one file; each category `index.md` is a hub that summarizes and progressively discloses its children; concept relations are plain markdown links.

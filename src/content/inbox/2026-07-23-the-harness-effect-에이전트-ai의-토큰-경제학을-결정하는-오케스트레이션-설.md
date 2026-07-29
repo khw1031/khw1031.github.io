@@ -11,11 +11,12 @@ tags:
   - 'optimization'
   - 'performance'
 canonical: 'https://arxiv.org/pdf/2607.06906'
-lintHash: '454ddd0d78da'
+lintHash: '0b2f1a27171a'
+polishHash: '0b2f1a27171a'
 ---
 
 ## TL;DR
-- 에이전트 AI의 비용 폭주는 모델이 아니라 **harness(오케스트레이션 레이어)**가 결정하며, 모델 고정·harness 교체만으로도 작업당 비용 41%, 지연 44%, 토큰 38%가 줄어든다(저자 주장, Writer 측 자체 평가).
+- ==에이전트 AI의 비용 폭주는 모델이 아니라 **harness(오케스트레이션 레이어)**가 결정하며, 모델 고정·harness 교체만으로도 작업당 비용 41%, 지연 44%, 토큰 38%가 줄어든다==(저자 주장, Writer 측 자체 평가).
 
 ## 큰 그림
 ```
@@ -41,11 +42,11 @@ lintHash: '454ddd0d78da'
 ## 핵심
 - 저자들은 **token maxing**을 "더 긴 추론, 더 많은 turn, 더 넓은 도구 payload, 더 큰 replayed context로 성능을 구매하는 개발 궤적"으로 정의한다. 토큰 단가 하락이 이 습관을 가리지만 총지출은 오히려 증가하는 **Jevons 역설**의 전형이라는 게 주장의 뼈대다.
 - 기존 효율화 연구(프롬프트 압축, 라우팅, 추론 budget 등)는 단일 호출 내부 또는 모델 간 선택에 집중하지만, 정작 토큰 청구서의 각 항(system·history·tool schema·retrieval·retry)을 구성하는 **harness**는 고정된 채 둔다. 저자들은 이 레이어를 독립 변수로 만들기 위해 **22개 locked task × 6개 foundation model**에서 오케스트레이션 코드만 교체하는 자연실험을 설계했다(저자 주장).
-- 그 결과 효율 이득은 **모델 불변**(모든 모델에서 −33%~−61%)이지만 품질 이득은 **모델 의존**이다. 저자들은 이를 **harness leverage**라 부르며, baseline 강점과 harness 품질 향상이 r=0.99(n=6)로 거의 완벽히 상관을 보인다고 보고한다.
+- ==그 결과 효율 이득은 **모델 불변**(모든 모델에서 −33%~−61%)이지만 품질 이득은 **모델 의존**이다.== 저자들은 이를 **harness leverage**라 부르며, baseline 강점과 harness 품질 향상이 r=0.99(n=6)로 거의 완벽히 상관을 보인다고 보고한다.
 
 ## 깊이
 - **비용 방정식 분해 (Eq.1–3, 저자 제시)**: 입력 토큰은 `S(system) + H(history) + G(tool schema) + R(retrieval) + U(user)` 합이고, naive replay 시 H_i가 turn 수 k에 대해 2차로 쌓여 누적 입력이 O(k²)가 된다. Harness는 prefix caching·compaction·offload로 이를 O(k)에 가깝게 낮춘다. **비유**: 매 회의 때마다 지난 회의록 전부를 다시 읽게 하는 vs. 요약본만 배포하고 원문은 보관함으로 빼는 차이. **비유가 깨지는 지점**: LLM은 "보관함 원문"을 실제로 가져오려면 재호출(=추가 토큰)이 필요하므로, 순수한 오프로드가 항상 무료는 아니다.
-- **Harnes leverage의 양면**: 48개 capability×model 셀 중 30개 개선, 11개 보합, 7개 퇴보. **퇴보 7건은 모두 작은 모델 3종**에 집중되고, 특히 **MCP 도구 사용·multi-step Playbook** 같은 오케스트레이션 집약 기능에서 나타난다(저자 보고). 즉 harness는 "공짜 품질"이 아니라 **모델 능력 하한(capability floor)**을 요구한다.
+- **Harnes leverage의 양면**: 48개 capability×model 셀 중 30개 개선, 11개 보합, 7개 퇴보. **퇴보 7건은 모두 작은 모델 3종**에 집중되고, 특히 **MCP 도구 사용·multi-step Playbook** 같은 오케스트레이션 집약 기능에서 나타난다(저자 보고). 즉 ==harness는 "공짜 품질"이 아니라 **모델 능력 하한(capability floor)**을 요구한다.==
 - **Prompt caching과 실효 입력 단가**: 저자는 cache hit 비율 h와 캐시 배율 κ(≈0.1)로 `p_eff_in`을 모델링한다. 에이전트 워크로드의 입력:출력 비가 ~100:1이라는 실무 보고를 근거로, 입력 단가 최적화가 비용의 대부분을 결정한다고 주장한다.
 - **6개 메커니즘 패밀리**: cache-shape 규율 / structured compaction / context offload / zero-token waiting / failure-spend 통제 / model-agnostic floor. 본문은 이들을 Eq.2의 각 항에 1:1 매핑한다(저자 제시, 세부 수치는 원문 후속 섹션).
 
@@ -69,7 +70,7 @@ lintHash: '454ddd0d78da'
 ## 핵심 시사점 / 판단
 - **(저자 주장)** 오케스트레이션 레이어는 "모델 선택"보다 더 큰 비용 레버이며, 효율 이득은 현재·미래의 모든 모델에 곱해지므로 **own-vs-rent** 판단에서 harness 자체 구축의 경제적 근거가 된다.
 - **(저자 주장)** 라우팅은 난이도뿐 아니라 "요청이 사용할 오케스트레이션 기능" 기준으로 설계해야 한다(capability floor 발견).
-- **(검증 필요·불확실)** 샘플이 22 task·6 model·Writer 자사 harness이며, judge·가격표는 동일하다고 하나 **자사 제품에 유리한 설계 편향 가능성**은 원문만으로는 배제 불가.
+- **(검증 필요·불확실)** 샘플이 22 task·6 model·Writer 자사 harness이며, judge·가격표는 동일하다고 하나 ==**자사 제품에 유리한 설계 편향 가능성**은 원문만으로는 배제 불가.==
 - **(원문에 없음)** 타사 agent 시스템 6종 비교의 정량 결과는 제공된 발췌에 포함되지 않음.
 - **(검증 필요)** r=0.99는 n=6에서의 상관이므로 통계적 강건성(신뢰구간, 다른 모델군에서의 재현) 확인 필요.
 

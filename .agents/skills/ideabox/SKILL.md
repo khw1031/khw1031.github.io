@@ -7,7 +7,10 @@ description: >
   This is the fast, low-ceremony sibling of the `idea` skill: no full methodology, no exhaustive
   primary-source verification, no business analysis — just enough structure to make the idea
   reviewable and promotable later. Use when the user runs /ideabox or wants to jot and lightly
-  organize an idea. 아이디어를 가볍게 정리·질문·레퍼런스 스캔해 idea 인박스에 남길 때 사용.
+  organize an idea to BUILD. NOT for research/analysis captures — those go to the separate
+  top-level `src/content/inbox/` collection (`YYYY-MM-DD-{slug}.md`, no owning skill), so a bare
+  "inbox에 추가해줘" / "조사해서 inbox에 넣어줘" is NOT this skill.
+  아이디어를 가볍게 정리·질문·레퍼런스 스캔해 idea 인박스에 남길 때 사용.
 compatibility: Project-scoped; targets this repo's /idea/inbox route. Claude Code compatibility through a .claude/skills relative symlink.
 repo-operating-targets: src/content/idea, .agents/skills/ideabox
 argument-hint: "[캡처할 아이디어 (한 개 이상)]"
@@ -21,10 +24,26 @@ argument-hint: "[캡처할 아이디어 (한 개 이상)]"
 ## When to use
 
 - 사용자가 `/ideabox`를 실행할 때
-- "이 생각 가볍게 정리해서 인박스에 넣어줘", "레퍼런스만 좀 훑어서 남겨줘"
+- "이 **아이디어** 가볍게 정리해서 남겨줘", "이거 만들면 어떨까 싶은데 캡처해둬"
+
+## When NOT to use — 라우팅 선행 확인 (필수)
+
+이 저장소에는 **`inbox`가 두 개** 있다. 쓰기 전에 어느 쪽인지 확정한다.
+
+| 요청의 성격 | 목적지 | 담당 |
+| --- | --- | --- |
+| 만들 수 있는 것(제품·사업 아이디어) | `src/content/idea/inbox/{slug}.md` | **ideabox (이 스킬)** |
+| 알게 된 것(조사·분석·레퍼런스 스윕·읽은 것) | `src/content/inbox/YYYY-MM-DD-{slug}.md` | 스킬 없음 — 에이전트가 직접 작성 |
+
+- **"인박스에 넣어줘" / "inbox에 추가해줘"만 있으면 이 스킬이 아니다.** 기본값은 `src/content/inbox/`다.
+  아이디어 프레이밍(만들 것·제품·사업)이 명시적으로 있을 때만 ideabox로 온다.
+- **"조사해서 …에 넣어줘"는 이 스킬이 아니다.** 조사 결과물은 `src/content/inbox/`(날짜 접두사 필수)로 간다.
+- 스킬 검색에서 이 스킬만 매칭된다는 사실은 **근거가 아니다** — `src/content/inbox/`는 담당 스킬이 없어서
+  애초에 매칭될 수 없다. 매칭 여부로 라우팅을 결정하지 말 것.
+- 모호하면 쓰기 전에 어느 컬렉션인지 되묻는다. 잘못 쓰면 파일 이동 + 상호 링크 수정 + 태그 수정이 뒤따른다.
 
 경계: 풀 발전(발산·수렴·방법론·근거 검증)은 `idea`. ideabox는 그 **앞단 캡처**다. 공개 레퍼런스
-라이브러리는 research(위키), 개인 학습 노트는 note-promoter(notes).
+라이브러리는 research(위키), 개인 학습 노트는 note-promoter(notes), 조사·분석 캡처는 `src/content/inbox/`.
 
 ## Scope of /idea/inbox (알아둘 것)
 
@@ -71,6 +90,10 @@ tags: [idea-inbox, ...]
 
 ## Failure spec ("done"이 아닌 모습)
 
+- **컬렉션 오라우팅** — 조사·분석 결과물을 `src/content/idea/inbox/`에 쓰는 것. 목적지는
+  `src/content/inbox/YYYY-MM-DD-{slug}.md`였다. 사용자가 "inbox"만 말했을 때 이 스킬을 호출한 것 자체가
+  실패다 — 되돌리려면 파일 이동 + 상호 링크 수정 + `idea-inbox` 태그 제거가 필요하다. (실제 발생:
+  2026-07-29 Building in Public 조사 2건.)
 - **비밀 유출** — 비밀값·민감 개인정보를 평문 인박스에 넣는 것. HARD FAIL — 저장 전에 멈춘다.
 - **과잉 작업** — Double Diamond·Lean Canvas·사업성 분석 등 풀 방법론을 여기서 돌리는 것. 그건 `idea`
    범위 위반. ideabox는 정리·질문·빠른 스캔까지만.

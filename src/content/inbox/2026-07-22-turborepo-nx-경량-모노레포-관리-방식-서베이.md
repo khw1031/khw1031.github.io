@@ -10,18 +10,19 @@ tags:
   - 'nx'
   - 'pnpm'
   - 'build-tooling'
-lintHash: '44bf628af61e'
+lintHash: '63808da88819'
+polishHash: '63808da88819'
 ---
 
 ## TL;DR
 - 모노레포 관리 도구는 **세 계층**으로 본다: **① 경량** — package-manager workspaces(pnpm/yarn/npm) 자체 + `changesets`(버전/릴리스) + pnpm `catalogs`(의존성 버전 중앙화). **② task-runner** — Turborepo·Nx(캐싱·태스크 그래프·affected). **③ heavy** — Bazel(초대형·다언어, 정밀하지만 설정 비용 큼).
 - **Turborepo = JS/TS 전용, "80% 이득을 20% 복잡도로"** — 캐싱·파이프라인이 단순하고 Vercel 통합. 경계 강제(Boundaries)는 아직 experimental.
 - **Nx = 플랫폼** — 폴리글롯·코드 생성·성숙한 경계 강제(`enforce-module-boundaries`)·Nx Cloud(원격 캐시·분산 실행·Self-Healing CI). 여러 팀·복잡한 의존 그래프에 강함.
-- **선택 순서**: 대부분의 JS/TS 팀은 **경량 → 느려지면 Turborepo**. 여러 팀·강한 아키텍처 경계·다언어면 **Nx**. Google 스케일(1,000+ 엔지니어·다언어)에서만 **Bazel**.
+- **선택 순서**: ==대부분의 JS/TS 팀은 **경량 → 느려지면 Turborepo**.== 여러 팀·강한 아키텍처 경계·다언어면 **Nx**. Google 스케일(1,000+ 엔지니어·다언어)에서만 **Bazel**.
 - 관련: 경계(boundary) 설계·에이전트 팀 격리의 상세는 별도 노트([모노레포 에이전트 팀의 서비스 격리와 공통 코드 전략](/inbox/2026-07-22-모노레포-에이전트-팀의-서비스-격리와-공통-코드-전략))에서 다룸. 이 노트는 도구·방식 선택에 집중.
 
 ## 세 계층 지형
-- **① 경량 (package-manager native)** — pnpm/yarn/npm workspaces가 "여러 패키지를 한 레포에서 링크"를 이미 제공한다. 여기에 릴리스는 `changesets`, 의존성 버전 통일은 pnpm `catalogs`로 얹으면 별도 task-runner 없이도 모노레포가 돌아간다. 태스크 오케스트레이션은 루트 스크립트나 `pnpm --filter`로 처리. **캐싱·affected가 병목이 되기 전까지는 이걸로 충분**하다.
+- **① 경량 (package-manager native)** — pnpm/yarn/npm workspaces가 "여러 패키지를 한 레포에서 링크"를 이미 제공한다. 여기에 릴리스는 `changesets`, 의존성 버전 통일은 pnpm `catalogs`로 얹으면 별도 task-runner 없이도 모노레포가 돌아간다. 태스크 오케스트레이션은 루트 스크립트나 `pnpm --filter`로 처리. ==**캐싱·affected가 병목이 되기 전까지는 이걸로 충분**하다.==
 - **② task-runner (Turborepo·Nx)** — 빌드/테스트 결과를 캐싱하고, 의존 그래프로 "바뀐 것만"(affected) 돌리며, 원격 캐시로 CI를 가속한다. 경량으로 감당이 안 될 만큼 패키지·빌드 시간이 커질 때 도입.
 - **③ heavy (Bazel)** — 초대형·다언어 저장소(1,000+ 엔지니어)에서 재현성·정밀 캐싱을 극한까지. 강력하지만 학습·설정 비용이 크다. Google 스케일에서 지배적.
 - **그 외 — Lerna, moon**(아래 별도 섹션): Lerna는 버전/발행에 특화된 레거시 도구(현재 Nx 엔진 기반), moon은 폴리글롯·툴체인 관리를 강조하는 Rust 기반 신흥 러너.
@@ -32,7 +33,7 @@ lintHash: '44bf628af61e'
 - **2026 릴리스** 2026-03-25에 **Git worktrees·Agent Skill·`turbo docs`** 공식 지원(에이전트 병렬 워크플로우와 직접 맞물림). 2026-06-24에 최대 96% 성능 향상·`turbo query` stable·3.0 준비 deprecation.
 - **경계 강제** `Boundaries`(2.4, 2025-04 도입) — **오늘도 experimental**. 기본은 "패키지 디렉토리 밖 파일 import 금지 + 미선언 의존성 import 금지", 태그(dependencies/dependents allow/deny, 전이) 지원. Nx 대비 미성숙 → deep-import/아키텍처 규칙은 `dependency-cruiser`/`eslint-plugin-*` 보조가 흔히 필요.
 - **소유** Vercel. → 로드맵이 Vercel 상업 전략에 묶임.
-- **한계** **폴리글롯 미지원**(Python 등은 사실상 후보 아님). 코드 생성·아키텍처 거버넌스 기능 없음.
+- **한계** ==**폴리글롯 미지원**(Python 등은 사실상 후보 아님).== 코드 생성·아키텍처 거버넌스 기능 없음.
 
 ## Nx (확인일 2026-07-22)
 - **버전** 23.0.1(≈2026-07-19). 코어 **Rust 이식 완료**(그 위에 새 Terminal UI 등 신기능).
@@ -40,7 +41,7 @@ lintHash: '44bf628af61e'
 - **경계 강제** `@nx/enforce-module-boundaries` — 초기부터 있던 태그 기반 ESLint 규칙(앱→앱 금지, feature→feature 금지, 공개 API 외 deep import 차단). 다언어용 conformance 규칙도 있음. 경계 성숙도는 Turborepo 대비 확실한 우위.
 - **2026** **22.5 Nx Agent Skills**(AI 에이전트가 워크스페이스에서 일하는 법을 가르치는 이식 가능 capability), **22.7 Self-Healing CI**(실패 자동 수정 제안, GitHub/GitLab/Bitbucket/Azure). **21**에서 비-JS(Java/Go/Rust/Python) 버저닝까지 폴리글롯 확장.
 - **소유** Nrwl(현 Nx사). OSS 코어(MIT) + 유료 **Nx Cloud**(원격 캐시·분산 실행·Self-Healing). `@nrwl`→`@nx` 스코프 이전 완료(v16 이동, v20부터 `@nrwl` 발행 중단).
-- **한계** 학습·설정 비용이 Turborepo보다 큼. **Python 지원은 공식이 아닌 커뮤니티 플러그인 `@nxlv/python`**(개인 유지, 구 공식 파이썬 플러그인은 아카이브)에 의존 → 지속성 리스크.
+- **한계** 학습·설정 비용이 Turborepo보다 큼. ==**Python 지원은 공식이 아닌 커뮤니티 플러그인 `@nxlv/python`**(개인 유지, 구 공식 파이썬 플러그인은 아카이브)에 의존 → 지속성 리스크.==
 
 ## 경량 방식 — pnpm workspaces (+ catalogs) + changesets
 - **언제 충분한가** 패키지 수가 적당하고, 빌드 캐싱·affected가 아직 병목이 아니며, 폴리글롯이 느슨하게 공존하는 경우. task-runner의 학습·설정 비용을 치르기 전 기본선.

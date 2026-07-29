@@ -1,0 +1,44 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../layouts/Base.astro';
+
+// Unlisted TOC for /docs (reachable by direct URL; excluded from search, sitemap,
+// and shown in the footer only in dev). Free-form documents, so titles are
+// derived from the first H1 (or slug) when frontmatter omits one.
+const entries = await getCollection('docs');
+const docs = entries
+  .map((entry) => {
+    const body = (entry as { body?: string }).body ?? '';
+    const title = entry.data.title ?? body.match(/^#\s+(.+?)\s*$/m)?.[1] ?? entry.id;
+    return { href: `/docs/${entry.id}/`, title, description: entry.data.description };
+  })
+  .sort((a, b) => a.title.localeCompare(b.title));
+---
+
+<Base title="Docs — thnkr" description="Docs — 양식 없는 작업 문서">
+  <section class="mt-2">
+    <h2 class="font-medium mb-1">Docs</h2>
+    <p class="not-prose mb-6 text-sm text-muted">
+      양식 없는 작업 문서(PRD·초안 등). 직접 URL로만 접근하며 검색·사이트맵에서 제외됩니다.
+    </p>
+    {
+      docs.length > 0 ? (
+        <ul class="not-prose space-y-2">
+          {docs.map((d) => (
+            <li>
+              <a
+                href={d.href}
+                class="underline underline-offset-2 hover:text-foreground"
+              >
+                {d.title}
+              </a>
+              {d.description && <span class="text-sm text-muted"> — {d.description}</span>}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="text-sm text-muted">아직 문서가 없습니다.</p>
+      )
+    }
+  </section>
+</Base>

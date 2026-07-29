@@ -11,6 +11,7 @@ export function GET(context: APIContext): Response {
     'Disallow: /inbox/',
     'Disallow: /specs/',
     'Disallow: /idea/',
+    'Disallow: /docs/',
   ];
   const block = (ua: string): string[] => [`User-agent: ${ua}`, 'Allow: /', ...disallowed, ''];
   const lines = [

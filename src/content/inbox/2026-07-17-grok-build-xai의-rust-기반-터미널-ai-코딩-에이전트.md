@@ -10,11 +10,12 @@ tags:
   - 'mcp'
   - 'developer-productivity'
 canonical: 'https://github.com/xai-org/grok-build'
-lintHash: '2dd4383f7019'
+lintHash: '49682ef98896'
+polishHash: '49682ef98896'
 ---
 
 ## TL;DR
-- Grok Build는 xAI가 Rust로 만든 풀스크린 터미널 코딩 에이전트로, TUI·헤드리스·에디터 임베딩(ACP) 세 모드를 하나의 런타임에서 제공한다(2차).
+- ==Grok Build는 xAI가 Rust로 만든 풀스크린 터미널 코딩 에이전트로, TUI·헤드리스·에디터 임베딩(ACP) 세 모드를 하나의 런타임에서 제공한다==(2차).
 
 ## 큰 그림
 ```
@@ -38,7 +39,7 @@ lintHash: '2dd4383f7019'
 - Grok Build는 **단일 바이너리(`xai-grok-pager`, 배포명 `grok`)** 로 코드베이스 이해·파일 편집·셸 실행·웹 검색·장기 작업 관리를 수행하는 에이전트다(2차).
 - 실행 모드는 세 가지로 분기한다: 사용자가 직접 조작하는 **TUI**, CI/스크립트용 **headless**, 에디터가 호출하는 **ACP(Agent Client Protocol)** — 즉 하나의 런타임을 다양한 호스트가 소비하는 구조다(2차).
 - 코드베이스는 **기능별 crate**로 쪼개져 `pager-bin`(composition root)이 `pager`·`shell`·`tools`·`workspace`를 조합하고, `codegen/...` 아래 config·MCP·마크다운·샌드박스가 붙는다(2차).
-- 라이선스는 Apache 2.0이며, **openai/codex와 sst/opencode의 도구 구현을 in-tree로 이식**해 동봉했다(2차, THIRD-PARTY-NOTICES 근거).
+- 라이선스는 Apache 2.0이며, ==**openai/codex와 sst/opencode의 도구 구현을 in-tree로 이식**해 동봉했다==(2차, THIRD-PARTY-NOTICES 근거).
 - 빌드는 `rust-toolchain.toml`로 고정되고 `protoc`은 dotslash 런처(`bin/protoc`) 또는 `PATH/$PROTOC`로 해결한다(2차).
 
 ## 깊이
@@ -73,7 +74,7 @@ lintHash: '2dd4383f7019'
 - **(저자 주장)** "코드베이스를 이해하고, 파일을 편집하고, 셸을 실행하고, 웹을 검색하고, 장기 작업을 관리한다" — 범용 코딩 에이전트를 표방(2차).
 - **(저자 주장)** Rust + crate 분리 + generated `Cargo.toml`로 대규모 모노레포 동기화를 전제로 한 빌드 체계를 갖춤(2차).
 - **(검증 필요·불확실)** ACP의 구체적 스펙, MCP 서버 번들 목록, 샌드박스 격리 수준(네트워크/프로세스), Windows 소스 빌드 안정성은 원문에 상세 없음.
-- **(검증 필요·불확실)** "openai/codex, sst/opencode 도구 이식"의 기능 동등성과 Rust 포트로 인한 성능·행동 차이는 벤치마크 없이 미확인.
+- **(검증 필요·불확실)** =="openai/codex, sst/opencode 도구 이식"의 기능 동등성과 Rust 포트로 인한 성능·행동 차이는 벤치마크 없이 미확인.==
 - **(검증 필요·불확실)** xAI 모노레포에서 주기적 동기화한다고 하나, 업스트림과 공개 트리의 diff·지연 주기는 명시되지 않음.
 
 ## 레퍼런스

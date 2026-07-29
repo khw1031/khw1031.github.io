@@ -13,6 +13,8 @@ tags:
   - 'orca'
   - 'git-worktree'
 canonical: 'https://www.onorca.dev/docs'
+polishHash: '9c084950a87c'
+lintHash: '9c084950a87c'
 ---
 
 > 한 줄 명제: Orca는 ==여러 AI 코딩 에이전트(Claude Code·Codex·Cursor CLI·GLM 등)를 각자 격리된 git worktree에서 동시에 돌리는 데스크톱 "ADE(Agent Development Environment)"==로, 브랜치 저글링 없이 병렬 에이전트를 안전하게 굴리고 그 결과를 진지하게 리뷰·출하하는 것을 하나의 앱으로 묶는다.
@@ -70,12 +72,12 @@ Orca의 모든 기능이 여기서 파생한다. 문서가 스스로를 "**workt
 - **(사실) Tabs · panes · split layouts** — 하나의 worktree "안에서" 에디터/터미널/diff/브라우저를 분할 배치. 태스크 모양에 맞춰 pane을 짠다.
 - **(사실) Agents & sessions** — worktree의 격리 환경 안에서 도는 AI 도구(agent)와 그 런타임 컨텍스트(session).
 - **(사실) Session restore / Quick Open & Jump Palette** — 세션 복원, 그리고 다수 worktree 사이를 빠르게 오가는 팔레트.
-- **(분석)** 관계 요약: `worktree(태스크 컨테이너) ⊃ tab/pane(그 안의 분할) · agent(그 안에서 도는 도구) · session(agent의 런타임)`. **"태스크 1개 = worktree 1개"**가 멘탈 모델의 축.
+- **(분석)** 관계 요약: `worktree(태스크 컨테이너) ⊃ tab/pane(그 안의 분할) · agent(그 안에서 도는 도구) · session(agent의 런타임)`. ==**"태스크 1개 = worktree 1개"**가 멘탈 모델의 축.==
 
 ### ② 에이전트 운용 (Working with Agents)
 - **(사실)** 지원 에이전트: **Claude Code, Codex, Cursor CLI, GLM-5.2(Orca ADE), OpenCode, Grok** 등 — "아무 에이전트 CLI나" 자신의 기존 구독을 꽂아 나란히 실행.
 - **(사실)** 운용 기능: **커스텀 CLI 에이전트** 등록, **Codex 계정 hot-swap**, **세션 히스토리**, **에이전트 hibernation(휴면)**, **사용량·rate-limit 추적**, **hooks & memory**.
-- **(분석)** "자기 구독을 그대로 꽂는다(BYO subscription)"가 상업적 차별점 — Orca가 모델을 재판매하지 않고 실행 환경만 판다.
+- **(분석)** =="자기 구독을 그대로 꽂는다(BYO subscription)"가 상업적 차별점 — Orca가 모델을 재판매하지 않고 실행 환경만 판다.==
 
 ### ③ 리뷰 · 출하 (Reviewing & Shipping Code)
 - **(사실)** **Diff viewer**, **Annotate AI Diff**(AI가 만든 diff에 주석), **Attribution**(누가/무엇이 만들었는지 귀속), **Commit & Push**(Orca 안에서 바로), **GitHub 호스티드 리뷰·이슈·Actions**, **Linear items drawer**, **Jira items drawer**.
@@ -98,7 +100,7 @@ Orca의 모든 기능이 여기서 파생한다. 문서가 스스로를 "**workt
   - **Tasks** — spec·의존성·상태(pending/ready/dispatched/completed/failed/blocked)를 가진 작업 항목.
   - **Dispatch / Decision Gates** — 태스크를 특정 터미널에 배정(재시도 가능), 코디네이터가 소유하는 질문이 진행을 막는 게이트.
   - 주요 명령: `orca orchestration task-create / dispatch --inject / task-list --json`, `send`/`check`(점대점), `ask`(블로킹 질문), **`orca orchestration run --max-concurrent`**(코디네이터 루프를 Orca가 돌려 가용 에이전트에 작업 분배). `@all·@idle·@codex` 같은 그룹 메시징.
-- **(분석)** ①의 worktree 격리가 "병렬을 안전하게" 만든다면, ⑥의 orchestration은 "병렬을 **coordinator↔worker 프로토콜로 지휘**"하는 층 — 사람이 아니라 스크립트/코디네이터가 함대를 몬다.
+- **(분석)** ==①의 worktree 격리가 "병렬을 안전하게" 만든다면, ⑥의 orchestration은 "병렬을 **coordinator↔worker 프로토콜로 지휘**"하는 층== — 사람이 아니라 스크립트/코디네이터가 함대를 몬다.
 
 ### ⑦ 접근 · 알림 (Mobile / Notifications)
 - **(사실)** **모바일 컴패니언** — 라이브 에이전트 상태·사용량 확인, 계정 전환, 자리를 비운 사이 터미널 작업 유지.
@@ -108,7 +110,7 @@ Orca의 모든 기능이 여기서 파생한다. 문서가 스스로를 "**workt
 - **(사실)** Recipes: "같은 태스크로 에이전트 3개 경주 시키기", "AI diff 줄단위 리뷰", "worktree 10개 사이 점프", "Design Mode로 UI 버그 고치기", "SSH 원격에서 작업". Settings/Privacy·Telemetry/Troubleshooting/GitHub 에러.
 
 ## 판단 / 시사점
-- **(분석)** 기능을 하나로 꿰는 축은 **worktree**다. "격리(①)→에이전트(②)→리뷰(③)→작업 표면(④)→원격(⑤)→오케스트레이션(⑥)"이 전부 같은 worktree 단위에 얹힌다. 이 노트도 그 순서로 읽으면 전체가 한 번에 잡힌다.
+- **(분석)** ==기능을 하나로 꿰는 축은 **worktree**다.== "격리(①)→에이전트(②)→리뷰(③)→작업 표면(④)→원격(⑤)→오케스트레이션(⑥)"이 전부 같은 worktree 단위에 얹힌다. 이 노트도 그 순서로 읽으면 전체가 한 번에 잡힌다.
 - **(분석)** 다른 에이전트 러너와의 진짜 차별점 후보는 두 개 — ③ **리뷰·출하를 1급으로** 둔 것, ⑥ **coordinator↔worker 메시지 프로토콜(orchestration)**. 단순 "여러 터미널 띄우기"를 넘어 병렬 함대를 지휘하는 층이 있다는 점.
 - **(분석)** BYO 구독 + 오픈소스 모델이라 "실행 환경(shell)"을 팔지 "모델(substrate)"을 팔지 않는다. → 나중에 shell-substrate/해자 관점으로 따로 볼 가치가 있는 후보.
 

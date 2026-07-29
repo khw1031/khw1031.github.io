@@ -20,8 +20,8 @@ function* walkMarkdown(dir) {
 
 // @astrojs/sitemap's filter only sees the final URL, not frontmatter, so
 // excluding draft entries from collections that DO appear in the sitemap
-// (posts, read-and-write, wiki — notes/inbox/specs/idea are already excluded
-// wholesale by path below) means precomputing their draft routes here by
+// (posts, read-and-write, wiki — notes/inbox/specs/idea/docs are already
+// excluded wholesale by path below) means precomputing their draft routes by
 // reading frontmatter directly, the same way scripts/check-frontmatter.ts does.
 function draftPagePaths() {
   const paths = new Set();
@@ -57,6 +57,7 @@ export default defineConfig({
           !isPrivate('/inbox') &&
           !isPrivate('/specs') &&
           !isPrivate('/idea') &&
+          !isPrivate('/docs') &&
           !DRAFT_PATHS.has(path)
         );
       },
