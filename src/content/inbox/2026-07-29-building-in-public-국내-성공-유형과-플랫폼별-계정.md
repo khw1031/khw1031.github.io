@@ -6,6 +6,7 @@ summary: 'Building in Public의 기원(Buffer 2013)과 작동 메커니즘을 �
 lang: ko
 tags: [building-in-public, 인디해커, 퍼스널브랜딩, 국내사례, threads]
 polishHash: '9fd28043b8cc'
+lintHash: '9fd28043b8cc'
 ---
 
 ## 아이디어

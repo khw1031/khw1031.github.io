@@ -9,7 +9,7 @@ tags:
   - 'ai'
   - 'developer-productivity'
 canonical: 'https://www.instagram.com/p/DbDTI0DgVFg/?img_index=3'
-lintHash: '0b09ff8faeb8'
+lintHash: '68537bb3f003'
 polishHash: '68537bb3f003'
 ---
 

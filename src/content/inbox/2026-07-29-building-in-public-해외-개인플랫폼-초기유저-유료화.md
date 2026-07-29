@@ -4,8 +4,9 @@ pubDate: '2026-07-29T16:11:15+09:00'
 description: 해외 BiP를 개인 플랫폼 연계·초기 이용자 획득·유료화 세 축으로 조사한 캡처. 메타 레이어가 원본 제품보다 더 번다는 관찰이 핵심.
 summary: '해외 Building in Public을 개인 사이트를 정본 허브로 쓰는 구조, 과정 공개를 초기 이용자 획득 채널로 쓰는 방식, 그리고 BiP 방법론 자체를 유료 제품으로 파는 메타 레이어 세 축으로 조사하고, Marc Lou의 제품별 매출에서 방법론 판매가 원본 제품을 앞지른다는 관찰과 Bannerbear·WIP의 후퇴 사례까지 확인한 인박스 캡처'
 lang: ko
-tags: [building-in-public, 인디해커, 개인사이트, 초기이용자, 유료화, 해외사례]
+tags: [building-in-public, 인디해커, 개인사이트, 유료화, 해외사례]
 polishHash: '2584d48d4d30'
+lintHash: '2584d48d4d30'
 ---
 
 ## 아이디어
