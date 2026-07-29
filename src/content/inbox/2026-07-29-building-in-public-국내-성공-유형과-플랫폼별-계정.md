@@ -5,6 +5,7 @@ description: BiP의 기원·작동 메커니즘을 정리하고, 국내에서 �
 summary: 'Building in Public의 기원(Buffer 2013)과 작동 메커니즘을 정리하고, 국내 과정 공개형 활동이 Threads에 집중되어 있으며 X는 소수 고신뢰 개인, Instagram은 사실상 부재라는 플랫폼별 지형과 실제 계정·원문을 확인한 인박스 캡처'
 lang: ko
 tags: [building-in-public, 인디해커, 퍼스널브랜딩, 국내사례, threads]
+polishHash: '9fd28043b8cc'
 ---
 
 ## 아이디어
