@@ -15,6 +15,12 @@ npx tsx scripts/check-notes-polish.ts || true
 echo "pre-push: checking for stray scripts…"
 npx tsx scripts/check-stray-script.ts || true
 
+# Advisory only (never blocks): flags captures whose body is truncated or degenerate
+# — the failure mode that passes frontmatter and reads as merely "unpolished".
+# Repair is a re-capture from the frontmatter's canonical, not a polish pass.
+echo "pre-push: checking capture integrity…"
+npx tsx scripts/check-capture-integrity.ts || true
+
 echo "pre-push: checking content frontmatter…"
 if ! npx tsx scripts/check-frontmatter.ts; then
   echo ""
