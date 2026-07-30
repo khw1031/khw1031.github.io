@@ -9,11 +9,12 @@ tags:
   - 'ai'
   - 'developer-productivity'
 canonical: 'https://www.instagram.com/p/DbDTI0DgVFg/?img_index=3'
-lintHash: 'ecf3f1acaddf'
+lintHash: 'ffb2ebeb77d4'
+polishHash: 'ffb2ebeb77d4'
 ---
 
 ## TL;DR
-- Elon Musk가 설립한 Ad Astra는 "도구보다 문제 정의"를 핵심으로 삼았고, 한국 TEU Kids Moonshot은 이 철학을 초등 AI 프로젝트 학습에 적용했다고 **주장**한다.
+- ==Elon Musk가 설립한 Ad Astra는 "도구보다 문제 정의"를 핵심으로 삼았고,== 한국 TEU Kids Moonshot은 이 철학을 초등 AI 프로젝트 학습에 적용했다고 **주장**한다.
 
 ## 큰 그림
 ```
@@ -46,7 +47,7 @@ Elon Musk는 2014년 SpaceX 캠퍼스 내에 Ad Astra(라틴어 "별을 향하�
 
 ## 용어 풀이
 - **Ad Astra** — "별을 향하여"(라틴어). Musk가 SpaceX 본사에 만든 비인가 대안학교. *비유*: 학교가 아닌 '연구소에 붙은 실험실'. *깨지는 점*: 연구소는 성과 압박이 있지만 Ad Astra는 아동 교육기관이므로 평가·발달 체계가 별도로 존재.
-- **문제 정의(Problem Framing)** — 주어진 문제를 푸는 것이 아니라 "무엇이 진짜 문제인가"를 설정하는 능력. *비유*: 의사가 증상만 보지 않고 병명을 다시 내리는 것. *깨지는 점*: 초등생에게 문제 정의 자율성을 주면 산만해질 수 있어 가이드 프레임이 필수 — 원문은 이 가이드 구조를 설명하지 않음.
+- **문제 정의(Problem Framing)** — 주어진 문제를 푸는 것이 아니라 "무엇이 진짜 문제인가"를 설정하는 능력. *비유*: 의사가 증상만 보지 않고 병명을 다시 내리는 것. *깨지는 점*: ==초등생에게 문제 정의 자율성을 주면 산만해질 수 있어 가이드 프레임이 필수== — 원문은 이 가이드 구조를 설명하지 않음.
 
 ## 시각 자료
 
