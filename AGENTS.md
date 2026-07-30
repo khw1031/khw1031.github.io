@@ -68,6 +68,13 @@
 - **Confidentiality** — Do not expose internal URLs, private repository names, customer data, credentials, or screenshots containing non-public information. Ask the user for sanitized/public references when evidence is missing.
 - **Language** — Write posts in Korean by default. Preserve English technical terms when they are standard terms or identifiers, and explain them in Korean when first introduced.
 
+## Script
+
+Applies to all authored content (posts, notes, wiki, inbox, sources, idea) and to frontmatter.
+
+- **한글 by Default, No 한자** — Write Korean in 한글. Do not use 한자 as ordinary prose (`구상`, not `构想`/`構想`), and never use Japanese kana (`히스토리`, not `ヒ스토리`) or simplified-Chinese-only forms. The single exception is text that is *about* or *quoting* another script: a directly quoted foreign-language passage, or a proper noun with no Korean form. Mark those as quotations so they read as deliberate rather than as leakage.
+- **Why it matters** — These characters arrive as capture-time leakage from an upstream model or source, not as authorial choice, so they are always a defect unless quoted. (Origin: 2026-07-30 — a kana scan over `src/content` found 8 contaminated lines in 6 files: `続く`, `化する`, `构想`, `クリア`, `からは`, `仕組み`, `位置づけ` ×2, `ミサイル`, `ヒストリー`. Only 2 hits in 1 file were legitimate Japanese quotations.)
+
 ## Diagrams
 
 Applies to all authored content (posts, notes, wiki).

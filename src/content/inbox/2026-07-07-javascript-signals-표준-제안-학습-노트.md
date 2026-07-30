@@ -10,8 +10,8 @@ tags:
   - 'tc39'
   - 'javascript'
 canonical: 'https://github.com/tc39/proposal-signals'
-lintHash: '31a62f7ae18c'
-polishHash: '31a62f7ae18c'
+lintHash: 'aa8e8f4e60d4'
+polishHash: 'aa8e8f4e60d4'
 ---
 
 > 한 줄 명제: JavaScript Signals는 반응형 상태 관리를 위해 자동 의존성 추적·지연 평가·glitch-free 전파를 그래프 기반 원시 타입으로 제공하는 TC39 표준 제안이다.
@@ -91,7 +91,7 @@ Computed 콜백 내에서 다른 Signal에 `.set()`하는 것은 금지되지 �
 네이티브 C++ 구현이 JS polyfill보다 상수 배(performance) 효율적일 것으로 기대되지만, 알고리즘 자체는 polyfill과 동일하다. DevTools 측면에서는 Signal 간 참조 그래프와 계산 체인의 콜스택 추적이 가능해질 전망이다. Watcher는 감시 중인 Signal들을 살아있게 유지하므로 `unwatch()`로 명시적 정리가 필요하다. 그렇지 않으면 메모리 누수가 발생한다.
 
 **[⑥ API와 알고리즘 명세] 📎**
-hidden global state는 세 가지다: `computing`(현재 재평가 중인 Computed), `frozen`(그래프 수정 금지 여부), `generation`(순환 방지용 증가 정수). "recalculate dirty computed Signal" 알고리즘은 sources 집합을クリア하고 콜백을 실행한 후, 반환값을 "set Signal value" 알고리즘에 전달해 dirty/clean을 결정한다. `equals`에서 예외가 발생하면 예외가 값으로 캐시되고, 콜백이 false를 반환한 것처럼 처리된다. 원문에 실행 예제 없음.
+hidden global state는 세 가지다: `computing`(현재 재평가 중인 Computed), `frozen`(그래프 수정 금지 여부), `generation`(순환 방지용 증가 정수). "recalculate dirty computed Signal" 알고리즘은 sources 집합을 비우고 콜백을 실행한 후, 반환값을 "set Signal value" 알고리즘에 전달해 dirty/clean을 결정한다. `equals`에서 예외가 발생하면 예외가 값으로 캐시되고, 콜백이 false를 반환한 것처럼 처리된다. 원문에 실행 예제 없음.
 
 ## 레퍼런스
 
