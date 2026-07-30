@@ -151,6 +151,41 @@
   margin-top: 0.15em;
   margin-bottom: 0.15em;
 }
+/* Trailing reference block (`<div class="refs">` after the final divider). It is
+   apparatus, not body text — one step down in size, heading normalized to match. */
+.prose .refs {
+  font-size: 0.9em;
+}
+.prose .refs :is(h2) {
+  font-size: 1em;
+  margin-top: 1.5em;
+}
+
+/* Bullet glyph: the default disc reads heavy next to 14px Korean body text.
+   ::marker takes font-size, so the dot shrinks without shifting text indent. */
+.prose :where(ul) > li::marker {
+  font-size: 0.7em;
+}
+/* Outline numbering for ordered lists. An <ol> counter restarts at 1 on every
+   nesting level; CSS counters compose the ancestor stack instead, so labels read
+   1. / 1.1. / 1.1.1. The native marker is dropped since ::before carries it. */
+.prose :where(ol) {
+  list-style: none;
+  counter-reset: outline;
+}
+.prose :where(ol) > li {
+  counter-increment: outline;
+}
+.prose :where(ol) > li::before {
+  content: counters(outline, ".") ". ";
+  color: var(--color-muted);
+}
+/* Tailwind's list padding exists to hold the native marker. The counter above
+   lives inside the content flow instead, so the outermost ordered list needs no
+   left inset — nested levels keep theirs to show depth. */
+.prose > ol {
+  padding-inline-start: 0;
+}
 .prose :where(h1, h2, h3, h4):not(:where([class~="not-prose"], [class~="not-prose"] *)) + p {
   margin-top: 0.85em;
 }

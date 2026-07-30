@@ -7,8 +7,8 @@ description: 아이콘은 인식(recognition)을 활용하지만 대부분 텍�
 lang: ko
 tags: ['icons', 'pictograms', 'recognition', 'accessibility', 'wcag', 'material-symbols']
 summary: "아이콘은 인식-over-회상(Nielsen 6)을 활용하지만, 그 의미가 이미 학습·관습화됐을 때만 통한다 — NN/g 연구는 보편적으로 이해되는 아이콘은 극소수(홈·검색·프린트)이고 대부분 텍스트 레이블이 필요하다고 본다. 애매한 아이콘은 부하만 늘린다. 접근성상 아이콘 전용 버튼은 접근 가능한 이름(WCAG 4.1.2·1.1.1: aria-label/시각 숨김 텍스트)이 필요하고, 의미 있는 아이콘은 3:1 대비(1.4.11)를 지켜야 한다. Material Symbols(가변 폰트 4축)·SF Symbols는 24dp 그리드·옵티컬 사이징으로 체계화한다."
-lintHash: '4028d74251c9'
-polishHash: '4028d74251c9'
+lintHash: '67f9f0876721'
+polishHash: '67f9f0876721'
 ---
 
 > 한 줄 명제: 아이콘은 관습화됐을 때만 인식되고, 대부분 텍스트 레이블이 필요하다 — 아이콘 전용 버튼엔 접근 가능한 이름을, 의미 있는 아이콘엔 3:1 대비를.
@@ -41,13 +41,3 @@ polishHash: '4028d74251c9'
 - [Google — Material Symbols guide](https://developers.google.com/fonts/docs/material_symbols) — 2차(벤더, 정적 확인). 가변 폰트 4축(FILL·wght·GRAD·opsz). [System icons (M2)](https://m2.material.io/design/iconography/system-icons.html) — 24dp 그리드·키라인.
 - [Apple — SF Symbols](https://developer.apple.com/design/human-interface-guidelines/sf-symbols) — 2차(벤더). 7,000+·9웨이트·3스케일·텍스트 자동 정렬.
 - [Nielsen — 10 Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) — 2차. 인식-over-회상(휴리스틱 6).
-
-## 연결
-
-- [usability](/wiki/design-principles/usability/) — 상위 허브. 인식-over-회상의 구체 사례.
-- [Nielsen 휴리스틱](/wiki/design-principles/usability/nielsen-heuristics/) — 6번(인식 우선)의 적용과 한계.
-- [Jakob의 법칙](/wiki/design-principles/usability/jakobs-law/) — 관습 아이콘이 통하는 이유.
-- [cognitive-load-and-density](/wiki/design-principles/usability/cognitive-load-and-density/) — 애매한 아이콘 = 부하 증가.
-- [color-and-contrast](/wiki/design-principles/color-and-contrast/) — 아이콘 비텍스트 대비(1.4.11).
-- [typographic-scale](/wiki/design-principles/aesthetics-and-layout/typographic-scale/) — 아이콘 옵티컬 사이징이 텍스트에 맞춰지는 접점.
-- [apple-hig](/wiki/design-principles/apple-hig/) — SF Symbols(7,000+·9 웨이트·3 스케일, 텍스트 자동 정렬)의 구현 사례.

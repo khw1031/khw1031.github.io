@@ -11,8 +11,8 @@ tags:
   - 'developer-productivity'
   - 'ssr'
 canonical: 'https://github.com/firecrawl/open-lovable'
-lintHash: 'd9ecc49d18e2'
-polishHash: 'd9ecc49d18e2'
+lintHash: 'e006011ea570'
+polishHash: 'e006011ea570'
 ---
 
 ## TL;DR
@@ -59,14 +59,14 @@ polishHash: 'd9ecc49d18e2'
 
 ## 깊이
 - **[LLM 다중 지원]** `.env.local`에 Gemini, Anthropic, OpenAI, Groq 중 원하는 키를 넣으면 된다. 원문은 어떤 LLM이 기본인지 명시하지 않았다(불확실). 여러 키를 동시에 넣을 수 있는지 여부도 원문에 없음.
-- **[Fast Apply — Morph]** 선택적 의존성으로 Morph LLM을 사용하면, 전체 코드를 다시 생성하지 않고 부분 편집만 빠르게 적용한다(저자 주장). 비유하자면 "전체 다시 그리기" 대신 "지우개와 연필로 한 줄만 고치는" 격. 깨지는 지점: Morph가 없으면 편집 속도가 LLM 전체 재생성 속도에 의존하므로 체감 차이가 클 수 있다.
+- **[Fast Apply — Morph]** 선택적 의존성으로 Morph LLM을 사용하면, 전체 코드를 다시 생성하지 않고 부분 편집만 빠르게 적용한다(저자 주장).
 - **[샌드박스 이중 지원]** Vercel Sandbox(기본, OIDC 인증 권장) 또는 E2B 중 하나를 선택한다. Vercel은 개발 시 `vercel link` + `vercel env pull`로 OIDC 토큰을 자동 발급받고, 프로덕션에서는 Personal Access Token 방식을 쓴다. 이 구조는 생성된 앱을 격리된 환경에서 안전하게 프리뷰하기 위함이다.
 - **[프로젝트 규모]** GitHub 27.7k 스타, 5.3k 포크, 13명 기여자, MIT 라이선스. 2025년 8월 최초 커밋 이후 11월까지 59 커밋이 쌓였다.
 
 ## 용어 풀이
-- **Firecrawl** — 웹사이트를 구조화된 데이터로 스크래핑하는 API 서비스. / 비유: "웹페이지를 해부하여 뼈대(구조), 피부(스타일), 장기(콘텐츠)를 분리하는 외과의." / 깨지는 지점: JS 렌더링이 필요한 SPA나 로그인 벽 뒤 콘텐츠는 추출이 불완전할 수 있다.
-- **Sandbox (Vercel/E2B)** — 생성된 코드를 격리 실행하는 임시 환경. / 비유: "아이에게 안전한 놀이터를 주고 그 안에서 블록을 쌓게 하는 것." / 깨지는 지점: 샌드박스 수명 종료 후 상태는 사라지므로, 실제 배포는 별도 과정이 필요하다.
-- **Fast Apply (Morph)** — 코드 전체 재생성 없이 diff만 적용하는 편집 방식. / 비유: "문서 전체를 다시 타이핑하지 않고 찾기·바꾸기로 한 단어만 고치는 것." / 깨지는 지점: 큰 구조 변경에는 전체 재생성이 더 나을 수 있다.
+- **Firecrawl** — 웹사이트를 구조화된 데이터로 스크래핑하는 API 서비스.
+- **Sandbox (Vercel/E2B)** — 생성된 코드를 격리 실행하는 임시 환경.
+- **Fast Apply (Morph)** — 코드 전체 재생성 없이 diff만 적용하는 편집 방식.
 
 ## 시각 자료
 

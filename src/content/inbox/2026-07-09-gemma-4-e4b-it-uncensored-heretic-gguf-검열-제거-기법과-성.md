@@ -10,8 +10,8 @@ tags:
   - 'reasoning'
   - 'optimization'
 canonical: 'https://huggingface.co/llmfan46/gemma-4-E4B-it-ultra-uncensored-heretic-GGUF'
-lintHash: 'd4941eb3160d'
-polishHash: 'd4941eb3160d'
+lintHash: 'e9c91e7e2676'
+polishHash: 'e9c91e7e2676'
 ---
 
 ## TL;DR
@@ -54,7 +54,7 @@ llmfan46/gemma-4-E4B-it-ultra-uncensored-heretic
 
 ## 깊이
 
-- **[abliteration의 작동 원리]** refusal은 모델 내부에서 특정 "방향"으로 표현된다는 가설이 전제다(저자 주장). 비유하면, 모델의 사고 흐름에서 "이 질문은 위험하니 거부하라"는 신호가 흐르는 특정 신경 경로가 있고, 이 경로의 신호를 외과적으로 차단하는 것이다. ARA(Arbitrary-Rank Ablation)는 기존 abliteration보다 더 유연한 rank 선택이 가능한 개선 방법으로 보인다. **비유가 깨지는 지점**: 실제 신경망에서 "거부 방향"이 깔끔하게 분리된 단일 벡터로 존재한다는 보장은 없으며, 여러 개념이 얽힌 표현 공간에서 일부를 제거하면 예상치 못한 부작용이 생길 수 있다.
+- **[abliteration의 작동 원리]** refusal은 모델 내부에서 특정 "방향"으로 표현된다는 가설이 전제다(저자 주장). 그 방향 벡터를 weight에서 외과적으로 제거하는 것이 abliteration이고, ARA(Arbitrary-Rank Ablation)는 기존 방식보다 더 유연한 rank 선택이 가능한 개선 방법으로 보인다. **한계**: 실제 신경망에서 "거부 방향"이 깔끔하게 분리된 단일 벡터로 존재한다는 보장은 없으며, 여러 개념이 얽힌 표현 공간에서 일부를 제거하면 예상치 못한 부작용이 생길 수 있다.
 
 - **[성능 트레이드오프의 구체적 수치]** MMLU에서 세부 과목을 비교하면, `moral_scenarios`가 43.91% → 41.23%(-2.68%p)로 가장 크게 하락한 반면, `philosophy`는 70.74%로 변동이 없다. 이는 검열 제거가 윤리적 추론이 필요한 영역에 더 큰 영향을 미칠 수 있음을 시사한다(원문 데이터 기반 추론, 인과관계는 불확실).
 
@@ -64,15 +64,15 @@ llmfan46/gemma-4-E4B-it-ultra-uncensored-heretic
 
 ## 용어 풀이
 
-- **Abliteration** — 모델 weight에서 특정 행동(예: 거부)을 유발하는 방향 벡터를 제거하는 사후 기법 / 비유: 라디오에서 특정 주파수만 차단하는 노치 필터 / 깨지는 지점: 라디오 필터는 주파수가 물리적으로 분리되지만, 신경망 표현 공간에서는 "거부"와 "유용한 답변"이 완전히 분리되지 않을 수 있다.
+- **Abliteration** — 모델 weight에서 특정 행동(예: 거부)을 유발하는 방향 벡터를 제거하는 사후 기법.
 
-- **KL divergence** — 두 확률 분포의 차이를 측정하는 지표. 여기서 0에 가까울수록 원본 모델과 출력 분포가 유사함을 의미 / 비유: 두 사람이 같은 질문에 대해 얼마나 다른 확률로 답변하는지 / 깨지는 지점: KL divergence가 낮아도 특정 입력(예: 민감한 주제)에서는 큰 차이가 날 수 있다.
+- **KL divergence** — 두 확률 분포의 차이를 측정하는 지표. 여기서 0에 가까울수록 원본 모델과 출력 분포가 유사함을 의미.
 
 - **ARA (Arbitrary-Rank Ablation)** — Abliteration의 개선 방법으로, 제거할 방향의 rank를 유연하게 선택 가능 / 원문에 상세 알고리즘 설명은 없음.
 
-- **GGUF** — llama.cpp 생태계에서 사용하는 모델 파일 포맷. 양자화된 weight와 메타데이터를 단일 파일에 담음 / 비유: 압축된 ZIP 파일처럼 모델을 하나의 파일로 패키징.
+- **GGUF** — llama.cpp 생태계에서 사용하는 모델 파일 포맷. 양자화된 weight와 메타데이터를 단일 파일에 담음.
 
-- **Per-Layer Embeddings (PLE)** — 각 decoder layer가 토큰마다 자체적인 소형 embedding을 갖는 구조 / 비유: 같은 단어를 각 층이 약간씩 다른 "렌즈"로 바라봄.
+- **Per-Layer Embeddings (PLE)** — 각 decoder layer가 토큰마다 자체적인 소형 embedding을 갖는 구조.
 
 - **attn.o_proj** — Transformer attention 블록의 output projection 레이어. attention 결과를 residual stream에 투영하는 역할.
 

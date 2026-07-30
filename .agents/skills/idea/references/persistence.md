@@ -1,12 +1,12 @@
 # The /idea route: how it is served and what to check
 
-`/idea`는 `notes`/`specs`와 동일한 **unlisted 컬렉션 라우트**다. 별도 빌드 스텝·암호화·키가 없다 —
+`/idea`는 `notes`와 동일한 **unlisted 컬렉션 라우트**다. 별도 빌드 스텝·암호화·키가 없다 —
 평문 마크다운을 커밋하면 그대로 배포된다.
 
 ## 동작 방식
 
 - `idea`는 Astro 콘텐츠 컬렉션(`src/content.config.ts`, `baseFrontmatter` 스키마)이다.
-- `src/pages/idea/[...slug].astro`가 `src/content/idea/**/*.md`를 렌더한다(notes/specs와 같은 패턴:
+- `src/pages/idea/[...slug].astro`가 `src/content/idea/**/*.md`를 렌더한다(notes와 같은 패턴:
   허브 `{slug}/index.md` + 자식 `{slug}/{child}.md`, 허브는 직속 자식 목차 자동 렌더).
 - 노출 제외는 기존 코드가 처리한다: 사이트맵 필터(`astro.config.mjs`)와 `robots.txt.ts`가 `/idea`를
   제외하고, `SEARCHABLE_COLLECTIONS`에 없으므로 pagefind 인덱스에도 안 들어간다.

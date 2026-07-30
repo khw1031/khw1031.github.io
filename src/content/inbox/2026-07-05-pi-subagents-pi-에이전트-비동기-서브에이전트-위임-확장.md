@@ -10,8 +10,8 @@ tags:
   - 'developer-productivity'
   - 'open-source'
 canonical: 'https://github.com/nicobailon/pi-subagents'
-lintHash: 'c9d0be585f09'
-polishHash: 'c9d0be585f09'
+lintHash: 'b53ad4bf3ca9'
+polishHash: 'b53ad4bf3ca9'
 ---
 
 ## TL;DR
@@ -158,17 +158,17 @@ async-subagent-runs/<id>/
 
 ## 용어 풀이
 
-- **Subagent** — 쉬운 말: 부모 에이전트가 일을 맡기는 자식 에이전트 세션. 비유: 팀장이 팀원에게 작업을 배정하듯. 비유가 깨지는 지점: 자식은 독립 프로세스로 실행되며 부모의 전체 맥락을 자동 상속하지 않는다(의도적 격리).
+- **Subagent** — 쉬운 말: 부모 에이전트가 일을 맡기는 자식 에이전트 세션.
 
-- **Fork vs Fresh context** — 쉬운 말: `fork`는 부모 세션의 현재 상태를 복제하여 시작, `fresh`는 백지 상태에서 시작. 비유: `fork`는 회의록을 복사해서 새 회의에 가져가는 것, `fresh`는 빈 노트로 새 회의 시작. 비유가 깨지는 지점: fork 시 Anthropic의 서명된 `thinking`/`redacted_thinking` 블록은 서명 무효화를 방지하기 위해 제거된다.
+- **Fork vs Fresh context** — 쉬운 말: `fork`는 부모 세션의 현재 상태를 복제하여 시작, `fresh`는 백지 상태에서 시작.
 
-- **Acceptance Gate** — 쉬운 말: 자식 에이전트의 작업 결과를 검증하는 품질 관문. 비유: 건물 검수 — 자기 보고(attested)부터 독립 검사관 검토(reviewed)까지 단계적. 비유가 깨지는 지점: `verified` 단계에서 자식이 스스로 보고한 테스트 성공은 인정되지 않으며, 반드시 런타임이 직접 명령을 실행해 확인한다.
+- **Acceptance Gate** — 쉬운 말: 자식 에이전트의 작업 결과를 검증하는 품질 관문.
 
-- **Worktree** — 쉬운 말: git의 독립 작업 사본. 비유: 같은 건물의 다른 층에서 각자 리모델링하여 충돌 방지. 비유가 깨지는 지점: `node_modules/`는 복사가 아닌 심볼릭 링크로 공유되며, clean working tree가 아니면 실패한다.
+- **Worktree** — 쉬운 말: git의 독립 작업 사본.
 
-- **Dynamic Fanout** — 쉬운 말: 이전 단계의 구조화된 결과(JSON 배열)를 기반으로 자동으로 병렬 자식을 생성. 비유: 검사 목록의 각 항목마다 검사원을 자동으로 배정. 비유가 깨지는 지점: 산문 출력은 절대 파싱되지 않으며, `maxItems` 초과 시 실패한다.
+- **Dynamic Fanout** — 쉬운 말: 이전 단계의 구조화된 결과(JSON 배열)를 기반으로 자동으로 병렬 자식을 생성.
 
-- **Intercom / contact_supervisor** — 쉬운 말: 자식이 부모에게 질문하거나 진행 상황을 알리는 통신 채널. 비유: 무전기. 비유가 깨지는 지점: 메시지는 생성된 정확한 세션 ID로 범위가 제한되어, 같은 리포의 다른 Pi 세션은 수신하지 못한다.
+- **Intercom / contact_supervisor** — 쉬운 말: 자식이 부모에게 질문하거나 진행 상황을 알리는 통신 채널.
 
 ## 시각 자료
 

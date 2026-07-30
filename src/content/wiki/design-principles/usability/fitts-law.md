@@ -7,8 +7,8 @@ description: 타깃을 획득하는 시간은 타깃까지의 거리와 타깃 �
 lang: ko
 tags: ['fitts-law', 'usability', 'pointing', 'target-size', 'hci']
 summary: "Paul Fitts(1954)가 인간 운동 시스템의 정보 용량을 측정해 정립한 법칙. 타깃 획득 시간 MT는 거리 D가 멀수록, 타깃 폭 W가 좁을수록 로그로 길어진다: MT = a + b·log₂(2D/W). UI 함의는 명확하다 — 중요한 컨트롤은 크게·가깝게, 화면 모서리·가장자리는 포인터가 멈추는 '무한 크기' 타깃이라 고빈도 컨트롤에 최적. 타깃 최소 크기 규범(48dp·44pt)의 이론적 근거."
-lintHash: '0d1455496cd7'
-polishHash: '0d1455496cd7'
+lintHash: '0491003e3f18'
+polishHash: '0491003e3f18'
 ---
 
 > 한 줄 명제: 타깃까지 가는 시간은 거리와 크기의 함수다 — 중요한 것은 크게, 가깝게, 그리고 가능하면 화면 모서리(무한 크기)에.
@@ -35,10 +35,3 @@ UI 함의(2차 UX 문헌에서 정리된 것):
 
 - [Fitts, P. M. (1954), The information capacity of the human motor system in controlling the amplitude of movement — *J. Exp. Psychol.* 47(6), 381–391](https://doi.org/10.1037/h0055392) — 1차. 원 실험 논문. (PhilPapers 레코드: [FITTIC](https://philpapers.org/rec/FITTIC))
 - [Laws of UX — Fitts's Law](https://lawsofux.com/fittss-law/) — 2차. "타깃 획득 시간은 거리와 크기의 함수"라는 UX 요약(공식 없음). 원 논문 확인 후 보조.
-
-## 연결
-
-- [usability](/wiki/design-principles/usability/) — 상위 허브. "원 논문 있는 인지·운동 법칙" 계열.
-- [touch-target-size](/wiki/design-principles/usability/touch-target-size/) — Fitts가 물리 수치 규범으로 굳은 결과.
-- [Hick의 법칙](/wiki/design-principles/usability/hicks-law/) — 짝이 되는 법칙(운동 시간 vs 결정 시간). 둘 다 로그 관계.
-- [Material Design](/wiki/design-principles/material-design/) — 48dp 타깃·타깃 간 8dp 간격으로 Fitts를 규범화.

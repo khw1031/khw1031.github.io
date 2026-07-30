@@ -2,7 +2,7 @@
 name: content-delete
 description: >
   Safely delete a document from an agent-authored content collection
-  (notes, inbox, specs, wiki) by first mapping every inbound reference to it across
+  (notes, inbox, sources, wiki) by first mapping every inbound reference to it across
   the whole repo, surfacing structural dependencies (hub↔child, category TOC), and
   only then removing it with git rm so the deletion is reviewable and reversible.
   Never auto-rewrites inbound links — it reports them and proposes edits. Handles
@@ -11,8 +11,8 @@ description: >
   capture, or to clean up an obsolete doc without leaving dangling links. 노트·위키·
   스펙·inbox 문서 안전 삭제, 참조 파악 후 삭제, dangling 링크 없이 정리 요청에 사용.
 compatibility: Project-scoped; targets this repo's Astro content collections. Claude Code compatibility through a .claude/skills relative symlink.
-repo-operating-targets: src/content/notes, src/content/inbox, src/content/specs, src/content/wiki
-argument-hint: "[삭제할 문서 경로|slug (notes|inbox|specs|wiki)]"
+repo-operating-targets: src/content/notes, src/content/inbox, src/content/sources, src/content/wiki
+argument-hint: "[삭제할 문서 경로|slug (notes|inbox|sources|wiki)]"
 ---
 
 # content-delete — reference-safe deletion for agent-authored content
@@ -26,7 +26,7 @@ so nothing is left dangling and the deletion is reviewable and revertible.
 
 ## Scope
 
-- **Deletable targets**: any doc under `src/content/{notes,inbox,specs,wiki}`
+- **Deletable targets**: any doc under `src/content/{notes,inbox,sources,wiki}`
   (agent-authored). `posts` / `read-and-write` are **user-authored** — this skill can
   scan for references to them but treats deleting them as an escalation: require
   explicit per-file confirmation, never cascade, never bulk.
@@ -38,12 +38,12 @@ so nothing is left dangling and the deletion is reviewable and revertible.
 
 - "이 노트/위키 카드/스펙 삭제해줘" — a single doc, safely.
 - "이 허브 통째로 지워줘" — a hub (`{topic}/index.md`) and its children.
-- "이 곁가지 자식 노트 지워줘" — a child, keeping the hub.
+- "이 자식 노트 지워줘" — a child, keeping the hub.
 - Cleaning up an obsolete/duplicated capture without leaving `/notes/...` or
   `/wiki/...` links pointing at nothing.
 
 Not for: publishing/listing/search/sitemap changes (out of scope), or moving a doc
-between collections (that is `note-promoter` for inbox→notes, or authoring).
+between collections (that is authoring, e.g. inbox→notes).
 
 ## Workflow
 
@@ -71,7 +71,7 @@ between collections (that is `note-promoter` for inbox→notes, or authoring).
      hub alone. Offer: (a) delete the whole subtree (`git rm -r`), (b) promote a child
      to the new hub / reparent the others, then delete only the old hub, (c) abort.
    - **Deleting a child** → the auto-TOC drops it automatically, but the hub's
-     §큰 그림 map / §곁가지 / §연결 may still name it. Flag those hub sections for a
+     §큰 그림 map and its prose may still name it. Flag those hub sections for a
      follow-up edit.
    - **Deleting a wiki leaf/subcategory** → its parent category `index.md` hub
      summarizes/links it; the immediate-children TOC is auto-rendered, but the hub's
@@ -95,10 +95,10 @@ between collections (that is `note-promoter` for inbox→notes, or authoring).
 
 ## What this skill does NOT touch
 
-- Listing/search/sitemap/routing code. notes/inbox/specs are unlisted and wiki is
+- Listing/search/sitemap/routing code. notes/inbox/sources are unlisted and wiki is
   public+searchable; pagefind/sitemap regenerate on the next build — no manual index
   surgery. Changing a collection's exposure is escalation, not deletion.
-- Cross-collection moves (inbox→notes is `note-promoter`).
+- Cross-collection moves (inbox→notes is authoring).
 
 ## Failure spec ("done"이 아닌 모습)
 
@@ -127,7 +127,7 @@ between collections (that is `note-promoter` for inbox→notes, or authoring).
 
 ## Boundary
 
-- `src/content/{notes,inbox,specs,wiki}`의 파일을 삭제하고, 승인된 inbound 링크만 편집한다.
+- `src/content/{notes,inbox,sources,wiki}`의 파일을 삭제하고, 승인된 inbound 링크만 편집한다.
   참조 스캔은 repo 전체를 read-only로 훑는다.
 - 컬렉션 설정·라우팅·목록·검색·사이트맵 코드는 건드리지 않는다.
 - 삭제는 `git rm`으로 staged 상태이며 커밋 전까지 되돌릴 수 있다 — 파괴적 확정(커밋/푸시)은

@@ -7,8 +7,8 @@ description: 그리드가 뷰포트에 적응하는 차원 — 유동 그리드�
 lang: ko
 tags: ['responsive-design', 'media-queries', 'container-queries', 'css-grid', 'flexbox', 'mobile-first']
 summary: "layout-grid가 그리드의 계보라면, 이 카드는 그 그리드가 화면 크기에 어떻게 적응하는가다. Ethan Marcotte(2010)가 반응형 웹 디자인을 정의한 세 재료: 유동 그리드·유연한 이미지·미디어 쿼리. Wroblewski의 모바일 퍼스트는 작은 화면부터 설계하고 min-width로 향상한다. CSS Grid(2D)와 Flexbox(1D)는 배타가 아니라 조합한다. 컨테이너 쿼리(@container)는 뷰포트가 아니라 '컴포넌트가 놓인 공간'에 반응하는 전환이다(size 쿼리 2024 Baseline). Jen Simmons의 intrinsic web design은 minmax()·auto-fit·fr로 브레이크포인트 없이 적응한다."
-lintHash: '89b877cf2395'
-polishHash: '89b877cf2395'
+lintHash: '9c4055e78bae'
+polishHash: '9c4055e78bae'
 ---
 
 > 한 줄 명제: 그리드가 화면에 맞춰 적응하게 하라 — 유동 그리드·유연한 이미지·미디어 쿼리로 시작해, 모바일 퍼스트로 쌓고, 이제는 컨테이너 쿼리로 "컴포넌트가 놓인 공간"에 반응한다.
@@ -44,11 +44,3 @@ polishHash: '89b877cf2395'
 - [W3C — CSS Containment L3](https://www.w3.org/TR/css-contain-3/) · [MDN Container queries](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_containment/Container_queries) — 1차. `@container`·`container-type`(size 쿼리 2024 Baseline).
 - [Jen Simmons, Intrinsic Web Design (2018)](https://noti.st/jensimmons/h0XWcf) — 2차(개념). minmax()·auto-fit·fr로 브레이크포인트 없는 적응.
 - [Material 3 — Breakpoints](https://m3.material.io/foundations/layout/breakpoints/overview) — 1차(SPA, dp 스니펫). 5단계 window size class.
-
-## 연결
-
-- [aesthetics-and-layout](/wiki/design-principles/aesthetics-and-layout/) — 상위 허브. 그리드 계열(계보→적응)의 적응 차원.
-- [layout-grid](/wiki/design-principles/aesthetics-and-layout/layout-grid/) — 이 카드가 확장하는 그리드의 계보·구조.
-- [fluid-typography](/wiki/design-principles/aesthetics-and-layout/fluid-typography/) — clamp()·뷰포트 단위로 크기를 잇는 형제 기법.
-- [spacing-8pt-grid](/wiki/design-principles/aesthetics-and-layout/spacing-8pt-grid/) — 브레이크포인트별 spacing·density 조정.
-- [navigation-and-ia](/wiki/design-principles/usability/navigation-and-ia/) — 내비게이션이 화면 크기에 따라 적응(노출↔숨김).

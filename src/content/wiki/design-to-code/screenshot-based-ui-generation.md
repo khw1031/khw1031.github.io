@@ -6,8 +6,8 @@ description: 어떤 도구로 만들었든 상관없는 스크린샷/스케치 �
 lang: ko
 tags: ['design-to-code', 'vision-model', 'screenshot-to-code', 'ai-agent-workflow']
 summary: "v0, bolt.new, Lovable, Anima를 비롯한 2026년 주요 AI 앱 빌더는 스크린샷·손그림 스케치·경쟁사 사이트 화면 등 '어디서 왔는지 상관없는' 이미지를 비전 모델에 바로 넣어 코드를 생성하는 기능을 공식 지원한다. Figma 파일 파싱이 아예 없다는 점에서 노드 트리 기반 접근과 근본적으로 다르다."
-lintHash: 'b1b4d420094a'
-polishHash: 'b1b4d420094a'
+lintHash: '96885195d2b6'
+polishHash: '96885195d2b6'
 ---
 
 > 한 줄 명제: v0·bolt.new·Lovable·Anima는 모두 "어디서 왔는지 상관없는" 스크린샷 한 장을 비전 모델에 바로 넣어 코드를 생성하는 기능을 공식 지원한다 — 구조화된 디자인 파일 파싱이 아예 없는, 2026년 기준 가장 성숙한 Figma 우회 경로다.
@@ -30,9 +30,3 @@ polishHash: 'b1b4d420094a'
 - [Anima, Starting from a Prompt](https://docs.animaapp.com/docs/starting-from-a-prompt) — 1차. PNG/JPEG/WebP 이미지 첨부로 "레이아웃 구조와 컴포넌트 배치를 추출"하는 기능과, 실제 운영 중인 웹사이트 URL을 스크레이핑하는("inspired by [URL]") 별도 모드를 함께 문서화.
 - [abi/screenshot-to-code (GitHub)](https://github.com/abi/screenshot-to-code) — 2차(OSS 프로젝트 자체 README). 가장 많은 star를 받은 오픈소스 구현체, Gemini 3/3.1 Pro 비전 모델 지원.
 - [Claude 공식 Vision 문서](https://platform.claude.com/docs/en/build-with-claude/vision) — 1차. 이미지 입력 메커니즘(base64/URL/Files API)과 고해상도 티어(최대 2576px/4784 비주얼 토큰)를 확인. 다만 "UI 목업 → 코드"를 명명된 유스케이스로 다루지는 않음 — 갭으로 명시.
-
-## 연결
-
-- [Design-to-Code Agent Workflows](/wiki/design-to-code/) — 이 카드가 속한 카테고리, 나머지 세 갈래 대안과의 관계.
-- [이식 가능한 텍스트 디자인 스펙](/wiki/design-to-code/design-token-dsl-handoff/) — 스크린샷(이미지)만으로는 부족한 디자인 토큰·규칙을 텍스트로 보완하는 대조 사례(bolt×Stitch 연동이 실제로 스크린샷+DESIGN.md를 함께 쓰는 것이 그 증거).
-- [코드/캔버스를 디자인 소스로 쓰는 도구](/wiki/design-to-code/code-as-design-source/) — 스크린샷을 "보고 재현"하는 대신 애초에 구조화된 데이터 모델을 직접 조작하는 더 근본적인 대안.

@@ -6,8 +6,8 @@ description: 디자인 토큰·컴포넌트·문서 자체를 코드/텍스트�
 lang: ko
 tags: ['design-to-code', 'design-tokens', 'design-system', 'ai-agent-workflow', 'mcp']
 summary: "Style Dictionary·Terrazzo(W3C DTCG 토큰 표준), Storybook(코드에서 생성하는 컴포넌트 문서), bit.dev(진짜 코드-퍼스트 플랫폼), Vanilla Extract/Panda CSS/StyleX(코드에 내장된 토큰) 등, 디자인 시스템의 원본을 애초에 코드/텍스트로 두는 산업 전반의 도구를 정리한다. 2026-06 Meta가 공개한 Astryx는 여기에 'MCP 서버로 사람과 AI 에이전트가 같은 참조를 읽는다'는 축을 더한, 가장 최근이자 이 조사 주제에 가장 정확히 들어맞는 사례다."
-lintHash: '65ca322f298f'
-polishHash: '65ca322f298f'
+lintHash: '53be4ec59a21'
+polishHash: '53be4ec59a21'
 ---
 
 > 한 줄 명제: Figma를 우회하는 AI 에이전트 워크플로 이전에, 디자인 시스템의 원본을 애초에 코드/텍스트로 두는 산업 관행이 이미 있었다 — 토큰 컴파일러, 코드에서 뽑는 컴포넌트 문서, 코드-퍼스트 플랫폼, CSS-in-JS 토큰이 그것이고, Meta의 Astryx(2026-06)는 여기에 "사람과 AI 에이전트가 같은 참조를 읽는다"는 축을 새로 더했다.
@@ -40,9 +40,3 @@ polishHash: '65ca322f298f'
 - [Panda CSS (GitHub)](https://github.com/chakra-ui/panda) — 1차. 2026-06-27 릴리스까지 확인. DTCG 정합성에 대한 공식 선언은 찾지 못함(미확인으로 표기).
 - [StyleX (GitHub)](https://github.com/facebook/stylex) 및 [Meta Engineering, CSS at Scale with StyleX](https://engineering.fb.com/2026/01/12/web/css-at-scale-with-stylex/) — 1차. 토큰/테마 언어 없이 순수 빌드타임 컴파일러로 스코프를 한정.
 - [Meta, Astryx (GitHub)](https://github.com/facebook/astryx) — 1차. 상세는 심층 노트 참조.
-
-## 연결
-
-- [Design-to-Code Agent Workflows](/wiki/design-to-code/) — 이 카드가 속한 카테고리.
-- [코드/캔버스를 디자인 소스로 쓰는 도구](/wiki/design-to-code/code-as-design-source/) — 저쪽은 AI 에이전트가 앱의 실제 UI 코드를 직접 조작하는 워크플로(Onlook/Subframe/tldraw)를, 이 카드는 그 아래 깔리는 "디자인 시스템 자체를 코드로 관리하는" 더 일반적인 산업 인프라를 다룬다는 점에서 층위가 다르다.
-- [컴포넌트 레지스트리 기반 생성](/wiki/design-to-code/component-registry-first-generation/) — bit.dev·Astryx 모두 "정해진 컴포넌트 집합에서 조합"이라는 shadcn/v0 registry와 같은 발상을 공유한다.

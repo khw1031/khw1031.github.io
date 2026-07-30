@@ -10,8 +10,8 @@ tags:
   - 'tc39'
   - 'javascript'
 canonical: 'https://github.com/tc39/proposal-signals'
-lintHash: '75988edf36e0'
-polishHash: '75988edf36e0'
+lintHash: '31a62f7ae18c'
+polishHash: '31a62f7ae18c'
 ---
 
 > 한 줄 명제: JavaScript Signals는 반응형 상태 관리를 위해 자동 의존성 추적·지연 평가·glitch-free 전파를 그래프 기반 원시 타입으로 제공하는 TC39 표준 제안이다.
@@ -93,40 +93,8 @@ Computed 콜백 내에서 다른 Signal에 `.set()`하는 것은 금지되지 �
 **[⑥ API와 알고리즘 명세] 📎**
 hidden global state는 세 가지다: `computing`(현재 재평가 중인 Computed), `frozen`(그래프 수정 금지 여부), `generation`(순환 방지용 증가 정수). "recalculate dirty computed Signal" 알고리즘은 sources 집합을クリア하고 콜백을 실행한 후, 반환값을 "set Signal value" 알고리즘에 전달해 dirty/clean을 결정한다. `equals`에서 예외가 발생하면 예외가 값으로 캐시되고, 콜백이 false를 반환한 것처럼 처리된다. 원문에 실행 예제 없음.
 
-## 비유
-
-**다리 1 — Computed Signal은 스프레드시트 셀이다.** 다른 셀(의존 Signal)을 참조하는 수식을 담고, 참조 셀이 바뀌면 자동으로 재계산된다.
-**깨지는 지점:** 스프레드시트는 모든 변경 시 즉시 재계산하는 push 모델인 경우가 많지만, Computed는 `.get()` 호출 시점까지 평가를 지연하는 pull 모델이다. 또한 스프레드시트에는 glitch-free 보장이 기본적으로 고려되지 않는다.
-
-**다리 2 — Watcher의 `notify`는 공장의 '변경 알림 벨'이다.** 원자재가 도착하면 벨이 울리지만, 벨이 울리는 동안에는 생산라인을 멈추고 새 원자재를 바로 투입할 수 없다 — 먼저 라인의 현재 상태를 정리해야 한다.
-**깨지는 지점:** 실제 공장과 달리 Signal 그래프의 `notify`는 마이크로초 단위로 동기 실행되며, "라인 정리"에 해당하는 작업이 개발자 몫이 아니라 `frozen` 메커니즘이 자동으로 처리한다. 또한 벨이 울린 후 개발자가 `queueMicrotask`로 작업을 스케줄해야 한다는 점이 공장의 자동화와 다르다.
-
-## 곁가지
-
-- Signal 알고리즘 심화: 상태 전이도 6가지를 구현 레벨에서 추적해야 할 때
-- Watcher 기반 effect 스케줄링 심화: 프레임워크 렌더링 사이클과 통합할 때
-- Signal과 Proxy 조합 심화: 중첩 반응형 데이터 구조(reactive store)를 설계할 때
-- untrack unsafe 패턴 심화: 외부 Observable을 Signal로 감쌀 때
-- SSR과 Signal 직렬화 심화: 서버에서 Signal 그래프를 하이드레이션할 때
-
-## 연결
-
-- **Reactive Programming**: Signals는 reactive programming의 glitch-free, pull-based 구현체로, RxJS 등의 Observable(push/stream 기반)과 문제 영역이 다르다.
-- **Proxy**: Proxy는 객체 연산을 가로채고, Signal은 셀 간 의존성 그래프를 조정한다. 둘은 조합되어 nested reactive store를 구성할 수 있다.
-- **TC39 TC39 프로세스**: Stage 1 제안으로, Promises/A+가 ES2015 Promise로 표준화된 것처럼 polyfill·프레임워크 통합 검증 후 Stage 2+로 진행될 예정이다.
-
 ## 레퍼런스
 
 - [TC39 proposal-signals (1차)](https://github.com/tc39/proposal-signals) — JavaScript Signals 표준 제안서 원문. Stage 1 기준 API 스케치, 알고리즘, FAQ를 포함. 버전 명시 없음.
 - [Signal Polyfill (2차)](https://github.com/proposal-signals/signal-polyfill) — 제안서의 polyfill 구현. 기본 테스트 포함, 프레임워크 통합 실험용. 버전 명시 없음.
 - [What is Reactivity? (2차)](https://www.pzuraq.com/blog/what-is-reactivity) — 반응형 프로그래밍의 정의와 declarative 업데이트 모델 설명. 배경 읽기 자료.
-
----
-## 인출 질문
-
-1. Signal 그래프에서 Computed의 상태가 `~clean~` → `~checked~` → `~clean~`으로 전이하는 조건과, 이 전이가 lazy 평가와 어떻게 연결되는지 설명하라.
-2. Watcher의 `notify` 콜백 안에서 Signal 읽기/쓰기가 금지되는 **이유**는 무엇이며, 이 제한을 우회하는 정당한 방법은 무엇인가?
-
-## 내 관점
-
-<!-- 학습자가 직접 채우는 섹션 — 파이프라인은 대필하지 않는다 -->

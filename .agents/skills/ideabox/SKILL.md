@@ -43,11 +43,11 @@ argument-hint: "[캡처할 아이디어 (한 개 이상)]"
 - 모호하면 쓰기 전에 어느 컬렉션인지 되묻는다. 잘못 쓰면 파일 이동 + 상호 링크 수정 + 태그 수정이 뒤따른다.
 
 경계: 풀 발전(발산·수렴·방법론·근거 검증)은 `idea`. ideabox는 그 **앞단 캡처**다. 공개 레퍼런스
-라이브러리는 research(위키), 개인 학습 노트는 note-promoter(notes), 조사·분석 캡처는 `src/content/inbox/`.
+라이브러리는 research(위키), 개인 학습 노트는 core(notes), 조사·분석 캡처는 `src/content/inbox/`.
 
 ## Scope of /idea/inbox (알아둘 것)
 
-- `/idea` 트리의 하위 — notes/specs처럼 **unlisted**(URL 전용, 검색·사이트맵·robots·푸터 제외).
+- `/idea` 트리의 하위 — notes처럼 **unlisted**(URL 전용, 검색·사이트맵·robots·푸터 제외).
 - 본문은 **평문으로 커밋**되는 공개 정적 사이트다. **비밀값·민감정보를 넣지 않는다.** 그런 내용이면
   저장을 멈추고 사용자에게 알린다.
 - 인박스는 **스테이징**이다 — `idea`로 발전되면 원본이 삭제되고 노트로 승격된다.

@@ -7,8 +7,8 @@ description: 현재 배포 중인 주요 디자인 시스템들의 비교 카탈
 lang: ko
 tags: ['design-systems', 'landscape', 'design-tokens', 'mcp', 'comparison']
 summary: "이 라이브러리의 원리가 어느 한 벤더(Material)의 소유물이 아님을 보이는 비교 카탈로그. 다섯 이상 독립 조직의 현행 시스템을 놓고 보면 수렴이 뚜렷하다 — (1) 토큰화, (2) 시맨틱/파생 레이어, (3) 접근성 1급, (4) 단일 원본에서 멀티플랫폼, 그리고 (5) 가장 최근 축: 에이전트에 노출(Adobe spectrum-design-data-mcp·Spotify Encore MCP·Meta Astryx MCP). 갈리는 것은 전달 메커니즘·기준 단위·색 스케일 모양·파생 철학·컴포넌트 철학 — 즉 구현 표면은 교체 가능하고 원리는 아니다. 이것이 이 카테고리가 한 벤더가 아니라 이식 가능한 포맷 DESIGN.md에 앵커하는 이유다."
-lintHash: 'f6d4cac7cac4'
-polishHash: 'f6d4cac7cac4'
+lintHash: 'cdc544fa84be'
+polishHash: 'cdc544fa84be'
 ---
 
 > 한 줄 명제: 다섯 이상 독립 조직의 현행 디자인 시스템이 같은 원리(토큰·시맨틱·접근성·단일원본 멀티플랫폼·에이전트 노출)에 독립적으로 수렴한다 — 구현 표면(단위·스케일·API)만 다를 뿐. 그래서 원리는 벤더의 소유물이 아니다.
@@ -60,11 +60,3 @@ polishHash: 'f6d4cac7cac4'
 - [Uber — Base Web](https://baseweb.design/) · [Introducing Base Web](https://www.uber.com/blog/introducing-base-web/) — 1차. Styletron 원자적 CSS, overrides API.
 - [Figma Blog — How Spotify's design system goes beyond platforms](https://www.figma.com/blog/creating-coherence-how-spotifys-design-system-goes-beyond-platforms/) — 2차(Spotify 1차 아티클 인증서 오류 대체). Encore 티어·시맨틱 토큰·MCP.
 - [Microsoft Fluent 2](https://fluent2.microsoft.design/design-tokens) · [IBM Carbon](https://carbondesignsystem.com/) · [Radix](https://www.radix-ui.com/) · [Tailwind](https://tailwindcss.com/) · [shadcn/ui](https://ui.shadcn.com/) — 1차. 각 시스템 공식 문서.
-
-## 연결
-
-- [Design Principles](/wiki/design-principles/) — 상위 허브. 이 카드는 "원리는 벤더 무관"이라는 논지의 실측 근거.
-- [DESIGN.md](/wiki/design-principles/design-md/) — 다섯 번째 수렴(에이전트 노출·MCP)이 이 앵커를 정당화한다.
-- [Apple HIG](/wiki/design-principles/apple-hig/) · [Material Design](/wiki/design-principles/material-design/) · [Meta Astryx](/wiki/design-principles/meta-astryx/) — 이 카탈로그의 깊은 사례 카드.
-- [spacing-8pt-grid](/wiki/design-principles/aesthetics-and-layout/spacing-8pt-grid/) · [color-and-contrast](/wiki/design-principles/color-and-contrast/) — 기준 단위·색 스케일이 벤더마다 갈리는 지점의 각론.
-- [Design-to-Code Agent Workflows](/wiki/design-to-code/) — 에이전트 노출(MCP) 메커니즘을 다루는 인접 카테고리.

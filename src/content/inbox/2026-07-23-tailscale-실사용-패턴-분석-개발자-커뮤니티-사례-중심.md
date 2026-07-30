@@ -10,8 +10,8 @@ tags:
   - 'developer-productivity'
   - 'organization'
 canonical: 'https://beebs.hada.io/b/geeknews/t/10'
-lintHash: '338d9e49cc7f'
-polishHash: '338d9e49cc7f'
+lintHash: '4f5f804e8820'
+polishHash: '4f5f804e8820'
 ---
 
 ## TL;DR
@@ -47,10 +47,10 @@ polishHash: '338d9e49cc7f'
 - **[JetKVM + Tailscale]** 구루는 맥+UTM 환경의 원격 서버를 JetKVM(IP 기반 KVM-over-IP 하드웨어)으로 물리적 제어하고, Tailscale로 그 KVM 관리 포탈에 접속한다. 소프트웨어 원격이 실패하는 상황(커널 패닉, 부팅 단계)까지 커버하는 **이중 원격 계층** 구성이다.
 
 ## 용어 풀이
-- **Exit Node** — 내 트래픽의 '출구'를 다른 기기로 지정하는 기능. / 비유: "회사 PC를 내 노트북의 창문으로 빌려 쓰는 것." / 비유가 깨지는 지점: 창문과 달리 Exit Node 기기의 **관리자·네트워크 소유자**가 트래픽을 볼 수 있어 신뢰 관계가 필수다.
-- **Tailnet** — Tailscale이 구성하는 논리적 사설망. / 비유: "기기간 자동 생성되는 전용선." / 깨지는 지점: 전용선은 대역폭이 보장되지만 Tailnet은 DERP 릴레이(불확실, Tailscale의 relay 서버)를 경유할 때 지연이 커질 수 있다.
-- **Taildrop** — Tailscale 기기 간 파일 전송. / 비유: "AirDrop의 크로스플랫폼 버전." / 깨지는 지점: AirDrop과 달리 동일 LAN이 아니어도 되지만, 무료 플랜의 전송 용량 제한은 확인 필요(원문에 없음).
-- **Reverse Proxy (Caddy/Traefik)** — 내부 서버를 외부에 대신 응답해주는 중계기. / 비유: "아파트 프론트데스크." / 깨지는 지점: Tailscale Funnel과 결합하면 프론트데스크가 '건물 바깥'에도 생기는 셈이며, 이는 **홈 IP가 퍼블릭에 노출됨**을 의미한다.
+- **Exit Node** — 내 트래픽의 '출구'를 다른 기기로 지정하는 기능.
+- **Tailnet** — Tailscale이 구성하는 논리적 사설망.
+- **Taildrop** — Tailscale 기기 간 파일 전송.
+- **Reverse Proxy (Caddy/Traefik)** — 내부 서버를 외부에 대신 응답해주는 중계기.
 
 ## 시각 자료
 | 패턴 | 대표 사례 | 핵심 구성 요소 | 빈도(댓글 기준) |

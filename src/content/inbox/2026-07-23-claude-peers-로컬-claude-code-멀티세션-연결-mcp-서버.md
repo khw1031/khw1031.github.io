@@ -9,8 +9,8 @@ tags:
   - 'ai'
   - 'agentic-coding'
 canonical: 'https://www.threads.com/@ryugw109/post/DbFidD5GjMj?xmt=AQG0ny9mymx_ENzldo52ToyXgDgkrUIhAZ5ZFT7W_Ve9uWLygwBOc8scUykKqAsjCFDSSMtk&slof=1'
-lintHash: 'a4e9f684d818'
-polishHash: 'a4e9f684d818'
+lintHash: 'c30630e6a0b2'
+polishHash: 'c30630e6a0b2'
 ---
 
 ## TL;DR
@@ -47,9 +47,9 @@ polishHash: 'a4e9f684d818'
 - **[1초 폴링]** 실시간성이 중요한 시나리오에는 부적합할 수 있다(불확실 — 원문에 지연 시간 관련 측정치 없음).
 
 ## 용어 풀이
-- **MCP (Model Context Protocol)** — AI 에이전트가 외부 도구·데이터와 대화하는 표준 규격 / 비유: "AI용 USB 포트" / 비유가 깨지는 지점: USB는 물리적 연결이지만 MCP는 프로토콜(약속)이라 구현체마다 지원 범위가 다르다.
-- **브로커** — 메시지를 중개하는 중앙 서버 / 비유: "우체국" — 보내는 사람과 받는 사람을 직접 만나지 않게 해줌 / 비유가 깨지는 지점: 우체국은 영구 기관이지만 이 브로커는 첫 세션과 함께 태어나고 세션이 없으면 사라진다.
-- **폴링** — 정해진 간격으로 "새 소식 있나?"고 반복 확인하는 방식 / 비유: "5분마다 우편함 확인" / 비유가 깨지는 지점: 실시간 푸시와 달리 최대 1초(폴링 간격)만큼 메시지 수신이 늦어질 수 있다.
+- **MCP (Model Context Protocol)** — AI 에이전트가 외부 도구·데이터와 대화하는 표준 규격.
+- **브로커** — 메시지를 중개하는 중앙 서버.
+- **폴링** — 정해진 간격으로 "새 소식 있나?"고 반복 확인하는 방식.
 
 ## 시각 자료
 | 구성 요소 | 역할 | 기술 스택 |

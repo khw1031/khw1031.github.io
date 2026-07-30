@@ -6,8 +6,8 @@ description: 학습·기억·전이의 근거가 되는 인지·교육심리학 
 summary: "무엇이 장기 파지와 전이를 만드는가에 대한 인지·교육심리학의 1차 문헌을 모은 카테고리. Bjork의 'desirable difficulties'를 우산 개념으로, 인출 연습·분산 학습·인터리빙 등 개별 원리를 각 레퍼런스 카드로 정리한다."
 lang: ko
 tags: ['learning-science', 'memory', 'cognition', 'education']
-lintHash: '20ef412f2144'
-polishHash: '20ef412f2144'
+lintHash: 'f5027c75b94e'
+polishHash: 'f5027c75b94e'
 ---
 
 > 한 줄 명제: 습득을 느리게 만드는 조건(인출·간격·인터리빙 등)이 오히려 장기 파지와 전이를 가속한다 — 이것이 학습 과학의 핵심 발견이고, 아래 레퍼런스들은 그 각론이다.
@@ -35,20 +35,6 @@ learning science
 ==학습 과학의 실무 결론은 대체로 하나로 수렴한다: **다시 읽기·형광펜 같은 "쉬운" 공부는 숙달 착각을 만들고, 인출·분산·인터리빙 같은 "어려운" 공부가 오래 남는다.**== ==Dunlosky 등(2013)의 종합 리뷰는 열 가지 학습 기법을 효용순으로 평가하면서 practice testing(인출)과 distributed practice(간격)를 최상위(high utility)에, 재읽기·요약·형광펜을 하위(low utility)에 두었다.== Bjork는 이 현상들을 "desirable difficulties"라는 우산 아래 묶어, 노력이 파지의 대가라고 정리한다.
 
 이 카테고리의 각 레퍼런스 카드는 하나의 원리를 1차 출처와 함께 담는다. 위 목차(상단 하위 문서)에서 개별 원리로 들어가면 정의·근거·핵심 결과를 볼 수 있다.
-
-## 곁가지
-
-- **self-explanation / elaborative interrogation 심화** — "왜?" 질문의 효과크기와 자기설명 훈련이 실제 과제(수학 등)에 미치는 효과를 다룰 때.
-- **worked example effect / cognitive load** — 초기 스키마 형성 단계에서 예제 학습이 문제풀이보다 효율적인 이유(Sweller)를 정리할 때.
-- **expertise & chunking** — 전문가의 빠른 패턴 인식(Chase & Simon 체스 연구)을 학습 목표 속도와 연결할 때.
-
-## 연결
-
-- [Retrieval Practice](/wiki/learning-science/retrieval-practice/) · [Spacing](/wiki/learning-science/spacing/) · [Interleaving](/wiki/learning-science/interleaving/) — 이 카테고리의 핵심 세 원리.
-- [손글씨 필기 vs 타이핑](/wiki/learning-science/handwriting-note-taking/) · [ICAP Framework](/wiki/learning-science/icap-framework/) · [Transfer](/wiki/learning-science/transfer/) · [Procedural vs Conceptual Knowledge](/wiki/learning-science/procedural-vs-conceptual-knowledge/) — "손으로 쓰면 이해가 깊어진다"는 통속 주장을 검증할 때 함께 보는 네 카드.
-- [Pareto Principle in Learning](/wiki/learning-science/pareto-principle-in-learning/) — "핵심 20%만 배우면 80%를 응용할 수 있다"는 통속 주장의 출처(파레토→주란→코치/페리스)와 검증 한계를 다루는, 학습과학 실험이 아니라 경영학 휴리스틱 계보의 대조 사례.
-- [Simple-to-Complex Sequencing](/wiki/learning-science/simple-to-complex-sequencing/) — "핵심부터 배우고 확장하라"는 커리큘럼 순서 자체는 worked-example effect·4C/ID 등 통제 실험으로 뒷받침되는, 위 카드와는 결이 다른 더 구체적인 처방.
-- [Computing Education](/wiki/computing-education/) — 이 원리들을 AI 시대 프로그래밍 교육 맥락에 적용한 실증 카드는 이쪽 카테고리에 있다.
 
 ## 레퍼런스
 

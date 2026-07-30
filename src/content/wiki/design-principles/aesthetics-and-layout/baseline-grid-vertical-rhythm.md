@@ -7,8 +7,8 @@ description: 인쇄의 베이스라인 그리드가 웹의 수직 리듬으로 �
 lang: ko
 tags: ['baseline-grid', 'vertical-rhythm', 'typography', 'line-height', 'css']
 summary: "인쇄에서 텍스트가 일정한 베이스라인에 정렬되던 규칙이 웹으로 넘어와 '수직 리듬'이 됐다. Richard Rutter(24 ways, 2006)가 그 웹 규칙을 정식화했다: line-height를 기본 리듬 단위로 정하고, 모든 수직 측정(line-height·margin·padding)을 그 단위의 배수(또는 깔끔한 약수)로 둬, 텍스트가 보이지 않는 일정 격자에 얹히게 한다. 원리는 Bringhurst의 인쇄 베이스라인 그리드이고, CSS box model이 이를 형식화한다."
-lintHash: '13e28c8fc3eb'
-polishHash: '13e28c8fc3eb'
+lintHash: '87041574a741'
+polishHash: '87041574a741'
 ---
 
 > 한 줄 명제: line-height 하나를 리듬 단위로 정하고, 모든 수직 간격을 그 배수로 두면 텍스트가 보이지 않는 격자에 얹혀 안정된 리듬이 생긴다.
@@ -37,10 +37,3 @@ Rutter는 사용자가 글자 크기를 키워도 리듬이 유지되도록 **�
 - [Richard Rutter, Compose to a Vertical Rhythm (24 ways, 2006)](https://24ways.org/2006/compose-to-a-vertical-rhythm/) — 2차(정본 웹 글). 2006-12-12. line-height=리듬 단위, 모든 수직 측정을 그 배수로, em 단위 사용. 웹 수직 리듬의 기초 진술.
 - Robert Bringhurst, *The Elements of Typographic Style* (§2 Vertical Motion / baseline grid) — 1차(정본 서적). 인쇄 베이스라인 그리드의 원 출처.
 - [W3C — CSS Box Model Module Level 3](https://www.w3.org/TR/css-box-3/) — 1차/규범(W3C Recommendation, 2023). margin·padding = 수직 간격의 형식 모델. 리듬을 구현하는 CSS 토대.
-
-## 연결
-
-- [aesthetics-and-layout](/wiki/design-principles/aesthetics-and-layout/) — 상위 허브. 출판→웹 계보의 둘째 갈래.
-- [typographic-scale](/wiki/design-principles/aesthetics-and-layout/typographic-scale/) — 각 글자 크기를 리듬에 정렬해야 격자가 유지됨.
-- [spacing-8pt-grid](/wiki/design-principles/aesthetics-and-layout/spacing-8pt-grid/) — 수직 리듬 단위가 4/8px 격자와 만나는 지점.
-- [Material Design](/wiki/design-principles/material-design/) — "타입은 4dp 베이스라인 그리드에 정렬".

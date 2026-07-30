@@ -8,8 +8,8 @@ description: 모션은 장식이 아니라 사용성 도구(피드백·연속성
 lang: ko
 tags: ['motion', 'animation', 'microinteractions', 'accessibility', 'prefers-reduced-motion', 'easing']
 summary: "모션은 의미를 전달하는 사용성 도구다 — 상태 변화를 잇고 맥락을 보존하며 주의를 모은다. 웹 플랫폼 근거는 CSS Transitions/Animations·Web Animations API·easing-function(cubic-bezier/steps/linear())·scroll-timeline(아직 Baseline 아님). 이징의 뿌리는 Disney 12원칙의 slow-in/out·anticipation이고, 마이크로인터랙션은 trigger→rules→feedback→loops/modes(Saffer). 현행 시스템은 100–300ms 대역에 수렴한다 — Carbon(productive/expressive 곡선·70–700ms), Fluent(50–500ms·curveEasyEase), Apple(의도적·간결), Material 3은 예시 하나. 접근성이 강한 제약: WCAG 2.2.2/2.3.1/2.3.3 + prefers-reduced-motion으로 전정장애·발작·산만을 배려."
-lintHash: 'c7abc6b5f987'
-polishHash: 'c7abc6b5f987'
+lintHash: '046269187d3b'
+polishHash: '046269187d3b'
 ---
 
 > 한 줄 명제: 모션은 장식이 아니라 의미다 — 피드백·연속성·주의 유도의 도구이되 웹 플랫폼 스펙과 Disney 원칙에 뿌리를 두고, prefers-reduced-motion·WCAG로 멀미·발작·산만을 반드시 배려하라.
@@ -54,11 +54,3 @@ polishHash: 'c7abc6b5f987'
 - [W3C — SC 2.2.2](https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html) · [2.3.1](https://www.w3.org/WAI/WCAG22/Understanding/three-flashes-or-below-threshold.html) · [2.3.3](https://www.w3.org/WAI/WCAG22/Understanding/animation-from-interactions.html) · [MDN prefers-reduced-motion](https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-reduced-motion) — 1차/규범.
 - [IBM Carbon — Motion](https://carbondesignsystem.com/elements/motion/overview/) ([@carbon/motion](https://github.com/carbon-design-system/carbon/tree/main/packages/motion)) · [Apple HIG — Motion](https://developer.apple.com/design/human-interface-guidelines/motion) · [Fluent 2 — Motion](https://fluent2.microsoft.design/motion) · [Material 3 — Motion tokens](https://m3.material.io/styles/motion/easing-and-duration/tokens-specs) — 1차(각 시스템, 현행). duration·easing 토큰.
 - [Motion (구 Framer Motion)](https://motion.dev/docs) — 1차(라이브러리). WAAPI + JS 스프링 하이브리드.
-
-## 연결
-
-- [usability](/wiki/design-principles/usability/) — 상위 허브. 모션 = 피드백 도구.
-- [gulf-of-execution-evaluation](/wiki/design-principles/usability/gulf-of-execution-evaluation/) — 모션 피드백이 평가의 간극을 좁힘.
-- [Nielsen 휴리스틱](/wiki/design-principles/usability/nielsen-heuristics/) — 1번(시스템 상태 가시성)을 모션이 구현.
-- [touch-target-size](/wiki/design-principles/usability/touch-target-size/) · [color-and-contrast](/wiki/design-principles/color-and-contrast/) — 함께 묶이는 WCAG 접근성 축의 이웃.
-- [material-design](/wiki/design-principles/material-design/) — 모션 토큰을 쓰는 한 시스템 사례(여러 벤더 중 하나).

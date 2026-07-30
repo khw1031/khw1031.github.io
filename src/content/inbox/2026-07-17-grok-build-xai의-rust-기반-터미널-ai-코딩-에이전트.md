@@ -10,8 +10,8 @@ tags:
   - 'mcp'
   - 'developer-productivity'
 canonical: 'https://github.com/xai-org/grok-build'
-lintHash: '49682ef98896'
-polishHash: '49682ef98896'
+lintHash: '7ef3ea5f7bbb'
+polishHash: '7ef3ea5f7bbb'
 ---
 
 ## TL;DR
@@ -51,12 +51,12 @@ polishHash: '49682ef98896'
 - **[설치·빌드]** `curl …/install.sh | bash`(macOS/Linux/Git Bash), `irm …/install.ps1 | iex`(Windows)로 바이너리 설치. 소스 빌드는 `cargo run -p xai-grok-pager-bin`, 최초 실행 시 브라우저 OAuth 인증이 필요하다(2차).
 
 ## 용어 풀이
-- **TUI** — Text-based User Interface. GUI 대신 터미널에 창·버튼·스크롤을 그리는 UI. 비유: "터미널 속 데스크톱". 깨지는 지점: 마우스·색상·리사이즈 지원 수준은 터미널 에뮬레이터마다 달라 일관성이 보장되지 않음.
-- **ACP (Agent Client Protocol)** — 에디터가 외부 에이전트를 호출하는 규격. 비유: "에디터와 에이전트 사이의 USB 규격". 깨지는 지점: 원문에 상세 스펙이 없어 MCP/LSP와의 차이는 확인 필요.
-- **Headless** — UI 없이 stdio만으로 동작하는 모드. 비유: "조종석 없는 자율주행". 깨지는 지점: 대화형 피드백이 없으므로 출력 포맷·에러 계약이 엄격해야 함.
-- **MCP** — Model Context Protocol. LLM이 외부 도구·데이터를 호출하는 표준. 비유: "에이전트용 플러그 소켓". 깨지는 지점: 서버 구현 품질과 보안 정책이 성능·안전성을 좌우.
-- **Checkpoint** — 작업 중간 상태를 저장해 되돌리는 지점. 비유: "세이브 파일". 깨지는 지점: FS·VCS 상태와 동기화되지 않으면 복원 시 불일치 발생 가능.
-- **Dotslash launcher** — `bin/protoc`처럼 `PATH` 의존 없이 고정 버전 실행파일을 불러오는 래퍼. 비유: "내장 드라이버". 깨지는 지점: 네트워크/캐시 설정에 따라 첫 실행이 느릴 수 있음.
+- **TUI** — Text-based User Interface. GUI 대신 터미널에 창·버튼·스크롤을 그리는 UI.
+- **ACP (Agent Client Protocol)** — 에디터가 외부 에이전트를 호출하는 규격.
+- **Headless** — UI 없이 stdio만으로 동작하는 모드.
+- **MCP** — Model Context Protocol. LLM이 외부 도구·데이터를 호출하는 표준.
+- **Checkpoint** — 작업 중간 상태를 저장해 되돌리는 지점.
+- **Dotslash launcher** — `bin/protoc`처럼 `PATH` 의존 없이 고정 버전 실행파일을 불러오는 래퍼.
 
 ## 시각 자료
 | 영역 | Crate | 역할 |

@@ -7,8 +7,8 @@ description: 좋은 웹·앱 UI/UX를 사용성(측정 가능)과 미감(규칙�
 lang: ko
 tags: ['design-principles', 'ui-ux', 'usability', 'typography', 'design-md', 'web-design']
 summary: "이 카테고리의 산출물 프레임은 DESIGN.md — 코딩 에이전트에게 시각 아이덴티티를 넘기는 포맷(YAML 토큰 + 마크다운 산문)이다. '좋은 UI/UX가 무엇인가'를 사용성(취향이 아니라 인지 법칙으로 측정·근거화 가능; Fitts·Hick·Nielsen·WCAG·Gestalt)과 미감(처리 유창성이라는 규칙성; 출판→웹의 typographic scale·baseline·grid·8pt spacing 계보)의 두 축으로 1차 출처로 정리하고, 그 원리들을 DESIGN.md의 섹션(Overview·Colors·Typography·Layout·Elevation&Depth·Shapes·Components·Do's and Don'ts)에 매핑한다. Material Design 등은 앵커가 아니라 이 원리들이 한 시스템으로 구현된 '사례'다."
-lintHash: '2094038f31f2'
-polishHash: '2094038f31f2'
+lintHash: 'c20773fb8aa9'
+polishHash: 'c20773fb8aa9'
 ---
 
 > 한 줄 명제: 좋은 UI/UX는 취향으로 끝나지 않는다 — 사용성은 인지 법칙으로 측정·근거화되고, 미감도 "쉽게 처리되는 것을 아름답다고 느낀다"는 규칙성을 가진다. 이 카테고리는 그 근거를 모아, **DESIGN.md(에이전트에 시각 아이덴티티를 넘기는 포맷)의 각 섹션을 무슨 근거로 채울지**의 라이브러리로 조직한다.
@@ -72,22 +72,7 @@ DESIGN.md의 산문 섹션 ↔ 이 라이브러리의 근거 카드:
 
 가로지르는 근거([gestalt-principles](/wiki/design-principles/usability/gestalt-principles/)·[fitts-law](/wiki/design-principles/usability/fitts-law/)·[hicks-law](/wiki/design-principles/usability/hicks-law/)·[jakobs-law](/wiki/design-principles/usability/jakobs-law/)·[cognitive-load-and-density](/wiki/design-principles/usability/cognitive-load-and-density/)·[touch-target-size](/wiki/design-principles/usability/touch-target-size/))는 여러 섹션에 동시에 적용된다.
 
-## 곁가지
-
-- **온보딩·빈 상태(empty states)** — 첫 사용 안내·빈 화면. ux-writing·progressive disclosure가 부분 대리.
-- **신뢰·설득·다크 패턴 회피(ethics)** — 사회적 증거·기본값의 윤리적 사용.
-- **반응형 이미지·미디어** — `srcset`·`<picture>`·aspect-ratio. responsive-layout이 "유연한 이미지"로 부분 언급.
-- **데이터 시각화(dataviz)** — 차트·대시보드. 별도 카테고리로 클 수도.
-
 ## 레퍼런스
 
 - [google-labs-code/design.md — GitHub](https://github.com/google-labs-code/design.md) — 1차. 이 카테고리의 산출물 프레임인 DESIGN.md 포맷의 원 저장소(alpha v0.3.0). 상세는 [design-md 카드](/wiki/design-principles/design-md/).
 - [Nielsen Norman Group — 10 Usability Heuristics](https://www.nngroup.com/articles/ten-usability-heuristics/) — 1차/공식. 사용성 축의 대표 근거(1994, 목록 불변).
-
-## 연결
-
-- [DESIGN.md](/wiki/design-principles/design-md/) — 이 카테고리의 앵커(산출물 포맷)이자 섹션 조직 렌즈.
-- [사용성 (usability)](/wiki/design-principles/usability/) · [미감과 레이아웃 (aesthetics-and-layout)](/wiki/design-principles/aesthetics-and-layout/) — 두 축의 하위 허브.
-- [color-and-contrast](/wiki/design-principles/color-and-contrast/) — 두 축을 가로지르는 브리지 카드.
-- **구현 사례:** [material-design](/wiki/design-principles/material-design/) · [apple-hig](/wiki/design-principles/apple-hig/) · [meta-astryx](/wiki/design-principles/meta-astryx/) · [design-systems-landscape](/wiki/design-principles/design-systems-landscape/) — 원리가 실제 배포 시스템으로 구현된 예.
-- [Design-to-Code Agent Workflows](/wiki/design-to-code/) — DESIGN.md가 속하는 인접 카테고리. 이 카테고리가 "무슨 좋은 디자인을 담을까(규범)"라면 저쪽은 "어떻게 코드로 넘길까(메커니즘)".

@@ -5,8 +5,8 @@ description: 브라우저가 페이지를 요청하고 렌더링하고 입력에
 summary: "URL 입력부터 navigation·connection·요청·HTML 파싱·렌더링·JS 실행·입력 처리까지 브라우저 로딩 파이프라인을 단계별 비용 모델로 정리하고, 각 구간에 붙는 성능 지표(TTFB·FCP·LCP·CLS·TBT·INP)와 프론트엔드 개선 체크를 연결한 허브 노트."
 lang: ko
 tags: ['web-performance', 'browser', 'core-web-vitals', 'frontend']
-lintHash: 'a464d5394b3d'
-polishHash: 'a464d5394b3d'
+lintHash: 'c848692b964a'
+polishHash: 'c848692b964a'
 ---
 
 > 한 줄 명제: 페이지 로드는 "네트워크 준비 → 응답 → 파싱·리소스 발견 → 렌더링 → JS 실행 → 입력 처리"로 이어지는 비용 파이프라인이고, 성능 지표는 이 파이프라인의 특정 구간에 붙는 계기판이다.
@@ -251,25 +251,6 @@ INP는 사용자의 클릭, 탭, 키 입력부터 브라우저가 다음 프레�
 
 > 브라우저 흐름을 네트워크, 리소스 발견, 렌더링, JavaScript 실행, 입력 처리로 나눠 봅니다. LCP가 느리면 LCP element와 리소스 발견/다운로드/렌더링 지연을 보고, TBT나 INP가 나쁘면 main thread long task와 hydration, 이벤트 핸들러, re-render 범위를 봅니다. CLS는 이미지나 동적 영역의 공간 예약 문제로 접근합니다. 그래서 성능 개선은 Lighthouse 점수 조정이 아니라 브라우저 파이프라인의 병목을 단계별로 줄이는 작업이라고 설명할 수 있습니다.
 
-## 비유
-
-페이지 로드는 릴레이 경주와 비슷하다 — DNS가 TCP에게, TCP가 TLS에게, TLS가 HTTP에게 바통을 넘기고, 어느 한 주자가 늦으면 최종 기록(TTFB, LCP)이 그만큼 밀린다.
-
-**깨지는 지점**: 실제 브라우저는 순차 릴레이가 아니다. HTML이 다 도착하기 전에 파싱이 시작되고, 파싱 중에 preload scanner가 다음 리소스를 병렬로 내려받으며, 렌더링과 JS 실행이 main thread를 두고 교차한다. 구간이 겹치기 때문에 "한 구간을 줄이면 그만큼 빨라진다"는 릴레이식 계산이 항상 성립하지는 않는다 — critical path 위의 구간만 최종 기록을 바꾼다.
-
-## 곁가지
-
-- **render pipeline 심화 (style 계산·compositor 내부)** — 애니메이션 jank를 DevTools 레이어 패널까지 내려가 디버깅해야 할 때.
-- **hydration 전략 비교 (island / partial / resumability)** — 프레임워크 선택이나 hydration 비용 최적화가 실제 과제가 될 때.
-- **HTTP/3와 QUIC** — connection setup 비용이 실측에서 병목으로 드러날 때.
-
-(DNS/TCP/TLS는 이미 자식 노트로 승격되어 상단 목차에 있다.)
-
-## 연결
-
-- [Web Performance](/notes/web-performance/) — 지표 정의와 측정 도구 쪽에서 같은 파이프라인을 바라본다.
-- [Web Worker](/notes/web-worker/) — 가지 6·7의 main thread 비용을 덜어내는 실행 컨텍스트.
-
 ## 레퍼런스
 
 - [Core Web Vitals — web.dev](https://web.dev/articles/vitals) — 1차. 지표 정의의 기준 문서.
@@ -277,17 +258,3 @@ INP는 사용자의 클릭, 탭, 키 입력부터 브라우저가 다음 프레�
 - [Interaction to Next Paint — web.dev](https://web.dev/articles/inp) — 1차. INP 정의와 측정.
 - [Cumulative Layout Shift — web.dev](https://web.dev/articles/cls) — 1차. CLS 정의.
 - [Total Blocking Time — Chrome for Developers](https://developer.chrome.com/docs/lighthouse/performance/lighthouse-total-blocking-time) — 1차. TBT 정의(lab).
-
----
-
-## 인출 질문
-
-- 페이지 로드 파이프라인 7구간을 기억으로 재생하고, 각 구간에 붙는 metric을 말해보기.
-- LCP가 느린 페이지에서 가장 먼저 볼 곳은? hero 이미지가 CSS `background-image`일 때 무엇이 문제인가?
-- TBT와 INP의 차이는? lab 점수가 좋은데 INP가 나쁠 수 있는 이유는?
-- `defer`, `async`, module script의 실행 시점 차이를 설명해보기.
-- 성능 문제를 받았을 때의 디버깅 순서를 Lighthouse 없이 설명해보기.
-
-## 내 관점
-
-(학습자 영역 — 비어 있음)

@@ -10,8 +10,8 @@ tags:
   - 'open-source'
   - 'mcp'
 canonical: 'https://github.com/Julian-adv/OpenMMO'
-lintHash: '4dc1c7fb850b'
-polishHash: '4dc1c7fb850b'
+lintHash: '4e6d29998683'
+polishHash: '4e6d29998683'
 ---
 
 ## TL;DR
@@ -47,9 +47,9 @@ polishHash: '4dc1c7fb850b'
 - **[대표 기능: 주택 시스템]** 모듈형 목조 건축, 층간 인식 드롭 아이템(2층에서 떨어뜨린 아이템은 2층에서만 획득 가능), 서버 측 원자성 중복 방지 등 게임플레이 깊이가 단순하지 않음을 보여준다.
 
 ## 용어 풀이
-- **Agent-Human Parity** — 에이전트와 인간을 동등하게 취급하는 설계 원칙. 비유: "같은 창구에서 같은 양식을 쓰는 시민과 외국인." 깨지는 점: ==에이전트는 인간보다 빠른 입력·지속 접속이 가능하므로 실질적 동등성과는 다를 수 있다.==
-- **Server-authoritative combat** — 전투 판정을 클라이언트가 아닌 서버가 수행. 비유: "심판이 있는 스포츠." 깨지는 점: 레이턴시가 높은 환경에서는 체감이 나빠질 수 있다.
-- **MCP (Model Context Protocol)** — LLM이 외부 도구를 호출하는 표준 프로토콜. 비유: "AI를 위한 USB 포트." 깨지는 점: MCP 자체가 게임 행위 표현에 적합한지는 불확실.
+- **Agent-Human Parity** — 에이전트와 인간을 동등하게 취급하는 설계 원칙.
+- **Server-authoritative combat** — 전투 판정을 클라이언트가 아닌 서버가 수행.
+- **MCP (Model Context Protocol)** — LLM이 외부 도구를 호출하는 표준 프로토콜.
 
 ## 시각 자료
 | 구성 요소 | 기술 | 역할 |

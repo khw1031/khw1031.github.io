@@ -10,8 +10,8 @@ tags:
   - 'agent'
   - 'langchain'
   - 'framework'
-polishHash: 'bd2bfee303a4'
-lintHash: 'bd2bfee303a4'
+polishHash: '487f1393e5da'
+lintHash: '487f1393e5da'
 ---
 
 ## TL;DR
@@ -54,7 +54,7 @@ LLM 앱 스택의 재편 (2026) — "무거운 범용 프레임워크"가 세 �
 - **[TS 진영의 대응물]** — 같은 논리가 TS에서도 성립하며, 여기선 Vercel AI SDK가 ①층 기본값, Mastra·LangGraph.js가 ②층. Vercel은 "LangChain → AI SDK 마이그레이션 플레이북"을 비용·품질 관점으로 정리한 2차 자료도 유통 중이다. (digitalapplied, 2차)
 
 ## 용어 풀이
-- **LCEL(LangChain Expression Language)** — `|` 파이프로 retriever·prompt·llm·parser를 체인으로 잇는 LangChain의 조립 DSL. Exit의 주 대상 = 이 "글루 추상"이 모델·SDK 네이티브 기능과 중복되고 디버깅을 가린다는 것. / 비유: 여러 부품을 끼우는 범용 어댑터인데, 부품들이 표준 규격(native tool call)을 갖추자 어댑터가 오히려 방해가 된 상황.
+- **LCEL(LangChain Expression Language)** — `|` 파이프로 retriever·prompt·llm·parser를 체인으로 잇는 LangChain의 조립 DSL. Exit의 주 대상 = 이 "글루 추상"이 모델·SDK 네이티브 기능과 중복되고 디버깅을 가린다는 것.
 - **"own the loop"** — agent의 "모델 호출 → tool 실행 → 결과 주입 → 반복" 루프를 누가 소유하느냐. 저수준 API(Responses/Client SDK)는 개발자가, 고수준 SDK(Agents SDK)는 SDK가 소유. 프레임워크 이탈은 "누가 loop를 쥐느냐"의 재배치다.
 - **Middleware(LangChain v1)** — create_agent에서 프롬프트·요약·tool 접근·상태·guardrail을 가로채 제어하는 합성 가능한 훅. "제어권을 안 줘서 떠났다"는 비판에 대한 LangChain의 직접적 응답.
 - **Agent SDK vs Client SDK(Anthropic 용어)** — 전자는 loop·context 관리까지 SDK가 대행(배터리 포함), 후자는 최소 API만 주고 loop는 개발자 몫. 같은 이분법이 OpenAI Responses↔Agents SDK에도 대응.

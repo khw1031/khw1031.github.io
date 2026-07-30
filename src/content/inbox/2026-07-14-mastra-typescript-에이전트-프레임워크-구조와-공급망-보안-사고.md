@@ -11,8 +11,8 @@ tags:
   - 'open-source'
   - 'workflow'
 canonical: 'https://mastra.ai/docs'
-lintHash: '4a022a486dd0'
-polishHash: '4a022a486dd0'
+lintHash: '3c1e64d32c93'
+polishHash: '3c1e64d32c93'
 ---
 
 ## TL;DR
@@ -63,7 +63,7 @@ Mastra (TypeScript AI 프레임워크, Kepler Software Inc., 2024.08~)
 - **[공식 원인 설명]** — 팀의 공개 포스트모템(GitHub #18061)에 따르면, 현직 직원인 메인테이너가 다른 유명 TypeScript 오픈소스 메인테이너들과 동일한 수법(탈취된 LinkedIn 계정의 접근 → 통화 중 의심스러운 링크 클릭)으로 개인 머신이 손상되었다. Microsoft는 이 공격의 인프라·수법이 북한 국가 배후 행위자 **Sapphire Sleet**의 기존 활동과 일치한다고 결론지었다(암호화폐 지갑 자격증명 탈취 목적, 가짜 IE8 User-Agent 등 TTP 일치).
 
 ## 용어 풀이
-- **Agent vs Workflow** — Agent는 LLM이 스스로 도구 사용 순서를 정하는 개방형 실행, Workflow는 개발자가 단계·순서·데이터 흐름을 미리 고정하는 결정적 실행. / 비유: Agent는 "목적지만 알려주고 알아서 찾아가는 택시 기사", Workflow는 "정해진 노선을 도는 버스". / 비유가 깨지는 점: 실제로는 Workflow의 한 정류장(step)에 Agent를 태울 수 있어 완전히 분리되지 않는다.
+- **Agent vs Workflow** — Agent는 LLM이 스스로 도구 사용 순서를 정하는 개방형 실행, Workflow는 개발자가 단계·순서·데이터 흐름을 미리 고정하는 결정적 실행.
 - **Semantic Recall vs Working Memory vs Observational Memory** — 순서대로 "의미 기반 과거 메시지 검색", "이름·선호 같은 지속 구조화 사실 저장", "긴 대화를 압축 로그로 요약해 컨텍스트 창을 절약". 세 축은 서로 대체재가 아니라 보완재다.
 - **Model Router** — `"openai/gpt-5.5"`처럼 provider/model을 문자열 하나로 지정해, provider별 SDK 파라미터 차이를 Agent 코드에서 숨기는 어댑터 계층.
 - **Sapphire Sleet** — Microsoft가 명명한 북한 연계 국가 배후 해킹 그룹으로, 개발자·오픈소스 메인테이너 대상 소셜 피싱을 통해 암호화폐·자격증명을 노려온 것으로 2020년부터 추적되어 왔다(Microsoft 공식 블로그 표현).

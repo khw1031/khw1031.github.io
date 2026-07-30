@@ -7,8 +7,8 @@ description: 스위스 국제 타이포그래피 양식의 그리드(Tschichold 
 lang: ko
 tags: ['layout-grid', 'grid-system', 'swiss-design', 'css-grid', 'columns']
 summary: "레이아웃 그리드는 페이지를 컬럼·행·모듈로 나눠 마진·거터로 질서를 주는 체계다. 뿌리는 Jan Tschichold의 신 타이포그래피(1928)와 Josef Müller-Brockmann의 《Grid Systems in Graphic Design》(1981) — 스위스 국제 타이포그래피 양식의 '질서에의 의지'. 이것이 Nathan Smith의 960 Grid System(2008, 960px·12/16컬럼)으로 웹에 이식됐고, 다시 W3C CSS Grid Layout 스펙(2차원 격자, 아직 Candidate Recommendation)으로 브라우저 네이티브가 됐다."
-lintHash: 'e4c8cdd71555'
-polishHash: 'e4c8cdd71555'
+lintHash: '3de0a996903f'
+polishHash: '3de0a996903f'
 ---
 
 > 한 줄 명제: 페이지를 컬럼·모듈·거터로 나눠 질서를 주는 그리드는 스위스 인쇄 양식에서 왔고, 960.gs 12컬럼을 거쳐 CSS Grid로 웹의 뼈대가 됐다.
@@ -29,10 +29,3 @@ CSS Grid는 이 계보를 웹 표준으로 형식화한다 — ==행·열을 동
 - Josef Müller-Brockmann, *Grid Systems in Graphic Design* (1981) — 1차(정본 서적, ISBN 978-3721201451). 컬럼·모듈·거터 정의, "질서에의 의지". ([판본 확인용 출판사](https://niggli.ch/en/products/rastersysteme-fur-die-visuelle-gestaltung))
 - Jan Tschichold, *Die neue Typographie* (1928) — 1차(정본 서적, 영역 ISBN 978-0520250123). 그리드 기반 모더니즘 타이포의 선언. ([UC Press](https://www.ucpress.edu/book/9780520250123/the-new-typography))
 - [Nathan Smith, 960 Grid System (2008)](https://960.gs/) — 2차. 스위스 컬럼 그리드의 웹 이식(960px·12/16컬럼·20px 거터). ([소스](https://github.com/nathansmith/960-Grid-System))
-
-## 연결
-
-- [aesthetics-and-layout](/wiki/design-principles/aesthetics-and-layout/) — 상위 허브. 출판→웹 계보의 셋째 갈래.
-- [spacing-8pt-grid](/wiki/design-principles/aesthetics-and-layout/spacing-8pt-grid/) — 컬럼 그리드의 거터·마진이 spacing 격자와 만나는 지점.
-- [gestalt-principles](/wiki/design-principles/usability/gestalt-principles/) — 정렬(연속)·공동영역이 그리드로 구현되는 지각적 근거.
-- [Material Design](/wiki/design-principles/material-design/) — 12컬럼 반응형 그리드로 계보를 제품화.

@@ -7,8 +7,8 @@ description: "사용자는 당신 사이트보다 다른 사이트에서 훨씬 
 lang: ko
 tags: ['jakobs-law', 'usability', 'convention', 'mental-model', 'consistency']
 summary: "Jakob Nielsen이 2000년 'End of Web Design'에서 정립한 법칙: '사용자는 다른 사이트에서 대부분의 시간을 보낸다.' 따라서 사용자는 당신 사이트도 이미 아는 다른 사이트들처럼 동작하기를 기대한다. 함의는 관습(장바구니 우상단, 로고=홈, 밑줄=링크)을 따라 기존 멘탈 모델을 재사용시키라는 것 — 새 규칙 학습 비용을 없앤다. 차별화는 관습을 지킨 위에서 선택적으로."
-lintHash: '4aae319d41bd'
-polishHash: '4aae319d41bd'
+lintHash: '3d3350aded08'
+polishHash: '3d3350aded08'
 ---
 
 > 한 줄 명제: 사용자는 당신 사이트보다 다른 사이트에서 더 오래 산다 — 그들이 이미 아는 대로 동작하게 만들면 학습 비용이 사라진다.
@@ -29,10 +29,3 @@ Jakob의 법칙은 Jakob Nielsen이 2000년 NN/g 글 "End of Web Design"에서 �
 
 - [Nielsen, J. (2000), End of Web Design — Nielsen Norman Group](https://www.nngroup.com/articles/end-of-web-design/) — 1차/공식. 2000-07-22. "사용자는 다른 사이트에서 대부분의 시간을 보낸다"가 최초로 나온 원 출처.
 - [Laws of UX — Jakob's Law](https://lawsofux.com/jakobs-law/) — 2차. 법칙의 현대적 정식화와 Nielsen 귀속을 담은 aggregator.
-
-## 연결
-
-- [usability](/wiki/design-principles/usability/) — 상위 허브. "관습" 계열의 대표.
-- [Nielsen 휴리스틱](/wiki/design-principles/usability/nielsen-heuristics/) — 4번(일관성·표준)의 뿌리.
-- [Hick의 법칙](/wiki/design-principles/usability/hicks-law/) — 익숙한 배치가 결정을 빠르게 하는 접점.
-- [Material Design](/wiki/design-principles/material-design/) — 플랫폼 관습을 시스템 차원에서 표준화한 사례("통합된 경험").

@@ -10,8 +10,8 @@ tags:
   - 'agentic-coding'
   - 'troubleshooting'
 canonical: 'https://x.com/lqez/status/2075419299527983354?s=12'
-lintHash: '7d4282ed59b9'
-polishHash: '7d4282ed59b9'
+lintHash: 'f33aad7a3c5e'
+polishHash: 'f33aad7a3c5e'
 ---
 
 ## TL;DR
@@ -43,9 +43,9 @@ polishHash: '7d4282ed59b9'
 - **[주제C~E]** 공연권료(15평 미만 면제, 월 2만원 수준)와 Anthropic 평가는 **저자 의견**이며 기술적 근거는 원문에 없다. 주제E는 링크만 있고 내용이 없어 확인 불가.
 
 ## 용어 풀이
-- **QUIC** — UDP 위에서 TLS를 통합한 전송 프로토콜 / 비유: "고속도로 전용차선" / 비유가 깨지는 점: 전용차선이 아니라 ISP가 도로 자체를 막으면 소용없음.
-- **Taskfile** — YAML 기반 작업 러너(taskfile.dev) / 비유: "Makefile의 현대적 사촌" / 비유가 깨지는 점: Make와 문법 호환이 전혀 아님.
-- **cloudflared** — Cloudflare Tunnel 클라이언트 / 비유: "집과 Cloudflare를 잇는 사설 터널" / 비유가 깨지는 점: 터널 안의 프로토콜 선택에 따라 속도가 크게 달라짐.
+- **QUIC** — UDP 위에서 TLS를 통합한 전송 프로토콜.
+- **Taskfile** — YAML 기반 작업 러너(taskfile.dev)
+- **cloudflared** — Cloudflare Tunnel 클라이언트.
 
 ## 시각 자료
 

@@ -7,8 +7,8 @@ description: 작업기억은 좁다(대중적 7±2, 실제 ~4 청크) — 이해
 lang: ko
 tags: ['cognitive-load', 'working-memory', 'progressive-disclosure', 'information-density', 'usability']
 summary: "작업기억은 심하게 제한적이다 — Miller(1956)의 유명한 7±2는 사실 절반은 수사였고 핵심은 '청킹'이며, 통제된 조건의 실제 순수 용량은 Cowan(2001)의 ~4 청크에 가깝다. Sweller의 인지 부하 이론은 이해(스키마 구축)에 기여하지 않는 외재 부하(extraneous load)가 성능·학습을 해친다고 본다. 그래서 좋은 UI는 비핵심 복잡도를 뒤로 미루고(progressive disclosure, NN/g) 비데이터 잉크를 걷어낸다(Tufte data-ink). 밀도는 맥락 의존이다."
-lintHash: '177bd80e0499'
-polishHash: '177bd80e0499'
+lintHash: '46a830b7be65'
+polishHash: '46a830b7be65'
 ---
 
 > 한 줄 명제: 사람이 한 번에 머릿속에 붙들 수 있는 건 몇 덩어리뿐(~4 청크)이다 — 이해에 기여하지 않는 부하를 줄이고, 비핵심은 뒤로 미뤄라.
@@ -41,11 +41,3 @@ polishHash: '177bd80e0499'
 - [Sweller, J. (1988), Cognitive load during problem solving — *Cognitive Science* 12(2), 257–285](https://doi.org/10.1207/s15516709cog1202_4) — 1차. CLT의 기원. (부하 3분류는 [Sweller 1994](https://doi.org/10.1016/0959-4752(94)90003-5)·[Sweller/van Merriënboer/Paas 1998](https://doi.org/10.1023/A:1022193728205)에서.)
 - [Nielsen, J. (2006), Progressive Disclosure — NN/g](https://www.nngroup.com/articles/progressive-disclosure/) — 2차(권위 있는 실무 정본). 비핵심 기능을 2차 화면으로.
 - [Tufte, E. R., *The Visual Display of Quantitative Information* (2nd ed., 2001)](https://www.edwardtufte.com/book/the-visual-display-of-quantitative-information/) — 1차(정본, ISBN 978-0-9613921-4-7). data-ink ratio 최대화.
-
-## 연결
-
-- [usability](/wiki/design-principles/usability/) — 상위 허브. 작업기억 한계 계열.
-- [Hick의 법칙](/wiki/design-principles/usability/hicks-law/) — 선택 과부하(choice overload)의 짝. 둘 다 "줄여라".
-- [gulf-of-execution-evaluation](/wiki/design-principles/usability/gulf-of-execution-evaluation/) — 부하 줄이기 = 실행·평가 간극을 좁히는 상위 이론의 실행.
-- [spacing-8pt-grid](/wiki/design-principles/aesthetics-and-layout/spacing-8pt-grid/) — 밀도(density) 조정과 직접 연결.
-- [visual-hierarchy](/wiki/design-principles/aesthetics-and-layout/visual-hierarchy/) — 위계로 주의 부하를 낮추는 시각적 수단.

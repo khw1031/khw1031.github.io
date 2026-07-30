@@ -10,8 +10,8 @@ tags:
   - 'ontology'
   - 'semantic-web'
 canonical: 'https://www.linkedin.com/posts/%EB%AC%B4%EC%A4%80-%EC%9A%B0-b5737a239_agenticai-ontology-semanticweb-ugcPost-7482710911447650304-n-5E/?utm_source=social_share_send&utm_medium=ios_app&rcm=ACoAAB15JU0Bh0ozoFHKUp6BqJa4W5v2yqNn5k8&utm_campaign=share_via'
-lintHash: 'b9478279b8b6'
-polishHash: 'b9478279b8b6'
+lintHash: '9aba49e84be5'
+polishHash: '9aba49e84be5'
 ---
 
 ## TL;DR
@@ -38,10 +38,10 @@ LinkedIn Post (우무준, ugcPost:7482710911447650304)
 - [해시태그 기반 주제 추정] 세 해시태그의 일반적인 교차점은 "LLM 에이전트가 RDF/OWL 기반 온톨로지를 활용해 도메인 지식을 구조화하고 추론에 활용하는 프레임워크"다. 다만 **저자의 구체적 주장, 사례, 결론은 확인 불가**.
 
 ## 용어 풀이
-- **Jina reader** — 웹 페이지를 LLM 친화적 마크다운으로 변환하는 크롤링 도구. / 비유: "웹페이지를 베껴 쓰는 비서." / 깨지는 지점: JS 렌더링 후 인증 벽이 등장하면 빈 껍데기만 베껴 쓴다.
-- **Agentic AI** — 외부 도구 호출·계획 수립·자기 수정이 가능한 AI 시스템. / 비유: "지시를 기다리지 않고 스스로 일하는 인턴." / 깨지는 지점: 실제 자율성은 프롬프트·가드레일 범위에 제한된다.
-- **Ontology** — 개념·관계·제약을 형식으로 정의한 지식 모델(OWL 등). / 비유: "도메인의 가계도." / 깨지는 지점: 가계도는 정적이지만, 실제 도메인 지식은 계속 변한다.
-- **Semantic Web** — W3C 표준(RDF, SPARQL 등)으로 웹 데이터에 의미를 부여하는 비전. / 비유: "기계가 읽을 수 있는 도서관 카드." / 깨지는 지점: 카드가 있어도 책(데이터)이 없으면 소용없다.
+- **Jina reader** — 웹 페이지를 LLM 친화적 마크다운으로 변환하는 크롤링 도구.
+- **Agentic AI** — 외부 도구 호출·계획 수립·자기 수정이 가능한 AI 시스템.
+- **Ontology** — 개념·관계·제약을 형식으로 정의한 지식 모델(OWL 등).
+- **Semantic Web** — W3C 표준(RDF, SPARQL 등)으로 웹 데이터에 의미를 부여하는 비전.
 
 ## 시각 자료
 

@@ -5,8 +5,8 @@ description: 학습 과학 연구를 하나의 실행 가능한 학습법으로 
 summary: "인출·분산·인터리빙·자기설명·worked example·전이 같은 학습 과학의 개별 원리를 'desirable difficulties'라는 한 원리로 묶고, 이해 인코딩→인출→분산→인터리빙→왜/언제-아닌가→전이 검증의 6단계 loop으로 일반화한다. 이어서 이 방법이 강한 영역(판별 많고 누적적·전이 필요), 적응이 필요한 영역(운동/창의), 깨지는 조건(초심자 첫 노출·판별 전 인터리빙·far transfer·단발 벼락치기)을 지도로 정리한다."
 lang: ko
 tags: ['learning-science', 'learning-method', 'desirable-difficulties', 'retrieval-practice', 'transfer']
-lintHash: '2636e2770cb1'
-polishHash: '2636e2770cb1'
+lintHash: '0cbdacf7b886'
+polishHash: '0cbdacf7b886'
 ---
 
 > 한 줄 명제: 학습 과학의 여러 기법은 따로 외울 목록이 아니라 한 원리의 다른 얼굴이다 — "지금 더 힘들게" 만드는 인출·분산·인터리빙이 나중의 파지와 전이를 만든다. 방법은 이 원리를 절차로 편 것이고, 효과는 대상 영역이 그 원리와 얼마나 맞느냐로 갈린다.
@@ -58,24 +58,6 @@ polishHash: '2636e2770cb1'
 
 📎 far transfer는 기본적으로 잘 일어나지 않는다(Barnett & Ceci) — 표면이 다르면 구조적 대응이 가려지기 때문. 이 방법은 near transfer를 안정적으로 높이지만, far transfer는 "원리를 명시적으로 추상화"할 때만 겨우 붙는다. 그래서 6단계에서 "메커니즘 이해"와 "전이"를 분리 기록하는 것이 방법의 안전장치다.
 
-## 비유
-
-근력 운동과 같다. 편하게 드는 무게는 성장 자극이 안 되고, 약간 버거운 무게가 근육을 키운다(= desirable difficulty). 그리고 회복(간격)을 줘야 더 강해진다(= spacing).
-
-**깨지는 지점**: 근육은 대체로 "과부하 = 이득"이지만, 학습에서는 **모든 어려움이 이득은 아니다.** 범주를 구별하지 못하는 상태에서의 인터리빙, 인코딩 전에 강요된 인출은 "나쁜 어려움"이라 좌절만 남긴다. desirable difficulty의 핵심 단서는 "학습자가 실제로 수행할 수 있는" 어려움이라는 조건인데, 무게 비유는 이 실행 가능성 경계를 잘 담지 못한다.
-
-## 곁가지
-
-- **spaced repetition 알고리즘 심화 (SM-2 / FSRS / Anki)** — 복습 스케줄러를 직접 구현하거나 튜닝해야 할 때.
-- **expertise reversal effect 심화** — 초심자↔전문가별로 안내를 fade시키는 교수 설계를 세분화할 때.
-- **far transfer 훈련 설계** — 도메인을 가로지르는 전이를 실제로 만들어야 할 때(원리 추상화·다양 맥락 노출).
-
-## 연결
-
-- [Learning Science (wiki)](/wiki/learning-science/) — 이 방법의 **근거·1차 출처**가 있는 곳. 이 노트는 그 레퍼런스들을 "실행 절차 + 효과 지도"로 합성한 것이다(wiki=근거, notes=합성한 방법).
-- [Retrieval Practice](/wiki/learning-science/retrieval-practice/) · [Spacing](/wiki/learning-science/spacing/) · [Interleaving](/wiki/learning-science/interleaving/) — 방법 loop의 2·3·4단계에 각각 대응.
-- (외부) `frontend-leetcode-patterns` 학습 규칙 — 이 방법의 구체적 적용 사례: 인터리빙 = 입력 신호로 패턴 후보화, 비예시 = "언제 이 패턴이 아닌가", time-boxed 인출, 전이 실패를 별도 유닛으로 분리.
-
 ## 레퍼런스
 
 - [Dunlosky et al. (2013), Effective Learning Techniques (PDF)](https://www.whz.de/fileadmin/lehre/hochschuldidaktik/docs/dunloskiimprovingstudentlearning.pdf) — 1차. 기법 효용 순위(인출·분산 최상위, 재읽기·형광펜 하위). 방법의 우선순위 근거.
@@ -83,18 +65,3 @@ polishHash: '2636e2770cb1'
 - [Sweller (1988), Cognitive Load During Problem Solving](https://onlinelibrary.wiley.com/doi/10.1207/s15516709cog1202_4) — 1차. worked example / 초심자 인코딩·expertise reversal의 근거.
 - [Barnett & Ceci (2002), A Taxonomy for Far Transfer (PDF)](https://rapunselshair.pbworks.com/f/barnett_2002.pdf) — 1차. near/far 전이 구분.
 - 개별 기법(인출·분산·인터리빙)의 1차 출처와 한 줄 요약은 [wiki/learning-science](/wiki/learning-science/)에 카드로 정리되어 있다 — 여기서는 중복 인용하지 않는다.
-
----
-
-## 인출 질문
-
-- 맵 재생: 근거 기반 학습법을 관통하는 하나의 원리는 무엇이고, 방법 loop 6단계를 순서대로 말해보기.
-- 완전한 초심자에게 인출·인터리빙을 곧바로 시키면 왜 역효과인가? 대신 무엇을 먼저 하고, 그 근거 개념은?
-- 이 방법이 강한 영역과 약한 영역을 각각 둘씩 들고, 그 차이를 만드는 기준(판별 가능성·인코딩 여부·전이 필요·재사용 횟수)으로 설명해보기.
-- interleaving이 "실행"이 아니라 "선택"을 훈련한다는 말의 뜻은? 알고리즘 패턴 학습에 어떻게 대응되나?
-- far transfer가 잘 일어나지 않는 이유와, 방법에서 그것을 다루는 단계·기록 방식은?
-- 벼락치기(massed)가 이길 수 있는 유일한 시나리오는 무엇이고, 그 대가로 무엇을 포기하는가?
-
-## 내 관점
-
-(학습자 영역 — 비어 있음)

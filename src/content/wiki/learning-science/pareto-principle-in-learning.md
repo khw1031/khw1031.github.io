@@ -7,8 +7,8 @@ description: '"핵심 20%만 배우면 나머지 80%에 응용할 수 있다"는
 summary: "'핵심 20%를 배우면 대부분을 응용할 수 있다'는 문구는 학습과학이 검증한 법칙이 아니라, 이탈리아 토지 소유 분포를 관찰한 파레토(1896)의 경험적 관찰을 Juran(1941)이 '소수의 결정적 원인'이라는 경영 휴리스틱으로 일반화하고, Richard Koch(1997)와 Tim Ferriss(2010년대, DiSSS 프레임워크)가 학습 영역에 유비적으로 확장한 것이다. 이 계보에서 실제로 코퍼스 데이터로 정량 검증되는 부분은 언어학습의 '고빈도 어휘가 텍스트를 얼마나 커버하는가'뿐이며, 이마저도 '이해를 위한 노출 커버리지'이지 '새 문제에 응용하는 능력(전이)'과는 다른 개념이다."
 lang: ko
 tags: ['pareto-principle', '80-20-rule', 'learning-heuristic', 'tim-ferriss', 'transfer']
-lintHash: '1adfb3aef767'
-polishHash: '1adfb3aef767'
+lintHash: '7b219c2aaebb'
+polishHash: '7b219c2aaebb'
 ---
 
 > 한 줄 명제: "핵심 20%만 배우면 나머지 80%에 응용할 수 있다"는 검증된 학습 법칙이 아니라, 파레토 원칙을 학습 영역에 유비적으로 확장한 자기계발 휴리스틱이며, 정량적으로 실증되는 부분은 어휘 빈도-텍스트 커버리지 관계로 국한된다.
@@ -29,9 +29,3 @@ polishHash: '1adfb3aef767'
 - [Pareto principle — Wikipedia](https://en.wikipedia.org/wiki/Pareto_principle) — 2차. 주란의 1941년 일반화("vital few and trivial many"→"useful many")와 80:20 비율이 보편 법칙이 아닌 셈족적 표현이라는 점을 정리.
 - [Tim Ferriss, The Art and Science of Learning Anything Faster (tim.blog, 2016)](https://tim.blog/2016/10/06/the-art-and-science-of-learning-anything-faster/) — 1차. DiSSS의 "Selection" 단계를 "어떤 20%가 80% 이상의 결과를 내는가"로 직접 정식화한 페리스 본인의 글. 학술 인용 없이 경험칙임을 명시.
 - [Nation (2006), How Large a Vocabulary Is Needed for Reading and Listening? — Canadian Modern Language Review, 63(1), 59–82](https://doi.org/10.3138/cmlr.63.1.59) — 1차. 상위 고빈도 단어군의 텍스트 커버리지를 코퍼스로 정량화한 연구. ([무료 PDF](https://www.lextutor.ca/cover/papers/nation_2006.pdf)) 98% 이해에는 8,000~9,000 단어군이 필요하다는 결론은 "20%면 충분"이라는 통속 주장과 배치된다.
-
-## 연결
-
-- [Transfer](/wiki/learning-science/transfer/) — "일부만 배우면 나머지에 응용 가능하다"는 주장은 본질적으로 far transfer 주장이며, 그 성립 여부는 이 카드의 분류체계로 검증해야 한다.
-- [Learning Science](/wiki/learning-science/) — 이 카드는 desirable difficulties 계열과 달리, 근거가 학습과학 실험이 아니라 경영학 휴리스틱의 유비적 확장이라는 점에서 대조적인 사례로 배치된다.
-- [Simple-to-Complex Sequencing](/wiki/learning-science/simple-to-complex-sequencing/) — "자료의 일부만 고르기"와 "단순화된 전체부터 복잡도를 높이기"는 표면적으로 비슷해 보이지만, 후자는 worked-example effect·4C/ID 같은 통제 실험으로 뒷받침된다는 점에서 근거 구조가 다르다.

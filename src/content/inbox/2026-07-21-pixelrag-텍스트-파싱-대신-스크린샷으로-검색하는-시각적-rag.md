@@ -11,8 +11,8 @@ tags:
   - 'embedding'
   - 'open-source'
 canonical: 'https://github.com/StarTrail-org/PixelRAG'
-lintHash: '822971ea5b2e'
-polishHash: '822971ea5b2e'
+lintHash: '893bca4bbfa9'
+polishHash: '893bca4bbfa9'
 ---
 
 ## TL;DR
@@ -40,14 +40,14 @@ polishHash: '822971ea5b2e'
 - 828만 Wikipedia 페이지에 대한 사전 구축 FAISS 색인이 공개되어 있으며, 별도 설정 없이 호스팅 API(`api.pixelrag.ai`)에서 바로 검색할 수 있다. 텍스트 쿼리뿐 아니라 이미지 쿼리(시각 검색)도 지원한다.
 
 ## 깊이
-- **[렌더링 → 검색 연결]** 텍스트 파싱은 DOM 구조에 의존하므로 JavaScript 렌더링 결과물, 캔버스 차트, 이미지 내 텍스트를 놓친다. ==스크린샷 타일 방식은 브라우저가 최종 렌더링한 픽셀을 그대로 캡처하므로 "사람이 보는 그대로" 검색 대상이 된다.== 비유하면, 책의 목차만 발췌하는 대신 책 페이지를 사진으로 찍어두는 것. **비유가 깨지는 지점**: 사진은 텍스트보다 저장·색인 비용이 훨씬 크고, OCR 없이 순수 픽셀 검색이므로 텍스트精确 매칭은 약할 수 있다.
+- **[렌더링 → 검색 연결]** 텍스트 파싱은 DOM 구조에 의존하므로 JavaScript 렌더링 결과물, 캔버스 차트, 이미지 내 텍스트를 놓친다. ==스크린샷 타일 방식은 브라우저가 최종 렌더링한 픽셀을 그대로 캡처하므로 "사람이 보는 그대로" 검색 대상이 된다.==
 - **[임베딩 모델]** `Qwen3-VL-Embedding-2B`를 스크린샷 데이터로 LoRA fine-tuning하여, 웹페이지 이미지 공간에서 시각적 내용 기반 검색이 가능하도록 한다. 훈련 데이터셋(`screenshot-training-natural-filtered-v2`)과 데이터 큐레이션 파이프라인(LLM 기반 쿼리 생성, hard-negative mining)도 함께 공개되어 있어 다른 백본 모델로의 확장도 가능하다.
 - **[Claude Code 통합]** `pixelbrowse` 스킬로 Claude Code에 설치하면, Claude가 HTML 대신 스크린샷을 "보고" 차트·표를 해석할 수 있다. MCP 서버 없이 로컬 Playwright만 사용하므로 경량이다.
 
 ## 용어 풀이
-- **RAG (Retrieval-Augmented Generation)** — 외부 문서를 검색해 LLM에 컨텍스트로 제공하는 방식 / 도서관에서 관련 책을 꺼내다 책상 위에 펼쳐두는 것 / 비유가 깨지는 지점: 실제 RAG는 검색 순위·청크 크기 등 엔지니어링 변수에 결과가 크게 좌우된다.
-- **LoRA (Low-Rank Adaptation)** — 대규모 모델의 일부 가중치만 저차원으로 fine-tuning하는 기법 / 전체 건물을 리모델링하지 않고 한 층만 고치는 것 / 비유가 깨지는 지점: "저차원"이 항상 충분한 표현력을 보장하지는 않는다.
-- **FAISS** — Meta의 고속 근사 근접 이웃 검색 라이브러리 / 대규모 색인 카드 Catalog / 비유가 깨지는 지점: 단일 노드 메모리 한계가 있어 초대규모에는 Qdrant 등 분산 백엔드가 필요하다.
+- **RAG (Retrieval-Augmented Generation)** — 외부 문서를 검색해 LLM에 컨텍스트로 제공하는 방식 / 도서관에서 관련 책을 꺼내다 책상 위에 펼쳐두는 것.
+- **LoRA (Low-Rank Adaptation)** — 대규모 모델의 일부 가중치만 저차원으로 fine-tuning하는 기법 / 전체 건물을 리모델링하지 않고 한 층만 고치는 것.
+- **FAISS** — Meta의 고속 근사 근접 이웃 검색 라이브러리 / 대규모 색인 카드 Catalog.
 - **스크린샷 타일** — 긴 웹페이지를 잘라 여러 장의 이미지 조각으로 나눈 것 / 두루마리를 A4 크기로 재단하는 것.
 
 ## 시각 자료

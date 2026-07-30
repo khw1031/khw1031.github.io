@@ -5,8 +5,8 @@ description: 새 언어·프레임워크 같은 스킬 습득 도메인을 처�
 summary: "허브 학습 주제가 '이걸 할 수 있게 되고 싶다'류 스킬 습득 도메인일 때, 에이전트가 맵을 추상화 층위가 아니라 몸통(완결 실행 가능한 최소집합)→굵은 가지→잔가지/잎의 능력-해금 순서로 라벨링하도록 강제하는 턴 단위 절차다. 근거(왜 이 순서가 맞는가)는 wiki의 simple-to-complex-sequencing/pareto-principle-in-learning 카드에 있고, 이 문서는 그것을 실행 가능한 형태로만 옮긴다."
 lang: ko
 tags: ['agent-spec', 'instructional-design', 'sequencing', 'study-session']
-lintHash: '0d9bda136315'
-polishHash: '0d9bda136315'
+lintHash: 'c3f6264a69c8'
+polishHash: 'c3f6264a69c8'
 ---
 
 ## 이 문서의 성격
@@ -69,8 +69,3 @@ polishHash: '0d9bda136315'
 - 세션 종료 시 몸통/굵은 가지/잔가지/잎 라벨과 각 가지의 능력 문장이 담긴 맵 1개.
 - ==몸통 단계의 실행 가능한 최소 산출물 1개(코드/설정/결과물 등 도메인에 맞는 형태)와 그 실행 결과.==
 - 이 맵과 실습 결과를 이후 학습(예: `read` 스킬의 허브 노트, 또는 다른 학습 도구)의 시작점으로 그대로 넘길 수 있어야 한다 — ==이 스펙 자체가 특정 노트 포맷에 묶이지 않는다==.
-
-## 연결
-
-- [Simple-to-Complex Sequencing](/wiki/learning-science/simple-to-complex-sequencing/) — 이 프로토콜이 실행하는 원리(Reigeluth epitome, 4C/ID whole-task, worked-example effect)와 증거 수준의 근거.
-- [Pareto Principle in Learning](/wiki/learning-science/pareto-principle-in-learning/) — 이 프로토콜이 명시적으로 피하는 "자료의 20%만 배우면 된다"는 프레이밍이 왜 근거가 약한지의 근거.

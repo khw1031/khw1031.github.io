@@ -10,8 +10,8 @@ tags:
   - 'open-source'
   - 'workflow'
 canonical: 'https://github.com/coreyhaines31/marketingskills'
-lintHash: '6cc0887bf3a0'
-polishHash: '6cc0887bf3a0'
+lintHash: 'ad9402bdb512'
+polishHash: 'ad9402bdb512'
 ---
 
 > 한 줄 명제: marketingskills는 product-marketing을 루트로 하는 markdown 스킬 트리이며, AI 코딩 에이전트가 마케팅 작업을 인식하고 전문 프레임워크를 적용하도록 만든다.
@@ -112,26 +112,6 @@ mv .claude/product-marketing.md .agents/product-marketing.md 2>/dev/null
 mv .claude/product-marketing-context.md .agents/product-marketing.md 2>/dev/null
 ```
 
-## 비유
-
-**비유**: marketingskills는 "공통 설계도를 공유하는 전문 공구 상자"다. `product-marketing`이 설계도면이고, 각 스킬(cro, copywriting, seo-audit 등)은 특정 작업에特化한 공구이며, 공구들은 서로를 참조하면서 협동 작업을 수행한다.
-
-**깨지는 지점**: 실제 공구 상자의 공구는 설계도를 읽고 나서 작동하지 않는다 — 망치가 도면을 참조하지는 않는다. marketingskills의 각 스킬은 실행 시점에 `product-marketing` 문서를 능동적으로 파싱하여 맥락을 주입받으며, 스킬끼리 서로의 출력을 입력으로 참조하는 동적 네트워크를 형성한다는 점에서 수동적 도구와 근본적으로 다르다.
-
-## 곁가지
-
-- Agent Skills spec 심화: agentskills.io 표준 포맷으로 커스텀 스킬을 직접 작성할 필요가 생길 때
-- CONTRIBUTING.md 심화: 새 스킬 기여 시 디렉토리 구조, Related Skills 섹션 작성 규칙, PR 가이드라인이 필요해질 때 (원문에 CONTRIBUTING.md의 구체적 내용은 포함되어 있지 않음)
-- SkillKit 심화: Cursor·Copilot·Claude Code 등 멀티 에이전트 환경에서 스킬 동기화가 필요해질 때
-- Coding for Marketers 심화: 터미널·코딩 에이전트 초심자 마케터를 위한 동반 가이드가 필요해질 때
-
-## 연결
-
-- **Agent Skills spec (agentskills.io)**: marketingskills가 따르는 스킬 포맷 표준 — 이 스펙을 구현한 모든 에이전트와 호환됨
-- **Claude Code skills system**: `.claude/skills/` 심볼릭 링크를 통해 Claude Code 내장 스킬 시스템과 호환 레이어 형성
-- **Vercel Labs npx skills CLI**: `npx skills add` 명령어로 스킬 설치·관리를 자동화하는 패키지 매니저
-- **product-marketing 맥락 문서**: 모든 스킬의 공통 입력 — 이 문서의 품질이 전체 스킬 출력의 상한선을 결정
-
 ## 레퍼런스
 
 - [GitHub - coreyhaines31/marketingskills](https://github.com/coreyhaines31/marketingskills) — 전체 소스, 설치 가이드, 40+ 스킬 목록 및 v2 마이그레이션 맵 포함 (1차) · 기준 버전: v2.0
@@ -140,16 +120,3 @@ mv .claude/product-marketing-context.md .agents/product-marketing.md 2>/dev/null
 - [SkillKit](https://github.com/rohitg00/skillkit) — 멀티 에이전트 스킬 설치 도구, `npx skillkit install` 명령어 제공 (1차) · 버전 명시 없음
 - [Coding for Marketers](https://codingformarketers.com/?ref=marketingskills) — 터미널·코딩 에이전트 초심자 마케터를 위한 동반 가이드 (2차) · 버전 명시 없음
 - [Conversion Factory](https://conversionfactory.co/?ref=marketingskills) — 저자 Corey Haines의 전환 최적화 에이전시, 프로젝트 배경 맥락 (2차)
-
----
-## 인출 질문
-
-1. **(맵 재생)** marketingskills의 5가지 핵심 가지를 나열하고, 각 가지가 다루는 내용을 한 문장씩 설명하라.
-
-2. **(전이)** v1.x에서 v2.0으로 업그레이드하는 사용자가 수행해야 할 세 가지 작업을 순서대로 설명하고, product-marketing 맥락 파일의 경로·파일명 변화를 기술하라. 또한 마이그레이션을 즉시 수행하지 않아도 기존 워크플로가 중단되지 않는 이유를 설명하라.
-
-3. **(전이)** AI 에이전트가 "Write homepage copy for my SaaS"라는 요청을 받았을 때, 어떤 스킬이 활성화되며 그 스킬이 product-marketing 문서를 어떻게 활용하는지, 그리고 해당 스킬이 상호 참조하는 다른 스킬들은 무엇인지 설명하라.
-
-## 내 관점
-
-<!-- 학습자가 직접 채우는 섹션 — 파이프라인은 대필하지 않는다 -->

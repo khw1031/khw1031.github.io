@@ -9,8 +9,8 @@ tags:
   - 'design-system'
   - 'open-source'
 canonical: 'https://github.com/Subhan-code/Amicro--Micro-transitions-'
-lintHash: 'cdf61810595b'
-polishHash: 'cdf61810595b'
+lintHash: '3068f70a15c1'
+polishHash: '3068f70a15c1'
 ---
 
 ## TL;DR
@@ -46,8 +46,8 @@ Amicro의 핵심 가치는 **"프리뷰 → 복사 → 즉시 사용"** 워크�
 - **[테마 시스템]** Dark/Light 모드 전환 시 코드 복사 결과물도 현재 테마에 맞게 생성된다고 주장한다. 이는 테마 토큰이 컴포넌트 코드 생성 단계까지 주입된다는 의미로, 단순 CSS 변수 토글보다 깊이 있는 통합을 시사한다.
 
 ## 용어 풀이
-- **Micro-interaction** — 사용자가 UI 요소와 상호작용할 때 발생하는 짧은 시각적 피드백(버튼 호버, 토글, 상태 변경 등). 비유: "문 손잡이를 돌릴 때 딸깍하는 감각의 시각 버전." 비유가 깨지는 지점: 물리적 피드백은 촉각이지만 마이크로 인터랙션은 시각·운동 감각에만 의존한다.
-- **Hardware-accelerated animation** — GPU(compositor)를 활용해 CSS `transform`, `opacity` 등을 애니메이션하여 CPU 부하를 줄이는 방식. 비유: "짐을 손으로 나르지 않고 컨베이어 벨트에 올리는 것." 깨지는 지점: `width`, `height`, `top` 등 레이아웃을 유발하는 속성은 GPU 가속 대상이 아니다.
+- **Micro-interaction** — 사용자가 UI 요소와 상호작용할 때 발생하는 짧은 시각적 피드백(버튼 호버, 토글, 상태 변경 등).
+- **Hardware-accelerated animation** — GPU(compositor)를 활용해 CSS `transform`, `opacity` 등을 애니메이션하여 CPU 부하를 줄이는 방식.
 - **Motion** — Framer Motion의 후속 라이브러리로, React에서 선언적으로 애니메이션을 정의할 수 있게 해준다. 공식 사이트(motion.dev)에 따르면 Framer Motion v12의 진화형(2차).
 
 ## 시각 자료

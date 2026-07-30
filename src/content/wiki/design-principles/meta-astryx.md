@@ -7,8 +7,8 @@ description: DESIGN.md 문제를 한 단계 더 밀어붙인 구현 사례 — �
 lang: ko
 tags: ['astryx', 'meta', 'design-system', 'mcp', 'agent-ready', 'design-md']
 summary: "Meta가 2026-06-18 오픈소스로 공개한 Astryx는 사내 8년(코드명 XDS, 13,000+ 앱)을 거친 코드 기반 디자인 시스템이다. 이 카테고리의 앵커 DESIGN.md와 같은 문제 — '에이전트에게 디자인 컨텍스트를 지속적으로 전달' — 를 한 단계 더 밀어붙인 구현 사례다. 핵심은 컴포넌트마다 하나뿐인 .doc.mjs 문서 파일이 CLI·문서 사이트·MCP 서버(search/get 두 도구)로 동시에 파생된다는 아키텍처. DESIGN.md가 '에이전트에게 주는 편지'라면 Astryx는 '에이전트가 직접 열람하는 서고'다. StyleX로 작성되지만 소비자는 몰라도 되게 분리했고(이 분리 자체가 LLM 코드 품질 이슈에서 나옴), 접근성은 WAI-ARIA APG + PR별 axe 감사. beta(0.x)."
-lintHash: 'c3d452d29f49'
-polishHash: 'c3d452d29f49'
+lintHash: 'eeae11be7d4a'
+polishHash: 'eeae11be7d4a'
 ---
 
 > 한 줄 명제: Astryx는 컴포넌트당 하나의 `.doc.mjs`를 유일 원본으로 두고 CLI·문서사이트·MCP를 파생해 사람과 에이전트가 같은 참조를 읽게 한 코드 기반 디자인 시스템 — DESIGN.md가 "에이전트에게 주는 편지"라면 Astryx는 "에이전트가 직접 열람하는 서고"다.
@@ -42,10 +42,3 @@ Astryx(Meta, 2026-06-18 오픈소스, MIT, beta)는 컴포넌트·테마·템플
 - [facebook/astryx wiki — Why StyleX](https://github.com/facebook/astryx/wiki/Why-StyleX) — 1차. 저작-소비 분리 근거(이슈 #506, LLM 코드 품질).
 - 저장소 소스 `apps/docsite/src/app/mcp/route.ts`·`__tests__/mcp-server.test.ts`·`packages/cli/src/commands/agent-docs.mjs` — 1차(직접 확인). MCP 두 도구 정의·테스트, agent-docs 프리셋. 확인일 2026-07-08.
 - [MarkTechPost (2026-06-27)](https://www.marktechpost.com/2026/06/27/) — 2차. shadcn/ui 비교, beta 약점. "Figma/Snowflake" 문장은 StyleX 가리킴(오귀속 주의).
-
-## 연결
-
-- [DESIGN.md](/wiki/design-principles/design-md/) — 같은 문제의 형제 사례. DESIGN.md=핸드오프 파일, Astryx=MCP로 노출된 서고. **이 카테고리 앵커와의 대비가 이 카드의 핵심.**
-- [Design Principles](/wiki/design-principles/) — 상위 허브. Astryx는 "구현된 디자인 시스템 사례"의 하나(agent-ready 극단).
-- [material-design](/wiki/design-principles/material-design/) — 또 다른 구현 사례(Google). Material=시각 언어 스펙, Astryx=코드+MCP 배포.
-- [코드 기반 디자인 시스템 관리 도구](/wiki/design-to-code/code-based-design-system-tools/) — 이 위키의 인접 카드가 Astryx를 헤드라인 사례로 다룬다(Style Dictionary·Storybook·bit.dev 계열과의 관계).

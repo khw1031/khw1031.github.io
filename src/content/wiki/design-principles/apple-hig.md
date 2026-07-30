@@ -7,8 +7,8 @@ description: 현행(2025~26, Liquid Glass/OS 26) Apple 디자인 시스템을 �
 lang: ko
 tags: ['apple', 'hig', 'design-system', 'liquid-glass', 'sf-symbols', 'accessibility']
 summary: "Apple HIG는 이 라이브러리의 원리들이 플랫폼 네이티브로 구현된 한 사례다. 현행 디자인 언어는 Liquid Glass(WWDC25, 2025-06-09 발표; iOS 26·macOS Tahoe 26 등 model-year 26에 탑재) — 반투명·굴절 재질. 검증된 구체값: 터치 타깃 44pt, 시스템 폰트 SF Pro/SF Compact/New York + Dynamic Type(11 텍스트 스타일, 사용자 확대), SF Symbols 7,000+·9 웨이트·3 스케일·4 렌더 모드, Materials 5단계(ultraThin~ultraThick)+vibrancy, 시맨틱 색(고정 hex 미공개·자동 적응), 연속 곡률(squircle). 레이아웃은 고정 브레이크포인트가 아니라 축별 size class(regular/compact). 단 HIG 페이지는 SPA라 일부는 2차·SwiftUI/UIKit 문서로 검증."
-lintHash: '5d465f0ca7e5'
-polishHash: '5d465f0ca7e5'
+lintHash: '74ebfd3457e9'
+polishHash: '74ebfd3457e9'
 ---
 
 > 한 줄 명제: Apple HIG는 원리들이 플랫폼 네이티브로 구현된 사례 — 깊이는 그림자 램프가 아니라 반투명 Materials·vibrancy로, 반응형은 브레이크포인트가 아니라 축별 size class로, 색은 고정 hex 없는 시맨틱 색으로 푼다.
@@ -45,10 +45,3 @@ Apple의 Human Interface Guidelines(HIG)는 이 라이브러리의 원리들이 
 - [Apple — Icon Composer](https://developer.apple.com/icon-composer/) — 1차(렌더). Liquid Glass 아이콘·연속 곡률 마스크.
 - [Apple — Reduced Motion 평가 기준](https://developer.apple.com/help/app-store-connect/manage-app-accessibility/reduced-motion-evaluation-criteria/) · [Sufficient Contrast](https://developer.apple.com/help/app-store-connect/manage-app-accessibility/sufficient-contrast-evaluation-criteria) — 1차(렌더). 접근성 기준.
 - ["Meet Liquid Glass" WWDC25 세션 219](https://developer.apple.com/videos/play/wwdc2025/219/) — 1차(영상, SPA). Regular/Clear 변형·적응 거동.
-
-## 연결
-
-- [DESIGN.md](/wiki/design-principles/design-md/) — 이 카테고리 앵커(산출물 포맷). Apple은 담길 수 있는 실제 시스템 사례 중 하나.
-- [Design Principles](/wiki/design-principles/) — 상위 허브. "구현된 디자인 시스템 사례"의 하나.
-- [material-design](/wiki/design-principles/material-design/) · [meta-astryx](/wiki/design-principles/meta-astryx/) — 나란한 구현 사례(Google·Meta).
-- [touch-target-size](/wiki/design-principles/usability/touch-target-size/) · [icon-systems](/wiki/design-principles/usability/icon-systems/) · [elevation-and-depth](/wiki/design-principles/aesthetics-and-layout/elevation-and-depth/) · [shape-and-corner-radius](/wiki/design-principles/aesthetics-and-layout/shape-and-corner-radius/) · [responsive-layout](/wiki/design-principles/aesthetics-and-layout/responsive-layout/) — Apple이 구현한 각 원리.

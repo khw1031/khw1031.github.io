@@ -7,8 +7,8 @@ description: 학습자가 자료를 대하는 인지적 관여 양식을 수동-
 summary: "Chi & Wylie(2014)의 ICAP 프레임워크는 학습자의 겉으로 드러나는 행동을 Passive(그냥 보기·듣기)·Active(밑줄·따라 쓰기)·Constructive(자기 언어로 재구성·자기설명)·Interactive(서로 아이디어를 주고받으며 구성)의 네 양식으로 나눈다. 필기·개념도·자기설명을 다룬 실험들에서 관여 양식이 P<A<C<I 순으로 깊어질수록 학습 성과가 커진다는 것이 반복적으로 확인되며, 이는 '손이냐 키보드냐'가 아니라 '무엇을 하고 있는가'가 핵심 변수임을 보여준다."
 lang: ko
 tags: ['icap', 'active-learning', 'engagement']
-lintHash: '332439f1a9e0'
-polishHash: '332439f1a9e0'
+lintHash: '0df4846e78c3'
+polishHash: '0df4846e78c3'
 ---
 
 > 한 줄 명제: 학습 효과를 가르는 것은 필기 도구(손 vs 키보드)가 아니라, 자료를 대하는 동안 학습자가 수동적으로 받기만 하는지, 능동적으로 손을 움직이는지, 자기 언어로 재구성하는지, 남과 상호작용하며 구성하는지의 인지적 관여 양식이다.
@@ -22,8 +22,3 @@ Chi와 Wylie(2014)는 학습자의 겉으로 드러나는 행동을 기준으로
 ## 레퍼런스
 
 - [Chi & Wylie (2014), The ICAP Framework: Linking Cognitive Engagement to Active Learning Outcomes — Educational Psychologist, 49(4), 219–243](https://doi.org/10.1080/00461520.2014.965823) — 1차. ICAP 네 양식과 그 경험적 근거를 정리한 원 논문(해당 호 lead article).
-
-## 연결
-
-- [손글씨 필기 vs 타이핑](/wiki/learning-science/handwriting-note-taking/) — ICAP은 이 연구가 실제로 측정한 변수가 필기 도구가 아니라 관여 양식임을 설명한다.
-- [Learning Science](/wiki/learning-science/) — desirable difficulties(인출·간격·인터리빙)는 모두 학습자를 더 깊은 ICAP 양식으로 밀어 넣는 조작들로 재해석할 수 있다.

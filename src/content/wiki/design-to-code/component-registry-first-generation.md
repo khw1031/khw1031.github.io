@@ -6,8 +6,8 @@ description: 열린 시각적 디자인을 해석시키는 대신, 정해진 실
 lang: ko
 tags: ['design-to-code', 'component-registry', 'shadcn', 'mcp', 'ai-agent-workflow']
 summary: "v0와 shadcn은 registry.json 이라는 구조화된 스펙으로 컴포넌트·블록·디자인 토큰과 그 의존관계를 노출하고, 공식 MCP 서버를 통해 Claude Code·Cursor·Copilot 같은 에이전트가 자연어로 검색·설치하게 한다. Vercel은 이를 '시각 도구에서 디자인 의도를 역공학하는 것'에 대한 명시적 대안으로 제시한다 — 열린 해석이 아니라 닫힌 후보 집합에서 조합하므로 결과가 결정론적이다."
-lintHash: 'b8f23ff75f18'
-polishHash: 'b8f23ff75f18'
+lintHash: '72a645ebea48'
+polishHash: '72a645ebea48'
 ---
 
 > 한 줄 명제: v0와 shadcn은 열린 시각적 디자인을 해석시키는 대신, 정해진 실제 컴포넌트 집합(registry.json)에서 고르고 조합하게 함으로써 "디자인 의도 역공학"이라는 문제 자체를 없앤다.
@@ -25,9 +25,3 @@ Vercel의 공식 블로그(2025-08-22)는 이 접근의 동기를 직접적으�
 - [v0 (Vercel), Design Systems](https://v0.app/docs/design-systems) — 1차. "레지스트리는 디자인 시스템에서 AI 모델로 컨텍스트를 전달하도록 설계된 배포 스펙"이라고 정의.
 - [Vercel, AI-powered prototyping with design systems](https://vercel.com/blog/ai-powered-prototyping-with-design-systems) (2025-08-22) — 1차. "시각 도구에서 디자인 의도를 역공학하는 것"에 대한 명시적 대안으로 레지스트리 기반 생성을 제시 — 이 카테고리 문제의식의 벤더측 원문.
 - [shadcn/ui, MCP Server](https://ui.shadcn.com/docs/mcp) — 1차. shadcn 공식 MCP 서버 문서. Claude Code·Cursor·Copilot·Windsurf 등에서 자연어로 컴포넌트를 브라우징·검색·설치하는 방법과, 공개/프라이빗/서드파티 레지스트리를 넘나드는 구조를 설명.
-
-## 연결
-
-- [Design-to-Code Agent Workflows](/wiki/design-to-code/) — 이 카드가 속한 카테고리.
-- [이식 가능한 텍스트 디자인 스펙](/wiki/design-to-code/design-token-dsl-handoff/) — 둘 다 구조화된 텍스트를 에이전트에 넘기지만, DESIGN.md는 스타일 토큰을, registry는 실제 컴포넌트 자체를 넘긴다.
-- [코드/캔버스를 디자인 소스로 쓰는 도구](/wiki/design-to-code/code-as-design-source/) — registry가 "설치 가능한 표준 컴포넌트 집합"을 다룬다면, 이쪽은 "이미 존재하는 프로젝트의 실제 소스코드 전체"를 다룬다는 점에서 스코프가 다르다.

@@ -7,8 +7,8 @@ description: 기억에서 능동적으로 꺼내는 행위가 다시 읽기보�
 summary: "정보를 다시 읽는 것보다 기억에서 인출하는 행위 자체가 장기 파지를 강화한다는 원리(testing effect). 지연 시험에서 인출 연습군이 반복 학습군을 앞서며, 이미 인출한 정보가 이후 새 학습의 파지까지 높이는 forward effect도 관찰된다."
 lang: ko
 tags: ['retrieval-practice', 'testing-effect', 'memory']
-lintHash: 'fcc82743f0cc'
-polishHash: 'fcc82743f0cc'
+lintHash: '4f6fd279c005'
+polishHash: '4f6fd279c005'
 ---
 
 > 한 줄 명제: 기억은 "넣는 것"이 아니라 "꺼내는 것"으로 강해진다 — 인출 시도 자체가 파지를 만든다.
@@ -24,8 +24,3 @@ polishHash: 'fcc82743f0cc'
 - [Roediger & Karpicke (2006), Test-Enhanced Learning — Psychological Science](https://journals.sagepub.com/doi/10.1111/j.1467-9280.2006.01693.x) — 1차. 지연 시험에서 인출 연습이 반복 학습을 앞선다는 대표 실험.
 - [The forward effect of testing — PMC](https://pmc.ncbi.nlm.nih.gov/articles/PMC3983480/) — 1차. 인출이 후속 학습의 파지까지 높이는 간접 효과.
 - [The Power of Testing Memory (2006) — Matuschak 정리 노트](https://notes.andymatuschak.org/zGfjkW1ociSmSUCLcpbhKjf) — 2차. 원 논문 요약.
-
-## 연결
-
-- [Spacing](/wiki/learning-science/spacing/) — 인출을 시간 간격을 두고 반복하면 효과가 더 커진다(간격 인출).
-- [Learning Science](/wiki/learning-science/) — Bjork의 desirable difficulties 중 하나.

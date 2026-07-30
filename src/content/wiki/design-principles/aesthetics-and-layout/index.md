@@ -6,8 +6,8 @@ description: 활자·인쇄 전통에서 웹으로 계승된 미감·레이아�
 lang: ko
 tags: ['typography', 'layout', 'grid', 'spacing', 'vertical-rhythm', 'web-design']
 summary: "좋은 웹 디자인의 미감은 무에서 발명된 게 아니라 500년 활자·인쇄 전통에서 계승됐다. 이 하위 허브는 그 계보를 네 카드로 추적한다: 주조소 점 크기에서 나온 조화 비율(typographic scale), 인쇄 베이스라인 그리드에서 온 웹 수직 리듬, 스위스 국제 타이포그래피 양식의 그리드가 12컬럼 웹 그리드와 CSS Grid로 이어진 계보(layout grid), 그리고 그 정점의 8pt spacing 시스템. 미감은 부분적으로 주관적이지만, 이 형식 골격은 처리 유창성이라는 규칙성에 기대어 반복 선호된다."
-lintHash: 'd65a6ac54ffb'
-polishHash: 'd65a6ac54ffb'
+lintHash: 'd646b85e31aa'
+polishHash: 'd646b85e31aa'
 ---
 
 > 한 줄 명제: 웹의 미감은 발명이 아니라 계승이다 — 활자 주조소의 점 크기, 인쇄의 베이스라인 그리드, 스위스 양식의 그리드가 각각 웹의 타입 스케일·수직 리듬·컬럼 그리드로 이어졌고, 그 정점에 8pt spacing이 있다.
@@ -54,22 +54,7 @@ aesthetics-and-layout (출판 → 웹 계보)
 
 계보 위에 본문 조판의 나머지 두 축을 더한다: [readability-measure](/wiki/design-principles/aesthetics-and-layout/readability-measure/)는 인쇄 전통의 줄 길이(measure, 45~90자 / WCAG 80·CJK 40자)·행간을, [fluid-typography](/wiki/design-principles/aesthetics-and-layout/fluid-typography/)는 그 스케일을 `clamp()`·뷰포트 단위로 화면 폭에 연속 보간하는 반응형 기법을 다룬다 — 크기(스케일)·수직 간격(리듬)·가로 폭(measure)·반응(fluid)의 조판 삼각형이 완성된다.
 
-## 곁가지
-
-- **반응형 타이포그래피 심화(fluid space)** — Utopia식 유동 *스페이스* 스케일(간격도 뷰포트에 보간). fluid-typography(타입)·spacing-8pt-grid(토큰)와 실질 중복이라 별도 카드로 분리하지 않고 두 카드가 나눠 다룬다. 유동 *간격* 스케일이 독립 주제가 될 만큼 커지면 재검토.
-- **아이콘 그리드·옵티컬 사이징** — Material 24dp 그리드·키라인은 지금 [icon-systems](/wiki/design-principles/usability/icon-systems/)(사용성 축)가 다룬다. 시각적 그리드 관점의 심화가 필요해지면 곁가지로.
-- **이미지·미디어(반응형 이미지)** — `srcset`·`<picture>`·aspect-ratio. responsive-layout이 "유연한 이미지"로 부분 언급. 독립 근거가 필요해지면 카드로.
-
-*(승격 완료: Measure/가독성 → [readability-measure](/wiki/design-principles/aesthetics-and-layout/readability-measure/); 반응형 타이포 → [fluid-typography](/wiki/design-principles/aesthetics-and-layout/fluid-typography/); 색·대비 → [color-and-contrast](/wiki/design-principles/color-and-contrast/); 정렬·시각 위계 → [visual-hierarchy](/wiki/design-principles/aesthetics-and-layout/visual-hierarchy/); 엘리베이션·깊이 → [elevation-and-depth](/wiki/design-principles/aesthetics-and-layout/elevation-and-depth/); 다크 모드·테마 → [dark-mode-and-theming](/wiki/design-principles/aesthetics-and-layout/dark-mode-and-theming/); 반응형·적응형 레이아웃 → [responsive-layout](/wiki/design-principles/aesthetics-and-layout/responsive-layout/); Shape/코너 반경(DESIGN.md Shapes) → [shape-and-corner-radius](/wiki/design-principles/aesthetics-and-layout/shape-and-corner-radius/).)*
-
 ## 레퍼런스
 
 - [Robert Bringhurst, *The Elements of Typographic Style*](https://en.wikipedia.org/wiki/The_Elements_of_Typographic_Style) — 1차(정본 서적, ISBN 978-0881792126, v4.0 2012). 활자 스케일·베이스라인 그리드의 정본. (링크는 판본 확인용 2차 위키)
 - [Josef Müller-Brockmann, *Grid Systems in Graphic Design* (1981)](https://niggli.ch/en/products/rastersysteme-fur-die-visuelle-gestaltung) — 1차(정본 서적, ISBN 978-3721201451). 스위스 그리드 매뉴얼, 웹 레이아웃 그리드의 조상.
-
-## 연결
-
-- [Design Principles](/wiki/design-principles/) — 상위 허브(두 축 중 미감·레이아웃 축).
-- [DESIGN.md](/wiki/design-principles/design-md/) — 이 허브의 카드들이 채우는 산출물 포맷의 Colors·Typography·Layout·Elevation·Shapes 섹션.
-- [usability](/wiki/design-principles/usability/) — 다른 한 축. [gestalt-principles](/wiki/design-principles/usability/gestalt-principles/) ↔ [spacing-8pt-grid](/wiki/design-principles/aesthetics-and-layout/spacing-8pt-grid/)가 두 축을 잇는 핵심 연결.
-- [Material Design](/wiki/design-principles/material-design/) — 이 계보(인쇄 요소 → 8dp 그리드·타입 스케일)를 명시적으로 계승한 한 시스템 사례.

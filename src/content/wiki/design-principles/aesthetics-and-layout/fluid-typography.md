@@ -7,8 +7,8 @@ description: CSS clamp()와 뷰포트 단위로 타입 스케일을 화면 폭�
 lang: ko
 tags: ['fluid-typography', 'clamp', 'viewport-units', 'responsive', 'css', 'accessibility']
 summary: "고정 타입 스케일을 브레이크포인트마다 바꾸는 대신, CSS clamp(MIN, VAL, MAX)와 뷰포트 단위(vw)로 화면 폭에 따라 글자 크기를 연속 보간하는 기법. clamp는 max(MIN, min(VAL, MAX))로 해석돼 하한·상한 사이에서 선호값을 따른다. 핵심 관용구는 font-size: clamp(하한, rem항 + vw항, 상한). 단 vw만 쓰면 사용자 확대(WCAG 1.4.4 Resize Text, 200%)를 깨므로 선호값에 반드시 rem 항을 섞는다. Utopia는 이를 최소·최대 뷰포트의 두 스케일 사이 보간으로 확장한다."
-lintHash: 'fb95c0dab633'
-polishHash: 'fb95c0dab633'
+lintHash: '502cd86d8317'
+polishHash: '502cd86d8317'
 ---
 
 > 한 줄 명제: 브레이크포인트마다 글자 크기를 바꾸지 말고, clamp()와 vw로 화면 폭에 따라 연속 보간하라 — 단 vw만 쓰면 사용자 확대가 깨지니 선호값에 rem을 섞어라.
@@ -39,10 +39,3 @@ h1 { font-size: clamp(1rem, 1rem + 2vw, 3rem); }
 - [W3C WAI — Understanding SC 1.4.4 Resize Text (WCAG 2.1, AA)](https://www.w3.org/WAI/WCAG21/Understanding/resize-text.html) — 1차/규범. "200%까지 확대해도 손실 없이." vw-only의 접근성 위험 근거.
 - [CSS-Tricks — Simplified Fluid Typography (2019)](https://css-tricks.com/simplified-fluid-typography/) — 2차. `clamp(하한, rem+vw, 상한)` 관용구와 rem 항의 접근성 헤지.
 - [Utopia (utopia.fyi)](https://utopia.fyi/) — 2차. 두 뷰포트 사이 보간으로 스케일 전체를 유동화(브레이크포인트 없이).
-
-## 연결
-
-- [aesthetics-and-layout](/wiki/design-principles/aesthetics-and-layout/) — 상위 허브. 타입 스케일의 반응형 확장.
-- [typographic-scale](/wiki/design-principles/aesthetics-and-layout/typographic-scale/) — fluid가 유동화하는 대상(모듈러 스케일).
-- [readability-measure](/wiki/design-principles/aesthetics-and-layout/readability-measure/) — clamp()로 measure(폭)도 뷰포트에 맞춰 조절.
-- [touch-target-size](/wiki/design-principles/usability/touch-target-size/) — 크기·확대의 접근성(WCAG) 축에서 만남.

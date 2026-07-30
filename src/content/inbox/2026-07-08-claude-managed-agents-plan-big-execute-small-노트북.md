@@ -9,8 +9,8 @@ tags:
   - 'ai'
   - 'agentic-coding'
 canonical: 'https://github.com/anthropics/claude-cookbooks/blob/main/managed_agents/CMA_plan_big_execute_small.ipynb'
-lintHash: 'ca94a51f782d'
-polishHash: 'ca94a51f782d'
+lintHash: 'a863b7283780'
+polishHash: 'a863b7283780'
 ---
 
 > 한 줄 명제: "읽기"가 비용을 지배하는 리서치 작업에서, 도구 없는 비싼 코디네이터는 계획·종합만 맡고 값싼 worker들이 병렬로 원문을 읽어 distilled 결과만 보고하게 하면, 같은 검증 기준을 유지한 채 비용과 시간을 크게 줄일 수 있다 — 단, 코디네이터가 세운 전제 자체는 아무도 검증하지 않는다는 대가를 진다.
@@ -126,23 +126,6 @@ with client.beta.sessions.events.stream(session.id, betas=BETAS) as stream:
 
 **[언제 split이 안 통하는지]** ⭐ narrow한 질문(애초에 위임할 읽기 분량이 적음), 코디네이터가 자기 지식으로 답해 버려 delegation 자체가 없는 경우(round-trip 비용만 헛되이 나감), 원자료 자체에 frontier 수준의 판단이 필요한 미묘한 문서 분석 작업(cheap reader가 정작 중요한 뉘앙스를 요약 과정에서 날려버릴 수 있음) — 이 세 경우는 노트북이 명시한 패턴의 적용 한계다.
 
-## 비유
-
-이 구조는 **연구소장과 인턴 조사원들**에 가깝다. 소장(코디네이터)은 직접 도서관에 가지 않고, 조사 항목을 인턴들(worker)에게 나눠 병렬로 맡긴 뒤 각자의 요약 보고서만 받아 종합한다. 소장의 시간(비싼 rate)은 도서관에서 원문을 뒤지는 데 쓰이지 않고 오직 지시와 종합에만 쓰이므로 전체 비용이 줄어든다.
-
-이 비유가 깨지는 지점은 정확히 caveat 3과 같다 — 현실의 연구소장은 보통 "어떤 항목을 조사시킬지"를 스스로도 어느 정도 검증하지만, 이 패턴의 코디네이터는 인턴들에게 나눠준 **질문 리스트 자체를 아무도 검증하지 않는다**. 인턴들이 맡은 개별 사실은 완벽하게 검증해도, 애초에 소장이 잘못 만든 질문 리스트(예: 틀린 국립공원 목록)는 그대로 통과된다. 비유 속 소장은 최소한 목차 정도는 다시 확인하지만, 이 패턴의 코디네이터는 그럴 도구도, 그럴 유인도 기본적으로는 없다.
-
-## 곁가지
-
-- Managed Agents `multiagent` 필드 심화(이질적 역할 팀): `CMA_coordinate_specialist_team.ipynb`가 다루는, worker가 한 종류가 아니라 여러 specialist 역할로 나뉘고 역할별 tool scoping이 중요해지는 팀 설계가 필요해질 때
-- Managed Agents 기초(session/environment/event 스트림 자체): `CMA_iterate_fix_failing_tests.ipynb`가 다루는 선행 개념을 처음부터 짚어야 할 때
-- Claude 가격·캐싱 요율 심화: 이 노트북의 비용 계산 코드(캐시 5분/1시간 write, read 배율)를 실제 프로젝트 비용 추정에 그대로 적용해야 할 때
-
-## 연결
-
-- [Anthropic Advisor Tool 노트](/inbox/2026-07-08-anthropic-advisor-tool-저비용-executor와-고지능-advisor의/): "값싼 실행 + 비싼 판단"을 나누는 2단 추론 패턴이라는 점에서 이 coordinator 패턴과 같은 경제적 논리를 공유한다. Advisor Tool은 단일 모델의 한 요청 안에서 조언을 주입받는 구조이고, 이 노트북은 여러 독립 에이전트 세션으로 역할을 완전히 분리한다는 점이 구조적 차이다.
-- Orchestrator/worker 에이전트 설계 패턴 일반: "plan big, execute small"(coordinator pattern)은 fan-out/fan-in 형태의 일반적인 멀티에이전트 설계 패턴의 구체적 구현 사례다.
-
 ## 레퍼런스
 
 - [원본 노트북 — GitHub](https://github.com/anthropics/claude-cookbooks/blob/main/managed_agents/CMA_plan_big_execute_small.ipynb): raw ipynb를 직접 확보해 셀 12개(markdown 7 + code 5)를 전수 확인함. (1차) — `main` 브랜치, 확인 시점 2026-07-08 기준 최신 커밋 `5d5b014`(2026-07-06, 파일 내 상대 링크를 절대 GitHub URL로 바꾼 커밋이며 기술 본문은 변경되지 않음)
@@ -152,14 +135,3 @@ with client.beta.sessions.events.stream(session.id, betas=BETAS) as stream:
 - [BrowseComp — arXiv:2504.12516](https://arxiv.org/abs/2504.12516): 노트북이 "discovery 질문"(coverage 질문과 대비되는, 큰 검색공간에서 답 하나를 찾는 유형) 벤치마크 예시로 언급. (1차)
 - [Claude Pricing](https://platform.claude.com/docs/en/about-claude/pricing): 노트북의 비용 계산 코드가 참조하는 $/MTok 표. (1차) — 노트북은 Sonnet 5 도입가($2/$10, 2026-08-31까지)와 표준가($3/$15, 이후)를 구분해 하드코딩
 - [Multi-agent sessions 문서](https://platform.claude.com/docs/en/managed-agents/multi-agent): 노트북 Recap이 안내하는 `multiagent` 필드의 공식 레퍼런스. (1차)
-
----
-## 인출 질문
-
-1. 이 패턴에서 코디네이터가 "worker에 대해 아는 것"은 어디에서 오며, 그 정보 경로가 왜 4가지 caveat 중 절반(1번, 4번)의 근본 원인이 되는가?
-2. "coverage task"(사실 대조 검증)와 "discovery task"(답 하나 찾기)를 구분했을 때, 이 노트북의 비용 절감 효과가 discovery task에서는 왜 더 좁아질 것으로 예상되는가?
-3. Advisor Tool의 executor/advisor 분리와 이 노트북의 coordinator/worker 분리는 둘 다 "값싼 실행 + 비싼 판단"을 나누지만, 컨텍스트를 공유하는 방식이 근본적으로 다르다. 그 차이는 각각 어떤 실패 모드를 만드는가?
-
-## 내 관점
-
-<!-- 학습자가 직접 채우는 섹션 — 파이프라인은 대필하지 않는다 -->

@@ -17,7 +17,10 @@ export const collections = {
   notes: defineCollection({ loader: glob(md('notes')), schema: baseFrontmatter }),
   inbox: defineCollection({ loader: glob(md('inbox')), schema: baseFrontmatter }),
   wiki: defineCollection({ loader: glob(md('wiki')), schema: wikiSchema }),
-  specs: defineCollection({ loader: glob(md('specs')), schema: baseFrontmatter }),
+  // Retired source documents. A note links here once its core decomposition
+  // supersedes the full original; the original is kept verbatim as the reference.
+  // Unlisted like notes/docs (out of search/sitemap/robots).
+  sources: defineCollection({ loader: glob(md('sources')), schema: baseFrontmatter }),
   idea: defineCollection({ loader: glob(md('idea')), schema: baseFrontmatter }),
   // Free-form working documents (PRDs, drafts). No required frontmatter — the
   // title falls back to the first H1 or the slug at render time, so a doc can be

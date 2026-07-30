@@ -7,8 +7,8 @@ description: 콘텐츠를 구조화·라벨링해 찾을 수 있게 만드는 �
 lang: ko
 tags: ['information-architecture', 'navigation', 'findability', 'card-sorting', 'usability', 'ia']
 summary: "정보 구조(IA)는 콘텐츠를 조직·라벨링·탐색·검색하게 해 사람이 정보를 더 잘 찾고 관리하도록 설계하는 것이다(Rosenfeld·Morville·Arango '북극곰 책'의 4대 시스템). 구조는 디자이너가 아니라 사용자의 멘탈 모델에서 나와야 하므로 카드 소팅(생성)으로 발견하고 트리 테스트(평가)로 검증한다. 내비게이션은 global/local/contextual/supplemental로 나뉘고, breadcrumb·local nav가 'Where am I? Where can I go?'라는 wayfinding에 답한다. 숨은 내비게이션(햄버거)은 발견율을 20%+ 떨어뜨린다."
-lintHash: 'ba9cad461074'
-polishHash: 'ba9cad461074'
+lintHash: '2bea7421f2ab'
+polishHash: '2bea7421f2ab'
 ---
 
 > 한 줄 명제: 좋은 구조는 디자이너 머리가 아니라 사용자 멘탈 모델에서 나온다 — 카드 소팅으로 발견하고, 트리 테스트로 검증하고, 내비게이션으로 "여기가 어디, 어디로 갈 수 있나"에 답하라.
@@ -45,11 +45,3 @@ Peter Morville의 **findability(찾을 수 있음)** 가 이 모든 것의 목�
 - [NN/g — Card Sorting (2024)](https://www.nngroup.com/articles/card-sorting-definition/) · [Tree Testing (2023)](https://www.nngroup.com/articles/tree-testing/) — 2차(권위). 멘탈 모델 발견(생성) vs 구조 검증(평가).
 - [NN/g — Local Navigation](https://www.nngroup.com/articles/local-navigation/) · [Breadcrumbs (2018)](https://www.nngroup.com/articles/breadcrumbs/) — 2차. wayfinding, 계층 기반 breadcrumb(3단계+).
 - [NN/g — Hamburger Menus Hurt UX](https://www.nngroup.com/articles/hamburger-menus/) · [Mega Menus Work Well (2023)](https://www.nngroup.com/articles/mega-menus-work-well/) — 2차. 숨은 내비 발견율 −20%+, 메가 메뉴 이점.
-
-## 연결
-
-- [usability](/wiki/design-principles/usability/) — 상위 허브.
-- [Jakob의 법칙](/wiki/design-principles/usability/jakobs-law/) — 관습적 내비게이션 배치가 통하는 이유.
-- [gulf-of-execution-evaluation](/wiki/design-principles/usability/gulf-of-execution-evaluation/) — 구조가 올바른 멘탈 모델(시스템 이미지)을 심어야 함.
-- [cognitive-load-and-density](/wiki/design-principles/usability/cognitive-load-and-density/) · [hicks-law](/wiki/design-principles/usability/hicks-law/) — 계층화로 각 단계 선택지·부하를 낮춤.
-- [responsive-layout](/wiki/design-principles/aesthetics-and-layout/responsive-layout/) — 내비게이션이 화면 크기에 따라 적응(숨김 vs 노출)하는 접점.

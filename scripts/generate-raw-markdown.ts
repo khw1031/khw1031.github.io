@@ -16,9 +16,9 @@ const COLLECTIONS = [
   'notes',
   'inbox',
   'wiki',
-  'specs',
   'idea',
   'docs',
+  'sources',
 ] as const;
 
 type Collection = (typeof COLLECTIONS)[number];

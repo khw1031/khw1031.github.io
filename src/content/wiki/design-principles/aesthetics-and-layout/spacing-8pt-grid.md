@@ -7,8 +7,8 @@ description: 좋은 웹 디자인의 핵심 골격인 spacing 시스템 — 8pt(
 lang: ko
 tags: ['spacing', '8pt-grid', 'design-tokens', 'whitespace', 'web-design', 'material-design']
 summary: "spacing은 좋은 웹 디자인에서 가장 과소평가되면서 가장 결정적인 골격이다. 현대 디자인 시스템은 간격을 임의로 두지 않고 고정 스케일(대개 4px 기준, 8px 격자)의 토큰으로 관리한다: Material 8dp/4dp, Carbon 13스텝(2·4·8·…·160px), Polaris(4px 기준), Atlassian(8px 기준), Tailwind(4px 기준). 8을 쓰는 이유는 대부분의 화면 밀도가 8로 나눠떨어지고 @2x·@3x에서도 정수로 유지돼 결정을 줄이기 때문 — 단 이 '나눗셈' 근거는 주로 2차 출처다. spacing은 미감(리듬)이자 사용성(Gestalt 근접성으로 정보 구조 전달)이다."
-lintHash: '3cf85256b9f4'
-polishHash: '3cf85256b9f4'
+lintHash: '076b7558c440'
+polishHash: '076b7558c440'
 ---
 
 > 한 줄 명제: 간격을 임의로 두지 말고 하나의 스케일(4px 기준·8px 격자)로 토큰화하라 — 8은 화면 밀도로 잘 나눠떨어지고, 간격은 미감(리듬)이자 사용성(그룹핑)이다.
@@ -48,12 +48,3 @@ Carbon의 13스텝(px): 2 · 4 · 8 · 12 · 16 · 24 · 32 · 40 · 48 · 64 ·
 - [Elliot Dahl, Intro to the 8-Point Grid System (2016)](https://medium.com/built-to-adapt/intro-to-the-8-point-grid-system-d2573cde8632) · [spec.fm — The 8-Point Grid](https://spec.fm/specifics/8-pt-grid) — 2차. "화면이 8로 나눠떨어짐 / @2x·@3x 정수 유지" 나눗셈 근거의 대중적 출처. hard grid vs soft grid.
 - [W3C — WCAG 2.1 SC 1.4.8 Visual Presentation](https://www.w3.org/WAI/WCAG21/Understanding/visual-presentation.html) — 1차/규범. 80자(CJK 40) 이하, 행간 1.5·문단 간격 1.5×(AAA). [Butterick — Line length](https://practicaltypography.com/line-length.html) — 2차. 45–90자.
 - [Una Kravets, Using Material Density on the Web (Google Design, 2019)](https://m3.material.io/blog/material-density-web) — 1차. default/comfortable/compact, −4px/스텝, 타깃 48px 하한 유지.
-
-## 연결
-
-- [aesthetics-and-layout](/wiki/design-principles/aesthetics-and-layout/) — 상위 허브. 타입 스케일·베이스라인·그리드를 하나의 격자로 통합하는 정점.
-- [gestalt-principles](/wiki/design-principles/usability/gestalt-principles/) — 근접성의 수치화. **두 축(미감·사용성)을 잇는 핵심 연결.**
-- [baseline-grid-vertical-rhythm](/wiki/design-principles/aesthetics-and-layout/baseline-grid-vertical-rhythm/) — 수직 간격이 4/8px 리듬 단위와 만남.
-- [layout-grid](/wiki/design-principles/aesthetics-and-layout/layout-grid/) — 거터·마진이 spacing 격자와 공유됨.
-- [touch-target-size](/wiki/design-principles/usability/touch-target-size/) — 타깃 간 8dp 간격, 밀도와 무관한 48px 하한.
-- [Material Design](/wiki/design-principles/material-design/) — 8dp/4dp 그리드의 기관 기원.

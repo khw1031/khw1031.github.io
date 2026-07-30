@@ -7,8 +7,8 @@ description: 같은 양의 학습을 몰아서(massed)보다 시간에 나눠(sp
 summary: "동일한 학습량이라도 한 번에 몰아치기보다 시간 간격을 두고 나눠 반복하면 장기 파지가 높아진다는 원리. Cepeda 등(2006)의 대규모 메타분석은 목표 파지 기간이 길수록 최적 복습 간격도 함께 길어진다는 관계를 보였다 — 복습 스케줄 설계의 근거."
 lang: ko
 tags: ['spacing', 'distributed-practice', 'spaced-repetition', 'memory']
-lintHash: '290940546b90'
-polishHash: '290940546b90'
+lintHash: 'f4cf7c7239af'
+polishHash: 'f4cf7c7239af'
 ---
 
 > 한 줄 명제: 같은 시간을 쓴다면, 몰아서 한 번보다 간격을 두고 여러 번이 오래 남는다.
@@ -25,8 +25,3 @@ polishHash: '290940546b90'
 - [Bjork & Bjork, Desirable Difficulties](https://www.unh.edu/teaching-learning-resource-hub/sites/default/files/media/2023-06/itow-introducing-desirable-difficulties-into-practice-and-instruction-bjork-and-bjork.pdf) — 1차. 간격이 왜 "바람직한 어려움"인지.
 
 **Gotcha**: 메타분석 규모는 자료마다 "317 experiments / 184 articles"와 "254 studies / 14,000 observations"로 엇갈려 인용된다. 표준 인용은 전자다.
-
-## 연결
-
-- [Retrieval Practice](/wiki/learning-science/retrieval-practice/) — 간격을 둔 인출이 분산 학습의 대표 실행 형태.
-- [Learning Science](/wiki/learning-science/) — desirable difficulties의 대표 항목.

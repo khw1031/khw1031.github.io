@@ -11,8 +11,8 @@ tags:
   - 'prompting'
   - 'api'
 canonical: 'https://platform.claude.com/docs/en/agents-and-tools/tool-use/advisor-tool'
-lintHash: '32ffe5009d03'
-polishHash: '32ffe5009d03'
+lintHash: '6e06244fd053'
+polishHash: '6e06244fd053'
 ---
 
 ## TL;DR
@@ -81,12 +81,12 @@ polishHash: '32ffe5009d03'
 - **[max_tokens 캡 효과]** Anthropic 내부 하드 추론 벤치마크(n=40)에서 `max_tokens: 2048` 설정은 advisor 평균 출력을 약 7배 줄이면서 절단률은 거의 0%, 품질 저하는 감지 불가 수준이었다(저자 주장). 1024로 낮추면 약 10배 감소하나 ~10% 호출에서 절단 발생. 소프트 제어(프롬프트에 "80단어 이내" 요청)와 하드 제어(`max_tokens`)를 상황에 따라 선택 또는 병용한다(저자 주장).
 
 ## 용어 풀이
-- **executor model** — 실제 사용자 작업을 수행하며 토큰을 생성하는 "작업자" 모델. / 비유: 현장 엔지니어. / 비유가 깨지는 지점: 엔지니어와 달리 executor는 스스로 advisor 호출 시점을 결정하는 자율성을 가진다.
-- **advisor model** — executor의 전체 대화 기록을 보고 전략적 조언을 제공하는 "자문가" 모델. / 비유: 수석 아키텍트가 설계 검토를 하는 것. / 비유가 깨지는 지점: 실제 수석 아키텍트는 지속적으로 관여하지만 advisor는 executor가 호출할 때만 반응한다.
-- **server_tool_use** — Anthropic 서버가 실행하는 도구 호출을 나타내는 블록 타입. / 비유: 레스토랑에서 웨이터가 주방에 직접 전달하는 주문. / 비유가 깨지는 지점: 고객(executor)이 주문 내용(input)을 지정하지 않고 "부탁해"라는 신호만 보낸다.
-- **advisor_redacted_result** — Fable 5·Mythos 5가 반환하는 암호화된 조언 blob. / 비유: 봉인된 편지 — 받는 사람은 내용물을 볼 수 없지만 다음 턴에 서버가 열어준다. / 비유가 깨지는 지점: 실제 봉인 편지와 달리 클라이언트는 이 blob을 절대 읽을 수 없으며 오직 서버만 복호화한다.
-- **pause_turn** — advisor 호출이 완료되지 않은 상태에서 응답이 중단된 것을 나타내는 stop_reason. / 비유: 전화 통화 중 "잠시만요, 다른 사람 확인 좀 받을게요" 상태. / 비유가 깨지는 지점: 실제 전화와 달리 클라이언트가 추가 user 메시지 없이 이전 assistant 메시지를 그대로 재전송하면 재개된다.
-- **prompt caching (ephemeral)** — advisor의 대화 기록 프롬프트를 일정 TTL 동안 캐시해 재호출 시 입력 토큰 비용을 줄이는 기능. / 비유: 매번 전체 서류를 복사하지 않고 이전 복사본에 추가 페이지만 붙이는 것. / 비유가 깨지는 지점: `clear_thinking` 설정이 기본값이라도 이전 모델에서는 thinking 턴을 유지하지 않아 캐시가 깨질 수 있다.
+- **executor model** — 실제 사용자 작업을 수행하며 토큰을 생성하는 "작업자" 모델.
+- **advisor model** — executor의 전체 대화 기록을 보고 전략적 조언을 제공하는 "자문가" 모델.
+- **server_tool_use** — Anthropic 서버가 실행하는 도구 호출을 나타내는 블록 타입.
+- **advisor_redacted_result** — Fable 5·Mythos 5가 반환하는 암호화된 조언 blob.
+- **pause_turn** — advisor 호출이 완료되지 않은 상태에서 응답이 중단된 것을 나타내는 stop_reason.
+- **prompt caching (ephemeral)** — advisor의 대화 기록 프롬프트를 일정 TTL 동안 캐시해 재호출 시 입력 토큰 비용을 줄이는 기능.
 
 ## 시각 자료
 

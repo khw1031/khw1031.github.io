@@ -7,8 +7,8 @@ description: Don Norman의 두 간극 — 사용자 의도와 시스템 사이�
 lang: ko
 tags: ['norman', 'gulf-of-execution', 'gulf-of-evaluation', 'affordance', 'signifier', 'mental-model']
 summary: "Don Norman(User Centered System Design 1986, The Design of Everyday Things 2013)의 통합 프레임. 사람이 무언가를 쓸 때 두 간극에 부딪힌다 — 실행의 간극(어떻게 조작하지?)과 평가의 간극(무슨 일이 일어났지?). 7단계 행동 주기 중 실행 3단계(plan·specify·perform)가 앞의 간극을, 평가 3단계(perceive·interpret·compare)가 뒤의 간극을 건넌다. 디자이너는 실행의 간극을 시그니파이어·제약·매핑·개념 모델로, 평가의 간극을 피드백·개념 모델로 좁힌다. 이 카테고리의 사용성 법칙들이 왜 통하는지 설명하는 상위 이론."
-lintHash: '11e501f400e8'
-polishHash: '11e501f400e8'
+lintHash: '3db3798e9fb3'
+polishHash: '3db3798e9fb3'
 ---
 
 > 한 줄 명제: 좋은 디자인 = 사용자 의도와 시스템 사이의 두 간극을 좁히는 것 — "어떻게 하지?"(실행)는 시그니파이어·매핑으로, "먹혔나?"(평가)는 피드백으로.
@@ -40,11 +40,3 @@ Don Norman의 두 간극은 이 카테고리 전체를 꿰는 상위 이론이�
 - [Norman, D. A. & Draper, S. W. (eds.) (1986), *User Centered System Design*, LEA/Routledge](https://www.routledge.com/User-Centered-System-Design-New-Perspectives-on-Human-computer-Interaction/Norman-Draper/p/book/9780898598728) — 1차(개념 기원, ISBN 9780898598728). 두 간극과 "user-centered design"의 출발점(1986 verbatim은 2차 경유).
 - [NN/g — The Two UX Gulfs: Evaluation and Execution (2018)](https://www.nngroup.com/articles/two-ux-gulfs-evaluation-execution/) — 2차(Norman 공동창립 NN/g). 두 간극의 실무 해설.
 - [IxDF — Gulf of Evaluation and Gulf of Execution](https://ixdf.org/literature/book/the-glossary-of-human-computer-interaction/gulf-of-evaluation-and-gulf-of-execution) — 2차. 1986 기원·1988 대중화 정리(단, p.51 인용은 1988판 문구).
-
-## 연결
-
-- [usability](/wiki/design-principles/usability/) — 상위 허브. 이 카드가 나머지 법칙들을 정렬하는 상위 이론.
-- [Nielsen 휴리스틱](/wiki/design-principles/usability/nielsen-heuristics/) — 가시성·복구(평가) / 일치·인식(실행)이 두 간극에 매핑.
-- [Jakob의 법칙](/wiki/design-principles/usability/jakobs-law/) — 관습이 "시스템 이미지"를 미리 채워 멘탈 모델 형성을 돕는 지점.
-- [Fitts](/wiki/design-principles/usability/fitts-law/) · [Hick](/wiki/design-principles/usability/hicks-law/) · [Gestalt](/wiki/design-principles/usability/gestalt-principles/) — 실행·평가 단계의 물리·인지·지각 비용을 좁히는 각론.
-- [Material Design](/wiki/design-principles/material-design/) — 피드백·매핑·일관성을 시스템으로 구현("Motion provides meaning" = 평가의 간극 좁히기).

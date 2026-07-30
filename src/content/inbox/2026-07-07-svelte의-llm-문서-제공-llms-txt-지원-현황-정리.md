@@ -10,8 +10,8 @@ tags:
   - 'svelte'
   - 'ai-tooling'
 canonical: 'https://svelte.dev/docs/llms'
-lintHash: '39520e93b902'
-polishHash: '39520e93b902'
+lintHash: '0ae7696c57b0'
+polishHash: '0ae7696c57b0'
 ---
 
 ## TL;DR
@@ -45,8 +45,8 @@ svelte.dev/docs/llms
 - [llms.txt 컨벤션] `llmstxt.org`는 LLM이 문서 크롤링 시 표준화된 진입점을 얻도록 하는 커뮤니티 제안이다. (사실) Svelte가 이를 채택한 것은 AI 기반 개발 도구(agentic-coding)가 문서 소비의 주요 소비자가 되었다는 흐름과 일치한다. (저자 주장·추론)
 
 ## 용어 풀이
-- **llms.txt** — 웹사이트의 LLM용 문서 색인 파일. 비유: `robots.txt`가 크롤러에게 "여기 있다/없다"를 알리듯, `llms.txt`는 LLM에게 "문서가 여기에 모여 있다"고 안내하는 표지판. 비유가 깨지는 지점: `robots.txt`는 접근 제어(허용/차단)가 주 기능이지만, `llms.txt`는 접근 제어 없이 **가용 문서 목록과 위치**를 알려주는 색인에 가깝다.
-- **Context Window(컨텍스트 윈도우)** — LLM이 한 번의 프롬프트에서 처리할 수 있는 토큰의 최대량. 비유: 사람이 한 번에 펼쳐 읽을 수 있는 책 페이지 수. 페이지가 많으면 중요한 부분만 발췌(compressed)해서 읽듯, medium/small 파일은 문서를 추려낸 버전이다.
+- **llms.txt** — 웹사이트의 LLM용 문서 색인 파일.
+- **Context Window(컨텍스트 윈도우)** — LLM이 한 번의 프롬프트에서 처리할 수 있는 토큰의 최대량. 이 한도를 넘기지 않도록 medium/small 파일은 문서를 추려낸(compressed) 버전으로 제공된다.
 
 ## 시각 자료
 | 파일 경로 | 용도 | 내용 범위 | 비고 |

@@ -8,7 +8,6 @@ export type ListableCollection =
   | 'notes'
   | 'inbox'
   | 'wiki'
-  | 'specs'
   | 'idea';
 
 export interface PostListItem {
@@ -33,19 +32,18 @@ export const COLLECTION_LABELS: Record<ListableCollection, string> = {
   notes: 'Notes',
   inbox: 'Inbox',
   wiki: 'Wiki',
-  specs: 'Specs',
   idea: 'Idea',
 };
 
 // Timeline scope: home "Recent", the archive, tags, and RSS. Kept to the
 // chronological blog collections (+ labs, added in getPublicItems). wiki, notes,
-// inbox and specs are deliberately absent — wiki is a category-tree reference
-// library, not a dated timeline, and notes/inbox/specs are unlisted.
+// inbox is deliberately absent — wiki is a category-tree reference
+// library, not a dated timeline, and notes/inbox are unlisted.
 export const COLLECTION_ORDER: ListableCollection[] = ['posts', 'read-and-write'];
 
 // Search scope: which collections enter the pagefind index (+ sitemap +
 // robots-allowed). This is COLLECTION_ORDER plus wiki — wiki is public and
-// searchable but stays out of the timeline surfaces above. notes/inbox/specs are
+// searchable but stays out of the timeline surfaces above. notes/inbox are
 // in neither scope (unlisted). The pagefind gate lives in the layouts:
 // PostLayout keys off COLLECTION_ORDER, WikiLayout marks wiki bodies directly.
 export const SEARCHABLE_COLLECTIONS: ListableCollection[] = [...COLLECTION_ORDER, 'wiki'];

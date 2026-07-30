@@ -9,8 +9,8 @@ tags:
   - 'developer-productivity'
   - 'open-source'
 canonical: 'https://taskfile.dev/docs/getting-started'
-lintHash: 'c93abd28e8fe'
-polishHash: 'c93abd28e8fe'
+lintHash: '365b9ca79d4e'
+polishHash: '365b9ca79d4e'
 ---
 
 ## TL;DR
@@ -40,12 +40,12 @@ Task (태스크 러너)
 - 각 태스크의 `cmds`에는 쉘 명령을 나열하는데, 여기서 Task는 시스템 쉘 대신 **mvdan/sh라는 Go 기반 sh 해석기**를 사용한다. 따라서 Windows처럼 sh/bash가 기본 없는 환경에서도 동일한 스크립트가 동작한다(단, 호출하는 외부 실행파일은 PATH에 있어야 함).
 
 ## 깊이
-- **[크로스플랫폼 쉘]** mvdan/sh는 POSIX sh 구문을 Go로 재구현한 라이브러리다. 비유하면 "sh 문법을 번역해 Go 프로세스 안에서 직접 실행하는 통역사"인데, 이 비유가 깨지는 지점은 **외부 바이너리 호출**이다: 통역(구문 해석)은 하지만, 실제 `go build`, `gcc` 같은 실행파일은 OS의 PATH에서 찾아야 하므로 플랫폼별 설치 여부는 별도로 관리해야 한다(원문 명시).
+- **[크로스플랫폼 쉘]** mvdan/sh는 POSIX sh 구문을 Go로 재구현한 라이브러리다. 구문 해석은 Go 프로세스 안에서 직접 처리하지만, **외부 바이너리 호출**은 그 범위 밖이다: 실제 `go build`, `gcc` 같은 실행파일은 OS의 PATH에서 찾아야 하므로 플랫폼별 설치 여부는 별도로 관리해야 한다(원문 명시).
 - **[silent 속성]** `silent: true`는 태스크 메타데이터 출력을 억제하고 커맨드 결과만 보여준다. CI 로그 정리나 사용자 친화적 CLI 출력에 유용하며, 원문의 `default` 예시에서 이 패턴을 확인할 수 있다.
 - **[빌드 태스크 예시]** `build` 태스크에 `go build ./cmd/main.go`를 넣은 예시는 Task가 단순히 echo 수준의 유틸이 아니라 실제 빌드·배포 파이프라인의 진입점으로 확장됨을 보여준다. 여기서 `cmds`는 리스트이므로 여러 명령을 순차 연결할 수 있고(원문의 'so much more' 언급), 이후 문서의 의존성(`deps`), 소스 감시(`sources`/`generates`) 등으로 발전한다.
 
 ## 용어 풀이
-- **Taskfile** — Task가 읽는 YAML 설정 파일 / Makefile의 YAML 버전이라 생각하면 됨 / 비유가 깨지는 지점: Makefile의 타겟 의존성 그래프·암묵적 규칙 등 고급 기능은 Task에서 `deps`, `sources` 같은 별도 속성으로 재설계되어 있어 1:1 대응은 아님.
+- **Taskfile** — Task가 읽는 YAML 설정 파일 / Makefile의 YAML 버전이라 생각하면 됨.
 - **mvdan/sh** — Go로 작성된 POSIX sh 해석기·포매터 / "내장 통역사" / 외부 실행파일 자체를 대체하지는 않으므로, 쉘 내장 명령(built-in)이 아닌 바이너리는 시스템 PATH 의존.
 - **Go template (`{{.VAR}}`)** — 변수 치환 문법 / Jinja, Handlebars와 유사 / Task는 Go template 엔진 전체를 노출하므로 조건문·범위 반복도 가능하지만, 원문 getting-started 범위에서는 단순 변수 참조만 다룸.
 

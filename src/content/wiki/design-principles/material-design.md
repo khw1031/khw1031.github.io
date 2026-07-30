@@ -7,8 +7,8 @@ description: Google의 Material Design(M1~M3)을 이 라이브러리의 원리�
 lang: ko
 tags: ['material-design', 'design-system', '8dp-grid', 'material-you', 'accessibility', 'example']
 summary: "Material Design은 이 카테고리의 앵커가 아니라, 이 라이브러리가 다루는 원리(타이포·spacing·elevation·색·접근성)가 한 시스템으로 어떻게 구현되는지 보여주는 '한 사례'다 — Apple HIG·IBM Carbon·Tailwind와 나란한. 인쇄 기반 요소를 시각 기반으로 삼고, 8dp/4dp 그리드·12컬럼 반응형·48×48dp 타깃·4.5:1 대비로 규범화하며, M3(Material You)의 동적 색은 개인 표현이 접근 가능한 대비를 깨지 않게 설계됐다. 이런 시스템의 토큰·의도를 코딩 에이전트에 넘기는 산출물 포맷이 앵커인 DESIGN.md다."
-lintHash: '2e79f28a5341'
-polishHash: '2e79f28a5341'
+lintHash: '2350ae6f2b7b'
+polishHash: '2350ae6f2b7b'
 ---
 
 > 한 줄 명제: Material Design은 이 라이브러리의 원리들이 한 시스템으로 실제 구현된 **사례**다(앵커가 아니라 예시) — Apple·Carbon·Tailwind처럼, DESIGN.md로 인코딩할 수 있는 여러 디자인 시스템 중 하나.
@@ -40,10 +40,3 @@ Material이 잘 문서화된 사례인 이유는, 좋은 디자인의 미감·�
 - [Material Design — Accessibility (M1)](https://m1.material.io/usability/accessibility.html) — 1차. 48×48dp(≈9mm), 4.5:1/3:1.
 - [Google, Android 12 Beta (Material You)](https://blog.google/products/android/android-12-beta/) — 1차. 2021-05-18. 배경에서 색 추출.
 - [Google Design — Colors Change](https://design.google/library/colors-change) — 1차. 한 색 → 60톤, "어떤 색에서도 접근 가능한 대비 보장".
-
-## 연결
-
-- [DESIGN.md](/wiki/design-principles/design-md/) — 이 카테고리의 앵커(산출물 포맷). Material은 DESIGN.md로 인코딩할 수 있는 여러 시스템 중 하나의 사례.
-- [Design Principles](/wiki/design-principles/) — 상위 허브. Material은 여기 원리들의 통합 구현 예.
-- [spacing-8pt-grid](/wiki/design-principles/aesthetics-and-layout/spacing-8pt-grid/) · [color-and-contrast](/wiki/design-principles/color-and-contrast/) · [elevation-and-depth](/wiki/design-principles/aesthetics-and-layout/elevation-and-depth/) · [typographic-scale](/wiki/design-principles/aesthetics-and-layout/typographic-scale/) — Material이 구현한 각 원리(다른 시스템 사례와 비교).
-- [Design-to-Code Agent Workflows](/wiki/design-to-code/) — Material 같은 시스템을 코드로 옮기는 인접 카테고리.

@@ -7,8 +7,8 @@ description: 크기·색·대비·위치로 눈이 볼 순서를 만드는 시�
 lang: ko
 tags: ['visual-hierarchy', 'pre-attentive', 'focal-point', 'contrast', 'typography', 'perception']
 summary: "시각 위계는 요소를 배치해 '눈이 의도된 중요도 순서로 소비하도록' 유도하는 것이다. 근거는 pre-attentive 처리 — Treisman & Gelade(1980)의 특징 통합 이론에 따르면 색·형태·위치 같은 개별 특징은 초기·자동·병렬로(시각화 전통에서 ≤200~250ms) 등록되고, 그 뒤 초점 주의가 특징을 결합한다. 그래서 크기·대비·색·위치가 읽기 전에 '어디를 먼저 볼지'를 정한다. 핵심 도구는 대비이며(강조는 상대적 — 다 강조하면 아무것도 강조 안 됨), Gestalt와 같은 지각 기반을 공유한다."
-lintHash: '9a8da88bffba'
-polishHash: '9a8da88bffba'
+lintHash: 'a83907132e6a'
+polishHash: 'a83907132e6a'
 ---
 
 > 한 줄 명제: 눈은 읽기 전에 이미 어디를 볼지 정한다 — 크기·대비·색·위치로 초점과 순서를 만들되, 다 강조하면 아무것도 강조되지 않는다.
@@ -43,11 +43,3 @@ polishHash: '9a8da88bffba'
 - [NN/g — Visual Hierarchy in UX: Definition (2021)](https://www.nngroup.com/articles/visual-hierarchy-ux-definition/) — 2차. 정의와 레버(크기≤3·대비·그루핑).
 - [NN/g — F-Shaped Pattern of Reading (Nielsen 2006)](https://www.nngroup.com/articles/f-shaped-pattern-reading-web-content-discovered/) — 2차(자체 아이트래킹, 232명). 읽기 동선 F-패턴.
 - [IxDF — What is Visual Hierarchy?](https://www.interaction-design.org/literature/topics/visual-hierarchy) — 2차. 8요소(크기·색·대비·정렬·반복·근접·여백·스타일).
-
-## 연결
-
-- [aesthetics-and-layout](/wiki/design-principles/aesthetics-and-layout/) — 상위 허브. 시각 조직의 "무엇이 먼저인가" 축.
-- [gestalt-principles](/wiki/design-principles/usability/gestalt-principles/) — 같은 pre-attentive 기반의 형제("무엇이 묶이는가").
-- [typographic-scale](/wiki/design-principles/aesthetics-and-layout/typographic-scale/) · [spacing-8pt-grid](/wiki/design-principles/aesthetics-and-layout/spacing-8pt-grid/) — 위계를 만드는 크기·간격 도구.
-- [color-and-contrast](/wiki/design-principles/color-and-contrast/) — 대비를 강조(위계)에 쓰는 것 vs 판독성(WCAG)의 구분.
-- [cognitive-load-and-density](/wiki/design-principles/usability/cognitive-load-and-density/) — 위계는 주의 부하를 낮추는 수단.

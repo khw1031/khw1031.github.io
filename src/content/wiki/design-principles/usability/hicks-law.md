@@ -7,8 +7,8 @@ description: 결정 시간은 선택지의 수(정보량)에 로그로 비례한
 lang: ko
 tags: ['hicks-law', 'usability', 'decision-time', 'cognitive-load', 'hci']
 summary: "W. E. Hick(1952)과 Ray Hyman(1953)이 독립적으로 보인, 결정·반응 시간이 선택지 집합이 담은 정보량(비트)에 선형으로 — 즉 선택지 수의 로그에 — 비례한다는 법칙: RT = a + b·log₂(n+1). UI 함의는 선택지를 줄이고·계층화하고·기본값을 제공하라는 것. 단, 무조건 적게가 아니라 정보 구조·친숙도와 함께 판단해야 한다."
-lintHash: '1449c1b3a95e'
-polishHash: '1449c1b3a95e'
+lintHash: 'f627e2fbe3a0'
+polishHash: 'f627e2fbe3a0'
 ---
 
 > 한 줄 명제: 선택지가 늘면 결정 시간은 로그로 늘어난다 — 그러니 줄이고, 묶고, 기본값을 줘라.
@@ -38,10 +38,3 @@ UI 함의:
 - [Hick, W. E. (1952), On the rate of gain of information — *Q. J. Exp. Psychol.* 4(1), 11–26](https://doi.org/10.1080/17470215208416600) — 1차. 원 논문. ([공개 PDF](https://www2.psychology.uiowa.edu/faculty/mordkoff/InfoProc/pdfs/Hick%201952.pdf))
 - [Hyman, R. (1953), Stimulus information as a determinant of reaction time — *J. Exp. Psychol.* 45(3), 188–196](https://doi.org/10.1037/h0056940) — 1차. 법칙의 다른 한 축.
 - [Laws of UX — Hick's Law](https://lawsofux.com/hicks-law/) — 2차. "선택지 수·복잡도가 늘면 결정 시간이 는다"는 UX 요약(공식 없음).
-
-## 연결
-
-- [usability](/wiki/design-principles/usability/) — 상위 허브. Fitts와 짝을 이루는 로그 법칙.
-- [Fitts의 법칙](/wiki/design-principles/usability/fitts-law/) — 운동 시간의 법칙(vs 결정 시간).
-- [Gestalt 원리](/wiki/design-principles/usability/gestalt-principles/) — 선택지를 그룹으로 묶어 각 결정 단계의 n을 낮추는 지각적 근거.
-- [Nielsen 휴리스틱](/wiki/design-principles/usability/nielsen-heuristics/) — 미니멀리즘·인식 우선과 직접 연결.

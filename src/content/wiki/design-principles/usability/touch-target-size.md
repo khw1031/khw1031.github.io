@@ -7,8 +7,8 @@ description: 손가락·포인터로 정확히 누를 수 있는 최소 타깃 �
 lang: ko
 tags: ['touch-target', 'accessibility', 'wcag', 'usability', 'mobile']
 summary: "Fitts의 법칙이 물리 수치 규범으로 굳은 결과. 플랫폼별로 값이 다르다: Apple HIG 44×44 pt, Google Material 48×48 dp(≈9mm)에 타깃 간 8dp 이상. 웹 표준은 두 기준이 병존한다 — WCAG 2.1 SC 2.5.5(44×44 CSS px, Level AAA)와 WCAG 2.2 SC 2.5.8(24×24 CSS px, Level AA + 간격 예외). 24와 44는 대체가 아니라 별개 기준이다. 작은 타깃은 오조준 에러를 늘리므로 크기와 함께 '간격'이 규범에 포함된다."
-lintHash: 'bcb26e811229'
-polishHash: 'bcb26e811229'
+lintHash: 'f8af71cca09c'
+polishHash: 'f8af71cca09c'
 ---
 
 > 한 줄 명제: 손가락은 정밀하지 않다 — Apple 44pt, Material 48dp, WCAG 2.2 최소 24 / 2.1 권장 44 CSS px. 크기만큼 타깃 사이 간격도 규범이다.
@@ -32,11 +32,3 @@ polishHash: 'bcb26e811229'
 - [W3C — Understanding SC 2.5.5: Target Size (WCAG 2.1)](https://www.w3.org/WAI/WCAG21/Understanding/target-size.html) — 1차/규범. 44×44 CSS px, Level AAA.
 - [Apple — UI Design Do's and Don'ts](https://developer.apple.com/design/tips/) — 1차. "44×44 pt 이상." (HIG [Buttons](https://developer.apple.com/design/human-interface-guidelines/buttons)도 동일.)
 - [Material Design — Accessibility (M1)](https://m1.material.io/usability/accessibility.html) — 1차. 48×48dp(≈9mm), 타깃 간 8dp.
-
-## 연결
-
-- [usability](/wiki/design-principles/usability/) — 상위 허브. Fitts가 물리 규범으로 굳은 결과.
-- [Fitts의 법칙](/wiki/design-principles/usability/fitts-law/) — 이 수치들의 이론적 근거.
-- [spacing-8pt-grid](/wiki/design-principles/aesthetics-and-layout/spacing-8pt-grid/) — 타깃 간 간격(8dp)이 spacing 스케일과 만나는 지점.
-- [Material Design](/wiki/design-principles/material-design/) — 48dp를 시스템 규범으로 못박은 사례.
-- [apple-hig](/wiki/design-principles/apple-hig/) — 44pt 최소 타깃의 구현 사례(플랫폼별 값 비교).

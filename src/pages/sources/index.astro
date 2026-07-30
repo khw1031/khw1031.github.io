@@ -1,0 +1,45 @@
+---
+import { getCollection } from 'astro:content';
+import { formatDate } from '../../lib/collections';
+import Base from '../../layouts/Base.astro';
+
+// Unlisted TOC for /sources (direct URL only; excluded from search and sitemap).
+// Retired originals: a note under /notes/ links here once its core decomposition
+// supersedes the full source. Newest first — most recently retired on top.
+const entries = await getCollection('sources');
+const sources = entries
+  .map((entry) => ({
+    href: `/sources/${entry.id}/`,
+    title: entry.data.title,
+    description: entry.data.description,
+    pubDate: entry.data.pubDate,
+  }))
+  .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+---
+
+<Base title="Sources — thnkr" description="Sources — 은퇴한 원본 문서">
+  <section class="mt-2">
+    <h2 class="font-medium mb-1">Sources</h2>
+    <p class="not-prose mb-6 text-sm text-muted">
+      노트로 핵심 분해가 끝나 은퇴한 원본 문서. 노트가 근거로 링크하는 대상이며, 직접 URL로만
+      접근하고 검색·사이트맵에서 제외됩니다.
+    </p>
+    {
+      sources.length > 0 ? (
+        <ul class="not-prose space-y-2">
+          {sources.map((s) => (
+            <li>
+              <a href={s.href} class="underline underline-offset-2 hover:text-foreground">
+                {s.title}
+              </a>
+              <span class="text-sm text-muted"> · {formatDate(s.pubDate)}</span>
+              {s.description && <span class="text-sm text-muted"> — {s.description}</span>}
+            </li>
+          ))}
+        </ul>
+      ) : (
+        <p class="text-sm text-muted">아직 문서가 없습니다.</p>
+      )
+    }
+  </section>
+</Base>

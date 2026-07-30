@@ -11,8 +11,8 @@ tags:
   - 'ai'
   - 'streaming'
 canonical: 'https://docs.langchain.com/oss/python/langchain/frontend/generative-ui'
-lintHash: '239e3cea866d'
-polishHash: '239e3cea866d'
+lintHash: '6da31be4f8ec'
+polishHash: '6da31be4f8ec'
 ---
 
 > 한 줄 명제: Generative UI는 개발자가 정의한 컴포넌트 카탈로그 안에서 AI가 JSON spec을 조합해 예측 가능하고 안전한 UI를 생성하는 패턴이다.
@@ -165,37 +165,7 @@ Spec 포맷 — 평탄화된 JSON으로 각 요소는 ID로 자식을 참조한�
 - **[5. Spec 포맷]** spec은 트리가 아닌 flat 구조다. `children`은 실제 컴포넌트 객체가 아니라 `elements` 맵의 키(ID) 문자열 배열이다. 이 설계를 통해 스트리밍 중 순서 무관 추가가 가능하다. ⭐
 - **[5. Spec 포맷]** 디자인 토큰은 CSS custom properties로 적용해 렌더된 컴포넌트가 light/dark 테마에 자동 적응하게 한다. 원문은 구체적 구현 예시를 제공하지 않는다. 📎
 
-## 비유
-
-카탈로그는 레고 부품 목록, AI는 설명서 없이 부품만으로 조립하는 어린이, Renderer는 완성된 조립품을 전시하는 받침대다. 카탈로그에 없는 부품은 AI가 절대 사용할 수 없고, props는 부품의 규격(홈 크기, 돌기 수)을 의미한다.
-
-**깨지는 지점**: 실제 레고는 물리적 제약(중력, 마찰)으로만 조합이 제한되지만, 여기서는 Zod 스키마가 논리적 제약을 가한다. 또한 레고와 달리 AI는 description이라는 텍스트 힌트에 의존하므로, description이 부정확하면 전혀 다른 조립이 나온다. 비유는 "가용 부품의 제한" 개념까지만 유효하다.
-
-## 곁가지
-
-- json-render 심화: React 외 Vue/Svelte/Angular용 registry 정의가 필요해질 때
-- Agent structured output 심화: `useStream`에서 tool_calls 파싱 안정화가 필요해질 때
-- Zod 스키마 설계 심화: 중첩 props와 union type이 필요해질 때
-- 테마 연동 심화: CSS custom properties 기반 다크모드 자동 적응이 필요해질 때
-
-## 연결
-
-- **Schema validation**: Zod를 컴포넌트 props에 적용하는 패턴은 일반 폼 검증과 동일한 원리지만, AI 생성물 대상이라 런타임 before-render 체크가 필수다.
-- **Streaming UI**: progressive rendering은 서버 사이드 스트리밍과 유사하지만, 데이터가 아닌 컴포넌트 트리 구조 자체가 점진적으로 조립된다는 차이가 있다.
-- **Component-driven design**: 디자인 시스템의 컴포넌트 카탈로그가 AI의 "사용 허용 목록"으로 전환된다.
-
 ## 레퍼런스
 
 - [json-render 공식 사이트 — Generative UI 프레임워크의 컴포넌트 카탈로그 정의, spec 생성, 다중 프레임워크 렌더링을 제공](https://json-render.dev/) (1차). 기준 버전: 버전 명시 없음.
 - [LangChain 공식 문서 — Generative UI: json-render를 LangChain 에이전트와 연동하여 UI를 생성하는 패턴 설명](https://docs.langchain.com/oss/python/langchain/frontend/generative-ui) (1차). 기준 버전: 버전 명시 없음.
-
----
-## 인출 질문
-
-1. Generative UI 파이프라인의 4단계를 순서대로 말하고, 각 단계에서 AI의 출력 형태와 개발자의 책임 범위를 구분하라.
-2. 스트리밍 중 `loading={true}`를 `Renderer`에 전달하지 않으면 어떤 문제가 발생하는가? 원문의 필터 로직이 해결하는 구체적인 조건은 무엇인가?
-3. Spec 포맷에서 `children`이 컴포넌트 객체가 아닌 ID 문자열 배열인 설계적 이점은 스트리밍 환경에서 왜 중요한가?
-
-## 내 관점
-
-<!-- 학습자가 직접 채우는 섹션 — 파이프라인은 대필하지 않는다 -->

@@ -7,8 +7,8 @@ description: "'하는 법을 아는 것'과 '왜 되는지 아는 것'을 구분
 summary: "Hiebert & Lefevre(1986)는 절차적 지식(단계를 실행하는 법)과 개념적 지식(그 절차가 왜 성립하는지에 대한 이해)을 구분하는 틀을 수학교육 연구에 제공했다. 그러나 Rittle-Johnson & Schneider(2015)의 종합은 두 지식이 한쪽이 원인이고 다른 쪽이 결과인 단순한 위계가 아니라, 서로를 발달시키는 양방향·반복적 관계임을 보여준다."
 lang: ko
 tags: ['procedural-knowledge', 'conceptual-knowledge', 'math-education']
-lintHash: 'fd491fa49a69'
-polishHash: 'fd491fa49a69'
+lintHash: 'b70d2900faf2'
+polishHash: 'b70d2900faf2'
 ---
 
 > 한 줄 명제: "하는 법을 아는 것"과 "왜 되는지 아는 것"은 서로 다른 지식이지만, 개념 이해가 먼저이고 절차 활용은 그 표면적 결과물이라는 단순한 위계로 보기는 어렵다 — 둘은 서로를 키운다.
@@ -23,8 +23,3 @@ Hiebert와 Lefevre(1986)는 수학교육 연구에서 널리 쓰이는 구분을
 
 - [Hiebert & Lefevre (1986), Conceptual and Procedural Knowledge in Mathematics: An Introductory Analysis — in Hiebert (Ed.), Conceptual and Procedural Knowledge: The Case of Mathematics, pp. 1–27, Lawrence Erlbaum](https://www.taylorfrancis.com/books/edit/10.4324/9780203063538/conceptual-procedural-knowledge-james-hiebert) — 1차. 절차적/개념적 지식 구분을 정식화한 원 챕터.
 - [Rittle-Johnson & Schneider (2015), Developing Conceptual and Procedural Knowledge of Mathematics — in Oxford Handbook of Numerical Cognition](https://www.uni-trier.de/fileadmin/fb1/prof/PSY/PAE/Team/Schneider/Rittle-JohnsonEtAl2015.pdf) — 1차. 두 지식의 발달 관계가 양방향·반복적이라는 종합 리뷰.
-
-## 연결
-
-- [Transfer](/wiki/learning-science/transfer/) — 절차 지식은 가까운 전이에, 개념 지식은 먼 전이에 더 강하게 연결된다.
-- [AI by Hand — Tom Yeh](/wiki/computing-education/ai-by-hand-tom-yeh/) — "도구 활용 vs 원리 이해"를 대비시키는 인터뷰 주장이 실제로 참고할 수 있는 학습과학 배경.

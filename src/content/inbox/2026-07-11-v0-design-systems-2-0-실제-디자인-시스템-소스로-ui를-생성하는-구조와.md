@@ -10,8 +10,8 @@ tags:
   - 'ai'
   - 'developer-productivity'
 canonical: 'https://x.com/v0/status/2075589636227735902?s=12'
-lintHash: '21722d1e6979'
-polishHash: '21722d1e6979'
+lintHash: 'a7407e23fa10'
+polishHash: 'a7407e23fa10'
 ---
 
 ## TL;DR
@@ -52,8 +52,8 @@ Design Systems 2.0(2025.06.25 발표)은 이 구조를 뒤집는다. 사용자�
 
 ## 용어 풀이
 
-- **Design System** — UI 일관성을 위한 컴포넌트·토큰·가이드라인 체계. 비유: 레고 세트+조립 설명서. 깨지는 점: 레고는 물리적 제약이 있으나 디자인 시스템은 코드·문서·Figma 등 다층 매체에 분산.
-- **Skill (v0)** — 한 번 설정하면 이후 모든 채팅에 자동 적용되는 설정 묶음. 비유: 신입에게 건네는 컨벤션 cheat sheet. 깨지는 점: 사람은 맥락을 유연하게 해석하나 Skill은 규칙 기반으로 적용.
+- **Design System** — UI 일관성을 위한 컴포넌트·토큰·가이드라인 체계.
+- **Skill (v0)** — 한 번 설정하면 이후 모든 채팅에 자동 적용되는 설정 묶음.
 - **Registry (v1)** — 컴포넌트를 패키지 매니저처럼 등록·조회하는 저장소.
 - **Drift** — 원본과 복제본이 시간 차에 따라 달라지는 현상.
 

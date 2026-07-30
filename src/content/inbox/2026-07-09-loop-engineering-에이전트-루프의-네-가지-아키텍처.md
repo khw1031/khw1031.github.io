@@ -5,8 +5,8 @@ description: 'AI 에이전트 엔지니어링에서 "루프"가 실제로 가리
 summary: 'Aparna Dhinakaran의 분류를 중심으로, 루프라는 용어 아래 혼재된 다섯 아키텍처의 반복 대상과 종료 조건, 자율성 다이얼의 위치를 정리한다.'
 tags: ['ai-engineering', 'agent-loops', 'software-factory', 'loop-engineering']
 lang: 'ko'
-polishHash: 'f07ca7378fc9'
-lintHash: 'f07ca7378fc9'
+polishHash: 'c66edb83df36'
+lintHash: 'c66edb83df36'
 ---
 
 > 한 줄 명제: "루프"는 하나의 개념이 아니라, 반복 대상과 종료 조건이 서로 다른 네 가지 아키텍처의 공통 별명이다.
@@ -86,27 +86,6 @@ Ralph Loop가 매번 새 컨텍스트 윈도우로 에이전트를 재시작하�
 
 Aparna의 핵심 경고: 루프에 종료 신호가 실제로 배선되어 있지 않으면, 루프는 수렴하지 않고 외부에서 멈춰줄 때까지 계속 달린다. "종료 조건을 이름 붙이는 것"과 "종료 신호를 실제로 배선하는 것"은 다르. 프로덕션 규모에서 루프가 실제로 닫히고 있는지 확인하려면, 트랜스크립트를 spot-check하는 대신 트레이스를 sweep하고 실패를 연속적으로 클러스터링해야 한다.
 
-## 비유
-
-**공장 비유**: 프로덕트 루프는 "소프트웨어 팩토리"라고 불린다 — 공장이 제품을 만드는 것처럼, 팩토리가 소프트웨어를 만든다. **깨지는 지점**: 공장은 동일한 제품을 반복 생산하지만, 소프트웨어 팩토리는 매 반복마다 다른 산출물을 만들고, 요구사항 자체가 변한다. 공장의 품질 관리는 규격 대비 편차 측정으로 끝나지만, 소프트웨어 팩토리의 품질 판단에는 인간의 해석이 필요한 영역이 남는다.
-
-**기관사 비유**: Geoffrey Huntley는 태스크 루프의 인간을 "기관사"에 비유했다 — 기차가 레일 위에 있도록 유지하는 것이 온전한 직업. **깨지는 지점**: 기관사는 정해진 레일 위에서 정해진 열차를 운영하지만, 태스크 루프의 인간은 레일 자체(실패 패턴)를 수리하고 새로운 레일을 놓아야 한다. 단순 모니터링이 아니라 시스템 개선 엔지니어링이다.
-
-**오케스트라 vs 팩토리**: Roland Gavrilescu의 구분 — 오케스트라는 인간 지휘자를 유지하는 시스템, 팩토리는 인간 없이 돌아가는 시스템. 오케스트라를 먼저 만들고 팩토리로 진화하라. **깨지는 지점**: 오케스트라 지휘자는 연주자들 전체를 실시간으로 듣고 판단하지만, 에이전트 시스템의 "지휘자"는 에이전트 출력을 실제로 이해하지 못한 채 승인만 할 위험이 있다 — 이 경우 지휘자가 아니라 rubber stamp가 된다.
-
-## 곁가지
-
-- **Ralph Loop 심화**: Geoffrey Huntley의 원문과 "everything is a ralph loop" 프레임워크를 깊이 읽고 싶을 때 — 실제 spec 작성 패턴, 실패 패턴 카탈로그, 재시작 전략이 필요해질 때.
-- **Software Factory 아키텍처**: Warp의 Oz, Anthropic의 Claude Tag 등 실제 팩토리 구현체의 구체적 아키텍처(triage→ship 파이프라인, 자동 PR merge rate 운영)가 필요해질 때.
-- **Autoresearch 실전**: Karpathy의 630줄 구현이나 Meta Brain2Qwerty v2의 실험 설계를 직접 재구성해보고 싶을 때 — eval 설계, hypothesis space 정의가 필요해질 때.
-- **Oversight Loop와 자율성 거버넌스**: Paul Bakaus의 "no auto" 주장과 Dex Horthy의 "deterministic control loops" 논의를 깊이 읽으며, 조직에서 자율성 다이얼을 어디에 둘지 결정하는 프레임워크가 필요해질 때.
-
-## 연결
-
-- `claude-managed-agents-plan-big-execute-small-노트북.md` — 계획-실행 분리 패턴은 실행 루프 내부의 한 설계 선택으로 볼 수 있다. 루프 엔지니어링은 그 위에 태스크 루프·프로덕트 루프를 쌓아 올리는 더 큰 프레임워크.
-- `evidence-based-learning.md` — "eval이 학습을 결정한다"는 원리는 시스템 루프에서도 동일하게 적용된다. eval 설계가 루프의 수렴 방향을 제어한다.
-- `open-knowledge-format.md` — OKF의 "one concept = one file" 원칙은 루프 엔지니어링의 "one loop = one exit condition"과 구조적으로 닮았다. 각 루프가 하나의 책임과 하나의 종료 신호를 갖는 것이 설계의 핵심.
-
 ## 레퍼런스
 
 - [Aparna Dhinakaran (@aparnadhinak), "What the hell is a loop, anyway?" — 스레드 원문](https://x.com/aparnadhinak/status/2073492320159510869), 2026-07-04. 1차 — 이 노트의 직접 소스.
@@ -118,16 +97,3 @@ Aparna의 핵심 경고: 루프에 종료 신호가 실제로 배선되어 있�
 - [Latent Space Podcast](https://www.latent.space/) — Zach Lloyd·Roland Gavrilescu 인터뷰, AIEWF 폐막 토론 커버리지. 2차 — 스레드가 인용한 인터뷰 소스.
 - Andrej Karpathy, autoresearch (2026-03). ~630줄 파이썬, GPU 1개, 50 experiments overnight. 1차 — 시스템 루프 최소 사례. (미확인: 본문만 인용)
 - Meta, Brain2Qwerty v2 (2026-06 late). 에이전트 반복 수정으로 디코딩 아키텍처 개선, word error rate 상당 개선. caveat: 최종 학습 설정은 수동 선택. 1차. (미확인: 본문만 인용)
-
----
-
-## 인출 질문
-
-1. "루프"라고 불리는 네 가지 아키텍처를 안쪽부터 바깥쪽 순서로 나열하고, 각각의 반복 대상을 한 문장으로 말해보시오.
-2. Ralph Loop가 매번 새 컨텍스트 윈도우로 재시작하는 이유를 설명하시오. 이것이 해결하는 두 가지 문제는?
-3. Agentic MapReduce가 루프가 아니라 파이프라인인 이유를 "피드백"이라는 개념을 사용해 설명하시오.
-4. "완전히 자율적인 실행 루프를 강력하게 감시되는 프로덕트 루프 안에 넣을 수 있다" — 이것이 가능한 이유를 루프 간 관계로 설명하시오.
-5. Oversight 루프의 종료 조건이 "없음"인 이유와, 왜 인간이 반드시 이 루프에 머물러야 하는지를 swyx와 Addy Osmani의 진술을 활용해 설명하시오.
-
-## 내 관점
-

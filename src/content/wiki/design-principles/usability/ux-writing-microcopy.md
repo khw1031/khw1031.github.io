@@ -7,8 +7,8 @@ description: 인터페이스 속 단어(버튼·에러·레이블) 설계 — �
 lang: ko
 tags: ['ux-writing', 'microcopy', 'plain-language', 'error-messages', 'content-design', 'accessibility']
 summary: "인터페이스의 단어는 읽히고 음미되려는 게 아니라 사용자를 원하는 것으로 통과시키는 도구다(Podmajersky). 좋은 UX 라이팅은 목적 지향·간결·대화체·명료하고, voice/tone을 일관되게 유지한다. plain language(미국 Plain Writing Act 2010·ISO 24495-1:2023)는 쉬운 단어·짧은 문장·능동태·'you' 호칭을 권한다. WCAG 3.1.5(AAA)는 하위 중등 교육 수준 초과 시 대체본을 요구한다. 에러 메시지는 사람이 읽을 수 있게·사용자를 탓하지 말고·복구를 도와야 한다(NN/g, 휴리스틱 9). 버튼은 결과를 서술하는 액션 레이블('변경 저장')이 'OK/제출'보다 낫다."
-lintHash: 'a892f5ad04fb'
-polishHash: 'a892f5ad04fb'
+lintHash: '24ab6fa9e255'
+polishHash: '24ab6fa9e255'
 ---
 
 > 한 줄 명제: 인터페이스의 단어는 장식이 아니라 사용자를 목적지로 통과시키는 도구다 — 쉬운 말로, 사용자를 탓하지 말고, 버튼은 결과를 서술하라.
@@ -40,12 +40,3 @@ UX 라이팅(마이크로카피)은 인터페이스 속 단어 — 버튼·레�
 - [W3C — SC 3.1.5 Reading Level (AAA)](https://www.w3.org/WAI/WCAG22/Understanding/reading-level.html) · [3.1.3 Unusual Words](https://www.w3.org/WAI/WCAG22/Understanding/unusual-words.html) · [3.1.4 Abbreviations](https://www.w3.org/WAI/WCAG22/Understanding/abbreviations.html) — 1차/규범.
 - [NN/g — Error-Message Guidelines (2023)](https://www.nngroup.com/articles/error-message-guidelines/) · [The 3 I's of Microcopy](https://www.nngroup.com/articles/3-is-of-microcopy/) · [UI Copy](https://www.nngroup.com/articles/ui-copy/) — 2차(권위). 에러 메시지·버튼 레이블.
 - [Shopify Polaris — Content fundamentals](https://polaris-react.shopify.com/content/fundamentals) — 2차(디자인 시스템). voice/tone, 강한 동사 CTA.
-
-## 연결
-
-- [usability](/wiki/design-principles/usability/) — 상위 허브.
-- [Nielsen 휴리스틱](/wiki/design-principles/usability/nielsen-heuristics/) — 2(현실의 언어)·9(에러 복구)의 언어적 실행.
-- [gulf-of-execution-evaluation](/wiki/design-principles/usability/gulf-of-execution-evaluation/) — 단어가 시스템 이미지를 통해 멘탈 모델을 형성.
-- [forms-and-inputs](/wiki/design-principles/usability/forms-and-inputs/) — 에러 메시지·레이블 문구의 적용처.
-- [icon-systems](/wiki/design-principles/usability/icon-systems/) — 아이콘에 텍스트 레이블을 더하는 지점.
-- [navigation-and-ia](/wiki/design-principles/usability/navigation-and-ia/) — 라벨링 시스템(IA)과 마이크로카피의 접점.

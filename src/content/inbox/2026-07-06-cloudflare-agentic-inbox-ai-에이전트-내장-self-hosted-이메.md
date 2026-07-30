@@ -11,8 +11,8 @@ tags:
   - 'workflow'
   - 'llm'
 canonical: 'https://github.com/cloudflare/agentic-inbox'
-lintHash: 'ac69038dbd5c'
-polishHash: 'ac69038dbd5c'
+lintHash: 'fcece3d014c1'
+polishHash: 'fcece3d014c1'
 ---
 
 > 한 줄 명제: Cloudflare의 서버리스 인프라(Email Routing, Durable Objects, R2, Workers AI)를 조합하면, AI 에이전트가 메일함을 읽고 답장 초안을 작성하는 self-hosted 이메일 클라이언트를 단일 Workers 배포로 운영할 수 있다.
@@ -85,26 +85,6 @@ Cloudflare의 네 가지 서비스가 각기 다른 역할을 담당한다. Emai
 **[6. 스택]** 📎
 프론트엔드는 React 19, React Router v7, Tailwind CSS, Zustand(상태 관리), TipTap(리치 텍스트 에디터), `@cloudflare/kumo`를 사용한다. 백엔드는 Hono 프레임워크 위에서 Workers + Durable Objects로 구성되며, AI 계층은 Agents SDK + AI SDK v6 + Workers AI를 조합한다. 마크다운 렌더링은 `react-markdown` + `remark-gfm`을 사용한다.
 
-## 비유
-
-**비유**: Durable Object 사서함은 "개인 금고가 딸린 우체국 사서함"이다. 각 사서함(메일 주소)마다 전용 Durable Object가 할당되어 자체 SQLite 데이터베이스(금고)와 R2 연결(별도 보관함)을 가지며, 다른 사서함의 상태에 간섭하지 않는다.
-
-**깨지는 지점**: 실제 우체국 사서함은 물리적으로 분리되어 있지만, Durable Objects는 같은 Workers 런타임 위에서 논리적으로 격리될 뿐이다. 동일한 Cloudflare 계정과 Workers 배포를 공유하므로, Worker 수준의 오류(배포 실패, 메모리 한도 초과 등)는 모든 사서함에 동시에 영향을 미친다. 또한 "금고"는 Cloudflare의 인프라에 존재하므로, 데이터 주권이 Cloudflare에 위임된다.
-
-## 곁가지
-
-- Durable Objects SQLite 심화: Durable Object 내부에서 SQLite를 활용한 상태 관리 패턴이 필요해질 때
-- Cloudflare Agents SDK 심화: `AIChatAgent` 커스터마이징과 도구 정의 방식이 필요해질 때
-- MCP 프로토콜 심화: 외부 AI 도구(Claude Code, Cursor 등)와 `/mcp` 엔드포인트 연동 방식이 필요해질 때
-- Cloudflare Email Routing 심화: catch-all 규칙 이상의 세분화된 라우팅 규칙 설계가 필요해질 때
-
-## 연결
-
-- **Cloudflare Durable Objects** — 사서함 격리의 핵심 메커니즘으로, 상태가 있는 서버리스 컴퓨팅 패턴의 대표 사례
-- **MCP (Model Context Protocol)** — `/mcp` 엔드포인트를 통해 외부 AI 도구가 이메일 시스템을 조작할 수 있게 하는 표준 프로토콜
-- **Cloudflare Agents SDK** — `AIChatAgent`와 도구 프레임워크를 제공하는 SDK로, 에이전트 설계의 기반
-- **Hono** — 경량 웹 프레임워크로, Workers 위에서 API와 SSR을 동시에 처리하는 라우팅 계층
-
 ## 레퍼런스
 
 - https://github.com/cloudflare/agentic-inbox — Agentic Inbox 소스 코드 및 README, 전체 아키텍처와 설정 가이드 (1차). 버전 명시 없음.
@@ -117,14 +97,3 @@ Cloudflare의 네 가지 서비스가 각기 다른 역할을 담당한다. Emai
 - https://developers.cloudflare.com/workers-ai/ — Workers AI 모델 카탈로그 및 추론 API (1차).
 - https://developers.cloudflare.com/changelog/post/2025-10-03-one-click-access-for-workers/ — Workers one-click Cloudflare Access 설정 방법, `POLICY_AUD`/`TEAM_DOMAIN` 값 확인 (1차).
 - https://github.com/cloudflare/agentic-inbox/issues/4#issuecomment-4269118513 — 스크린샷 포함 단계별 설정 가이드 커뮤니티 코멘트 (2차).
-
----
-## 인출 질문
-
-1. **맵 재생**: Agentic Inbox의 아키텍처에서 Browser에서 시작한 요청이 AI 에이전트에 도달하기까지 거치는 구성요소와 프로토콜을 순서대로 설명하라. 또한 사서함 격리에 사용되는 Cloudflare 서비스와 그 내부 저장소를 각각 말하라.
-2. **전이 질문**: Agentic Inbox의 "단일 trust boundary" 보안 모델이 적합하지 않은 시나리오를 하나 들고, 어떤 추가 계층이 필요한지 설명하라.
-3. **전이 질문**: 이 아키텍처에서 AI 에이전트가 `/mcp` 엔드포인트를 통해 외부 도구와 상호작용할 때 발생할 수 있는 보안 위험과 이를 완화하기 위한 설계 변경을 제안하라.
-
-## 내 관점
-
-<!-- 학습자가 직접 채우는 섹션 — 파이프라인은 대필하지 않는다 -->

@@ -7,8 +7,8 @@ description: 초심자에게 단순화된 전체 과제를 먼저 경험시키�
 summary: '"핵심을 먼저 배우고 확장하라"는 직관은 교수설계(instructional design) 문헌에서 최소 60년간 다뤄온 시퀀싱 문제다. Sweller의 worked-example effect와 van Merriënboer의 4C/ID whole-task sequencing, Carroll의 minimal manual은 통제 실험·메타분석으로 뒷받침되는 반면, Bruner의 spiral curriculum과 Reigeluth의 Elaboration Theory는 널리 쓰이지만 그 자체를 검증한 통제 실험은 부족한 설계 프레임워크다. 이 카드는 여섯 갈래 문헌을 증거 수준별로 정리한다.'
 lang: ko
 tags: ['instructional-design', 'sequencing', 'cognitive-load', '4cid', 'worked-examples', 'transfer']
-lintHash: 'e24d82065000'
-polishHash: 'e24d82065000'
+lintHash: '7a0c92c1420a'
+polishHash: '7a0c92c1420a'
 ---
 
 > 한 줄 명제: "단순화됐지만 완결된 전체를 먼저 경험시키고 점차 복잡도를 높이라"는 시퀀싱 원칙은 여러 독립적인 교수설계 전통이 수렴하는 지점이지만, 그 근거는 이론마다 통제 실험·메타분석 수준부터 이론적 프레임워크 수준까지 크게 갈린다.
@@ -36,11 +36,3 @@ polishHash: 'e24d82065000'
 - [Reigeluth (1979), The elaboration theory of instruction — Instructional Science, 8, 311–327](https://doi.org/10.1007/BF00177327) — 1차. Elaboration Theory 원 논문(epitome→elaboration 시퀀싱).
 - [A critical review of elaboration theory — Educational Technology Research and Development](https://doi.org/10.1007/BF02296843) — 2차. "학습이론이 아니라 설계 절차"라는 비판.
 - [Perkins, Making Learning Whole (2009) — Project Zero, Harvard](https://pz.harvard.edu/resources/making-learning-whole-how-seven-principles-of-teaching-can-transform-education) — 1차. "junior version의 whole game" 비유를 제시한 원저.
-
-## 연결
-
-- [Pareto Principle in Learning](/wiki/learning-science/pareto-principle-in-learning/) — "자료의 일부만 고르면 된다"는 통속 주장과, 이 카드가 다루는 "단순화된 전체부터 복잡도를 높이라"는 시퀀싱 처방은 표면적으로 비슷해 보이지만 근거 구조가 다르다.
-- [Procedural vs Conceptual Knowledge](/wiki/learning-science/procedural-vs-conceptual-knowledge/) — worked example과 4C/ID 모두 절차 지식과 개념 지식을 함께 다루는 방식에 대한 처방이라는 점에서 이어진다.
-- [ICAP Framework](/wiki/learning-science/icap-framework/) — worked example을 수동적으로 읽기만 하면 효과가 줄고, 스스로 설명을 덧붙이는 능동적 관여가 있을 때 더 커진다는 논의와 연결된다.
-- [Transfer](/wiki/learning-science/transfer/) — "핵심을 먼저 배우면 나머지에 응용 가능하다"는 말은 결국 far transfer가 일어나는지의 질문이며, 이 분류체계로 검증 범위를 구체화할 수 있다.
-- [Learning Science](/wiki/learning-science/) — desirable difficulties가 "연습 조건"을 다룬다면, 이 카드는 "커리큘럼 순서"를 다룬다는 점에서 인접하지만 구분되는 축이다.

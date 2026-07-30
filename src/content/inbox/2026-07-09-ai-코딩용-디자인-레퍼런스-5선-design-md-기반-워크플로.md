@@ -11,8 +11,8 @@ tags:
   - 'agentic-coding'
   - 'developer-productivity'
 canonical: 'https://x.com/sexyguy/status/2075188856941605248?s=12'
-lintHash: 'd4131b7dd6dd'
-polishHash: 'd4131b7dd6dd'
+lintHash: '9582c774d486'
+polishHash: '9582c774d486'
 ---
 
 ## TL;DR
@@ -56,8 +56,8 @@ AI 코딩 디자인 일관성 워크플로
 
 ## 용어 풀이
 
-- **DESIGN.md** — 디자인 시스템의 규칙(색상, 폰트, 간격, 컴포넌트 패턴 등)을 마크다운으로 작성한 파일 / 비유: AI에게 건네는 **"디자인 지침서"** / 비유가 깨지는 지점: 실제 디자인 시스템은 Figma 토큰·컴포넌트 라이브러리 등 훨씬 풍부한 맥락을 포함하지만, DESIGN.md는 텍스트로 표현 가능한 규칙만 담는다.
-- **MCP (Model Context Protocol)** — AI 모델이 외부 도구·데이터 소스와 연결되는 표준 프로토콜 / 비유: AI에게 **USB 포트**를 달아주는 것 / 비유가 깨지는 지점: USB는 범용이지만 MCP는 아직 생태계가 제한적이며 구현체마다 호환성이 다를 수 있다.
+- **DESIGN.md** — 디자인 시스템의 규칙(색상, 폰트, 간격, 컴포넌트 패턴 등)을 마크다운으로 작성한 파일.
+- **MCP (Model Context Protocol)** — AI 모델이 외부 도구·데이터 소스와 연결되는 표준 프로토콜.
 - **Tailwind** — 유틸리티 우선 CSS 프레임워크. 클래스 조합으로 스타일링.
 - **Claude Code / Cursor / Lovable** — AI 기반 코딩 도구들. 코드 생성·편집에 특화.
 

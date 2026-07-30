@@ -11,8 +11,8 @@ tags:
   - 'open-source'
   - 'optimization'
 canonical: 'https://github.com/google-ai-edge/LiteRT/tree/main/litert/js'
-lintHash: '21b8995f1d44'
-polishHash: '21b8995f1d44'
+lintHash: '13dec964bded'
+polishHash: '13dec964bded'
 ---
 
 ## TL;DR
@@ -51,9 +51,9 @@ polishHash: '21b8995f1d44'
 - **[Model Tester]** `npx model-tester`로 GPU 위임 비율과 CPU 간 수치 차이를 확인할 수 있어, 프로덕션 배포 전 호환성 검증 도구로 유용하다.
 
 ## 용어 풀이
-- **XNNPACK** — Google의 고도로 최적화된 CPU 추론 커널 라이브러리 / 비유: "CPU용 터보 엔진" / 깨지는 점: GPU 대비 절대 성능은 낮음.
-- **JSPI** — WebAssembly와 JS 간 비동기 호출을 가능하게 하는 브라우저 API / 비유: "동기·비동기 번역기" / 깨지는 점: 아직 모든 브라우저가 지원하지 않음.
-- **op (operation)** — 모델 계산 그래프의 개별 노드(conv, matmul 등) / 비유: "레고 블록 하나" / 깨지는 점: op 조합에 따라 fallback 비용이 비선형적으로 증가.
+- **XNNPACK** — Google의 고도로 최적화된 CPU 추론 커널 라이브러리 / 한계: GPU 대비 절대 성능은 낮음.
+- **JSPI** — WebAssembly와 JS 간 비동기 호출을 가능하게 하는 브라우저 API / 한계: 아직 모든 브라우저가 지원하지 않음.
+- **op (operation)** — 모델 계산 그래프의 개별 노드(conv, matmul 등) / 한계: op 조합에 따라 fallback 비용이 비선형적으로 증가.
 
 ## 시각 자료
 | 구분 | WebGPU | WASM (XNNPACK) |

@@ -6,8 +6,8 @@ description: 디자인 시스템을 바이너리 Figma 파일이 아니라 평�
 lang: ko
 tags: ['design-to-code', 'design-tokens', 'ai-agent-workflow']
 summary: "Google Stitch가 만든 DESIGN.md는 색상·폰트·스타일 규칙·WCAG 검증 가능한 시맨틱 컬러 롤을 담은 Apache 2.0 오픈소스 마크다운 파일로, 리포지토리에 커밋해 Claude Code·Cursor·Copilot·Bolt 등 UI 코드를 쓰는 어떤 에이전트든 읽게 하는 것을 목표로 설계됐다. Figma의 노드 트리 대신 사람도 LLM도 직접 편집 가능한 텍스트 포맷을 디자인 핸드오프 매체로 쓰는 사례다."
-lintHash: '847b30f3ffe1'
-polishHash: '847b30f3ffe1'
+lintHash: '412c11ece95d'
+polishHash: '412c11ece95d'
 ---
 
 > 한 줄 명제: Google Stitch는 디자인 시스템을 바이너리 Figma 파일이 아니라 사람도 LLM도 읽고 손으로 고칠 수 있는 평범한 마크다운 파일(DESIGN.md)로 표현해, Claude Code·Cursor·Bolt 등 어떤 에이전트에도 그대로 넘길 수 있게 만들었다.
@@ -28,9 +28,3 @@ polishHash: '847b30f3ffe1'
 - [bolt.new × Google Stitch 연동 문서](https://support.bolt.new/integrations/google-stitch.md) — 1차. Stitch → Bolt로 "스크린샷 + HTML + DESIGN.md"가 넘어가는 실제 핸드오프 포맷을 확인.
 - [Google, Google I/O 2026 전체 발표 정리](https://blog.google/innovation-and-ai/technology/ai/google-io-2026-all-our-announcements/) — 1차. Stitch가 음성/텍스트 입력과 "기존 코드베이스·디자인 파일 가져오기"를 지원한다고 언급(브리지 옵션 존재를 확인하되, 이 카드의 핵심 주장인 DESIGN.md의 독립성과는 별개).
 - Stitch 2026-03 "멀티 스크린" 업데이트 — **1차 미확인**. techtimes.com, heypash.com, tech-insider.org 등 2차 매체에서만 확인됨. Google 공식 원문을 찾으면 갱신 필요.
-
-## 연결
-
-- [Design-to-Code Agent Workflows](/wiki/design-to-code/) — 이 카드가 속한 카테고리.
-- [Screenshot 기반 UI 생성](/wiki/design-to-code/screenshot-based-ui-generation/) — bolt×Stitch 연동처럼 스크린샷과 텍스트 스펙을 함께 쓰는 하이브리드 패턴의 다른 축.
-- [컴포넌트 레지스트리 기반 생성](/wiki/design-to-code/component-registry-first-generation/) — 둘 다 "텍스트/구조화 스펙을 에이전트에 넘긴다"는 점은 같지만, DESIGN.md는 스타일 토큰을, registry는 실제 컴포넌트 자체를 넘긴다는 차이가 있다.

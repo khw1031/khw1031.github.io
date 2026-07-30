@@ -11,8 +11,8 @@ tags:
   - 'multimodal'
   - 'optimization'
 canonical: 'https://www.linkedin.com/posts/kiwoong-yeom_chatgpt%EC%9D%98-%EC%96%B4%EB%A8%B8%EB%8B%88-%EC%A0%84-openai-cto-%EB%AF%B8%EB%9D%BC-%EB%AC%B4%EB%9D%BC%ED%8B%B0%EC%9D%98-%ED%9A%8C%EC%82%AC-thinking-share-7483416064022839296-xzvk/?utm_source=social_share_send&utm_medium=ios_app&rcm=ACoAAB15JU0Bh0ozoFHKUp6BqJa4W5v2yqNn5k8&utm_campaign=share_via'
-lintHash: '57a362e457fd'
-polishHash: '57a362e457fd'
+lintHash: 'b8c55964d3ca'
+polishHash: 'b8c55964d3ca'
 ---
 
 ## TL;DR
@@ -50,9 +50,9 @@ polishHash: '57a362e457fd'
 - **[지식 밀도 비교]** 저자는 개인 경험으로 GLM 5.2가 "지식이 부족하다"고 느끼며, Inkling이 더 큰 모델이라 이 부분이 나을 것이라 **기대**한다. 이는 주관적 인상으로, 벤치마크 데이터가 아닌 개인 사용감에 기반한다.
 
 ## 용어 풀이
-- **T급 모델** — Trillion(조) 단위 파라미터 클래스 / 비유: 도시 인구 규모(조 명) / 깨지는 점: MoE에서는 총 파라미터가 실제 추론 성능과 비례하지 않음
-- **MoE (Mixture of Experts)** — 여러 전문 네트워크 중 일부만 활성화하는 구조 / 비유: 종합병원에서 해당 과 의사만 배정 / 깨지는 점: 라우터 판단 오류 시 잘못된 전문가가 응답할 수 있음
-- **1M 컨텍스트** — 100만 토큰을 한 번에 처리 / 비유: A4 3,000페이지를 동시에 기억 / 깨지는 점: 토큰당 정보 밀도에 따라 실제 체감 용량은 다름
+- **T급 모델** — Trillion(조) 단위 파라미터 클래스 / 한계: MoE에서는 총 파라미터가 실제 추론 성능과 비례하지 않음.
+- **MoE (Mixture of Experts)** — 여러 전문 네트워크 중 일부만 활성화하는 구조 / 한계: 라우터 판단 오류 시 잘못된 전문가가 응답할 수 있음.
+- **1M 컨텍스트** — 100만 토큰을 한 번에 처리 / 한계: 토큰당 정보 밀도에 따라 실제 체감 용량은 다름.
 
 ## 시각 자료
 | 모델 | 출처 | 파라미터 | 멀티모달 | Inkling 대비 성능 |

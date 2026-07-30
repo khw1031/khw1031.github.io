@@ -11,8 +11,8 @@ tags:
   - 'lazy-stores'
   - 'ssr'
 canonical: 'https://github.com/nanostores/nanostores'
-lintHash: '80001201dd33'
-polishHash: '80001201dd33'
+lintHash: '502a3213900d'
+polishHash: '502a3213900d'
 ---
 
 > 한 줄 명제: Nano Stores는 프레임워크에 독립적인 원자적(atom) 스토어를 단위로 상태와 로직을 관리하며, 리스너 기반 lazy mount 생명주기를 통해 실제로 사용되는 스토어만 리소스를 소비하게 한다.
@@ -103,37 +103,8 @@ React/Preact/Vue/Solid/Lit/Angular/Alpine.js 모두 공식 어댑터 패키지�
 ### Best Practices — 로직 이전과 `get()` 제한 ⭐
 스토어는 값 저장뿐 아니라 타이머 추적, 서버 데이터 로딩, 라우팅 감시 등의 로직을 담당한다. 컴포넌트와 무관한 모든 로직을 스토어로 이전하면 테스트 용이성이 증가하고 프레임워크 변경(예: React Native 버전 추가)이 쉬워진다. "변경"과 "반응"을 분리해야 한다 — 값을 변경하는 액션 함수 내에서 `store.get()`으로 즉시 반응하는 대신, 별도 리스너에서 반응하도록 구성한다. 이는 지속형 스토어가 다른 브라우저 탭에서 값을 가져오는 등, 액션 함수 외부에서도 값이 변경될 수 있기 때문이다. `get()`은 테스트 환경에서만 사용하고, UI에서는 `useStore()`, `$store`, `Store#subscribe()`로 구독 기반 렌더링을 해야 최신 데이터가 보장된다.
 
-## 비유
-
-**비유**: Nano Stores의 스토어는 각자 독립된 전구와 같다. 아무도 방에 들어오지 않으면 전구는 꺼져 있고(lazy disabled), 누군가 스위치를 켜면(lisener mount) 불이 들어오며, `onMount` 반환 함수는 마지막 사람이 나가면 1초 뒤 자동으로 소등을 예약한다. `computed`는 전구들의 밝기를 조합해 새로운 색을 만드는 프리즘이고, `batch`는 여러 스위치를 한 번에 조작하는 마스터 스위치다.
-
-**깨지는 지점**: 전구는 수동적인 소자이지만 Nano Stores 스토어는 능동적으로 네트워크 연결을 설정하거나 타이머를 실행하는 사이드 이펙트를 가질 수 있다. 또한 전유는 물리적으로 연결된 배선이 필요하지만, 스토어 간 의존은 런타임에 동적으로 구성되며 `computed` 체인은 방향성 있는 그래프를 형성한다. 비유는 "사용 시에만 리소스를 쓴다"는 lazy mount 개념을 설명하는 도구일 뿐, 스토어의 능동적 생명주기나 의존 그래프 구조를 대체하지 않는다.
-
-## 곁가지
-
-- **Map Creator 심화**: ORM이나 다수의 유사 스토어를 동적으로 생성해야 할 때 `mapCreator` 패턴이 필요해질 것임
-- **Persistent/Router 심화**: localStorage 동기화 또는 SPA 라우팅을 스토어 레벨에서 구현할 때 `@nanostores/persistent`, `@nanostores/router` 확장 필요
-- **Deep Map 심화**: 중첩 객체/배열의 경로 기반 변경이 필요할 때 `@nanostores/deepmap` 도입 필요
-- **ESM 빌드 심화**: Next.js < 11.1 또는 CJS 환경에서 ESM-only 패키지를 사용할 때 번들러 설정 문제 해결 필요
-
-## 연결
-
-- **Recoil/Jotai**: 같은 원자적(atom) 상태 관리 패러다임을 공유하지만, Nano Stores는 프레임워크 독립적이고 더 작은 번들 크기를 지향함 — 상태 라이브러리 선택 시 비교 대상
-- **Redux Toolkit**: 단일 전역 스토어 + 미들웨어 아키텍처와 대조적 — 로직을 스토어로 이전한다는 철학은 공유하지만 구현 계층이 다름
-- **Svelte Store Contract**: Nano Stores가 Svelte의 구독 프로토콜(`.subscribe()`)을 네이티브로 구현함으로써 `$` 자동 구독 문법과 호환됨 — 프레임워크 통합 방식의 기준 사례
-
 ## 레퍼런스
 
 - https://github.com/nanostores/nanostores — Nano Stores 공식 저장소. 원자적 스토어 타입, lazy mount 생명주기, 프레임워크별 통합 가이드, 모범 사례를 포함하는 1차 문서 (버전 명시 없음)
 - https://github.com/ai/size-limit — Size Limit 프로젝트. Nano Stores가 번들 크기 제어에 사용하는 도구 (2차)
 - https://nextjs.org/blog/next-11-1#es-modules-support — Next.js 11.1+의 ESM external 지원 문서. Nano Stores의 ESM-only 제한에 대한 대안 설정 참조 (2차)
-
----
-## 인출 질문
-
-1. Nano Stores에서 스토어가 "disabled" 모드로 진입하는 조건과, `onMount`가 반환한 정리 함수가 실제로 실행되는 시점의 지연 시간은 무엇인가?
-2. `computed`와 `batched`의 갱신 타이밍 차이는 무엇이며, 여러 스토어를 동시에 변경할 때 `batch`를 사용하면 리스너가 몇 번 실행되는가?
-
-## 내 관점
-
-<!-- 학습자가 직접 채우는 섹션 — 파이프라인은 대필하지 않는다 -->

@@ -11,8 +11,8 @@ tags:
   - 'optimization'
   - 'performance'
 canonical: 'https://arxiv.org/pdf/2607.06906'
-lintHash: '0b2f1a27171a'
-polishHash: '0b2f1a27171a'
+lintHash: 'eab98b64ffd2'
+polishHash: 'eab98b64ffd2'
 ---
 
 ## TL;DR
@@ -45,17 +45,17 @@ polishHash: '0b2f1a27171a'
 - ==그 결과 효율 이득은 **모델 불변**(모든 모델에서 −33%~−61%)이지만 품질 이득은 **모델 의존**이다.== 저자들은 이를 **harness leverage**라 부르며, baseline 강점과 harness 품질 향상이 r=0.99(n=6)로 거의 완벽히 상관을 보인다고 보고한다.
 
 ## 깊이
-- **비용 방정식 분해 (Eq.1–3, 저자 제시)**: 입력 토큰은 `S(system) + H(history) + G(tool schema) + R(retrieval) + U(user)` 합이고, naive replay 시 H_i가 turn 수 k에 대해 2차로 쌓여 누적 입력이 O(k²)가 된다. Harness는 prefix caching·compaction·offload로 이를 O(k)에 가깝게 낮춘다. **비유**: 매 회의 때마다 지난 회의록 전부를 다시 읽게 하는 vs. 요약본만 배포하고 원문은 보관함으로 빼는 차이. **비유가 깨지는 지점**: LLM은 "보관함 원문"을 실제로 가져오려면 재호출(=추가 토큰)이 필요하므로, 순수한 오프로드가 항상 무료는 아니다.
+- **비용 방정식 분해 (Eq.1–3, 저자 제시)**: 입력 토큰은 `S(system) + H(history) + G(tool schema) + R(retrieval) + U(user)` 합이고, naive replay 시 H_i가 turn 수 k에 대해 2차로 쌓여 누적 입력이 O(k²)가 된다. Harness는 prefix caching·compaction·offload로 이를 O(k)에 가깝게 낮춘다.
 - **Harnes leverage의 양면**: 48개 capability×model 셀 중 30개 개선, 11개 보합, 7개 퇴보. **퇴보 7건은 모두 작은 모델 3종**에 집중되고, 특히 **MCP 도구 사용·multi-step Playbook** 같은 오케스트레이션 집약 기능에서 나타난다(저자 보고). 즉 ==harness는 "공짜 품질"이 아니라 **모델 능력 하한(capability floor)**을 요구한다.==
 - **Prompt caching과 실효 입력 단가**: 저자는 cache hit 비율 h와 캐시 배율 κ(≈0.1)로 `p_eff_in`을 모델링한다. 에이전트 워크로드의 입력:출력 비가 ~100:1이라는 실무 보고를 근거로, 입력 단가 최적화가 비용의 대부분을 결정한다고 주장한다.
 - **6개 메커니즘 패밀리**: cache-shape 규율 / structured compaction / context offload / zero-token waiting / failure-spend 통제 / model-agnostic floor. 본문은 이들을 Eq.2의 각 항에 1:1 매핑한다(저자 제시, 세부 수치는 원문 후속 섹션).
 
 ## 용어 풀이
-- **Token maxing** — 토큰을 더 써서 성능을 "사는" 개발 습관 / 비유: 기름값 싸졌다고 매일 장거리 드라이브 / 깨지는 점: 가격은 내려도 물리적 한도(컨텍스트 윈도우·지연)는 존재.
-- **Harness** — 모델 호출을 작업으로 조립하는 오케스트레이션 레이어 / 비유: 주방(모델)과 손님(task) 사이 동선을 설계하는 셰프 / 깨지는 점: 모델 내부 추론(예: reasoning token)은 harness가 통제 불가.
-- **Harness leverage** — 강한 모델이 harness 구조를 품질로 바꾸는 정도 / 비유: 좋은 엔진일수록 차체 경량화의 이득을 더 크게 체감 / 깨지는 점: 상관계수 0.99는 n=6 샘플이라 외생 요인 배제 불확실.
-- **Jevons dynamic** — 자원 효율↑ → 단가↓ → 총소비↑ / 비유: LED 전구가 싸지니 조명을 더 많이 켬 / 깨지는 점: 예산 상한이 있는 기업에서는 반드시 성립하지 않음.
-- **Prompt caching** — 이전 prefix를 서버가 기억해 재전송 토큰을 할인 / 비유: 반복 주문을 단골 카드로 자동 입력 / 깨지는 점: prefix가 한 글자라도 바뀌면 hit가 깨짐.
+- **Token maxing** — 토큰을 더 써서 성능을 "사는" 개발 습관 / 한계: 가격은 내려도 물리적 한도(컨텍스트 윈도우·지연)는 존재.
+- **Harness** — 모델 호출을 작업으로 조립하는 오케스트레이션 레이어 / 한계: 모델 내부 추론(예: reasoning token)은 harness가 통제 불가.
+- **Harness leverage** — 강한 모델이 harness 구조를 품질로 바꾸는 정도 / 한계: 상관계수 0.99는 n=6 샘플이라 외생 요인 배제 불확실.
+- **Jevons dynamic** — 자원 효율↑ → 단가↓ → 총소비↑ / 한계: 예산 상한이 있는 기업에서는 반드시 성립하지 않음.
+- **Prompt caching** — 이전 prefix를 서버가 기억해 재전송 토큰을 할인 / 한계: prefix가 한 글자라도 바뀌면 hit가 깨짐.
 
 ## 시각 자료
 | 비교 축 | Naive Harness | Writer Harness | 변화 |

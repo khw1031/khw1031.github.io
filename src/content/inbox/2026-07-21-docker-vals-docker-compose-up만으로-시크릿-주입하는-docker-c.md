@@ -11,8 +11,8 @@ tags:
   - 'developer-productivity'
   - 'contribution'
 canonical: 'https://zenn.dev/estie/articles/df0fd5f0326f9a'
-lintHash: 'df96228e7346'
-polishHash: 'df96228e7346'
+lintHash: '3171a553ebca'
+polishHash: '3171a553ebca'
 ---
 
 ## TL;DR
@@ -59,9 +59,9 @@ polishHash: 'df96228e7346'
 - **[docker-vals 구현]** `helmfile/vals`를 Go 라이브러리로 임베딩하여 `ref+<backend>://...` URI 형식으로 다양한 백엔드(SSM, Vault, 1Password 등)를 지원한다. 플러그인 자체는 Go 약 200줄의 얇은 래퍼이며, vals 본체를 별도 설치할 필요 없다.
 
 ## 용어 풀이
-- **Provider Services** — Docker Compose가 컨테이너 대신 외부 플러그인을 호출하는 확장 인터페이스. / 비유: 식당에서 요리 대신 외부 케이터링을 호출하는 주문서. / 비유가 깨지는 지점: 실제 컨테이너를 대체하는 것이 아니라 컨테이너에 값을 주입하는 보조 역할로도 사용 가능.
-- **rawsetenv** — Provider Protocol에 추가된 메시지 타입으로, 변수명 prefix 없이 환경변수를 그대로 전달. / 비유: 봉투에 이름을 다시 써 붙이는 대신 원래 이름표 그대로 전달. / 비유가 깨지는 지점: 다중 Provider가 같은 변수명을 쓰면 충돌할 수 있어 사용 시 주의 필요.
-- **vals** — `ref+<backend>://` URI를 해석해 실제 시크릿 값을 가져오는 Go 도구. / 비유: 여러 금고(SSM, Vault 등)의 위치를 적은 메모장에서 실제 열쇠를 찾아오는 심부름꾼.
+- **Provider Services** — Docker Compose가 컨테이너 대신 외부 플러그인을 호출하는 확장 인터페이스.
+- **rawsetenv** — Provider Protocol에 추가된 메시지 타입으로, 변수명 prefix 없이 환경변수를 그대로 전달.
+- **vals** — `ref+<backend>://` URI를 해석해 실제 시크릿 값을 가져오는 Go 도구.
 
 ## 시각 자료
 

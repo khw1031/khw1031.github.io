@@ -8,8 +8,8 @@ description: DESIGN.md의 Elevation & Depth 섹션 근거 — z축 위계를 그
 lang: ko
 tags: ['elevation', 'depth', 'shadow', 'z-index', 'layering', 'design-tokens']
 summary: "깊이는 z축으로 표면 간 위계를 표현하는 것이다. 지각 근거는 Ramachandran(1988)의 '빛은 위에서 온다' 가정 — 위에서 진 그림자는 '올라옴', 반대는 '들어감'으로 읽힌다. 웹 프리미티브는 box-shadow(사각 박스), filter:drop-shadow(알파 윤곽), z-index/stacking context(opacity·transform·filter가 조용히 새 컨텍스트 생성). 현행 디자인 시스템은 무거운 스키어모픽 그림자 대신 낮은 불투명도의 다층 그림자(Tailwind ≤0.1, Fluent key+ambient, Radix 알파+1px 링)나 색 기반 레이어링(Carbon layer 토큰, Material 3 톤 엘리베이션, Apple 반투명 머티리얼)로 이동했다. 단 완전 플랫은 클릭 단서를 없애 역효과(NN/g)."
-lintHash: 'b3a2bfb78f99'
-polishHash: 'b3a2bfb78f99'
+lintHash: 'dca4a557cbb5'
+polishHash: 'dca4a557cbb5'
 ---
 
 > 한 줄 명제: 깊이는 "빛은 위에서 온다"는 지각을 이용해 z축 위계를 만드는 것 — 현행 흐름은 무거운 그림자가 아니라 낮은 불투명도 다층 그림자 + 색/머티리얼 기반 레이어링이다.
@@ -50,12 +50,3 @@ polishHash: 'b3a2bfb78f99'
 - [Tailwind CSS — box-shadow](https://tailwindcss.com/docs/box-shadow) · [Radix Themes — Shadows](https://www.radix-ui.com/themes/docs/theme/shadows) · [Microsoft Fluent 2 — Elevation](https://fluent2.microsoft.design/elevation) · [IBM Carbon — Color/Layer 토큰](https://carbondesignsystem.com/elements/color/tokens/) · [GitHub Primer — box-shadow](https://primer.style/product/css-utilities/box-shadow/) — 1차(각 시스템). 현행 다벤더 그림자·레이어링 스케일.
 - [Apple HIG — Materials](https://developer.apple.com/design/human-interface-guidelines/materials) — 1차(SPA). 반투명·vibrancy 깊이. [Material 3 — Tone-based surface color](https://m3.material.io/blog/tone-based-surface-color-m3) — 1차. 톤 엘리베이션(한 사례).
 - [NN/g — Flat UI Elements Attract Less Attention (2017)](https://www.nngroup.com/articles/flat-ui-less-attention-cause-uncertainty/) — 2차. 약한 단서 시선 +22%·고정 +25%, 깊이=클릭 단서.
-
-## 연결
-
-- [aesthetics-and-layout](/wiki/design-principles/aesthetics-and-layout/) — 상위 허브.
-- [DESIGN.md](/wiki/design-principles/design-md/) — 이 카드는 DESIGN.md의 **Elevation & Depth** 섹션 근거.
-- [color-and-contrast](/wiki/design-principles/color-and-contrast/) — 색 기반 레이어링(Carbon·M3 톤)이 색과 만나는 지점.
-- [shape-and-corner-radius](/wiki/design-principles/aesthetics-and-layout/shape-and-corner-radius/) · [visual-hierarchy](/wiki/design-principles/aesthetics-and-layout/visual-hierarchy/) — 형태·깊이가 함께 위계를 만듦.
-- [gulf-of-execution-evaluation](/wiki/design-principles/usability/gulf-of-execution-evaluation/) — 올라와 보임 = "눌릴 수 있음"의 어포던스 신호.
-- [material-design](/wiki/design-principles/material-design/) — 톤 엘리베이션을 쓰는 한 시스템 사례(여러 벤더 중 하나).

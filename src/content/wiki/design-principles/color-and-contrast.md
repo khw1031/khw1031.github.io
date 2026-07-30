@@ -7,8 +7,8 @@ description: 색은 미감(체계적 톤 팔레트)이자 사용성(WCAG 명도 
 lang: ko
 tags: ['color', 'contrast', 'wcag', 'accessibility', 'design-tokens', 'palette']
 summary: "색은 두 축을 가로지른다. 미감 쪽에서는 체계적 톤 팔레트가 표준이다 — Material M3의 시드→6개 톤 팔레트(0~100), M2의 50~900(500=기준), Carbon 10~100, Tailwind 50~950. 사용성 쪽에서는 WCAG 명도 대비가 하한을 정한다 — 1.4.3(AA) 본문 4.5:1·큰 텍스트 3:1, 1.4.6(AAA) 7:1/4.5:1, 1.4.11(AA) 비텍스트 3:1. 대비비는 (L1+0.05)/(L2+0.05)로 1:1~21:1. 좋은 색 설계 = 톤 스케일의 어떤 짝을 골라도 대비 기준을 만족하도록 팔레트를 구성하는 것. Material You가 그 대표 구현."
-lintHash: '2829d63551bd'
-polishHash: '2829d63551bd'
+lintHash: 'a3f5fd1a3459'
+polishHash: 'a3f5fd1a3459'
 ---
 
 > 한 줄 명제: 색은 미감(어떤 톤이 조화로운가)이자 사용성(어떤 짝이 읽히는가)이다 — 체계적 톤 팔레트를 만들되, 어떤 조합을 골라도 WCAG 대비 기준을 넘도록 설계하라.
@@ -55,11 +55,3 @@ shadcn/ui background/foreground·primary·muted… 시맨틱 쌍을 CSS 변수�
 - [shadcn/ui — Theming](https://ui.shadcn.com/docs/theming) — 1차. 시맨틱 색 변수 쌍(background/foreground…)으로 테마(현행 웹 관행).
 - [Material 3 — Color system](https://m3.material.io/styles/color/system/overview) — 1차(SPA, 스니펫). 시드→6 톤 팔레트(한 사례).
 - [W3C — WCAG 3.0 (Working Draft)](https://www.w3.org/TR/wcag-3.0/) — 1차. APCA를 탐색한 차기 표준의 초기 상태(요구사항 아님).
-
-## 연결
-
-- [Design Principles](/wiki/design-principles/) — 이 카드가 브리지로 붙는 상위 허브(두 축).
-- [material-design](/wiki/design-principles/material-design/) — Material You 동적 색이 팔레트↔대비 결합의 대표 구현.
-- [spacing-8pt-grid](/wiki/design-principles/aesthetics-and-layout/spacing-8pt-grid/) — 색 톤 스케일과 같은 "토큰 스케일" 사고의 형제.
-- [touch-target-size](/wiki/design-principles/usability/touch-target-size/) · [readability-measure](/wiki/design-principles/aesthetics-and-layout/readability-measure/) — 함께 본문·컨트롤 판독성을 정하는 WCAG 접근성 축의 이웃.
-- [aesthetic-usability-effect](/wiki/design-principles/usability/aesthetic-usability-effect/) — 색의 미감이 사용성 인식에 미치는 영향의 실증.

@@ -7,8 +7,8 @@ description: 손으로 필기하면 개념 이해가 깊어진다는 유명한 �
 summary: "Mueller & Oppenheimer(2014)는 노트북 필기가 강의를 그대로 받아적게 만들어(verbatim transcription) 개념 문제 성적을 낮춘다고 보고했다. 그러나 Morehead, Dunlosky & Rawson(2019)의 직접 재현·확장 연구는 이 효과가 통계적으로 유의하지 않은 수준으로 작아, '손으로 써야 이해가 깊어진다'는 대중적 서사는 원 연구가 뒷받침하는 것보다 훨씬 강하게 퍼져 있음을 보여준다."
 lang: ko
 tags: ['handwriting', 'note-taking', 'generation-effect', 'replication']
-lintHash: 'd2214d9c3b39'
-polishHash: 'd2214d9c3b39'
+lintHash: '62aa0e2d2148'
+polishHash: '62aa0e2d2148'
 ---
 
 > 한 줄 명제: 손글씨가 이해를 깊게 만든 것처럼 보였던 이유는 "손이라서"가 아니라 "그대로 베끼지 못해 재구성해야 했기 때문"이며, 이 효과 자체도 재현 시도에서는 불안정한 것으로 드러났다.
@@ -25,8 +25,3 @@ Mueller와 Oppenheimer(2014)는 세 차례 실험에서 노트북으로 필기�
 
 - [Mueller & Oppenheimer (2014), The Pen Is Mightier Than the Keyboard — Psychological Science, 25(6), 1159–1168](https://doi.org/10.1177/0956797614524581) — 1차. 손글씨 필기군이 개념 문제에서 우위를 보인 원 실험(3개 연구).
 - [Morehead, Dunlosky & Rawson (2019), How Much Mightier Is the Pen than the Keyboard for Note-Taking? — Educational Psychology Review](https://eric.ed.gov/?id=EJ1225471) — 1차. 직접 재현·확장 연구. 효과가 일관되지 않고 메타분석상 유의하지 않음을 보고.
-
-## 연결
-
-- [Learning Science](/wiki/learning-science/) — 이 효과는 desirable difficulties의 "generation effect"(스스로 만들어내는 처리가 파지를 돕는다) 계열로 해석된다.
-- [ICAP Framework](/wiki/learning-science/icap-framework/) — 이 문헌이 실제로 가리키는 변수는 필기 도구가 아니라 인지적 관여 양식(수동적 받아쓰기 vs 능동적 재구성)이다.

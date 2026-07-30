@@ -7,8 +7,8 @@ description: 본문 가독성의 핵심 변수인 measure(한 줄 길이)와 행
 lang: ko
 tags: ['readability', 'measure', 'line-length', 'typography', 'accessibility']
 summary: "measure(한 줄에 담기는 글자 수)는 본문 가독성을 좌우하는 인쇄 전통의 핵심 변수다. 너무 길면 다음 줄 첫머리를 놓치고, 너무 짧으면 눈이 자주 되돌아 리듬이 깨진다. Butterick의 Practical Typography는 평균 45~90자(공백 포함)를 권한다. 웹 표준 WCAG 2.1 SC 1.4.8(AAA)은 본문 폭 80자(CJK 40자) 이하 + 행간 1.5·문단 간격 1.5×를 규정한다. CSS에서는 ch 단위(0의 폭)로 measure를 직접 제어한다."
-lintHash: 'f15b38261f9a'
-polishHash: 'f15b38261f9a'
+lintHash: 'e383c104cf7f'
+polishHash: 'e383c104cf7f'
 ---
 
 > 한 줄 명제: 한 줄이 너무 길면 다음 줄을 놓치고 너무 짧으면 눈이 자주 되돌아온다 — 본문은 45~90자(웹 표준은 80자 이하)가 편안하다.
@@ -38,10 +38,3 @@ polishHash: 'f15b38261f9a'
 
 - [Matthew Butterick, *Practical Typography* — Line length](https://practicaltypography.com/line-length.html) — 2차(널리 인용되는 실무 정본). 평균 45~90자, 알파벳 2~3벌 테스트.
 - [W3C — Understanding SC 1.4.8: Visual Presentation (WCAG 2.1, AAA)](https://www.w3.org/WAI/WCAG21/Understanding/visual-presentation.html) — 1차/규범. 80자(CJK 40) 이하, 행간 1.5·문단 간격 1.5×.
-
-## 연결
-
-- [aesthetics-and-layout](/wiki/design-principles/aesthetics-and-layout/) — 상위 허브. 본문 조판의 가로축(measure).
-- [typographic-scale](/wiki/design-principles/aesthetics-and-layout/typographic-scale/) · [baseline-grid-vertical-rhythm](/wiki/design-principles/aesthetics-and-layout/baseline-grid-vertical-rhythm/) — 크기·수직 리듬과 함께 조판 삼각형을 이룸.
-- [fluid-typography](/wiki/design-principles/aesthetics-and-layout/fluid-typography/) — 뷰포트에 따라 measure·크기를 잇는 반응형 기법.
-- [color-and-contrast](/wiki/design-principles/color-and-contrast/) — measure와 함께 본문 판독성을 좌우하는 다른 축(대비).

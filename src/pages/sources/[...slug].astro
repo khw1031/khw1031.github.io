@@ -1,0 +1,34 @@
+---
+import { getCollection, render } from 'astro:content';
+import CopyMarkdown from '../../components/CopyMarkdown.astro';
+import CopyPath from '../../components/CopyPath.astro';
+import Base from '../../layouts/Base.astro';
+
+// Retired source documents (see the `sources` collection in src/content.config.ts).
+// A note under /notes/ links here once its core decomposition supersedes the full
+// original; the original is kept verbatim as the reference behind that note.
+// Unlisted like docs/notes: excluded from search (not in SEARCHABLE_COLLECTIONS and
+// no data-pagefind-body here), sitemap, and robots.
+export async function getStaticPaths() {
+  const entries = await getCollection('sources');
+  return entries.map((entry) => ({ params: { slug: entry.id }, props: { entry } }));
+}
+
+const { entry } = Astro.props;
+const { Content } = await render(entry);
+const { title, description } = entry.data;
+// copy-markdown fetches the generated raw.md (scripts/generate-raw-markdown.ts
+// covers sources); copy-path copies the loader-provided source path.
+const mdHref = `${Astro.url.pathname.replace(/\/$/, '')}/raw.md`;
+const sourcePath = entry.filePath ?? `src/content/sources/${entry.id}.md`;
+---
+
+<Base title={`${title} — thnkr`} description={description}>
+  <div class="flex justify-end gap-4">
+    <CopyMarkdown href={mdHref} />
+    <CopyPath value={sourcePath} />
+  </div>
+  <article class="prose max-w-none mt-2">
+    <Content />
+  </article>
+</Base>

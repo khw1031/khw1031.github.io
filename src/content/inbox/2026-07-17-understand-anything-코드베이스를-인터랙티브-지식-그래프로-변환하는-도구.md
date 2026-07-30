@@ -10,8 +10,8 @@ tags:
   - 'open-source'
   - 'knowledge-graph'
 canonical: 'https://github.com/Egonex-AI/Understand-Anything'
-lintHash: 'd5b40c223cd0'
-polishHash: 'd5b40c223cd0'
+lintHash: 'fc9a6fc84b25'
+polishHash: 'fc9a6fc84b25'
 ---
 
 ## TL;DR
@@ -54,7 +54,7 @@ polishHash: 'd5b40c223cd0'
 - 생성된 그래프는 JSON이므로 **git에 커밋해 팀원과 공유**할 수 있고, 대시보드 뷰어는 Node.js만 있으면 LLM 없이도 로컬에서 열람 가능하다.
 
 ## 깊이
-- **[Tree-sitter + LLM 분업]** Tree-sitter는 C 기반 파서로 수십 개 언어의 구체적 구문 트리(CST)를 제공하는 라이브러리다. 비유하면 "건물의 설계도에서 벽·기둥·배관을 자동으로 뽑아내는 스캐너"이고, LLM은 "이 방이 거실인지 침실인지, 동선이 어떻게 되는지 설명해주는 건축가" 역할이다. 이 비유가 깨지는 지점: ==Tree-sitter는 구문은 정확히 잡지만 **타입 해석·런타임 동작·매크로 확장** 같은 의미론은 잡지 못한다.== 또한 동적 언어(JavaScript 등)에서는 import 경로 해결이 불완전할 수 있어 `importMap` 전처리 단계가 별도로 존재한다.
+- **[Tree-sitter + LLM 분업]** Tree-sitter는 C 기반 파서로 수십 개 언어의 구체적 구문 트리(CST)를 제공하는 라이브러리다. 구조를 기계적으로 추출하는 쪽이 Tree-sitter이고, 그 구조가 무엇을 하는 코드인지 해석하는 쪽이 LLM이다. 이 분업의 한계는 정확히 그 경계에 있다: ==Tree-sitter는 구문은 정확히 잡지만 **타입 해석·런타임 동작·매크로 확장** 같은 의미론은 잡지 못한다.== 또한 동적 언어(JavaScript 등)에서는 import 경로 해결이 불완전할 수 있어 `importMap` 전처리 단계가 별도로 존재한다.
 - **[Multi-Agent 파이프라인]** 5개 기본 에이전트(`project-scanner`, `file-analyzer`, `architecture-analyzer`, `tour-builder`, `graph-reviewer`)가 순차·병렬로 동작한다. file-analyzer는 최대 5 동시, 배치당 20~30개 파일로 병렬 처리된다. `/understand-domain`은 `domain-analyzer`를, `/understand-knowledge`는 `article-analyzer`를 추가한다. 이는 단일 monolithic 프롬프트 대신 **전문화된 작은 에이전트를 엮어 비용·품질·속도를 절충**하는 agentic 패턴의 사례다.
 - **[플랫폼 호환성 — 묶음 표]** 원문은 17개 플랫폼을 나열하나, 설치 방식 기준으로 압축하면 다음과 같다.
 
@@ -67,10 +67,10 @@ polishHash: 'd5b40c223cd0'
 대표적으로 **Claude Code**(네이티브 plugin)와 **Cursor**(auto-discovery) 두 경로만 기억하면 대부분의 사용 사례를 커버한다.
 
 ## 용어 풀이
-- **Knowledge Graph** — 엔티티(노드)와 관계(엣지)로 지식을 표현하는 그래프. 비유: "위키백과 하이퍼링크를 구조화한 것". 깨지는 지점: 위키는 사람이 엣지를 만들지만 여기선 Tree-sitter+LLM이 자동 생성하므로 **노이즈 엣지**가 섞일 수 있다.
-- **Tree-sitter** — GitHub이 개발한 증분 파싱 라이브러리. 언어별 grammar로 CST를 만든다. 비유: "소스코드의 엑스레이". 깨지는 지점: grammar가 없는 언어/DSL은 처리 불가.
-- **Multi-Agent Pipeline** — 여러 특화 LLM 에이전트가 분업하는 아키텍처. 비유: "병원에서 전문의들이 순차 진료하는 것". 깨지는 지점: 에이전트 간 정보 손실이 발생할 수 있고, 오케스트레이션 비용(토큰·지연)이 단일 호출보다 크다.
-- **Fingerprint-based change detection** — 파일 내용의 해시/시그니처로 변경 여부를 판단. 비유: "지문 대조". 깨지는 지점: 포맷팅만 바뀐 경우도 변경으로 잡힐 수 있다(구체적 전략은 원문에 없음).
+- **Knowledge Graph** — 엔티티(노드)와 관계(엣지)로 지식을 표현하는 그래프.
+- **Tree-sitter** — GitHub이 개발한 증분 파싱 라이브러리. 언어별 grammar로 CST를 만든다.
+- **Multi-Agent Pipeline** — 여러 특화 LLM 에이전트가 분업하는 아키텍처.
+- **Fingerprint-based change detection** — 파일 내용의 해시/시그니처로 변경 여부를 판단.
 
 ## 시각 자료
 **기능 매핑 표**

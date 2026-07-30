@@ -11,8 +11,8 @@ tags:
   - 'developer-productivity'
   - 'prompting'
 canonical: 'https://x.com/claudedevs/status/2074208949205881033?s=12'
-lintHash: '15d8dec58fd8'
-polishHash: '15d8dec58fd8'
+lintHash: '3b38b067575c'
+polishHash: '3b38b067575c'
 ---
 
 ## TL;DR
@@ -106,13 +106,13 @@ Claude Code 팀은 "루프 설계(designing loops)"를 프롬프트 엔지니어
 
 ## 용어 풀이
 
-- **Agentic loop** — 사용자가 한 번 프롬프트를 보내면 에이전트가 "컨텍스트 수집 → 행동 → 검증 → 응답"을 한 바퀴 도는 기본 단위. 비유하면 "심부름꾼이 갔다 와서 보고하는 한 왕복." 비유가 깨지는 지점: 심부름꾼은 보통 한 번만 가지만, agentic loop는 스스로 부족하다고 판단하면 같은 프롬프트 안에서 여러 번 왕복할 수 있다.
+- **Agentic loop** — 사용자가 한 번 프롬프트를 보내면 에이전트가 "컨텍스트 수집 → 행동 → 검증 → 응답"을 한 바퀴 도는 기본 단위.
 
-- **Primitive** — Claude Code가 제공하는 기본 실행 단위(/goal, /loop, /schedule, dynamic workflows 등). 비유하면 "레고 블록." 비유가 깨지는 지점: 레고는 수동 조립이지만, primitive 중 일부(auto mode, dynamic workflows)는 스스로 조립 방식을 바꾸는 메타 기능을 가진다.
+- **Primitive** — Claude Code가 제공하는 기본 실행 단위(/goal, /loop, /schedule, dynamic workflows 등).
 
-- **Evaluator model** — Goal-based 루프에서 Claude의 출력이 성공 조건을 만족하는지 판정하는 별도 모델. 비유하면 "채점관." 비유가 깨지는 지점: 채점관은 보통 인간이지만, 여기서는 다른 LLM이 채점하므로 채점 자체에도 오류가 있을 수 있다.
+- **Evaluator model** — Goal-based 루프에서 Claude의 출력이 성공 조건을 만족하는지 판정하는 별도 모델.
 
-- **Deterministic criteria** — 테스트 통과 수, 점수 임계값 등 모호함이 없는 성공 기준. 비유하면 "계산기 결과." 비유가 깨지는 지점: 코드 품질, UX 만족도 등 정성적 목표에는 적용하기 어렵다.
+- **Deterministic criteria** — 테스트 통과 수, 점수 임계값 등 모호함이 없는 성공 기준.
 
 - **Dynamic workflows** — 여러 에이전트를 동적으로 오케스트레이션하는 기능 (research preview). 원문에 상세 메커니즘 설명은 없으며, "수백 개의 에이전트를 생성할 수 있다"고만 언급된다.
 

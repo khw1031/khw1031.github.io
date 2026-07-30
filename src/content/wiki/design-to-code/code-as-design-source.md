@@ -6,8 +6,8 @@ description: 내보낸 디자인 파일이라는 중간 단계를 없애고, 실
 lang: ko
 tags: ['design-to-code', 'ai-agent-workflow', 'canvas-sdk']
 summary: "Onlook은 실제 Next.js/Tailwind 소스코드를 컨테이너에서 인덱싱해 브라우저 iframe과 코드 사이를 양방향 동기화하고, Subframe은 결정론적으로 React/Tailwind/Radix 코드를 생성해 락인을 피하며, tldraw는 캔버스의 구조화된 shape/JSON 데이터 모델을 에이전트가 API로 직접 조작하게 한다. 세 도구 모두 '내보낸 디자인 파일'이라는 중간 표현 자체를 없애고, 실제 코드 또는 캔버스 데이터 모델을 디자인의 원본으로 삼는다는 공통점이 있다."
-lintHash: '7dfdb2186a39'
-polishHash: '7dfdb2186a39'
+lintHash: '1bb671b62032'
+polishHash: '1bb671b62032'
 ---
 
 > 한 줄 명제: Onlook·Subframe·tldraw는 내보낸 디자인 파일이라는 중간 단계 자체를 없애고, 실제 React 소스코드나 캔버스 데이터 모델을 에이전트가 직접 읽고 고치게 한다.
@@ -31,9 +31,3 @@ polishHash: '7dfdb2186a39'
 - [Subframe, 공식 사이트](https://www.subframe.com/) — 1차. "생성된 코드가 당신의 코드베이스에 그대로 산다 — 플랫폼 락인을 피한다"는 포지셔닝 문구.
 - [tldraw, AI 문서](https://tldraw.dev/docs/ai) 및 [Agent 스타터 킷](https://tldraw.dev/starter-kits/agent) — 1차. 에디터 API를 통한 에이전트의 캔버스 직접 조작을 공식 문서화.
 - [tldraw/make-real (GitHub)](https://github.com/tldraw/make-real) — 1차(프로젝트 공식 저장소). 캔버스 선택 영역을 이미지로 캡처해 비전 모델(원래 GPT-4V)에 넘겨 HTML을 생성하는 초기 구현 방식.
-
-## 연결
-
-- [Design-to-Code Agent Workflows](/wiki/design-to-code/) — 이 카드가 속한 카테고리.
-- [Screenshot 기반 UI 생성](/wiki/design-to-code/screenshot-based-ui-generation/) — tldraw의 "make real" 자체는 이 카드가 다루는 이미지 캡처 방식과 겹친다는 점에 유의.
-- [컴포넌트 레지스트리 기반 생성](/wiki/design-to-code/component-registry-first-generation/) — registry가 "설치 가능한 표준 컴포넌트 집합"을 다룬다면, 이쪽은 "이미 존재하는 프로젝트의 실제 소스코드 전체"를 다룬다.

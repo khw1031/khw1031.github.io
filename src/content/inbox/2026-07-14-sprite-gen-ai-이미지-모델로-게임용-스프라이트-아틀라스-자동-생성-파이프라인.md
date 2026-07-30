@@ -11,8 +11,8 @@ tags:
   - 'workflow'
   - 'game-dev'
 canonical: 'https://github.com/aldegad/sprite-gen'
-lintHash: 'fe7910aeb688'
-polishHash: 'fe7910aeb688'
+lintHash: 'ac90a039a5c2'
+polishHash: 'ac90a039a5c2'
 ---
 
 ## TL;DR
@@ -63,9 +63,9 @@ polishHash: 'fe7910aeb688'
 - **[재사용 경로]** — 완성된 시트만 남아 있어도 `unpack_atlas_run.py`로 격자/매니페스트/알파 자동감지를 통해 curator-ready run 디렉터리를 복원할 수 있어, 기존 자산 역수입에도 쓸 수 있다.
 
 ## 용어 풀이
-- **component-row pipeline** — 스프라이트 시트를 상태별 "행"으로 나누어 생성·처리하는 방식. / 비유: 영화 필름을 장면별로 따로 촬영해 한 릴에 붙이는 것. / 비유가 깨지는 점: 실제 필름과 달리 각 행은 **동일 캐릭터 정체성**을 유지해야 하므로 기반 이미지 참조가 필수.
-- **soft-alpha unmix** — 크로마 배경색을 알파 값으로 "분리"하되 경계 픽셀의 반투명 정보를 보존하는 알고리즘. / 비유: 색종이 뒷면을 물에 불려 조심스럽게 떼어내는 것. / 비유가 깨지는 점: 단순 크로마키와 달리 **수학적 unmix**이므로 키 컬러가 전경에 섞인 경우(예: 녹색 의상) 추가 마스킹이 필요할 수 있음(원문에 명시 없음).
-- **manifest.json.frame_layout** — 각 프레임의 절대 좌표 사각형과 상태별 fps/루프 플래그를 담은 JSON. / 비유: 스프라이트 시트의 "목차". 엔진은 격자 크기를 가정하지 않고 이 좌표만 따라 샘플링한다.
+- **component-row pipeline** — 스프라이트 시트를 상태별 "행"으로 나누어 생성·처리하는 방식.
+- **soft-alpha unmix** — 크로마 배경색을 알파 값으로 "분리"하되 경계 픽셀의 반투명 정보를 보존하는 알고리즘.
+- **manifest.json.frame_layout** — 각 프레임의 절대 좌표 사각형과 상태별 fps/루프 플래그를 담은 JSON.
 - **SSoT (Single Source of Truth)** — 수치 정보를 한 파일(`sprite-request.json`)에만 두어 파이프라인 전체가 동일 수치를 참조하게 하는 설계 원칙.
 
 ## 시각 자료

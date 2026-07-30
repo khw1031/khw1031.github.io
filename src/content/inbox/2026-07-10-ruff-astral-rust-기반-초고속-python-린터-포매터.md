@@ -13,8 +13,8 @@ tags:
   - 'tooling'
   - 'astral'
 canonical: 'https://github.com/astral-sh/ruff'
-polishHash: 'ea67348356d3'
-lintHash: 'ea67348356d3'
+polishHash: '3d3656089ec9'
+lintHash: '3d3656089ec9'
 ---
 
 ## TL;DR
@@ -76,11 +76,3 @@ Ruff를 만든 Astral은 Python 패키지·프로젝트 매니저 **uv**, 타입
 - 설치: pip, uv, pipx, Homebrew, Conda, standalone installer.
 - 라이선스: MIT. GitHub 48.5k 스타.
 - 채택: FastAPI, Pandas, SciPy, Hugging Face, Apache Airflow 등.
-
-## 곁가지 (탐색 후보)
-
-- Black 호환 포매터를 별도로 두지 않고 `ruff format` 하나로 수렴시킬 때의 스타일 차이·마이그레이션 이슈.
-- 규칙 선택 정책: 900+ 규칙을 다 켜지 않고 프로젝트별로 어떤 규칙 세트를 고를 것인가(`select`/`ignore` 설계).
-- Astral 도구군(uv·ruff·ty)을 한 번에 쓰는 Python 워크플로 — "Rust로 다시 쓴 Python 툴체인"이라는 큰 그림.
-- 파서/AST 재사용 아키텍처: 한 번 파싱해 여러 규칙을 도는 구조가 속도에 기여하는 정도.
-- LSP·에디터 통합(ruff-lsp / 네이티브 서버)로 실시간 린트를 붙일 때의 경험.

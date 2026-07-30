@@ -7,8 +7,8 @@ description: 사람들은 예쁜 인터페이스를 실제로 더 쓰기 쉽다�
 lang: ko
 tags: ['aesthetic-usability-effect', 'usability', 'aesthetics', 'perception', 'emotional-design']
 summary: "Masaaki Kurosu & Kaori Kashimura(1995, CHI)가 26개 ATM 레이아웃을 252명에게 평가시켜, '겉보기 사용성(apparent usability)'과 '아름다움'의 상관이 강하다는 것을 처음 보였다. Noam Tractinsky et al.(2000, 'What is beautiful is usable')은 이를 재현·확장해, 시스템의 미감이 사용 전후 사용성 인식에 영향을 준 반면 실제 사용성은 미감 인식에 영향을 주지 못했음을 보였다. 미감이 주관적이어서 무시할 수 있다는 통념을 깨는, 두 축을 잇는 다리."
-lintHash: '491bff2fe6d8'
-polishHash: '491bff2fe6d8'
+lintHash: '3da0d52bcb2c'
+polishHash: '3da0d52bcb2c'
 ---
 
 > 한 줄 명제: 예쁜 것을 사람들은 실제로 "더 쓰기 쉽다"고 느낀다 — 미감은 사용성 인식에 직접 영향을 주며, 작은 결함에 대한 관용마저 만든다.
@@ -30,10 +30,3 @@ polishHash: '491bff2fe6d8'
 - [Tractinsky, N., Katz, A. S., & Ikar, D. (2000), What is beautiful is usable — *Interacting with Computers* 13(2), 127–145](https://doi.org/10.1016/S0953-5438(00)00031-X) — 1차. 재현·확장 연구. ([저자 공개 PDF](https://www.ise.bgu.ac.il/faculty/noam/papers/00_nt_ask_di_iwc.pdf))
 - [Kurosu, M. & Kashimura, K. (1995), Apparent usability vs. inherent usability — CHI '95 Companion, 292–293](https://doi.org/10.1145/223355.223680) — 1차. 효과를 처음 보인 ATM 실험.
 - [NN/g — The Aesthetic-Usability Effect](https://www.nngroup.com/articles/aesthetic-usability-effect/) — 2차. Kate Moran(2024 갱신). 실무 해설, Norman 《Emotional Design》(2004) 연결.
-
-## 연결
-
-- [usability](/wiki/design-principles/usability/) — 상위 허브. 미감↔사용성을 잇는 다리.
-- [aesthetics-and-layout](/wiki/design-principles/aesthetics-and-layout/) — 이 효과가 "미감 축"을 사용성 논의로 끌어들이는 근거.
-- [Nielsen 휴리스틱](/wiki/design-principles/usability/nielsen-heuristics/) — 8번(심미·미니멀)의 실증적 뒷받침.
-- [Material Design](/wiki/design-principles/material-design/) — 미감(표현)과 사용성을 한 시스템에 통합한 사례.

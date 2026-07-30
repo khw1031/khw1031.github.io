@@ -7,8 +7,8 @@ description: 이 카테고리의 산출물 프레임 — DESIGN.md(Google Labs)�
 lang: ko
 tags: ['design-md', 'design-tokens', 'ai-agents', 'design-system', 'design-to-code']
 summary: "이 카테고리의 앵커는 특정 디자인 시스템(Material 등)이 아니라 산출물 포맷 DESIGN.md다. DESIGN.md(google-labs-code, alpha v0.3.0)는 'AGENTS.md의 시각 디자인 버전' — YAML frontmatter(기계용 토큰: color/dimension/typography/rounded/spacing)와 마크다운 산문(사람·에이전트용 의도)을 한 파일에 담고, 섹션 순서를 Overview→Colors→Typography→Layout→Elevation&Depth→Shapes→Components→Do's and Don'ts로 고정한다. 토큰만으로 판단 안 되는 '왜·언제·예외'를 산문이 채운다. 이 라이브러리의 원리 카드들이 바로 그 산문 섹션을 채울 근거다 — 즉 DESIGN.md의 섹션 구조가 이 카테고리의 조직 렌즈다."
-lintHash: 'd09305db614c'
-polishHash: 'd09305db614c'
+lintHash: '405ea76ff67f'
+polishHash: '405ea76ff67f'
 ---
 
 > 한 줄 명제: 이 카테고리의 산출물은 특정 디자인 시스템이 아니라 **DESIGN.md** — 좋은 UI/UX 원리를, 코딩 에이전트가 읽는 토큰+산문 포맷의 각 섹션(Colors·Typography·Layout·Elevation·Shapes·Components·Do's&Don'ts)에 채우는 것이 목표다.
@@ -54,10 +54,3 @@ npx @google/design.md export --format css-tailwind DESIGN.md > theme.css
 - [DESIGN.md Specification — stitch.withgoogle.com](https://stitch.withgoogle.com/docs/design-md/specification) — 1차. 포맷 스펙 전문(섹션 규칙·토큰 스키마).
 - [@google/design.md — npm](https://www.npmjs.com/package/@google/design.md) — 1차. CLI 패키지 (v0.3.0, 2026-06-15 게시).
 - [W3C Design Tokens (DTCG)](https://www.designtokens.org/) — 2차. 토큰 포맷의 영감이자 `export` 대상 표준(단, DTCG는 W3C 표준이 아니라 Community Group 리포트 — → [dark-mode-and-theming](/wiki/design-principles/aesthetics-and-layout/dark-mode-and-theming/)).
-
-## 연결
-
-- [Design Principles](/wiki/design-principles/) — 이 카드가 앵커로 프레이밍하는 상위 허브. 섹션↔카드 전체 매핑이 거기 있다.
-- [Design-to-Code Agent Workflows](/wiki/design-to-code/) — DESIGN.md가 속하는 인접 카테고리(디자인을 코드로 넘기는 파이프라인). 특히 [이식 가능한 텍스트 디자인 스펙](/wiki/design-to-code/design-token-dsl-handoff/)이 DESIGN.md의 핸드오프 메커니즘을 다룬다. 이 카테고리가 "무슨 좋은 디자인을 담을까(규범)"라면 저쪽은 "어떻게 담아 코드로 넘길까(메커니즘)".
-- [Material Design](/wiki/design-principles/material-design/) — DESIGN.md에 담을 수 있는 **한 디자인 시스템 사례**(Apple·Carbon·Tailwind와 나란한). 앵커가 아니라 예시.
-- [color-and-contrast](/wiki/design-principles/color-and-contrast/) · [elevation-and-depth](/wiki/design-principles/aesthetics-and-layout/elevation-and-depth/) · [shape-and-corner-radius](/wiki/design-principles/aesthetics-and-layout/shape-and-corner-radius/) — DESIGN.md 섹션명과 그대로 대응하는 카드들.

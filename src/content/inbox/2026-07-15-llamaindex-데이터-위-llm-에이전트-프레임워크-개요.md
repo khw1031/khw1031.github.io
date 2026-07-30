@@ -11,8 +11,8 @@ tags:
   - 'llamaindex'
   - 'agent'
 canonical: 'https://developers.llamaindex.ai/python/framework/'
-polishHash: 'acc41e99ba2e'
-lintHash: 'acc41e99ba2e'
+polishHash: '2ca1d9937e19'
+lintHash: '2ca1d9937e19'
 ---
 
 > 한 줄 명제: LlamaIndex는 공개 데이터로만 학습된 LLM에 내 사설·도메인 데이터를 연결하는 "컨텍스트 증강(context augmentation)" 프레임워크로, 데이터 로딩→인덱싱→저장→쿼리로 이어지는 RAG 파이프라인 위에 도구를 쓰는 에이전트와 이벤트 기반 워크플로우까지 얹어 데이터 위에서 동작하는 LLM 애플리케이션을 만든다.
@@ -101,27 +101,6 @@ RAG 위에 두 가지 확장 축이 있다. **Agent**는 "LLM을 도구·메모�
 
 > 주의: 두 프레임워크의 무게중심·"둘 다 쓴다" 결론은 벤더 문서(1차)가 아니라 비교 블로그(2차)의 합의에서 나온 것이다. "LlamaIndex가 검색 40% 빠르다" 같은 수치는 출처가 블로그뿐이라 **검증되지 않은 2차 주장**으로 취급하고 본문에 사실로 싣지 않았다.
 
-## 비유
-
-**LlamaIndex를 "개인 비서를 위한 사내 자료실 시스템"에 비유하면**: LLM은 세상 지식은 많지만 우리 회사 사정은 모르는 신입 비서다. Connector는 여기저기 흩어진 문서를 자료실로 실어 나르는 수레(로딩), 사서가 문서를 챕터 카드로 쪼개 색인을 만드는 것이 Node·Index(인덱싱), 색인을 서고에 꽂아두는 것이 저장이다. 비서가 질문을 받으면 Retriever가 관련 카드를 찾고 Response Synthesizer가 그 카드로 답을 정리한다(쿼리). Agent는 "카드만 찾는" 데 그치지 않고 계산기·이메일 같은 도구를 스스로 꺼내 여러 단계로 일을 처리하는 유능한 비서다.
-
-**깨지는 지점**: 자료실 사서는 카드의 '의미'를 이해하지 않는다 — 벡터 간 수학적 거리만 잰다. 또 비유 속 비서는 사람이지만, 에이전트의 "판단"은 확률적 토큰 생성이라 도구 선택이 틀릴 수 있다. 그래서 Observability·Evaluation이라는, 비유에는 없는 별도 감시 장치가 반드시 필요하다.
-
-## 곁가지
-
-- **LangChain 비교 심화**: 무게중심·핵심 추상·에이전트·RAG 기본기·함께 쓰기 패턴은 위 「LangChain과의 비교」 절에 정리 → 프로덕션에서 "LlamaIndex 검색 + LangGraph 에이전트" 결합 설계를 실제로 짤 때 각 프레임워크의 통합 지점을 재확인
-- **Workflows 심화**: 이벤트 기반 step 설계, 서버로 배포(`workflows/deployment`)까지 다뤄야 할 때 → Workflows 1.0 공식 문서 참조
-- **PropertyGraphIndex 심화**: 벡터 검색만으로 부족한 엔티티·관계 질의(GraphRAG류)가 필요할 때 → Property Graph 문서 참조
-- **LlamaParse/LlamaCloud 심화**: 복잡한 표·스캔 PDF의 파싱 품질이 검색 정확도를 좌우할 때 → LlamaParse 문서 참조
-- **평가 심화**: retrieval 정확도 vs 생성 품질을 분리 측정하는 지표 설계가 필요할 때 → Evaluation 모듈 참조
-
-## 연결
-
-- **Qdrant/벡터 검색 엔진**: LlamaIndex의 ③저장·④쿼리는 Qdrant 같은 Vector Store를 백엔드로 쓴다. Qdrant가 "벡터를 어떻게 저장·검색하는가"(HNSW, quantization, hybrid)를 책임진다면, LlamaIndex는 "그 위에서 문서를 어떻게 로딩·청킹·합성하는가"의 상위 오케스트레이션을 맡는다 — 층위가 다른 상보 관계다.
-- **RAG ↔ 에이전트**: RAG는 "검색→합성"의 단방향 파이프라인, 에이전트는 "도구를 반복 호출하는 추론 루프". LlamaIndex는 Query Engine 자체를 에이전트의 도구로 감싸 RAG를 에이전트의 한 능력으로 흡수한다.
-- **Workflows ↔ 범용 오케스트레이터**: Workflows 1.0이 독립 패키지가 되면서, LangGraph 같은 이벤트/그래프 기반 오케스트레이션 프레임워크와 같은 문제 공간(분기·반복·동시성)을 겨냥하게 됐다.
-- **Settings ↔ 경계 객체 원칙**: LLM·임베딩 모델 선택을 Settings에 가두는 것은 "변하기 쉬운 provider 지식을 경계 한 곳에 모은다"는 원칙의 구현 — 소비 코드(Query Engine)는 어떤 모델인지 몰라도 된다.
-
 ## 레퍼런스
 
 - [LlamaIndex Framework (Python)](https://developers.llamaindex.ai/python/framework/) — 프레임워크 정의와 상위 개념 랜딩 페이지 (1차)
@@ -133,14 +112,3 @@ RAG 위에 두 가지 확장 축이 있다. **Agent**는 "LLM을 도구·메모�
 - [run-llama/llama_index (GitHub)](https://github.com/run-llama/llama_index) — 소스 저장소, "document agent and OCR platform" 재포지셔닝 확인 (1차)
 - [LangChain Overview](https://docs.langchain.com/oss/python/langchain/overview) — `create_agent`·LangGraph·Deep Agents·LangSmith 구성과 에이전트 우선 포지셔닝 (1차, 비교 대상)
 - [LangChain vs LlamaIndex 2026 비교 글 모음](https://aimultiple.com/rag-frameworks) — 무게중심 차이·"둘 다 쓰기" 실무 합의의 출처 (2차, 애그리게이터) — 수치 주장은 미검증
-
----
-## 인출 질문
-
-1. LlamaIndex가 말하는 "컨텍스트 증강(context augmentation)"이 풀려는 근본 문제는 무엇이며, RAG의 다섯 단계(로딩·인덱싱·저장·쿼리·평가)가 각각 그 문제 해결에서 맡는 역할을 설명하라.
-2. Document와 Node의 차이는 무엇이고, 쿼리 단계에서 Retriever → Node Postprocessor → Response Synthesizer로 이어지는 흐름이 왜 이 순서인지 서술하라.
-3. RAG와 Agent는 어떻게 다르며, Workflows가 "이벤트 기반"이라는 점이 분기·반복·동시 실행에서 어떤 이점을 주는지 설명하라.
-
-## 내 관점
-
-<!-- 학습자가 직접 채우는 섹션 — 파이프라인은 대필하지 않는다 -->

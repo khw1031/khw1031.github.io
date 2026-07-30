@@ -11,8 +11,8 @@ tags:
   - 'workflow'
   - 'reasoning'
 canonical: 'https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/prompting-claude-fable-5'
-lintHash: '7495c67b4a01'
-polishHash: '7495c67b4a01'
+lintHash: '1d3a1620d9c7'
+polishHash: '1d3a1620d9c7'
 ---
 
 ## TL;DR
@@ -75,13 +75,13 @@ Effort 레벨은 이 모델에서 intelligence, latency, cost 세 가지 축을 
 
 ## 용어 풀이
 
-- **Effort** — 모델이 문제에 투입하는 '사고의 깊이'를 제어하는 파라미터 / 낮은 effort는 빠른 직답, 높은 effort는 심층 검증. / 비유가 깨지는 지점: effort는 단순한 '속도 조절'이 아니라 모델이 생성하는 토큰 수와 추론 경로 자체를 바꾸므로, cost와 latency가 비선형적으로 변할 수 있다.
+- **Effort** — 모델이 문제에 투입하는 '사고의 깊이'를 제어하는 파라미터 / 낮은 effort는 빠른 직답, 높은 effort는 심층 검증.
 
-- **Subagent** — 오케스트레이터 에이전트가 위임한 하위 작업을 수행하는 독립 실행 단위 / 원문은 '비동기 통신'과 '장기 생존(long-lived)'을 강조. / 비유가 깨지는 지점: 일반 함수 호출과 달리 서브에이전트는 자체 컨텍스트를 가지며, cache read를 통해 상태를 유지할 수 있어 단순한 '병렬 처리'보다 복잡한 패턴이다.
+- **Subagent** — 오케스트레이터 에이전트가 위임한 하위 작업을 수행하는 독립 실행 단위 / 원문은 '비동기 통신'과 '장기 생존(long-lived)'을 강조.
 
-- **Adaptive thinking** — Claude Fable 5에 도입된 사고 모드 / 원문에 따르면 extended thinking budget을 사용하지 않고, thinking 출력이 요약 형태로만 제공된다. / 비유가 깨지는 지점: '생각'이라는 용어가 붙었지만 실제로는 API 파라미터로 제어되는 내부 추론 단계이며, 사용자가 직접 내용을 보려면 structured thinking blocks을 읽어야 한다.
+- **Adaptive thinking** — Claude Fable 5에 도입된 사고 모드 / 원문에 따르면 extended thinking budget을 사용하지 않고, thinking 출력이 요약 형태로만 제공된다.
 
-- **Send-to-user tool** — 에이전트가 턴을 종료하지 않고 사용자에게 정확히 그대로 전달할 메시지를 생성하는 도구 / 진행 상황 숫자, 생성된 코드 스니펫, 사용자 질문에 대한 직접 답변 등에 사용. / 비유가 깨지는 지점: 이 도구는 '로깅'이 아니라 **UI 렌더링을 위한 정확한 메시지 전달**이 목적이므로, 내부 reasoning이나 narration에 사용하면 본래 목적을 훼손한다.
+- **Send-to-user tool** — 에이전트가 턴을 종료하지 않고 사용자에게 정확히 그대로 전달할 메시지를 생성하는 도구 / 진행 상황 숫자, 생성된 코드 스니펫, 사용자 질문에 대한 직접 답변 등에 사용.
 
 ## 시각 자료
 

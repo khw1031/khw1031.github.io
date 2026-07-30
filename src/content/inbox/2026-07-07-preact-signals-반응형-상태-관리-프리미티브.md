@@ -9,8 +9,8 @@ tags:
   - 'signal'
   - 'reactive-state'
 canonical: 'https://preactjs.com/guide/v10/signals/'
-lintHash: '3d801fdba771'
-polishHash: '3d801fdba771'
+lintHash: '99fcbc25c129'
+polishHash: '99fcbc25c129'
 ---
 
 > 한 줄 명제: Preact Signals는 값의 변화를 자동으로 추적하여 UI를 최소 비용으로 갱신하는 반응형 프리미티브로, 신호의 정체성(identity) 유지와 지연 평가(lazy evaluation)가 핵심 작동 원리이다.
@@ -140,24 +140,6 @@ JSX 텍스트 위치에 신호 객체를 `.value` 없이 전달하면 Preact는 
 [유틸리티] 📎
 `@preact/signals/utils`(v2.1.0+)에서 `Show`는 신호 기반 조건부 렌더링, `For`는 신호 배열의 아이템을 자동 캐싱하며 렌더링하는 컴포넌트를 제공한다. `useLiveSignal`은 외부 신호와 동기화되는 로컬 신호를 만들고, `useSignalRef`는 `.current` 프로퍼티를 가진 ref 스타일 신호를 생성한다.
 
-## 비유
-
-**다리:** 신호를 '변화를 알려주는 벨이 달린 상자'로 생각하라. 상자(신호) 자체는 고정되어 있고, 내용물(.value)이 바뀌면 벨이 울려서 지켜보는 사람(구독자)에게 알린다. 상자를 다른 방(props/context)으로 옮겨도 상자 자체는 그대로이므로 옮기는 사람은 변화에 반응하지 않고, 내용물을 직접 들여다본 사람만 벨을 듣는다.
-
-**깨지는 지점:** 이 비유는 신호가 '수동적 알림'만 한다고 암시하지만, 실제로 computed는 게으르게(lazy) 작동해서 아무도 `.value`를 읽지 않으면 벨조차 울리지 않는다. 또한 batch는 여러 벨 소리를 하나의 알림으로 합치는데, 상자 비유로는 이 '합치기' 동작을 자연스럽게 표현할 수 없다.
-
-## 곁가지
-
-- Signals 내부 디펜던시 추적 심화: 신호 그래프의 DAG 구조와 fine-grained reactivity가 필요해질 때
-- Signals vs useState/useReducer 비교 심화: Preact와 React 생태계 간 상태 관리 전략을 선택해야 할 때
-- Model + TypeScript 패턴 심화: 대규모 앱에서 타입 안전 모델 아키텍처를 설계해야 할 때
-
-## 연결
-
-- Preact Context: 전역 상태를 props drilling 없이 컴포넌트 트리에 주입하는 표준 수단으로 Signals와 결합
-- Virtual DOM diffing: Signals의 JSX 직접 바인딩 최적화가 VDOM 오버헤드를 우회하는 지점
-- Reactivity 시스템 전반: Vue reactivity, Solid signals, MobX와 개념적 공통점(observable → subscriber 패턴)과 차이점 비교
-
 ## 레퍼런스
 
 - [Preact Guide — Signals](https://preactjs.com/guide/v10/signals/) (1차) — Preact Signals의 설치부터 signal/computed/effect/batch/Model까지 전체 API와 사용 패턴을 다룬 공식 가이드. 기준 버전: Preact v10, @preact/signals 기준 버전 명시 없음.
@@ -165,14 +147,3 @@ JSX 텍스트 위치에 신호 객체를 `.value` 없이 전달하면 Preact는 
 - [@preact/signals-react (GitHub)](https://github.com/preactjs/signals/tree/main/packages/react) (1차) — React용 Signals 어댑터 저장소.
 - [Signals Debug (GitHub)](https://github.com/preactjs/signals/blob/main/packages/debug) (2차) — 신호 갱신·effect 실행·computed 재계산을 콘솔에 출력하는 디버깅 도구.
 - [Signals DevTools (GitHub)](https://github.com/preactjs/signals/blob/main/packages/devtools-ui) (2차) — Signals를 시각적으로 디버깅하는 DevTools UI.
-
----
-## 인출 질문
-
-1. 신호를 props로 전달해도 상위 컴포넌트가 재렌더링되지 않는 이유를 정체성(identity) 관점에서 한 문장으로 설명하라.
-2. `batch()` 안에서 수정된 신호에 접근한 computed와 그렇지 않은 computed의 갱신 시점은 어떻게 다른가?
-3. effect가 메모리 누수를 일으킬 수 있는 상황과 이를 방지하는 방법을 서술하라.
-
-## 내 관점
-
-<!-- 학습자가 직접 채우는 섹션 — 파이프라인은 대필하지 않는다 -->

@@ -4,7 +4,7 @@ description: >
   Take a raw idea, research BOTH how to best develop it (idea-handling methodologies) AND its
   subject-domain evidence (official/primary sources first), apply the chosen methodology, and
   persist the result as an OKF note under src/content/idea, served on the unlisted /idea route.
-  /idea behaves like the notes/specs routes (URL-only, excluded from search index, sitemap, and
+  /idea behaves like the notes route (URL-only, excluded from search index, sitemap, and
   robots) but is additionally NOT linked in the footer — reachable only by a direct URL. Content
   is committed plaintext, so it is public-if-found; do not put secrets in it. Use when the user
   hands over an idea to develop, expand, pressure-test, or capture. 아이디어를 방법론+도메인
@@ -29,13 +29,13 @@ argument-hint: "[발전시킬 아이디어 | idea/inbox slug(승격)]"
 인박스와의 관계: 가벼운 캡처는 `ideabox`(`/ideabox`)가 `src/content/idea/inbox/`에 만든다. idea는
 그 후보를 방법론+근거로 **발전**시키고, 소스가 인박스면 **승격**한다(원본 삭제).
 
-다른 컬렉션과의 경계: 공개 레퍼런스는 research(위키), 개인 학습 노트는 note-promoter(notes),
-에이전트 실행 지침은 specs. idea는 **아이디어 개발** 전용이다.
+다른 컬렉션과의 경계: 공개 레퍼런스는 research(위키), 개인 학습 노트는 core(notes),
+idea는 **아이디어 개발** 전용이다.
 
 ## Scope of /idea (알아둘 것)
 
-- notes/specs와 같은 **unlisted 라우트** — URL로만 접근, 검색 인덱스·사이트맵·robots에서 제외.
-- 단, notes/specs와 달리 **푸터에도 링크되지 않는다** — 직접 URL로만 도달한다.
+- notes와 같은 **unlisted 라우트** — URL로만 접근, 검색 인덱스·사이트맵·robots에서 제외.
+- 단, notes와 달리 **푸터에도 링크되지 않는다** — 직접 URL로만 도달한다.
 - 본문은 **평문으로 커밋**되는 공개 정적 사이트다 — URL을 알거나 repo를 뒤지면 읽힌다(검색엔
   안 잡힘). **비밀값·민감정보를 넣지 않는다.** 그런 내용이면 저장을 멈추고 사용자에게 알린다.
 
@@ -89,6 +89,6 @@ argument-hint: "[발전시킬 아이디어 | idea/inbox slug(승격)]"
 
 - `src/content/idea/`에만 콘텐츠를 쓴다. 라우팅·레이아웃·목록·노출 코드는 이 스킬이 수정하지 않는다
   (필요하면 escalate).
-- notes/wiki/specs와 구분한다 — 개인 학습 노트는 note-promoter, 공개 레퍼런스는 research, 에이전트
-  지침은 specs, 아이디어 개발은 idea.
+- notes/wiki와 구분한다 — 개인 학습 노트는 core, 공개 레퍼런스는 research,
+  아이디어 개발은 idea.
 - idea는 공개-if-found이므로 비밀값·내부 URL·비공개 데이터를 넣지 않는다.

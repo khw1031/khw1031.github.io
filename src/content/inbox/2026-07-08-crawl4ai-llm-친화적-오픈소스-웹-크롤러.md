@@ -10,8 +10,8 @@ tags:
   - 'api'
   - 'scraping'
 canonical: 'https://github.com/unclecode/crawl4ai'
-lintHash: 'a372190783a9'
-polishHash: 'a372190783a9'
+lintHash: 'fa7bc5f4d38a'
+polishHash: 'fa7bc5f4d38a'
 ---
 
 > 한 줄 명제: Crawl4AI는 웹 페이지를 LLM·RAG·agent가 즉시 소비할 수 있는 구조화된 Markdown과 JSON으로 변환하는 async-first 오픈소스 크롤링 파이프라인이다.
@@ -301,27 +301,6 @@ else:
     result = requests.get(f"http://localhost:11235/task/{task_id}")
 ```
 
-## 비유
-
-**Crawl4AI는 "웹 페이지의 동시 통역사"다.** HTML이라는 소스 언어를 LLM이 이해하는 Markdown이라는 타겟 언어로 실시간 번역하되, 원문의 구조(제목 계층, 표, 코드 블록)를 보존하고 노이즈(광고, 네비게이션)는 걸러낸다.
-
-**깨지는 지점**: 인간 통역사는 문맥을 이해하고 의미를 재해석·요약할 수 있지만, Crawl4AI는 구조적 변환만 수행하며 의미 해석은 하지 않는다. 의미 기반 필터링(BM25, Pruning)도 통계적 근사이지 의미 이해가 아니다. 또한 통역사는 1:1 대화지만, Crawl4AI는 브라우저 풀을 통해 수백 페이지를 병렬 처리한다 — 이 규모의 차이는 rate limiting, 메모리 관리, crash recovery 등 통역에는 없는 문제를 만들어낸다.
-
-## 곁가지
-
-- 도메인 특화 스크레이퍼 심화: 특정 사이트(전자상거래, 학술 DB)의 반복 패턴을 자동 스키마로 변환할 때 필요
-- Adaptive Crawling 심화: `AdaptiveConfig`로 사이트 패턴을 학습하는 자율 크롤러가 필요해질 때
-- LLMTableExtraction 심화: 대규모 테이블을 chunk 단위로 분할·추출·병합해야 할 때
-- MCP 통합 심화: Claude Code 등 AI 도구에 Crawl4AI Docker 서버를 직접 연결할 때
-
-## 연결
-
-- **RAG 파이프라인**: Crawl4AI가 생성한 fit Markdown이 RAG의 ingestion 소스로直接进入 — 토큰 비용과 노이즈가 임베딩 품질을 좌우
-- **LangChain / LlamaIndex**: 크롤링 결과를 document loader로 래핑하여 vector store에 적재하는 패턴
-- **Playwright**: Crawl4AI의 브라우저 자동화 기반 — `crawl4ai-setup`이 Playwright 바이너리를 설치
-- **LiteLLM (`unclecode-litellm`)**: `LLMExtractionStrategy`가 다양한 LLM provider를 통합 호출하는 데 사용 (v0.8.6에서 supply chain 공격 대응 위해 fork)
-- **MCP (Model Context Protocol)**: Docker 서버가 MCP integration을 제공해 AI agent가 직접 크롤 요청 가능
-
 ## 레퍼런스
 
 - [Crawl4AI GitHub 저장소](https://github.com/unclecode/crawl4ai) — 전체 소스 코드, README, 릴리스 노트의 단일 소스 of truth (1차)
@@ -332,14 +311,3 @@ else:
 - [Docker 예제 코드](https://github.com/unclecode/crawl4ai/blob/main/docs/examples/docker_example.py) — Docker API 호출 패턴 모음 (1차)
 - [Self-Hosting Guide](https://docs.crawl4ai.com/core/self-hosting/) — Docker 배포, 모니터링, 프로덕션 설정 가이드 (1차)
 - [Google Colab 데모](https://colab.research.google.com/drive/1SgRPrByQLzjRfwoRNq1wSGE9nYY_EE8C?usp=sharing) — 브라우저 없이 바로 실행해볼 수 있는 인터랙티브 노트북 (2차)
-
----
-## 인출 질문
-
-1. **(맵 재생)** Crawl4AI의 핵심 아키텍처를 구성하는 6가지 가지를 나열하고, 각 가지가 다루는 핵심 concern을 한 단어씩 설명하라.
-2. **(전이)** v0.8.x에서 v0.9로 self-hosted Docker API 서버를 업그레이드할 때 가장 중요한 두 가지 breaking change는 무엇이며, 왜 이것이 보안에 중요한가?
-3. **(전이)** 상품 목록 페이지에서 가격·상품명·이미지를 추출할 때 `JsonCssExtractionStrategy`를 선택해야 하는가, `LLMExtractionStrategy`를 선택해야 하는가? 선택의 근거를 비용·속도·유지보수 관점에서 설명하라.
-
-## 내 관점
-
-<!-- 학습자가 직접 채우는 섹션 — 파이프라인은 대필하지 않는다 -->

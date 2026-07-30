@@ -7,8 +7,8 @@ description: CU Boulder 컴퓨터과학과 부교수 Tom Yeh가 운영하는 "AI
 summary: "Tom Yeh는 CU Boulder 컴퓨터과학과의 실존 부교수(human-centered AI 연구)이며, 'AI by Hand'는 그의 학교 공식 소개 페이지에도 명시된 실재하는 아웃리치·교육 이니셔티브다. 실체는 구독자 7만 명 이상을 가진 Substack 퍼블리케이션(byhand.ai, 운영 주체 'By Hand Research')이며, 손 계산이 이해를 돕는다는 방법론적 근거로는 파인만의 격언 하나만 제시할 뿐 동료심사 연구는 없다 — 존재와 도달 범위는 확인되지만, 방법론의 학습효과 자체는 아직 검증된 주장이 아니라 실천가의 선언에 가깝다."
 lang: ko
 tags: ['tom-yeh', 'ai-by-hand', 'ai-education', 'source-verification']
-lintHash: '34ccf5e97086'
-polishHash: '34ccf5e97086'
+lintHash: '2f66b20b176c'
+polishHash: '2f66b20b176c'
 ---
 
 > 한 줄 명제: Tom Yeh와 "AI by Hand"는 CU Boulder가 공식적으로 인정하는 실존 인물·프로그램이지만, "손으로 쓰면 이해가 깊어진다"는 핵심 주장을 뒷받침하는 동료심사 연구는 프로그램 자신도 제시하지 않는다.
@@ -31,8 +31,3 @@ byhand.ai는 커스텀 도메인을 쓰고 있을 뿐 실제로는 Substack 퍼�
 - [Tom Yeh — CU Experts, University of Colorado Boulder](https://experts.colorado.edu/display/fisid_151584) — 1차. 대학 공식 연구자 디렉토리 등재.
 - [Tom Yeh (@tom-yeh) — LinkedIn](https://www.linkedin.com/in/tom-yeh/) — 1차(본인 계정). "AI by Hand" 콘텐츠 발행 채널.
 - [AI by Hand ✍️ — Adafruit 블로그 소개](https://blog.adafruit.com/2025/02/11/ai-by-hand-%E2%9C%8D%EF%B8%8F/) — 2차. 외부 매체의 소개성 보도.
-
-## 연결
-
-- [Computing Education](/wiki/computing-education/) — 이 카테고리의 허브.
-- [손글씨 필기 vs 타이핑](/wiki/learning-science/handwriting-note-taking/) · [ICAP Framework](/wiki/learning-science/icap-framework/) · [Procedural vs Conceptual Knowledge](/wiki/learning-science/procedural-vs-conceptual-knowledge/) — "손으로 쓰면 이해가 깊어진다"는 주장 자체를 검증할 때 참조할 학습과학 문헌.

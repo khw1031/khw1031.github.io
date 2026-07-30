@@ -5,8 +5,8 @@ description: 조직 지식을 markdown + YAML frontmatter 파일 트리로 표�
 summary: "AI 에이전트가 쓰는 조직 내부 지식(스키마·지표 정의·조인 경로·런북)이 카탈로그·위키·코드에 분산된 fragmented context 문제를, markdown 파일 + YAML frontmatter + 마크다운 링크 그래프라는 최소 스펙(OKF v0.1)으로 표준화하려는 시도를 정리한 레퍼런스 노트."
 lang: ko
 tags: ['okf', 'ai-agents', 'metadata', 'data-catalog', 'markdown']
-lintHash: '67472e8ee174'
-polishHash: '67472e8ee174'
+lintHash: '5ce2a4b79a20'
+polishHash: '5ce2a4b79a20'
 ---
 
 > 한 줄 명제: OKF는 "LLM이 유지보수하는 위키" 패턴을 이식 가능한 파일 포맷으로 표준화한 것이다 — 조직 지식을 플랫폼이 아니라 markdown 파일 트리에 담아, 어떤 에이전트·카탈로그·뷰어든 같은 지식을 소비하게 한다.
@@ -92,44 +92,9 @@ sales/
 
 **Gotcha**: v0.1은 "finished standard가 아니라 starting point"라고 스스로 명시한다. dbt·Iceberg·semantic layer·RDF 같은 기존 메타데이터 표준과의 관계는 이 글에서 다루지 않는다 — 실무 도입 판단에는 이 공백이 핵심 리스크다.
 
-## 비유
-
-OKF는 해운의 ISO 컨테이너 표준과 같다. 컨테이너 규격이 통일되자 어떤 배·트럭·크레인·항구든 내용물을 몰라도 같은 상자를 다룰 수 있게 되어 물류 생태계가 폭발했다. OKF도 지식을 표준 상자(markdown 파일 + `type` frontmatter)에 담아, 어떤 에이전트·카탈로그·뷰어든 만든 쪽을 몰라도 소비할 수 있게 하려는 것이다.
-
-**깨지는 지점**: 컨테이너는 내용물이 무엇이든 규격만 맞으면 가치가 성립하지만, OKF의 가치는 전적으로 상자 안 내용물(마크다운 본문)의 품질에 달려 있다. `type`만 있으면 빈 문서도 스펙 준수(conformant)이므로, 규격 준수가 지식의 정확성·최신성을 전혀 보장하지 않는다. 또 컨테이너는 불투명한 채 운송되지만 OKF 문서는 사람과 에이전트가 열어 읽는 것 자체가 목적이다.
-
-## 곁가지
-
-- **OKF 스펙 원문 정독 (conformance·크로스링크 규칙)** — OKF 번들을 직접 만들거나 파싱하는 코드를 쓰게 될 때.
-- **enrichment agent 구조 분석** — 데이터셋 메타데이터 자동 문서화 파이프라인을 우리 환경에 만들고 싶을 때.
-- **이 블로그 notes의 OKF 호환성 검토** — 내 노트를 외부 에이전트가 표준 포맷으로 소비하게 하고 싶어질 때 (frontmatter에 `type` 추가 수준인지, 구조 변경이 필요한지).
-
-## 연결
-
-- 이 레포의 notes 구조 — markdown + frontmatter + 허브(`index.md`) + 자식 노트라는 같은 패턴을 독립적으로 수렴했다. 특히 `index.md`를 통한 점진 공개는 OKF의 설계와 동일한 발상.
-- [OpenWiki](/inbox/2026-07-05-openwiki-코딩-에이전트를-위한-오픈소스-레포-문서화-에이전트/) — "에이전트가 유지보수하는 문서화"라는 같은 계보의 코드 레포 쪽 구현.
-- AGENTS.md/CLAUDE.md 관습 — OKF가 명시적으로 계보로 인용하는, 에이전트용 컨텍스트 파일의 선행 사례.
-
 ## 레퍼런스
 
 - [Introducing the Open Knowledge Format — Google Cloud Blog](https://cloud.google.com/blog/products/data-analytics/how-the-open-knowledge-format-can-improve-data-sharing) — 1차. 이 노트의 주 소스 (2026-06-13, Sam McVeety·Amir Hormati).
 - [OKF 스펙 repo](https://github.com/GoogleCloudPlatform/knowledge-catalog/tree/main/okf) — 1차. 스펙 전문과 샘플 번들. 기준 버전 v0.1 (확인일 2026-07-05).
 - [Karpathy — LLM wiki gist](https://gist.github.com/karpathy/442a6bf555914893e9891c11519de94f) — 2차. OKF가 형식화했다고 밝힌 원 패턴.
 - [Obsidian vault](https://obsidian.md/help/vault) — 2차. 같은 계보로 인용된 파일 기반 지식 저장소.
-
----
-
-## 인출 질문
-
-- OKF의 여섯 가지(문제→스펙→그래프→원칙→생태계→계보)를 기억으로 재생해보기.
-- OKF에서 유일한 필수 필드는? 예약 파일 두 개와 각각의 역할은?
-- 개념 간 관계(조인 경로 등)는 스펙에서 어떻게 표현되는가?
-- 설계 원칙 "Format, not platform"이 구체적으로 배제하는 것은?
-- 전이: 우리 팀 dbt 프로젝트의 모델·지표 메타데이터를 OKF 번들로 내보낸다면 디렉토리 트리가 어떤 모양이 될까? 어떤 정보가 frontmatter로 가고 어떤 정보가 본문으로 가야 하나?
-- 컨테이너 비유가 깨지는 지점은 어디이고, 그것이 OKF 도입 판단에 왜 중요한가?
-
-## 내 관점
-
-- 이 블로그의 notes는 이미 OKF와 거의 같은 모양(markdown + frontmatter + index.md 점진 공개 + 링크 그래프)으로 독립 수렴해 있다. 전환의 실체는 `type` 필드 추가 수준이라 비용이 낮지만, 뒤집으면 미루는 비용도 낮다.
-- 지금 전환하지 않기로 판단 (2026-07-05). 이 노트의 소비자는 나와 이 레포의 Claude Code뿐이고, 후자는 CLAUDE.md + note-promoter 스킬이라는 더 풍부한 계약을 이미 갖고 있다. OKF의 가치는 "만든 쪽을 모르는 제네릭 소비자"가 나타날 때만 발생하는데, 아직 그런 소비자가 없다. v0.1 알파에 조기 베팅해서 선점되는 이득도 개인 노트에는 없다.
-- 재검토 트리거: ① 노트를 다른 레포/환경의 에이전트에 컨텍스트 번들로 물려주고 싶은 구체적 순간이 올 때, ② OKF가 v1.0 또는 GCP 밖 소비자를 얻을 때, ③ visualizer 같은 도구를 써보고 싶을 때 — 그때도 전면 전환이 아니라 `type` 필드만 얹는 실험이면 충분하다.

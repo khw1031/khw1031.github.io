@@ -11,8 +11,8 @@ tags:
   - 'state-management'
   - 'islands-architecture'
 canonical: 'https://docs.astro.build/en/recipes/sharing-state-islands/'
-lintHash: '4480b5801e19'
-polishHash: '4480b5801e19'
+lintHash: '20080f8a3231'
+polishHash: '20080f8a3231'
 ---
 
 > 한 줄 명제: Astro Islands 아키텍처에서는 React/Vue의 Context 같은 프레임워크 전용 상태 전파 수단을 쓸 수 없으므로, Nano Stores라는 프레임워크 독립적인 경량 상태 저장소를 통해 클라이언트 측 Island 간 상태를 공유한다.
@@ -117,35 +117,8 @@ Nano Stores가 선택된 이유는 번들 크기(1KB 미만)와 프레임워크 
 [제한사항: 서버 컴포넌트에서는 사용 불가] ⭐
 `.astro` 파일의 frontmatter나 하이드레이션되지 않은 컴포넌트에서 Nano Stores를 쓰는 것은 세 가지 제한이 있다. 첫째, 서버에서 store에 write해도 클라이언트 컴포넌트에는 반영되지 않는다. 둘째, Nano Store 인스턴스를 props로 전달할 수 없다. 셋째, `.astro` 컴포넌트는 리렌더되지 않으므로 subscribe 자체가 의미가 없다. Nano Stores는 클라이언트 측 반응성을 목적으로 설계되었다.
 
-## 비유
-
-Nano Stores는 건물 공용 사서함이다. 각 Island(거주민)는 자신의 집(프레임워크) 안에서 독자적으로 생활하지만, 우편물(상태)은 공용 사서함에 넣고 빼며 공유한다. 사서함은 어느 집 언어(React, Vue, Svelte)로 쓰여진 편지든 상관없이 처리한다.
-
-**깨지는 지점:** 사서함은 수동 read/write만 가능하다. Nano Stores의 반응성(구독 시 자동 리렌더)은 사서함에 비유할 수 없다. 또한 서버(.astro 파일)에서는 사서함에 접근할 수 없는 제약이 있는데, 이는 물리적 사서함과 달리 Astro의 SSR/CSR 경계에서 오는 아키텍처적 제한이다.
-
-## 곁가지
-
-Nano Stores async/lazy stores 심화: 서버에서 데이터를 가져와 클라이언트 상태와 동기화할 때 필요해질 때
-Astro Server Islands + Nano Stores 심화: SSR 데이터와 클라이언트 상태를 연결해야 할 때 필요해질 때
-Svelte stores vs Nano Stores 선택 기준 심화: 단일 Svelte 프로젝트에서 내장 store 대신 Nano Stores를 선택해야 하는 근거가 필요해질 때
-
-## 연결
-
-- [Islands architecture](https://docs.astro.build/en/concepts/islands/) — partial hydration이 상태 공유 문제를 발생시키는 근본 구조
-- [Share state between Astro components](https://docs.astro.build/en/recipes/sharing-state/) — 서버 측 `.astro` 컴포넌트 간 상태 공유는 별도 레시피로 다룸
-- React Context / Vue provide-inject — Astro Islands에서는 동작하지 않는 프레임워크 전용 대안
-
 ## 레퍼런스
 
 - https://docs.astro.build/en/recipes/sharing-state-islands/ — Astro 공식 레시피: Nano Stores로 Islands 간 상태 공유 방법, atom/map API 사용 예제 포함 (1차, 버전 명시 없음)
 - https://github.com/nanostores/nanostores — Nano Stores 공식 저장소: atom, map, lazy stores API 레퍼런스 (1차)
 - https://github.com/withastro/astro/tree/main/examples/with-nanostores — 완성된 이커머스 예제 코드 (1차)
-
-## 인출 질문
-
-1. (맵 재생) Astro Islands 환경에서 React Context를 쓸 수 없는 이유와 Nano Stores가 이를 해결하는 메커니즘을 큰 그림의 가지 순서대로 서술하시오.
-2. (전이) 이벤트 핸들러 내부에서 Nano Store 값을 읽을 때 `useStore` 대신 `.get()`을 써야 하는 이유를 설명하고, 이 원칙을 어렸을 때 어떤 버그가 발생할 수 있는지 추론하시오.
-
-## 내 관점
-
-<!-- 학습자가 직접 채우는 섹션 — 파이프라인은 대필하지 않는다 -->

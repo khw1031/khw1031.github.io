@@ -10,8 +10,8 @@ tags:
   - 'frontend'
   - 'workflow'
 canonical: 'https://ai-sdk.dev/docs/ai-sdk-ui/generative-user-interfaces'
-lintHash: '85088251c14d'
-polishHash: '85088251c14d'
+lintHash: '3e7b44ee53b9'
+polishHash: '3e7b44ee53b9'
 ---
 
 > 한 줄 명제: Generative UI는 LLM의 도구 호출 결과를 React 컴포넌트 매핑으로 전환하여 텍스트 너머의 동적 인터페이스를 생성하는 파이프라인이다.
@@ -365,37 +365,7 @@ export default function Page() {
 
 **[확장 패턴]** ⭐ 새로운 기능을 추가할 때는 도구 정의(`ai/tools.ts`에 `createTool` 추가), `tools` 객체에 키 추가, 대응하는 React 컴포넌트 생성, `page.tsx`의 `message.parts` 매핑에 `tool-${toolName}` 케이스 추가의 네 단계를 반복한다. 이 패턴은 도구와 컴포넌트가 1:1로 대응하는 느슨한 결합 구조이므로 기능 추가가 기존 코드에 영향을 주지 않는다. 📎 동적 도구 등록(runtime tool injection), 도구 간 의존성, 병렬 도구 호출은 원문에 없음 — 확장 시 공식 문서 참고.
 
-## 비유
-
-**비유: 도구 호출은 주문서, React 컴포넌트는 배달 상자**
-LLM이 "샌프란시스코 날씨를 가져와"라고 판단하면 주문서(tool call)를 작성하고, API가 실행하여 데이터를 수집한 후 배달 상자(React 컴포넌트)에 담아 사용자에게 전달한다. 주문서에는 받을 사람의 이름과 주소(zod inputSchema)가 적혀 있고, 배달 상자는 주문서에 적힌 품목에 맞춰 포맷된다.
-
-**깨지는 지점**: 이 비유는 도구 호출이 항상 순차적·단일이라고 가정하지만, 실제 LLM은 여러 도구를 병렬로 호출하거나 도구 호출 후 추가 추론을 거쳐 다른 도구를 연쇄 호출할 수 있다. 또한 "배달 상자"는 정적이지 않고 `input-available` → `output-available` → `output-error` 상태로 변화하는 동적 객체이므로, 단순한 일회성 배달과는 구조가 다르다.
-
-## 곁가지
-
-- 도구 호출 스트리밍 심화: 도구 실행 중간 결과를 스트리밍하여 실시간 피드백이 필요해질 때
-- 동적 도구 등록 심화: 세션별·사용자별 도구 집합을 런타임에 변경해야 할 때
-- TypeScript 타입 안전성 심화: `part.output`의 타입을 컴파일 타임에 보장하는 패턴이 필요해질 때
-- 에러 복구 심화: 도구 실행 실패 시 재시도·폴백 UI 전략이 필요해질 때
-
-## 연결
-
-- **Tool Calling**: Generative UI의 기반이 되는 도구 호출 메커니즘 — 도구가 없으면 UI 생성 자체가 불가능하다.
-- **React Server Components**: 도구 실행 결과를 서버 컴포넌트에서 렌더링하는 방식과 클라이언트 측 `useChat` 렌더링의 아키텍처 선택지가 교차한다.
-- **Streaming Protocol**: `toUIMessageStream`과 `createUIMessageStreamResponse`가 사용하는 스트리밍 형식은 다른 AI SDK 기능(streamObject, streamUI)과 공유된다.
-
 ## 레퍼런스
 
 - [Generative User Interfaces — Vercel AI SDK 공식 문서](https://ai-sdk.dev/docs/ai-sdk-ui/generative-user-interfaces) (1차): Generative UI의 전체 구현 흐름을 도구 정의→API 라우팅→클라이언트 렌더링→확장 순으로 설명하는 기본 가이드. 버전 명시 없음.
 - [Tools and Tool Calling — Vercel AI SDK 공식 문서](https://ai-sdk.dev/docs/ai-sdk-core/tools-and-tool-calling) (1차): 도구 호출의 핵심 개념과 API 레퍼런스. Generative UI의 기반이 되는 도구 시스템 문서. 버전 명시 없음.
-
----
-## 인출 질문
-
-1. Generative UI 파이프라인에서 모델이 도구 호출을 결정한 후 데이터가 React 컴포넌트에 전달되기까지 거치는 네 단계는 무엇인가?
-2. AI SDK 5.0에서 `message.parts` 배열의 도구 파트 타입명은 어떤 패턴을 따르며, 각 파트가 가지는 세 가지 상태는 무엇인가?
-
-## 내 관점
-
-<!-- 학습자가 직접 채우는 섹션 — 파이프라인은 대필하지 않는다 -->

@@ -7,8 +7,8 @@ description: 시맨틱 색 토큰으로 대비를 깨지 않고 테마를 전환
 lang: ko
 tags: ['dark-mode', 'theming', 'design-tokens', 'prefers-color-scheme', 'color', 'accessibility']
 summary: "테마는 색을 하드코딩하지 않고 '역할(role)' 토큰에 매핑해, 값만 바꿔 전체를 다시 칠하는 것이다. 웹은 prefers-color-scheme로 OS 선호를 감지하고 color-scheme/light-dark()로 선언한다. 시맨틱 토큰(surface·on-surface·text-primary)이 라이트/다크에서 다른 값으로 해석된다 — Carbon 4테마(White·g10·g90·g100), Material 색 역할, Apple 동적 시스템 색. Material 다크는 순수 검정 대신 어두운 회색(#121212)·탈채도 색을 권하고 M3는 톤 오버레이로 깊이를 낸다. WCAG 대비(4.5:1)는 두 테마 모두에 동일 적용."
-lintHash: '7acacc8f26e1'
-polishHash: '7acacc8f26e1'
+lintHash: 'c52f4405ff9b'
+polishHash: 'c52f4405ff9b'
 ---
 
 > 한 줄 명제: 테마는 색을 하드코딩하지 말고 역할 토큰에 매핑해 값만 바꾸는 것 — 순수 검정 대신 어두운 회색, 그리고 두 테마 모두 WCAG 대비를 지켜라.
@@ -50,11 +50,3 @@ polishHash: '7acacc8f26e1'
 - [Apple HIG — Dark Mode](https://developer.apple.com/design/human-interface-guidelines/dark-mode) — 1차(SPA, 스니펫). 동적 시스템 색.
 - [Material Design — Dark theme](https://m2.material.io/design/color/dark-theme.html) — 1차(SPA, 스니펫). #121212·탈채도(한 사례). [Google Design](https://design.google/library/material-design-dark-theme) — 2차(원칙 확인).
 - [W3C DTCG — Design Tokens Format Module](https://www.designtokens.org/TR/drafts/format/) — 2차(Community Group, 표준 아님). 토큰=이름↔값 개념.
-
-## 연결
-
-- [aesthetics-and-layout](/wiki/design-principles/aesthetics-and-layout/) — 상위 허브.
-- [color-and-contrast](/wiki/design-principles/color-and-contrast/) — 테마는 톤 스케일 위에 얹히는 시맨틱 층. 대비는 두 테마 모두 검증.
-- [elevation-and-depth](/wiki/design-principles/aesthetics-and-layout/elevation-and-depth/) — M3 다크의 톤 엘리베이션.
-- [material-design](/wiki/design-principles/material-design/) — 색 역할·동적 색(Material You)의 출처.
-- [motion-and-microinteractions](/wiki/design-principles/usability/motion-and-microinteractions/) — prefers-color-scheme와 형제인 prefers-reduced-motion(사용자 선호 감지).

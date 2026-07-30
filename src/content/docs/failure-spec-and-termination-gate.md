@@ -5,8 +5,8 @@ description: LLM에는 오답/기권 출력 영역이 없다는 원리를 Rule �
 summary: "Rule 문서(프로젝트 규칙·재사용 프롬프트)와 Skill 문서(SKILL.md)를 쓰거나 리뷰하는 에이전트가 성공 경로만 적고 실패 명세·종료 조건을 빠뜨리는 것을 막는 저작 게이트다. §Rule > Core는 범용 규칙 문서에 적용되는 원칙 자체를 담고, §Skill > Skill Core는 그 원칙을 SKILL.md 저작에 적용한다 — 후자는 이미 `skill-manager`의 Review Gate로 강제되는 정책이라 재정의하지 않고 요약·연결만 한다."
 lang: ko
 tags: ['agent-spec', 'prompt-engineering', 'skill-design', 'failure-mode']
-lintHash: '87b27745804f'
-polishHash: '87b27745804f'
+lintHash: 'a6cecf95e9d9'
+polishHash: 'a6cecf95e9d9'
 ---
 
 ## 이 문서의 성격
@@ -90,8 +90,3 @@ polishHash: '87b27745804f'
 - 저작 대상이 Rule 문서면: 문서 안에 실패 명세(false-success 최소 1개 포함)와 관찰 가능한 종료 조건(성공/기권/에스컬레이션 중 해당 항목) 절이 존재한다.
 - 저작 대상이 Skill 문서(`SKILL.md`)면: `skill-manager` Review Gate 통과 결과(`~/.agents/skills/skill-manager/scripts/validate-skill` 실행 결과 포함, 미가용 시 "미검증"으로 명시)가 있다.
 - 리뷰 대상 문서가 이미 존재하면: §판별 휴리스틱으로 검사한 결과(통과/미비 항목과 그 근거)를 보고한다.
-
-## 연결
-
-- [LLM은 오답공간이 없다 — 환각의 필연성과 실패 명세 설계](/inbox/2026-07-10-llm-오답공간-없음-환각의-필연성과-실패-명세-설계/) — 이 게이트가 실행하는 원리(생성 메커니즘·학습 인센티브·계산이론 세 층위)의 근거.
-- `~/.agents/skills/skill-manager/SKILL.md` — §Skill > Skill Core가 요약·연결하는 실제 강제 지점(Author 단계, Review Gates). 저장소 경로라 이 사이트에서는 직접 링크되지 않는다.
