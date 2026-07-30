@@ -5,14 +5,13 @@ import PostList from '../../components/PostList.astro';
 import { Content as Intro } from '../../copy/notes.md';
 import Base from '../../layouts/Base.astro';
 import { COLLECTION_LABELS, type PostListItem, getListItems } from '../../lib/collections';
+import { collapseToHubs } from '../../lib/listing';
 
 export const getStaticPaths: GetStaticPaths = async ({ paginate }) => {
-  const all = await getListItems('notes');
   // Child notes (e.g. /notes/foo/bar/ under the hub /notes/foo/) are reachable
   // from their hub's TOC; only hubs and standalone notes appear in the list.
-  const items = all.filter(
-    (item) => !all.some((other) => other !== item && item.href.startsWith(other.href)),
-  );
+  // scripts/check-note-visibility.ts reports the same rule from the same helper.
+  const items = collapseToHubs(await getListItems('notes'));
   return paginate(items, { pageSize: 10 });
 };
 

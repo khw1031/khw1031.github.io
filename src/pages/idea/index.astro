@@ -2,6 +2,7 @@
 import PostList from '../../components/PostList.astro';
 import Base from '../../layouts/Base.astro';
 import { getListItems } from '../../lib/collections';
+import { collapseToHubs } from '../../lib/listing';
 
 // Unlisted TOC for /idea (reachable by direct URL; excluded from search, sitemap,
 // and the footer). Inbox captures live under /idea/inbox/ with their own TOC, so
@@ -9,9 +10,7 @@ import { getListItems } from '../../lib/collections';
 // way the notes list does it — only hubs and standalone ideas appear here.
 const all = await getListItems('idea');
 const developed = all.filter((item) => !item.href.startsWith('/idea/inbox/'));
-const ideas = developed.filter(
-  (item) => !developed.some((other) => other !== item && item.href.startsWith(other.href)),
-);
+const ideas = collapseToHubs(developed);
 const inboxCount = all.length - developed.length;
 ---
 

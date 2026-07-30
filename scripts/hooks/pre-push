@@ -21,6 +21,13 @@ npx tsx scripts/check-stray-script.ts || true
 echo "pre-push: checking capture integrity…"
 npx tsx scripts/check-capture-integrity.ts || true
 
+# Advisory only (never blocks): names any notes/idea document that reaches no
+# list page — a hub child or a draft. Both are valid layouts, but both produce
+# the "I wrote it and it is not in the list" symptom that reads as a stale dev
+# server. Quiet when every document lists.
+echo "pre-push: checking note list visibility…"
+npx tsx scripts/check-note-visibility.ts || true
+
 echo "pre-push: checking content frontmatter…"
 if ! npx tsx scripts/check-frontmatter.ts; then
   echo ""
