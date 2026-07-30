@@ -11,7 +11,6 @@ tags:
   - 'chatgpt'
   - 'self-taught'
   - 'ai'
-polishHash: 'e1c8cf71a0d3'
 lintHash: '8a769f587e04'
 ---
 
