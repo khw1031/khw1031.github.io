@@ -2,6 +2,7 @@
 import type { CollectionEntry } from 'astro:content';
 import CopyMarkdown from '../components/CopyMarkdown.astro';
 import CopyPath from '../components/CopyPath.astro';
+import NoteAnnotator from '../components/NoteAnnotator.astro';
 import {
   COLLECTION_ORDER,
   type ListableCollection,
@@ -42,6 +43,10 @@ const searchable = SEARCHABLE_COLLECTIONS.includes(entry.collection) && !data.dr
 // public collections show them so a chip never points at a missing tag page.
 const showTags =
   (COLLECTION_ORDER as ListableCollection[]).includes(entry.collection) && data.tags.length > 0;
+// Notes open with their own first core claim, so a 핵심요약 block above it restates
+// the same thing in weaker words. The frontmatter field stays (check-frontmatter
+// requires it, and it backs the meta description) — only the block is dropped.
+const showSummary = Boolean(data.summary) && entry.collection !== 'notes';
 ---
 
 <Base title={`${data.title} — thnkr`} description={description} jsonLd={jsonLd}>
@@ -49,7 +54,15 @@ const showTags =
     <CopyMarkdown href={mdHref} />
     <CopyPath value={sourcePath} />
   </div>
-  <article class="prose max-w-none mt-2" data-pagefind-body={searchable ? true : undefined}>
+  <!-- data-source-path / data-raw-md let the dev annotator map a clicked block
+       back to its markdown source; both values are already public (CopyPath,
+       CopyMarkdown), so they ship in production too and dev/prod HTML matches. -->
+  <article
+    class="prose max-w-none mt-2"
+    data-pagefind-body={searchable ? true : undefined}
+    data-source-path={sourcePath}
+    data-raw-md={mdHref}
+  >
     <h1>{data.title}</h1>
     <div class="not-prose text-sm text-muted mb-6">
       <time datetime={data.pubDate.toISOString()} data-pagefind-meta="date">
@@ -59,7 +72,7 @@ const showTags =
       <span>{readingMinutes} min</span>
     </div>
     {
-      data.summary && (
+      showSummary && (
         <aside class="not-prose mb-14 text-[#4c82f0]">
           <div class="mb-1 flex items-center gap-1.5">
             <svg
@@ -99,6 +112,7 @@ const showTags =
       )
     }
   </article>
+  {import.meta.env.DEV && <NoteAnnotator />}
 </Base>
 
 <style>

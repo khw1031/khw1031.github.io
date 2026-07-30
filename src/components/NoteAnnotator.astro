@@ -1,0 +1,590 @@
+---
+/**
+ * Dev-only content annotator. Select text in a rendered document, write what
+ * should change, and confirm — the item stacks up in a basket. "전체 복사"
+ * assembles every stacked item into one prompt, copies it, and empties the
+ * basket, removing its storage key so an approved batch leaves no trace.
+ *
+ * There is no undo and no status line: the cards themselves report state.
+ * They vanish on a successful copy and stay put when the clipboard refuses.
+ *
+ * Selecting text does NOT open anything: it only offers a small "노트" chip.
+ * Nothing takes focus until that chip is clicked, so ordinary reading and ⌘C
+ * on a selection keep working.
+ *
+ * Anchoring is source-based, not DOM-based: the block's `data-line`
+ * (rehypeStampSourceLines) indexes into the page's raw.md, so each item
+ * carries the body line verbatim and stays greppable in the .md file.
+ *
+ * Rendered by PostLayout under an `import.meta.env.DEV` guard.
+ */
+import { Copy, MessageSquare } from '@lucide/astro';
+---
+
+<div data-annotator class="fb">
+  <!-- Step 1: an opt-in affordance. Shown next to a selection, steals nothing. -->
+  <button type="button" data-fb-chip class="fb-chip" hidden>노트</button>
+
+  <!-- Step 2: the editor, opened only from the chip (or a card's 수정). -->
+  <form data-fb-panel class="fb-panel" hidden>
+    <div class="fb-panel-head">
+      <span class="fb-label">선택한 내용</span>
+      <span data-fb-anchor class="fb-meta"></span>
+    </div>
+    <blockquote data-fb-source class="fb-quote"></blockquote>
+    <textarea
+      data-fb-prompt
+      class="fb-input"
+      rows="3"
+      placeholder="무엇을 어떻게 바꿀지"></textarea>
+    <div class="fb-panel-actions">
+      <button type="button" data-fb-cancel class="fb-btn-quiet">취소</button>
+      <button type="submit" class="fb-btn">
+        <span data-fb-submit>노트 추가</span>
+        <kbd class="fb-kbd">⌘↵</kbd>
+      </button>
+    </div>
+  </form>
+
+  <!-- The basket: stacked note cards over a bar that approves the whole batch. -->
+  <div data-fb-basket class="fb-dock" hidden>
+    <div data-fb-cards class="fb-cards" hidden></div>
+    <div class="fb-bar">
+      <button type="button" data-fb-toggle class="fb-bar-btn" aria-expanded="false">
+        <MessageSquare size={14} stroke-width={1.8} aria-hidden="true" />
+        <span data-fb-count>0</span>
+      </button>
+      <button type="button" data-fb-copy class="fb-bar-btn">
+        <Copy size={14} stroke-width={1.8} aria-hidden="true" />
+        <span data-fb-copy-label>전체 복사</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- Cloned per item. Lives in markup so the card stays reviewable as HTML. -->
+  <template data-fb-card>
+    <article class="fb-card">
+      <div class="fb-card-head">
+        <span class="fb-label">노트</span>
+        <span class="fb-card-actions">
+          <button type="button" data-act="copy" class="fb-mini">복사</button>
+          <button type="button" data-act="edit" class="fb-mini">수정</button>
+          <button type="button" data-act="drop" class="fb-mini">삭제</button>
+        </span>
+      </div>
+      <blockquote class="fb-quote" data-slot="quote"></blockquote>
+      <p class="fb-card-body" data-slot="prompt"></p>
+    </article>
+  </template>
+</div>
+
+<!-- Scoped on purpose: a scoped block is dropped from a build where this
+     component never renders, while `is:global` would be inlined into every
+     page. `:global()` marks the selectors that land on cloned cards or on
+     article blocks outside the component; every class is `fb-` prefixed.
+     Palette follows DESIGN.md tokens; the one accent is the palette's violet,
+     kept clear of the yellow `==마커==` mark and the content blue. No shadows
+     and no transitions beyond color, per the anti-pattern list. -->
+<style>
+  .fb {
+    --fb-accent: var(--iterm-ansi-13-color, #b260ea);
+    --fb-fill: color-mix(in srgb, var(--color-foreground) 4%, transparent);
+    font-family: var(--font-mono);
+    font-size: 12px;
+    line-height: 1.5;
+  }
+
+  /* A block that carries at least one note. Background only — a border would
+     shift the prose. Names the palette colour directly: this lands outside
+     `.fb`, where --fb-accent does not resolve. */
+  :global(.fb-marked) {
+    background-color: color-mix(in srgb, var(--iterm-ansi-13-color, #b260ea) 14%, transparent);
+  }
+
+  :global(.fb-label) {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    color: var(--color-muted);
+  }
+
+  .fb-meta {
+    font-size: 10px;
+    color: var(--color-muted);
+  }
+
+  /* Quoted source line, with the accent bar the reference uses. */
+  :global(.fb-quote) {
+    margin: 0;
+    padding: 4px 8px;
+    border-left: 2px solid var(--fb-accent);
+    background: var(--fb-fill);
+    color: var(--color-muted);
+    white-space: pre-wrap;
+    overflow-wrap: anywhere;
+    max-height: 5.5rem;
+    overflow: auto;
+  }
+
+  .fb-chip {
+    position: fixed;
+    z-index: 10000;
+    font: inherit;
+    color: var(--color-background);
+    background: var(--color-foreground);
+    border: 0;
+    border-radius: 4px;
+    padding: 2px 8px;
+    cursor: pointer;
+  }
+
+  .fb-panel {
+    position: fixed;
+    z-index: 10000;
+    width: min(30rem, calc(100vw - 2rem));
+    display: grid;
+    gap: 6px;
+    padding: 10px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+  }
+
+  .fb-panel-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    gap: 8px;
+  }
+
+  .fb-input {
+    width: 100%;
+    font: inherit;
+    color: var(--color-foreground);
+    background: transparent;
+    border: 1px solid var(--color-border);
+    border-radius: 4px;
+    padding: 6px;
+    resize: vertical;
+  }
+
+  .fb-panel-actions {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px;
+  }
+
+  .fb-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font: inherit;
+    color: var(--color-background);
+    background: var(--color-foreground);
+    border: 0;
+    border-radius: 4px;
+    padding: 4px 10px;
+    cursor: pointer;
+  }
+
+  .fb-kbd {
+    font: inherit;
+    opacity: 0.6;
+  }
+
+  .fb-btn-quiet,
+  :global(.fb-mini) {
+    font: inherit;
+    color: var(--color-muted);
+    background: transparent;
+    border: 0;
+    padding: 2px 4px;
+    cursor: pointer;
+    transition: color 0.1s;
+  }
+
+  .fb-btn-quiet:hover,
+  :global(.fb-mini:hover) {
+    color: var(--color-foreground);
+  }
+
+  .fb-dock {
+    position: fixed;
+    right: 1rem;
+    bottom: 1rem;
+    z-index: 9999;
+    display: grid;
+    gap: 6px;
+    justify-items: end;
+    width: min(24rem, calc(100vw - 2rem));
+  }
+
+  .fb-cards {
+    display: grid;
+    gap: 6px;
+    width: 100%;
+    max-height: 60vh;
+    overflow: auto;
+  }
+
+  :global(.fb-card) {
+    display: grid;
+    gap: 4px;
+    padding: 8px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+  }
+
+  :global(.fb-card-head) {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+  }
+
+  :global(.fb-card-actions) {
+    display: flex;
+    gap: 2px;
+  }
+
+  :global(.fb-card-body) {
+    margin: 0;
+    color: var(--color-foreground);
+  }
+
+  .fb-bar {
+    display: flex;
+    gap: 4px;
+    align-items: center;
+    padding: 4px;
+    background: var(--color-background);
+    border: 1px solid var(--color-border);
+    border-radius: 6px;
+  }
+
+  .fb-bar-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font: inherit;
+    color: var(--color-foreground);
+    background: transparent;
+    border: 0;
+    border-radius: 4px;
+    padding: 3px 8px;
+    cursor: pointer;
+    transition: color 0.1s;
+  }
+
+  .fb-bar-btn[disabled] {
+    color: var(--color-border);
+    cursor: default;
+  }
+</style>
+
+<script>
+  import {
+    type Annotation,
+    addAnnotation,
+    buildFeedbackMarkdown,
+    parseBasket,
+    persistBasket,
+    removeAnnotation,
+    resolveSourceLine,
+    updateAnnotation,
+  } from '../lib/annotations';
+
+  const BASKET_KEY = 'note-feedback:v1';
+  const MAX_SELECTED = 300;
+
+  // Belt and braces: the component is only rendered in dev, and this guard
+  // means the bundler drops the body from a production build regardless.
+  if (import.meta.env.DEV) {
+    const root = document.querySelector<HTMLElement>('[data-annotator]');
+    const article = document.querySelector<HTMLElement>('article[data-source-path]');
+
+    // Pages without stamped markdown content (listings, labs) get nothing.
+    if (root && article) {
+      const content = article;
+      const file = content.dataset.sourcePath ?? '';
+      const rawHref = content.dataset.rawMd ?? '';
+
+      const chip = root.querySelector<HTMLButtonElement>('[data-fb-chip]')!;
+      const panel = root.querySelector<HTMLFormElement>('[data-fb-panel]')!;
+      const anchorLabel = root.querySelector<HTMLElement>('[data-fb-anchor]')!;
+      const sourcePreview = root.querySelector<HTMLElement>('[data-fb-source]')!;
+      const promptInput = root.querySelector<HTMLTextAreaElement>('[data-fb-prompt]')!;
+      const submitLabel = root.querySelector<HTMLElement>('[data-fb-submit]')!;
+      const basket = root.querySelector<HTMLElement>('[data-fb-basket]')!;
+      const cards = root.querySelector<HTMLElement>('[data-fb-cards]')!;
+      const toggle = root.querySelector<HTMLElement>('[data-fb-toggle]')!;
+      const count = root.querySelector<HTMLElement>('[data-fb-count]')!;
+      const copyButton = root.querySelector<HTMLElement>('[data-fb-copy]')!;
+      const copyLabel = root.querySelector<HTMLElement>('[data-fb-copy-label]')!;
+      const cardTemplate = root.querySelector<HTMLTemplateElement>('[data-fb-card]')!;
+
+      let items: Annotation[] = parseBasket(localStorage.getItem(BASKET_KEY));
+      let pending: Omit<Annotation, 'id' | 'prompt' | 'at'> | null = null;
+      // Where the selection sat, in viewport coordinates. Kept because the chip
+      // is display:none by the time the panel opens, and a hidden element
+      // measures as a zero rect.
+      let pendingRect: DOMRect | null = null;
+      let editing: Annotation | null = null;
+      let bodyLines: string[] | null = null;
+      let seq = 0;
+
+      /** raw.md is the same body the line numbers were stamped against. */
+      async function loadBodyLines(): Promise<string[]> {
+        if (bodyLines) return bodyLines;
+        const res = await fetch(rawHref);
+        bodyLines = (await res.text()).split('\n');
+        return bodyLines;
+      }
+
+      function lineOf(
+        node: Node | null,
+      ): { line: number; block: string; element: HTMLElement } | null {
+        const start = node instanceof Element ? node : (node?.parentElement ?? null);
+        const block = start?.closest<HTMLElement>('[data-line]');
+        if (!block || !content.contains(block)) return null;
+        return {
+          line: Number(block.dataset.line),
+          block: block.tagName.toLowerCase(),
+          element: block,
+        };
+      }
+
+      function save() {
+        persistBasket(localStorage, BASKET_KEY, items);
+        render();
+      }
+
+      /** Tint every block on this page that carries a note. */
+      function mark() {
+        for (const el of content.querySelectorAll('.fb-marked')) {
+          el.classList.remove('fb-marked');
+        }
+        for (const item of items) {
+          if (item.url !== location.pathname || !item.domLine) continue;
+          content.querySelector(`[data-line="${item.domLine}"]`)?.classList.add('fb-marked');
+        }
+      }
+
+      function card(item: Annotation, index: number): HTMLElement {
+        const node = cardTemplate.content.cloneNode(true) as DocumentFragment;
+        const el = node.querySelector<HTMLElement>('.fb-card')!;
+        el.querySelector<HTMLElement>('.fb-label')!.textContent = `노트 ${index + 1}`;
+        el.querySelector<HTMLElement>('[data-slot="quote"]')!.textContent =
+          item.selected ?? item.sourceText;
+        el.querySelector<HTMLElement>('[data-slot="prompt"]')!.textContent = item.prompt;
+
+        const act = (name: string) => el.querySelector<HTMLButtonElement>(`[data-act="${name}"]`)!;
+        act('copy').addEventListener('click', async (event) => {
+          // Same feedback shape as CopyPath/CopyMarkdown: swap the label, restore.
+          const button = event.currentTarget as HTMLButtonElement;
+          try {
+            await navigator.clipboard.writeText(buildFeedbackMarkdown([item]));
+            button.textContent = '✓';
+          } catch {
+            button.textContent = '실패';
+          }
+          window.setTimeout(() => {
+            button.textContent = '복사';
+          }, 1200);
+        });
+        act('edit').addEventListener('click', () => openEditor(item));
+        act('drop').addEventListener('click', () => {
+          items = removeAnnotation(items, item.id);
+          save();
+        });
+        return el;
+      }
+
+      function render() {
+        basket.hidden = items.length === 0;
+        count.textContent = String(items.length);
+        copyButton.toggleAttribute('disabled', items.length === 0);
+        cards.replaceChildren(...items.map(card));
+        if (items.length === 0) cards.hidden = true;
+        mark();
+      }
+
+      const GAP = 8;
+
+      /**
+       * Open the panel beside the anchor — to the right of the selected text,
+       * which is where the eye already is. Falls back to the left side, then to
+       * the viewport edge, when there is not enough room. Unhides first because
+       * a hidden panel measures as zero; both happen before the next paint, so
+       * nothing flashes at the old position.
+       */
+      function openPanelAt(anchor: { left: number; right: number; top: number }) {
+        panel.hidden = false;
+        const { offsetWidth: width, offsetHeight: height } = panel;
+
+        let left = anchor.right + GAP;
+        if (left + width > window.innerWidth - GAP) left = anchor.left - width - GAP;
+        if (left < GAP) left = Math.max(GAP, window.innerWidth - width - GAP);
+
+        const top = Math.max(GAP, Math.min(anchor.top, window.innerHeight - height - GAP));
+        panel.style.left = `${left}px`;
+        panel.style.top = `${top}px`;
+      }
+
+      function closePanel() {
+        panel.hidden = true;
+        pending = null;
+        editing = null;
+        promptInput.value = '';
+        submitLabel.textContent = '노트 추가';
+      }
+
+      /** Reopen an existing note for rewording; the anchor is untouched. */
+      function openEditor(item: Annotation) {
+        chip.hidden = true;
+        editing = item;
+        pending = null;
+        anchorLabel.textContent = `본문 ${item.bodyLine}행 · ${item.block} · 수정`;
+        sourcePreview.textContent = item.selected ?? item.sourceText;
+        promptInput.value = item.prompt;
+        submitLabel.textContent = '수정 완료';
+        const block = item.domLine
+          ? content.querySelector(`[data-line="${item.domLine}"]`)?.getBoundingClientRect()
+          : undefined;
+        openPanelAt(block ?? { left: GAP, right: GAP, top: GAP });
+        promptInput.focus();
+      }
+
+      // Selection only offers the chip. Focus stays in the document so the
+      // native selection — and ⌘C on it — keeps working.
+      document.addEventListener('mouseup', async (event) => {
+        if ((event.target as HTMLElement | null)?.closest('[data-annotator]')) return;
+
+        const selection = window.getSelection();
+        const text = selection?.toString().trim() ?? '';
+        if (!selection || selection.rangeCount === 0 || text === '') {
+          chip.hidden = true;
+          return;
+        }
+
+        const range = selection.getRangeAt(0);
+        const start = lineOf(range.startContainer);
+        if (!start) {
+          chip.hidden = true;
+          return;
+        }
+        const end = lineOf(range.endContainer);
+
+        // Capture now: opening the panel later collapses the selection.
+        const lines = await loadBodyLines();
+        const blockText = start.element.textContent?.trim() ?? '';
+
+        // data-line is a hint; the rendered text is what proves which line it is.
+        const resolved = resolveSourceLine(lines, start.line, blockText);
+        const bodyLine = resolved?.line ?? start.line;
+        const endHint = end && end.line > start.line ? end.line + (resolved?.delta ?? 0) : undefined;
+        const sourceText = resolved
+          ? lines.slice(bodyLine - 1, endHint ?? bodyLine).join('\n')
+          : blockText;
+
+        pending = {
+          file,
+          bodyLine,
+          endBodyLine: endHint,
+          block: start.block,
+          domLine: start.line,
+          sourceText,
+          // Omitted when the whole block was taken — the source line says it already.
+          selected: text === blockText ? undefined : text.slice(0, MAX_SELECTED),
+          unverified: resolved ? undefined : true,
+          url: location.pathname,
+        };
+
+        anchorLabel.textContent = resolved
+          ? `본문 ${bodyLine}${endHint ? `-${endHint}` : ''}행 · ${start.block}`
+          : `본문 ${bodyLine}행 · ${start.block} · 소스 줄 확인 실패`;
+        sourcePreview.textContent = sourceText;
+
+        // The last client rect, not the bounding box: a selection spanning lines
+        // should anchor at where it actually ends, not at the widest line's edge.
+        const rects = range.getClientRects();
+        const rect = rects.length > 0 ? rects[rects.length - 1]! : range.getBoundingClientRect();
+        pendingRect = rect;
+        chip.style.left = `${Math.min(rect.right + 6, window.innerWidth - 60)}px`;
+        chip.style.top = `${Math.min(rect.bottom + 4, window.innerHeight - 30)}px`;
+        chip.hidden = false;
+      });
+
+      chip.addEventListener('click', () => {
+        if (!pending || !pendingRect) return;
+        chip.hidden = true;
+        submitLabel.textContent = '노트 추가';
+        openPanelAt(pendingRect);
+        promptInput.focus();
+      });
+
+      // A fixed chip would otherwise hang over unrelated text once the page moves.
+      window.addEventListener('scroll', () => {
+        chip.hidden = true;
+      });
+
+      // A fresh selection or a click elsewhere retires the chip.
+      document.addEventListener('selectionchange', () => {
+        if ((window.getSelection()?.toString() ?? '') === '') chip.hidden = true;
+      });
+
+      panel.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const prompt = promptInput.value.trim();
+        if (prompt === '') return;
+        if (editing) {
+          items = updateAnnotation(items, editing.id, prompt);
+        } else if (pending) {
+          seq += 1;
+          items = addAnnotation(items, {
+            ...pending,
+            id: `${Date.now().toString(36)}-${seq}`,
+            prompt,
+            at: new Date().toISOString(),
+          });
+        } else {
+          return;
+        }
+        closePanel();
+        save();
+      });
+
+      root.querySelector('[data-fb-cancel]')?.addEventListener('click', closePanel);
+
+      promptInput.addEventListener('keydown', (event) => {
+        if (event.key === 'Escape') closePanel();
+        if (event.key === 'Enter' && (event.metaKey || event.ctrlKey)) panel.requestSubmit();
+      });
+
+      toggle.addEventListener('click', () => {
+        cards.hidden = !cards.hidden;
+        toggle.setAttribute('aria-expanded', String(!cards.hidden));
+      });
+
+      copyButton.addEventListener('click', async () => {
+        if (items.length === 0) return;
+        try {
+          await navigator.clipboard.writeText(buildFeedbackMarkdown(items));
+        } catch {
+          // Keeping the basket IS the failure signal — the cards stay on screen.
+          copyLabel.textContent = '복사 실패';
+          window.setTimeout(() => {
+            copyLabel.textContent = '전체 복사';
+          }, 1500);
+          return;
+        }
+        items = [];
+        // Empties the basket AND drops its storage key — nothing is left behind.
+        save();
+      });
+
+      render();
+    }
+  }
+</script>

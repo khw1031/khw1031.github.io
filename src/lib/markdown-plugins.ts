@@ -49,6 +49,67 @@ function stripLeadingHash(heading: { children?: unknown }): void {
   first.value = first.value.replace(/^[#\s]+/, '');
 }
 
+/**
+ * Block elements that are worth pointing at when reviewing content. Anything
+ * finer (inline emphasis, links) shares its parent block's line, and anything
+ * coarser (section wrappers) is too vague to edit against.
+ */
+const ANCHORED_BLOCKS = new Set([
+  'p',
+  'li',
+  'h2',
+  'h3',
+  'h4',
+  'h5',
+  'h6',
+  'blockquote',
+  'pre',
+  // A table row, not its cells: one markdown row is one source line, so `tr`
+  // is both the finest useful anchor and the only one that adds no noise.
+  'tr',
+]);
+
+/**
+ * Stamp each block element with the markdown line it came from, so a rendered
+ * page can point back at the exact source line. Consumed by the dev-only note
+ * annotator (src/components/NoteAnnotator.astro, src/lib/annotations.ts).
+ *
+ * The number is body-relative — frontmatter is stripped before parsing — which
+ * makes it line up exactly with the raw.md that
+ * scripts/generate-raw-markdown.ts writes from `matter(raw).content`.
+ *
+ * Runs last in the rehype phase so it sees the tree after mermaid/KaTeX/Shiki
+ * substitutions. Those plugins rebuild their subtrees from HTML strings, which
+ * drops position info; such nodes simply go unstamped rather than erroring.
+ */
+function rehypeStampSourceLines() {
+  return (tree: unknown) => {
+    const visit = (node: unknown): void => {
+      if (typeof node !== 'object' || node === null) return;
+      const n = node as {
+        type?: unknown;
+        tagName?: unknown;
+        properties?: Record<string, unknown>;
+        children?: unknown;
+        position?: { start?: { line?: number } };
+      };
+      const line = n.position?.start?.line;
+      if (
+        n.type === 'element' &&
+        typeof n.tagName === 'string' &&
+        ANCHORED_BLOCKS.has(n.tagName) &&
+        typeof line === 'number'
+      ) {
+        n.properties = { ...(n.properties ?? {}), 'data-line': line };
+      }
+      if (Array.isArray(n.children)) {
+        for (const child of n.children) visit(child);
+      }
+    };
+    visit(tree);
+  };
+}
+
 export const remarkPlugins: PluggableList = [
   // singleTilde: false — GFM strikethrough only via `~~...~~`. A single
   // `~` is kept literal, so Korean range notation (`8~12배`, `140만~160만`)
@@ -82,6 +143,8 @@ export const rehypePlugins: ReadonlyArray<Pluggable> = [
   rehypeSlug,
   [rehypeAutolinkHeadings, { behavior: 'wrap' }],
   [rehypeExternalLinks, { target: '_blank', rel: ['noopener', 'noreferrer'] }],
+  // Last: stamps data-line after every other plugin has settled the tree.
+  rehypeStampSourceLines,
 ];
 
 export const shikiConfig = {

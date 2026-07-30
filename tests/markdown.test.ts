@@ -75,6 +75,32 @@ describe('markdown pipeline', () => {
     expect(html).toContain('class="katex"');
   });
 
+  // Block elements carry the markdown line they came from, so a rendered page
+  // can point back at the exact body line (src/lib/annotations.ts consumes it).
+  // The line is body-relative — frontmatter is stripped before parsing — which
+  // makes it line up with the generated raw.md exactly.
+  it('stamps paragraphs with their source line', async () => {
+    const html = await render('first\n\nsecond\n');
+    expect(html).toContain('<p data-line="1">first</p>');
+    expect(html).toContain('<p data-line="3">second</p>');
+  });
+
+  it('stamps list items and headings with their source line', async () => {
+    const html = await render('# head\n\n- one\n- two\n');
+    expect(html).toMatch(/<h2[^>]+data-line="1"/);
+    expect(html).toContain('<li data-line="3">one</li>');
+    expect(html).toContain('<li data-line="4">two</li>');
+  });
+
+  // Cells share their row's source line, so the row is the anchor and cell
+  // markup stays clean.
+  it('stamps table rows but not their cells', async () => {
+    const html = await render('| a | b |\n| - | - |\n| 1 | 2 |');
+    expect(html).toMatch(/<tr[^>]+data-line="1"/);
+    expect(html).toMatch(/<tr[^>]+data-line="3"/);
+    expect(html).toContain('<th>a</th>');
+  });
+
   // singleDollarTextMath: false — a lone `$` in prose (prices, Svelte runes)
   // must stay literal, not become math.
   it('leaves single-dollar prose untouched', async () => {
