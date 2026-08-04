@@ -4,9 +4,11 @@ import {
   addAnnotation,
   buildFeedbackMarkdown,
   parseBasket,
+  parseTrash,
   persistBasket,
+  persistTrash,
   removeAnnotation,
-  resolveSourceLine,
+  restoreTrash,
   updateAnnotation,
 } from '../src/lib/annotations';
 
@@ -33,7 +35,7 @@ function annotation(over: Partial<Annotation> = {}): Annotation {
     file: 'src/content/notes/foo/index.md',
     bodyLine: 3,
     block: 'li',
-    sourceText: '1. ==핵심 문장.== 뒤따르는 설명.',
+    text: '핵심 문장. 뒤따르는 설명.',
     prompt: '6번 항목과 중복',
     url: '/notes/foo/',
     at: '2026-07-30T13:40:00+09:00',
@@ -98,46 +100,47 @@ describe('persistBasket', () => {
   });
 });
 
-// data-line counts against the body Astro parsed, which drops the blank line
-// after the frontmatter that gray-matter (and so raw.md) keeps. Measured on the
-// built site: every one of 50 stamped blocks sits at raw.md[data-line + 1]. The
-// shift is a property of the file's blank lines, not a constant, so the line is
-// resolved by verifying against what the browser rendered.
-describe('resolveSourceLine', () => {
-  it('takes the hint when it already matches', () => {
-    const lines = ['첫 줄이다.', '둘째 줄이다.'];
-    expect(resolveSourceLine(lines, 2, '둘째 줄이다.')).toEqual({
-      line: 2,
-      text: '둘째 줄이다.',
-      delta: 0,
-    });
+// Deleted items go into a trash of batches so 삭제 and 전체 복사 are undoable.
+// It lives in sessionStorage: a dev-server rebuild reloads the page and would
+// wipe an in-memory history, while per-tab storage survives the reload and
+// still disappears when the tab closes.
+describe('deletion trash', () => {
+  it('round-trips batches through storage', () => {
+    const storage = fakeStorage();
+    const batches = [
+      [annotation({ id: 'a1' })],
+      [annotation({ id: 'a2' }), annotation({ id: 'a3' })],
+    ];
+    persistTrash(storage, 'k', batches);
+    const restored = parseTrash(storage.getItem('k'));
+    expect(restored).toHaveLength(2);
+    expect(restored[1]?.map((a) => a.id)).toEqual(['a2', 'a3']);
   });
 
-  it('recovers the real line when the hint is one short', () => {
-    const lines = ['', '1. ==핵심 문장.== 뒤따르는 설명.'];
-    const found = resolveSourceLine(lines, 1, '핵심 문장. 뒤따르는 설명.');
-    expect(found).toEqual({ line: 2, text: '1. ==핵심 문장.== 뒤따르는 설명.', delta: 1 });
+  it('removes the key when the trash empties', () => {
+    const storage = fakeStorage();
+    persistTrash(storage, 'k', [[annotation()]]);
+    persistTrash(storage, 'k', []);
+    expect(storage.getItem('k')).toBeNull();
+    expect(storage.calls).toEqual(['set:k', 'remove:k']);
   });
 
-  it('matches through smartypants quote and dash rewrites', () => {
-    const lines = ['그는 "왜"라고 물었다 -- 두 번.'];
-    expect(resolveSourceLine(lines, 1, '그는 “왜”라고 물었다 – 두 번.')?.line).toBe(1);
+  // A corrupt or stale value must not throw — same contract as parseBasket.
+  it('drops corrupt values, non-batches, and empty batches', () => {
+    expect(parseTrash(null)).toEqual([]);
+    expect(parseTrash('not json')).toEqual([]);
+    expect(parseTrash('{"a":1}')).toEqual([]);
+    expect(parseTrash(JSON.stringify([['no'], [], [annotation()]]))).toHaveLength(1);
   });
 
-  it('matches through marker, emphasis, and link syntax', () => {
-    const lines = ['- **강조**와 [링크](https://example.com)가 섞인 줄.'];
-    expect(resolveSourceLine(lines, 1, '강조와 링크가 섞인 줄.')?.line).toBe(1);
-  });
-
-  it('gives up rather than guessing when nothing near the hint matches', () => {
-    const lines = ['전혀 다른 내용', '역시 다른 내용'];
-    expect(resolveSourceLine(lines, 1, '없는 문장이다')).toBeNull();
-  });
-
-  it('stays inside the search radius', () => {
-    const lines = ['목표 문장이다.', 'a', 'b', 'c', 'd'];
-    expect(resolveSourceLine(lines, 5, '목표 문장이다.', 1)).toBeNull();
-    expect(resolveSourceLine(lines, 5, '목표 문장이다.', 4)?.line).toBe(1);
+  // The trash may only cross a dev-rebuild reload, which the component marks
+  // via vite:beforeFullReload. A load without the marker is a manual refresh
+  // or navigation and starts clean — a stale undo lingering past a refresh is
+  // exactly what blocked the next round of comments.
+  it('keeps the trash only when the rebuild marker is present', () => {
+    const raw = JSON.stringify([[annotation()]]);
+    expect(restoreTrash('1', raw)).toHaveLength(1);
+    expect(restoreTrash(null, raw)).toEqual([]);
   });
 });
 
@@ -164,10 +167,10 @@ describe('buildFeedbackMarkdown', () => {
     expect(out).toContain('### 3. 본문 5행');
   });
 
-  it('carries the prompt and the verbatim source line', () => {
+  it('carries the prompt and the quoted block text', () => {
     const out = buildFeedbackMarkdown([annotation()]);
     expect(out).toContain('요청: 6번 항목과 중복');
-    expect(out).toContain('1. ==핵심 문장.== 뒤따르는 설명.');
+    expect(out).toContain('핵심 문장. 뒤따르는 설명.');
     expect(out).toContain('src/content/notes/foo/index.md');
     expect(out).toContain('(li)');
   });
@@ -179,27 +182,30 @@ describe('buildFeedbackMarkdown', () => {
     expect(buildFeedbackMarkdown([annotation()])).not.toContain('선택:');
   });
 
-  it('labels a multi-line anchor as a range', () => {
-    const out = buildFeedbackMarkdown([annotation({ bodyLine: 3, endBodyLine: 5 })]);
-    expect(out).toContain('본문 3-5행');
+  // Line numbers are the stamped data-line — a hint, not a verified fact —
+  // so the label must say 부근 rather than promise the exact line.
+  it('labels the anchor as approximate', () => {
+    expect(buildFeedbackMarkdown([annotation({ bodyLine: 3 })])).toContain('본문 3행 부근');
+    expect(buildFeedbackMarkdown([annotation({ bodyLine: 3, endBodyLine: 5 })])).toContain(
+      '본문 3-5행 부근',
+    );
   });
 
   // Notes contain inline code, so a naive triple-backtick fence would be
-  // closed early by the source line itself.
-  it('opens a fence longer than any backtick run in the source', () => {
-    const out = buildFeedbackMarkdown([annotation({ sourceText: '앞 ```코드``` 뒤' })]);
+  // closed early by the quoted text itself.
+  it('opens a fence longer than any backtick run in the quote', () => {
+    const out = buildFeedbackMarkdown([annotation({ text: '앞 ```코드``` 뒤' })]);
     expect(out).toContain('````\n앞 ```코드``` 뒤\n````');
   });
 
-  it('tells the agent the source block is greppable', () => {
-    expect(buildFeedbackMarkdown([annotation()])).toContain('정확히 일치');
-  });
-
-  // An item whose source line could not be verified must not travel under the
-  // "matches the file exactly" promise the header makes.
-  it('flags an unverified item instead of passing it off as source', () => {
-    const out = buildFeedbackMarkdown([annotation({ unverified: true })]);
-    expect(out).toContain('소스 줄 확인 실패');
+  // The quotes are rendered text: smartypants rewrites quotes/dashes and
+  // marker/link syntax is gone, so the header must warn that the wording may
+  // differ from the source file instead of promising a verbatim match.
+  it('warns that quotes are rendered text, and asks for a proposal', () => {
+    const out = buildFeedbackMarkdown([annotation()]);
     expect(out).toContain('렌더링된 텍스트');
+    expect(out).toContain('제안');
+    expect(out).not.toContain('정확히 일치');
+    expect(out).not.toContain('편집하라');
   });
 });

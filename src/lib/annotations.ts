@@ -2,104 +2,38 @@
  * Note-feedback basket: the data model shared by the dev-only annotator
  * (src/components/NoteAnnotator.astro) and its tests.
  *
- * The annotator anchors on `data-line`, stamped onto block elements by
- * rehypeStampSourceLines (src/lib/markdown-plugins.ts), and pulls the matching
- * line out of the page's raw.md. That is why `sourceText` is the *source*
- * line rather than what the browser rendered: remarkSmartypants rewrites
- * quotes and dashes, and marker/link syntax disappears in the DOM, so rendered
- * text is not reliably greppable against the .md file. Source text is.
+ * Quotes are what the browser rendered, and the line number is the block's
+ * stamped `data-line` (rehypeStampSourceLines, src/lib/markdown-plugins.ts)
+ * taken as-is. Neither is verified against the source file — an earlier
+ * version fetched raw.md and proved every line, but raw.md is generated once
+ * per dev-server start and goes stale as the agent applies feedback, turning
+ * the proof into noise. A file path, an approximate line, and the rendered
+ * wording are enough for the reading agent to find the spot itself.
  */
 
 export type Annotation = {
   id: string;
   /** Repo-relative path of the markdown source, e.g. src/content/notes/foo/index.md */
   file: string;
-  /** 1-based line in the markdown BODY (frontmatter excluded), matching raw.md. */
+  /**
+   * The block's stamped `data-line`: 1-based against the markdown body Astro
+   * parsed, which can sit a line or so off the file (frontmatter handling).
+   * A hint for the reader, and the way to find the block on the page again.
+   */
   bodyLine: number;
   /** Set when the selection crossed into a later block. */
   endBodyLine?: number;
   /** Tag name of the anchored block, e.g. 'li' — tells the agent what it is editing. */
   block: string;
-  /** The block's rendered `data-line`, used to find it again and mark it on the page. */
-  domLine?: number;
-  /** The body line(s) verbatim, safe to search for in the source file. */
-  sourceText: string;
+  /** The anchored block's rendered text. */
+  text: string;
   /** What the user highlighted, as rendered. Absent when the whole block was taken. */
   selected?: string;
   /** The user's instruction for this spot. */
   prompt: string;
-  /** True when the source line could not be verified, so `sourceText` is rendered text. */
-  unverified?: boolean;
   url: string;
   at: string;
 };
-
-export type ResolvedLine = { line: number; text: string; delta: number };
-
-/**
- * Undo the transformations that sit between a markdown line and its rendered
- * text: smartypants quotes/dashes, marker and emphasis syntax, list and heading
- * prefixes, and link targets. Whitespace goes too — CJK line wrapping in the
- * source must not count as a difference.
- */
-function normalize(text: string): string {
-  return text
-    .replace(/[“”]/g, '"')
-    .replace(/[‘’]/g, "'")
-    .replace(/[—–]/g, '-')
-    .replace(/-{2,}/g, '-')
-    .replace(/\[([^\]]+)\]\([^)]*\)/g, '$1')
-    .replace(/^\s*(?:[-*+]|\d+[.)])\s+/, '')
-    .replace(/^\s*#{1,6}\s+/, '')
-    .replace(/^\s*>\s?/, '')
-    .replace(/[=*_`~]/g, '')
-    .replace(/\s+/g, '')
-    .trim();
-}
-
-const KEY_LENGTH = 24;
-const MIN_KEY_LENGTH = 6;
-
-function matches(source: string, rendered: string): boolean {
-  if (source === '' || rendered === '') return false;
-  if (source === rendered) return true;
-  const forward = rendered.slice(0, KEY_LENGTH);
-  if (forward.length >= MIN_KEY_LENGTH && source.includes(forward)) return true;
-  const backward = source.slice(0, KEY_LENGTH);
-  return backward.length >= MIN_KEY_LENGTH && rendered.includes(backward);
-}
-
-/**
- * Find the source line a rendered block came from, using its stamped
- * `data-line` as a hint and the rendered text as proof.
- *
- * A hint alone is not enough: `data-line` counts against the body Astro parsed,
- * while raw.md keeps the blank line gray-matter leaves after the frontmatter, so
- * the two are shifted (measured at +1 across all 50 blocks of the current note).
- * The shift depends on the file's own blank lines, so it is discovered per
- * lookup instead of assumed — and when nothing nearby matches, this returns null
- * rather than attaching a line it cannot vouch for.
- */
-export function resolveSourceLine(
-  lines: readonly string[],
-  hint: number,
-  renderedText: string,
-  radius = 3,
-): ResolvedLine | null {
-  const target = normalize(renderedText);
-  if (target === '') return null;
-
-  for (let step = 0; step <= radius; step += 1) {
-    // Forward first: the observed shift runs that way.
-    for (const delta of step === 0 ? [0] : [step, -step]) {
-      const line = hint + delta;
-      if (line < 1 || line > lines.length) continue;
-      const text = lines[line - 1] ?? '';
-      if (matches(normalize(text), target)) return { line, text, delta };
-    }
-  }
-  return null;
-}
 
 export function addAnnotation(list: readonly Annotation[], item: Annotation): Annotation[] {
   return [...list, item];
@@ -152,6 +86,49 @@ export function persistBasket(
   else storage.setItem(key, JSON.stringify(items));
 }
 
+/**
+ * Parse the deletion trash: a LIFO stack of deleted batches (one per 삭제
+ * click, one per 전체 복사 clear). Same never-throw contract as parseBasket.
+ */
+export function parseTrash(raw: string | null): Annotation[][] {
+  if (!raw) return [];
+  let parsed: unknown;
+  try {
+    parsed = JSON.parse(raw);
+  } catch {
+    return [];
+  }
+  if (!Array.isArray(parsed)) return [];
+  const batches: Annotation[][] = [];
+  for (const batch of parsed) {
+    if (!Array.isArray(batch)) continue;
+    const items = batch.filter(isAnnotation);
+    if (items.length > 0) batches.push(items);
+  }
+  return batches;
+}
+
+/**
+ * Decide what a fresh page load starts with. The trash exists to survive a
+ * dev-rebuild reload — the component stamps `marker` into sessionStorage when
+ * Vite announces one — and nothing else. A load without the marker is a manual
+ * refresh or navigation and starts clean, so a stale undo from the previous
+ * round cannot linger and get in the way of the next one.
+ */
+export function restoreTrash(marker: string | null, raw: string | null): Annotation[][] {
+  return marker === null ? [] : parseTrash(raw);
+}
+
+/** Persist the trash, dropping the key once the last batch is restored. */
+export function persistTrash(
+  storage: BasketStorage,
+  key: string,
+  batches: readonly (readonly Annotation[])[],
+): void {
+  if (batches.length === 0) storage.removeItem(key);
+  else storage.setItem(key, JSON.stringify(batches));
+}
+
 function isAnnotation(value: unknown): value is Annotation {
   if (typeof value !== 'object' || value === null) return false;
   const v = value as Record<string, unknown>;
@@ -160,7 +137,7 @@ function isAnnotation(value: unknown): value is Annotation {
     typeof v.file === 'string' &&
     typeof v.bodyLine === 'number' &&
     typeof v.block === 'string' &&
-    typeof v.sourceText === 'string' &&
+    typeof v.text === 'string' &&
     typeof v.prompt === 'string'
   );
 }
@@ -173,8 +150,8 @@ function fenceFor(text: string): string {
 
 function lineLabel(item: Annotation): string {
   return item.endBodyLine && item.endBodyLine !== item.bodyLine
-    ? `본문 ${item.bodyLine}-${item.endBodyLine}행`
-    : `본문 ${item.bodyLine}행`;
+    ? `본문 ${item.bodyLine}-${item.endBodyLine}행 부근`
+    : `본문 ${item.bodyLine}행 부근`;
 }
 
 /**
@@ -195,7 +172,7 @@ export function buildFeedbackMarkdown(list: readonly Annotation[]): string {
   const out: string[] = [
     `# 노트 피드백 (${list.length}건)`,
     '',
-    '아래 소스 블록은 파일 본문과 정확히 일치한다. 그대로 찾아 해당 줄을 편집하라.',
+    '아래 인용은 화면에 렌더링된 텍스트라 소스 파일과 표기(따옴표·대시·마커 문법 등)가 다를 수 있다. 표시된 파일과 줄 부근에서 해당 대목을 찾아, 각 요청의 요구사항을 파악해 반영 방안을 제안하라.',
     '',
   ];
 
@@ -208,12 +185,9 @@ export function buildFeedbackMarkdown(list: readonly Annotation[]): string {
       out.push(`### ${index}. ${lineLabel(item)} (${item.block})`, '');
       out.push(`요청: ${item.prompt}`);
       if (item.selected) out.push(`선택: ${item.selected}`);
-      if (item.unverified) {
-        out.push('주의: 소스 줄 확인 실패 — 아래는 화면에 렌더링된 텍스트다');
-      }
       out.push('');
-      const fence = fenceFor(item.sourceText);
-      out.push(fence, item.sourceText, fence, '');
+      const fence = fenceFor(item.text);
+      out.push(fence, item.text, fence, '');
     }
   }
 

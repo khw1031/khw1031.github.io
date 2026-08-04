@@ -180,6 +180,16 @@
   content: counters(outline, ".") ". ";
   color: var(--color-muted);
 }
+/* Notes write the top-level item, their core claim, in bold (the core skill's
+   assembly rules). The number is generated content from the counter above, so the
+   `**` in the markdown cannot reach it and `::marker` does not exist here at all
+   — the native marker was dropped. Bolding `::before` is what matches the number
+   to the sentence it labels. Only the first level: deeper items are the claim's
+   evidence and stay normal. */
+article[data-collection="notes"] > ol > li::before {
+  font-weight: 600;
+}
+
 /* Tailwind's list padding exists to hold the native marker. The counter above
    lives inside the content flow instead, so the outermost ordered list needs no
    left inset — nested levels keep theirs to show depth. */

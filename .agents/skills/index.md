@@ -16,4 +16,3 @@ is not in this table. Its default note destination is `$HOME/khw1031.github.io/s
 | [lint](lint/SKILL.md) | Checking content `.md` frontmatter integrity and auto-filling missing fields (upper model analyzes, Haiku writes). Run before commit/push. |
 | [notes-polish](notes-polish/SKILL.md) | Highlight (`==마커==`) + structure alignment over agent-authored collections (notes/inbox/wiki/idea). Body-mutating; independent of `/lint`. Manual batch or scoped to named files. |
 | [research](research/SKILL.md) | Researching references (official/primary sources first) and persisting them into the OKF wiki under `src/content/wiki` — nested categories, `type` frontmatter, 1차/2차 링크. Public + searchable. |
-| [skill-manager](skill-manager/SKILL.md) | Creating, updating, reviewing, validating project skills. |

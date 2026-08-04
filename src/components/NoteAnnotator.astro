@@ -3,22 +3,33 @@
  * Dev-only content annotator. Select text in a rendered document, write what
  * should change, and confirm — the item stacks up in a basket. "전체 복사"
  * assembles every stacked item into one prompt, copies it, and empties the
- * basket, removing its storage key so an approved batch leaves no trace.
+ * basket, removing its storage key.
  *
- * There is no undo and no status line: the cards themselves report state.
- * They vanish on a successful copy and stay put when the clipboard refuses.
+ * There is no status line: the cards themselves report state. They vanish on
+ * a successful copy and stay put when the clipboard refuses. Deletions — a
+ * card's 삭제, the clear that follows 전체 복사, or the ✕ in the bar — stack
+ * into a trash and "되돌리기" restores the last batch. The ✕ works in two
+ * steps: while notes are stacked it clears them all (into the trash), and
+ * once nothing is left to clear it discards the trash itself, so a slip of
+ * the finger never loses work but the bar can still be fully retired.
+ * The trash sits in sessionStorage but only crosses a dev-rebuild reload,
+ * marked via vite:beforeFullReload — a manual refresh or navigation starts
+ * clean, so a stale undo never hangs around into the next round of comments.
  *
  * Selecting text does NOT open anything: it only offers a small "노트" chip.
  * Nothing takes focus until that chip is clicked, so ordinary reading and ⌘C
  * on a selection keep working.
  *
- * Anchoring is source-based, not DOM-based: the block's `data-line`
- * (rehypeStampSourceLines) indexes into the page's raw.md, so each item
- * carries the body line verbatim and stays greppable in the .md file.
+ * Anchoring is a hint, not a proof: each item carries the block's stamped
+ * `data-line` (rehypeStampSourceLines) and its rendered text, and the agent
+ * reading the batch locates the spot in the file itself. An earlier version
+ * verified every line against the page's raw.md, but raw.md is generated
+ * once per dev-server start and drifts as feedback gets applied — the
+ * verification failed on exactly the sessions that use the annotator most.
  *
  * Rendered by PostLayout under an `import.meta.env.DEV` guard.
  */
-import { Copy, MessageSquare } from '@lucide/astro';
+import { Copy, MessageSquare, Undo2, X } from '@lucide/astro';
 ---
 
 <div data-annotator class="fb">
@@ -57,6 +68,13 @@ import { Copy, MessageSquare } from '@lucide/astro';
       <button type="button" data-fb-copy class="fb-bar-btn">
         <Copy size={14} stroke-width={1.8} aria-hidden="true" />
         <span data-fb-copy-label>전체 복사</span>
+      </button>
+      <button type="button" data-fb-undo class="fb-bar-btn" hidden>
+        <Undo2 size={14} stroke-width={1.8} aria-hidden="true" />
+        되돌리기
+      </button>
+      <button type="button" data-fb-discard class="fb-bar-btn" hidden>
+        <X size={14} stroke-width={1.8} aria-hidden="true" />
       </button>
     </div>
   </div>
@@ -290,12 +308,15 @@ import { Copy, MessageSquare } from '@lucide/astro';
     buildFeedbackMarkdown,
     parseBasket,
     persistBasket,
+    persistTrash,
     removeAnnotation,
-    resolveSourceLine,
+    restoreTrash,
     updateAnnotation,
   } from '../lib/annotations';
 
   const BASKET_KEY = 'note-feedback:v1';
+  const TRASH_KEY = 'note-feedback:trash:v1';
+  const REBUILD_KEY = 'note-feedback:rebuild';
   const MAX_SELECTED = 300;
 
   // Belt and braces: the component is only rendered in dev, and this guard
@@ -308,7 +329,6 @@ import { Copy, MessageSquare } from '@lucide/astro';
     if (root && article) {
       const content = article;
       const file = content.dataset.sourcePath ?? '';
-      const rawHref = content.dataset.rawMd ?? '';
 
       const chip = root.querySelector<HTMLButtonElement>('[data-fb-chip]')!;
       const panel = root.querySelector<HTMLFormElement>('[data-fb-panel]')!;
@@ -322,25 +342,34 @@ import { Copy, MessageSquare } from '@lucide/astro';
       const count = root.querySelector<HTMLElement>('[data-fb-count]')!;
       const copyButton = root.querySelector<HTMLElement>('[data-fb-copy]')!;
       const copyLabel = root.querySelector<HTMLElement>('[data-fb-copy-label]')!;
+      const undoButton = root.querySelector<HTMLElement>('[data-fb-undo]')!;
+      const discardButton = root.querySelector<HTMLElement>('[data-fb-discard]')!;
       const cardTemplate = root.querySelector<HTMLTemplateElement>('[data-fb-card]')!;
 
+      // A dev rebuild reloads the page; stamping a marker just before lets the
+      // next load tell that reload apart from a manual refresh. Should Vite end
+      // up not reloading (path-filtered), the timer takes the stamp back.
+      import.meta.hot?.on('vite:beforeFullReload', () => {
+        sessionStorage.setItem(REBUILD_KEY, '1');
+        window.setTimeout(() => sessionStorage.removeItem(REBUILD_KEY), 1000);
+      });
+
       let items: Annotation[] = parseBasket(localStorage.getItem(BASKET_KEY));
+      // Deleted batches, most recent last. Survives a dev-rebuild reload and
+      // nothing else — a manual refresh is the way to a clean slate.
+      let trash: Annotation[][] = restoreTrash(
+        sessionStorage.getItem(REBUILD_KEY),
+        sessionStorage.getItem(TRASH_KEY),
+      );
+      sessionStorage.removeItem(REBUILD_KEY);
+      persistTrash(sessionStorage, TRASH_KEY, trash);
       let pending: Omit<Annotation, 'id' | 'prompt' | 'at'> | null = null;
       // Where the selection sat, in viewport coordinates. Kept because the chip
       // is display:none by the time the panel opens, and a hidden element
       // measures as a zero rect.
       let pendingRect: DOMRect | null = null;
       let editing: Annotation | null = null;
-      let bodyLines: string[] | null = null;
       let seq = 0;
-
-      /** raw.md is the same body the line numbers were stamped against. */
-      async function loadBodyLines(): Promise<string[]> {
-        if (bodyLines) return bodyLines;
-        const res = await fetch(rawHref);
-        bodyLines = (await res.text()).split('\n');
-        return bodyLines;
-      }
 
       function lineOf(
         node: Node | null,
@@ -357,6 +386,7 @@ import { Copy, MessageSquare } from '@lucide/astro';
 
       function save() {
         persistBasket(localStorage, BASKET_KEY, items);
+        persistTrash(sessionStorage, TRASH_KEY, trash);
         render();
       }
 
@@ -366,8 +396,8 @@ import { Copy, MessageSquare } from '@lucide/astro';
           el.classList.remove('fb-marked');
         }
         for (const item of items) {
-          if (item.url !== location.pathname || !item.domLine) continue;
-          content.querySelector(`[data-line="${item.domLine}"]`)?.classList.add('fb-marked');
+          if (item.url !== location.pathname) continue;
+          content.querySelector(`[data-line="${item.bodyLine}"]`)?.classList.add('fb-marked');
         }
       }
 
@@ -376,7 +406,7 @@ import { Copy, MessageSquare } from '@lucide/astro';
         const el = node.querySelector<HTMLElement>('.fb-card')!;
         el.querySelector<HTMLElement>('.fb-label')!.textContent = `노트 ${index + 1}`;
         el.querySelector<HTMLElement>('[data-slot="quote"]')!.textContent =
-          item.selected ?? item.sourceText;
+          item.selected ?? item.text;
         el.querySelector<HTMLElement>('[data-slot="prompt"]')!.textContent = item.prompt;
 
         const act = (name: string) => el.querySelector<HTMLButtonElement>(`[data-act="${name}"]`)!;
@@ -395,6 +425,7 @@ import { Copy, MessageSquare } from '@lucide/astro';
         });
         act('edit').addEventListener('click', () => openEditor(item));
         act('drop').addEventListener('click', () => {
+          trash = [...trash, [item]];
           items = removeAnnotation(items, item.id);
           save();
         });
@@ -402,7 +433,15 @@ import { Copy, MessageSquare } from '@lucide/astro';
       }
 
       function render() {
-        basket.hidden = items.length === 0;
+        // The bar must survive an emptied basket while the trash holds
+        // something — it is the only place the undo button lives.
+        basket.hidden = items.length === 0 && trash.length === 0;
+        undoButton.hidden = trash.length === 0;
+        // The ✕ rides along with the bar; its meaning follows what is left.
+        discardButton.hidden = basket.hidden;
+        const discardTitle = items.length > 0 ? '전체 삭제' : '되돌리기 기록 삭제';
+        discardButton.setAttribute('aria-label', discardTitle);
+        discardButton.setAttribute('title', discardTitle);
         count.textContent = String(items.length);
         copyButton.toggleAttribute('disabled', items.length === 0);
         cards.replaceChildren(...items.map(card));
@@ -445,20 +484,20 @@ import { Copy, MessageSquare } from '@lucide/astro';
         chip.hidden = true;
         editing = item;
         pending = null;
-        anchorLabel.textContent = `본문 ${item.bodyLine}행 · ${item.block} · 수정`;
-        sourcePreview.textContent = item.selected ?? item.sourceText;
+        anchorLabel.textContent = `본문 ${item.bodyLine}행 부근 · ${item.block} · 수정`;
+        sourcePreview.textContent = item.selected ?? item.text;
         promptInput.value = item.prompt;
         submitLabel.textContent = '수정 완료';
-        const block = item.domLine
-          ? content.querySelector(`[data-line="${item.domLine}"]`)?.getBoundingClientRect()
-          : undefined;
+        const block = content
+          .querySelector(`[data-line="${item.bodyLine}"]`)
+          ?.getBoundingClientRect();
         openPanelAt(block ?? { left: GAP, right: GAP, top: GAP });
         promptInput.focus();
       }
 
       // Selection only offers the chip. Focus stays in the document so the
       // native selection — and ⌘C on it — keeps working.
-      document.addEventListener('mouseup', async (event) => {
+      document.addEventListener('mouseup', (event) => {
         if ((event.target as HTMLElement | null)?.closest('[data-annotator]')) return;
 
         const selection = window.getSelection();
@@ -477,34 +516,22 @@ import { Copy, MessageSquare } from '@lucide/astro';
         const end = lineOf(range.endContainer);
 
         // Capture now: opening the panel later collapses the selection.
-        const lines = await loadBodyLines();
         const blockText = start.element.textContent?.trim() ?? '';
-
-        // data-line is a hint; the rendered text is what proves which line it is.
-        const resolved = resolveSourceLine(lines, start.line, blockText);
-        const bodyLine = resolved?.line ?? start.line;
-        const endHint = end && end.line > start.line ? end.line + (resolved?.delta ?? 0) : undefined;
-        const sourceText = resolved
-          ? lines.slice(bodyLine - 1, endHint ?? bodyLine).join('\n')
-          : blockText;
+        const endLine = end && end.line > start.line ? end.line : undefined;
 
         pending = {
           file,
-          bodyLine,
-          endBodyLine: endHint,
+          bodyLine: start.line,
+          endBodyLine: endLine,
           block: start.block,
-          domLine: start.line,
-          sourceText,
-          // Omitted when the whole block was taken — the source line says it already.
+          text: blockText,
+          // Omitted when the whole block was taken — the quote says it already.
           selected: text === blockText ? undefined : text.slice(0, MAX_SELECTED),
-          unverified: resolved ? undefined : true,
           url: location.pathname,
         };
 
-        anchorLabel.textContent = resolved
-          ? `본문 ${bodyLine}${endHint ? `-${endHint}` : ''}행 · ${start.block}`
-          : `본문 ${bodyLine}행 · ${start.block} · 소스 줄 확인 실패`;
-        sourcePreview.textContent = sourceText;
+        anchorLabel.textContent = `본문 ${start.line}${endLine ? `-${endLine}` : ''}행 부근 · ${start.block}`;
+        sourcePreview.textContent = blockText;
 
         // The last client rect, not the bounding box: a selection spanning lines
         // should anchor at where it actually ends, not at the widest line's edge.
@@ -579,8 +606,31 @@ import { Copy, MessageSquare } from '@lucide/astro';
           }, 1500);
           return;
         }
+        // The approved batch leaves the basket (and its storage key) but goes
+        // through the trash, so an accidental copy is recoverable.
+        trash = [...trash, items];
         items = [];
-        // Empties the basket AND drops its storage key — nothing is left behind.
+        save();
+      });
+
+      undoButton.addEventListener('click', () => {
+        const last = trash[trash.length - 1];
+        if (!last) return;
+        trash = trash.slice(0, -1);
+        items = [...items, ...last];
+        save();
+      });
+
+      // First press clears the stacked notes — recoverably, through the
+      // trash. Once nothing is left to clear, it gives up the undo history so
+      // the bar can retire without waiting for a refresh.
+      discardButton.addEventListener('click', () => {
+        if (items.length > 0) {
+          trash = [...trash, items];
+          items = [];
+        } else {
+          trash = [];
+        }
         save();
       });
 

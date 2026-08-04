@@ -71,12 +71,12 @@ const ANCHORED_BLOCKS = new Set([
 
 /**
  * Stamp each block element with the markdown line it came from, so a rendered
- * page can point back at the exact source line. Consumed by the dev-only note
- * annotator (src/components/NoteAnnotator.astro, src/lib/annotations.ts).
+ * page can point back at its source. Consumed by the dev-only note annotator
+ * (src/components/NoteAnnotator.astro, src/lib/annotations.ts) as a location
+ * hint and as the handle for finding a block again on the page.
  *
- * The number is body-relative — frontmatter is stripped before parsing — which
- * makes it line up exactly with the raw.md that
- * scripts/generate-raw-markdown.ts writes from `matter(raw).content`.
+ * The number is body-relative — frontmatter is stripped before parsing — so
+ * against the full source file it can sit a line or so off.
  *
  * Runs last in the rehype phase so it sees the tree after mermaid/KaTeX/Shiki
  * substitutions. Those plugins rebuild their subtrees from HTML strings, which

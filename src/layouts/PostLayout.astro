@@ -60,6 +60,7 @@ const showSummary = Boolean(data.summary) && entry.collection !== 'notes';
   <article
     class="prose max-w-none mt-2"
     data-pagefind-body={searchable ? true : undefined}
+    data-collection={entry.collection}
     data-source-path={sourcePath}
     data-raw-md={mdHref}
   >
