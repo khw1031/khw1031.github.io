@@ -1,5 +1,6 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import { getLabItems } from './labs';
+import { sortByRecency } from './listing';
 import { readingTime } from './reading-time';
 
 export type ListableCollection =
@@ -14,6 +15,11 @@ export interface PostListItem {
   href: string;
   title: string;
   pubDate: Date;
+  /**
+   * Last revision, when an author stamped one. Listings order and label by this
+   * in preference to pubDate (see `sortByRecency`); labs never carry it.
+   */
+  updatedDate?: Date;
   /** Short description shown under the title in listings; absent for labs. */
   description?: string;
   /** Topical tags from frontmatter; absent for labs. */
@@ -60,6 +66,7 @@ function entryToItem(
     href: `/${collection}/${entry.id}/`,
     title: entry.data.title,
     pubDate: entry.data.pubDate,
+    updatedDate: entry.data.updatedDate,
     description: entry.data.description,
     tags: entry.data.tags,
     readingMinutes: readingTime(entryBody(entry)).minutes,
@@ -68,9 +75,7 @@ function entryToItem(
 
 export async function getListItems(collection: ListableCollection): Promise<PostListItem[]> {
   const entries = await getCollection(collection, ({ data }) => !data.draft);
-  return entries
-    .map((entry) => entryToItem(collection, entry))
-    .sort((a, b) => b.pubDate.valueOf() - a.pubDate.valueOf());
+  return sortByRecency(entries.map((entry) => entryToItem(collection, entry)));
 }
 
 // Public, listed content merged for the home "Recent" list and the archive:
@@ -84,9 +89,10 @@ async function getPublicItems(): Promise<PostListItem[]> {
       ),
     ),
   );
-  return [...collections.flat(), ...getLabItems().map((item) => ({ ...item, label: 'Labs' }))].sort(
-    (a, b) => b.pubDate.valueOf() - a.pubDate.valueOf(),
-  );
+  return sortByRecency([
+    ...collections.flat(),
+    ...getLabItems().map((item) => ({ ...item, label: 'Labs' })),
+  ]);
 }
 
 export async function getRecentAcrossCollections(limit: number): Promise<PostListItem[]> {

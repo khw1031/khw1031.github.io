@@ -1,5 +1,6 @@
 ---
 import { type PostListItem, formatDate } from '../lib/collections';
+import { listingDate } from '../lib/listing';
 
 interface Props {
   items: PostListItem[];
@@ -38,7 +39,8 @@ const truncateTitle = (title: string) =>
               <span> · </span>
             </>
           )}
-          <time datetime={item.pubDate.toISOString()}>{formatDate(item.pubDate)}</time>
+          {item.updatedDate && <span>updated </span>}
+          <time datetime={listingDate(item).toISOString()}>{formatDate(listingDate(item))}</time>
           {item.readingMinutes != null ? (
             <>
               <span> · </span>
