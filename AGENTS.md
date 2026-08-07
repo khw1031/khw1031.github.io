@@ -162,7 +162,6 @@ The site has two distinct public scopes — keep them separate so the rules cann
 - **발동 시**: advisor 스킬 절차를 따르고, 조언 문서(`~/.agents/advisor/`)를 읽어
   후속 작업·보고에서 해당 파일 경로를 인용한다.
 
-<!-- from: patterns/software-engineering -->
 # Software Engineering Rules
 
 변하기 쉬운 지식이 코드 곳곳에 퍼지는 것을 막는 원형(seed) 규칙. React, FastAPI,
