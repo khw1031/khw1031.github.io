@@ -41,6 +41,7 @@ const searchable = !data.draft;
   <article class="prose max-w-none mt-2" data-pagefind-body={searchable ? true : undefined}>
     <h1>{data.title}</h1>
     <div class="not-prose text-sm text-muted mb-6 flex flex-wrap items-center gap-x-2">
+      {data.noteId && <span class="note-id">{data.noteId}</span>}
       <span
         class="border border-border px-1.5 py-0.5 text-[11px] uppercase tracking-wide"
         data-pagefind-filter="type"
@@ -83,6 +84,15 @@ const searchable = !data.draft;
 </Base>
 
 <style>
+  /* Handwriting-transcribable id, leading the meta line — mirrors PostLayout. */
+  .note-id {
+    font-family: var(--font-mono);
+    color: var(--color-foreground);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    user-select: all;
+  }
+
   /* Optical centering of the 핵심요약 glyph — mirrors PostLayout. */
   .tldr-mark {
     transform: translateY(0.5px);

@@ -1,6 +1,7 @@
 ---
 title: '[SKILL] 이벤트 로그를 단일 게이트웨이로 삼는 작업 하네스(normalpowers)의 동작 규정과 미해결 지점'
 pubDate: '2026-08-03T11:20:12+09:00'
+noteId: AGENT-2608-003
 description: '작업 상태의 진실을 append-only 이벤트 로그 한 곳에 두고, 완료를 특정 SHA에서의 eval 통과와 사람 승인으로만 판정하는 규칙.'
 summary: '체크박스는 누가 켰는지만 말하고 무엇이 검증됐는지는 말하지 않는다. 진행 상태의 진실을 append-only 이벤트 로그 한 곳에 두면 보이는 문서는 전부 그 로그의 projection이 되고, 완료는 특정 git SHA에서 eval이 통과했다는 사건이 된다. 여기에 사람 승인 게이트 둘과 쓰기 전 거부, locked spec 경계, 설계 epoch 기반 drift 점검을 얹으면 에이전트가 자기 작업을 스스로 종결하지 못하고 완료도 부패를 감지당한다.'
 lang: ko

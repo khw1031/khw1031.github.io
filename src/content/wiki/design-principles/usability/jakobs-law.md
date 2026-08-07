@@ -2,6 +2,7 @@
 type: Reference
 title: Jakob의 법칙
 pubDate: '2026-07-10T16:10:50+09:00'
+noteId: UX-2607-009
 resource: https://www.nngroup.com/articles/end-of-web-design/
 description: "사용자는 당신 사이트보다 다른 사이트에서 훨씬 더 많은 시간을 보낸다 — 그래서 이미 학습된 관습을 따르는 것이 대개 창의성보다 옳다는 Jakob Nielsen(2000)의 법칙"
 lang: ko

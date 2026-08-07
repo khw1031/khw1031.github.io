@@ -2,6 +2,7 @@
 type: Reference
 title: Fitts의 법칙
 pubDate: '2026-07-10T16:10:40+09:00'
+noteId: UX-2607-007
 resource: https://doi.org/10.1037/h0055392
 description: 타깃을 획득하는 시간은 타깃까지의 거리와 타깃 크기의 함수라는, 1954년 Paul Fitts의 실험 법칙 — 크고 가까운 타깃이 빠르다
 lang: ko

@@ -1,6 +1,7 @@
 ---
 title: 'Tavily 검색 API — 복제 가능한 껍질과 못 베끼는 기저, 그리고 재구축·서비스화 설계'
 pubDate: '2026-07-15'
+noteId: BIZ-2607-009
 description: '에이전트용 웹검색 API Tavily를 shell/substrate로 갈라 진짜 해자를 짚고, 동일 로직 재구축·서비스화·개선점을 설계한 메모.'
 summary: 'LangChain create_agent 실습에서 출발해, Tavily의 무엇이 복제되고 무엇이 안 되는지 moat map으로 정리한 뒤, 같은 로직을 재구축·서비스화할 때의 비용 구조와 Tavily 약점을 공략하는 개선 방향을 담았다.'
 lang: ko

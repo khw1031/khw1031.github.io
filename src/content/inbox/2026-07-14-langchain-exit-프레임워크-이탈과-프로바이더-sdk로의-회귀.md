@@ -1,6 +1,7 @@
 ---
 title: 'LangChain Exit: 무거운 프레임워크에서 프로바이더 SDK + 얇은 코드로'
 pubDate: '2026-07-14T21:31:30+09:00'
+noteId: AGENT-2607-021
 description: '2026년 프로덕션 팀이 범용 LLM 프레임워크의 추상을 걷어내고 프로바이더 SDK + 얇은 자기 코드로 이동하는 흐름의 원인·구분·반론 정리.'
 summary: 'LangChain/LlamaIndex 같은 범용 프레임워크의 "체인 글루 추상"을 걷어내는 이른바 LangChain Exit는 프로바이더 SDK가 그 추상을 네이티브로 흡수했기 때문에 일어난다. 다만 이는 "프레임워크 전멸"이 아니라 무거운 범용층 → 얇은 목적특화층으로의 시장 보정이며, LangChain 자신도 v1.0에서 이를 공식 인정하고 경량화로 대응했다.'
 lang: ko

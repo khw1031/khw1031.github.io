@@ -2,6 +2,7 @@
 type: Reference
 title: 인지 부하와 정보 밀도
 pubDate: '2026-07-10T16:45:00+09:00'
+noteId: UX-2607-022
 resource: https://doi.org/10.1037/h0043158
 description: 작업기억은 좁다(대중적 7±2, 실제 ~4 청크) — 이해에 기여하지 않는 부하(extraneous load)를 줄이는 것이 좋은 UI의 원리. Miller·Cowan·Sweller·progressive disclosure·Tufte
 lang: ko

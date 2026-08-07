@@ -66,6 +66,14 @@ const showSummary = Boolean(data.summary) && entry.collection !== 'notes';
   >
     <h1>{data.title}</h1>
     <div class="not-prose text-sm text-muted mb-6">
+      {
+        data.noteId && (
+          <>
+            <span class="note-id">{data.noteId}</span>
+            <span> · </span>
+          </>
+        )
+      }
       <time datetime={data.pubDate.toISOString()} data-pagefind-meta="date">
         {formatDate(data.pubDate)}
       </time>
@@ -117,6 +125,20 @@ const showSummary = Boolean(data.summary) && entry.collection !== 'notes';
 </Base>
 
 <style>
+  /* The handwriting-transcribable id, leading the meta line above the date.
+     It sat beside the h1 first, where the only size that did not compete with
+     the title was too small to read back onto paper — the meta line gives it
+     full size at no cost to the heading. Mono so O/0 and I/1 stay apart when
+     transcribed, foreground-colored to lead the muted row, nowrap so an id
+     never breaks mid-token, and select-all so one click grabs the whole id. */
+  .note-id {
+    font-family: var(--font-mono);
+    color: var(--color-foreground);
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    user-select: all;
+  }
+
   /* The "핵심요약" glyph ink sits slightly low in its line box, so the flex-
      centered mark reads a touch high. The optical offset depends on subpixel
      rounding, which differs by display density: standard (1x) displays need a

@@ -2,6 +2,7 @@
 type: Reference
 title: Material Design — 한 디자인 시스템 사례
 pubDate: '2026-07-10T16:10:25+09:00'
+noteId: DS-2607-012
 resource: https://m3.material.io/
 description: Google의 Material Design(M1~M3)을 이 라이브러리의 원리들이 한 시스템으로 어떻게 구현되는지 보여주는 '사례'로 정리 — 8dp 그리드·12컬럼·48dp 타깃·타입 스케일·동적 색. Apple·Carbon·Tailwind와 나란한 예시
 lang: ko

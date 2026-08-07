@@ -2,6 +2,7 @@
 type: Category
 title: Usability — 측정 가능한 사용성의 법칙
 pubDate: '2026-07-10T16:10:30+09:00'
+noteId: UX-2607-005
 description: 취향이 아니라 인간 인지의 제약에서 나오는, 근거를 댈 수 있는 사용성 법칙과 휴리스틱 모음 — Nielsen 10대 휴리스틱, Fitts·Hick 법칙, Gestalt, Jakob의 법칙, 미학-사용성 효과, 타깃 크기
 lang: ko
 tags: ['usability', 'ux-laws', 'heuristics', 'cognition', 'accessibility']

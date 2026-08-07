@@ -1,6 +1,7 @@
 ---
 title: 'How to Speak — Patrick Winston (MIT OCW)'
 pubDate: '2026-07-22T23:29:15+09:00'
+noteId: LEARN-2607-025
 description: 'MIT OpenCourseWare의 Patrick Henry Winston "How to Speak"(RES.TLL-005, IAP 2018) 강의 페이지 캡처. 페이지가 제공하는 목차·타임스탬프 구조와 개요를 데이터로 정리하고, 실질 내용(60분 영상)은 미시청 상태로 남겨둔 인박스 후보.'
 summary: 'Patrick Winston(MIT)이 40년간 다듬은 60분짜리 발표·강연 기법 강의. OCW 페이지 자체는 개요와 10개 섹션 타임스탬프 목차(시작법, 4가지 샘플 휴리스틱, 시간·장소, 칠판/소품/슬라이드, informing vs persuading, 끝내는 법 등)만 제공하고, 실제 기법의 내용은 강의 영상에 있다. 여기서는 페이지 구조를 데이터로 캡처하고, 영상 시청 후 승격할 질문들을 남긴다.'
 lang: ko

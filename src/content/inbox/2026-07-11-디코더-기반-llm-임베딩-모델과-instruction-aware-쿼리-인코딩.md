@@ -1,6 +1,7 @@
 ---
 title: '디코더 기반 LLM 임베딩 모델과 Instruction-Aware 쿼리 인코딩'
 pubDate: '2026-07-11T15:49:15+09:00'
+noteId: AI-2607-010
 description: 'Qwen3-Embedding·E5-mistral 같은 디코더(LLM) 기반 임베딩 모델이 왜 last-token pooling을 쓰고 쿼리에만 instruction을 붙이는지 원 논문·모델 카드로 확인해 정리'
 summary: 'Qwen3-Embedding·E5-mistral 등 디코더 전용 LLM 기반 임베딩 모델은 causal attention 구조상 last-token([EOS]) pooling으로 임베딩을 뽑고, "Instruct: ...\nQuery: ..." 포맷으로 쿼리에만 태스크 지시문을 붙인다. 이는 문서 인덱스를 재구축하지 않고 쿼리만 바꿔 여러 검색 태스크에 대응하기 위한 설계다.'
 lang: ko

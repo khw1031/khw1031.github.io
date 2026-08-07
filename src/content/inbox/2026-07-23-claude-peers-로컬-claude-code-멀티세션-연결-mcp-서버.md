@@ -1,6 +1,7 @@
 ---
 title: 'claude-peers — 로컬 Claude Code 멀티세션 연결 MCP 서버'
 pubDate: '2026-07-23T08:52:19+09:00'
+noteId: AGENT-2607-031
 description: 'claude-peers는 로컬에서 여러 Claude Code 세션을 MCP로 연결해 상호 조율하게 하는 브로커 기반 서버다.'
 summary: '로컬 SQLite 브로커 위에서 다수 Claude Code 세션이 폴링 기반 메시지를 교환하는 claude-peers의 구조를 한 장의 지도와 함께 파악할 수 있다.'
 lang: ko

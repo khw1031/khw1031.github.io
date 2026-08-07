@@ -2,6 +2,7 @@
 type: Category
 title: Aesthetics & Layout — 출판에서 웹으로 이어진 미감의 골격
 pubDate: '2026-07-10T16:11:10+09:00'
+noteId: UX-2607-013
 description: 활자·인쇄 전통에서 웹으로 계승된 미감·레이아웃 원칙 — typographic scale, baseline grid/수직 리듬, 스위스 grid→CSS Grid, 8pt spacing 시스템을 1차 출처로 정리
 lang: ko
 tags: ['typography', 'layout', 'grid', 'spacing', 'vertical-rhythm', 'web-design']

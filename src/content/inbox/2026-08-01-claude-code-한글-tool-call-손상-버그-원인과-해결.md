@@ -1,6 +1,7 @@
 ---
 title: 'Claude Code 한글 tool call 손상 버그: 원인과 해결'
 pubDate: '2026-08-01T15:57:35+09:00'
+noteId: AGENT-2608-002
 description: 'Claude Code의 한글 tool call 파라미터 손상 원인(\uXXXX hex 오기)과 CLAUDE.md 지시문 한 줄로 해결한 통제 실험 보고서.'
 summary: 'Sonnet/Opus 5에서 한글이 깨져 나오는 현상의 원인은 인프라가 아닌 모델의 \uXXXX escape 오기 습관이며, CLAUDE.md에 UTF-8 리터럴 지시문 한 줄을 추가하면 완전히 차단된다는 통제 실험 결과.'
 lang: ko

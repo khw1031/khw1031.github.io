@@ -1,6 +1,7 @@
 ---
 title: Building in Public — 국내 성공 유형과 플랫폼별 계정 지형
 pubDate: '2026-07-29T15:52:03+09:00'
+noteId: BIZ-2607-017
 description: BiP의 기원·작동 메커니즘을 정리하고, 국내에서 과정 자체를 공개하는 계정을 Instagram·Threads·X 단위로 확인한 캡처.
 summary: 'Building in Public의 기원(Buffer 2013)과 작동 메커니즘을 정리하고, 국내 과정 공개형 활동이 Threads에 집중되어 있으며 X는 소수 고신뢰 개인, Instagram은 사실상 부재라는 플랫폼별 지형과 실제 계정·원문을 확인한 인박스 캡처'
 lang: ko

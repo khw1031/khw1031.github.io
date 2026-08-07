@@ -1,6 +1,7 @@
 ---
 title: 'Turborepo·Nx·경량 모노레포 관리 방식 서베이'
 pubDate: '2026-07-22T01:20:00+09:00'
+noteId: DEV-2607-009
 description: '모노레포 관리 도구·방식을 세 계층(package-manager workspaces 경량 / Turborepo·Nx task-runner / Bazel heavy)으로 놓고, Turborepo와 Nx의 오늘자(2026-07) 상태와 경량 조합(pnpm workspaces + catalogs + changesets)이 언제 충분한지 정리한 서베이.'
 summary: '모노레포 관리는 세 계층으로 나뉜다 — ① package-manager workspaces(pnpm/yarn/npm) + catalogs + changesets의 경량 방식 ② Turborepo(JS/TS 전용, 캐싱·파이프라인, 설정 단순)와 Nx(폴리글롯·경계 강제·코드 생성, 플랫폼) 같은 task-runner ③ Bazel(초대형·다언어)의 heavy. 2026 공통 흐름은 코어 Rust 이식·에이전트 기능 1차화. 대부분의 JS/TS 팀은 경량→Turborepo가 기본선이고, 여러 팀·강한 아키텍처 경계·폴리글롯이면 Nx, Google 스케일에서만 Bazel. Python+React처럼 두 언어가 느슨히 공존하면 도구를 얹기 전에 pnpm+uv 경량 조합으로 충분한 경우가 많다. Lerna는 deprecated가 아니라 Nx 엔진 위에서 발행에 특화된 레거시, moon은 툴체인 pin·폴리글롯을 강조하는 Rust 신흥 러너다.'
 lang: ko

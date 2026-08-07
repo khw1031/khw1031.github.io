@@ -2,6 +2,7 @@
 type: Reference
 title: 가독성과 Measure (줄 길이)
 pubDate: '2026-07-10T16:30:00+09:00'
+noteId: UX-2607-018
 resource: https://practicaltypography.com/line-length.html
 description: 본문 가독성의 핵심 변수인 measure(한 줄 길이)와 행간 — 인쇄 전통의 45~90자 규칙이 웹 본문 설계로 이어진 계보
 lang: ko

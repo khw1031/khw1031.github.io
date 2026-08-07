@@ -1,6 +1,7 @@
 ---
 title: '톱다운 학습 — 문제에서 시작해 기초까지 재귀로 내려가는 절차 (Gabriel Petersson 실측)'
 pubDate: '2026-07-29T20:19:43+09:00'
+noteId: LEARN-2607-028
 description: 'ChatGPT로 수학·ML을 독학해 OpenAI Sora 리서처가 된 Gabriel Petersson이 "구체적으로 무엇을 어떤 순서로 했는가"를 인터뷰 전문·본인 트윗·그가 남긴 GitHub 학습 repo·플레이리스트로 재구성한 노트. 5단계 절차와 실측 타임라인(2024-11-11~22), 그리고 "ChatGPT만으로"라는 서사의 과장 지점까지.'
 summary: '톱다운 학습의 재현 가능한 절차를 1차 자료로 복원한다. ①문제·코드 확보를 모델에 위임 ②동작→라인→부품→수학으로 재귀 하강 ③되설명으로 검증(gap 신호·click 신호) ④모델 출력 형식을 상시 지시로 교정 ⑤실전 압박·질문 습관·사람 피드백으로 강제. 그의 GitHub repo는 autoencoder→VAE→CIFAR diffusion을 11일에 통과한 뒤 한 달 만에 Sora 팀에 합류한 궤적을 그대로 보여주지만, 같은 repo가 남긴 28편 "best foundational ai videos" 플레이리스트는 "ChatGPT만으로"가 과장임을 보여준다 — 기초를 건너뛴 게 아니라 순서를 뒤집었을 뿐이다.'
 lang: ko

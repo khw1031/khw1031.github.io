@@ -1,6 +1,7 @@
 ---
 title: 'docker-vals: docker compose up만으로 시크릿 주입하는 Docker CLI 플러그인'
 pubDate: '2026-07-21T01:58:46+09:00'
+noteId: DEV-2607-008
 description: 'Docker Compose Provider Services를 확장해 AWS SSM, Vault 등에서 시크릿을 자동 주입하는 OSS 도구 docker-vals의 구조와 Docker Compose 본체 기여까지 정리.'
 summary: 'docker-vals는 compose.yaml에 시크릿 위치만 선언하면 docker compose up 실행 시 호스트에서 시크릿 스토어를 조회해 컨테이너 환경변수로 주입하는 Docker CLI 플러그인이다. 이 도구를 만들기 위해 Docker Compose 본체에 rawsetenv 프로토콜을 직접 기여한 과정까지 다룬다.'
 lang: ko

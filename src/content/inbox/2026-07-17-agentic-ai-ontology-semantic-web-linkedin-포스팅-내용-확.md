@@ -1,6 +1,7 @@
 ---
 title: 'Agentic AI·Ontology·Semantic Web LinkedIn 포스팅 (내용 확인 불가)'
 pubDate: '2026-07-17T02:26:52+09:00'
+noteId: AGENT-2607-023
 description: 'LinkedIn 로그인 벽으로 원문 추출 실패 — 해시태그(AgenticAI, Ontology, SemanticWeb) 기반 주제만 확인 가능.'
 summary: 'LinkedIn 인증 벽 때문에 본문 추출에 실패했다. URL 해시태그로 주제(Agentic AI, 온톨로지, 시맨틱 웹)만 알 수 있으며, 원문에 직접 접근해야 내용을 확인할 수 있다.'
 lang: ko

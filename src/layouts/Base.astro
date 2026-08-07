@@ -2,6 +2,7 @@
 import Footer from '../components/Footer.astro';
 import Header from '../components/Header.astro';
 import JsonLd from '../components/JsonLd.astro';
+import NoteIdPalette from '../components/NoteIdPalette.astro';
 import '../styles/global.css';
 
 interface Props {
@@ -64,5 +65,8 @@ const fullOgImage = ogImage ? new URL(ogImage, Astro.site).toString() : null;
       <slot />
     </main>
     <Footer />
+    {/* ⌘K noteId lookup. Dev-only: Pagefind's index is a build artifact and
+        excludes the unlisted collections anyway, so it can't answer this. */}
+    {import.meta.env.DEV && <NoteIdPalette />}
   </body>
 </html>

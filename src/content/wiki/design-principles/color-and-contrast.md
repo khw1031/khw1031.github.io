@@ -2,6 +2,7 @@
 type: Reference
 title: Color & Contrast — 팔레트(미감)와 대비(접근성)
 pubDate: '2026-07-10T16:30:10+09:00'
+noteId: UX-2607-019
 resource: https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html
 description: 색은 미감(체계적 톤 팔레트)이자 사용성(WCAG 명도 대비)이다 — Material·Carbon·Tailwind의 톤 스케일과 WCAG 4.5:1/3:1/7:1 대비 기준, 그리고 둘의 결합
 lang: ko

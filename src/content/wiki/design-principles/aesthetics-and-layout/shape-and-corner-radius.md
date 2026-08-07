@@ -2,6 +2,7 @@
 type: Reference
 title: Shape와 Corner Radius (경계 반경·곡률)
 pubDate: '2026-07-10T20:40:20+09:00'
+noteId: UX-2607-032
 resource: https://www.w3.org/TR/css-backgrounds-3/
 description: DESIGN.md의 Shapes 섹션 근거 — border-radius, 연속 곡률(squircle/superellipse), Material 셰이프 스케일, 그리고 형태가 브랜드·의미를 전달하는 방식
 lang: ko

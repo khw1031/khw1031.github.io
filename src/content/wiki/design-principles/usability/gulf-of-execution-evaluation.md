@@ -2,6 +2,7 @@
 type: Reference
 title: 실행의 간극 · 평가의 간극 (Norman)
 pubDate: '2026-07-10T16:30:20+09:00'
+noteId: UX-2607-020
 resource: https://jnd.org/books/the-design-of-everyday-things-revised-and-expanded-edition/
 description: Don Norman의 두 간극 — 사용자 의도와 시스템 사이의 실행/평가 간극을 어포던스·시그니파이어·매핑·피드백·개념 모델로 좁히는, 이 카테고리 전체를 꿰는 상위 이론
 lang: ko

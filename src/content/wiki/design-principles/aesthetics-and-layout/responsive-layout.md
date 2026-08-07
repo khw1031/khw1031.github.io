@@ -2,6 +2,7 @@
 type: Reference
 title: 반응형·적응형 레이아웃 (Responsive Layout)
 pubDate: '2026-07-10T20:28:20+09:00'
+noteId: UX-2607-031
 resource: https://alistapart.com/article/responsive-web-design/
 description: 그리드가 뷰포트에 적응하는 차원 — 유동 그리드·유연한 이미지·미디어 쿼리(Marcotte), 모바일 퍼스트, Grid vs Flexbox, 컨테이너 쿼리, intrinsic web design
 lang: ko

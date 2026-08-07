@@ -1,6 +1,7 @@
 ---
 title: 'The Harness Effect: 에이전트 AI의 토큰 경제학을 결정하는 오케스트레이션 설계'
 pubDate: '2026-07-23T01:27:25+09:00'
+noteId: AGENT-2607-029
 description: 'Agentic AI의 토큰 소비 급증(token maxing)을 오케스트레이션 레이어(harness) 설계로 41% 절감한 실증 연구 분석.'
 summary: '이 리포트를 읽으면 모델 교체 없이 orchestration만 바꿔도 비용·지연·토큰이 40% 안팎 줄고, 그 이득이 모든 모델에 곱해지는 구조를 이해하게 된다.'
 lang: ko

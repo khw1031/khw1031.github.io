@@ -2,6 +2,7 @@
 type: Reference
 title: 정보 구조(IA)와 내비게이션
 pubDate: '2026-07-10T20:28:00+09:00'
+noteId: UX-2607-029
 resource: https://www.oreilly.com/library/view/information-architecture-4th/9781491913529/
 description: 콘텐츠를 구조화·라벨링해 찾을 수 있게 만드는 정보 구조(IA)와 내비게이션 — Rosenfeld/Morville의 4대 시스템, 카드 소팅·트리 테스트, wayfinding, 숨은 내비게이션의 비용
 lang: ko

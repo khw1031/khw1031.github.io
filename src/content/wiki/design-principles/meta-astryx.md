@@ -2,6 +2,7 @@
 type: Reference
 title: Meta Astryx — 코드 기반 Agent-Ready 디자인 시스템 (구현 사례)
 pubDate: '2026-07-10T21:15:00+09:00'
+noteId: DS-2607-014
 resource: https://github.com/facebook/astryx
 description: DESIGN.md 문제를 한 단계 더 밀어붙인 구현 사례 — 컴포넌트당 하나의 .doc.mjs에서 CLI·문서사이트·MCP 서버를 파생해 사람과 AI 에이전트가 같은 참조를 읽는 Meta의 오픈소스 디자인 시스템
 lang: ko

@@ -2,6 +2,7 @@
 type: Reference
 title: UX 라이팅과 마이크로카피
 pubDate: '2026-07-10T20:28:10+09:00'
+noteId: UX-2607-030
 resource: https://www.nngroup.com/articles/3-is-of-microcopy/
 description: 인터페이스 속 단어(버튼·에러·레이블) 설계 — 목적 지향 UX 라이팅, plain language, WCAG 읽기 수준, 에러 메시지 가이드라인, 서술적 액션 레이블
 lang: ko

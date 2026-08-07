@@ -2,6 +2,7 @@
 type: Reference
 title: 터치 타깃 최소 크기
 pubDate: '2026-07-10T16:11:05+09:00'
+noteId: UX-2607-012
 resource: https://www.w3.org/WAI/WCAG22/Understanding/target-size-minimum.html
 description: 손가락·포인터로 정확히 누를 수 있는 최소 타깃 크기 규범 — Apple 44pt, Material 48dp, WCAG 2.1(44×44 CSS px, AAA)·2.2(24×24 CSS px, AA)
 lang: ko

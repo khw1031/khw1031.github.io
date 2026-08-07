@@ -29,6 +29,7 @@ import { baseFrontmatter, postSchema, readAndWriteSchema } from '../src/content/
 // labs.ts only type-imports from ./collections, so this pulls in no Astro
 // virtual modules at runtime — safe to import from a plain tsx script.
 import { labs } from '../src/lib/labs';
+import { isKnownCategory, NOTE_ID_COLLECTIONS, parseNoteId } from '../src/lib/note-id';
 
 const CONTENT_ROOT = resolve('src/content');
 
@@ -53,6 +54,13 @@ const KNOWN_SCHEMA: Record<string, ZodType> = {
 const REQUIRED_KEYS = ['title', 'pubDate', 'description', 'summary', 'lang', 'tags'];
 
 /**
+ * Collections that additionally require a stamped `noteId`. These are the
+ * agent-authored collections a paper notebook cites; posts/read-and-write are
+ * out of scope. Stamp missing ids with `tsx scripts/stamp-note-ids.ts`.
+ */
+const NOTE_ID_REQUIRED = new Set<string>(NOTE_ID_COLLECTIONS);
+
+/**
  * Collections intentionally exempt from the frontmatter contract: free-form
  * documents (PRDs, drafts) whose title is derived from the body, so they carry
  * no required keys and are neither validated nor stamped here. They are still
@@ -71,6 +79,8 @@ interface FileReport {
   bodyHash?: string;
   /** Identifies a specific entry within a multi-entry source (e.g. a lab href). */
   ref?: string;
+  /** Stamped noteId, when the file carries one. Used for the uniqueness pass. */
+  noteId?: string;
 }
 
 /** Short hash of the markdown body only (frontmatter excluded) to detect drift. */
@@ -124,7 +134,8 @@ function inspect(file: string): FileReport {
   const raw = readFileSync(file, 'utf-8');
   const data = matter(raw).data as Record<string, unknown>;
 
-  const missing = REQUIRED_KEYS.filter((key) => !(key in data));
+  const required = NOTE_ID_REQUIRED.has(collection) ? [...REQUIRED_KEYS, 'noteId'] : REQUIRED_KEYS;
+  const missing = required.filter((key) => !(key in data));
 
   const invalid: FileReport['invalid'] = [];
   const parsed = schema.safeParse(data);
@@ -133,6 +144,17 @@ function inspect(file: string): FileReport {
       const field = issue.path.length > 0 ? issue.path.join('.') : '(root)';
       invalid.push({ field, message: issue.message });
     }
+  }
+
+  // The schema only pins the shape. The category has to exist in the registry
+  // too, or a typo becomes a permanent id that no handwritten index resolves.
+  const noteId = typeof data.noteId === 'string' ? data.noteId : undefined;
+  const parsedId = noteId ? parseNoteId(noteId) : null;
+  if (parsedId && !isKnownCategory(parsedId.category)) {
+    invalid.push({
+      field: 'noteId',
+      message: `unknown category '${parsedId.category}' — register it in src/lib/note-id.ts or fix the id`,
+    });
   }
 
   const hash = bodyHash(raw);
@@ -145,7 +167,36 @@ function inspect(file: string): FileReport {
     invalid,
     stale,
     bodyHash: hash,
+    noteId,
   };
+}
+
+/**
+ * Flag any noteId claimed by more than one file.
+ *
+ * Uniqueness cannot live in the Zod schema (it is per-file), and it is the one
+ * failure that silently corrupts the paper index: two documents answering to
+ * the same handwritten reference. Reported on every file involved so the fix is
+ * obvious from either end. Mutates the reports in place.
+ */
+function flagDuplicateNoteIds(reports: FileReport[]): void {
+  const byId = new Map<string, FileReport[]>();
+  for (const report of reports) {
+    if (!report.noteId) continue;
+    const group = byId.get(report.noteId);
+    if (group) group.push(report);
+    else byId.set(report.noteId, [report]);
+  }
+  for (const [id, group] of byId) {
+    if (group.length < 2) continue;
+    for (const report of group) {
+      const others = group.filter((r) => r !== report).map((r) => r.file);
+      report.invalid.push({
+        field: 'noteId',
+        message: `duplicate id '${id}' — also on ${others.join(', ')}`,
+      });
+    }
+  }
 }
 
 /** Deterministically write `lintHash: '<body hash>'` into every content file. */
@@ -179,13 +230,14 @@ function main(): void {
   const json = process.argv.includes('--json');
   const reports: FileReport[] = [];
 
-  for (const file of contentFiles()) {
-    if (SCHEMA_FREE.has(collectionOf(file))) continue;
-    const report = inspect(file);
-    if (hasError(report) || report.stale) {
-      reports.push(report);
-    }
-  }
+  // Inspect every file before filtering: the noteId uniqueness pass needs the
+  // ids of clean files too, or a duplicate between one clean and one dirty file
+  // would go unseen.
+  const all = contentFiles()
+    .filter((file) => !SCHEMA_FREE.has(collectionOf(file)))
+    .map(inspect);
+  flagDuplicateNoteIds(all);
+  reports.push(...all.filter((r) => hasError(r) || r.stale));
   reports.push(...labReports());
 
   const errors = reports.filter(hasError);

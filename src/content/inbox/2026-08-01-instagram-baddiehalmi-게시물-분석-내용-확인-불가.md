@@ -1,6 +1,7 @@
 ---
 title: 'Instagram @baddiehalmi 게시물 분석 (내용 확인 불가)'
 pubDate: '2026-08-01T17:26:28+09:00'
+noteId: LEARN-2608-002
 description: 'baddiehalmi의 Instagram 게시물 메타데이터만 확인되며, 본문 콘텐츠는 원문에 포함되어 있지 않아 분석 불가.'
 summary: '해당 Instagram 게시물의 텍스트 콘텐츠가 입력에 포함되지 않아 실질적 분석이 불가능함을 명시한 리포트.'
 lang: ko

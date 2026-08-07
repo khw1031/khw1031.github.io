@@ -1,6 +1,7 @@
 ---
 title: 'Intelligence Ownership: AI 성과 격차의 핵심, 소유 vs 임대 분기점'
 pubDate: '2026-07-29T18:18:14+09:00'
+noteId: AI-2607-018
 description: 'AI 투자 상위 25% 기업 매출 2.2배 성장의 비결은 오픈소스 모델의 RL 파인튜닝이다.'
 summary: 'Ramp 데이터와 Fermisense의 카탈로그 리뷰 실험을 바탕으로, frontier API 임대 대신 자체 파인튜닝이 정확도 +13%·비용 1/68을 만드는 구조와 적용 조건을 정리한다.'
 lang: ko

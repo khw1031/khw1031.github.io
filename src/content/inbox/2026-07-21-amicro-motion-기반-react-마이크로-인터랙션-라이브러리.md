@@ -1,6 +1,7 @@
 ---
 title: 'Amicro: Motion 기반 React 마이크로 인터랙션 라이브러리'
 pubDate: '2026-07-21T01:58:30+09:00'
+noteId: FE-2607-019
 description: 'Motion(Framer Motion)으로 구동되는 React 마이크로 인터랙션 컴포넌트 큐레이션 라이브러리 Amicro의 구조와 활용법 정리.'
 summary: 'Amicro는 React + Tailwind + Motion 스택 위에서 버튼·컨트롤·UI 상태 전환을 하드웨어 가속 애니메이션으로 제공하고, 원클릭 코드 복사까지 지원하는 오픈소스 컴포넌트 라이브러리다.'
 lang: ko

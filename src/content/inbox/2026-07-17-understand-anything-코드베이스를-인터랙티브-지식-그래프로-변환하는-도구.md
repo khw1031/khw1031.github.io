@@ -1,6 +1,7 @@
 ---
 title: 'Understand Anything: 코드베이스를 인터랙티브 지식 그래프로 변환하는 도구'
 pubDate: '2026-07-17T13:19:25+09:00'
+noteId: DEV-2607-007
 description: 'Tree-sitter 정적 분석과 LLM 의미 분석을 결합해 코드·문서를 탐색 가능한 지식 그래프로 만드는 오픈소스 프로젝트 분석.'
 summary: 'Understand Anything은 대규모 코드베이스를 파일·함수·클래스 단위의 노드로 구성된 지식 그래프로 변환하여 시각적 탐색과 질의를 가능하게 한다. 결정론적 파서와 LLM의 분업 구조가 핵심 설계 원리다.'
 lang: ko

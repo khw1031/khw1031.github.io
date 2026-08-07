@@ -2,6 +2,7 @@
 type: Category
 title: Design-to-Code Agent Workflows
 pubDate: '2026-07-08T17:23:17+09:00'
+noteId: DS-2607-008
 description: AI 에이전트가 Figma 같은 범용 디자인 툴의 노드 트리를 파싱하지 않고 디자인 의도를 코드로 옮기는 방식들을 정리한 레퍼런스 모음
 lang: ko
 tags: ['design-to-code', 'ai-agent-workflow', 'ui-generation', 'mcp']

@@ -1,6 +1,7 @@
 ---
 title: 'SEO에서 커뮤니티로: 진화하는 Go-To-Market 플레이북 정리'
 pubDate: '2026-07-30T10:30:43+09:00'
+noteId: BIZ-2607-021
 description: '전통 SEO·PR의 한계를 넘어 제품 바이럴성과 외부 커뮤니티를 결합한 새로운 GTM 전략 6가지와 핵심 원리를 정리한 학습 리포트.'
 summary: 'GTM이 Pull에서 Off-Platform Push로 진화한 경로와 6가지 실행 전술을 파악해, 자사 성장 전략에 적용 가능한 프레임워크를 얻을 수 있다.'
 lang: ko

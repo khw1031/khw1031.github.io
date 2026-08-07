@@ -1,6 +1,7 @@
 ---
 title: 'AI 기반 가족 돌봄 플랫폼 Abby Care와 미국 의료보장 제도'
 pubDate: '2026-07-31T11:07:00+09:00'
+noteId: BIZ-2607-025
 description: 'Forbes가 주목한 Abby Care의 AI 앱이 미국 Medicaid·Medicare 탐색과 가족 유급 돌봄을 어떻게 연결하는지 분석한다.'
 summary: 'Havi Nguyen이 창업한 Abby Care는 AI로 미국 의료보장 제도의 복잡한 절차를 안내하고 가족이 유급 돌봄 제공자가 될 수 있게 돕는 플랫폼이다. 개인적 경험이 시스템적 해결책으로 확장된 사례이며, 제도의 복잡성이 곧 사업 기회가 된 구조를 보여준다.'
 lang: ko

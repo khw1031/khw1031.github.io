@@ -1,6 +1,7 @@
 ---
 title: 'Cloudflare OS: 보안 내장형 에이전트·앱 오픈소스 플랫폼'
 pubDate: '2026-08-06T11:49:32+09:00'
+noteId: AGENT-2608-007
 description: 'Cloudflare OS의 에이전트 작업 공간, Gatekeeper 보안 모델, 풀스택 앱 구조를 연결해 해설하는 학습용 리포트.'
 summary: '에이전트가 조직 데이터를 다루는 과정에서 접근·관찰·공유 단계까지 정책을 강제하는 Cloudflare OS의 설계를 한 장으로 파악할 수 있다.'
 lang: ko

@@ -2,6 +2,7 @@
 type: Reference
 title: Spacing 시스템 (8pt 그리드 · spacing 토큰)
 pubDate: '2026-07-10T16:11:30+09:00'
+noteId: UX-2607-017
 resource: https://m1.material.io/layout/metrics-keylines.html
 description: 좋은 웹 디자인의 핵심 골격인 spacing 시스템 — 8pt(8dp) 그리드와 4px 스텝 spacing 토큰이 왜 표준이 됐는지, Material·Carbon·Polaris·Atlassian·Tailwind의 실제 스케일 비교
 lang: ko

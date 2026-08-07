@@ -1,6 +1,7 @@
 ---
 title: 'Open Lovable: 웹사이트를 React 앱으로 복제하는 오픈소스 AI 도구'
 pubDate: '2026-07-17T17:09:45+09:00'
+noteId: FE-2607-018
 description: 'Firecrawl 팀이 만든 Open Lovable은 AI와 웹 스크래핑으로 기존 웹사이트를 React 앱으로 즉시 재생성하는 오픈소스 도구다.'
 summary: 'Open Lovable은 Firecrawl로 웹사이트를 스크래핑하고 LLM이 React 코드를 생성하여, 기존 사이트를 현대적 React 앱으로 복제·재구성하는 로컬 실행형 오픈소스 프로젝트다. 다양한 LLM과 샌드박스 환경을 지원하며 커스터마이징이 가능하다.'
 lang: ko

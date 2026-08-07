@@ -1,6 +1,7 @@
 ---
 title: 'CDN 없는 봇 차단: HTTP·IP·TCP·TLS 조합 9가지 방법 정리'
 pubDate: '2026-07-30T10:21:34+09:00'
+noteId: SEC-2607-002
 description: 'CDN 없이 HTTP 프로토콜, IP 대역, TCP 특성, TLS 지문을 조합해 부실한 봇을 차단하는 9가지 방법을 계층별로 정리한 실무 가이드.'
 summary: 'Nginx와 nftables만으로 구현 가능한 봇 차단 기법을 L7→L4→콘텐츠 계층으로 분류하고, 각 방법의 오탐 위험과 적용 전 로그 분석의 중요성을 짚는다.'
 lang: ko

@@ -2,6 +2,7 @@
 type: Reference
 title: 아이콘·픽토그램 시스템
 pubDate: '2026-07-10T16:55:10+09:00'
+noteId: UX-2607-027
 resource: https://www.nngroup.com/articles/icon-usability/
 description: 아이콘은 인식(recognition)을 활용하지만 대부분 텍스트 레이블이 필요하다 — 아이콘 사용성, 접근 가능한 이름(WCAG 4.1.2·1.1.1), 비텍스트 대비(1.4.11), 체계적 아이콘 폰트
 lang: ko

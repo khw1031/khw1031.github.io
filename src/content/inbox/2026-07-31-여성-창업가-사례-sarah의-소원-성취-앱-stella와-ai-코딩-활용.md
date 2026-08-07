@@ -1,6 +1,7 @@
 ---
 title: '여성 창업가 사례: Sarah의 소원 성취 앱 Stella와 AI 코딩 활용'
 pubDate: '2026-07-31T23:42:26+09:00'
+noteId: BIZ-2607-027
 description: '인스타그램 @youfree.builder가 소개한 여성 창업가 Sarah의 Stella 앱 사례와 AI 코딩·바이럴 마케팅 결합 전략 분석'
 summary: '바이럴 마케팅 경험과 AI 코딩을 결합해 1인 앱 창업에 성공한 Sarah의 사례를 소개하고, 저자 본인의 글로벌 AI 서비스 운영 경험과 1인 브랜드 컨설팅을 홍보하는 인스타그램 게시물 분석.'
 lang: ko

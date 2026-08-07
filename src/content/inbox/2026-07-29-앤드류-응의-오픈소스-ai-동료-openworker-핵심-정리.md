@@ -1,6 +1,7 @@
 ---
 title: '앤드류 응의 오픈소스 AI 동료 OpenWorker 핵심 정리'
 pubDate: '2026-07-29T22:35:20+09:00'
+noteId: AGENT-2607-037
 description: '앤드류 응이 공개한 오픈소스 AI 에이전트 OpenWorker의 핵심 구조와 작동 방식, 실사용 한계를 정리한 학습용 리포트.'
 summary: 'OpenWorker는 로컬에서 동작하며 대화 답변이 아닌 완성된 결과물을 산출하는 오픈소스 AI 동료이다. 25개 이상의 도구 연동이 가능하나 API 키 발급과 도구 연결 등 직접 세팅이 필수라는 점이 핵심 제약이다.'
 lang: ko

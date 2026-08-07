@@ -2,6 +2,7 @@
 type: Reference
 title: Nielsen의 10대 사용성 휴리스틱
 pubDate: '2026-07-10T16:10:35+09:00'
+noteId: UX-2607-006
 resource: https://www.nngroup.com/articles/ten-usability-heuristics/
 description: Jakob Nielsen이 실사용성 문제를 귀납해 1994년 정리한, 인터페이스 사용성 평가의 표준 10대 원칙
 lang: ko

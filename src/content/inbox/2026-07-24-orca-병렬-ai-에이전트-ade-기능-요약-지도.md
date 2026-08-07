@@ -1,6 +1,7 @@
 ---
 title: 'Orca(ADE) 주요 기능 — 상위 레이어부터 내려가는 요약 지도'
 pubDate: '2026-07-24T09:10:28+09:00'
+noteId: AGENT-2607-035
 description: '여러 AI 코딩 에이전트를 나란히 돌리는 데스크톱 ADE "Orca"의 기능을, worktree라는 뿌리 추상부터 원격·CLI 오케스트레이션까지 상위 레이어 순서로 정리한 요약 지도.'
 summary: 'Orca를 "worktree-native ADE(Agent Development Environment)"로 파악하고, 핵심 모델(worktree/tab·pane/agent·session) → 에이전트 운용 → 리뷰·출하 → 편집·브라우저·터미널 → 원격 → CLI 오케스트레이션 → 모바일·알림의 레이어 순으로 기능을 훑는다.'
 lang: ko

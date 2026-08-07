@@ -1,6 +1,7 @@
 ---
 title: 'Tailscale 실사용 패턴 분석: 개발자 커뮤니티 사례 중심'
 pubDate: '2026-07-23T12:14:50+09:00'
+noteId: DEV-2607-010
 description: 'GeekNews 커뮤니티 개발자들이 공유한 Tailscale 활용 사례를 원격 개발·Exit Node·홈서버·특수 구성 패턴으로 분류 정리'
 summary: 'Tailscale이 개발자들에게 단순 VPN을 넘어 원격 개발 서버, 사내망/해외 우회, 홈 인프라 오케스트레이션의 핵심 계층으로 자리 잡았음을 커뮤니티 사례로 확인한다.'
 lang: ko

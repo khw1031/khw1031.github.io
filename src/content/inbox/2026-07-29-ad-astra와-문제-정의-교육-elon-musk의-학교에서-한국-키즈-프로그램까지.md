@@ -1,6 +1,7 @@
 ---
 title: 'Ad Astra와 문제 정의 교육 — Elon Musk의 학교에서 한국 키즈 프로그램까지'
 pubDate: '2026-07-29T22:33:58+09:00'
+noteId: LEARN-2607-030
 description: 'Elon Musk가 설립한 Ad Astra 학교의 문제 중심 교육 철학과 이를 참조한 한국 TEU Kids Moonshot 프로그램을 분석한다.'
 summary: 'Elon Musk의 Ad Astra 학교가 지향한 ''도구가 아닌 문제 정의'' 교육관을 정리하고, 이를 한국 초등 교육 프로그램에 적용한 TEU Kids Moonshot의 접점을 검토한다.'
 lang: ko

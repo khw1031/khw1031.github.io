@@ -2,6 +2,7 @@
 type: Reference
 title: Apple Human Interface Guidelines — 플랫폼 네이티브 구현 사례
 pubDate: '2026-07-10T21:15:10+09:00'
+noteId: DS-2607-015
 resource: https://developer.apple.com/design/human-interface-guidelines/
 description: 현행(2025~26, Liquid Glass/OS 26) Apple 디자인 시스템을 구현 사례로 정리 — SF Pro·SF Symbols·Dynamic Type·Materials·44pt·연속 곡률·시맨틱 색, 그리고 브레이크포인트가 아닌 size class
 lang: ko

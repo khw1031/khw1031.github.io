@@ -1,6 +1,7 @@
 ---
 title: '60B 토큰 후 만든 AGENTS.md — 사이드 프로젝트용 AI 코딩 규칙'
 pubDate: '2026-08-05T08:52:39+09:00'
+noteId: AGENT-2608-006
 description: 'MarcosHernanz가 60B 토큰 사용 후 정리한 사이드 프로젝트용 AGENTS.md 핵심 규칙과 커뮤니티 반응'
 summary: '사이드 프로젝트에서 AI 에이전트와 60B 토큰을 소모한 경험이 담긴 AGENTS.md 규칙 요약. 코드 리뷰 생략, 빠른 반복, 취향 우선이라는 3가지 교훈과 함께 backward compatibility 포기 등 구체적 지시사항을 다룬다.'
 lang: ko

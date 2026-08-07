@@ -2,6 +2,7 @@
 type: Reference
 title: Fluid Typography (clamp · 뷰포트 단위)
 pubDate: '2026-07-10T16:30:30+09:00'
+noteId: UX-2607-021
 resource: https://www.w3.org/TR/css-values-4/#funcdef-clamp
 description: CSS clamp()와 뷰포트 단위로 타입 스케일을 화면 폭에 매끄럽게 잇는 반응형 타이포 — 브레이크포인트 없이 크기를 보간하되 사용자 확대를 깨지 않는 기법
 lang: ko

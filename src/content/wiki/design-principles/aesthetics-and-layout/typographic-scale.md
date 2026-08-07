@@ -2,6 +2,7 @@
 type: Reference
 title: Typographic Scale (모듈러 스케일)
 pubDate: '2026-07-10T16:11:15+09:00'
+noteId: UX-2607-014
 resource: https://alistapart.com/article/more-meaningful-typography/
 description: 활자 주조소의 표준 점 크기에서 나온 '조화 비율' 활자 스케일이 웹의 모듈러 스케일(1.25·1.333·1.618 등)로 이어진 계보
 lang: ko

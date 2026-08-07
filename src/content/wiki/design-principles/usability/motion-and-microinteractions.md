@@ -2,6 +2,7 @@
 type: Reference
 title: 모션과 마이크로인터랙션
 pubDate: '2026-07-10T16:45:10+09:00'
+noteId: UX-2607-023
 updatedDate: '2026-07-10T20:55:00+09:00'
 resource: https://developer.mozilla.org/en-US/docs/Web/API/Web_Animations_API
 description: 모션은 장식이 아니라 사용성 도구(피드백·연속성·주의)다 — 웹 플랫폼 애니메이션 스펙(CSS Transitions/Animations·WAAPI·easing), Disney 12원칙, 마이크로인터랙션, 다벤더 duration/easing 토큰, 접근성

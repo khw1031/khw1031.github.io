@@ -2,6 +2,7 @@
 type: Reference
 title: Hick의 법칙 (Hick–Hyman)
 pubDate: '2026-07-10T16:10:45+09:00'
+noteId: UX-2607-008
 resource: https://doi.org/10.1080/17470215208416600
 description: 결정 시간은 선택지의 수(정보량)에 로그로 비례한다는 Hick(1952)·Hyman(1953)의 법칙 — 선택지를 줄이면 결정이 빨라진다
 lang: ko

@@ -1,6 +1,7 @@
 ---
 title: 'Mastra: TypeScript 에이전트 프레임워크의 Agent·Workflow·Memory·RAG 구조'
 pubDate: '2026-07-14T20:39:12+09:00'
+noteId: AGENT-2607-020
 description: 'Agent·Workflow·Memory·RAG를 통합한 TypeScript 에이전트 프레임워크 Mastra의 구조와 2026년 6월 npm 공급망 공격 전말.'
 summary: 'Mastra는 Agent·Workflow·Memory·RAG를 하나의 TypeScript 프레임워크로 묶어 프로덕션급 AI 에이전트를 만들 수 있게 하며 빠르게 성장했다. 다만 2026년 6월 메인테이너 피싱발 npm 공급망 공격을 겪었고, 팀의 대응과 공개 포스트모템까지 함께 확인할 가치가 있다.'
 lang: ko

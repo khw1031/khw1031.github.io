@@ -2,6 +2,7 @@
 type: Reference
 title: Baseline Grid & 수직 리듬 (Vertical Rhythm)
 pubDate: '2026-07-10T16:11:20+09:00'
+noteId: UX-2607-015
 resource: https://24ways.org/2006/compose-to-a-vertical-rhythm/
 description: 인쇄의 베이스라인 그리드가 웹의 수직 리듬으로 계승된 계보 — line-height를 기본 단위로 삼고 모든 수직 간격을 그 배수로 둔다
 lang: ko

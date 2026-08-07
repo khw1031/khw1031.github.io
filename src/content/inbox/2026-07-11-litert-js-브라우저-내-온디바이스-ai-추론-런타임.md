@@ -1,6 +1,7 @@
 ---
 title: 'LiteRT.js: 브라우저 내 온디바이스 AI 추론 런타임'
 pubDate: '2026-07-11T01:34:20+09:00'
+noteId: AI-2607-009
 description: 'Google의 LiteRT.js로 브라우저에서 .tflite 모델을 WebGPU/WASM 가속으로 실행하는 방법과 제약사항 정리'
 summary: 'LiteRT.js는 브라우저에서 .tflite 모델을 WebGPU 또는 WASM(XNNPACK)으로 추론하는 경량 런타임이다. TFJS 파이프라인과 상호운용 가능하나 2GB 메모리 제한과 WebGPU op 커버리지 한계가 있다.'
 lang: ko

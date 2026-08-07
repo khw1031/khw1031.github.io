@@ -1,6 +1,7 @@
 ---
 title: 'Task(Taskfile) 시작 가이드: YAML 기반 태스크 러너 기본기'
 pubDate: '2026-07-11T02:20:59+09:00'
+noteId: DEV-2607-005
 description: 'Taskfile.yml 생성부터 태스크 호출·빌드 예시까지, Task 러너의 기본 사용법을 정리한 학습 가이드.'
 summary: 'Task는 YAML 기반 태스크 러너로, `task --init` 한 줄로 시작해 쉘 명령을 재사용 가능한 태스크로 정의·실행한다. mvdan/sh 기반 크로스플랫폼 쉘 지원이 핵심 차별점이다.'
 lang: ko

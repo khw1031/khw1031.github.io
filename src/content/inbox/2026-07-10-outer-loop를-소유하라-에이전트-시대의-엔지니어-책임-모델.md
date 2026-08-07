@@ -1,6 +1,7 @@
 ---
 title: 'Outer Loop를 소유하라: 에이전트 시대의 엔지니어 책임 모델'
 pubDate: '2026-07-10'
+noteId: AGENT-2607-018
 description: '에이전트가 코드를 생성하는 시대에 엔지니어가_outer loop(판단·검증·책임)를 소유해야 하는 이유와 운영 모델을 정리한 Addy Osmani의 주장.'
 summary: 'AI 에이전트가 inner loop(실행)를 담당하게 되면서, 엔지니어의 핵심 역할은 outer loop(검증·판단·책임)로 이동했다. 이 리포트는 품질·판정·답변책임성이라는 세 축을 중심으로 에이전트 시대의 운영 모델과 숨겨진 비용, 그리고 taste의 중요성을 정리한다.'
 lang: ko

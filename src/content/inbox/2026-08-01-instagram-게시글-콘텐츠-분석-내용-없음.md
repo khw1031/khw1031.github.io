@@ -1,6 +1,7 @@
 ---
 title: 'Instagram 게시글 콘텐츠 분석 (내용 없음)'
 pubDate: '2026-08-01T17:20:05+09:00'
+noteId: LEARN-2608-001
 description: 'inner_world_publisher 인스타그램 게시물의 학습 리포트이나 원문 콘텐츠가 제공되지 않아 분석 불가.'
 summary: 'Instagram 메타데이터(좋아요 248, 댓글 0)만 확인되며 게시글 본문이나 이미지 텍스트 등 실질적 콘텐츠가 입력에 포함되지 않았다.'
 lang: ko

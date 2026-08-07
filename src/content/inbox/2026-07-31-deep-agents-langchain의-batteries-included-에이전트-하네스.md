@@ -1,6 +1,7 @@
 ---
 title: 'Deep Agents: LangChain의 batteries-included 에이전트 하네스'
 pubDate: '2026-07-31T11:03:58+09:00'
+noteId: AGENT-2607-040
 description: 'LangGraph 위에 구축된 LangChain의 opinionated 에이전트 하네스 Deep Agents의 구조·기능·생태계를 정리한 학습 리포트.'
 summary: 'Deep Agents는 LangGraph 런타임 위에 filesystem, sub-agent, context 관리, skills 등을 기본 탑재한 ''batteries-included'' 에이전트 프레임워크다. LangChain 생태계의 계층 구조와 Deep Agents가 어느 위치에서 어떤 문제를 해결하는지 한 장에 파악할 수 있다.'
 lang: ko

@@ -1,6 +1,7 @@
 ---
 title: 'Build in Public 콘텐츠 트렌드 4가지 (멤버십 잠김 요약 불가)'
 pubDate: '2026-08-03T23:46:46+09:00'
+noteId: BIZ-2608-001
 description: 'Build in Public 콘텐츠의 최근 상승 트렌드 4가지를 다루는 뉴스레터이나, 핵심 본문이 멤버십 잠김으로 확인 불가.'
 summary: '해당 뉴스레터는 Build in Public 콘텐츠의 최근 트렌드 4가지를 정리한다고 예고하지만, 본문 전체가 멤버십 유료 전환으로 인해 핵심 내용을 확인할 수 없다.'
 lang: ko

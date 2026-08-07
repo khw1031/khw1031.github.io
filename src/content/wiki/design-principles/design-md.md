@@ -2,6 +2,7 @@
 type: Reference
 title: DESIGN.md — 에이전트에 시각 아이덴티티를 넘기는 포맷 (이 카테고리의 앵커)
 pubDate: '2026-07-10T20:40:00+09:00'
+noteId: DS-2607-013
 resource: https://github.com/google-labs-code/design.md
 description: 이 카테고리의 산출물 프레임 — DESIGN.md(Google Labs)는 YAML 디자인 토큰 + 마크다운 산문으로 코딩 에이전트에게 디자인 시스템을 전달하는 포맷. 그 섹션 구조가 이 라이브러리의 조직 렌즈다
 lang: ko

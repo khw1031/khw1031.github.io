@@ -1,6 +1,7 @@
 ---
 title: 'v0 Design Systems 2.0 — 실제 디자인 시스템 소스로 UI를 생성하는 구조와 데모 분석'
 pubDate: '2026-07-11T01:38:15+09:00'
+noteId: DS-2607-017
 description: 'v0가 shadcn 레지스트리 의존을 벗어나 실제 디자인 시스템 소스를 직접 학습해 컴포넌트를 생성하는 Design Systems 2.0의 구조와 5개 시스템 데모 성과를 정리한 리포트.'
 summary: 'v0 Design Systems 2.0은 자체 레지스트리 복제가 아닌 실제 패키지·소스·Figma를 직접 분석해 디자인 시스템을 적용하며, 5개 시스템 데모에서 시스템별 고유 디테일이 반영됨을 확인했다.'
 lang: ko

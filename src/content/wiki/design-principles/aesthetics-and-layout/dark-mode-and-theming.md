@@ -2,6 +2,7 @@
 type: Reference
 title: 다크 모드와 테마 (Theming)
 pubDate: '2026-07-10T16:55:20+09:00'
+noteId: UX-2607-028
 resource: https://developer.mozilla.org/en-US/docs/Web/CSS/@media/prefers-color-scheme
 description: 시맨틱 색 토큰으로 대비를 깨지 않고 테마를 전환하는 원리 — prefers-color-scheme·color-scheme, 역할 기반 토큰, Material 다크 테마(#121212·탈채도), Apple 동적 색
 lang: ko

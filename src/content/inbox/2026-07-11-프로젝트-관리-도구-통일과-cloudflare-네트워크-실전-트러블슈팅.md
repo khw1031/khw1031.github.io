@@ -1,6 +1,7 @@
 ---
 title: '프로젝트 관리 도구 통일과 Cloudflare 네트워크 실전 트러블슈팅'
 pubDate: '2026-07-11T02:22:53+09:00'
+noteId: DEV-2607-006
 description: 'Makefile/Taskfile 기반 프로젝트 명령 표준화와 cloudflared QUIC 프로토콜 이슈 해결 경험을 정리한 개발자 스레드 요약.'
 summary: '개발 프로젝트의 빌드·테스트 명령을 Makefile이나 Taskfile로 통일하면 인간과 AI 에이전트 양쪽의 인지부하를 줄일 수 있으며, cloudflared 사용 시 ISP의 UDP 제한이 성능 병목이 될 수 있어 프로토콜 전환이 유효하다는 실무 인사이트를 다룬다.'
 lang: ko

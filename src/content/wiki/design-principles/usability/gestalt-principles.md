@@ -2,6 +2,7 @@
 type: Reference
 title: Gestalt 그루핑 원리
 pubDate: '2026-07-10T16:10:55+09:00'
+noteId: UX-2607-010
 resource: https://pmc.ncbi.nlm.nih.gov/articles/PMC3482144/
 description: 사람은 요소를 개별이 아니라 그룹으로 지각한다 — 근접·유사·폐쇄·연속·공동영역·전경/배경 등 Wertheimer(1923)에서 시작된 지각적 그루핑 법칙
 lang: ko

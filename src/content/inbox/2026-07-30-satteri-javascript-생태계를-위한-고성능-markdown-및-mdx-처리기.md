@@ -1,6 +1,7 @@
 ---
 title: 'satteri - JavaScript 생태계를 위한 고성능 Markdown 및 MDX 처리기'
 pubDate: '2026-07-30T10:09:44+09:00'
+noteId: DEV-2607-012
 description: 'Rust 파서와 JavaScript 플러그인을 napi-rs로 잇는 Markdown·MDX 처리기. remark/rehype 플러그인과는 호환되지 않는다.'
 summary: 'satteri는 pulldown-cmark 기반 Rust 층에서 파싱하고 JS 층에서 플러그인을 실행하며 GFM·frontmatter·math·directive를 설정으로 지원한다. 다만 공식 문서가 remark/rehype 비호환을 명시하고 벤치마크 수치는 공개하지 않아, 도입은 플러그인 재작성 비용과 자체 측정을 전제로 한다.'
 lang: ko

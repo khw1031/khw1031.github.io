@@ -1,6 +1,7 @@
 ---
 title: 'LlamaIndex: 데이터 위에서 LLM 에이전트를 만드는 프레임워크 개요'
 pubDate: '2026-07-15T10:00:00+09:00'
+noteId: AGENT-2607-022
 description: 'LlamaIndex의 RAG 5단계(로딩·인덱싱·저장·쿼리·평가)와 에이전트·워크플로우 구조, 핵심 빌딩 블록을 정리한 학습 노트'
 summary: 'LlamaIndex를 "내 데이터를 LLM에 연결하는 컨텍스트 증강 프레임워크"로 파악하고, RAG 파이프라인 단계와 에이전트/워크플로우 확장, 주요 컴포넌트를 전체 맵으로 이해한다.'
 lang: ko

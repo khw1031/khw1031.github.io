@@ -2,6 +2,7 @@
 type: Reference
 title: 폼과 입력 설계 (Forms & Inputs)
 pubDate: '2026-07-10T16:55:00+09:00'
+noteId: UX-2607-026
 resource: https://www.w3.org/WAI/WCAG22/Understanding/labels-or-instructions.html
 description: 데이터 입력의 사용성 원칙 — 지속적 레이블, 에러 예방·식별·복구(WCAG 3.3.x), 인라인 검증, 네이티브 입력 시맨틱, placeholder-as-label 안티패턴
 lang: ko

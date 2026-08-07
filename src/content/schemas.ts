@@ -1,4 +1,5 @@
 import { z } from 'zod';
+import { NOTE_ID_PATTERN } from '../lib/note-id';
 
 const isoDate = z
   .union([z.string(), z.date()])
@@ -23,6 +24,16 @@ export const baseFrontmatter = z.object({
   // collections only); detects when a note's body changed since it was last
   // polished (highlight + structure). Independent of lintHash. Not rendered.
   polishHash: z.string().optional(),
+  // Permanent, hand-transcribable identifier ({CATEGORY}-{YYMM}-{NNN}), stamped
+  // once by scripts/stamp-note-ids.ts and never rewritten — a paper notebook
+  // cites it. Optional here because posts/read-and-write are out of scope and
+  // an unstamped document must still build; check-frontmatter is what requires
+  // it on notes/inbox/sources/idea/wiki and enforces registry + uniqueness.
+  // Rendered next to the <h1> by PostLayout/WikiLayout.
+  noteId: z
+    .string()
+    .regex(NOTE_ID_PATTERN, 'noteId must look like AI-2608-014 ({CATEGORY}-{YYMM}-{NNN})')
+    .optional(),
 });
 
 export const postSchema = baseFrontmatter;

@@ -1,6 +1,7 @@
 ---
 title: 'OpenMMO: AI 에이전트와 인간 플레이어가 동등하게 참여하는 오픈소스 MMORPG'
 pubDate: '2026-07-21T01:53:38+09:00'
+noteId: GAME-2607-002
 description: '동일 WebSocket 프로토콜로 AI 에이전트와 인간 플레이어가 구분 없이 상호작용하는 Rust/Svelte 기반 오픈소스 MMORPG 아키텍처 분석'
 summary: 'OpenMMO는 AI 에이전트에게 특권 API를 주지 않고 인간과 완전히 같은 인터페이스로 접속하게 하는 MMORPG다. 에이전트-인간 패리티라는 설계 철학과 이를 실현한 기술 스택을 정리한다.'
 lang: ko

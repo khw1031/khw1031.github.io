@@ -1,6 +1,7 @@
 ---
 title: 'Anthropic 비용 최적화 패턴과 AI 오케스트레이션 도구 정리'
 pubDate: '2026-07-24T01:16:12+09:00'
+noteId: AGENT-2607-033
 description: 'Anthropic advisor/orchestrator 패턴과 Orca 등 AI 오케스트레이션 도구 활용 전략을 정리한 스레드 요약.'
 summary: '이 리포트는 Anthropic 비공개 웨비나에서 공개된 Fable 5 비용 절감 두 패턴(advisor·orchestrator)과 저자가 실전에서 검증한 Orca 멀티에이전트 오케스트레이션 구축 사례를 연결해 정리한다.'
 lang: ko

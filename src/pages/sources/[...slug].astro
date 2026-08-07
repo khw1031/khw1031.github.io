@@ -24,9 +24,16 @@ const sourcePath = entry.filePath ?? `src/content/sources/${entry.id}.md`;
 ---
 
 <Base title={`${title} — thnkr`} description={description}>
-  <div class="flex justify-end gap-4">
-    <CopyMarkdown href={mdHref} />
-    <CopyPath value={sourcePath} />
+  {/* Unlike every other collection, a retired source renders no frontmatter
+      <h1> — its body opens straight into the original document. There is no
+      title to sit beside, so the noteId joins the only metadata row the page
+      has. */}
+  <div class="flex items-baseline justify-between gap-4">
+    <span class="font-mono text-xs text-muted select-all">{entry.data.noteId}</span>
+    <span class="flex gap-4">
+      <CopyMarkdown href={mdHref} />
+      <CopyPath value={sourcePath} />
+    </span>
   </div>
   <article class="prose max-w-none mt-2">
     <Content />

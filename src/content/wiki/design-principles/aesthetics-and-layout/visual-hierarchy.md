@@ -2,6 +2,7 @@
 type: Reference
 title: 시각 위계 (Visual Hierarchy)와 Pre-attentive 처리
 pubDate: '2026-07-10T16:45:20+09:00'
+noteId: UX-2607-024
 resource: https://www.nngroup.com/articles/visual-hierarchy-ux-definition/
 description: 크기·색·대비·위치로 눈이 볼 순서를 만드는 시각 위계 — 의식적 읽기 이전(pre-attentive)에 병렬 처리되는 지각 특성에 기댄다
 lang: ko

@@ -2,6 +2,7 @@
 type: Reference
 title: 엘리베이션과 깊이 (z축·그림자)
 pubDate: '2026-07-10T16:45:30+09:00'
+noteId: UX-2607-025
 updatedDate: '2026-07-10T20:55:00+09:00'
 resource: https://developer.mozilla.org/en-US/docs/Web/CSS/box-shadow
 description: DESIGN.md의 Elevation & Depth 섹션 근거 — z축 위계를 그림자·색·머티리얼로 표현. 빛-위에서-온다 지각, CSS box-shadow·drop-shadow·z-index, 그리고 현행 다벤더 그림자 스케일

@@ -1,6 +1,7 @@
 ---
 title: '일론 머스크의 Ad Astra 학교와 TEU Kids Moonshot 교육 모델'
 pubDate: '2026-07-24T23:12:47+09:00'
+noteId: LEARN-2607-026
 description: '일론 머스크가 만든 Ad Astra 학교의 문제 중심 교육 철학을 분석하고, 이를 한국에 도입한 TEU Kids Moonshot 프로그램의 구조와 한계를 살펴본다.'
 summary: 'Ad Astra 학교의 ''도구가 아닌 문제'' 교육 철학과 이를 차용한 TEU Kids Moonshot의 프로젝트 기반 학습 모델을 정리하고, 원문의 광고적 성격과 검증 필요한 주장을 구분한다.'
 lang: ko

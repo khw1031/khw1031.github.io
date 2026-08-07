@@ -2,6 +2,7 @@
 type: Reference
 title: 미학-사용성 효과 (Aesthetic-Usability Effect)
 pubDate: '2026-07-10T16:11:00+09:00'
+noteId: UX-2607-011
 resource: https://doi.org/10.1016/S0953-5438(00)00031-X
 description: 사람들은 예쁜 인터페이스를 실제로 더 쓰기 쉽다고 지각한다 — Kurosu & Kashimura(1995), Tractinsky(2000)가 실험으로 보인, 미감과 사용성 인식의 연결
 lang: ko

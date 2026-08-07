@@ -1,6 +1,7 @@
 ---
 title: 'Thinking Machines Lab의 Inkling: 미국산 오픈소스 T급 멀티모달 LLM'
 pubDate: '2026-07-17T02:24:03+09:00'
+noteId: AI-2607-014
 description: '전 OpenAI CTO 미라 무라티의 회사가 공개한 975B MoE 모델 Inkling의 성능과 의의'
 summary: 'Inkling은 미국에서 공개된 최고 성능의 오픈소스 T급 멀티모달 모델로, 오디오 지원과 1M 컨텍스트를 제공하며 Muon optimizer를 채택했다.'
 lang: ko

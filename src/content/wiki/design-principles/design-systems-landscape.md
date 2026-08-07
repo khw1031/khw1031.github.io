@@ -2,6 +2,7 @@
 type: Reference
 title: 디자인 시스템 랜드스케이프 — 현재 구현된 사례들
 pubDate: '2026-07-10T21:15:20+09:00'
+noteId: DS-2607-016
 resource: https://www.designsystems.com/
 description: 현재 배포 중인 주요 디자인 시스템들의 비교 카탈로그 — Apple·Material·Astryx·Fluent·Carbon·Radix·Tailwind·shadcn·Adobe·Salesforce·Ant·Uber·Spotify. 무엇이 벤더 무관하게 수렴하고 무엇이 갈리는지
 lang: ko

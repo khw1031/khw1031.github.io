@@ -2,6 +2,7 @@
 type: Reference
 title: Layout Grid (스위스 그리드 → 웹 컬럼 그리드)
 pubDate: '2026-07-10T16:11:25+09:00'
+noteId: UX-2607-016
 resource: https://www.w3.org/TR/css-grid-1/
 description: 스위스 국제 타이포그래피 양식의 그리드(Tschichold 1928, Müller-Brockmann 1981)가 960.gs 12컬럼과 CSS Grid 스펙으로 이어진 레이아웃 그리드 계보
 lang: ko

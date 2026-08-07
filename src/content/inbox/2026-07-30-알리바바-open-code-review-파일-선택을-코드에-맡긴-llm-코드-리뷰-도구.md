@@ -1,6 +1,7 @@
 ---
 title: '알리바바 Open Code Review — 파일 선택을 코드에 맡긴 LLM 코드 리뷰 도구'
 pubDate: '2026-07-30T19:58:55+09:00'
+noteId: AGENT-2607-038
 description: '알리바바가 2년간 사내 사용 후 오픈소스화한 LLM 기반 코드 리뷰 도구의 구조와 벤치마크 성능을 정리한 리포트.'
 summary: 'Open Code Review는 파일 선정 로직을 코드가 담당하고 LLM은 판단만 수행하여, 동일 모델 대비 F1 정확도와 토큰 효율에서 우위를 보인다고 주장하는 오픈소스 도구다.'
 lang: ko

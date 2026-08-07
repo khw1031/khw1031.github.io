@@ -2,6 +2,7 @@
 type: Category
 title: Design Principles — DESIGN.md를 채울 좋은 UI/UX의 근거
 pubDate: '2026-07-10T16:10:20+09:00'
+noteId: UX-2607-004
 updatedDate: '2026-07-10T20:40:00+09:00'
 description: 좋은 웹·앱 UI/UX를 사용성(측정 가능)과 미감(규칙성 있는)으로 나눠 1차 출처로 정리하되, 산출물 프레임을 DESIGN.md(에이전트에 시각 아이덴티티를 넘기는 포맷)로 삼아 그 섹션(Colors·Typography·Layout·Elevation·Shapes·Components·Do's&Don'ts)에 매핑한 카테고리
 lang: ko

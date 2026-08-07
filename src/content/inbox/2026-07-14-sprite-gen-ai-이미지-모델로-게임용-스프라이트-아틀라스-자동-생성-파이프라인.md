@@ -1,6 +1,7 @@
 ---
 title: 'sprite-gen: AI 이미지 모델로 게임용 스프라이트 아틀라스 자동 생성 파이프라인'
 pubDate: '2026-07-14T01:11:27+09:00'
+noteId: GAME-2607-001
 description: '기반 이미지 하나로 상태별 행 생성, 크로마 제거, 프레임 추출, 런타임 아틀라스까지 자동화하는 Codex/Claude skill.'
 summary: 'sprite-gen은 AI 이미지 생성의 고질적 한계(캐릭터 일관성·배경 제거·격자 정렬)를 component-row 파이프라인으로 해결해 게임 엔진이 바로 소비할 수 있는 스프라이트 아틀라스와 매니페스트를 산출한다.'
 lang: ko
