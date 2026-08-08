@@ -1,6 +1,7 @@
 ---
 title: 'YouTube 영상 BL8cZvMIzi4 — 원문 미수집 리포트'
 pubDate: '2026-08-08T02:07:14+09:00'
+noteId: DEV-2608-001
 description: 'YouTube 영상(BL8cZvMIzi4)의 원문 수집이 차단되어 내용을 확인할 수 없는 상태임을 기록한다.'
 summary: 'YouTube 봇 탐지 페이지(CAPTCHA)만 반환되어 영상 본문의 어떤 정보도 추출하지 못했다. 재수집 또는 대체 출처가 필요하다.'
 lang: ko
