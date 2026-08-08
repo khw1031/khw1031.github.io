@@ -1,6 +1,7 @@
 ---
 title: '손으로 풀어본 Vector Database 10단계 작동 원리'
 pubDate: '2026-08-07T15:54:14+09:00'
+noteId: AI-2608-003
 description: 'Vector Database의 indexing·querying 파이프라인을 세 문장 손 계산 예제로 단계별 분해해 RAG의 핵심 메커니즘을 설명한다.'
 summary: 'Tom Yeh가 제시한 10단계 워크스루를 따라가며 embedding → pooling → projection → dot product 흐름을 직접 계산하고, toy example의 한계와 실무 보완점까지 짚는다.'
 lang: ko
