@@ -5,8 +5,8 @@ period: '2025.03'
 company: '(주)한샘'
 role: '프론트엔드 성능 개선 리드'
 status: needs-input
-source: 'src/content/posts/20250330.md'
-post: 'src/content/posts/20250330.md'
+source: 'src/content/inbox/2025-03-30-hanssem-mall-performance.md'
+post: 'src/content/inbox/2025-03-30-hanssem-mall-performance.md'
 public_url: 'https://khw1031.github.io/posts/20250330/'
 evidence_dir: 'docs/cv/evidence/2025-03-hanssem-mall-performance/'
 cv_ready: false
@@ -28,7 +28,7 @@ private_materials: []
 
 ## Linked Documents
 
-- [Post](../../../src/content/posts/20250330.md)
+- [Inbox draft](../../../src/content/inbox/2025-03-30-hanssem-mall-performance.md)
 - [Metrics](../evidence/2025-03-hanssem-mall-performance/metrics.md)
 - [Interview Questions](../evidence/2025-03-hanssem-mall-performance/interview-questions.md)
 - [Concepts](../evidence/2025-03-hanssem-mall-performance/concepts.md)

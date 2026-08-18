@@ -1,0 +1,74 @@
+---
+import { getCollection, render } from 'astro:content';
+import CopyMarkdown from '../../components/CopyMarkdown.astro';
+import CopyPath from '../../components/CopyPath.astro';
+import NoteAnnotator from '../../components/NoteAnnotator.astro';
+import Base from '../../layouts/Base.astro';
+
+// Free-form study notes (see the `study-note` collection in src/content.config.ts).
+// Unlisted: excluded from search (not in SEARCHABLE_COLLECTIONS, no
+// data-pagefind-body here), sitemap, and robots. Title/description are optional, so
+// the title falls back to the first H1, then the id. Hub pages render their child
+// notes as a TOC; shows a visible title + copy-markdown/copy-path and the dev-only
+// NoteAnnotator (select text → add a note), like the other document pages.
+export async function getStaticPaths() {
+  const entries = await getCollection('study-note');
+  return entries.map((entry) => ({
+    params: { slug: entry.id },
+    props: {
+      entry,
+      childEntries: entries.filter((e) => e.id.startsWith(`${entry.id}/`)),
+    },
+  }));
+}
+
+const { entry, childEntries } = Astro.props;
+const { Content } = await render(entry);
+const body = (entry as { body?: string }).body ?? '';
+const title = entry.data.title ?? body.match(/^#\s+(.+?)\s*$/m)?.[1] ?? entry.id;
+const description = entry.data.description;
+const mdHref = `${Astro.url.pathname.replace(/\/$/, '')}/raw.md`;
+const sourcePath = entry.filePath ?? `src/content/study-note/${entry.id}.md`;
+// Hub pages list their child notes as a TOC: adding a file under the hub's
+// directory is all it takes to appear here. Ordered by id (schema-free, no pubDate).
+const childItems = childEntries
+  .map((child) => {
+    const childBody = (child as { body?: string }).body ?? '';
+    return {
+      href: `/study-note/${child.id}/`,
+      title: child.data.title ?? childBody.match(/^#\s+(.+?)\s*$/m)?.[1] ?? child.id,
+      id: child.id,
+    };
+  })
+  .sort((a, b) => a.id.localeCompare(b.id));
+---
+
+<Base title={`${title} — thnkr`} description={description}>
+  <div class="flex justify-end gap-4">
+    <CopyMarkdown href={mdHref} />
+    <CopyPath value={sourcePath} />
+  </div>
+  <article
+    class="prose max-w-none mt-2"
+    data-collection="study-note"
+    data-source-path={sourcePath}
+    data-raw-md={mdHref}
+  >
+    <h1>{title}</h1>
+    {
+      childItems.length > 0 && (
+        <nav aria-label="하위 문서">
+          <ul>
+            {childItems.map((child) => (
+              <li>
+                <a href={child.href}>{child.title}</a>
+              </li>
+            ))}
+          </ul>
+        </nav>
+      )
+    }
+    <Content />
+  </article>
+  {import.meta.env.DEV && <NoteAnnotator />}
+</Base>

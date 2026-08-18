@@ -389,4 +389,8 @@ export const plotPatternRegistry = {
   },
 } satisfies Record<string, PlotPattern>;
 
-export type PlotPatternEntry = (typeof plotPatternRegistry)[keyof typeof plotPatternRegistry];
+// The declared shape, not the indexed-access union of the registry's literal
+// entry types: only one pattern sets the optional `colorSplit`/`lineOpacity`, so
+// the union type makes those fields unreadable on a value typed as "some entry".
+// `satisfies` above still gives the registry its literal keys for `keyof typeof`.
+export type PlotPatternEntry = PlotPattern;

@@ -63,10 +63,12 @@ const NOTE_ID_REQUIRED = new Set<string>(NOTE_ID_COLLECTIONS);
 /**
  * Collections intentionally exempt from the frontmatter contract: free-form
  * documents (PRDs, drafts) whose title is derived from the body, so they carry
- * no required keys and are neither validated nor stamped here. They are still
- * unlisted from search/sitemap/robots by the usual path-based rules.
+ * no required keys and are neither validated nor stamped here. `logs` (raw `/q`
+ * staging) and `study-note` (its categorized migration target) are exempt like
+ * `docs`. They are still unlisted from search/sitemap/robots by the usual
+ * path-based rules.
  */
-const SCHEMA_FREE = new Set(['docs']);
+const SCHEMA_FREE = new Set(['docs', 'logs', 'study-note']);
 
 interface FileReport {
   file: string;

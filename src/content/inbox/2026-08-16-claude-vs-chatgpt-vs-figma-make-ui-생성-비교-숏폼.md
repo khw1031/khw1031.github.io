@@ -1,6 +1,7 @@
 ---
 title: 'Claude vs ChatGPT vs Figma Make UI 생성 비교 숏폼'
 pubDate: '2026-08-16T00:56:03+09:00'
+noteId: DS-2608-008
 description: 'Claude·ChatGPT·Figma Make 동일 프롬프트 UI 비교 인스타 숏폼, 실질 비교 데이터는 원문에 없음'
 summary: '동일 프롬프트로 Claude, ChatGPT, Figma Make의 UI 출력 결과를 비교한다는 인스타그램 숏폼 게시물이다. 그러나 실제 비교 결과·프롬프트·평가 기준은 본문 텍스트에 포함되지 않아, 내용 검증이 불가능한 홍보성 포스트다.'
 lang: ko

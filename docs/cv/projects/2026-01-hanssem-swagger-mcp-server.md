@@ -5,7 +5,7 @@ company: '(주)한샘'
 role: 'MCP 서버 개발 및 API 문서 표준화'
 status: draft
 source: 'src/data/cv.ts'
-post: 'src/content/posts/20251218.md'
+post: 'src/content/inbox/2025-12-18-hanssem-swagger-mcp-server.md'
 public_url: 'https://khw1031.github.io/posts/20251218/'
 evidence_dir: 'docs/cv/evidence/2026-01-hanssem-swagger-mcp-server/'
 cv_ready: false
@@ -44,7 +44,7 @@ private_materials: []
 
 ## Linked Documents
 
-- [Post](../../../src/content/posts/20251218.md)
+- [Inbox draft](../../../src/content/inbox/2025-12-18-hanssem-swagger-mcp-server.md)
 - [Metrics](../evidence/2026-01-hanssem-swagger-mcp-server/metrics.md)
 - [Interview Questions](../evidence/2026-01-hanssem-swagger-mcp-server/interview-questions.md)
 - [Concepts](../evidence/2026-01-hanssem-swagger-mcp-server/concepts.md)

@@ -36,7 +36,7 @@
  * newline-separated repo-relative paths>, to restrict the scan to those files.
  */
 import { existsSync, readdirSync, readFileSync } from 'node:fs';
-import { join, relative, resolve, sep } from 'node:path';
+import { join, relative, resolve } from 'node:path';
 
 const CONTENT_ROOT = resolve('src/content');
 
@@ -69,13 +69,6 @@ interface StrayHit {
   chars: string[];
   /** Trimmed excerpt around the first hit, for locating it without opening the file. */
   excerpt: string;
-}
-
-/** Top-level directory under src/content/, or '(root)' for a bare .md. */
-function collectionOf(file: string): string {
-  const rel = relative(CONTENT_ROOT, file);
-  const first = rel.split(sep)[0];
-  return first.endsWith('.md') ? '(root)' : first;
 }
 
 /** Optional scope: positional path args + STRAY_SCRIPT_SCOPE env. */

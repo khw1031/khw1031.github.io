@@ -1,6 +1,7 @@
 ---
 title: '인라인 스크립트로 배달의민족 웹뷰 LCP 30~40% 개선과 critical-script 오픈소스'
 pubDate: '2026-08-15T22:44:51+09:00'
+noteId: FE-2608-002
 description: 'HTML 인라인 스크립트로 API 프리페칭을 병렬화해 배달의민족 웹뷰 LCP를 30~40% 개선하고 Vite 플러그인 critical-script로 오픈소스화한 사례'
 summary: '배달의민족 커머스 웹뷰에서 HTML 인라인 스크립트로 API 요청을 JS 번들 다운로드와 병렬화해 LCP 30~40%를 개선했다. 관리 문제를 해결하기 위해 ?as-critical-script import suffix 기반 Vite 플러그인을 만들어 우아한형제들 GitHub에 오픈소스로 공개했다.'
 lang: ko

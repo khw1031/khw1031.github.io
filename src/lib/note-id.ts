@@ -10,10 +10,12 @@
  *     collections, editing its pubDate, or renaming its slug leaves the id
  *     alone. A derived id would silently break the handwritten reference.
  *   - The category is the document's SUBJECT, not its collection. `notes`,
- *     `inbox`, `sources`, `idea`, and `wiki` all draw from one namespace, so a
+ *     `inbox`, `sources`, and `idea` all draw from one namespace, so a
  *     note that graduates from inbox to notes keeps its id.
  *   - Sequences are never reused. `allocateNoteId` counts past gaps left by
- *     deleted documents rather than filling them.
+ *     deleted documents rather than filling them, and `highWaterIds` persists
+ *     the highest number ever issued per category-month to `note-id-highwater.json`
+ *     so deleting the newest document cannot free its number either.
  *
  * `posts` and `read-and-write` are deliberately out of scope: they are the
  * public timeline, addressed by URL, and were never part of the paper workflow.
@@ -63,7 +65,7 @@ export type NoteIdCategory = keyof typeof NOTE_ID_CATEGORIES;
  * `src/lib/collections.ts`) so the plain-tsx scripts can read it without
  * pulling in `astro:content`.
  */
-export const NOTE_ID_COLLECTIONS = ['notes', 'inbox', 'sources', 'idea', 'wiki'] as const;
+export const NOTE_ID_COLLECTIONS = ['notes', 'inbox', 'sources', 'idea'] as const;
 
 export type NoteIdCollection = (typeof NOTE_ID_COLLECTIONS)[number];
 
@@ -122,6 +124,11 @@ export function isKnownCategory(code: string): code is NoteIdCategory {
  * Counts from the highest sequence taken rather than the count of ids, so a
  * deleted document's number is retired instead of being handed to a different
  * document later — the one thing that would make a handwritten reference lie.
+ *
+ * That guarantee is only as good as `taken`. Frontmatter alone shrinks when a
+ * document is deleted, so callers must also feed in the persisted high-water
+ * ledger (see `highWaterIds`); otherwise deleting the newest id in a month
+ * silently frees it for reuse.
  */
 export function allocateNoteId(category: string, yymm: string, taken: Iterable<string>): string {
   let highest = 0;
@@ -134,4 +141,30 @@ export function allocateNoteId(category: string, yymm: string, taken: Iterable<s
     throw new Error(`noteId space exhausted for ${category}-${yymm} (max ${MAX_SEQ})`);
   }
   return formatNoteId(category, yymm, highest + 1);
+}
+
+/**
+ * The highest id ever issued per category-month, from every id known so far.
+ *
+ * The ids living in frontmatter are not a record of what has been issued — they
+ * are a record of what still exists. Deleting the newest document in a month
+ * lowers that maximum, and the next stamp would hand its number to a different
+ * document. Persisting this function's output as a ledger and feeding it back
+ * into `allocateNoteId` makes the mark monotonic: a number spent once stays
+ * spent even after every document holding it is gone.
+ *
+ * Sorted, so re-serializing the ledger produces a minimal diff between runs.
+ */
+export function highWaterIds(ids: Iterable<string>): string[] {
+  const highest = new Map<string, ParsedNoteId>();
+  for (const value of ids) {
+    const parsed = parseNoteId(value);
+    if (!parsed) continue;
+    const key = `${parsed.category}-${parsed.yymm}`;
+    const current = highest.get(key);
+    if (!current || parsed.seq > current.seq) highest.set(key, parsed);
+  }
+  return [...highest.values()]
+    .map(({ category, yymm, seq }) => formatNoteId(category, yymm, seq))
+    .sort();
 }

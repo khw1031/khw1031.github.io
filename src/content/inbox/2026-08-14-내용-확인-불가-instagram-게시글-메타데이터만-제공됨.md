@@ -1,6 +1,7 @@
 ---
 title: '내용 확인 불가 — Instagram 게시글 메타데이터만 제공됨'
 pubDate: '2026-08-14T01:08:35+09:00'
+noteId: LEARN-2608-026
 description: 'Instagram 게시글(@baddiehalmi)의 메타데이터만 입력되어 본문 내용을 확인할 수 없습니다.'
 summary: '제공된 입력에는 Instagram 게시글의 좋아요·댓글 수 등 메타데이터만 포함되어 있어 리포트 작성에 필요한 실질적 콘텐츠가 없습니다.'
 lang: ko

@@ -7,7 +7,7 @@ import { classifyDocs, type Doc } from '../scripts/check-note-visibility';
  * it — that coupling is the point, because a silently drifted mirror is worse
  * than no mirror at all.
  *
- *   src/pages/notes/[...page].astro — prefix filter over non-draft items
+ *   src/pages/notes/[...page].astro — production prefix filter over non-draft items
  *   src/pages/idea/index.astro      — /idea/inbox/ removed first, then prefix
  */
 function doc(href: string, draft = false): Doc {
@@ -57,8 +57,8 @@ describe('note visibility classifier', () => {
   });
 
   it('does not let a draft hub hide its child', () => {
-    // getListItems() strips drafts before the prefix filter runs, so a draft
-    // hub is absent from the comparison and its child surfaces on its own.
+    // Production getListItems() strips drafts before the prefix filter runs,
+    // so a draft hub is absent and its child surfaces on its own.
     const v = classifyDocs([doc('/notes/alpha/', true), doc('/notes/alpha/child/')], 'notes');
     expect(statusOf(v, '/notes/alpha/child/')).toBe('listed');
   });

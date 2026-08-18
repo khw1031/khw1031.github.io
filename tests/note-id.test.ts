@@ -2,6 +2,7 @@ import { describe, expect, it } from 'vitest';
 import {
   allocateNoteId,
   formatNoteId,
+  highWaterIds,
   isKnownCategory,
   NOTE_ID_CATEGORIES,
   noteIdMonth,
@@ -126,5 +127,51 @@ describe('allocateNoteId', () => {
 
   it('refuses to allocate past the 3-digit ceiling instead of colliding', () => {
     expect(() => allocateNoteId('AI', '2608', ['AI-2608-999'])).toThrow();
+  });
+
+  it('continues past a deleted tail when the ledger still remembers it', () => {
+    // 021-024 were stamped and the documents later deleted, so the repo only
+    // still contains 020. Without the ledger the allocator would hand 021 back
+    // out and every margin note from 021 to 024 would point somewhere else.
+    const present = ['LEARN-2608-020'];
+    const ledger = ['LEARN-2608-024'];
+    expect(allocateNoteId('LEARN', '2608', [...present, ...ledger])).toBe('LEARN-2608-025');
+  });
+});
+
+describe('highWaterIds', () => {
+  it('keeps only the highest id per category-month', () => {
+    expect(highWaterIds(['AI-2608-001', 'AI-2608-014', 'AI-2608-007'])).toEqual(['AI-2608-014']);
+  });
+
+  it('tracks each category and month separately', () => {
+    expect(highWaterIds(['AI-2608-002', 'FE-2608-005', 'AI-2607-009', 'AI-2608-001'])).toEqual([
+      'AI-2607-009',
+      'AI-2608-002',
+      'FE-2608-005',
+    ]);
+  });
+
+  it('retains a category-month whose documents were all deleted', () => {
+    // The ledger's whole job: yesterday's high-water survives into today's list
+    // even though no document carries that id any more.
+    const previous = ['LEARN-2608-024'];
+    const present: string[] = [];
+    expect(highWaterIds([...present, ...previous])).toEqual(['LEARN-2608-024']);
+  });
+
+  it('never lowers a high-water mark that a live document has already passed', () => {
+    expect(highWaterIds(['LEARN-2608-024', 'LEARN-2608-030'])).toEqual(['LEARN-2608-030']);
+  });
+
+  it('ignores entries that are not valid ids', () => {
+    expect(highWaterIds(['', 'garbage', 'AI-2608-002'])).toEqual(['AI-2608-002']);
+  });
+
+  it('sorts the result so the ledger diff stays small between runs', () => {
+    const a = highWaterIds(['FE-2608-001', 'AI-2607-002', 'AI-2608-003']);
+    const b = highWaterIds(['AI-2608-003', 'FE-2608-001', 'AI-2607-002']);
+    expect(a).toEqual(b);
+    expect(a).toEqual(['AI-2607-002', 'AI-2608-003', 'FE-2608-001']);
   });
 });

@@ -3,7 +3,10 @@ import Base from '../layouts/Base.astro';
 ---
 
 <Base title="Search — thnkr" description="사이트 내 글 검색.">
-  <section class="mt-2">
+  <!-- Keep one public Pagefind root even when every searchable collection is
+       empty. With no roots Pagefind falls back to whole-page indexing, which
+       would pull unlisted inbox/notes content into the search index. -->
+  <section class="mt-2" data-pagefind-body>
     <h1 class="font-medium mb-3">Search</h1>
     <div id="search"></div>
   </section>

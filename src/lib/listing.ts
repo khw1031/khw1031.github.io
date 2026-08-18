@@ -14,13 +14,18 @@
  * both would show the same topic twice.
  *
  * Comparison is over the set passed in, so callers decide what counts as a
- * potential hub — drafts are already gone by the time `getListItems` returns,
- * and `/idea/` removes its staging area first.
+ * potential hub — production listings remove drafts before this point, while
+ * development listings keep them, and `/idea/` removes its staging area first.
  */
 export function collapseToHubs<T extends { href: string }>(items: T[]): T[] {
   return items.filter(
     (item) => !items.some((other) => other !== item && item.href.startsWith(other.href)),
   );
+}
+
+/** Drafts are author-visible in development but remain absent from production listings. */
+export function isVisibleInListing(draft: boolean, isDevelopment: boolean): boolean {
+  return isDevelopment || !draft;
 }
 
 /** A document's position on the listing timeline. */

@@ -47,7 +47,6 @@ const data: DocumentPage = documentPageSchema.parse({
           title: '한샘 인테리어 플래너',
           period: '2026.02 — 2026.03',
           role: 'FE 리드',
-          url: '/posts/hanssem-interior-planner/',
           content: [
             {
               kind: 'prose',
@@ -78,7 +77,6 @@ const data: DocumentPage = documentPageSchema.parse({
           title: '프론트엔드 개발 워크플로우 설계 및 표준화',
           period: '2026.01 — 2026.02',
           role: '리드',
-          url: '/posts/feature-workflow/',
           content: [
             {
               kind: 'prose',
@@ -103,7 +101,6 @@ const data: DocumentPage = documentPageSchema.parse({
           title: 'IT AI 개발 도구 생태계 구축',
           period: '2026.01 — 현재',
           role: '리드',
-          url: '/posts/ai-dev-tools/',
           content: [
             {
               kind: 'prose',
@@ -118,7 +115,6 @@ const data: DocumentPage = documentPageSchema.parse({
             '37개 도구·규칙을 팀 단위로 배포, v2.18.0까지 릴리즈 운영',
             'Figma 99% 디자인 충실도 / Swagger MCP 오픈소스(@hynu/swagger-mcp) 공개',
           ],
-          references: [{ label: 'Swagger MCP', url: '/posts/20251218/' }],
         },
         {
           title: '바이브 파일럿 AI 워크플로우',

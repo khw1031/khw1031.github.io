@@ -89,6 +89,5 @@ idea는 **아이디어 개발** 전용이다.
 
 - `src/content/idea/`에만 콘텐츠를 쓴다. 라우팅·레이아웃·목록·노출 코드는 이 스킬이 수정하지 않는다
   (필요하면 escalate).
-- notes/wiki와 구분한다 — 개인 학습 노트는 core, 공개 레퍼런스는 research,
-  아이디어 개발은 idea.
+- notes와 구분한다 — 개인 학습 노트는 core, 아이디어 개발은 idea.
 - idea는 공개-if-found이므로 비밀값·내부 URL·비공개 데이터를 넣지 않는다.

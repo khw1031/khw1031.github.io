@@ -37,16 +37,16 @@ const sourcePath = entry.filePath ?? `src/content/${entry.collection}/${entry.id
 // Search scope (single source of truth: SEARCHABLE_COLLECTIONS). Notes and inbox
 // are unlisted (excluded from sitemap too) and must never enter the search index.
 // Drafts are hidden from listings, so they must stay out of the index as well.
-// (wiki is also searchable but renders via WikiLayout, not here.)
 const searchable = SEARCHABLE_COLLECTIONS.includes(entry.collection) && !data.draft;
 // Tag chips link to /tags/[tag], which only exists for the public scope. Only
 // public collections show them so a chip never points at a missing tag page.
 const showTags =
   (COLLECTION_ORDER as ListableCollection[]).includes(entry.collection) && data.tags.length > 0;
-// Notes open with their own first core claim, so a 핵심요약 block above it restates
-// the same thing in weaker words. The frontmatter field stays (check-frontmatter
-// requires it, and it backs the meta description) — only the block is dropped.
-const showSummary = Boolean(data.summary) && entry.collection !== 'notes';
+// Posts and Read & Write are complete arguments, not summary targets; notes also
+// open with their own first core claim. Keep frontmatter summary for metadata,
+// but only render the block for the capture and idea collections.
+const showSummary =
+  Boolean(data.summary) && !['posts', 'read-and-write', 'notes'].includes(entry.collection);
 ---
 
 <Base title={`${data.title} — thnkr`} description={description} jsonLd={jsonLd}>

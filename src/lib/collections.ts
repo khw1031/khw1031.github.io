@@ -1,15 +1,9 @@
 import { type CollectionEntry, getCollection } from 'astro:content';
 import { getLabItems } from './labs';
-import { sortByRecency } from './listing';
+import { isVisibleInListing, sortByRecency } from './listing';
 import { readingTime } from './reading-time';
 
-export type ListableCollection =
-  | 'posts'
-  | 'read-and-write'
-  | 'notes'
-  | 'inbox'
-  | 'wiki'
-  | 'idea';
+export type ListableCollection = 'posts' | 'read-and-write' | 'notes' | 'inbox' | 'idea';
 
 export interface PostListItem {
   href: string;
@@ -37,22 +31,21 @@ export const COLLECTION_LABELS: Record<ListableCollection, string> = {
   'read-and-write': 'Read & Write',
   notes: 'Notes',
   inbox: 'Inbox',
-  wiki: 'Wiki',
   idea: 'Idea',
 };
 
 // Timeline scope: home "Recent", the archive, tags, and RSS. Kept to the
-// chronological blog collections (+ labs, added in getPublicItems). wiki, notes,
-// inbox is deliberately absent — wiki is a category-tree reference
-// library, not a dated timeline, and notes/inbox are unlisted.
+// chronological blog collections (+ labs, added in getPublicItems). notes and
+// inbox are deliberately absent — they are unlisted.
 export const COLLECTION_ORDER: ListableCollection[] = ['posts', 'read-and-write'];
 
 // Search scope: which collections enter the pagefind index (+ sitemap +
-// robots-allowed). This is COLLECTION_ORDER plus wiki — wiki is public and
-// searchable but stays out of the timeline surfaces above. notes/inbox are
-// in neither scope (unlisted). The pagefind gate lives in the layouts:
-// PostLayout keys off COLLECTION_ORDER, WikiLayout marks wiki bodies directly.
-export const SEARCHABLE_COLLECTIONS: ListableCollection[] = [...COLLECTION_ORDER, 'wiki'];
+// robots-allowed). Currently identical to COLLECTION_ORDER, but kept separate
+// because the two scopes answer different questions — a collection can be
+// public and searchable without belonging on a dated timeline. notes/inbox/
+// sources/idea are in neither scope (unlisted). The pagefind gate lives in
+// PostLayout, which keys off this list.
+export const SEARCHABLE_COLLECTIONS: ListableCollection[] = [...COLLECTION_ORDER];
 
 function entryBody(entry: CollectionEntry<ListableCollection>): string {
   return 'body' in entry && typeof entry.body === 'string' ? entry.body : '';
@@ -74,13 +67,16 @@ function entryToItem(
 }
 
 export async function getListItems(collection: ListableCollection): Promise<PostListItem[]> {
-  const entries = await getCollection(collection, ({ data }) => !data.draft);
+  const entries = await getCollection(collection, ({ data }) =>
+    isVisibleInListing(data.draft, import.meta.env.DEV),
+  );
   return sortByRecency(entries.map((entry) => entryToItem(collection, entry)));
 }
 
-// Public, listed content merged for the home "Recent" list and the archive:
-// the COLLECTION_ORDER collections plus labs. Notes and inbox are intentionally
-// excluded (they are unlisted — also absent from the sitemap and search index).
+// Listed content merged for the home "Recent" list and the archive: the
+// COLLECTION_ORDER collections plus labs. Development includes drafts so they
+// are author-visible; production excludes them. Notes and inbox are deliberately
+// absent (they are unlisted — also absent from the sitemap and search index).
 async function getPublicItems(): Promise<PostListItem[]> {
   const collections = await Promise.all(
     COLLECTION_ORDER.map((c) =>
@@ -113,9 +109,9 @@ export interface TagCount {
   count: number;
 }
 
-// Tags are aggregated only over the public scope (getPublicItems): the
-// COLLECTION_ORDER collections, non-draft. Labs carry no tags, and notes/inbox
-// are unlisted, so neither contributes here — same rule as the archive/search.
+// Tags use the same listed scope as the archive: production sees only published
+// COLLECTION_ORDER entries, while development also shows drafts. Labs carry no
+// tags, and notes/inbox are unlisted, so neither contributes here.
 export async function getTagIndex(): Promise<TagCount[]> {
   const counts = new Map<string, number>();
   for (const item of await getPublicItems()) {

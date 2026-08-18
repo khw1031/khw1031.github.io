@@ -5,8 +5,8 @@ period: '2025.12'
 company: '(주)한샘'
 role: 'AI 워크플로우 설계 / 표준화'
 status: needs-input
-source: 'src/content/posts/20251210.md'
-post: 'src/content/posts/20251210.md'
+source: 'src/content/inbox/2025-12-10-team-agentic-coding-workflow.md'
+post: 'src/content/inbox/2025-12-10-team-agentic-coding-workflow.md'
 public_url: 'https://khw1031.github.io/posts/20251210/'
 evidence_dir: 'docs/cv/evidence/2025-12-team-agentic-coding-workflow/'
 cv_ready: false
@@ -29,7 +29,7 @@ private_materials: []
 
 ## Linked Documents
 
-- [Post](../../../src/content/posts/20251210.md)
+- [Inbox draft](../../../src/content/inbox/2025-12-10-team-agentic-coding-workflow.md)
 - [Metrics](../evidence/2025-12-team-agentic-coding-workflow/metrics.md)
 - [Interview Questions](../evidence/2025-12-team-agentic-coding-workflow/interview-questions.md)
 - [Concepts](../evidence/2025-12-team-agentic-coding-workflow/concepts.md)

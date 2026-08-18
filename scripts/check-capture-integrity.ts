@@ -47,7 +47,7 @@ import matter from 'gray-matter';
 const CONTENT_ROOT = resolve('src/content');
 
 /** Agent-authored collections. posts and read-and-write are user-authored. */
-const TARGET_COLLECTIONS = new Set(['notes', 'inbox', 'wiki', 'idea', 'sources']);
+const TARGET_COLLECTIONS = new Set(['notes', 'inbox', 'idea', 'sources']);
 
 /** Measured floor of a healthy body is 923 chars; this leaves wide margin. */
 const MIN_BODY_CHARS = 500;
@@ -194,9 +194,7 @@ function main(): void {
   }
 
   const files = new Set(reports.map((r) => r.file));
-  process.stdout.write(
-    `⚠ ${reports.length} integrity problem(s) in ${files.size} file(s):\n\n`,
-  );
+  process.stdout.write(`⚠ ${reports.length} integrity problem(s) in ${files.size} file(s):\n\n`);
   for (const r of reports) {
     const at = r.line === null ? '' : `:${r.line}`;
     process.stdout.write(`  ${r.file}${at}  [${r.kind}]\n    ${r.detail}\n`);

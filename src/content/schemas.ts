@@ -28,8 +28,8 @@ export const baseFrontmatter = z.object({
   // once by scripts/stamp-note-ids.ts and never rewritten — a paper notebook
   // cites it. Optional here because posts/read-and-write are out of scope and
   // an unstamped document must still build; check-frontmatter is what requires
-  // it on notes/inbox/sources/idea/wiki and enforces registry + uniqueness.
-  // Rendered next to the <h1> by PostLayout/WikiLayout.
+  // it on notes/inbox/sources/idea and enforces registry + uniqueness.
+  // Rendered next to the <h1> by PostLayout.
   noteId: z
     .string()
     .regex(NOTE_ID_PATTERN, 'noteId must look like AI-2608-014 ({CATEGORY}-{YYMM}-{NNN})')
@@ -38,12 +38,3 @@ export const baseFrontmatter = z.object({
 
 export const postSchema = baseFrontmatter;
 export const readAndWriteSchema = baseFrontmatter;
-
-// Wiki is the OKF-conformant reference library. OKF's single required field is
-// `type` (e.g. 'Category' for hubs, 'Reference' for leaf cards). `resource` is
-// the canonical URL of the concept the doc describes (optional). title/pubDate
-// stay required (inherited) because the site still renders and sorts by them.
-export const wikiSchema = baseFrontmatter.extend({
-  type: z.string().min(1),
-  resource: z.url().optional(),
-});

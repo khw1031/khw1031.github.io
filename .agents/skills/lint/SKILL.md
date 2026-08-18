@@ -22,7 +22,9 @@ the fill splits work by model tier — **the upper model analyzes, a lower model
 - **Every `src/content/**/*.md` is a target.** The checker scans the whole content
   tree, not a fixed list, and holds every file to the same required-key set (known
   collections use their configured schema; unknown ones validate with the base
-  schema), so new collections are covered automatically.
+  schema), so new collections are covered automatically. Exception: `docs`, `logs`,
+  and `study-note` are the `SCHEMA_FREE` collections — exempt from validation and
+  stamping (free-form/raw-staging bodies with body-derived titles).
 - **The upper model owns all analysis and decisions.** Deriving every field value
   from content is the upper (current) model's job.
 - **The lower model performs mechanical insertion only.** The delegated Haiku

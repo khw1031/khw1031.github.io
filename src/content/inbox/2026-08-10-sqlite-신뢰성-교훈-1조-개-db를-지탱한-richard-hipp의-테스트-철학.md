@@ -1,6 +1,7 @@
 ---
 title: 'SQLite 신뢰성 교훈 - 1조 개 DB를 지탱한 Richard Hipp의 테스트 철학'
 pubDate: '2026-08-10T14:39:15+09:00'
+noteId: ARCH-2608-004
 description: 'SQLite 창시자 Richard Hipp이 설명하는 100% MCDC, 오류 주입, 전원 장애 시뮬레이션 등 고신뢰 소프트웨어 설계 원칙.'
 summary: '이 리포트는 SQLite가 1조 개 이상의 배포에도 세 명의 커미터로 유지될 수 있었던 테스트 철학과 구체적 기법을 정리한다. MCDC 달성 방법부터 AI가 발견한 최신 결함까지, ''테스트 가능하게 설계하라''는 한 명제를 중심으로 읽는다.'
 lang: ko

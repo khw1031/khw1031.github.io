@@ -1,0 +1,58 @@
+---
+import { getCollection } from 'astro:content';
+import Base from '../../../layouts/Base.astro';
+
+// Unlisted topic TOC for final-form `/r` rules. Rules are organized under
+// logs/rules/<topic>/ when captured and remain there without a migration step.
+const entries = await getCollection('logs');
+const ruleEntries = entries.filter((entry) => entry.id.startsWith('rules/'));
+const topicNames = [
+  ...new Set(ruleEntries.map((entry) => entry.id.split('/')[1]).filter(Boolean)),
+].sort((a, b) => a.localeCompare(b));
+const topics = topicNames.map((topic) => ({
+  name: topic,
+  rules: ruleEntries
+    .filter((entry) => entry.id.startsWith(`rules/${topic}/`))
+    .map((entry) => {
+      const body = (entry as { body?: string }).body ?? '';
+      const title = entry.data.title ?? body.match(/^#\s+(.+?)\s*$/m)?.[1] ?? entry.id;
+      return { href: `/logs/${entry.id}/`, title };
+    })
+    .sort((a, b) => a.title.localeCompare(b.title)),
+}));
+---
+
+<Base title="Rules — thnkr" description="Rules — 주제별 규칙 모음">
+  <section class="mt-2">
+    <h2 class="font-medium mb-1">Rules</h2>
+    <p class="not-prose mb-6 text-sm text-muted">
+      `/r`로 캡처해 최종 위치에 저장한 주제별 규칙입니다. 직접 URL로만 접근하며
+      검색·사이트맵에서 제외됩니다.
+    </p>
+    {
+      topics.length > 0 ? (
+        <div class="space-y-6">
+          {topics.map((topic) => (
+            <section>
+              <h3 class="font-medium mb-2">{topic.name}</h3>
+              <ul class="not-prose space-y-2">
+                {topic.rules.map((rule) => (
+                  <li>
+                    <a
+                      href={rule.href}
+                      class="underline underline-offset-2 hover:text-foreground"
+                    >
+                      {rule.title}
+                    </a>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))}
+        </div>
+      ) : (
+        <p class="text-sm text-muted">아직 문서가 없습니다.</p>
+      )
+    }
+  </section>
+</Base>

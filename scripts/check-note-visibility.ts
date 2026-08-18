@@ -17,10 +17,9 @@
  * src/lib/listing.ts, called by this reporter AND by both list pages
  * (src/pages/notes/[...page].astro, src/pages/idea/index.astro), so the report
  * cannot drift away from what the site renders. Only the per-page context is
- * restated here — /idea/ drops its staging area before collapsing, and
- * getListItems() drops `draft: true` before either page sees it. Drafts are
- * reported too, because a draft produces the identical "it is not there"
- * symptom for an entirely different reason.
+ * restated here — /idea/ drops its staging area before collapsing. This script
+ * reports production visibility, where getListItems() drops `draft: true`;
+ * development intentionally includes drafts so authors can inspect them.
  *
  * `inbox` and `sources` are flat collections with no prefix filter, so they are
  * out of scope: every document in them lists.
@@ -90,8 +89,8 @@ function toDoc(collection: TreeCollection, relFile: string): Doc {
  * Pure classifier. The collapse rule itself comes from src/lib/listing.ts, the
  * same module both list pages call, so this reporter cannot drift away from
  * what the site actually renders. What stays here is the surrounding context
- * each page applies before collapsing: drafts are gone before getListItems()
- * returns, and /idea/ removes its staging area first.
+ * each page applies before collapsing in production: drafts are gone before
+ * getListItems() returns, and /idea/ removes its staging area first.
  */
 export function classifyDocs(docs: Doc[], collection: TreeCollection): Verdict[] {
   const listPage = `/${collection}/`;

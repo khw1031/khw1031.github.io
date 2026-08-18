@@ -10,7 +10,7 @@
   "scripts": {
     "predev": "tsx scripts/generate-raw-markdown.ts",
     "dev": "astro dev",
-    "build": "astro build && pagefind --site dist",
+    "build": "astro build && pagefind --site dist --root-selector '[data-pagefind-body]'",
     "preview": "astro preview",
     "check": "astro check",
     "lint": "biome check .",

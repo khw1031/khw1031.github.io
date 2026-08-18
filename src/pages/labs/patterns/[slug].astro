@@ -226,7 +226,8 @@ const candidates = pattern.candidates.map((candidate) => ({
   const status = document.querySelector<HTMLElement>('#copy-status');
   if (!canvas || !stage) throw new Error('Missing plot canvas.');
 
-  const width = 720;
+  // World-unit reference height; the matching width is derived per-resize from
+  // the live canvas aspect ratio (see `resize`), so no fixed width is kept here.
   const height = 540;
   const motion = view.motion;
   const zoom = view.zoom ?? 1;

@@ -22,12 +22,19 @@
  *
  * Sequences run in pubDate order within each category-month, so a lower number
  * means an earlier document.
+ *
+ * Frontmatter alone cannot uphold the never-reissue rule: it records what still
+ * exists, not what has been issued, so deleting the newest document in a month
+ * would free its number. `note-id-highwater.json` closes that hole by keeping
+ * the highest id ever issued per category-month; `--apply` reads it alongside
+ * the live ids and rewrites it after stamping. Never hand-lower an entry.
  */
 import { existsSync, readdirSync, readFileSync, writeFileSync } from 'node:fs';
 import { join, relative, resolve, sep } from 'node:path';
 import matter from 'gray-matter';
 import {
   allocateNoteId,
+  highWaterIds,
   isKnownCategory,
   NOTE_ID_COLLECTIONS,
   noteIdMonth,
@@ -35,6 +42,7 @@ import {
 
 const CONTENT_ROOT = resolve('src/content');
 const TARGET_COLLECTIONS = new Set<string>(NOTE_ID_COLLECTIONS);
+const LEDGER = resolve('note-id-highwater.json');
 
 interface Doc {
   /** Repo-relative path, the plan file's key. */
@@ -136,9 +144,11 @@ function apply(docs: Doc[], planPath: string, dryRun: boolean): void {
     process.exit(1);
   }
 
-  // Seed from every id in the repo — including files outside this plan — so a
-  // sequence is never handed out twice.
+  // Seed from every id in the repo — including files outside this plan — plus
+  // the ledger's high-water marks, which cover months whose newest documents
+  // have since been deleted. Without the ledger those numbers look free.
   const taken = new Set(docs.map((d) => d.noteId).filter((id): id is string => Boolean(id)));
+  for (const id of readLedger()) taken.add(id);
 
   let stamped = 0;
   for (const doc of docs) {
@@ -154,8 +164,55 @@ function apply(docs: Doc[], planPath: string, dryRun: boolean): void {
     stamped += 1;
   }
 
+  if (!dryRun) writeLedger(taken);
+
   const verb = dryRun ? 'would stamp' : 'stamped';
   process.stdout.write(`✓ ${verb} ${stamped} file(s)\n`);
+}
+
+/**
+ * Fold every live id into the ledger without stamping anything.
+ *
+ * Initializes the file on a repo that predates it, and repairs it afterwards.
+ * Safe to re-run: the union with the existing ledger means a mark can only
+ * rise, so this can never resurrect a retired number.
+ */
+function syncLedger(docs: Doc[]): void {
+  const previous = readLedger();
+  const known = new Set(previous);
+  for (const doc of docs) if (doc.noteId) known.add(doc.noteId);
+  writeLedger(known);
+  const after = readLedger();
+  process.stdout.write(
+    `✓ ledger: ${after.length} category-month mark(s), ${after.length - previous.length} added\n`,
+  );
+}
+
+/**
+ * The high-water ledger: one id per category-month, the highest ever issued.
+ *
+ * A missing file is not an error — the first `--apply` creates it — but a
+ * malformed one is, because silently treating it as empty would re-open every
+ * retired number at once.
+ */
+function readLedger(): string[] {
+  if (!existsSync(LEDGER)) return [];
+  const parsed: unknown = JSON.parse(readFileSync(LEDGER, 'utf-8'));
+  if (!Array.isArray(parsed) || parsed.some((v) => typeof v !== 'string')) {
+    throw new Error(`${relative(process.cwd(), LEDGER)}: expected a JSON array of id strings`);
+  }
+  return parsed as string[];
+}
+
+/**
+ * Rewrite the ledger from every id now known, live or retired.
+ *
+ * `highWaterIds` only ever keeps the maximum, and the previous ledger is folded
+ * into its input by the caller, so a mark can rise but never fall.
+ */
+function writeLedger(known: Iterable<string>): void {
+  const ids = highWaterIds(known);
+  writeFileSync(LEDGER, `${JSON.stringify(ids, null, 2)}\n`);
 }
 
 /**
@@ -199,10 +256,16 @@ function main(): void {
     return;
   }
 
+  if (args.includes('--sync-ledger')) {
+    syncLedger(docs);
+    return;
+  }
+
   const stamped = docs.filter((d) => d.noteId).length;
   process.stdout.write(
     `${stamped}/${docs.length} stampable documents carry a noteId.\n` +
-      'Usage: --plan | --apply <plan.tsv> [--dry-run]\n',
+      `${readLedger().length} high-water mark(s) in ${relative(process.cwd(), LEDGER)}.\n` +
+      'Usage: --plan | --apply <plan.tsv> [--dry-run] | --sync-ledger\n',
   );
 }
 

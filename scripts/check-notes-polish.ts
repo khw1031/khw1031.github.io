@@ -9,7 +9,7 @@
  * flags a file when the current body hash differs (or the hash is absent) — the
  * body changed since it was last polished, so a /notes-polish pass is due.
  *
- * Scope: notes, inbox, wiki, idea only. posts and read-and-write are
+ * Scope: notes, inbox, idea only. posts and read-and-write are
  * user-authored and never polished.
  *
  * Warning-only: this NEVER blocks a push (always exit 0). The pre-push hook runs
@@ -37,7 +37,7 @@ import matter from 'gray-matter';
 const CONTENT_ROOT = resolve('src/content');
 
 /** Agent-authored collections. posts and read-and-write are user-authored — never polished. */
-const TARGET_COLLECTIONS = new Set(['notes', 'inbox', 'wiki', 'idea']);
+const TARGET_COLLECTIONS = new Set(['notes', 'inbox', 'idea']);
 
 interface PolishReport {
   file: string;
@@ -147,9 +147,7 @@ function main(): void {
   for (const r of reports) {
     process.stdout.write(`  ${r.file} (${r.reason})\n`);
   }
-  process.stdout.write(
-    '\nRun /notes-polish to highlight key content and align structure.\n',
-  );
+  process.stdout.write('\nRun /notes-polish to highlight key content and align structure.\n');
   process.exit(0);
 }
 

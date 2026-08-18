@@ -1,6 +1,7 @@
 ---
 title: 'Midjourney 스타일 트렌드 #13: Bare Paper Ink Line'
 pubDate: '2026-08-08T23:31:30+09:00'
+noteId: DS-2608-006
 description: 'Midjourney --sref 코드 기반 미니멀 잉크 라인 스타일 분석과 시각 문해력 관점의 AI 이미지 생성 기법 정리'
 summary: '적은 선으로 더 잘 보이게 만드는 Bare Paper Ink Line 스타일은 Midjourney sref 코드 2930206942로 재현 가능한 미니멀 드로잉 기법이며, AI 크리에이터의 시각 문해력이 스타일 선택의 핵심 변수다.'
 lang: ko

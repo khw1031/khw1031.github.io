@@ -11,27 +11,27 @@ test.describe('notes (private route)', () => {
   });
 
   test('detail page is reachable by direct URL and renders title', async ({ page }) => {
-    const response = await page.goto('/notes/web-worker/');
+    const response = await page.goto('/notes/what-to-learn-and-when-to-stop/');
     expect(response?.status()).toBe(200);
-    await expect(page.locator('article h1').first()).toContainText('Web Worker');
+    await expect(page.locator('article h1').first()).toContainText('무엇을 배울지');
   });
 
   test('hub page renders child notes as a TOC and children resolve', async ({ page }) => {
-    await page.goto('/notes/browser-page-load/');
+    await page.goto('/notes/ai-capability-scoring-axes/');
     const tocLink = page.locator(
-      'article nav[aria-label="하위 문서"] a[href="/notes/browser-page-load/dns-resolution/"]',
+      'article nav[aria-label="하위 문서"] a[href="/notes/ai-capability-scoring-axes/skill-development/"]',
     );
     await expect(tocLink).toHaveCount(1);
-    const response = await page.goto('/notes/browser-page-load/dns-resolution/');
+    const response = await page.goto('/notes/ai-capability-scoring-axes/skill-development/');
     expect(response?.status()).toBe(200);
-    await expect(page.locator('article h1').first()).toContainText('DNS Resolution');
+    await expect(page.locator('article h1').first()).toContainText('소양 개발 방안');
   });
 
   test('list page shows hubs and standalone notes but not children', async ({ page }) => {
     await page.goto('/notes/');
-    await expect(page.locator('main a[href="/notes/browser-page-load/"]')).toHaveCount(1);
+    await expect(page.locator('main a[href="/notes/ai-capability-scoring-axes/"]')).toHaveCount(1);
     await expect(
-      page.locator('main a[href="/notes/browser-page-load/dns-resolution/"]'),
+      page.locator('main a[href="/notes/ai-capability-scoring-axes/skill-development/"]'),
     ).toHaveCount(0);
   });
 
@@ -63,7 +63,10 @@ test.describe('notes (private route)', () => {
     page,
     request,
   }) => {
-    for (const slug of ['/notes/browser-page-load/', '/notes/browser-page-load/dns-resolution/']) {
+    for (const slug of [
+      '/notes/ai-capability-scoring-axes/',
+      '/notes/ai-capability-scoring-axes/skill-development/',
+    ]) {
       await page.goto(slug);
       await expect(page.locator(`a[data-copy-md][href="${slug}raw.md"]`)).toHaveCount(1);
       const res = await request.get(`${slug}raw.md`);

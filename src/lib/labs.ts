@@ -43,7 +43,8 @@ export const labs: LabEntry[] = [
     title: 'expression plotter',
     href: '/labs/plot/',
     pubDate: new Date('2026-07-03'),
-    description: '수학 식을 입력하면 캔버스에 실시간으로 그래프를 그려주는 expr-eval 기반 수식 플로터',
+    description:
+      '수학 식을 입력하면 캔버스에 실시간으로 그래프를 그려주는 expr-eval 기반 수식 플로터',
   },
 ];
 

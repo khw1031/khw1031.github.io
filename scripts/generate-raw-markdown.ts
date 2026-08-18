@@ -3,8 +3,8 @@ import {
   mkdirSync,
   readdirSync,
   readFileSync,
-  rmSync,
   rmdirSync,
+  rmSync,
   writeFileSync,
 } from 'node:fs';
 import { join, resolve, sep } from 'node:path';
@@ -15,10 +15,11 @@ const COLLECTIONS = [
   'read-and-write',
   'notes',
   'inbox',
-  'wiki',
   'idea',
   'docs',
   'sources',
+  'logs',
+  'study-note',
 ] as const;
 
 type Collection = (typeof COLLECTIONS)[number];

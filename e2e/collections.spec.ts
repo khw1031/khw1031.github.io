@@ -3,25 +3,26 @@ import { expect, type Page, test } from '@playwright/test';
 interface CollectionSpec {
   name: string;
   path: string;
+  /**
+   * Non-draft entries currently in the collection. Page size is 10, so this is
+   * the whole list, not a page of it. It tracks content inventory — bump it when
+   * a post is added or a draft is published.
+   */
   expectedCount: number;
-  sampleSlug: string;
-  sampleTitleIncludes: string;
+  sampleSlug?: string;
+  sampleTitleIncludes?: string;
 }
 
 const COLLECTIONS: CollectionSpec[] = [
   {
     name: 'posts',
     path: '/posts/',
-    expectedCount: 5,
-    sampleSlug: '/posts/20251210/',
-    sampleTitleIncludes: 'Agentic',
+    expectedCount: 0,
   },
   {
     name: 'read-and-write',
     path: '/read-and-write/',
-    expectedCount: 5,
-    sampleSlug: '/read-and-write/251129/',
-    sampleTitleIncludes: 'AI',
+    expectedCount: 0,
   },
 ];
 
@@ -59,17 +60,20 @@ for (const c of COLLECTIONS) {
       await expect(page.locator('main ul > li')).toHaveCount(c.expectedCount);
     });
 
-    test('list page links to a known detail slug', async ({ page }) => {
-      await page.goto(c.path);
-      const link = page.locator(`main a[href="${c.sampleSlug}"]`);
-      await expect(link).toHaveCount(1);
-    });
+    const { sampleSlug, sampleTitleIncludes } = c;
+    if (sampleSlug && sampleTitleIncludes) {
+      test('list page links to a known detail slug', async ({ page }) => {
+        await page.goto(c.path);
+        const link = page.locator(`main a[href="${sampleSlug}"]`);
+        await expect(link).toHaveCount(1);
+      });
 
-    test('detail page renders the title in an h1', async ({ page }) => {
-      const response = await page.goto(c.sampleSlug);
-      expect(response?.status()).toBe(200);
-      await expect(page.locator('article h1').first()).toContainText(c.sampleTitleIncludes);
-    });
+      test('detail page renders the title in an h1', async ({ page }) => {
+        const response = await page.goto(sampleSlug);
+        expect(response?.status()).toBe(200);
+        await expect(page.locator('article h1').first()).toContainText(sampleTitleIncludes);
+      });
+    }
   });
 }
 
@@ -82,6 +86,7 @@ test('header nav links to every collection', async ({ page }) => {
 
 test('post detail pages expose copy-markdown link + raw md endpoint', async ({ page, request }) => {
   for (const c of COLLECTIONS) {
+    if (!c.sampleSlug) continue;
     await page.goto(c.sampleSlug);
     const expectedMd = `${c.sampleSlug.replace(/\/$/, '')}/raw.md`;
     await expect(page.locator(`a[data-copy-md][href="${expectedMd}"]`)).toHaveCount(1);

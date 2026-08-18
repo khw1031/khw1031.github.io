@@ -65,4 +65,4 @@ polishHash: '0cbdacf7b886'
 - [Bjork & Bjork, Desirable Difficulties (PDF)](https://www.unh.edu/teaching-learning-resource-hub/sites/default/files/media/2023-06/itow-introducing-desirable-difficulties-into-practice-and-instruction-bjork-and-bjork.pdf) — 1차. §0 우산 원리.
 - [Sweller (1988), Cognitive Load During Problem Solving](https://onlinelibrary.wiley.com/doi/10.1207/s15516709cog1202_4) — 1차. worked example / 초심자 인코딩·expertise reversal의 근거.
 - [Barnett & Ceci (2002), A Taxonomy for Far Transfer (PDF)](https://rapunselshair.pbworks.com/f/barnett_2002.pdf) — 1차. near/far 전이 구분.
-- 개별 기법(인출·분산·인터리빙)의 1차 출처와 한 줄 요약은 [wiki/learning-science](/wiki/learning-science/)에 카드로 정리되어 있다 — 여기서는 중복 인용하지 않는다.
+- 개별 기법(인출·분산·인터리빙)의 1차 출처는 위 목록의 Dunlosky·Bjork 문헌에서 함께 다룬다 — 여기서는 중복 인용하지 않는다.

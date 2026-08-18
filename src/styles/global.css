@@ -200,17 +200,12 @@ article[data-collection="notes"] > ol > li::before {
   margin-top: 0.85em;
 }
 
-/* rehype-autolink-headings wraps each markdown heading in
-   <a href="#slug">. Strip the underline; keep the click target. */
-.prose :is(h1, h2, h3, h4) > a {
-  color: inherit;
-  text-decoration: none;
-}
-
 /* Content links: foreground (black) text with a faded underline so
    the link is clearly clickable without shouting. Hover keeps the
    same color/weight but fades the whole link a touch. Navigation in
-   header/footer overrides color via Tailwind utilities. */
+   header/footer overrides color via Tailwind utilities.
+   Declared before the heading-anchor rule below so source order runs
+   ascending in specificity; that rule is more specific and still wins. */
 main a,
 .prose :is(a) {
   color: var(--color-foreground);
@@ -223,6 +218,13 @@ main a,
 main a:hover,
 .prose :is(a):hover {
   opacity: 0.6;
+}
+
+/* rehype-autolink-headings wraps each markdown heading in
+   <a href="#slug">. Strip the underline; keep the click target. */
+.prose :is(h1, h2, h3, h4) > a {
+  color: inherit;
+  text-decoration: none;
 }
 
 /* CV / document links: one unified colored style (blue text + blue underline),

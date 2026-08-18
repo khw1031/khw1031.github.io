@@ -188,7 +188,7 @@ _아래 다섯 건은 확인일 2026-08-06. §3-bis와 다음 액션 6을 받친
 - (1차) [Zag.js](https://zagjs.com/overview/introduction) — 유한 상태 기계로 동작을 프레임워크 무관하게 두고 React·Vue·Svelte·Solid 어댑터를 제공, 키보드·포커스·ARIA 포함, 스타일 없음. `@zag-js/vanilla`는 1.43.0(2026-07-29)까지 나왔으나 1.32.0(2026-01-02) 시작이라 프레임워크 어댑터보다 어리다 — 순수 HTML 어댑터의 성숙도 리스크가 여기 있다.
 - (1차) [Playroom](https://github.com/seek-oss/playroom) · [Braid Design System 디자인 워크플로](https://seek-oss.github.io/braid-design-system/guides/design-workflow/) — JSX 편집기 + snippet 조립, 테마·뷰포트 동시 프리뷰. Braid가 이걸 주 디자인 워크플로로 쓰는 것이 **캔버스 도구 없는 저작 표면의 실존 증명**이다.
 
-- (provenance, 이전 조사 2026-07-09) 저장소 내부 합성 노트가 주장한 세부 — 컴포넌트당 `.doc.mjs` 단일 원본, MCP=`search`/`get` 조회 서버(코드 생성 아님): [Astryx 심층 노트](/inbox/2026-07-08-meta-astryx-코드-기반-agent-ready-디자인-시스템/) · [Figma 전략 리포트](/inbox/2026-07-08-figma의-다음-행보-캔버스에서-코드로의-중력-이동과-혁신자의-딜레마/) · [design-to-code 위키](/wiki/design-to-code/). Figma Code Connect·UXPin·Vercel 근거도 여기서 수집 — 채택 검토 시 1차 재확인 필요.
+- (provenance, 이전 조사 2026-07-09) 저장소 내부 합성 노트가 주장한 세부 — 컴포넌트당 `.doc.mjs` 단일 원본, MCP=`search`/`get` 조회 서버(코드 생성 아님): [Astryx 심층 노트](/inbox/2026-07-08-meta-astryx-코드-기반-agent-ready-디자인-시스템/) · [Figma 전략 리포트](/inbox/2026-07-08-figma의-다음-행보-캔버스에서-코드로의-중력-이동과-혁신자의-딜레마/). Figma Code Connect·UXPin·Vercel 근거도 여기서 수집 — 채택 검토 시 1차 재확인 필요.
 
 ## 다음 액션
 

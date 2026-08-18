@@ -5,8 +5,8 @@ period: '2025.03 — 2025.04'
 company: '(주)한샘'
 role: '프론트엔드 장애 분석 / 성능 개선'
 status: needs-input
-source: 'src/content/posts/20250404.md'
-post: 'src/content/posts/20250404.md'
+source: 'src/content/inbox/2025-04-04-hanssem-mall-memory-leak-oom.md'
+post: 'src/content/inbox/2025-04-04-hanssem-mall-memory-leak-oom.md'
 public_url: 'https://khw1031.github.io/posts/20250404/'
 evidence_dir: 'docs/cv/evidence/2025-04-hanssem-mall-memory-leak-oom/'
 cv_ready: false
@@ -28,7 +28,7 @@ private_materials: []
 
 ## Linked Documents
 
-- [Post](../../../src/content/posts/20250404.md)
+- [Inbox draft](../../../src/content/inbox/2025-04-04-hanssem-mall-memory-leak-oom.md)
 - [Metrics](../evidence/2025-04-hanssem-mall-memory-leak-oom/metrics.md)
 - [Interview Questions](../evidence/2025-04-hanssem-mall-memory-leak-oom/interview-questions.md)
 - [Concepts](../evidence/2025-04-hanssem-mall-memory-leak-oom/concepts.md)
