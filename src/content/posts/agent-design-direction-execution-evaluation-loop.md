@@ -10,6 +10,7 @@ tags:
   - 'design-md'
   - 'agentic-coding'
 draft: true
+lintHash: '5c2250ba58f8'
 ---
 
 AI가 만든 결과물을 보면 ‘AI가 만든 것 같다’는 느낌이 날 때가 많습니다. 하지만 무엇이 문제인지 딱 집어 말하기는

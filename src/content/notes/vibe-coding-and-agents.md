@@ -7,6 +7,7 @@ description: 'YouTube "바이브코딩과 에이전트" 재생목록(AI 서비�
 summary: 'AI 서비스 개발자는 모델을 만들 필요는 없지만, 모든 실무 문제를 LLM 관점(입력 벡터 → 벡터 변환 → 변환 벡터 활용)으로 재구성해 어떻게 벡터화하고 어떤 모델을 쓸지 설계할 수 있어야 한다.'
 lang: ko
 tags: ['reading', 'ai-service-design', 'llm', 'vibe-coding']
+lintHash: '579b85ddb213'
 ---
 
 ## 전체 피라미드

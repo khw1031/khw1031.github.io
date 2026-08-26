@@ -1,6 +1,7 @@
 ---
 title: 'Paperthin: AI 에이전트용 ''빼기'' 설계 패턴 모음'
 pubDate: '2026-08-26T19:25:44+09:00'
+noteId: AGENT-2608-028
 description: 'AI 코딩 에이전트에 ''추가 대신 제거'' 원칙을 자동 반사로 심는 28개 스킬 모음, 2×2 매트릭스로 분류'
 summary: 'Paperthin은 에이전트가 쌓기만 하는 경향을 교정하기 위해, 기존 공학 원칙(Boy Scout Rule·DRY·egoless programming 등)을 호출 가능한 스킬로 포장한 프로젝트다. 산출물 개수×시간 축 2×2 매트릭스로 28개 스킬을 배치하고, 각 스킬이 ''추가하지 않고 줄인다''는 단일 철학을 공유한다.'
 lang: ko

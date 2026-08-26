@@ -5,8 +5,8 @@ noteId: AGENT-2608-012
 lang: ko
 description: AI 산출물과 사람이 고친 최종본 사이의 diff를 신호로 삼아 다음 작업 지시를 갱신하는 루프를, 도메인·도구와 무관한 공통 규약으로 표준화하는 구상.
 summary: 디자인·글쓰기·코드·기획을 가리지 않고 반복되는 "시키기 → 보기 → 고치기 → 델타를 다음 지시에 반영" 루프를 하나의 규약과 델타 원장으로 고정하려는 아이디어. 별점이 아니라 편집 diff를 신호로 쓰기 때문에 사용자가 이유를 언어화하지 못해도 신호가 잡힌다는 점이 축이며, TextGrad·GEPA·user-edit 정렬 연구가 이미 인접해 있다는 점이 최대 리스크다.
-tags: [idea-inbox, agent, workflow, evaluation, prompt-optimization, tooling]
-lintHash: 'abe12bd8f011'
+tags: [agent, workflow, evaluation, prompt-optimization, tooling]
+lintHash: 'c40d7cfdb04a'
 ---
 
 ## 아이디어

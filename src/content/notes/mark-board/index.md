@@ -11,7 +11,7 @@ tags:
   - 'local-first'
   - 'sqlite'
   - 'byok'
-  - 'spec'
+lintHash: '923bbed7250e'
 ---
 
 1. **mark-board는 무한 캔버스 위의 노드 하나가 plain text가 아니라 마크다운 문서인 로컬 설치형 앱이고, 캔버스가 먼저이며 마크다운은 노드의 콘텐츠 형식이다.**

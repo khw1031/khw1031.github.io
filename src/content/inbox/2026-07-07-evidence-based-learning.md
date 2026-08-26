@@ -6,7 +6,7 @@ description: 학습 과학 연구를 하나의 실행 가능한 학습법으로 
 summary: "인출·분산·인터리빙·자기설명·worked example·전이 같은 학습 과학의 개별 원리를 'desirable difficulties'라는 한 원리로 묶고, 이해 인코딩→인출→분산→인터리빙→왜/언제-아닌가→전이 검증의 6단계 loop으로 일반화한다. 이어서 이 방법이 강한 영역(판별 많고 누적적·전이 필요), 적응이 필요한 영역(운동/창의), 깨지는 조건(초심자 첫 노출·판별 전 인터리빙·far transfer·단발 벼락치기)을 지도로 정리한다."
 lang: ko
 tags: ['learning-science', 'learning-method', 'desirable-difficulties', 'retrieval-practice', 'transfer']
-lintHash: '0cbdacf7b886'
+lintHash: '8d35842952ec'
 polishHash: '0cbdacf7b886'
 ---
 

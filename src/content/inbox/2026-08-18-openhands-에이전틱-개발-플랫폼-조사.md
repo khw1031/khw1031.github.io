@@ -1,10 +1,12 @@
 ---
 title: OpenHands 에이전틱 개발 플랫폼의 구성과 도입 판단 조사
 pubDate: '2026-08-18T23:34:11+09:00'
+noteId: AGENT-2608-025
 description: 'OpenHands의 현재 구성 요소, 실행 방식, 저장소 맞춤화 수단과 에이전트 작업에 적합한 조건을 공식 문서 중심으로 정리한 조사 기록'
 summary: 'OpenHands는 브라우저 클라이언트인 Agent Canvas, 원격 실행 API인 Agent Server, Python SDK, 샌드박스 제어면을 분리한 에이전틱 개발 생태계다. 명확한 완료 조건과 검증 가능한 작은 범위의 작업에 적합하며, 저장소별 지침·초기화·완료 전 품질 게이트를 .openhands로 둘 수 있다.'
 lang: ko
 tags: ['openhands', 'agentic-coding', 'software-agent', 'developer-tools']
+lintHash: '75444182033a'
 ---
 
 ## 조사 범위

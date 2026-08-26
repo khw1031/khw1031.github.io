@@ -12,6 +12,7 @@ tags:
   - 'eval'
   - 'context-engineering'
   - 'architecture'
+lintHash: 'da7cc3d62777'
 ---
 
 ## TL;DR

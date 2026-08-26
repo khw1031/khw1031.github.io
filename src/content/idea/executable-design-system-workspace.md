@@ -15,8 +15,8 @@ summary: >
   그리고 되돌리기 비싼 결정 넷(모드 전략·레시피 형태·첫 어댑터·계약 확정 시점).
 lang: ko
 updatedDate: '2026-08-06'
-tags: [design-system, ai-agents, first-principles, ports-adapters, mcp, stylex, astryx, figma, saas, subscription, product-idea, tailwind, design-tokens]
-lintHash: '42b3b25520b1'
+tags: [design-system, design-tokens, ai-agents, mcp, product-idea]
+lintHash: '9a92418dbb17'
 polishHash: '42b3b25520b1'
 ---
 

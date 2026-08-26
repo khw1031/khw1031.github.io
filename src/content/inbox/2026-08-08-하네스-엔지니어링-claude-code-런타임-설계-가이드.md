@@ -12,6 +12,7 @@ tags:
   - 'agentic-coding'
   - 'context-management'
 canonical: 'https://harness-books.agentway.dev/en/book1-claude-code/'
+lintHash: '88745c4fd5d0'
 ---
 
 > 캡처 맥락: `harness-books.agentway.dev/en/book1-claude-code/`의 영문판 전문(서문 + 9개 장 + 부록 A/B/C)을 직접 받아 읽고 정리했다. 확인 시점 2026-08-08. 저자는 `@wquguru`, 서문 서명일은 2026-04-01. 온라인판이 전문을 공개하고 있어 별도 구매·로그인은 필요 없었다(WebFetch는 403, 브라우저 User-Agent로 받으면 200).

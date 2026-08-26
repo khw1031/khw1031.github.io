@@ -1,6 +1,7 @@
 ---
 title: 'Higgsfield Seedance 2.5로 가족사진을 AI 영상화하는 사례'
 pubDate: '2026-08-19T00:56:09+09:00'
+noteId: AI-2608-006
 description: 'Higgsfield AI의 Seedance 2.5를 이용해 정지 가족사진을 1080p 영상으로 변환하는 스폰서드 릴스 사례 요약'
 summary: 'AI 크리에이터 ''프롬나우''가 Higgsfield Seedance 2.5로 앨범 속 가족사진을 30초 영상으로 변환한 제작지원 릴스를 정리한다. 스펙 주장과 실제 검증 가능한 정보를 분리했다.'
 lang: ko

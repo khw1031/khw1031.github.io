@@ -5,8 +5,8 @@ noteId: UX-2608-002
 lang: ko
 description: 무드보드·soul.md·라운드별 랭킹을 프로젝트 로컬 아티팩트로 영속화하고, MCP·에이전트 스킬·CLI 세 표면으로 노출하는 디자인 선별 루프 도구 구상.
 summary: YC 디자인 워크플로우 캡처에서 "생성이 아니라 선별이 병목"이라는 결론을 받아, 그 선별 상태 자체를 저장소(moodbox)로 만들고 MCP(상태 접근)·스킬(절차)·CLI(실행) 3표면으로 얹는 아이디어. 진짜 차별점 후보는 별점·쌍대 비교를 누적해 평가 언어(taste.md)를 자동 성장시키는 것이다.
-tags: [idea-inbox, design, mcp, agent-skills, cli, evaluation, tooling]
-lintHash: '711acd7c565a'
+tags: [design, mcp, agent-skills, cli, evaluation]
+lintHash: '9946e3fb7939'
 ---
 
 ## 아이디어

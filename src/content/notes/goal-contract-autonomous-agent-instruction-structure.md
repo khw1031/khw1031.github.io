@@ -6,6 +6,7 @@ description: 'Goal Contract 기반 자율 Agent 지시 구조 조사를 장별�
 summary: '자율 Agent 지시서는 실행 순서가 아니라 Human과 Agent가 합의한 Goal Contract이며, Agent는 방법을 선택하되 완료는 Eval이 판정한다.'
 lang: ko
 tags: ['reading', 'agent', 'goal-contract', 'eval']
+lintHash: '5c19edf4c87a'
 ---
 
 **최상위:** 자율 Agent 지시서는 실행 순서를 적는 문서가 아니라, Human과 Agent가 함께 확정한 `Goal Contract`이며, Agent는 방법을 자율적으로 선택하되 완료는 `Eval`이 판정해야 한다.

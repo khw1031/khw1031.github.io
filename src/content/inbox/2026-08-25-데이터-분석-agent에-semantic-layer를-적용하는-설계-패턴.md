@@ -1,6 +1,7 @@
 ---
 title: '데이터 분석 Agent에 Semantic Layer를 적용하는 설계 패턴'
 pubDate: '2026-08-25T01:28:17+09:00'
+noteId: AGENT-2608-027
 description: 'LLM이 SQL을 직접 쓰지 않고 Semantic 구조를 조합해 Query를 조립하는 분석 Agent 설계 방식'
 summary: '데이터 분석 Agent에서 LLM에게 자유 SQL 작성을 맡기는 대신, Dimension·Metric·Filter 등 시맨틱 구조를 Tool Call 인자로 넘기고 코드 레벨에서 SQL을 조립하면 정확도와 유연성을 동시에 확보할 수 있다는 실무 설계 패턴을 설명한다.'
 lang: ko

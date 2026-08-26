@@ -10,6 +10,7 @@ tags:
   - 'reading'
   - 'ai-design'
   - 'evaluation'
+lintHash: '0ffa96df0690'
 ---
 
 **최상위:** 생성이 쉬워진 AI 디자인의 병목은 좋은 후보를 고르고, 그 판단을 다음 생성이 실행할 조건으로 바꾸는 평가 능력이다.

@@ -1,6 +1,7 @@
 ---
 title: 'Dactyl: Node.js 창시자의 웹→네이티브 앱 빌더'
 pubDate: '2026-08-25T08:26:44+09:00'
+noteId: DEV-2608-004
 description: 'Dactyl은 Mac·Xcode 없이 웹에서 iOS/Android 네이티브 앱을 만드는 도구로, WASM SwiftUI 시뮬레이터가 핵심'
 summary: 'Node.js 창시자가 공개한 Dactyl의 구조(브라우저 WASM SwiftUI 시뮬레이션, 단일 코드베이스)와 커뮤니티의 기대·회의를 한 장에 정리한다.'
 lang: ko
