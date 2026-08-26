@@ -36,6 +36,7 @@ Next.js app에서 `outputs: [".next/**"]`라고 쓰면 root의 `["dist/**"]`는 
 
 ## 근거
 
+- 출처: turborepo-monorepo-starter 실습(스코프 `@lab/*`).
 - 상속 규칙은 `apps/api/turbo.json`(NestJS app 가정) 예시로 확인. array 대체·`$TURBO_EXTENDS$` 확장 규칙.
 
 ## 관련 개념

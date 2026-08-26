@@ -1,0 +1,4 @@
+Keeps the read-and-write collection directory in git while it has no entries.
+The collection stays wired (content.config.ts, /read-and-write routes, nav,
+COLLECTION_ORDER, SEARCHABLE_COLLECTIONS) — content is simply pending.
+Delete this file once the first entry lands.

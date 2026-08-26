@@ -1,0 +1,433 @@
+<!doctype html>
+<html lang="ko">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="5세도 이해할 수 있게 풀어 쓴 웹 인증 방식 안내서"
+    />
+    <title>웹사이트는 어떻게 나를 알아볼까?</title>
+    <style>
+      :root {
+        --ink: #223049;
+        --paper: #fffdf8;
+        --purple: #7654d9;
+        --pink: #fa7995;
+        --yellow: #ffd968;
+        --mint: #bdeed7;
+        --sky: #bee7fb;
+        --line: #dfe5ee;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at 10% 6%, #fff1b7 0 4%, transparent 4.2%),
+          radial-gradient(circle at 94% 16%, #dcf6ec 0 7%, transparent 7.2%),
+          #f7f3eb;
+        font-family:
+          ui-rounded, "Pretendard", "Apple SD Gothic Neo", sans-serif;
+        line-height: 1.65;
+      }
+
+      main {
+        max-width: 920px;
+        margin: 0 auto;
+        padding: 40px 20px 72px;
+      }
+
+      .hero {
+        padding: 38px 28px;
+        border: 3px solid var(--ink);
+        border-radius: 30px;
+        background: var(--paper);
+        box-shadow: 8px 8px 0 var(--yellow);
+      }
+
+      .eyebrow {
+        margin: 0 0 8px;
+        font-weight: 800;
+        color: var(--purple);
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(2rem, 7vw, 4rem);
+        line-height: 1.15;
+        letter-spacing: -0.06em;
+      }
+      h2 {
+        margin: 0;
+        font-size: clamp(1.45rem, 4vw, 2rem);
+        line-height: 1.25;
+      }
+      h3 {
+        margin: 0;
+        font-size: 1.25rem;
+      }
+      .hero p {
+        max-width: 620px;
+        margin: 20px 0 0;
+        font-size: 1.15rem;
+      }
+
+      .speech {
+        margin: 28px 0;
+        padding: 20px 24px;
+        border-radius: 20px;
+        background: var(--sky);
+        font-weight: 750;
+      }
+
+      .story {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 14px;
+        margin: 28px 0 44px;
+      }
+
+      .step,
+      .card,
+      .tip,
+      .compare {
+        border: 2px solid var(--ink);
+        border-radius: 22px;
+        background: var(--paper);
+      }
+
+      .step {
+        padding: 20px;
+        text-align: center;
+      }
+      .step .emoji {
+        display: block;
+        font-size: 2.7rem;
+      }
+      .step strong {
+        display: block;
+        margin-top: 8px;
+      }
+
+      .section-heading {
+        margin: 48px 0 18px;
+      }
+      .section-heading p {
+        margin: 8px 0 0;
+      }
+      .cards {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 18px;
+      }
+
+      .card {
+        position: relative;
+        padding: 24px;
+        overflow: hidden;
+      }
+      .card::after {
+        content: attr(data-icon);
+        position: absolute;
+        right: 15px;
+        top: 9px;
+        font-size: 3.2rem;
+        opacity: 0.22;
+      }
+      .card:nth-child(3n + 1) {
+        box-shadow: 6px 6px 0 var(--pink);
+      }
+      .card:nth-child(3n + 2) {
+        box-shadow: 6px 6px 0 var(--mint);
+      }
+      .card:nth-child(3n) {
+        box-shadow: 6px 6px 0 var(--yellow);
+      }
+      .tag {
+        display: inline-block;
+        margin: 13px 0 8px;
+        padding: 3px 10px;
+        border-radius: 999px;
+        background: var(--mint);
+        font-size: 0.82rem;
+        font-weight: 800;
+      }
+      .card p {
+        margin: 5px 0;
+      }
+      .grownup {
+        color: #52627e;
+        font-size: 0.92rem;
+      }
+
+      .compare {
+        margin-top: 38px;
+        padding: 24px;
+        background: #f1ecff;
+      }
+      .compare-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 16px;
+        margin-top: 16px;
+      }
+      .compare-item {
+        padding: 17px;
+        border-radius: 16px;
+        background: var(--paper);
+      }
+      .compare-item p {
+        margin: 6px 0 0;
+      }
+
+      .tips {
+        display: grid;
+        gap: 12px;
+        margin-top: 18px;
+      }
+      .tip {
+        display: flex;
+        gap: 15px;
+        align-items: flex-start;
+        padding: 16px 18px;
+      }
+      .tip span {
+        font-size: 1.7rem;
+      }
+      .tip p {
+        margin: 0;
+      }
+
+      .quiz {
+        margin-top: 42px;
+        padding: 25px;
+        border-radius: 24px;
+        background: var(--ink);
+        color: white;
+      }
+      .quiz p {
+        margin: 8px 0 16px;
+      }
+      button {
+        margin: 6px 8px 6px 0;
+        padding: 10px 15px;
+        border: 0;
+        border-radius: 12px;
+        background: var(--yellow);
+        color: var(--ink);
+        font: inherit;
+        font-weight: 800;
+        cursor: pointer;
+      }
+      button:hover,
+      button:focus-visible {
+        outline: 3px solid white;
+        outline-offset: 3px;
+        transform: translateY(-1px);
+      }
+      #answer {
+        min-height: 1.6em;
+        margin: 12px 0 0;
+        font-weight: 800;
+        color: #d8f8e8;
+      }
+      footer {
+        margin-top: 40px;
+        text-align: center;
+        color: #61708a;
+        font-size: 0.9rem;
+      }
+
+      @media (max-width: 620px) {
+        main {
+          padding: 24px 16px 54px;
+        }
+        .hero {
+          padding: 28px 21px;
+          border-radius: 24px;
+        }
+        .story,
+        .cards,
+        .compare-grid {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header class="hero">
+        <p class="eyebrow">🔐 아주 쉬운 웹 보안 이야기</p>
+        <h1>웹사이트는<br />어떻게 나를 알아볼까?</h1>
+        <p>
+          놀이공원에 들어갈 때 표를 보여 주는 것처럼, 웹사이트도 “정말 너니?”
+          하고 물어봐요. 이 확인을 <strong>인증</strong>이라고 해요.
+        </p>
+      </header>
+
+      <p class="speech">
+        인증은 “너는 누구니?”이고, 권한은 “무엇을 해도 되니?”예요. 이름표를
+        확인한 뒤에만 놀이방에 들어가는 것과 같아요.
+      </p>
+
+      <section aria-labelledby="story-title">
+        <div class="section-heading">
+          <h2 id="story-title">문을 열기까지</h2>
+          <p>대부분의 웹사이트는 이 세 가지 일을 해요.</p>
+        </div>
+        <div class="story">
+          <div class="step">
+            <span class="emoji">🙋</span><strong>“나는 민지야!”</strong
+            ><small>이름이나 이메일을 말해요.</small>
+          </div>
+          <div class="step">
+            <span class="emoji">🪪</span><strong>“증거를 보여 줘!”</strong
+            ><small>비밀번호나 얼굴로 보여 줘요.</small>
+          </div>
+          <div class="step">
+            <span class="emoji">🎟️</span><strong>“어서 와!”</strong
+            ><small>잠깐 쓸 입장표를 받아요.</small>
+          </div>
+        </div>
+      </section>
+
+      <section aria-labelledby="ways-title">
+        <div class="section-heading">
+          <h2 id="ways-title">인증하는 여러 방법</h2>
+          <p>
+            모두 같은 목표예요. 웹사이트가 “이 아이가 맞구나” 하고 알게 하는
+            방법이죠.
+          </p>
+        </div>
+        <div class="cards">
+          <article class="card" data-icon="🔑">
+            <h3>비밀번호</h3>
+            <span class="tag">나만 아는 비밀 말</span>
+            <p>
+              문을 열 때 말하는 비밀 암호예요. 다른 사람에게 들려주면 안 돼요.
+            </p>
+            <p class="grownup">
+              어른말: 아이디와 비밀번호를 서버가 확인합니다.
+            </p>
+          </article>
+          <article class="card" data-icon="✉️">
+            <h3>일회용 숫자와 로그인 링크</h3>
+            <span class="tag">한 번만 쓰는 초대장</span>
+            <p>
+              휴대폰 문자나 이메일로 숫자 또는 특별한 링크가 와요. 잠깐 뒤에는
+              쓸 수 없어요.
+            </p>
+            <p class="grownup">어른말: OTP와 매직 링크입니다.</p>
+          </article>
+          <article class="card" data-icon="🙂">
+            <h3>패스키</h3>
+            <span class="tag">내 기기가 가진 특별한 열쇠</span>
+            <p>
+              휴대폰의 얼굴, 지문, 화면 잠금으로 확인해요. 비밀번호를 외울
+              필요가 적어요.
+            </p>
+            <p class="grownup">
+              어른말: 기기 안의 공개키 암호 방식으로 서명합니다.
+            </p>
+          </article>
+          <article class="card" data-icon="🏠">
+            <h3>다른 큰 집에 물어보기</h3>
+            <span class="tag">친구가 소개해 주기</span>
+            <p>
+              “구글로 계속하기”처럼, 이미 로그인한 믿을 만한 곳이 “이 사람이
+              맞아”라고 알려 줘요.
+            </p>
+            <p class="grownup">
+              어른말: OAuth 또는 OpenID Connect 기반 소셜 로그인입니다.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="compare" aria-labelledby="ticket-title">
+        <h2 id="ticket-title">들어온 뒤에는 입장표를 써요</h2>
+        <div class="compare-grid">
+          <div class="compare-item">
+            <h3>🍪 쿠키와 세션</h3>
+            <p>
+              웹사이트가 작은 번호표를 브라우저에 맡기고, 진짜 출석부는 자기
+              집에 보관해요.
+            </p>
+          </div>
+          <div class="compare-item">
+            <h3>🎫 토큰</h3>
+            <p>
+              필요한 정보가 적힌 입장표를 받아서 보여 줘요. 유효 시간이 끝나면
+              새 표가 필요해요.
+            </p>
+          </div>
+        </div>
+        <p class="grownup">
+          둘 다 로그인한 뒤 매번 비밀번호를 다시 묻지 않기 위한 방법입니다.
+          쿠키, 세션, 토큰은 인증 방식 자체라기보다 로그인 상태를 이어 가는
+          방법이에요.
+        </p>
+      </section>
+
+      <section aria-labelledby="safe-title">
+        <div class="section-heading">
+          <h2 id="safe-title">안전하게 쓰는 약속</h2>
+        </div>
+        <div class="tips">
+          <div class="tip">
+            <span>🤫</span>
+            <p>
+              <strong>비밀번호와 문자 숫자는 비밀이에요.</strong> 친구, 낯선
+              어른, 전화한 사람에게도 말하지 않아요.
+            </p>
+          </div>
+          <div class="tip">
+            <span>🧸</span>
+            <p>
+              <strong>이상하면 어른에게 말해요.</strong> 급하게 숫자를 알려
+              달라는 메시지는 멈추고 보호자에게 보여 줘요.
+            </p>
+          </div>
+          <div class="tip">
+            <span>⏱️</span>
+            <p>
+              <strong>공용 기기에서는 로그아웃해요.</strong> 도서관이나 학교
+              컴퓨터에 내 입장표를 두고 오지 않아요.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="quiz" aria-labelledby="quiz-title">
+        <h2 id="quiz-title">작은 퀴즈</h2>
+        <p>문자로 온 한 번 쓰는 숫자를 누가 알려 달라고 하면 어떻게 할까요?</p>
+        <button
+          type="button"
+          data-answer="아주 잘했어요! 숫자는 비밀로 하고, 믿을 수 있는 어른에게 보여 주세요. 🎉"
+        >
+          어른에게 보여 준다
+        </button>
+        <button
+          type="button"
+          data-answer="앗, 그 숫자는 집 열쇠처럼 소중해요. 알려 주지 말고 어른에게 보여 주세요. 🛡️"
+        >
+          바로 알려 준다
+        </button>
+        <p id="answer" aria-live="polite"></p>
+      </section>
+
+      <footer>인증 = “너는 누구니?” · 권한 = “무엇을 해도 되니?”</footer>
+    </main>
+    <script>
+      document.querySelectorAll("[data-answer]").forEach((button) => {
+        button.addEventListener("click", () => {
+          document.querySelector("#answer").textContent = button.dataset.answer;
+        });
+      });
+    </script>
+  </body>
+</html>

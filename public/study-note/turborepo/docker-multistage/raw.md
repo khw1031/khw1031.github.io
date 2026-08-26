@@ -68,6 +68,7 @@ diff(레이어) 스택이다. `COPY`의 캐시 키는 **복사되는 파일 내�
 
 ## 근거
 
+- 출처: turborepo-monorepo-starter 실습(스코프 `@lab/*`).
 - `.dig/work/7-1.Dockerfile`, `.dig/work/7-1.md` — 실습 Dockerfile과 공식 3단계 패턴 대조.
 
 ## 관련 개념

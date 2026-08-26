@@ -1,4 +1,4 @@
-import { readdirSync, readFileSync } from 'node:fs';
+import { existsSync, readdirSync, readFileSync } from 'node:fs';
 import { extname, join, relative } from 'node:path';
 import { unified } from '@astrojs/markdown-remark';
 import sitemap from '@astrojs/sitemap';
@@ -8,6 +8,10 @@ import matter from 'gray-matter';
 import { rehypePlugins, remarkPlugins, shikiConfig } from './src/lib/markdown-plugins.ts';
 
 function* walkMarkdown(dir) {
+  // A collection directory disappears from the working tree once its last entry
+  // is moved out (git does not track empty directories), so a live collection can
+  // legitimately have no directory at all. Treat that as zero entries, not a crash.
+  if (!existsSync(dir)) return;
   for (const entry of readdirSync(dir, { withFileTypes: true })) {
     const full = join(dir, entry.name);
     if (entry.isDirectory()) {

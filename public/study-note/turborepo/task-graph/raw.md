@@ -66,6 +66,7 @@ task 없음(`[]`이어도 `package.json`의 dependency 자체는 남는다).
 
 ## 근거
 
+- 출처: turborepo-monorepo-starter 실습(스코프 `@lab/*`).
 - `turbo.json:4-6` — `dependsOn` 선언.
 - 실행 관찰: `turbo run build --dry=json`(agent#build → core#build), `turbo run build typecheck --concurrency=1 --force`(네 task 순차).
 

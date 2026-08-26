@@ -61,6 +61,7 @@ task와 그 dependent에만 영향을 준다.
 
 ## 근거
 
+- 출처: turborepo-monorepo-starter 실습(스코프 `@lab/*`).
 - `turbo.json:6`(`outputs: ["dist/**"]`), `turbo.json:7`(`inputs`), `apps/agent/tsconfig.json:9`·`packages/core/tsconfig.json:8`(`outDir: "dist"`).
 - 실행 관찰: `--dry=json`의 `globalCacheInputs`(현재 global 파일·환경은 비어 있고 dependency hash 표시), `--cache=local:,remote:r` 실행 시 core hit·agent miss.
 

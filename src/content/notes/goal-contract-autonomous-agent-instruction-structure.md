@@ -114,6 +114,14 @@ Human Input → Goal Definition → Goal Contract → Graph·Loop → Eval Verdi
 - 제외:
 - 제약:
 
+## Inputs, Evidence, and Resources
+- 신뢰할 수 있는 자료·시작 상태:
+- 쓸 수 있는 저장소·도구·환경:
+- 확인되지 않은 가정(검증 대상, 사실로 취급 금지):
+
+## Priorities and Trade-offs
+- 충돌 시 우선순위:
+
 ## Success Evidence
 - 성공하면 남아야 하는 증거:
 
@@ -162,6 +170,12 @@ Human Input → Goal Definition → Goal Contract → Graph·Loop → Eval Verdi
 | Evaluator | 누가 판정하는지 (생성 Agent 자기 선언 금지) | "결정론적 Test Runner + 별도 Context Grader" | "Agent가 스스로 판단" |
 | Order | 검사 순서 — 싼 결정론 → 측정 → Grader → Human | "① Test ② Benchmark ③ Grader ④ Human Review" | 순서 없음 |
 | 멈추고 보고할 조건 | 의도된 중단 조건을 구체적으로 | "계약 충돌, Eval 불가, 예산 소진, 되돌릴 수 없는 행동" | "문제 생기면 멈춤" |
+| Inputs, Evidence, Resources | 사실·자원과 미확인 가정을 분리 | "가정: 현재 회귀 Test 커버리지를 신뢰할 수 있다 — 검증 대상" | 가정을 사실처럼 나열 |
+| Priorities and Trade-offs | 충돌 시 tie-breaker를 실행 규칙으로 | "정확성 > 속도 > 비용" | "상황 봐서 판단" |
+
+`Inputs, Evidence, and Resources`는 Agent가 실행 중 근거로 삼을 사실·자원과, 사실로 취급하면 안 되는 미확인 가정을 함께 넘긴다. `확인되지 않은 가정`은 근거이면서 동시에 검증 대상이라는 점에서 특수하다 — 이 줄이 없으면 Agent가 확정 사실과 가정을 구분하지 못한 채 진행한다.
+
+`Priorities and Trade-offs`는 Input의 `Priorities and Risk`와 같은 재료를 다루지만 단계가 다르다. Input은 각자의 주관적 입력이고, 여기서는 합의된 단일 tie-breaker다. 감수할 수 없는 위험 자체는 `Authority and Escalation`의 금지·멈춤 조건에 두고, 이 항목에는 목표·제약이 충돌할 때의 우선순위 규칙만 남긴다.
 
 `Environment and Isolation`은 코딩 Agent를 Docker + SSH로 격리 실행할 때만 채운다(§7). 그 밖의 과업에서는 `해당 없음`이라 쓰거나 필요한 두세 줄만 남긴다.
 

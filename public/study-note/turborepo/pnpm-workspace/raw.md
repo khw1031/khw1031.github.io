@@ -63,6 +63,7 @@ agent·core만 실행했다.
 
 ## 근거
 
+- 출처: turborepo-monorepo-starter 실습(스코프 `@lab/*`).
 - `pnpm-workspace.yaml:1-3` — glob 선언.
 - 실행 관찰: `pnpm list -r --depth -1`(root·agent·core), `pnpm -r run typecheck`(agent·core).
 

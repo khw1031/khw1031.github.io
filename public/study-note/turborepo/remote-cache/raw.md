@@ -45,6 +45,7 @@ endpoint여야 한다.
 
 ## 근거
 
+- 출처: turborepo-monorepo-starter 실습(스코프 `@lab/*`).
 - 실습 관찰(M4/T1): `--cache=remote:rw`로 한 번 업로드한 뒤 두 task 모두 remote hit로 전환.
 
 ## 관련 개념

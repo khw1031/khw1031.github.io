@@ -32,6 +32,7 @@ lockfile은 **같은 시점의 `package.json`들에서 파생된 정합성 있�
 
 ## 근거
 
+- 출처: turborepo-monorepo-starter 실습(스코프 `@lab/*`).
 - 실습 M7/T1 정정(예상 `fail` → 검색으로 `fail-corrected`), `.dig/log.jsonl`.
 
 ## 관련 개념

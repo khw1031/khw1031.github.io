@@ -42,6 +42,7 @@ task는 기본적으로 함께 실행된다. 마지막 task dependency 확장까
 
 ## 근거
 
+- 출처: turborepo-monorepo-starter 실습(스코프 `@lab/*`).
 - 실행 관찰: `--filter=@lab/core`(core만), `--filter=@lab/agent...`(agent+core), `--filter=...@lab/core`(core+agent).
 
 ## 관련 개념
