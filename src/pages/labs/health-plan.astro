@@ -1,0 +1,217 @@
+---
+import Base from '../../layouts/Base.astro';
+
+const title = '12주 건강 실천표';
+const description = '진료 예약, 운동, 식사, 수분 습관을 한 주 단위로 점검하는 건강 실천표';
+
+const today = [
+  ['진료 예약', '순환기내과 또는 지질 상담 예약을 문의한다.', '20분'],
+  ['유산소', '빠른 걷기 또는 실내 자전거를 30분 한다.', '30분'],
+  ['가벼운 근력', '목과 팔 저림을 유발하지 않는 범위에서 한다.', '35분'],
+  ['식사 준비', '다음 두 끼의 단백질·채소·통곡물을 준비한다.', '20분'],
+];
+
+const weeklyPlan = [
+  ['월', '근력 40분 + 걷기 20분', '두부·닭고기·채소 중심으로 한 주 식재료 준비'],
+  ['화', '유산소 45분', '생선과 잡곡밥, 채소 2접시'],
+  ['수', '가벼운 걷기 30분', '두부 또는 콩 식사, 과일은 통과일로'],
+  ['목', '근력 40분 + 걷기 20분', '닭고기 또는 생선, 국물은 적게'],
+  ['금', '유산소 45분', '외식은 단백질·채소 메뉴와 밥 반 공기'],
+  ['토', '걷기·자전거·가벼운 등산 60~90분', '가공육 대신 생선·콩·두부'],
+  ['일', '휴식 또는 가벼운 걷기', '다음 주 식사 준비와 수행 기록 확인'],
+];
+
+const meals = [
+  ['아침', '오트밀 + 무가당 두유 또는 저지방 우유 + 그릭요거트 + 베리나 과일 1회분'],
+  ['점심', '잡곡밥 1/2~2/3공기 + 생선·닭고기·두부 중 하나 + 채소·나물 2접시'],
+  ['간식', '플레인 요거트, 무가당 두유, 삶은 달걀, 과일, 견과류 소량 중 하나'],
+  ['저녁', '생선 또는 두부와 채소 + 잡곡밥 1/2공기 또는 고구마 소량'],
+];
+---
+
+<Base title={`${title} | Labs | thnkr`} description={description}>
+  <article class="health-plan space-y-10">
+    <header class="space-y-3 border-b border-border pb-6">
+      <p class="text-sm text-muted"><a href="/labs/">labs</a> / 개인 기록 없이 쓰는 실천표</p>
+      <h1 class="text-2xl font-medium tracking-tight">12주 건강 실천표</h1>
+      <p class="max-w-2xl text-base text-muted">
+        오늘 할 일을 작게 시작하고, 한 주 동안 운동·식사·수분·진료 준비를 반복한다.
+        이 페이지는 생활 습관을 점검하는 도구이며 의료 진단이나 처방을 대신하지 않는다.
+      </p>
+    </header>
+
+    <section aria-labelledby="today-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">오늘</p>
+          <h2 id="today-title">시작하기</h2>
+        </div>
+        <p class="text-sm text-muted">체크는 이 브라우저에만 저장됩니다.</p>
+      </div>
+      <ul class="checklist" id="today-checklist">
+        {
+          today.map(([title, description, duration], index) => (
+            <li>
+              <label>
+                <input type="checkbox" data-check={`today-${index}`} />
+                <span class="checkmark" aria-hidden="true"></span>
+                <span class="check-copy">
+                  <strong>{title}</strong>
+                  <span>{description}</span>
+                </span>
+                <span class="duration">{duration}</span>
+              </label>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
+    <section class="plan-grid" aria-label="핵심 원칙">
+      <div class="principle-card">
+        <p class="eyebrow">운동</p>
+        <h2>유산소 200분 안팎<br />근력 주 2회</h2>
+        <p>숨이 조금 차지만 대화 가능한 강도로 시작한다. 통증이나 저림이 커지는 동작은 멈춘다.</p>
+      </div>
+      <div class="principle-card">
+        <p class="eyebrow">식사</p>
+        <h2>채소·통곡물·<br />단백질을 기본으로</h2>
+        <p>가공육·튀김·단 음료·야식을 줄이고, 단백질은 콩·생선·두부·닭고기 중심으로 돌린다.</p>
+      </div>
+      <div class="principle-card">
+        <p class="eyebrow">수분과 음주</p>
+        <h2>물 2.5~3L<br />술과 단 음료는 멈춤</h2>
+        <p>물을 나눠 마시고 과일은 주스보다 통과일로 먹는다. 수분 제한 지시가 있으면 의료진의 지시를 따른다.</p>
+      </div>
+    </section>
+
+    <section aria-labelledby="week-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">반복 일정</p>
+          <h2 id="week-title">주간 리듬</h2>
+        </div>
+      </div>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>요일</th><th>움직임</th><th>식사 초점</th></tr>
+          </thead>
+          <tbody>
+            {weeklyPlan.map(([day, movement, meal]) => <tr><th scope="row">{day}</th><td>{movement}</td><td>{meal}</td></tr>)}
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section aria-labelledby="meal-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">식사 틀</p>
+          <h2 id="meal-title">매일 고르기 쉽게</h2>
+        </div>
+      </div>
+      <dl class="meal-list">
+        {meals.map(([time, menu]) => <div><dt>{time}</dt><dd>{menu}</dd></div>)}
+      </dl>
+      <p class="rule-line">외식에서는 국물보다 건더기, 흰쌀밥 과량보다 반 공기, 튀김보다 구이·찜을 고른다.</p>
+    </section>
+
+    <section aria-labelledby="booking-title">
+      <div class="section-heading">
+        <div>
+          <p class="eyebrow">진료 준비</p>
+          <h2 id="booking-title">마포구 인접 진료 경로</h2>
+        </div>
+      </div>
+      <div class="pathway">
+        <span>1</span><p>마포구 내과에서 이상지질혈증 상담과 진료의뢰서 발급 가능 여부를 확인한다.</p>
+        <span>2</span><p>검사 결과와 의뢰서를 들고 대형병원 순환기내과에 예약한다.</p>
+      </div>
+      <div class="booking-grid">
+        <article>
+          <h3>마포웰니스내과의원</h3>
+          <p>마포역 4번 출구 인근. 공식 안내에 고지혈증 등 만성질환 병행 치료와 진료·검진 예약 창구가 있다.</p>
+          <p class="booking-meta">예약·문의 02-6953-1134 · 평일 08:00~17:00 / 토요일 08:00~13:00</p>
+          <a href="https://mapowellness.co.kr/bbs/content.php?co_id=program_05" target="_blank" rel="noreferrer">공식 진료·예약 안내</a>
+        </article>
+        <article>
+          <h3>신촌 세브란스병원</h3>
+          <p>서울 서대문구 연세로 50-1. 심장내과 예약을 상담할 수 있으며, 건강보험 진료를 위해서는 의뢰서 지참을 안내한다.</p>
+          <p class="booking-meta">예약 1599-1004 · 평일 08:00~18:00 / 토요일 08:00~13:00</p>
+          <a href="https://sev.severance.healthcare/sev/faq/faq.do?article.offset=0&articleLimit=20&articleNo=53817&mode=view" target="_blank" rel="noreferrer">공식 예약·의뢰서 안내</a>
+        </article>
+        <article>
+          <h3>강북삼성병원</h3>
+          <p>서울 종로구 새문안로 29. 순환기내과에서 이상지질혈증·대사증후군 진료 분야를 안내한다. 초진은 진료의뢰서 지참을 안내한다.</p>
+          <p class="booking-meta">진료예약 02-2001-1130</p>
+          <a href="https://main.kbsmc.co.kr/main/contents.do?idx=4899" target="_blank" rel="noreferrer">공식 예약·초진 안내</a>
+        </article>
+      </div>
+      <div class="callout">
+        <strong>먼저 의원에 전달할 말</strong>
+        <p>“최근 검진에서 지질 관리 상담이 필요하다는 소견을 받았습니다. 이상지질혈증 진료와, 필요하면 순환기내과 의뢰서 발급이 가능한지 알고 싶습니다.”</p>
+      </div>
+    </section>
+
+    <footer class="border-t border-border pt-5 text-sm text-muted">
+      <p>병원 정보는 각 기관의 공식 예약·진료 안내를 기준으로 2026-09-17에 확인했다. 진료 가능 의료진과 일정은 예약 시 다시 확인한다.</p>
+    </footer>
+  </article>
+</Base>
+
+<script>
+  const storagePrefix = 'thnkr-health-plan:';
+  document.querySelectorAll<HTMLInputElement>('[data-check]').forEach((input) => {
+    const key = `${storagePrefix}${input.dataset.check}`;
+    input.checked = localStorage.getItem(key) === 'true';
+    input.addEventListener('change', () => localStorage.setItem(key, String(input.checked)));
+  });
+</script>
+
+<style>
+  .health-plan { font-size: 1rem; }
+  .section-heading { display: flex; align-items: end; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+  .section-heading h2 { font-size: 1.35rem; font-weight: 600; line-height: 1.3; }
+  .eyebrow { color: var(--color-muted); font-family: var(--font-mono); font-size: 0.78rem; letter-spacing: 0.03em; margin-bottom: 0.25rem; }
+  .checklist { border-top: 1px solid var(--color-border); }
+  .checklist li { border-bottom: 1px solid var(--color-border); }
+  .checklist label { display: grid; grid-template-columns: 1.25rem minmax(0, 1fr) auto; align-items: start; column-gap: 0.8rem; cursor: pointer; padding: 1rem 0; }
+  .checklist input { position: absolute; opacity: 0; }
+  .checkmark { width: 1.1rem; height: 1.1rem; border: 1px solid var(--color-border); margin-top: 0.2rem; display: grid; place-items: center; }
+  .checklist input:checked + .checkmark { background: var(--color-foreground); border-color: var(--color-foreground); }
+  .checklist input:checked + .checkmark::after { content: '✓'; color: var(--color-background); font-size: 0.78rem; line-height: 1; }
+  .checklist input:focus-visible + .checkmark { outline: 2px solid var(--color-foreground); outline-offset: 3px; }
+  .check-copy { display: grid; gap: 0.15rem; }
+  .check-copy span, .duration { color: var(--color-muted); font-size: 0.9rem; }
+  .duration { font-family: var(--font-mono); white-space: nowrap; }
+  .plan-grid, .booking-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); border-top: 1px solid var(--color-border); border-left: 1px solid var(--color-border); }
+  .principle-card, .booking-grid article { border-right: 1px solid var(--color-border); border-bottom: 1px solid var(--color-border); padding: 1.15rem; }
+  .principle-card h2 { font-size: 1.15rem; font-weight: 600; line-height: 1.45; margin-bottom: 0.75rem; }
+  .principle-card p:last-child, .booking-grid p { color: var(--color-muted); font-size: 0.9rem; }
+  .table-wrap { overflow-x: auto; border-top: 1px solid var(--color-border); }
+  table { border-collapse: collapse; min-width: 39rem; width: 100%; text-align: left; }
+  th, td { border-bottom: 1px solid var(--color-border); padding: 0.75rem; vertical-align: top; }
+  thead th { font-family: var(--font-mono); font-size: 0.8rem; font-weight: 500; color: var(--color-muted); }
+  tbody th { font-weight: 500; width: 3.5rem; }
+  .meal-list { border-top: 1px solid var(--color-border); }
+  .meal-list div { display: grid; grid-template-columns: 6rem minmax(0, 1fr); gap: 1rem; padding: 0.8rem 0; border-bottom: 1px solid var(--color-border); }
+  .meal-list dt { font-weight: 600; }
+  .meal-list dd { color: var(--color-muted); }
+  .rule-line { color: var(--color-muted); font-size: 0.9rem; margin-top: 0.9rem; }
+  .pathway { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: 0.65rem 0.8rem; border-top: 1px solid var(--color-border); padding: 1rem 0; color: var(--color-muted); }
+  .pathway span { display: grid; place-items: center; width: 1.35rem; height: 1.35rem; border: 1px solid var(--color-border); color: var(--color-foreground); font-family: var(--font-mono); font-size: 0.75rem; }
+  .booking-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .booking-grid h3 { font-weight: 600; margin-bottom: 0.45rem; }
+  .booking-meta { font-family: var(--font-mono); font-size: 0.78rem !important; margin: 0.75rem 0; }
+  .booking-grid a { font-size: 0.9rem; }
+  .callout { border-left: 2px solid var(--color-foreground); padding: 0.25rem 0 0.25rem 1rem; margin-top: 1.25rem; }
+  .callout p { color: var(--color-muted); margin-top: 0.25rem; }
+  @media (max-width: 42rem) {
+    .section-heading { align-items: start; flex-direction: column; }
+    .plan-grid, .booking-grid { grid-template-columns: 1fr; }
+    .checklist label { grid-template-columns: 1.25rem minmax(0, 1fr); }
+    .duration { grid-column: 2; }
+    .meal-list div { grid-template-columns: 4.5rem minmax(0, 1fr); }
+  }
+</style>

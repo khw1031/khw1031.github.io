@@ -12,6 +12,13 @@ export interface LabEntry {
 // collection), so their publish dates and descriptions live here explicitly.
 export const labs: LabEntry[] = [
   {
+    title: '12주 건강 실천표',
+    href: '/labs/health-plan/',
+    pubDate: new Date('2026-09-17'),
+    description:
+      '진료 예약, 유산소·근력운동, 식사·수분 습관을 한 주 단위로 점검하는 익명 건강 실천 체크리스트',
+  },
+  {
     title: 'game of life',
     href: '/labs/game-of-life/',
     pubDate: new Date('2026-06-25'),
