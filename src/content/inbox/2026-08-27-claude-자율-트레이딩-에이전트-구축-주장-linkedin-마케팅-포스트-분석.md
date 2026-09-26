@@ -1,6 +1,7 @@
 ---
 title: 'Claude 자율 트레이딩 에이전트 구축 주장 – LinkedIn 마케팅 포스트 분석'
 pubDate: '2026-08-27T16:51:30+09:00'
+noteId: AGENT-2608-036
 description: 'Claude 기반 24/7 트레이딩 에이전트 구축 주장 포스트의 구조·크론 설계·마케팅 수사 분석'
 summary: 'Suleiman Najim이 Claude로 자율 트레이딩 루프를 만들어 30일 만에 S&P 대비 +8%를 달성했다고 주장하는 LinkedIn 포스트를 분석한다. 기술 구조(5개 크론+파일 기반 상태 관리)를 정리하고, 성과 수치·기관 비교 수사의 검증 한계를 짚는다.'
 lang: ko

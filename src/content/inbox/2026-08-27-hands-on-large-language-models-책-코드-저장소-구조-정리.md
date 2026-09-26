@@ -1,6 +1,7 @@
 ---
 title: 'Hands-On Large Language Models 책·코드 저장소 구조 정리'
 pubDate: '2026-08-27T16:33:17+09:00'
+noteId: AI-2608-008
 description: 'O''Reilly 출간 LLM 실습서 12장 구성, Colab 노트북·보너스 가이드·서평을 한 장으로 파악'
 summary: 'Jay Alammar·Maarten Grootendorst 공저의 ''Illustrated LLM Book'' 공식 코드 저장소. 12장 Colab 노트북이 기초→내부 구조→활용→fine-tuning 순으로 이어지며, 보너스 시각 가이드 6편이 최신 주제를 보충한다.'
 lang: ko
